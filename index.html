@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#d9d9d9">
+<title>Método Seterra</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#d9d9d9;--fg:#111;--muted:#888;--border:#bbb;
+  --win:#f5f5f5;--shadow:0 2px 10px rgba(0,0,0,0.14);--hover:rgba(0,0,0,0.05);
+  --c-info:#1501fe;   /* revelado, esperando confirmación */
+  --c-bad:#fe0110;    /* fallado, cerrado */
+  --c-ok:#0a8a3f;      /* acertado */
+  --c-neutral:#999;    /* punto sin tocar */
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html,body{height:100%;}
+body{font-family:'Courier New',Courier,monospace;background:var(--bg);color:var(--fg);
+  font-size:13px;line-height:1.5;height:100%;overflow:hidden;display:flex;flex-direction:column;
+  -webkit-tap-highlight-color:transparent;overscroll-behavior:none;}
+button,input{font-family:inherit;}
+button{cursor:pointer;}
+
+/* TOPBAR */
+.topbar{background:var(--bg);padding:calc(8px + var(--safe-top)) 14px 0;flex-shrink:0;}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;}
+.topbar h1{font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;}
+.app-tabs{display:flex;align-items:flex-end;gap:4px;}
+.app-tab{padding:5px 16px;font-family:inherit;font-size:11px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--border);
+  border-bottom:none;background:rgba(0,0,0,0.06);color:var(--muted);cursor:pointer;
+  border-radius:3px 3px 0 0;}
+.app-tab.active{background:var(--win);color:var(--fg);}
+.smallbtn{background:none;border:1px solid var(--border);padding:3px 9px;font-size:10px;
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);border-radius:2px;}
+.smallbtn:hover{border-color:var(--fg);color:var(--fg);}
+
+/* VIEWS */
+.view{display:none;flex:1;overflow:hidden;padding:10px;}
+.view.active{display:flex;}
+.app{max-width:640px;width:100%;margin:0 auto;display:flex;flex-direction:column;min-height:0;flex:1;}
+
+/* WINDOW */
+.window{border:1px solid var(--border);box-shadow:var(--shadow);border-radius:0 3px 3px 3px;
+  display:none;flex-direction:column;overflow:hidden;background:var(--win);flex:1;min-height:0;}
+.window.active{display:flex;}
+.win-tb{padding:7px 12px;border-bottom:1px solid var(--border);font-size:10px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);flex-shrink:0;
+  display:flex;align-items:center;gap:8px;}
+.win-tb .back{background:none;border:none;font-size:15px;color:var(--fg);padding:0 4px 0 0;line-height:1;}
+.win-tb .title{flex:1;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.win-content{overflow-y:auto;flex:1;padding:10px 14px;}
+
+/* TREE */
+.tree-toolbar{display:flex;gap:8px;padding:7px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.tree-row{display:flex;align-items:center;gap:7px;padding:6px 0;cursor:pointer;user-select:none;
+  border-radius:2px;position:relative;}
+.tree-row:hover{background:var(--hover);}
+.tree-tog{width:12px;flex-shrink:0;font-size:11px;color:var(--muted);text-align:center;}
+.tree-name{flex:1;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tree-row.folder .tree-name{font-weight:700;letter-spacing:0.02em;}
+.tree-count{font-size:10px;color:var(--muted);flex-shrink:0;}
+.tree-menu-btn{background:none;border:none;color:var(--muted);font-size:14px;padding:2px 6px;
+  flex-shrink:0;line-height:1;}
+.tree-menu-btn:hover{color:var(--fg);}
+.tree-children{display:none;}
+.tree-children.open{display:block;}
+.tree-empty{padding:24px 6px;color:var(--muted);font-size:12px;text-align:center;}
+
+/* CONTEXT MENU */
+.ctx-backdrop{position:fixed;inset:0;z-index:80;display:none;}
+.ctx-backdrop.open{display:block;}
+.ctx-menu{position:fixed;z-index:90;background:var(--win);border:1px solid var(--border);
+  box-shadow:var(--shadow);border-radius:2px;min-width:190px;overflow:hidden;}
+.ctx-item{padding:9px 14px;font-size:12px;cursor:pointer;}
+.ctx-item:hover{background:var(--hover);}
+.ctx-item.danger{color:#b00020;}
+.ctx-sep{height:1px;background:var(--border);margin:3px 0;}
+
+/* FORM BITS */
+.field{margin-bottom:14px;}
+.field .lbl{display:block;font-size:10px;color:var(--muted);letter-spacing:0.08em;
+  text-transform:uppercase;margin-bottom:5px;}
+input[type=text],input[type=number]{background:#fff;border:1px solid var(--border);color:var(--fg);
+  padding:8px 9px;font-size:13px;width:100%;border-radius:2px;}
+input[type=text]:focus,input[type=number]:focus{outline:1px solid var(--fg);}
+.row2{display:flex;gap:8px;}
+.btn{border:1px solid var(--border);border-radius:2px;background:var(--win);color:var(--fg);
+  padding:9px 12px;font-size:12px;letter-spacing:0.04em;}
+.btn:hover{border-color:var(--fg);}
+.btn-primary{background:var(--fg);color:var(--win);border-color:var(--fg);}
+.btn-primary:hover{opacity:0.85;}
+.btn-block{width:100%;}
+.btn-danger{color:#b00020;border-color:#e0b0b8;}
+.hr{height:1px;background:var(--border);margin:16px 0;}
+
+/* IMAGE WORKSPACE */
+.workspace{position:relative;flex:1;overflow:hidden;background:#bcbcbc;touch-action:none;min-height:220px;}
+.stage{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform;}
+.stage img{display:block;max-width:none;}
+.zoom-controls{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px;z-index:5;}
+.zoom-controls button{width:30px;height:30px;border-radius:2px;border:1px solid var(--border);
+  background:rgba(245,245,245,0.92);color:var(--fg);font-size:15px;}
+.filepick{border:1.5px dashed var(--border);border-radius:2px;padding:26px 16px;text-align:center;
+  color:var(--muted);cursor:pointer;font-size:12px;}
+.filepick:hover{border-color:var(--fg);color:var(--fg);}
+input[type=file]{display:none;}
+
+/* POINTS: editor markers */
+.editmarker{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;
+  background:rgba(21,1,254,0.18);border:2px solid var(--c-info);display:flex;align-items:center;
+  justify-content:center;font-size:10px;font-weight:700;color:var(--c-info);cursor:grab;}
+.pointrow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);}
+.pointrow:last-child{border-bottom:none;}
+.pointrow .num{width:18px;height:18px;border-radius:50%;background:var(--c-info);color:#fff;
+  font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pointrow input[type=text]{padding:6px 8px;font-size:12px;}
+.pointrow .del{background:none;border:none;color:#b00020;font-size:16px;padding:2px 6px;}
+.pointslist{padding:12px 14px;border-top:1px solid var(--border);max-height:34vh;overflow-y:auto;flex-shrink:0;}
+.pointslist-hdr{font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:6px;display:flex;justify-content:space-between;}
+
+/* GAME markers */
+.marker{position:absolute;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;
+  border:3px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,0.35);background:var(--c-neutral);}
+.marker.correct{background:var(--c-ok);}
+.marker.revealed{background:var(--c-info);animation:pulse 0.9s ease-in-out infinite;}
+.marker.wrong{background:var(--c-bad);}
+.marker .tag{position:absolute;top:38px;left:50%;transform:translateX(-50%);white-space:nowrap;
+  background:rgba(20,20,20,0.85);color:#fff;font-size:10px;padding:2px 6px;border-radius:2px;
+  display:none;}
+.marker.correct .tag,.marker.wrong .tag{display:block;}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.3);}}
+
+/* GAME HUD */
+.progressbar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:8px;}
+.progressbar .fill{height:100%;background:var(--fg);width:0%;}
+.attempts{display:flex;gap:4px;justify-content:center;margin-top:6px;}
+.attempts .dot{width:7px;height:7px;border-radius:50%;background:var(--border);}
+.attempts .dot.used{background:var(--c-bad);}
+
+/* overlays flotando sobre la imagen a pantalla completa */
+.game-overlay-top{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;
+  gap:10px;padding:calc(9px + var(--safe-top)) 12px 10px;
+  background:linear-gradient(rgba(0,0,0,0.4),transparent);}
+.game-overlay-top .back{color:#fff;background:rgba(0,0,0,0.35);border-radius:50%;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;border:none;flex-shrink:0;padding:0;}
+.game-overlay-top .progressbar{flex:1;height:4px;background:rgba(255,255,255,0.35);border-radius:2px;
+  overflow:hidden;margin:0;}
+.game-overlay-top .progressbar .fill{background:#fff;}
+.game-overlay-top span{color:#fff;font-size:11px;flex-shrink:0;text-shadow:0 1px 2px rgba(0,0,0,0.5);}
+.game-pill{position:absolute;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);
+  z-index:6;background:rgba(20,20,20,0.86);color:#fff;padding:9px 20px;border-radius:20px;
+  text-align:center;pointer-events:none;}
+.game-pill .name{font-size:15px;font-weight:700;}
+.game-pill .attempts{display:flex;gap:4px;justify-content:center;margin-top:5px;}
+.game-pill .attempts .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);}
+.game-pill .attempts .dot.used{background:var(--c-bad);}
+
+body.playing .topbar{display:none;}
+body.playing .view{padding:0;}
+body.playing .app{max-width:none;}
+body.playing #win-game{border:none;box-shadow:none;border-radius:0;}
+body.playing #win-game .workspace{min-height:0;}
+
+/* END SCREEN */
+.endwrap{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;
+  padding:30px 20px;text-align:center;gap:6px;}
+.endwrap .big{font-size:30px;font-weight:700;}
+.endwrap .sub{color:var(--muted);font-size:12px;margin-bottom:18px;}
+.endwrap .btn{width:100%;max-width:260px;margin-bottom:8px;}
+.histrow{display:flex;justify-content:space-between;gap:10px;padding:5px 8px;font-size:11px;
+  color:var(--muted);border-bottom:1px solid var(--border);}
+.histrow:last-child{border-bottom:none;}
+.histrow.me{color:var(--fg);font-weight:700;background:var(--hover);}
+.histrow .rk{width:16px;flex-shrink:0;}
+.histrow .sc{flex:1;text-align:left;}
+.histrow .tm{flex-shrink:0;}
+.reviewrow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;
+  border-bottom:1px solid var(--border);font-size:12px;}
+.reviewrow .res{font-size:10px;letter-spacing:0.05em;text-transform:uppercase;flex-shrink:0;}
+.reviewrow .res.r-ok{color:var(--c-ok);}
+.reviewrow .res.r-bad{color:var(--c-bad);}
+
+.toast{position:fixed;bottom:calc(16px + var(--safe-bottom));left:50%;transform:translateX(-50%);
+  background:var(--fg);color:var(--win);padding:8px 14px;border-radius:2px;font-size:11px;
+  z-index:200;opacity:0;pointer-events:none;transition:opacity 0.2s;}
+.toast.show{opacity:1;}
+
+@media(max-width:420px){.win-content{padding:10px;}}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="topbar">
+  <div class="topbar-row">
+    <h1>MÉTODO SETERRA</h1>
+    <button class="smallbtn" id="btn-refresh" title="Actualizar desde lo publicado">⟳ actualizar</button>
+  </div>
+  <div class="app-tabs">
+    <button class="app-tab active" data-tab="biblioteca">Biblioteca</button>
+    <button class="app-tab" data-tab="jugar">Jugar</button>
+  </div>
+</div>
+
+<!-- ===================== BIBLIOTECA ===================== -->
+<div class="view active" id="view-biblioteca">
+  <div class="app">
+
+    <div class="window active" id="win-tree-b">
+      <div class="win-tb">
+        <span class="title">biblioteca</span>
+        <button class="smallbtn" id="btn-export">exportar</button>
+        <button class="smallbtn" id="btn-import">importar</button>
+      </div>
+      <div class="tree-toolbar">
+        <button class="smallbtn" id="btn-root-folder">+ carpeta</button>
+        <button class="smallbtn" id="btn-root-tema">+ tema</button>
+      </div>
+      <div class="win-content" id="tree-b"></div>
+    </div>
+
+    <div class="window" id="win-tema-b">
+      <div class="win-tb">
+        <button class="back" id="back-tema-b">←</button>
+        <span class="title" id="tema-b-title">tema</span>
+        <button class="smallbtn" id="tema-b-play">jugar</button>
+      </div>
+      <div class="workspace" id="tema-b-workspace" style="display:none;">
+        <div class="stage" id="tema-b-stage"></div>
+        <div class="zoom-controls">
+          <button id="tema-b-zin">+</button>
+          <button id="tema-b-zout">–</button>
+        </div>
+      </div>
+      <div id="tema-b-filepick-wrap" style="padding:14px;">
+        <div class="filepick" id="tema-b-filepick">+ elegir imagen</div>
+        <input type="file" id="tema-b-file" accept="image/*">
+      </div>
+      <div class="pointslist" id="tema-b-points" style="display:none;">
+        <div class="pointslist-hdr">
+          <span id="tema-b-count">0 puntos</span>
+          <span>toca la imagen para añadir</span>
+        </div>
+        <div id="tema-b-pointlist"></div>
+      </div>
+      <div class="win-content" style="flex:0;border-top:1px solid var(--border);">
+        <div class="field" style="margin-bottom:10px;">
+          <span class="lbl">nombre del tema</span>
+          <input type="text" id="tema-b-name">
+        </div>
+        <div class="row2">
+          <button class="btn btn-block" id="tema-b-changeimg">cambiar imagen</button>
+          <button class="btn btn-danger btn-block" id="tema-b-delete">eliminar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== JUGAR ===================== -->
+<div class="view" id="view-jugar">
+  <div class="app">
+
+    <div class="window active" id="win-tree-j">
+      <div class="win-tb"><span class="title">elige un tema</span></div>
+      <div class="win-content" id="tree-j"></div>
+    </div>
+
+    <div class="window" id="win-game">
+      <div class="workspace" id="game-workspace">
+        <div class="stage" id="game-stage"></div>
+        <div class="game-overlay-top">
+          <button class="back" id="back-game">←</button>
+          <div class="progressbar"><div class="fill" id="game-progress"></div></div>
+          <span id="game-stats">0/0</span>
+        </div>
+        <div class="game-pill">
+          <div class="name" id="game-target">—</div>
+          <div class="attempts" id="game-attempts"></div>
+        </div>
+        <div class="zoom-controls">
+          <button id="game-zin">+</button>
+          <button id="game-zout">–</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="win-end">
+      <div class="endwrap">
+        <span class="lbl" style="color:var(--muted);">colección completada</span>
+        <div class="big" id="end-score">0%</div>
+        <div class="sub" id="end-sub">00:00 · 0 aciertos · 0 fallos</div>
+        <div id="end-best-badge" style="display:none;color:var(--c-info);font-size:11px;
+          letter-spacing:0.08em;text-transform:uppercase;margin:-10px 0 14px;">nuevo mejor resultado</div>
+        <div id="end-history" style="width:100%;max-width:260px;margin-bottom:16px;"></div>
+        <button class="btn btn-primary" id="end-again">jugar de nuevo</button>
+        <button class="btn" id="end-review">revisión</button>
+        <button class="btn" id="end-fails" style="display:none;">repasar solo los fallos</button>
+        <button class="btn" id="end-back">volver</button>
+      </div>
+    </div>
+
+    <div class="window" id="win-review">
+      <div class="win-tb">
+        <button class="back" id="back-review">←</button>
+        <span class="title">revisión</span>
+      </div>
+      <div class="win-content" id="review-list"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- context menu -->
+<div class="ctx-backdrop" id="ctx-backdrop"></div>
+<div class="ctx-menu" id="ctx-menu" style="display:none;"></div>
+
+<!-- simple prompt sheet (rename / new folder / new tema / point label) -->
+<div class="ctx-backdrop" id="prompt-backdrop"></div>
+<div class="ctx-menu" id="prompt-box" style="display:none;padding:16px;width:260px;">
+  <div class="lbl" id="prompt-title" style="margin-bottom:8px;">título</div>
+  <input type="text" id="prompt-input" style="margin-bottom:12px;">
+  <div class="row2">
+    <button class="btn btn-block" id="prompt-cancel">cancelar</button>
+    <button class="btn btn-primary btn-block" id="prompt-ok">ok</button>
+  </div>
+</div>
+
+<input type="file" id="input-import-file" accept="application/json" style="display:none;">
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   STORAGE
+   ============================================================ */
+const KEY = "metodo_seterra_v2";
+function uid(){ return 'id'+Math.random().toString(36).slice(2,9)+Date.now().toString(36); }
+
+let tree = [];
+
+function loadLocal(){
+  try{ const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
+}
+function saveLocal(){
+  try{ localStorage.setItem(KEY, JSON.stringify(tree)); }
+  catch(e){ toast('No se pudo guardar (memoria del navegador llena)'); }
+}
+
+async function boot(){
+  const cached = loadLocal();
+  tree = cached || [];
+  if(!cached){
+    try{
+      const res = await fetch('data.json',{cache:'no-store'});
+      if(res.ok){
+        const remote = await res.json();
+        tree = remote.tree || remote || [];
+        saveLocal();
+      }
+    }catch(e){ /* sin conexión / sin data.json / file:// — se queda vacío */ }
+  }
+  renderTree('tree-b', true);
+  renderTree('tree-j', false);
+}
+
+document.getElementById('btn-refresh').addEventListener('click', async ()=>{
+  try{
+    const res = await fetch('data.json',{cache:'no-store'});
+    if(!res.ok){ toast('No hay data.json publicado'); return; }
+    const remote = await res.json();
+    tree = remote.tree || remote || [];
+    saveLocal();
+    renderTree('tree-b', true);
+    renderTree('tree-j', false);
+    toast('Actualizado');
+  }catch(e){ toast('No se pudo actualizar'); }
+});
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer;
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> el.classList.remove('show'), 2000);
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+document.querySelectorAll('.app-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.app-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============================================================
+   TREE DATA HELPERS
+   ============================================================ */
+function findNode(id, nodes){
+  nodes = nodes || tree;
+  for(const n of nodes){
+    if(n.id === id) return n;
+    if(n.type === 'folder'){
+      const f = findNode(id, n.children);
+      if(f) return f;
+    }
+  }
+  return null;
+}
+function findParentArray(id, nodes){
+  nodes = nodes || tree;
+  for(let i=0;i<nodes.length;i++){
+    if(nodes[i].id === id) return nodes;
+    if(nodes[i].type === 'folder'){
+      const f = findParentArray(id, nodes[i].children);
+      if(f) return f;
+    }
+  }
+  return null;
+}
+function countTemas(node){
+  if(node.type === 'tema') return 1;
+  return node.children.reduce((s,c)=>s+countTemas(c), 0);
+}
+
+/* ============================================================
+   TREE RENDER  (mode: biblioteca = editable, jugar = readonly nav)
+   ============================================================ */
+function renderTree(containerId, editable){
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  if(tree.length === 0){
+    container.innerHTML = '<div class="tree-empty">Aún no hay nada aquí.' +
+      (editable ? '<br>Crea una carpeta o un tema arriba.' : '<br>Ve a Biblioteca para crear tu primera colección.') +
+      '</div>';
+    return;
+  }
+  container.appendChild(renderNodes(tree, 0, editable, containerId));
+}
+
+function renderNodes(nodes, depth, editable, containerId){
+  const wrap = document.createElement('div');
+  nodes.forEach(node=>{
+    wrap.appendChild(renderRow(node, depth, editable, containerId));
+    if(node.type === 'folder'){
+      const childWrap = document.createElement('div');
+      childWrap.className = 'tree-children' + (node.expanded ? ' open' : '');
+      childWrap.appendChild(renderNodes(node.children, depth+1, editable, containerId));
+      wrap.appendChild(childWrap);
+    }
+  });
+  return wrap;
+}
+
+function renderRow(node, depth, editable, containerId){
+  const row = document.createElement('div');
+  row.className = 'tree-row ' + node.type;
+  row.style.paddingLeft = (depth*18)+'px';
+  const isFolder = node.type === 'folder';
+  const tog = isFolder ? (node.expanded ? '−' : '+') : '';
+  const count = isFolder ? `<span class="tree-count">${countTemas(node)}</span>` : '';
+  row.innerHTML = `
+    <span class="tree-tog">${tog}</span>
+    <span class="tree-name">${escapeHtml(node.name)}</span>
+    ${count}
+    ${editable ? '<button class="tree-menu-btn">⋯</button>' : ''}
+  `;
+  row.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('tree-menu-btn')) return;
+    if(isFolder){
+      node.expanded = !node.expanded;
+      if(editable) saveLocal();
+      renderTree(containerId, editable);
+    } else {
+      if(editable) openTemaEditor(node.id);
+      else openGamePicker(node.id);
+    }
+  });
+  if(editable){
+    row.querySelector('.tree-menu-btn').addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openCtxMenu(e.currentTarget, node);
+    });
+  }
+  return row;
+}
+function escapeHtml(str){
+  const d = document.createElement('div'); d.textContent = str||''; return d.innerHTML;
+}
+
+/* ============================================================
+   CONTEXT MENU
+   ============================================================ */
+function openCtxMenu(anchorEl, node){
+  const menu = document.getElementById('ctx-menu');
+  const backdrop = document.getElementById('ctx-backdrop');
+  const items = [];
+  if(node.type === 'folder'){
+    items.push(['+ subcarpeta', ()=> promptNewFolder(node)]);
+    items.push(['+ tema', ()=> promptNewTema(node)]);
+  }
+  items.push(['renombrar', ()=> promptRename(node)]);
+  if(node.type === 'tema'){
+    items.push(['jugar', ()=>{ closeCtx(); switchToTab('jugar'); openGamePicker(node.id); }]);
+  }
+  items.push(['__sep__', null]);
+  items.push([node.type==='folder' ? 'eliminar carpeta' : 'eliminar tema', ()=> deleteNode(node), true]);
+
+  menu.innerHTML = items.map(([label,,danger])=>{
+    if(label === '__sep__') return '<div class="ctx-sep"></div>';
+    return `<div class="ctx-item${danger?' danger':''}">${label}</div>`;
+  }).join('');
+  const rect = anchorEl.getBoundingClientRect();
+  menu.style.display = 'block';
+  let top = rect.bottom + 4, left = rect.right - 190;
+  if(left < 8) left = 8;
+  if(top + 200 > window.innerHeight) top = rect.top - 200;
+  menu.style.top = top+'px';
+  menu.style.left = left+'px';
+  backdrop.classList.add('open');
+
+  const realItems = items.filter(i=>i[0] !== '__sep__');
+  menu.querySelectorAll('.ctx-item').forEach((el,i)=>{
+    el.addEventListener('click', ()=>{ closeCtx(); realItems[i][1](); });
+  });
+}
+function closeCtx(){
+  document.getElementById('ctx-menu').style.display='none';
+  document.getElementById('ctx-backdrop').classList.remove('open');
+}
+document.getElementById('ctx-backdrop').addEventListener('click', closeCtx);
+
+/* ============================================================
+   PROMPT SHEET (rename / new folder / new tema)
+   ============================================================ */
+let promptCb = null;
+function openPrompt(title, initial, cb){
+  document.getElementById('prompt-title').textContent = title;
+  const input = document.getElementById('prompt-input');
+  input.value = initial || '';
+  promptCb = cb;
+  document.getElementById('prompt-box').style.display = 'block';
+  document.getElementById('prompt-backdrop').classList.add('open');
+  setTimeout(()=>{ input.focus(); input.select(); }, 30);
+}
+function closePrompt(){
+  document.getElementById('prompt-box').style.display='none';
+  document.getElementById('prompt-backdrop').classList.remove('open');
+  promptCb = null;
+}
+document.getElementById('prompt-cancel').addEventListener('click', closePrompt);
+document.getElementById('prompt-backdrop').addEventListener('click', closePrompt);
+document.getElementById('prompt-ok').addEventListener('click', ()=>{
+  const val = document.getElementById('prompt-input').value.trim();
+  const cb = promptCb;
+  closePrompt();
+  if(cb) cb(val);
+});
+document.getElementById('prompt-input').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') document.getElementById('prompt-ok').click();
+});
+
+function promptNewFolder(parentNode){
+  openPrompt('nombre de la carpeta', '', (val)=>{
+    if(!val) return;
+    const node = {id:uid(), type:'folder', name:val, expanded:true, children:[]};
+    (parentNode ? parentNode.children : tree).push(node);
+    if(parentNode) parentNode.expanded = true;
+    saveLocal(); renderTree('tree-b', true); renderTree('tree-j', false);
+  });
+}
+function promptNewTema(parentNode){
+  openPrompt('nombre del tema', '', (val)=>{
+    if(!val) return;
+    const node = {id:uid(), type:'tema', name:val, image:null, points:[], tolerance:8};
+    (parentNode ? parentNode.children : tree).push(node);
+    if(parentNode) parentNode.expanded = true;
+    saveLocal(); renderTree('tree-b', true); renderTree('tree-j', false);
+    openTemaEditor(node.id);
+  });
+}
+function promptRename(node){
+  openPrompt('nuevo nombre', node.name, (val)=>{
+    if(!val) return;
+    node.name = val;
+    saveLocal(); renderTree('tree-b', true); renderTree('tree-j', false);
+    if(node.type==='tema' && currentTemaId===node.id) document.getElementById('tema-b-title').textContent = val;
+  });
+}
+function deleteNode(node){
+  const label = node.type==='folder' ? `la carpeta "${node.name}" y todo su contenido` : `el tema "${node.name}"`;
+  if(!confirm(`¿Eliminar ${label}? No se puede deshacer.`)) return;
+  const arr = findParentArray(node.id);
+  if(arr){
+    const idx = arr.indexOf(node);
+    arr.splice(idx,1);
+    saveLocal();
+    renderTree('tree-b', true); renderTree('tree-j', false);
+    showTreeOnly();
+  }
+}
+
+document.getElementById('btn-root-folder').addEventListener('click', ()=> promptNewFolder(null));
+document.getElementById('btn-root-tema').addEventListener('click', ()=> promptNewTema(null));
+
+/* ============================================================
+   NAV HELPERS (biblioteca)
+   ============================================================ */
+function showWindow(id){
+  document.querySelectorAll('#view-biblioteca .window').forEach(w=>w.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function showTreeOnly(){ showWindow('win-tree-b'); }
+
+document.getElementById('back-tema-b').addEventListener('click', showTreeOnly);
+
+/* ============================================================
+   IMAGE DOWNSCALE
+   ============================================================ */
+function fileToDownscaledDataURL(file, maxDim){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onerror = ()=> reject(reader.error);
+    reader.onload = ()=>{
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = ()=>{
+        let {width,height} = img;
+        if(width > maxDim || height > maxDim){
+          const s = maxDim / Math.max(width,height);
+          width = Math.round(width*s); height = Math.round(height*s);
+        }
+        const c = document.createElement('canvas');
+        c.width = width; c.height = height;
+        c.getContext('2d').drawImage(img,0,0,width,height);
+        resolve(c.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============================================================
+   PAN / ZOOM ENGINE  (shared: editor + game)
+   ============================================================ */
+function makePanZoom(workspaceEl, stageEl){
+  let scale=1, tx=0, ty=0, minScale=1, maxScale=5;
+  let pointers = new Map(), lastDist=null, dragStart=null, moved=false;
+
+  function apply(){ stageEl.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`; }
+  function clamp(){
+    const wr = workspaceEl.getBoundingClientRect();
+    const sw = stageEl.offsetWidth*scale, sh = stageEl.offsetHeight*scale;
+    tx = sw<=wr.width ? (wr.width-sw)/2 : Math.min(0, Math.max(wr.width-sw, tx));
+    ty = sh<=wr.height ? (wr.height-sh)/2 : Math.min(0, Math.max(wr.height-sh, ty));
+  }
+  function fit(){
+    const wr = workspaceEl.getBoundingClientRect();
+    const iw = stageEl.offsetWidth, ih = stageEl.offsetHeight;
+    if(!iw || !ih) return;
+    scale = Math.min(wr.width/iw, wr.height/ih);
+    minScale = scale; maxScale = scale*6;
+    tx = (wr.width-iw*scale)/2; ty = (wr.height-ih*scale)/2;
+    apply();
+  }
+  function zoomBy(factor, cx, cy){
+    const wr = workspaceEl.getBoundingClientRect();
+    if(cx===undefined){ cx=wr.width/2; cy=wr.height/2; }
+    const ns = Math.min(maxScale, Math.max(minScale, scale*factor));
+    const ratio = ns/scale;
+    tx = cx-(cx-tx)*ratio; ty = cy-(cy-ty)*ratio;
+    scale = ns; clamp(); apply();
+  }
+  workspaceEl.addEventListener('pointerdown', (e)=>{
+    workspaceEl.setPointerCapture(e.pointerId);
+    pointers.set(e.pointerId, {x:e.clientX,y:e.clientY});
+    moved = false;
+    if(pointers.size===1){ const p=[...pointers.values()][0]; dragStart={x:p.x,y:p.y,tx,ty}; }
+    else if(pointers.size===2){
+      const [a,b]=[...pointers.values()]; lastDist=Math.hypot(a.x-b.x,a.y-b.y);
+    }
+  });
+  workspaceEl.addEventListener('pointermove', (e)=>{
+    if(!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, {x:e.clientX,y:e.clientY});
+    if(pointers.size===1 && dragStart){
+      const p=[...pointers.values()][0];
+      const dx=p.x-dragStart.x, dy=p.y-dragStart.y;
+      if(Math.hypot(dx,dy)>6) moved = true;
+      if(scale > minScale+0.001){ tx=dragStart.tx+dx; ty=dragStart.ty+dy; clamp(); apply(); }
+    } else if(pointers.size===2){
+      const [a,b]=[...pointers.values()];
+      const dist=Math.hypot(a.x-b.x,a.y-b.y);
+      const mid={x:(a.x+b.x)/2,y:(a.y+b.y)/2};
+      if(lastDist){
+        const wr=workspaceEl.getBoundingClientRect();
+        zoomBy(dist/lastDist, mid.x-wr.left, mid.y-wr.top);
+      }
+      lastDist=dist; moved=true;
+    }
+  });
+  function endP(e){ pointers.delete(e.pointerId); if(pointers.size<2) lastDist=null; if(pointers.size===0) dragStart=null; }
+  workspaceEl.addEventListener('pointerup', endP);
+  workspaceEl.addEventListener('pointercancel', endP);
+  window.addEventListener('resize', fit);
+
+  return {
+    fit, zoomIn:()=>zoomBy(1.4), zoomOut:()=>zoomBy(1/1.4), wasDrag:()=>moved,
+    toStageCoords(clientX, clientY){
+      const r = stageEl.getBoundingClientRect();
+      return {x:(clientX-r.left)/r.width*100, y:(clientY-r.top)/r.height*100, aspect:r.width/r.height};
+    }
+  };
+}
+
+/* ============================================================
+   TEMA EDITOR (biblioteca)
+   ============================================================ */
+let currentTemaId = null;
+let editorPZ = null;
+
+function openTemaEditor(id){
+  currentTemaId = id;
+  const node = findNode(id);
+  document.getElementById('tema-b-title').textContent = node.name;
+  document.getElementById('tema-b-name').value = node.name;
+  showWindow('win-tema-b');
+  renderTemaEditorImage(node);
+  renderTemaPointList(node);
+}
+function renderTemaEditorImage(node){
+  const ws = document.getElementById('tema-b-workspace');
+  const fp = document.getElementById('tema-b-filepick-wrap');
+  const pl = document.getElementById('tema-b-points');
+  if(!node.image){
+    ws.style.display='none'; fp.style.display='block'; pl.style.display='none';
+    return;
+  }
+  ws.style.display='block'; fp.style.display='none'; pl.style.display='block';
+  const stage = document.getElementById('tema-b-stage');
+  stage.innerHTML = `<img src="${node.image}" id="tema-b-img">`;
+  const img = document.getElementById('tema-b-img');
+  const boot = ()=>{ editorPZ = makePanZoom(ws, stage); editorPZ.fit(); renderEditorMarkers(node); };
+  if(img.complete) boot(); else img.onload = boot;
+  ws.onclick = (e)=>{
+    if(editorPZ && editorPZ.wasDrag()) return;
+    const {x,y} = editorPZ.toStageCoords(e.clientX, e.clientY);
+    if(x<0||x>100||y<0||y>100) return;
+    openPrompt('nombre de este punto', '', (label)=>{
+      if(!label) return;
+      node.points.push({id:uid(), x, y, label});
+      saveLocal();
+      renderEditorMarkers(node);
+      renderTemaPointList(node);
+    });
+  };
+}
+function renderEditorMarkers(node){
+  const stage = document.getElementById('tema-b-stage');
+  stage.querySelectorAll('.editmarker').forEach(el=>el.remove());
+  node.points.forEach((p,i)=>{
+    const m = document.createElement('div');
+    m.className = 'editmarker';
+    m.style.left = p.x+'%'; m.style.top = p.y+'%';
+    m.textContent = i+1;
+    stage.appendChild(m);
+  });
+}
+function renderTemaPointList(node){
+  document.getElementById('tema-b-count').textContent = `${node.points.length} punto${node.points.length===1?'':'s'}`;
+  const list = document.getElementById('tema-b-pointlist');
+  list.innerHTML = '';
+  node.points.forEach((p,i)=>{
+    const row = document.createElement('div');
+    row.className = 'pointrow';
+    row.innerHTML = `<div class="num">${i+1}</div>
+      <input type="text" value="${escapeHtml(p.label)}" data-idx="${i}">
+      <button class="del" data-idx="${i}">✕</button>`;
+    list.appendChild(row);
+  });
+  list.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('input', (e)=>{ node.points[+e.target.dataset.idx].label = e.target.value; });
+    inp.addEventListener('change', saveLocal);
+  });
+  list.querySelectorAll('.del').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      node.points.splice(+e.target.dataset.idx, 1);
+      saveLocal();
+      renderEditorMarkers(node);
+      renderTemaPointList(node);
+    });
+  });
+}
+document.getElementById('tema-b-zin').addEventListener('click', ()=> editorPZ && editorPZ.zoomIn());
+document.getElementById('tema-b-zout').addEventListener('click', ()=> editorPZ && editorPZ.zoomOut());
+document.getElementById('tema-b-filepick').addEventListener('click', ()=> document.getElementById('tema-b-file').click());
+document.getElementById('tema-b-changeimg').addEventListener('click', ()=> document.getElementById('tema-b-file').click());
+document.getElementById('tema-b-file').addEventListener('change', async (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const node = findNode(currentTemaId);
+  node.image = await fileToDownscaledDataURL(file, 1800);
+  saveLocal();
+  renderTemaEditorImage(node);
+});
+document.getElementById('tema-b-name').addEventListener('change', (e)=>{
+  const node = findNode(currentTemaId);
+  const val = e.target.value.trim();
+  if(val){ node.name = val; saveLocal(); renderTree('tree-b',true); renderTree('tree-j',false);
+    document.getElementById('tema-b-title').textContent = val; }
+});
+document.getElementById('tema-b-delete').addEventListener('click', ()=> deleteNode(findNode(currentTemaId)));
+document.getElementById('tema-b-play').addEventListener('click', ()=>{
+  const id = currentTemaId;
+  switchToTab('jugar');
+  openGamePicker(id);
+});
+
+function switchToTab(name){
+  document.querySelectorAll('.app-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id==='view-'+name));
+}
+
+/* ============================================================
+   JUGAR — picker + game
+   ============================================================ */
+function showJugarWindow(id){
+  document.querySelectorAll('#view-jugar .window').forEach(w=>w.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function openGamePicker(temaId){
+  const node = findNode(temaId);
+  if(!node || node.type !== 'tema') return;
+  if(!node.image || node.points.length===0){ toast('Este tema no tiene imagen o puntos todavía'); return; }
+  startGame(node);
+}
+document.getElementById('back-game').addEventListener('click', ()=>{
+  if(confirm('¿Salir de la partida?')){ document.body.classList.remove('playing'); showJugarWindow('win-tree-j'); }
+});
+
+let game = null;
+let gamePZ = null;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function startGame(node, onlyIds){
+  document.body.classList.add('playing');
+  let points = node.points;
+  if(onlyIds) points = points.filter(p=> onlyIds.has(p.id));
+  game = {
+    node, order: shuffle(points), idx:0, total: points.length,
+    correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
+    startTime: Date.now(),
+    stateOf: {}, // pointId -> 'neutral'|'revealed'|'correct'|'wrong'
+    pointResult: {} // pointId -> 1|2|3 (intento en que acertó) | 'failed'
+  };
+  node.points.forEach(p=> game.stateOf[p.id] = 'neutral');
+
+  const stage = document.getElementById('game-stage');
+  stage.innerHTML = `<img src="${node.image}" id="game-img">`;
+  showJugarWindow('win-game');
+  const img = document.getElementById('game-img');
+  const ws = document.getElementById('game-workspace');
+  const boot = ()=>{ gamePZ = makePanZoom(ws, stage); gamePZ.fit(); renderGameMarkers(); nextTarget(true); };
+  if(img.complete) boot(); else img.onload = boot;
+  ws.onclick = (e)=> handleTap(e.clientX, e.clientY);
+}
+
+function renderGameMarkers(){
+  const stage = document.getElementById('game-stage');
+  stage.querySelectorAll('.marker').forEach(el=>el.remove());
+  game.node.points.forEach(p=>{
+    const m = document.createElement('div');
+    m.className = 'marker ' + (game.stateOf[p.id]==='neutral' ? '' : game.stateOf[p.id]);
+    m.dataset.id = p.id;
+    m.style.left = p.x+'%'; m.style.top = p.y+'%';
+    m.innerHTML = `<div class="tag">${escapeHtml(p.label)}</div>`;
+    stage.appendChild(m);
+  });
+}
+function markerStateUpdate(pointId, state){
+  game.stateOf[pointId] = state;
+  const el = document.querySelector(`.marker[data-id="${pointId}"]`);
+  if(el){ el.className = 'marker ' + (state==='neutral'?'':state); }
+}
+
+function currentTarget(){ return game.order[game.idx]; }
+
+function updateHud(){
+  const t = currentTarget();
+  document.getElementById('game-target').textContent = t ? t.label : '—';
+  document.getElementById('game-stats').textContent = `${game.idx}/${game.total}`;
+  document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
+  const dots = document.getElementById('game-attempts');
+  dots.innerHTML = '';
+  for(let i=0;i<3;i++){
+    const d = document.createElement('div');
+    d.className = 'dot' + (i < (3-game.attemptsLeft) ? ' used' : '');
+    dots.appendChild(d);
+  }
+}
+function nextTarget(first){
+  game.attemptsLeft = 3;
+  awaitingConfirm = false;
+  updateHud();
+}
+
+let awaitingConfirm = false; // true when a revealed point is waiting for tap-to-confirm
+
+function handleTap(clientX, clientY){
+  if(!gamePZ || gamePZ.wasDrag()) return;
+  const t = currentTarget();
+  if(!t) return;
+  const tol = Math.max(game.node.tolerance || 8, 8);
+  const {x,y,aspect} = gamePZ.toStageCoords(clientX, clientY);
+  const distTo = (p)=> Math.hypot(x-p.x, (y-p.y)/aspect);
+
+  if(awaitingConfirm){
+    // debe tocar el propio punto revelado para confirmar y continuar
+    if(distTo(t) <= tol){
+      markerStateUpdate(t.id, 'wrong');
+      game.mistakes++;
+      game.pointResult[t.id] = 'failed';
+      advance();
+    }
+    return;
+  }
+
+  // ¿el toque cae dentro de ALGÚN punto (el correcto u otro)? si no toca ninguno, se ignora sin penalizar
+  let nearest = null, nearestDist = Infinity;
+  game.node.points.forEach(p=>{
+    const d = distTo(p);
+    if(d <= tol && d < nearestDist){ nearest = p; nearestDist = d; }
+  });
+  if(!nearest) return; // toque en vacío: no cuenta como fallo
+
+  if(nearest.id === t.id){
+    markerStateUpdate(t.id, 'correct');
+    game.correct++;
+    game.pointResult[t.id] = 4 - game.attemptsLeft; // 3,2,1 intentos restantes -> 1º,2º,3º intento
+    advance();
+  } else {
+    game.attemptsLeft--;
+    if(game.attemptsLeft <= 0){
+      markerStateUpdate(t.id, 'revealed');
+      awaitingConfirm = true;
+      game.failedIds.add(t.id);
+    }
+    updateHud();
+  }
+}
+function advance(){
+  game.idx++;
+  if(game.idx >= game.total){ setTimeout(endGame, 250); }
+  else { nextTarget(); }
+}
+
+document.getElementById('game-zin').addEventListener('click', ()=> gamePZ && gamePZ.zoomIn());
+document.getElementById('game-zout').addEventListener('click', ()=> gamePZ && gamePZ.zoomOut());
+
+function endGame(){
+  document.body.classList.remove('playing');
+  const secs = Math.round((Date.now()-game.startTime)/1000);
+  const mm = String(Math.floor(secs/60)).padStart(2,'0');
+  const ss = String(secs%60).padStart(2,'0');
+
+  // puntuación ponderada: 1er intento=1, 2º=0.65, 3º=0.35, fallado=0
+  const weights = {1:1, 2:0.65, 3:0.35};
+  let sum = 0;
+  game.order.forEach(p=>{
+    const r = game.pointResult[p.id];
+    sum += (r === 'failed' || r === undefined) ? 0 : (weights[r] || 0);
+  });
+  const scorePct = Math.round(sum/game.total*100);
+
+  document.getElementById('end-score').textContent = scorePct+'%';
+  document.getElementById('end-sub').textContent = `${mm}:${ss} · ${game.correct} aciertos · ${game.mistakes} fallos`;
+
+  // guarda en el historial del tema (mejores 10 resultados)
+  const node = game.node;
+  node.history = node.history || [];
+  const entry = {score: scorePct, seconds: secs};
+  node.history.push(entry);
+  node.history.sort((a,b)=> b.score-a.score || a.seconds-b.seconds);
+  const isNewBest = node.history[0] === entry;
+  node.history = node.history.slice(0,10);
+  saveLocal();
+
+  document.getElementById('end-best-badge').style.display = isNewBest ? 'block' : 'none';
+
+  const histWrap = document.getElementById('end-history');
+  histWrap.innerHTML = node.history.map((h,i)=>{
+    const t2 = String(Math.floor(h.seconds/60)).padStart(2,'0')+':'+String(h.seconds%60).padStart(2,'0');
+    return `<div class="histrow${h===entry?' me':''}"><span class="rk">${i+1}.</span><span class="sc">${h.score}%</span><span class="tm">${t2}</span></div>`;
+  }).join('');
+
+  const failBtn = document.getElementById('end-fails');
+  if(game.failedIds.size){
+    failBtn.style.display = 'block';
+    failBtn.textContent = `repasar solo los fallos (${game.failedIds.size})`;
+  } else failBtn.style.display = 'none';
+  showJugarWindow('win-end');
+}
+document.getElementById('end-again').addEventListener('click', ()=> startGame(game.node));
+document.getElementById('end-fails').addEventListener('click', ()=> startGame(game.node, new Set(game.failedIds)));
+document.getElementById('end-back').addEventListener('click', ()=> showJugarWindow('win-tree-j'));
+document.getElementById('end-review').addEventListener('click', ()=>{
+  const labels = {1:'acertado a la 1ª', 2:'acertado a la 2ª', 3:'acertado a la 3ª', failed:'fallado'};
+  const list = document.getElementById('review-list');
+  list.innerHTML = game.order.map(p=>{
+    const r = game.pointResult[p.id];
+    const ok = r===1||r===2||r===3;
+    return `<div class="reviewrow"><span>${escapeHtml(p.label)}</span><span class="res ${ok?'r-ok':'r-bad'}">${labels[r]||'—'}</span></div>`;
+  }).join('');
+  showJugarWindow('win-review');
+});
+document.getElementById('back-review').addEventListener('click', ()=> showJugarWindow('win-end'));
+
+/* ============================================================
+   EXPORT / IMPORT
+   ============================================================ */
+document.getElementById('btn-export').addEventListener('click', ()=>{
+  const blob = new Blob([JSON.stringify({tree, exportedAt: Date.now()}, null, 0)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'data.json';
+  a.click();
+  toast('Sube este archivo a tu repo, junto al index.html');
+});
+document.getElementById('btn-import').addEventListener('click', ()=> document.getElementById('input-import-file').click());
+document.getElementById('input-import-file').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const data = JSON.parse(reader.result);
+      const incoming = data.tree || data;
+      if(!Array.isArray(incoming)) throw new Error('formato inválido');
+      if(tree.length && !confirm('Esto reemplazará tu biblioteca actual. ¿Continuar?')) return;
+      tree = incoming;
+      saveLocal();
+      renderTree('tree-b', true); renderTree('tree-j', false);
+      toast('Biblioteca importada');
+    }catch(err){ toast('El archivo no es válido'); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+boot();
+})();
+</script>
+</body>
+</html>
