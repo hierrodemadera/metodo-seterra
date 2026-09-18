@@ -193,6 +193,39 @@ body.playing #win-game .workspace{min-height:0;}
 .toast.show{opacity:1;}
 
 @media(max-width:420px){.win-content{padding:10px;}}
+
+/* ===================== LIENZO ===================== */
+.lz-app{display:flex;flex-direction:column;width:100%;height:100%;flex:1;min-height:0;}
+.lz-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;
+  border-bottom:1px solid var(--border);background:var(--win);flex-shrink:0;}
+.lz-grp{display:flex;align-items:center;gap:6px;}
+.lz-toolbar input[type=number]{width:60px;background:#fff;border:1px solid var(--border);
+  padding:6px 7px;font-size:12px;border-radius:2px;}
+.lz-toolbar input[type=color]{width:26px;height:26px;border:1px solid var(--border);border-radius:2px;
+  padding:0;background:none;}
+.lz-sep{width:1px;align-self:stretch;background:var(--border);}
+.lz-spacer{flex:1;}
+.lz-zoomlabel{font-size:11px;color:var(--muted);min-width:38px;text-align:center;}
+.lz-viewport{flex:1;overflow:auto;position:relative;display:flex;align-items:center;
+  justify-content:center;padding:24px;background:#c7c7c7;}
+.lz-canvas-wrap{position:relative;box-shadow:0 4px 20px rgba(0,0,0,0.25);flex-shrink:0;}
+#lz-canvas{position:relative;overflow:hidden;}
+.lz-item{position:absolute;cursor:grab;outline:2px solid transparent;user-select:none;touch-action:none;}
+.lz-item.selected{outline:2px solid var(--c-info);}
+.lz-item.cropping{outline:2px dashed var(--c-info);cursor:move;}
+.lz-frame{width:100%;height:100%;overflow:hidden;position:relative;}
+.lz-frame img{position:absolute;pointer-events:none;}
+.lz-del{position:absolute;top:-11px;right:-11px;width:22px;height:22px;border-radius:50%;
+  background:var(--c-bad);color:#fff;border:2px solid #fff;font-size:12px;line-height:1;
+  display:none;align-items:center;justify-content:center;cursor:pointer;}
+.lz-item.selected .lz-del{display:flex;}
+.lz-item.cropping .lz-del{display:none;}
+.lz-rs{position:absolute;bottom:-7px;right:-7px;width:14px;height:14px;border-radius:50%;
+  background:var(--c-info);border:2px solid #fff;display:none;cursor:nwse-resize;}
+.lz-item.selected .lz-rs{display:block;}
+.lz-item.cropping .lz-rs{display:none;}
+.lz-hint-empty{position:absolute;color:var(--muted);font-size:13px;text-align:center;
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1.6;}
 </style>
 </head>
 <body>
@@ -207,6 +240,7 @@ body.playing #win-game .workspace{min-height:0;}
   <div class="app-tabs">
     <button class="app-tab active" data-tab="biblioteca">Biblioteca</button>
     <button class="app-tab" data-tab="jugar">Jugar</button>
+    <button class="app-tab" data-tab="lienzo">Lienzo</button>
   </div>
 </div>
 
@@ -319,6 +353,49 @@ body.playing #win-game .workspace{min-height:0;}
 
   </div>
 
+</div>
+
+<!-- ===================== LIENZO ===================== -->
+<div class="view" id="view-lienzo" style="padding:0;">
+  <div class="lz-app">
+    <div class="lz-toolbar">
+      <div class="lz-grp">
+        <button class="btn btn-primary" id="lz-btn-add">+ imágenes</button>
+        <input type="file" id="lz-file-input" accept="image/*" multiple>
+      </div>
+      <div class="lz-sep"></div>
+      <div class="lz-grp">
+        <input type="number" id="lz-cv-w" value="1600" min="100" step="10" title="ancho">
+        <span style="color:var(--muted);">×</span>
+        <input type="number" id="lz-cv-h" value="1200" min="100" step="10" title="alto">
+        <button class="btn" id="lz-btn-resize">aplicar</button>
+      </div>
+      <div class="lz-sep"></div>
+      <input type="color" id="lz-cv-bg" value="#ffffff" title="fondo">
+      <div class="lz-sep"></div>
+      <div class="lz-grp">
+        <button class="btn" id="lz-btn-front">frente</button>
+        <button class="btn" id="lz-btn-back">fondo</button>
+        <button class="btn" id="lz-btn-crop">recortar</button>
+        <input type="range" id="lz-crop-zoom" min="1" max="3" step="0.01" value="1" style="display:none;width:90px;">
+        <button class="btn btn-danger" id="lz-btn-del">eliminar</button>
+      </div>
+      <div class="lz-spacer"></div>
+      <div class="lz-grp">
+        <button class="btn" id="lz-zoom-out">–</button>
+        <span class="lz-zoomlabel" id="lz-zoom-label">100%</span>
+        <button class="btn" id="lz-zoom-in">+</button>
+        <button class="btn" id="lz-zoom-fit">ajustar</button>
+      </div>
+      <div class="lz-sep"></div>
+      <button class="btn btn-primary" id="lz-btn-export">exportar PNG</button>
+    </div>
+    <div class="lz-viewport" id="lz-viewport">
+      <div class="lz-canvas-wrap" id="lz-canvas-wrap">
+        <div id="lz-canvas"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- context menu -->
@@ -1076,6 +1153,342 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
    BOOT
    ============================================================ */
 boot();
+})();
+</script>
+
+<script>
+/* ============================================================
+   LIENZO — composición de imágenes en un canvas libre
+   ============================================================ */
+(function(){
+"use strict";
+
+let W = 1600, H = 1200, bg = '#ffffff';
+let items = []; // {id, imgEl, natW, natH, x,y,w,h, z, cropScale, offX, offY}
+let nextZ = 1;
+let selectedId = null;
+let cropEditId = null; // id del item actualmente en modo "recortar"
+let viewScale = 1;
+let uidc = 0;
+function uid(){ return 'lz'+(++uidc); }
+
+const canvas = document.getElementById('lz-canvas');
+const canvasWrap = document.getElementById('lz-canvas-wrap');
+const viewport = document.getElementById('lz-viewport');
+const zoomSlider = document.getElementById('lz-crop-zoom');
+const btnCrop = document.getElementById('lz-btn-crop');
+
+function toast(msg){
+  const el = document.getElementById('toast');
+  if(!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=> el.classList.remove('show'), 2000);
+}
+
+/* ---------- tamaño de lienzo / zoom de vista ---------- */
+function applyCanvasSize(){
+  canvas.style.width = W+'px';
+  canvas.style.height = H+'px';
+  canvas.style.background = bg;
+  renderEmptyHint();
+}
+function fitZoom(){
+  const availW = viewport.clientWidth - 48, availH = viewport.clientHeight - 48;
+  viewScale = Math.max(0.05, Math.min(availW/W, availH/H, 2));
+  applyZoom();
+}
+function applyZoom(){
+  canvasWrap.style.width = (W*viewScale)+'px';
+  canvasWrap.style.height = (H*viewScale)+'px';
+  canvas.style.transform = `scale(${viewScale})`;
+  canvas.style.transformOrigin = '0 0';
+  document.getElementById('lz-zoom-label').textContent = Math.round(viewScale*100)+'%';
+}
+document.getElementById('lz-zoom-in').addEventListener('click', ()=>{ viewScale=Math.min(3, viewScale*1.2); applyZoom(); });
+document.getElementById('lz-zoom-out').addEventListener('click', ()=>{ viewScale=Math.max(0.05, viewScale/1.2); applyZoom(); });
+document.getElementById('lz-zoom-fit').addEventListener('click', fitZoom);
+window.addEventListener('resize', ()=>{ if(document.getElementById('view-lienzo').classList.contains('active')) fitZoom(); });
+
+document.getElementById('lz-btn-resize').addEventListener('click', ()=>{
+  W = Math.max(100, +document.getElementById('lz-cv-w').value || W);
+  H = Math.max(100, +document.getElementById('lz-cv-h').value || H);
+  applyCanvasSize();
+  items.forEach(clampCrop);
+  fitZoom();
+});
+document.getElementById('lz-cv-bg').addEventListener('input', (e)=>{
+  bg = e.target.value;
+  canvas.style.background = bg;
+});
+
+function renderEmptyHint(){
+  let hint = canvas.querySelector('.lz-hint-empty');
+  if(items.length === 0){
+    if(!hint){
+      hint = document.createElement('div');
+      hint.className = 'lz-hint-empty';
+      hint.innerHTML = 'arrastra imágenes aquí,<br>pégalas con Ctrl+V,<br>o usa "+ imágenes"';
+      canvas.appendChild(hint);
+    }
+  } else if(hint){ hint.remove(); }
+}
+
+/* ---------- recorte: cubrir el marco por defecto, con margen de zoom/paneo ---------- */
+function coverScale(item){ return Math.max(item.w/item.natW, item.h/item.natH); }
+function clampCrop(item){
+  const cs = coverScale(item);
+  if(item.cropScale < cs) item.cropScale = cs;
+  const dispW = item.natW*item.cropScale, dispH = item.natH*item.cropScale;
+  item.offX = Math.min(0, Math.max(item.w-dispW, item.offX));
+  item.offY = Math.min(0, Math.max(item.h-dispH, item.offY));
+}
+function syncImgStyle(item){
+  const el = canvas.querySelector(`.lz-item[data-id="${item.id}"] img`);
+  if(!el) return;
+  el.style.left = item.offX+'px';
+  el.style.top = item.offY+'px';
+  el.style.width = (item.natW*item.cropScale)+'px';
+  el.style.height = (item.natH*item.cropScale)+'px';
+}
+
+/* ---------- añadir imágenes ---------- */
+function addImageFile(file, dropX, dropY, cascadeIdx){
+  const GRID = 150;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const maxW = Math.min(img.naturalWidth, GRID-20, 130);
+      const w = maxW;
+      const h = w * (img.naturalHeight/img.naturalWidth);
+      let x, y;
+      if(dropX !== undefined){
+        x = dropX - w/2 + (cascadeIdx||0)*18;
+        y = dropY - h/2 + (cascadeIdx||0)*18;
+      } else {
+        const cols = Math.max(1, Math.floor(W/GRID));
+        const col = items.length % cols, row = Math.floor(items.length/cols);
+        x = 10 + col*GRID;
+        y = 10 + row*GRID;
+      }
+      const cs = Math.max(w/img.naturalWidth, h/img.naturalHeight);
+      const item = {
+        id:uid(), imgEl:img, natW:img.naturalWidth, natH:img.naturalHeight,
+        x, y, w, h, z: nextZ++,
+        cropScale: cs,
+        offX: (w - img.naturalWidth*cs)/2,
+        offY: (h - img.naturalHeight*cs)/2
+      };
+      items.push(item);
+      renderItem(item);
+      renderEmptyHint();
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+document.getElementById('lz-btn-add').addEventListener('click', ()=> document.getElementById('lz-file-input').click());
+document.getElementById('lz-file-input').addEventListener('change', (e)=>{
+  [...e.target.files].forEach(f=> addImageFile(f));
+  e.target.value = '';
+});
+
+['dragover','dragenter'].forEach(ev=> viewport.addEventListener(ev, (e)=> e.preventDefault()));
+viewport.addEventListener('drop', (e)=>{
+  e.preventDefault();
+  const files = [...(e.dataTransfer.files||[])].filter(f=> f.type.startsWith('image/'));
+  if(!files.length) return;
+  const rect = canvas.getBoundingClientRect();
+  const cx = (e.clientX - rect.left)/viewScale;
+  const cy = (e.clientY - rect.top)/viewScale;
+  files.forEach((f,i)=> addImageFile(f, cx, cy, i));
+});
+document.addEventListener('paste', (e)=>{
+  if(!document.getElementById('view-lienzo').classList.contains('active')) return;
+  const files = [...(e.clipboardData.items||[])]
+    .filter(it=> it.type && it.type.startsWith('image/'))
+    .map(it=> it.getAsFile()).filter(Boolean);
+  if(!files.length) return;
+  files.forEach((f,i)=> addImageFile(f, W/2, H/2, i));
+  toast(files.length>1 ? `${files.length} imágenes pegadas` : 'Imagen pegada');
+});
+
+/* ---------- render + interacción de cada item ---------- */
+function renderItem(item){
+  const el = document.createElement('div');
+  el.className = 'lz-item';
+  el.dataset.id = item.id;
+  el.style.left = item.x+'px';
+  el.style.top = item.y+'px';
+  el.style.width = item.w+'px';
+  el.style.height = item.h+'px';
+  el.style.zIndex = item.z;
+  el.innerHTML = `<div class="lz-frame"><img src="${item.imgEl.src}" draggable="false"></div>
+    <div class="lz-del">✕</div><div class="lz-rs"></div>`;
+  canvas.appendChild(el);
+  syncImgStyle(item);
+
+  el.addEventListener('pointerdown', (e)=>{
+    if(e.target.classList.contains('lz-del') || e.target.classList.contains('lz-rs')) return;
+    e.preventDefault();
+    select(item.id);
+    el.setPointerCapture(e.pointerId);
+    const startX = e.clientX, startY = e.clientY;
+    const cropping = cropEditId === item.id;
+    const ox = cropping ? item.offX : item.x;
+    const oy = cropping ? item.offY : item.y;
+    function onMove(ev){
+      const dx = (ev.clientX-startX)/viewScale, dy = (ev.clientY-startY)/viewScale;
+      if(cropping){
+        item.offX = ox+dx; item.offY = oy+dy;
+        clampCrop(item);
+        syncImgStyle(item);
+      } else {
+        item.x = ox+dx; item.y = oy+dy;
+        el.style.left = item.x+'px'; el.style.top = item.y+'px';
+      }
+    }
+    function onUp(){ el.removeEventListener('pointermove', onMove); el.removeEventListener('pointerup', onUp); }
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerup', onUp);
+  });
+
+  el.querySelector('.lz-del').addEventListener('pointerdown', (e)=> e.stopPropagation());
+  el.querySelector('.lz-del').addEventListener('click', (e)=>{ e.stopPropagation(); removeItem(item.id); });
+
+  const rs = el.querySelector('.lz-rs');
+  rs.addEventListener('pointerdown', (e)=>{
+    e.stopPropagation(); e.preventDefault();
+    select(item.id);
+    rs.setPointerCapture(e.pointerId);
+    const startX = e.clientX;
+    const ow = item.w, oh = item.h, ratio = oh/ow;
+    function onMove(ev){
+      const dx = (ev.clientX-startX)/viewScale;
+      item.w = Math.max(24, ow+dx);
+      item.h = item.w*ratio;
+      el.style.width = item.w+'px'; el.style.height = item.h+'px';
+      clampCrop(item);
+      syncImgStyle(item);
+    }
+    function onUp(){ rs.removeEventListener('pointermove', onMove); rs.removeEventListener('pointerup', onUp); }
+    rs.addEventListener('pointermove', onMove);
+    rs.addEventListener('pointerup', onUp);
+  });
+}
+
+function select(id){
+  if(cropEditId && cropEditId !== id) exitCropMode();
+  selectedId = id;
+  canvas.querySelectorAll('.lz-item').forEach(el=> el.classList.toggle('selected', el.dataset.id === id));
+}
+canvas.addEventListener('pointerdown', (e)=>{ if(e.target === canvas) select(null); });
+
+function removeItem(id){
+  if(cropEditId === id) exitCropMode();
+  items = items.filter(it=> it.id !== id);
+  const el = canvas.querySelector(`.lz-item[data-id="${id}"]`);
+  if(el) el.remove();
+  if(selectedId === id) selectedId = null;
+  renderEmptyHint();
+}
+function getSelected(){ return items.find(it=> it.id===selectedId); }
+
+document.getElementById('lz-btn-del').addEventListener('click', ()=>{
+  if(selectedId) removeItem(selectedId); else toast('Selecciona antes una imagen');
+});
+document.getElementById('lz-btn-front').addEventListener('click', ()=>{
+  const it = getSelected(); if(!it) return;
+  it.z = nextZ++;
+  canvas.querySelector(`.lz-item[data-id="${it.id}"]`).style.zIndex = it.z;
+});
+document.getElementById('lz-btn-back').addEventListener('click', ()=>{
+  const it = getSelected(); if(!it) return;
+  it.z = 0;
+  items.forEach(o=>{ if(o.id!==it.id){ o.z++; canvas.querySelector(`.lz-item[data-id="${o.id}"]`).style.zIndex=o.z; } });
+  canvas.querySelector(`.lz-item[data-id="${it.id}"]`).style.zIndex = 0;
+});
+
+document.addEventListener('keydown', (e)=>{
+  if(!document.getElementById('view-lienzo').classList.contains('active')) return;
+  if((e.key==='Delete' || e.key==='Backspace') && selectedId && document.activeElement.tagName !== 'INPUT'){
+    e.preventDefault();
+    removeItem(selectedId);
+  }
+});
+
+/* ---------- modo recortar: la misma imagen, pero arrastrar la mueve DENTRO del marco ---------- */
+function enterCropMode(id){
+  const it = items.find(i=>i.id===id);
+  if(!it) return;
+  cropEditId = id;
+  canvas.querySelector(`.lz-item[data-id="${id}"]`).classList.add('cropping');
+  zoomSlider.style.display = 'inline-block';
+  zoomSlider.value = it.cropScale / coverScale(it);
+  btnCrop.textContent = 'listo';
+  btnCrop.classList.add('btn-primary');
+}
+function exitCropMode(){
+  if(!cropEditId) return;
+  const el = canvas.querySelector(`.lz-item[data-id="${cropEditId}"]`);
+  if(el) el.classList.remove('cropping');
+  cropEditId = null;
+  zoomSlider.style.display = 'none';
+  btnCrop.textContent = 'recortar';
+  btnCrop.classList.remove('btn-primary');
+}
+btnCrop.addEventListener('click', ()=>{
+  if(cropEditId){ exitCropMode(); return; }
+  const it = getSelected();
+  if(!it){ toast('Selecciona antes una imagen'); return; }
+  enterCropMode(it.id);
+});
+zoomSlider.addEventListener('input', ()=>{
+  const it = items.find(i=>i.id===cropEditId);
+  if(!it) return;
+  const newScale = coverScale(it) * (+zoomSlider.value);
+  // mantiene centrado el punto medio del marco al hacer zoom
+  const cx = (it.w/2 - it.offX) / it.cropScale;
+  const cy = (it.h/2 - it.offY) / it.cropScale;
+  it.cropScale = newScale;
+  it.offX = it.w/2 - cx*newScale;
+  it.offY = it.h/2 - cy*newScale;
+  clampCrop(it);
+  syncImgStyle(it);
+});
+
+/* ---------- exportar ---------- */
+document.getElementById('lz-btn-export').addEventListener('click', ()=>{
+  if(items.length===0){ toast('El lienzo está vacío'); return; }
+  const out = document.createElement('canvas');
+  out.width = W; out.height = H;
+  const ctx = out.getContext('2d');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,W,H);
+  items.slice().sort((a,b)=>a.z-b.z).forEach(it=>{
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(it.x, it.y, it.w, it.h);
+    ctx.clip();
+    ctx.drawImage(it.imgEl, it.x+it.offX, it.y+it.offY, it.natW*it.cropScale, it.natH*it.cropScale);
+    ctx.restore();
+  });
+  out.toBlob((blob)=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'lienzo.png';
+    a.click();
+    toast('Imagen exportada');
+  }, 'image/png');
+});
+
+document.querySelector('.app-tab[data-tab="lienzo"]').addEventListener('click', ()=> fitZoom());
+
+applyCanvasSize();
+fitZoom();
 })();
 </script>
 </body>
