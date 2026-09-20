@@ -789,6 +789,7 @@ function makePanZoom(workspaceEl, stageEl){
     scale = ns; clamp(); apply();
   }
   workspaceEl.addEventListener('pointerdown', (e)=>{
+    if(e.target.closest('button')) return; // no robar el toque a botones superpuestos (salir, zoom+/-)
     workspaceEl.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, {x:e.clientX,y:e.clientY});
     moved = false;
@@ -910,8 +911,8 @@ function renderTemaPointList(node){
     });
   });
 }
-document.getElementById('tema-b-zin').addEventListener('click', ()=> editorPZ && editorPZ.zoomIn());
-document.getElementById('tema-b-zout').addEventListener('click', ()=> editorPZ && editorPZ.zoomOut());
+document.getElementById('tema-b-zin').addEventListener('click', (e)=>{ e.stopPropagation(); editorPZ && editorPZ.zoomIn(); });
+document.getElementById('tema-b-zout').addEventListener('click', (e)=>{ e.stopPropagation(); editorPZ && editorPZ.zoomOut(); });
 document.getElementById('tema-b-filepick').addEventListener('click', ()=> document.getElementById('tema-b-file').click());
 document.getElementById('tema-b-changeimg').addEventListener('click', ()=> document.getElementById('tema-b-file').click());
 document.getElementById('tema-b-file').addEventListener('change', async (e)=>{
@@ -954,7 +955,8 @@ function openGamePicker(temaId){
   if(!node.image || node.points.length===0){ toast('Este tema no tiene imagen o puntos todavía'); return; }
   startGame(node);
 }
-document.getElementById('back-game').addEventListener('click', ()=>{
+document.getElementById('back-game').addEventListener('click', (e)=>{
+  e.stopPropagation();
   if(confirm('¿Salir de la partida?')){ document.body.classList.remove('playing'); showJugarWindow('win-tree-j'); }
 });
 
@@ -1079,8 +1081,8 @@ function advance(){
   else { nextTarget(); }
 }
 
-document.getElementById('game-zin').addEventListener('click', ()=> gamePZ && gamePZ.zoomIn());
-document.getElementById('game-zout').addEventListener('click', ()=> gamePZ && gamePZ.zoomOut());
+document.getElementById('game-zin').addEventListener('click', (e)=>{ e.stopPropagation(); gamePZ && gamePZ.zoomIn(); });
+document.getElementById('game-zout').addEventListener('click', (e)=>{ e.stopPropagation(); gamePZ && gamePZ.zoomOut(); });
 
 function endGame(){
   document.body.classList.remove('playing');
