@@ -279,6 +279,9 @@ body.playing #win-game .workspace{min-height:0;}
         <span class="title" id="tema-b-title">tema</span>
         <button class="smallbtn" id="tema-b-play">jugar</button>
       </div>
+      <div style="padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;">
+        <button class="btn btn-primary btn-block" id="tema-b-save">💾 guardar</button>
+      </div>
       <div class="workspace" id="tema-b-workspace" style="display:none;">
         <div class="stage" id="tema-b-stage"></div>
         <div class="zoom-controls">
@@ -444,6 +447,11 @@ function loadLocal(){
 function saveLocal(){
   try{ localStorage.setItem(KEY, JSON.stringify(tree)); }
   catch(e){ toast('No se pudo guardar (memoria del navegador llena)'); }
+}
+let debouncedSaveTimer;
+function debouncedSave(){
+  clearTimeout(debouncedSaveTimer);
+  debouncedSaveTimer = setTimeout(saveLocal, 400);
 }
 
 async function boot(){
@@ -719,7 +727,8 @@ function showWindow(id){
 }
 function showTreeOnly(){ showWindow('win-tree-b'); }
 
-document.getElementById('back-tema-b').addEventListener('click', showTreeOnly);
+document.getElementById('back-tema-b').addEventListener('click', ()=>{ saveLocal(); showTreeOnly(); });
+document.getElementById('tema-b-save').addEventListener('click', ()=>{ saveLocal(); toast('Guardado'); });
 
 /* ============================================================
    IMAGE DOWNSCALE
@@ -887,8 +896,10 @@ function renderTemaPointList(node){
     list.appendChild(row);
   });
   list.querySelectorAll('input').forEach(inp=>{
-    inp.addEventListener('input', (e)=>{ node.points[+e.target.dataset.idx].label = e.target.value; });
-    inp.addEventListener('change', saveLocal);
+    inp.addEventListener('input', (e)=>{
+      node.points[+e.target.dataset.idx].label = e.target.value;
+      debouncedSave();
+    });
   });
   list.querySelectorAll('.del').forEach(btn=>{
     btn.addEventListener('click', (e)=>{
@@ -911,12 +922,13 @@ document.getElementById('tema-b-file').addEventListener('change', async (e)=>{
   saveLocal();
   renderTemaEditorImage(node);
 });
-document.getElementById('tema-b-name').addEventListener('change', (e)=>{
+document.getElementById('tema-b-name').addEventListener('input', (e)=>{
   const node = findNode(currentTemaId);
   const val = e.target.value.trim();
-  if(val){ node.name = val; saveLocal(); renderTree('tree-b',true); renderTree('tree-j',false);
+  if(val){ node.name = val; debouncedSave();
     document.getElementById('tema-b-title').textContent = val; }
 });
+document.getElementById('tema-b-name').addEventListener('change', ()=>{ renderTree('tree-b',true); renderTree('tree-j',false); });
 document.getElementById('tema-b-delete').addEventListener('click', ()=> deleteNode(findNode(currentTemaId)));
 document.getElementById('tema-b-play').addEventListener('click', ()=>{
   const id = currentTemaId;
