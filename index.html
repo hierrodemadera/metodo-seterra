@@ -351,6 +351,7 @@ body.playing #win-game .workspace{min-height:0;}
           <span class="lbl">columnas de la cuadrícula</span>
           <input type="number" id="tema-b-barajado-cols" min="1" step="1" style="text-align:center;">
         </div>
+        <button class="btn btn-primary btn-block" id="tema-b-barajado-addmore" style="max-width:260px;margin:0 auto 14px;">+ añadir más fotos (en el Lienzo)</button>
         <div style="font-size:12px;">Las fotos se editan desde la pestaña Lienzo (subir, recortar, nombrar).</div>
       </div>
       <div class="pointslist" id="tema-b-points" style="display:none;">
@@ -1141,6 +1142,15 @@ document.getElementById('tema-b-barajado-cols').addEventListener('change', (e)=>
   document.getElementById('tema-b-barajado-summary').textContent =
     `${photoCount} foto${photoCount===1?'':'s'} · ${cols} columnas`;
 });
+document.getElementById('tema-b-barajado-addmore').addEventListener('click', ()=>{
+  const node = findNode(currentTemaId);
+  if(!node) return;
+  if(window.MSApp) window.MSApp.appendTargetId = node.id;
+  const btn = document.getElementById('lz-btn-send-shuffle');
+  if(btn) btn.textContent = `+ añadir a "${node.name}"`;
+  switchToTab('lienzo');
+  toast('Prepara y nombra tus fotos, luego pulsa el botón naranja para añadirlas a este tema');
+});
 function renderTemaEditorImage(node){
   const ws = document.getElementById('tema-b-workspace');
   const fp = document.getElementById('tema-b-filepick-wrap');
@@ -1569,11 +1579,21 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
 window.MSApp = {
   uid,
   openPrompt,
+  appendTargetId: null,
   pushRootNode(node){
     tree.push(node);
     saveLocal();
     renderTree('tree-b', true);
     renderTree('tree-j', false);
+  },
+  appendPhotosToTema(id, photos){
+    const node = findNode(id);
+    if(!node || node.mode !== 'barajado') return false;
+    node.photos = (node.photos||[]).concat(photos);
+    saveLocal();
+    renderTree('tree-b', true);
+    renderTree('tree-j', false);
+    return true;
   }
 };
 
@@ -2356,20 +2376,41 @@ document.getElementById('lz-btn-send-shuffle').addEventListener('click', ()=>{
   const named = items.filter(it=> it.kind!=='rect' && it.label && it.label.trim());
   if(named.length===0){ toast('Nombra al menos una imagen antes de enviarla'); return; }
   if(!window.MSApp){ toast('No se pudo conectar con la Biblioteca'); return; }
+
+  const makePhotos = ()=> named.map(it=>{
+    const out = document.createElement('canvas');
+    out.width = Math.max(1, Math.round(it.csw));
+    out.height = Math.max(1, Math.round(it.csh));
+    out.getContext('2d').drawImage(it.imgEl, it.csx, it.csy, it.csw, it.csh, 0, 0, out.width, out.height);
+    return { id: window.MSApp.uid(), image: out.toDataURL('image/jpeg', 0.88), label: it.label.trim() };
+  });
+  const unnamedImages = items.filter(it=> it.kind!=='rect' && !(it.label && it.label.trim())).length;
+
+  if(window.MSApp.appendTargetId){
+    const targetId = window.MSApp.appendTargetId;
+    const photos = makePhotos();
+    const ok = window.MSApp.appendPhotosToTema(targetId, photos);
+    window.MSApp.appendTargetId = null;
+    document.getElementById('lz-btn-send-shuffle').textContent = 'enviar como barajado (con scroll)';
+    if(ok){
+      toast(unnamedImages>0
+        ? `${photos.length} fotos añadidas (${unnamedImages} sin nombre no se añadieron)`
+        : `${photos.length} fotos añadidas al tema`);
+      pushUndo();
+      clearCanvas();
+    } else {
+      toast('No se encontró ese tema — no se ha añadido nada');
+    }
+    return;
+  }
+
   window.MSApp.openPrompt('nombre para este tema', '', (name)=>{
     if(!name) return;
     window.MSApp.openPrompt('columnas de la cuadrícula', '3', (colsStr)=>{
       const cols = Math.max(1, Math.round(+colsStr || 3));
-      const photos = named.map(it=>{
-        const out = document.createElement('canvas');
-        out.width = Math.max(1, Math.round(it.csw));
-        out.height = Math.max(1, Math.round(it.csh));
-        out.getContext('2d').drawImage(it.imgEl, it.csx, it.csy, it.csw, it.csh, 0, 0, out.width, out.height);
-        return { id: window.MSApp.uid(), image: out.toDataURL('image/jpeg', 0.88), label: it.label.trim() };
-      });
+      const photos = makePhotos();
       const node = { id: window.MSApp.uid(), type:'tema', mode:'barajado', name, cols, photos };
       window.MSApp.pushRootNode(node);
-      const unnamedImages = items.filter(it=> it.kind!=='rect' && !(it.label && it.label.trim())).length;
       toast(unnamedImages>0
         ? `Tema barajado creado (${photos.length} fotos, ${unnamedImages} sin nombre no se añadieron)`
         : `Tema barajado creado (${photos.length} fotos)`);
