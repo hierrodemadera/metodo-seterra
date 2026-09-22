@@ -289,6 +289,23 @@ body.playing #win-game .workspace{min-height:0;}
 .lz-crop-handle[data-c="ne"]{top:-9px;right:-9px;cursor:nesw-resize;}
 .lz-crop-handle[data-c="sw"]{bottom:-9px;left:-9px;cursor:nesw-resize;}
 .lz-crop-handle[data-c="se"]{bottom:-9px;right:-9px;cursor:nwse-resize;}
+
+/* NOTAS */
+.notas-app{display:flex;flex-direction:column;flex:1;min-height:0;background:#fdfdfd;}
+.notas-bar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
+  padding:8px 14px;border-bottom:1px solid var(--border);background:var(--bg);}
+.notas-bar-title{font-size:13px;font-weight:600;color:var(--fg);
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;}
+.notas-bar-status{font-size:11.5px;color:var(--muted);}
+.notas-editor{flex:1;min-height:0;display:flex;overflow:hidden;background:#fdfdfd;}
+.notas-gutter{flex-shrink:0;width:42px;padding:10px 8px 10px 0;text-align:right;
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  font-size:13.5px;line-height:20px;color:#b7b7bb;background:#f4f4f5;
+  border-right:1px solid var(--border);overflow:hidden;white-space:pre;user-select:none;}
+.notas-editor textarea{flex:1;min-width:0;border:none;outline:none;resize:none;
+  padding:10px 14px;background:transparent;color:var(--fg);
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  font-size:13.5px;line-height:20px;white-space:pre;overflow:auto;}
 </style>
 </head>
 <body>
@@ -304,6 +321,7 @@ body.playing #win-game .workspace{min-height:0;}
     <button class="app-tab active" data-tab="biblioteca">Biblioteca</button>
     <button class="app-tab" data-tab="jugar">Jugar</button>
     <button class="app-tab" data-tab="lienzo">Lienzo</button>
+    <button class="app-tab" data-tab="notas">Notas</button>
   </div>
 </div>
 
@@ -493,6 +511,20 @@ body.playing #win-game .workspace{min-height:0;}
   </div>
 </div>
 
+<!-- ===================== NOTAS ===================== -->
+<div class="view" id="view-notas" style="padding:0;">
+  <div class="notas-app">
+    <div class="notas-bar">
+      <span class="notas-bar-title">ideas.txt</span>
+      <span class="notas-bar-status" id="notas-status"></span>
+    </div>
+    <div class="notas-editor">
+      <div class="notas-gutter" id="notas-gutter">1</div>
+      <textarea id="notas-text" spellcheck="false" placeholder="Escribe aquí…"></textarea>
+    </div>
+  </div>
+</div>
+
 <!-- context menu -->
 <div class="ctx-backdrop" id="ctx-backdrop"></div>
 <div class="ctx-menu" id="ctx-menu" style="display:none;"></div>
@@ -518,9 +550,11 @@ body.playing #win-game .workspace{min-height:0;}
    STORAGE
    ============================================================ */
 const KEY = "metodo_seterra_v2";
+const KEY_NOTAS = "metodo_seterra_notas_v1";
 function uid(){ return 'id'+Math.random().toString(36).slice(2,9)+Date.now().toString(36); }
 
 let tree = [];
+let notas = "";
 
 function loadLocal(){
   try{ const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
@@ -535,21 +569,44 @@ function debouncedSave(){
   debouncedSaveTimer = setTimeout(saveLocal, 400);
 }
 
+function loadLocalNotas(){
+  try{ const raw = localStorage.getItem(KEY_NOTAS); return raw === null ? null : raw; }catch(e){ return null; }
+}
+function saveLocalNotas(){
+  try{ localStorage.setItem(KEY_NOTAS, notas); }
+  catch(e){ toast('No se pudo guardar la nota (memoria del navegador llena)'); }
+}
+let debouncedSaveNotasTimer;
+function debouncedSaveNotas(){
+  const el = document.getElementById('notas-status');
+  if(el) el.textContent = 'escribiendo…';
+  clearTimeout(debouncedSaveNotasTimer);
+  debouncedSaveNotasTimer = setTimeout(()=>{
+    saveLocalNotas();
+    if(el) el.textContent = 'guardado';
+  }, 400);
+}
+
 async function boot(){
   const cached = loadLocal();
   tree = cached || [];
+  const cachedNotas = loadLocalNotas();
+  notas = cachedNotas !== null ? cachedNotas : "";
   if(!cached){
     try{
       const res = await fetch('data.json',{cache:'no-store'});
       if(res.ok){
         const remote = await res.json();
         tree = remote.tree || remote || [];
+        if(cachedNotas === null && typeof remote.notas === 'string') notas = remote.notas;
         saveLocal();
+        saveLocalNotas();
       }
     }catch(e){ /* sin conexión / sin data.json / file:// — se queda vacío */ }
   }
   renderTree('tree-b', true);
   renderTree('tree-j', false);
+  initNotasEditor();
 }
 
 document.getElementById('btn-refresh').addEventListener('click', async ()=>{
@@ -558,9 +615,12 @@ document.getElementById('btn-refresh').addEventListener('click', async ()=>{
     if(!res.ok){ toast('No hay data.json publicado'); return; }
     const remote = await res.json();
     tree = remote.tree || remote || [];
+    if(typeof remote.notas === 'string') notas = remote.notas;
     saveLocal();
+    saveLocalNotas();
     renderTree('tree-b', true);
     renderTree('tree-j', false);
+    setNotasText(notas);
     toast('Actualizado');
   }catch(e){ toast('No se pudo actualizar'); }
 });
@@ -1545,7 +1605,7 @@ document.getElementById('back-review').addEventListener('click', ()=> showJugarW
    EXPORT / IMPORT
    ============================================================ */
 document.getElementById('btn-export').addEventListener('click', ()=>{
-  const blob = new Blob([JSON.stringify({tree, exportedAt: Date.now()}, null, 0)], {type:'application/json'});
+  const blob = new Blob([JSON.stringify({tree, notas, exportedAt: Date.now()}, null, 0)], {type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'data.json';
@@ -1565,6 +1625,11 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
       if(tree.length && !confirm('Esto reemplazará tu biblioteca actual. ¿Continuar?')) return;
       tree = incoming;
       saveLocal();
+      if(typeof data.notas === 'string'){
+        notas = data.notas;
+        saveLocalNotas();
+        setNotasText(notas);
+      }
       renderTree('tree-b', true); renderTree('tree-j', false);
       toast('Biblioteca importada');
     }catch(err){ toast('El archivo no es válido'); }
@@ -1572,6 +1637,43 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
   reader.readAsText(file);
   e.target.value = '';
 });
+
+/* ============================================================
+   NOTAS — editor de texto plano
+   ============================================================ */
+function updateNotasGutter(){
+  const ta = document.getElementById('notas-text');
+  const gutter = document.getElementById('notas-gutter');
+  if(!ta || !gutter) return;
+  const lines = ta.value.split('\n').length;
+  let out = '';
+  for(let i=1;i<=lines;i++) out += i + '\n';
+  gutter.textContent = out.replace(/\n$/, '');
+  gutter.scrollTop = ta.scrollTop;
+}
+function setNotasText(val){
+  const ta = document.getElementById('notas-text');
+  if(!ta) return;
+  ta.value = val || '';
+  updateNotasGutter();
+  const el = document.getElementById('notas-status');
+  if(el) el.textContent = '';
+}
+function initNotasEditor(){
+  const ta = document.getElementById('notas-text');
+  if(!ta || ta.dataset.bound) { setNotasText(notas); return; }
+  ta.dataset.bound = '1';
+  ta.value = notas;
+  updateNotasGutter();
+  ta.addEventListener('input', ()=>{
+    notas = ta.value;
+    updateNotasGutter();
+    debouncedSaveNotas();
+  });
+  ta.addEventListener('scroll', ()=>{
+    document.getElementById('notas-gutter').scrollTop = ta.scrollTop;
+  });
+}
 
 /* ============================================================
    API expuesta para el módulo del Lienzo (script independiente)
