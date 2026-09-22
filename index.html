@@ -120,6 +120,10 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .zoom-controls{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px;z-index:5;}
 .zoom-controls button{width:32px;height:32px;border-radius:8px;border:1px solid var(--field-border);
   background:rgba(255,255,255,0.92);color:var(--fg);font-size:15px;}
+.pz-magnifier{position:fixed;z-index:50;width:160px;height:160px;border-radius:50%;
+  border:3px solid #fff;box-shadow:0 4px 22px rgba(0,0,0,0.4);pointer-events:none;
+  transform:translate(-50%,0);display:none;background:#111;}
+.pz-magnifier canvas{width:100%;height:100%;border-radius:50%;display:block;}
 .filepick{border:1.5px dashed var(--field-border);border-radius:10px;padding:26px 16px;text-align:center;
   color:var(--muted);cursor:pointer;font-size:13px;}
 .filepick:hover{border-color:var(--fg);color:var(--fg);}
@@ -159,6 +163,21 @@ input[type=file]{display:none;}
 .attempts .dot.used{background:var(--c-bad);}
 
 /* overlays flotando sobre la imagen a pantalla completa */
+#win-game{position:relative;}
+.game-grid-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;}
+#game-grid{display:grid;gap:4px;padding:4px;
+  padding-top:calc(64px + var(--safe-top));padding-bottom:calc(70px + var(--safe-bottom));}
+.game-cell{position:relative;aspect-ratio:1/1;background:#f2f2f2;overflow:hidden;
+  border:3px solid transparent;box-sizing:border-box;}
+.game-cell img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;}
+.game-cell.correct{border-color:var(--c-ok);}
+.game-cell.revealed{border-color:var(--c-info);animation:cellpulse 0.9s ease-in-out infinite;}
+.game-cell.wrong{border-color:var(--c-bad);}
+.game-cell .tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,20,20,0.85);
+  color:#fff;font-size:10px;padding:2px 4px;text-align:center;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;display:none;}
+.game-cell.correct .tag,.game-cell.wrong .tag{display:block;}
+@keyframes cellpulse{0%,100%{opacity:1;}50%{opacity:0.45;}}
 .game-overlay-top{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;
   gap:10px;padding:calc(9px + var(--safe-top)) 12px 10px;
   background:linear-gradient(rgba(0,0,0,0.4),transparent);}
@@ -325,6 +344,15 @@ body.playing #win-game .workspace{min-height:0;}
         <div class="filepick" id="tema-b-filepick">+ elegir imagen</div>
         <input type="file" id="tema-b-file" accept="image/*">
       </div>
+      <div id="tema-b-barajado-info" style="display:none;padding:20px 14px;text-align:center;color:var(--muted);">
+        <div style="font-size:32px;margin-bottom:8px;">🔀</div>
+        <div id="tema-b-barajado-summary" style="margin-bottom:14px;"></div>
+        <div class="field" style="max-width:180px;margin:0 auto 14px;text-align:left;">
+          <span class="lbl">columnas de la cuadrícula</span>
+          <input type="number" id="tema-b-barajado-cols" min="1" step="1" style="text-align:center;">
+        </div>
+        <div style="font-size:12px;">Las fotos se editan desde la pestaña Lienzo (subir, recortar, nombrar).</div>
+      </div>
       <div class="pointslist" id="tema-b-points" style="display:none;">
         <div class="pointslist-hdr">
           <span id="tema-b-count">0 puntos</span>
@@ -359,19 +387,22 @@ body.playing #win-game .workspace{min-height:0;}
     <div class="window" id="win-game">
       <div class="workspace" id="game-workspace">
         <div class="stage" id="game-stage"></div>
-        <div class="game-overlay-top">
-          <button class="back" id="back-game">←</button>
-          <div class="progressbar"><div class="fill" id="game-progress"></div></div>
-          <span id="game-stats">0/0</span>
-        </div>
-        <div class="game-pill">
-          <div class="name" id="game-target">—</div>
-          <div class="attempts" id="game-attempts"></div>
-        </div>
         <div class="zoom-controls">
           <button id="game-zin">+</button>
           <button id="game-zout">–</button>
         </div>
+      </div>
+      <div class="game-grid-wrap" id="game-grid-wrap" style="display:none;">
+        <div id="game-grid"></div>
+      </div>
+      <div class="game-overlay-top">
+        <button class="back" id="back-game">←</button>
+        <div class="progressbar"><div class="fill" id="game-progress"></div></div>
+        <span id="game-stats">0/0</span>
+      </div>
+      <div class="game-pill">
+        <div class="name" id="game-target">—</div>
+        <div class="attempts" id="game-attempts"></div>
       </div>
     </div>
 
@@ -450,6 +481,7 @@ body.playing #win-game .workspace{min-height:0;}
         <input type="text" id="lz-item-name" placeholder="nombre de la imagen seleccionada" disabled style="width:100%;">
       </div>
       <button class="btn btn-primary" id="lz-btn-send">enviar a Biblioteca</button>
+      <button class="btn" id="lz-btn-send-shuffle">enviar como barajado (con scroll)</button>
     </div>
     <div class="lz-viewport" id="lz-viewport">
       <div class="lz-canvas-wrap" id="lz-canvas-wrap">
@@ -622,7 +654,8 @@ function renderRow(node, depth, editable, containerId){
   row.dataset.id = node.id;
   const isFolder = node.type === 'folder';
   const tog = isFolder ? (node.expanded ? '−' : '+') : '';
-  const count = isFolder ? `<span class="tree-count">${countTemas(node)}</span>` : '';
+  const count = isFolder ? `<span class="tree-count">${countTemas(node)}</span>`
+    : (node.mode==='barajado' ? '<span class="tree-count">barajado</span>' : '');
   row.innerHTML = `
     <span class="tree-tog">${tog}</span>
     <span class="tree-name">${escapeHtml(node.name)}</span>
@@ -918,9 +951,11 @@ function fileToDownscaledDataURL(file, maxDim){
 /* ============================================================
    PAN / ZOOM ENGINE  (shared: editor + game)
    ============================================================ */
-function makePanZoom(workspaceEl, stageEl){
+function makePanZoom(workspaceEl, stageEl, opts){
+  opts = opts || {};
   let scale=1, tx=0, ty=0, minScale=1, maxScale=5;
   let pointers = new Map(), lastDist=null, dragStart=null, moved=false;
+  let pressTimer=null, magnifying=false, magnifierEl=null;
 
   function apply(){ stageEl.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`; }
   function clamp(){
@@ -946,13 +981,68 @@ function makePanZoom(workspaceEl, stageEl){
     tx = cx-(cx-tx)*ratio; ty = cy-(cy-ty)*ratio;
     scale = ns; clamp(); apply();
   }
+
+  function clearPressTimer(){ if(pressTimer){ clearTimeout(pressTimer); pressTimer=null; } }
+  function ensureMagnifierEl(){
+    if(!magnifierEl){
+      magnifierEl = document.createElement('div');
+      magnifierEl.className = 'pz-magnifier';
+      magnifierEl.innerHTML = '<canvas width="160" height="160"></canvas>';
+      document.body.appendChild(magnifierEl);
+    }
+    return magnifierEl;
+  }
+  function updateMagnifier(clientX, clientY){
+    const img = stageEl.querySelector('img');
+    if(!img) return;
+    const el = ensureMagnifierEl();
+    const rect = img.getBoundingClientRect();
+    const fx = (clientX-rect.left)/rect.width, fy = (clientY-rect.top)/rect.height;
+    const nx = fx*img.naturalWidth, ny = fy*img.naturalHeight;
+    const screenScale = rect.width/img.naturalWidth;
+    const extra = 3; // cuánto más cerca se ve con la lupa respecto al zoom actual
+    let winSize = 160/(screenScale*extra);
+    winSize = Math.max(30, Math.min(img.naturalWidth, img.naturalHeight, winSize));
+    const canvas = el.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, canvas.width/2, 0, Math.PI*2);
+    ctx.clip();
+    ctx.fillStyle = '#111';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(img, nx-winSize/2, ny-winSize/2, winSize, winSize, 0, 0, canvas.width, canvas.height);
+    ctx.restore();
+    el.style.left = clientX+'px';
+    el.style.top = (clientY-190)+'px';
+    el.style.display = 'block';
+  }
+  function stopMagnify(){
+    magnifying = false;
+    if(magnifierEl) magnifierEl.style.display = 'none';
+  }
+
   workspaceEl.addEventListener('pointerdown', (e)=>{
     if(e.target.closest('button')) return; // no robar el toque a botones superpuestos (salir, zoom+/-)
     workspaceEl.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, {x:e.clientX,y:e.clientY});
     moved = false;
-    if(pointers.size===1){ const p=[...pointers.values()][0]; dragStart={x:p.x,y:p.y,tx,ty}; }
-    else if(pointers.size===2){
+    if(pointers.size===1){
+      const p=[...pointers.values()][0];
+      dragStart={x:p.x,y:p.y,tx,ty};
+      if(opts.magnifier){
+        clearPressTimer();
+        const pid=e.pointerId, sx=e.clientX, sy=e.clientY;
+        pressTimer = setTimeout(()=>{
+          if(pointers.size===1 && pointers.has(pid) && !moved){
+            magnifying = true;
+            updateMagnifier(sx, sy);
+          }
+        }, 280);
+      }
+    } else if(pointers.size===2){
+      clearPressTimer(); stopMagnify();
       const [a,b]=[...pointers.values()]; lastDist=Math.hypot(a.x-b.x,a.y-b.y);
     }
   });
@@ -962,8 +1052,12 @@ function makePanZoom(workspaceEl, stageEl){
     if(pointers.size===1 && dragStart){
       const p=[...pointers.values()][0];
       const dx=p.x-dragStart.x, dy=p.y-dragStart.y;
-      if(Math.hypot(dx,dy)>6) moved = true;
-      if(scale > minScale+0.001){ tx=dragStart.tx+dx; ty=dragStart.ty+dy; clamp(); apply(); }
+      if(Math.hypot(dx,dy)>6 && !magnifying){ moved = true; clearPressTimer(); }
+      if(magnifying){
+        updateMagnifier(p.x, p.y);
+      } else if(scale > minScale+0.001){
+        tx=dragStart.tx+dx; ty=dragStart.ty+dy; clamp(); apply();
+      }
     } else if(pointers.size===2){
       const [a,b]=[...pointers.values()];
       const dist=Math.hypot(a.x-b.x,a.y-b.y);
@@ -975,7 +1069,24 @@ function makePanZoom(workspaceEl, stageEl){
       lastDist=dist; moved=true;
     }
   });
-  function endP(e){ pointers.delete(e.pointerId); if(pointers.size<2) lastDist=null; if(pointers.size===0) dragStart=null; }
+  function endP(e){
+    const wasMagnifying = magnifying;
+    const lastPos = pointers.get(e.pointerId);
+    clearPressTimer();
+    pointers.delete(e.pointerId);
+    if(pointers.size<2) lastDist=null;
+    if(pointers.size===1){
+      // reinicia el arrastre con el dedo que queda, tomando el estado ACTUAL (evita el salto)
+      const p=[...pointers.values()][0];
+      dragStart = {x:p.x, y:p.y, tx, ty};
+    }
+    if(pointers.size===0) dragStart=null;
+    if(wasMagnifying){
+      stopMagnify();
+      moved = true; // evita que el click nativo posterior también cuente como toque
+      if(opts.onMagnifierConfirm && lastPos) opts.onMagnifierConfirm(lastPos.x, lastPos.y);
+    }
+  }
   workspaceEl.addEventListener('pointerup', endP);
   workspaceEl.addEventListener('pointercancel', endP);
   window.addEventListener('resize', fit);
@@ -1001,9 +1112,35 @@ function openTemaEditor(id){
   document.getElementById('tema-b-title').textContent = node.name;
   document.getElementById('tema-b-name').value = node.name;
   showWindow('win-tema-b');
-  renderTemaEditorImage(node);
-  renderTemaPointList(node);
+  const changeImgBtn = document.getElementById('tema-b-changeimg');
+  if(node.mode === 'barajado'){
+    document.getElementById('tema-b-workspace').style.display = 'none';
+    document.getElementById('tema-b-filepick-wrap').style.display = 'none';
+    document.getElementById('tema-b-points').style.display = 'none';
+    document.getElementById('tema-b-barajado-info').style.display = 'block';
+    const photoCount = (node.photos||[]).length;
+    document.getElementById('tema-b-barajado-summary').textContent =
+      `${photoCount} foto${photoCount===1?'':'s'} · ${node.cols||3} columnas`;
+    document.getElementById('tema-b-barajado-cols').value = node.cols || 3;
+    changeImgBtn.style.display = 'none';
+  } else {
+    document.getElementById('tema-b-barajado-info').style.display = 'none';
+    changeImgBtn.style.display = '';
+    renderTemaEditorImage(node);
+    renderTemaPointList(node);
+  }
 }
+document.getElementById('tema-b-barajado-cols').addEventListener('change', (e)=>{
+  const node = findNode(currentTemaId);
+  if(!node) return;
+  const cols = Math.max(1, Math.round(+e.target.value || 3));
+  node.cols = cols;
+  e.target.value = cols;
+  saveLocal();
+  const photoCount = (node.photos||[]).length;
+  document.getElementById('tema-b-barajado-summary').textContent =
+    `${photoCount} foto${photoCount===1?'':'s'} · ${cols} columnas`;
+});
 function renderTemaEditorImage(node){
   const ws = document.getElementById('tema-b-workspace');
   const fp = document.getElementById('tema-b-filepick-wrap');
@@ -1110,8 +1247,18 @@ function showJugarWindow(id){
 function openGamePicker(temaId){
   const node = findNode(temaId);
   if(!node || node.type !== 'tema') return;
-  if(!node.image || node.points.length===0){ toast('Este tema no tiene imagen o puntos todavía'); return; }
-  startGame(node);
+  if(node.mode === 'barajado'){
+    if(!node.photos || !node.photos.length){
+      toast('Este tema no tiene fotos todavía'); return;
+    }
+  } else if(!node.image || node.points.length===0){
+    toast('Este tema no tiene imagen o puntos todavía'); return;
+  }
+  playTema(node);
+}
+function playTema(node, onlyIds){
+  if(node.mode === 'barajado') startBarajadoGame(node, onlyIds);
+  else startGame(node, onlyIds);
 }
 document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
@@ -1129,10 +1276,11 @@ function shuffle(arr){
 
 function startGame(node, onlyIds){
   document.body.classList.add('playing');
+  resetGameContainers();
   let points = node.points;
   if(onlyIds) points = points.filter(p=> onlyIds.has(p.id));
   game = {
-    node, order: shuffle(points), idx:0, total: points.length,
+    temaNode: node, node, order: shuffle(points), idx:0, total: points.length,
     correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
     startTime: Date.now(),
     stateOf: {}, // pointId -> 'neutral'|'revealed'|'correct'|'wrong'
@@ -1145,9 +1293,87 @@ function startGame(node, onlyIds){
   showJugarWindow('win-game');
   const img = document.getElementById('game-img');
   const ws = document.getElementById('game-workspace');
-  const boot = ()=>{ gamePZ = makePanZoom(ws, stage); gamePZ.fit(); renderGameMarkers(); nextTarget(true); };
+  const boot = ()=>{
+    gamePZ = makePanZoom(ws, stage, { magnifier: true, onMagnifierConfirm: (x,y)=> handleTap(x,y) });
+    gamePZ.fit(); renderGameMarkers(); nextTarget(true);
+  };
   if(img.complete) boot(); else img.onload = boot;
   ws.onclick = (e)=> handleTap(e.clientX, e.clientY);
+}
+
+/* ============================================================
+   BARAJADO — piezas sueltas repartidas al azar entre casillas
+   ============================================================ */
+function resetGameContainers(){
+  document.getElementById('game-workspace').style.display = '';
+  document.getElementById('game-grid-wrap').style.display = 'none';
+  document.getElementById('game-grid').innerHTML = '';
+}
+function startBarajadoGame(node, onlyIds){
+  document.body.classList.add('playing');
+  resetGameContainers();
+  let photos = node.photos || [];
+  if(onlyIds) photos = photos.filter(p=> onlyIds.has(p.id));
+  if(!photos.length){ toast('Este tema no tiene fotos todavía'); document.body.classList.remove('playing'); return; }
+
+  const order = shuffle(photos);
+  game = {
+    temaNode: node,
+    node: { points: order.map(p=>({id:p.id, label:p.label})), tolerance: 8 },
+    mode: 'barajado',
+    order: order.map(p=>({id:p.id, label:p.label})),
+    idx:0, total: order.length,
+    correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
+    startTime: Date.now(),
+    stateOf: {}, pointResult: {}
+  };
+  order.forEach(p=> game.stateOf[p.id] = 'neutral');
+
+  document.getElementById('game-workspace').style.display = 'none';
+  document.getElementById('game-grid-wrap').style.display = 'block';
+  const grid = document.getElementById('game-grid');
+  grid.style.gridTemplateColumns = `repeat(${Math.max(1, node.cols||3)}, 1fr)`;
+
+  const displayOrder = shuffle(photos); // dónde cae cada foto, distinto del orden de preguntas
+  displayOrder.forEach(p=>{
+    const cell = document.createElement('div');
+    cell.className = 'game-cell';
+    cell.dataset.id = p.id;
+    cell.innerHTML = `<img src="${p.image}"><div class="tag"></div>`;
+    cell.querySelector('.tag').textContent = p.label;
+    cell.addEventListener('click', ()=> handleGridTap(p.id));
+    grid.appendChild(cell);
+  });
+
+  showJugarWindow('win-game');
+  nextTarget(true);
+}
+function handleGridTap(photoId){
+  const t = currentTarget();
+  if(!t) return;
+  if(awaitingConfirm){
+    if(photoId === t.id){
+      markerStateUpdate(t.id, 'wrong');
+      game.mistakes++;
+      game.pointResult[t.id] = 'failed';
+      advance();
+    }
+    return;
+  }
+  if(photoId === t.id){
+    markerStateUpdate(t.id, 'correct');
+    game.correct++;
+    game.pointResult[t.id] = 4 - game.attemptsLeft;
+    advance();
+  } else {
+    game.attemptsLeft--;
+    if(game.attemptsLeft <= 0){
+      game.failedIds.add(t.id);
+      awaitingConfirm = true;
+      markerStateUpdate(t.id, 'revealed');
+    }
+    updateHud();
+  }
 }
 
 function renderGameMarkers(){
@@ -1166,6 +1392,11 @@ function markerStateUpdate(pointId, state){
   game.stateOf[pointId] = state;
   const el = document.querySelector(`.marker[data-id="${pointId}"]`);
   if(el){ el.className = 'marker ' + (state==='neutral'?'':state); }
+  const cell = document.querySelector(`.game-cell[data-id="${pointId}"]`);
+  if(cell){
+    cell.className = 'game-cell' + (state==='neutral'?'':' '+state);
+    if(state==='revealed') cell.scrollIntoView({behavior:'smooth', block:'center'});
+  }
 }
 
 function currentTarget(){ return game.order[game.idx]; }
@@ -1226,9 +1457,9 @@ function handleTap(clientX, clientY){
   } else {
     game.attemptsLeft--;
     if(game.attemptsLeft <= 0){
-      markerStateUpdate(t.id, 'revealed');
-      awaitingConfirm = true;
       game.failedIds.add(t.id);
+      awaitingConfirm = true;
+      markerStateUpdate(t.id, 'revealed');
     }
     updateHud();
   }
@@ -1261,7 +1492,7 @@ function endGame(){
   document.getElementById('end-sub').textContent = `${mm}:${ss} · ${game.correct} aciertos · ${game.mistakes} fallos`;
 
   // guarda en el historial del tema (mejores 10 resultados)
-  const node = game.node;
+  const node = game.temaNode;
   node.history = node.history || [];
   const entry = {score: scorePct, seconds: secs};
   node.history.push(entry);
@@ -1285,8 +1516,8 @@ function endGame(){
   } else failBtn.style.display = 'none';
   showJugarWindow('win-end');
 }
-document.getElementById('end-again').addEventListener('click', ()=> startGame(game.node));
-document.getElementById('end-fails').addEventListener('click', ()=> startGame(game.node, new Set(game.failedIds)));
+document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode));
+document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds)));
 document.getElementById('end-back').addEventListener('click', ()=> showJugarWindow('win-tree-j'));
 document.getElementById('end-review').addEventListener('click', ()=>{
   const labels = {1:'acertado a la 1ª', 2:'acertado a la 2ª', 3:'acertado a la 3ª', failed:'fallado'};
@@ -1891,7 +2122,7 @@ document.getElementById('lz-btn-front').addEventListener('click', ()=>{
 document.getElementById('lz-btn-back').addEventListener('click', ()=>{
   const sel = getSelected(); if(!sel.length){ toast('Selecciona antes una imagen'); return; }
   pushUndo();
-  let minZ = Math.min(0, ...items.map(i=>i.z));
+  let minZ = Math.min(0, ...items.filter(it=>it.kind!=='cell').map(i=>i.z));
   sel.forEach(it=>{ minZ--; it.z = minZ; const el=canvas.querySelector(`.lz-item[data-id="${it.id}"]`); if(el) el.style.zIndex=it.z; });
 });
 
@@ -2037,7 +2268,7 @@ cropBtn.addEventListener('click', ()=>{
   if(cropEditId){ applyCropAndClose(); return; }
   const it = getSingleSelected();
   if(!it){ toast(selectedIds.size>1 ? 'Selecciona solo una imagen para recortar' : 'Selecciona antes una imagen'); return; }
-  if(it.kind === 'rect'){ toast('Un rectángulo no se puede recortar'); return; }
+  if(it.kind === 'rect' || it.kind === 'cell'){ toast('Esto no se puede recortar'); return; }
   enterCropMode(it.id);
 });
 
@@ -2075,11 +2306,12 @@ document.getElementById('lz-btn-export').addEventListener('click', ()=>{
 
 document.getElementById('lz-btn-send').addEventListener('click', ()=>{
   if(items.length===0 && freePoints.length===0){ toast('El lienzo está vacío'); return; }
-  const named = items.filter(it=> it.label && it.label.trim());
+  const named = items.filter(it=> it.kind!=='rect' && it.label && it.label.trim());
+  if(!window.MSApp){ toast('No se pudo conectar con la Biblioteca'); return; }
+
   if(named.length===0 && freePoints.length===0){
     toast('Ponle nombre al menos a una imagen, o coloca al menos un punto'); return;
   }
-  if(!window.MSApp){ toast('No se pudo conectar con la Biblioteca'); return; }
   window.MSApp.openPrompt('nombre para este tema', '', (name)=>{
     if(!name) return;
     const src = renderComposite();
@@ -2111,12 +2343,39 @@ document.getElementById('lz-btn-send').addEventListener('click', ()=>{
       label: fp.label
     }));
     const points = [...regionPoints, ...loosePoints];
-    const node = { id: window.MSApp.uid(), type:'tema', name, image:dataUrl, points, tolerance:8 };
+    const node = { id: window.MSApp.uid(), type:'tema', mode:'fijo', name, image:dataUrl, points, tolerance:8 };
     window.MSApp.pushRootNode(node);
-    const unnamedImages = items.filter(it=> it.kind!=='rect' && !(it.label && it.label.trim())).length;
+    const unnamedImages = items.filter(it=> it.kind!=='rect' && it.kind!=='cell' && !(it.label && it.label.trim())).length;
     toast(unnamedImages>0 ? `Tema creado (${unnamedImages} imagen(es) sin nombre no se añadieron)` : 'Tema creado en Biblioteca');
     pushUndo();
     clearCanvas();
+  });
+});
+
+document.getElementById('lz-btn-send-shuffle').addEventListener('click', ()=>{
+  const named = items.filter(it=> it.kind!=='rect' && it.label && it.label.trim());
+  if(named.length===0){ toast('Nombra al menos una imagen antes de enviarla'); return; }
+  if(!window.MSApp){ toast('No se pudo conectar con la Biblioteca'); return; }
+  window.MSApp.openPrompt('nombre para este tema', '', (name)=>{
+    if(!name) return;
+    window.MSApp.openPrompt('columnas de la cuadrícula', '3', (colsStr)=>{
+      const cols = Math.max(1, Math.round(+colsStr || 3));
+      const photos = named.map(it=>{
+        const out = document.createElement('canvas');
+        out.width = Math.max(1, Math.round(it.csw));
+        out.height = Math.max(1, Math.round(it.csh));
+        out.getContext('2d').drawImage(it.imgEl, it.csx, it.csy, it.csw, it.csh, 0, 0, out.width, out.height);
+        return { id: window.MSApp.uid(), image: out.toDataURL('image/jpeg', 0.88), label: it.label.trim() };
+      });
+      const node = { id: window.MSApp.uid(), type:'tema', mode:'barajado', name, cols, photos };
+      window.MSApp.pushRootNode(node);
+      const unnamedImages = items.filter(it=> it.kind!=='rect' && !(it.label && it.label.trim())).length;
+      toast(unnamedImages>0
+        ? `Tema barajado creado (${photos.length} fotos, ${unnamedImages} sin nombre no se añadieron)`
+        : `Tema barajado creado (${photos.length} fotos)`);
+      pushUndo();
+      clearCanvas();
+    });
   });
 });
 
