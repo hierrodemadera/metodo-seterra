@@ -85,6 +85,8 @@ button{cursor:pointer;}
   cursor:not-allowed;}
 #tree-b.tree-root-drop{background:rgba(21,1,254,0.05);outline:2px dashed var(--c-info);
   outline-offset:-4px;border-radius:8px;}
+#notas-tree.tree-root-drop{background:rgba(21,1,254,0.05);outline:2px dashed var(--c-info);
+  outline-offset:-4px;border-radius:8px;}
 
 /* CONTEXT MENU */
 .ctx-backdrop{position:fixed;inset:0;z-index:80;display:none;}
@@ -291,11 +293,6 @@ body.playing #win-game .workspace{min-height:0;}
 .lz-crop-handle[data-c="se"]{bottom:-9px;right:-9px;cursor:nwse-resize;}
 
 /* NOTAS */
-.notas-app{display:flex;flex-direction:column;flex:1;min-height:0;background:#fdfdfd;}
-.notas-bar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
-  padding:8px 14px;border-bottom:1px solid var(--border);background:var(--bg);}
-.notas-bar-title{font-size:13px;font-weight:600;color:var(--fg);
-  font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;}
 .notas-bar-status{font-size:11.5px;color:var(--muted);}
 .notas-editor{flex:1;min-height:0;display:flex;overflow:hidden;background:#fdfdfd;}
 .notas-gutter{flex-shrink:0;width:42px;padding:10px 8px 10px 0;text-align:right;
@@ -512,16 +509,34 @@ body.playing #win-game .workspace{min-height:0;}
 </div>
 
 <!-- ===================== NOTAS ===================== -->
-<div class="view" id="view-notas" style="padding:0;">
-  <div class="notas-app">
-    <div class="notas-bar">
-      <span class="notas-bar-title">ideas.txt</span>
-      <span class="notas-bar-status" id="notas-status"></span>
+<div class="view" id="view-notas">
+  <div class="app">
+
+    <div class="window active" id="win-notas-list">
+      <div class="win-tb">
+        <span class="title">notas</span>
+      </div>
+      <div class="tree-toolbar">
+        <button class="smallbtn" id="btn-notas-root-folder">+ carpeta</button>
+        <button class="smallbtn" id="btn-notas-root-doc">+ documento</button>
+      </div>
+      <div class="win-content" id="notas-tree"></div>
     </div>
-    <div class="notas-editor">
-      <div class="notas-gutter" id="notas-gutter">1</div>
-      <textarea id="notas-text" spellcheck="false" placeholder="Escribe aquí…"></textarea>
+
+    <div class="window" id="win-notas-editor">
+      <div class="win-tb">
+        <button class="back" id="back-notas-editor">←</button>
+        <span class="title" id="notas-editor-title">documento</span>
+        <span class="notas-bar-status" id="notas-status"></span>
+        <button class="smallbtn" id="btn-notas-rename">renombrar</button>
+        <button class="smallbtn" id="btn-notas-delete">eliminar</button>
+      </div>
+      <div class="notas-editor">
+        <div class="notas-gutter" id="notas-gutter">1</div>
+        <textarea id="notas-text" spellcheck="false" placeholder="Escribe aquí…"></textarea>
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -554,7 +569,7 @@ const KEY_NOTAS = "metodo_seterra_notas_v1";
 function uid(){ return 'id'+Math.random().toString(36).slice(2,9)+Date.now().toString(36); }
 
 let tree = [];
-let notas = "";
+let notas = [];
 
 function loadLocal(){
   try{ const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
@@ -569,12 +584,33 @@ function debouncedSave(){
   debouncedSaveTimer = setTimeout(saveLocal, 400);
 }
 
-function loadLocalNotas(){
-  try{ const raw = localStorage.getItem(KEY_NOTAS); return raw === null ? null : raw; }catch(e){ return null; }
+function loadLocalNotasRaw(){
+  try{ return localStorage.getItem(KEY_NOTAS); }catch(e){ return null; }
+}
+function migrateNotasArray(arr){
+  return (arr||[]).map(item=>{
+    if(item && item.type === 'folder'){
+      return { id:item.id||uid(), type:'folder', name:item.name||'carpeta', expanded: !!item.expanded, children: migrateNotasArray(item.children||[]) };
+    }
+    return { id:(item&&item.id)||uid(), type:'nota', name:(item&&item.name)||'documento', content:(item&&item.content)||'' };
+  });
+}
+function parseNotasValue(raw){
+  if(raw === null || raw === undefined) return null;
+  let parsed = null;
+  try{ parsed = JSON.parse(raw); }catch(e){ /* formato antiguo: texto plano suelto */ }
+  if(Array.isArray(parsed)) return migrateNotasArray(parsed);
+  if(typeof raw === 'string' && raw.trim()) return [{ id: uid(), type:'nota', name: 'Notas', content: raw }];
+  return [];
+}
+function normalizeRemoteNotas(remoteNotas){
+  if(Array.isArray(remoteNotas)) return migrateNotasArray(remoteNotas);
+  if(typeof remoteNotas === 'string' && remoteNotas.trim()) return [{ id: uid(), type:'nota', name: 'Notas', content: remoteNotas }];
+  return null;
 }
 function saveLocalNotas(){
-  try{ localStorage.setItem(KEY_NOTAS, notas); }
-  catch(e){ toast('No se pudo guardar la nota (memoria del navegador llena)'); }
+  try{ localStorage.setItem(KEY_NOTAS, JSON.stringify(notas)); }
+  catch(e){ toast('No se pudo guardar el documento (memoria del navegador llena)'); }
 }
 let debouncedSaveNotasTimer;
 function debouncedSaveNotas(){
@@ -590,20 +626,24 @@ function debouncedSaveNotas(){
 async function boot(){
   const cached = loadLocal();
   tree = cached || [];
-  const cachedNotas = loadLocalNotas();
-  notas = cachedNotas !== null ? cachedNotas : "";
+  const cachedNotasRaw = loadLocalNotasRaw();
+  notas = cachedNotasRaw !== null ? parseNotasValue(cachedNotasRaw) : null;
   if(!cached){
     try{
       const res = await fetch('data.json',{cache:'no-store'});
       if(res.ok){
         const remote = await res.json();
         tree = remote.tree || remote || [];
-        if(cachedNotas === null && typeof remote.notas === 'string') notas = remote.notas;
+        if(notas === null){
+          const rn = normalizeRemoteNotas(remote.notas);
+          if(rn) notas = rn;
+        }
         saveLocal();
-        saveLocalNotas();
       }
     }catch(e){ /* sin conexión / sin data.json / file:// — se queda vacío */ }
   }
+  if(notas === null) notas = [];
+  saveLocalNotas();
   renderTree('tree-b', true);
   renderTree('tree-j', false);
   initNotasEditor();
@@ -615,12 +655,15 @@ document.getElementById('btn-refresh').addEventListener('click', async ()=>{
     if(!res.ok){ toast('No hay data.json publicado'); return; }
     const remote = await res.json();
     tree = remote.tree || remote || [];
-    if(typeof remote.notas === 'string') notas = remote.notas;
+    const rn = normalizeRemoteNotas(remote.notas);
+    if(rn) notas = rn;
     saveLocal();
     saveLocalNotas();
     renderTree('tree-b', true);
     renderTree('tree-j', false);
-    setNotasText(notas);
+    currentNotaId = null;
+    renderNotasTree();
+    showNotasWindow('win-notas-list');
     toast('Actualizado');
   }catch(e){ toast('No se pudo actualizar'); }
 });
@@ -1625,10 +1668,13 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
       if(tree.length && !confirm('Esto reemplazará tu biblioteca actual. ¿Continuar?')) return;
       tree = incoming;
       saveLocal();
-      if(typeof data.notas === 'string'){
-        notas = data.notas;
+      const rn = normalizeRemoteNotas(data.notas);
+      if(rn){
+        notas = rn;
         saveLocalNotas();
-        setNotasText(notas);
+        currentNotaId = null;
+        renderNotasTree();
+        showNotasWindow('win-notas-list');
       }
       renderTree('tree-b', true); renderTree('tree-j', false);
       toast('Biblioteca importada');
@@ -1639,8 +1685,280 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
 });
 
 /* ============================================================
-   NOTAS — editor de texto plano
+   NOTAS — árbol de carpetas + documentos de texto plano
+   (misma mecánica que la Biblioteca: expandir, menú ⋯, arrastrar)
    ============================================================ */
+let currentNotaId = null;
+let notasInited = false;
+
+function findNotaNode(id, nodes){
+  nodes = nodes || notas;
+  for(const n of nodes){
+    if(n.id === id) return n;
+    if(n.type === 'folder'){
+      const f = findNotaNode(id, n.children);
+      if(f) return f;
+    }
+  }
+  return null;
+}
+function findNotaParentArray(id, nodes){
+  nodes = nodes || notas;
+  for(let i=0;i<nodes.length;i++){
+    if(nodes[i].id === id) return nodes;
+    if(nodes[i].type === 'folder'){
+      const f = findNotaParentArray(id, nodes[i].children);
+      if(f) return f;
+    }
+  }
+  return null;
+}
+function countNotasLeaves(node){
+  if(node.type === 'nota') return 1;
+  return node.children.reduce((s,c)=>s+countNotasLeaves(c), 0);
+}
+function isWithinNotaSubtree(root, id){
+  if(root.id === id) return true;
+  if(root.type !== 'folder') return false;
+  return root.children.some(c=> isWithinNotaSubtree(c, id));
+}
+
+function renderNotasTree(){
+  const container = document.getElementById('notas-tree');
+  container.innerHTML = '';
+  if(notas.length === 0){
+    container.innerHTML = '<div class="tree-empty">No hay documentos.<br>Crea una carpeta o un documento arriba.</div>';
+    return;
+  }
+  container.appendChild(renderNotasNodes(notas, 0));
+}
+function renderNotasNodes(nodes, depth){
+  const wrap = document.createElement('div');
+  nodes.forEach(node=>{
+    wrap.appendChild(renderNotaRow(node, depth));
+    if(node.type === 'folder'){
+      const childWrap = document.createElement('div');
+      childWrap.className = 'tree-children' + (node.expanded ? ' open' : '');
+      childWrap.appendChild(renderNotasNodes(node.children, depth+1));
+      wrap.appendChild(childWrap);
+    }
+  });
+  return wrap;
+}
+function renderNotaRow(node, depth){
+  const row = document.createElement('div');
+  row.className = 'tree-row ' + (node.type === 'folder' ? 'folder' : 'nota');
+  row.style.paddingLeft = (depth*18)+'px';
+  row.dataset.id = node.id;
+  const isFolder = node.type === 'folder';
+  const tog = isFolder ? (node.expanded ? '−' : '+') : '';
+  let count;
+  if(isFolder){
+    count = `<span class="tree-count">${countNotasLeaves(node)}</span>`;
+  } else {
+    const lines = (node.content || '').split('\n').length;
+    count = `<span class="tree-count">${lines}${lines===1?' línea':' líneas'}</span>`;
+  }
+  row.innerHTML = `
+    <span class="tree-tog">${tog}</span>
+    <span class="tree-name">${escapeHtml(node.name)}</span>
+    ${count}
+    <button class="tree-menu-btn">⋯</button>
+  `;
+  row.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('tree-menu-btn')) return;
+    if(notasDragJustHappened){ notasDragJustHappened = false; return; }
+    if(isFolder){
+      node.expanded = !node.expanded;
+      saveLocalNotas();
+      renderNotasTree();
+    } else {
+      openNotaEditor(node.id);
+    }
+  });
+  row.querySelector('.tree-menu-btn').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    openNotaCtxMenu(e.currentTarget, node);
+  });
+  row.addEventListener('pointerdown', (e)=>{
+    if(e.target.classList.contains('tree-menu-btn')) return;
+    startNotaDrag(e, node, row);
+  });
+  return row;
+}
+
+/* ---------- arrastrar para reorganizar (idéntico patrón que Biblioteca) ---------- */
+let notasDragJustHappened = false;
+function isValidNotaDropFolder(dragNode, targetFolder){
+  if(dragNode.id === targetFolder.id) return false;
+  if(dragNode.type === 'folder' && isWithinNotaSubtree(dragNode, targetFolder.id)) return false;
+  return true;
+}
+function moveNotaInto(node, targetFolder){
+  const parentArr = findNotaParentArray(node.id);
+  if(!parentArr) return;
+  const idx = parentArr.indexOf(node);
+  if(idx === -1) return;
+  if(parentArr === targetFolder.children) return; // ya está ahí
+  parentArr.splice(idx,1);
+  targetFolder.children.push(node);
+  targetFolder.expanded = true;
+  saveLocalNotas();
+  renderNotasTree();
+  toast(`Movido a "${targetFolder.name}"`);
+}
+function moveNotaToRoot(node){
+  const parentArr = findNotaParentArray(node.id);
+  if(!parentArr || parentArr === notas) return; // ya está en la raíz
+  const idx = parentArr.indexOf(node);
+  if(idx === -1) return;
+  parentArr.splice(idx,1);
+  notas.push(node);
+  saveLocalNotas();
+  renderNotasTree();
+  toast('Movido a la raíz');
+}
+function startNotaDrag(e, node, row){
+  const pointerId = e.pointerId;
+  const startX = e.clientX, startY = e.clientY;
+  let dragging = false, ghost = null, targetRow = null, overRootZone = false;
+  const container = document.getElementById('notas-tree');
+
+  function onMove(ev){
+    const dx = ev.clientX-startX, dy = ev.clientY-startY;
+    if(!dragging){
+      if(Math.hypot(dx,dy) < 10) return;
+      dragging = true;
+      row.setPointerCapture(pointerId);
+      row.classList.add('drag-source');
+      ghost = document.createElement('div');
+      ghost.className = 'tree-drag-ghost';
+      ghost.textContent = node.name;
+      document.body.appendChild(ghost);
+    }
+    ghost.style.left = (ev.clientX+14)+'px';
+    ghost.style.top = (ev.clientY+14)+'px';
+    const under = document.elementFromPoint(ev.clientX, ev.clientY);
+    const rowEl = under && under.closest ? under.closest('.tree-row') : null;
+
+    if(targetRow && targetRow !== rowEl){ targetRow.classList.remove('drop-ok','drop-bad'); targetRow = null; }
+    overRootZone = false;
+    container.classList.remove('tree-root-drop');
+
+    if(rowEl && rowEl !== row){
+      const targetNode = findNotaNode(rowEl.dataset.id);
+      const valid = targetNode && targetNode.type === 'folder' && isValidNotaDropFolder(node, targetNode);
+      rowEl.classList.add(valid ? 'drop-ok' : 'drop-bad');
+      targetRow = rowEl;
+    } else if(under && under.closest && under.closest('#notas-tree')){
+      overRootZone = true;
+      container.classList.add('tree-root-drop');
+    }
+  }
+  function onUp(){
+    row.removeEventListener('pointermove', onMove);
+    row.removeEventListener('pointerup', onUp);
+    row.removeEventListener('pointercancel', onUp);
+    row.classList.remove('drag-source');
+    container.classList.remove('tree-root-drop');
+    if(dragging){
+      notasDragJustHappened = true;
+      if(ghost) ghost.remove();
+      if(targetRow){
+        targetRow.classList.remove('drop-ok','drop-bad');
+        const targetNode = findNotaNode(targetRow.dataset.id);
+        if(targetNode && targetNode.type==='folder' && isValidNotaDropFolder(node, targetNode)){
+          moveNotaInto(node, targetNode);
+        }
+      } else if(overRootZone){
+        moveNotaToRoot(node);
+      }
+    }
+  }
+  row.addEventListener('pointermove', onMove);
+  row.addEventListener('pointerup', onUp);
+  row.addEventListener('pointercancel', onUp);
+}
+
+/* ---------- menú ⋯ (reutiliza el mismo panel emergente de Biblioteca) ---------- */
+function openNotaCtxMenu(anchorEl, node){
+  const menu = document.getElementById('ctx-menu');
+  const backdrop = document.getElementById('ctx-backdrop');
+  const items = [];
+  if(node.type === 'folder'){
+    items.push(['+ subcarpeta', ()=> promptNewNotaFolder(node)]);
+    items.push(['+ documento', ()=> promptNewNota(node)]);
+  }
+  items.push(['renombrar', ()=> promptRenameNota(node)]);
+  items.push(['__sep__', null]);
+  items.push([node.type==='folder' ? 'eliminar carpeta' : 'eliminar documento', ()=> deleteNotaNode(node), true]);
+
+  menu.innerHTML = items.map(([label,,danger])=>{
+    if(label === '__sep__') return '<div class="ctx-sep"></div>';
+    return `<div class="ctx-item${danger?' danger':''}">${label}</div>`;
+  }).join('');
+  const rect = anchorEl.getBoundingClientRect();
+  menu.style.display = 'block';
+  let top = rect.bottom + 4, left = rect.right - 190;
+  if(left < 8) left = 8;
+  if(top + 200 > window.innerHeight) top = rect.top - 200;
+  menu.style.top = top+'px';
+  menu.style.left = left+'px';
+  backdrop.classList.add('open');
+
+  const realItems = items.filter(i=>i[0] !== '__sep__');
+  menu.querySelectorAll('.ctx-item').forEach((el,i)=>{
+    el.addEventListener('click', ()=>{ closeCtx(); realItems[i][1](); });
+  });
+}
+function promptNewNotaFolder(parentNode){
+  openPrompt('nombre de la carpeta', '', (val)=>{
+    if(!val) return;
+    const node = {id:uid(), type:'folder', name:val, expanded:true, children:[]};
+    (parentNode ? parentNode.children : notas).push(node);
+    if(parentNode) parentNode.expanded = true;
+    saveLocalNotas();
+    renderNotasTree();
+  });
+}
+function promptNewNota(parentNode){
+  openPrompt('nombre del documento', '', (val)=>{
+    if(!val) return;
+    const node = {id:uid(), type:'nota', name:val, content:''};
+    (parentNode ? parentNode.children : notas).push(node);
+    if(parentNode) parentNode.expanded = true;
+    saveLocalNotas();
+    renderNotasTree();
+    openNotaEditor(node.id);
+  });
+}
+function promptRenameNota(node){
+  openPrompt('nuevo nombre', node.name, (val)=>{
+    if(!val) return;
+    node.name = val;
+    saveLocalNotas();
+    renderNotasTree();
+    if(node.type==='nota' && currentNotaId===node.id) document.getElementById('notas-editor-title').textContent = val;
+  });
+}
+function deleteNotaNode(node){
+  const label = node.type==='folder' ? `la carpeta "${node.name}" y todo su contenido` : `el documento "${node.name}"`;
+  if(!confirm(`¿Eliminar ${label}? No se puede deshacer.`)) return;
+  const arr = findNotaParentArray(node.id);
+  if(!arr) return;
+  const idx = arr.indexOf(node);
+  arr.splice(idx,1);
+  saveLocalNotas();
+  const wasOpen = currentNotaId && (currentNotaId===node.id || (node.type==='folder' && isWithinNotaSubtree(node, currentNotaId)));
+  if(wasOpen){ currentNotaId = null; showNotasWindow('win-notas-list'); }
+  renderNotasTree();
+}
+
+/* ---------- ventana de edición ---------- */
+function showNotasWindow(id){
+  document.querySelectorAll('#view-notas .window').forEach(w=> w.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 function updateNotasGutter(){
   const ta = document.getElementById('notas-text');
   const gutter = document.getElementById('notas-gutter');
@@ -1659,19 +1977,42 @@ function setNotasText(val){
   const el = document.getElementById('notas-status');
   if(el) el.textContent = '';
 }
+function openNotaEditor(id){
+  const doc = findNotaNode(id);
+  if(!doc || doc.type !== 'nota') return;
+  currentNotaId = id;
+  document.getElementById('notas-editor-title').textContent = doc.name;
+  setNotasText(doc.content || '');
+  showNotasWindow('win-notas-editor');
+  setTimeout(()=> document.getElementById('notas-text').focus(), 30);
+}
 function initNotasEditor(){
+  renderNotasTree();
+  if(notasInited) return;
+  notasInited = true;
   const ta = document.getElementById('notas-text');
-  if(!ta || ta.dataset.bound) { setNotasText(notas); return; }
-  ta.dataset.bound = '1';
-  ta.value = notas;
-  updateNotasGutter();
   ta.addEventListener('input', ()=>{
-    notas = ta.value;
     updateNotasGutter();
+    const doc = findNotaNode(currentNotaId);
+    if(doc) doc.content = ta.value;
     debouncedSaveNotas();
   });
   ta.addEventListener('scroll', ()=>{
     document.getElementById('notas-gutter').scrollTop = ta.scrollTop;
+  });
+  document.getElementById('btn-notas-root-folder').addEventListener('click', ()=> promptNewNotaFolder(null));
+  document.getElementById('btn-notas-root-doc').addEventListener('click', ()=> promptNewNota(null));
+  document.getElementById('back-notas-editor').addEventListener('click', ()=>{
+    renderNotasTree();
+    showNotasWindow('win-notas-list');
+  });
+  document.getElementById('btn-notas-rename').addEventListener('click', ()=>{
+    const doc = findNotaNode(currentNotaId);
+    if(doc) promptRenameNota(doc);
+  });
+  document.getElementById('btn-notas-delete').addEventListener('click', ()=>{
+    const doc = findNotaNode(currentNotaId);
+    if(doc) deleteNotaNode(doc);
   });
 }
 
