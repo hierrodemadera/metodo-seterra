@@ -600,6 +600,7 @@ body.playing #win-game .workspace{min-height:0;}
       </div>
       <div class="cards-toolbar">
         <button class="btn" id="tarjetas-add">+ tarjeta</button>
+        <button class="btn" id="tarjetas-addmany">+ varias tarjetas</button>
         <button class="btn" id="tarjetas-addfiles">+ subir imágenes</button>
         <input type="file" id="tarjetas-file-bulk" accept="image/*" multiple>
         <input type="file" id="tarjetas-file-single" accept="image/*">
@@ -1562,6 +1563,22 @@ document.getElementById('tarjetas-add').addEventListener('click', ()=>{
   saveLocal();
   renderCardsPanel(node);
   selectCard(photo.id);
+});
+document.getElementById('tarjetas-addmany').addEventListener('click', ()=>{
+  const node = findNode(currentCardsId);
+  if(!node) return;
+  openPrompt('¿cuántas tarjetas quieres crear?', '', (val)=>{
+    const n = Math.round(+val);
+    if(!n || n < 1) return;
+    const max = 300;
+    const count = Math.min(n, max);
+    for(let i=0;i<count;i++) node.photos.push({ id: uid(), image: null, label: '' });
+    saveLocal();
+    renderCardsPanel(node);
+    toast(n > max
+      ? `Creadas ${max} tarjetas (límite de seguridad)`
+      : `${count} tarjeta${count===1?'':'s'} creada${count===1?'':'s'}`);
+  });
 });
 document.getElementById('tarjetas-addfiles').addEventListener('click', ()=>
   document.getElementById('tarjetas-file-bulk').click());
