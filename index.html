@@ -115,6 +115,55 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .btn-danger{color:#b00020;border-color:#f1c7cd;}
 .hr{height:1px;background:var(--border);margin:16px 0;}
 
+/* TARJETAS (temas barajados) */
+#view-tarjetas .app{max-width:1100px;}
+.cards-toolbar{display:flex;align-items:center;gap:8px;padding:10px 12px;
+  border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;}
+.cards-cols-field{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.cards-cols-field .lbl{margin:0;font-size:12px;color:var(--muted);}
+.cards-cols-field input{width:52px;padding:6px 8px;text-align:center;}
+.cards-grid{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;
+  display:flex;flex-wrap:wrap;align-content:flex-start;gap:22px;padding:20px;}
+.card-item{flex:0 0 250px;width:250px;flex-shrink:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  background:var(--win);display:flex;flex-direction:column;}
+.card-item.selected{outline:2px solid var(--c-info);outline-offset:-2px;}
+.card-img-wrap{position:relative;width:250px;height:250px;flex-shrink:0;background:#f2f2f2;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;}
+.card-img-wrap img{width:100%;height:100%;object-fit:contain;pointer-events:none;}
+.card-img-wrap.dragover{outline:3px dashed var(--c-info);outline-offset:-3px;}
+.card-empty-hint{color:var(--muted);font-size:13px;text-align:center;padding:10px;
+  pointer-events:none;line-height:1.6;}
+.card-replace-btn{position:absolute;right:8px;bottom:8px;width:32px;height:32px;
+  border-radius:50%;background:rgba(0,0,0,0.55);color:#fff;border:none;font-size:15px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.card-replace-btn:hover{background:rgba(0,0,0,0.75);}
+.card-name-input{flex-shrink:0;border:none;border-top:1px solid var(--border);padding:11px 10px;font-size:14.5px;
+  text-align:center;background:transparent;color:var(--fg);border-radius:0;width:100%;}
+.card-name-input:focus{outline:none;background:var(--hover);}
+.card-actions{flex-shrink:0;display:flex;border-top:1px solid var(--border);}
+.card-actions button{flex:1;background:none;border:none;padding:9px 4px;font-size:12px;
+  color:var(--muted);letter-spacing:normal;text-transform:none;}
+.card-actions button:hover{color:var(--fg);background:var(--hover);}
+.card-actions .card-del{color:#b00020;}
+.card-actions button + button{border-left:1px solid var(--border);}
+
+/* modal de recorte de tarjeta */
+.card-crop-box{position:fixed;z-index:500;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:var(--win);border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.3);
+  padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;max-width:92vw;}
+.card-crop-stage{position:relative;line-height:0;touch-action:none;}
+.card-crop-stage img{display:block;max-width:80vw;max-height:65vh;user-select:none;pointer-events:none;}
+.crop-rect{position:absolute;border:2px solid #fff;box-sizing:border-box;cursor:move;
+  box-shadow:0 0 0 2000px rgba(0,0,0,0.55);}
+.crop-handle{position:absolute;width:20px;height:20px;background:#fff;
+  border:2px solid var(--c-info);border-radius:50%;touch-action:none;}
+.crop-handle[data-c="nw"]{top:-10px;left:-10px;cursor:nwse-resize;}
+.crop-handle[data-c="ne"]{top:-10px;right:-10px;cursor:nesw-resize;}
+.crop-handle[data-c="sw"]{bottom:-10px;left:-10px;cursor:nesw-resize;}
+.crop-handle[data-c="se"]{bottom:-10px;right:-10px;cursor:nwse-resize;}
+.card-crop-controls{display:flex;gap:8px;width:100%;}
+.card-crop-controls button{flex:1;}
+
 /* IMAGE WORKSPACE */
 .workspace{position:relative;flex:1;overflow:hidden;background:#f7f7f7;touch-action:none;min-height:220px;}
 .stage{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform;}
@@ -317,6 +366,7 @@ body.playing #win-game .workspace{min-height:0;}
     <button class="app-tab active" data-tab="biblioteca">Biblioteca</button>
     <button class="app-tab" data-tab="jugar">Jugar</button>
     <button class="app-tab" data-tab="lienzo">Lienzo</button>
+    <button class="app-tab" data-tab="tarjetas">Crear tarjetas</button>
     <button class="app-tab" data-tab="notas">Notas</button>
   </div>
 </div>
@@ -357,16 +407,6 @@ body.playing #win-game .workspace{min-height:0;}
       <div id="tema-b-filepick-wrap" style="padding:14px;">
         <div class="filepick" id="tema-b-filepick">+ elegir imagen</div>
         <input type="file" id="tema-b-file" accept="image/*">
-      </div>
-      <div id="tema-b-barajado-info" style="display:none;padding:20px 14px;text-align:center;color:var(--muted);">
-        <div style="font-size:32px;margin-bottom:8px;">🔀</div>
-        <div id="tema-b-barajado-summary" style="margin-bottom:14px;"></div>
-        <div class="field" style="max-width:180px;margin:0 auto 14px;text-align:left;">
-          <span class="lbl">columnas de la cuadrícula</span>
-          <input type="number" id="tema-b-barajado-cols" min="1" step="1" style="text-align:center;">
-        </div>
-        <button class="btn btn-primary btn-block" id="tema-b-barajado-addmore" style="max-width:260px;margin:0 auto 14px;">+ añadir más fotos (en el Lienzo)</button>
-        <div style="font-size:12px;">Las fotos se editan desde la pestaña Lienzo (subir, recortar, nombrar).</div>
       </div>
       <div class="pointslist" id="tema-b-points" style="display:none;">
         <div class="pointslist-hdr">
@@ -539,6 +579,48 @@ body.playing #win-game .workspace{min-height:0;}
   </div>
 </div>
 
+<!-- ===================== CREAR TARJETAS ===================== -->
+<div class="view" id="view-tarjetas">
+  <div class="app">
+
+    <div class="window active" id="win-tarjetas-list">
+      <div class="win-tb">
+        <span class="title">crear tarjetas</span>
+      </div>
+      <div class="tree-toolbar">
+        <button class="smallbtn" id="btn-tarjetas-new">+ nuevo tema de tarjetas</button>
+      </div>
+      <div class="win-content" id="tarjetas-list"></div>
+    </div>
+
+    <div class="window" id="win-tarjetas-editor">
+      <div class="win-tb">
+        <button class="back" id="back-tarjetas-editor">←</button>
+        <span class="title" id="tarjetas-editor-title">tema</span>
+      </div>
+      <div class="cards-toolbar">
+        <button class="btn" id="tarjetas-add">+ tarjeta</button>
+        <button class="btn" id="tarjetas-addfiles">+ subir imágenes</button>
+        <input type="file" id="tarjetas-file-bulk" accept="image/*" multiple>
+        <input type="file" id="tarjetas-file-single" accept="image/*">
+        <span class="cards-cols-field">
+          <span class="lbl">columnas</span>
+          <input type="number" id="tarjetas-cols" min="1" step="1">
+        </span>
+      </div>
+      <div class="cards-grid" id="tarjetas-grid"></div>
+      <div class="win-content" style="flex:0;border-top:1px solid var(--border);">
+        <div class="field" style="margin-bottom:10px;">
+          <span class="lbl">nombre del tema</span>
+          <input type="text" id="tarjetas-name">
+        </div>
+        <button class="btn btn-danger btn-block" id="tarjetas-delete">eliminar tema</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- context menu -->
 <div class="ctx-backdrop" id="ctx-backdrop"></div>
 <div class="ctx-menu" id="ctx-menu" style="display:none;"></div>
@@ -555,6 +637,24 @@ body.playing #win-game .workspace{min-height:0;}
 </div>
 
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
+
+<!-- recorte de tarjeta (tema barajado) -->
+<div class="ctx-backdrop" id="card-crop-backdrop"></div>
+<div class="card-crop-box" id="card-crop-box" style="display:none;">
+  <div class="card-crop-stage" id="card-crop-stage">
+    <img id="card-crop-img" draggable="false">
+    <div class="crop-rect" id="crop-rect">
+      <div class="crop-handle" data-c="nw"></div>
+      <div class="crop-handle" data-c="ne"></div>
+      <div class="crop-handle" data-c="sw"></div>
+      <div class="crop-handle" data-c="se"></div>
+    </div>
+  </div>
+  <div class="card-crop-controls">
+    <button class="btn btn-block" id="card-crop-cancel">cancelar</button>
+    <button class="btn btn-primary btn-block" id="card-crop-apply">recortar</button>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -646,6 +746,7 @@ async function boot(){
   renderTree('tree-b', true);
   renderTree('tree-j', false);
   initNotasEditor();
+  renderTarjetasList();
 }
 
 document.getElementById('btn-refresh').addEventListener('click', async ()=>{
@@ -663,6 +764,9 @@ document.getElementById('btn-refresh').addEventListener('click', async ()=>{
     currentNotaId = null;
     renderNotasTree();
     showNotasWindow('win-notas-list');
+    currentCardsId = null;
+    renderTarjetasList();
+    showTarjetasWindow('win-tarjetas-list');
     toast('Actualizado');
   }catch(e){ toast('No se pudo actualizar'); }
 });
@@ -994,6 +1098,8 @@ function promptRename(node){
     node.name = val;
     saveLocal(); renderTree('tree-b', true); renderTree('tree-j', false);
     if(node.type==='tema' && currentTemaId===node.id) document.getElementById('tema-b-title').textContent = val;
+    if(node.type==='tema' && currentCardsId===node.id) document.getElementById('tarjetas-editor-title').textContent = val;
+    if(document.getElementById('view-tarjetas').classList.contains('active')) renderTarjetasList();
   });
 }
 function deleteNode(node){
@@ -1006,6 +1112,7 @@ function deleteNode(node){
     saveLocal();
     renderTree('tree-b', true); renderTree('tree-j', false);
     showTreeOnly();
+    if(document.getElementById('view-tarjetas').classList.contains('active')) renderTarjetasList();
   }
 }
 
@@ -1210,49 +1317,405 @@ let currentTemaId = null;
 let editorPZ = null;
 
 function openTemaEditor(id){
-  currentTemaId = id;
   const node = findNode(id);
+  if(node.mode === 'barajado'){
+    switchToTab('tarjetas');
+    openCardsEditor(id);
+    return;
+  }
+  currentTemaId = id;
   document.getElementById('tema-b-title').textContent = node.name;
   document.getElementById('tema-b-name').value = node.name;
   showWindow('win-tema-b');
   const changeImgBtn = document.getElementById('tema-b-changeimg');
-  if(node.mode === 'barajado'){
-    document.getElementById('tema-b-workspace').style.display = 'none';
-    document.getElementById('tema-b-filepick-wrap').style.display = 'none';
-    document.getElementById('tema-b-points').style.display = 'none';
-    document.getElementById('tema-b-barajado-info').style.display = 'block';
-    const photoCount = (node.photos||[]).length;
-    document.getElementById('tema-b-barajado-summary').textContent =
-      `${photoCount} foto${photoCount===1?'':'s'} · ${node.cols||3} columnas`;
-    document.getElementById('tema-b-barajado-cols').value = node.cols || 3;
-    changeImgBtn.style.display = 'none';
-  } else {
-    document.getElementById('tema-b-barajado-info').style.display = 'none';
-    changeImgBtn.style.display = '';
-    renderTemaEditorImage(node);
-    renderTemaPointList(node);
-  }
+  changeImgBtn.style.display = '';
+  renderTemaEditorImage(node);
+  renderTemaPointList(node);
 }
-document.getElementById('tema-b-barajado-cols').addEventListener('change', (e)=>{
-  const node = findNode(currentTemaId);
+
+/* ============================================================
+   TARJETAS — pestaña independiente para editar temas barajados
+   ============================================================ */
+let selectedCardId = null;
+let currentCardsId = null;
+
+function findAllBarajadoTemas(nodes, out){
+  nodes = nodes || tree; out = out || [];
+  nodes.forEach(n=>{
+    if(n.type === 'tema' && n.mode === 'barajado') out.push(n);
+    else if(n.type === 'folder') findAllBarajadoTemas(n.children, out);
+  });
+  return out;
+}
+function renderTarjetasList(){
+  const wrap = document.getElementById('tarjetas-list');
+  const temas = findAllBarajadoTemas();
+  wrap.innerHTML = '';
+  if(!temas.length){
+    wrap.innerHTML = '<div class="tree-empty">Aún no hay temas de tarjetas.<br>Crea el primero arriba.</div>';
+    return;
+  }
+  temas.forEach(node=>{
+    const row = document.createElement('div');
+    row.className = 'tree-row';
+    const count = (node.photos||[]).length;
+    row.innerHTML = `
+      <span class="tree-name">${escapeHtml(node.name)}</span>
+      <span class="tree-count">${count} tarjeta${count===1?'':'s'}</span>
+      <button class="tree-menu-btn">⋯</button>
+    `;
+    row.addEventListener('click', (e)=>{
+      if(e.target.classList.contains('tree-menu-btn')) return;
+      openCardsEditor(node.id);
+    });
+    row.querySelector('.tree-menu-btn').addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openCtxMenu(e.currentTarget, node);
+    });
+    wrap.appendChild(row);
+  });
+}
+function promptNewTemaBarajado(){
+  openPrompt('nombre del tema de tarjetas', '', (val)=>{
+    if(!val) return;
+    const node = {id:uid(), type:'tema', mode:'barajado', name:val, cols:3, photos:[]};
+    tree.push(node);
+    saveLocal(); renderTree('tree-b', true); renderTree('tree-j', false);
+    openCardsEditor(node.id);
+  });
+}
+document.getElementById('btn-tarjetas-new').addEventListener('click', ()=> promptNewTemaBarajado());
+document.getElementById('back-tarjetas-editor').addEventListener('click', ()=>{
+  renderTarjetasList();
+  showTarjetasWindow('win-tarjetas-list');
+});
+function showTarjetasWindow(id){
+  document.querySelectorAll('#view-tarjetas .window').forEach(w=> w.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function openCardsEditor(id){
+  const node = findNode(id);
+  if(!node) return;
+  currentCardsId = id;
+  selectedCardId = null;
+  document.getElementById('tarjetas-editor-title').textContent = node.name;
+  document.getElementById('tarjetas-name').value = node.name;
+  document.getElementById('tarjetas-cols').value = node.cols || 3;
+  showTarjetasWindow('win-tarjetas-editor');
+  renderCardsPanel(node);
+}
+document.getElementById('tarjetas-name').addEventListener('input', (e)=>{
+  const node = findNode(currentCardsId);
+  if(!node) return;
+  const val = e.target.value.trim();
+  if(val){ node.name = val; debouncedSave();
+    document.getElementById('tarjetas-editor-title').textContent = val; }
+});
+document.getElementById('tarjetas-name').addEventListener('change', ()=>{
+  renderTree('tree-b',true); renderTree('tree-j',false);
+});
+document.getElementById('tarjetas-cols').addEventListener('change', (e)=>{
+  const node = findNode(currentCardsId);
   if(!node) return;
   const cols = Math.max(1, Math.round(+e.target.value || 3));
   node.cols = cols;
   e.target.value = cols;
   saveLocal();
-  const photoCount = (node.photos||[]).length;
-  document.getElementById('tema-b-barajado-summary').textContent =
-    `${photoCount} foto${photoCount===1?'':'s'} · ${cols} columnas`;
 });
-document.getElementById('tema-b-barajado-addmore').addEventListener('click', ()=>{
-  const node = findNode(currentTemaId);
+document.getElementById('tarjetas-delete').addEventListener('click', ()=>{
+  const node = findNode(currentCardsId);
   if(!node) return;
-  if(window.MSApp) window.MSApp.appendTargetId = node.id;
-  const btn = document.getElementById('lz-btn-send-shuffle');
-  if(btn) btn.textContent = `+ añadir a "${node.name}"`;
-  switchToTab('lienzo');
-  toast('Prepara y nombra tus fotos, luego pulsa el botón naranja para añadirlas a este tema');
+  if(!confirm(`¿Eliminar el tema "${node.name}" y todas sus tarjetas? No se puede deshacer.`)) return;
+  const arr = findParentArray(node.id);
+  if(arr){
+    arr.splice(arr.indexOf(node),1);
+    saveLocal();
+    renderTree('tree-b', true); renderTree('tree-j', false);
+  }
+  renderTarjetasList();
+  showTarjetasWindow('win-tarjetas-list');
 });
+
+function renderCardsPanel(node){
+  const grid = document.getElementById('tarjetas-grid');
+  grid.innerHTML = '';
+  const photos = node.photos || (node.photos = []);
+  if(!photos.length){
+    grid.innerHTML = '<div class="tree-empty">Aún no hay tarjetas.<br>Crea una o sube imágenes arriba.</div>';
+    return;
+  }
+  photos.forEach(photo=> grid.appendChild(renderCardItem(node, photo)));
+}
+function renderCardItem(node, photo){
+  const card = document.createElement('div');
+  card.className = 'card-item' + (photo.id === selectedCardId ? ' selected' : '');
+  card.dataset.id = photo.id;
+
+  const imgWrap = document.createElement('div');
+  imgWrap.className = 'card-img-wrap';
+  if(photo.image){
+    imgWrap.innerHTML = `<img src="${photo.image}"><button class="card-replace-btn" title="cambiar imagen">✎</button>`;
+    imgWrap.querySelector('.card-replace-btn').addEventListener('click', (e)=>{
+      e.stopPropagation();
+      selectCard(photo.id);
+      openSingleCardFilePicker(photo.id);
+    });
+  } else {
+    imgWrap.innerHTML = '<div class="card-empty-hint">arrastra o pega<br>una imagen aquí</div>';
+  }
+  imgWrap.addEventListener('click', ()=>{
+    selectCard(photo.id);
+    if(!photo.image) openSingleCardFilePicker(photo.id);
+  });
+  ['dragover','dragenter'].forEach(ev=> imgWrap.addEventListener(ev, (e)=>{
+    e.preventDefault(); imgWrap.classList.add('dragover');
+  }));
+  ['dragleave','dragend'].forEach(ev=> imgWrap.addEventListener(ev, ()=> imgWrap.classList.remove('dragover')));
+  imgWrap.addEventListener('drop', async (e)=>{
+    e.preventDefault();
+    imgWrap.classList.remove('dragover');
+    const file = [...(e.dataTransfer.files||[])].find(f=> f.type.startsWith('image/'));
+    if(!file) return;
+    selectCard(photo.id);
+    await setCardImageFromFile(node, photo.id, file);
+  });
+  card.appendChild(imgWrap);
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.className = 'card-name-input';
+  nameInput.placeholder = 'nombre';
+  nameInput.value = photo.label || '';
+  nameInput.addEventListener('focus', ()=> selectCard(photo.id));
+  nameInput.addEventListener('input', ()=>{
+    photo.label = nameInput.value;
+    debouncedSave();
+  });
+  nameInput.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      nameInput.blur();
+      saveLocal();
+      const inputs = [...document.querySelectorAll('#tarjetas-grid .card-name-input')];
+      const idx = inputs.indexOf(nameInput);
+      const next = inputs[idx+1];
+      if(next){ next.focus(); next.select(); }
+    }
+  });
+  card.appendChild(nameInput);
+
+  const actions = document.createElement('div');
+  actions.className = 'card-actions';
+  if(photo.image){
+    const cropBtn = document.createElement('button');
+    cropBtn.textContent = 'recortar';
+    cropBtn.addEventListener('click', ()=> openCardCrop(node, photo.id));
+    actions.appendChild(cropBtn);
+  }
+  const delBtn = document.createElement('button');
+  delBtn.className = 'card-del';
+  delBtn.textContent = 'eliminar';
+  delBtn.addEventListener('click', ()=>{
+    if(!confirm('¿Eliminar esta tarjeta?')) return;
+    node.photos = node.photos.filter(p=> p.id !== photo.id);
+    if(selectedCardId === photo.id) selectedCardId = null;
+    saveLocal();
+    renderCardsPanel(node);
+  });
+  actions.appendChild(delBtn);
+  card.appendChild(actions);
+
+  return card;
+}
+function selectCard(id){
+  selectedCardId = id;
+  document.querySelectorAll('#tarjetas-grid .card-item').forEach(el=>{
+    el.classList.toggle('selected', el.dataset.id === id);
+  });
+}
+let singleCardTargetId = null;
+function openSingleCardFilePicker(photoId){
+  singleCardTargetId = photoId;
+  document.getElementById('tarjetas-file-single').click();
+}
+document.getElementById('tarjetas-file-single').addEventListener('change', async (e)=>{
+  const file = e.target.files[0];
+  e.target.value = '';
+  if(!file || !singleCardTargetId) return;
+  const node = findNode(currentCardsId);
+  if(node) await setCardImageFromFile(node, singleCardTargetId, file);
+  singleCardTargetId = null;
+});
+async function setCardImageFromFile(node, photoId, file){
+  const dataUrl = await fileToDownscaledDataURL(file, 1000);
+  const photo = (node.photos||[]).find(p=> p.id === photoId);
+  if(!photo) return;
+  photo.image = dataUrl;
+  saveLocal();
+  renderCardsPanel(node);
+}
+document.getElementById('tarjetas-add').addEventListener('click', ()=>{
+  const node = findNode(currentCardsId);
+  if(!node) return;
+  const photo = { id: uid(), image: null, label: '' };
+  node.photos.push(photo);
+  saveLocal();
+  renderCardsPanel(node);
+  selectCard(photo.id);
+});
+document.getElementById('tarjetas-addfiles').addEventListener('click', ()=>
+  document.getElementById('tarjetas-file-bulk').click());
+document.getElementById('tarjetas-file-bulk').addEventListener('change', async (e)=>{
+  const files = [...e.target.files];
+  e.target.value = '';
+  const node = findNode(currentCardsId);
+  if(!node || !files.length) return;
+  toast(`Añadiendo ${files.length} imagen${files.length===1?'':'es'}…`);
+  for(const file of files){
+    const dataUrl = await fileToDownscaledDataURL(file, 1000);
+    node.photos.push({ id: uid(), image: dataUrl, label: '' });
+  }
+  saveLocal();
+  renderCardsPanel(node);
+  toast(`${files.length} tarjeta${files.length===1?'':'s'} creada${files.length===1?'':'s'}`);
+});
+
+/* pegar (Ctrl+V) en la tarjeta seleccionada */
+document.addEventListener('paste', async (e)=>{
+  if(!document.getElementById('view-tarjetas').classList.contains('active')) return;
+  if(!document.getElementById('win-tarjetas-editor').classList.contains('active')) return;
+  const node = findNode(currentCardsId);
+  if(!node || !selectedCardId) return;
+  const items = [...(e.clipboardData.items||[])];
+  const item = items.find(it=> it.type && it.type.startsWith('image/'));
+  if(!item) return;
+  const file = item.getAsFile();
+  if(!file) return;
+  await setCardImageFromFile(node, selectedCardId, file);
+  toast('Imagen pegada');
+});
+
+/* ---------- modal de recorte de tarjeta (rectángulo libre) ---------- */
+let cropState = null;
+const CROP_MIN = 30;
+function openCardCrop(node, photoId){
+  const photo = (node.photos||[]).find(p=> p.id === photoId);
+  if(!photo || !photo.image) return;
+  const img = document.getElementById('card-crop-img');
+  img.src = photo.image;
+  const box = document.getElementById('card-crop-box');
+  const backdrop = document.getElementById('card-crop-backdrop');
+  const doOpen = ()=>{
+    box.style.display = 'flex';
+    backdrop.classList.add('open');
+    requestAnimationFrame(()=>{
+      const dispW = img.clientWidth, dispH = img.clientHeight;
+      cropState = {
+        node, photoId, natW: img.naturalWidth, natH: img.naturalHeight,
+        dispW, dispH,
+        rx: dispW*0.1, ry: dispH*0.1, rw: dispW*0.8, rh: dispH*0.8
+      };
+      renderCropRect();
+    });
+  };
+  if(img.complete && img.naturalWidth){ doOpen(); }
+  else { img.onload = doOpen; }
+}
+function renderCropRect(){
+  const s = cropState;
+  const rect = document.getElementById('crop-rect');
+  rect.style.left = s.rx+'px';
+  rect.style.top = s.ry+'px';
+  rect.style.width = s.rw+'px';
+  rect.style.height = s.rh+'px';
+}
+function closeCardCrop(){
+  document.getElementById('card-crop-box').style.display = 'none';
+  document.getElementById('card-crop-backdrop').classList.remove('open');
+  cropState = null;
+}
+document.getElementById('card-crop-backdrop').addEventListener('click', closeCardCrop);
+document.getElementById('card-crop-cancel').addEventListener('click', closeCardCrop);
+
+function clampCropRect(mode){
+  const s = cropState;
+  if(s.rw < CROP_MIN){ if(mode && mode.includes('w')) s.rx += s.rw - CROP_MIN; s.rw = CROP_MIN; }
+  if(s.rw > s.dispW) s.rw = s.dispW;
+  if(s.rx < 0) s.rx = 0;
+  if(s.rx + s.rw > s.dispW){
+    if(mode && mode.includes('w')) s.rx = s.dispW - s.rw;
+    else s.rw = s.dispW - s.rx;
+  }
+  if(s.rh < CROP_MIN){ if(mode && mode.includes('n')) s.ry += s.rh - CROP_MIN; s.rh = CROP_MIN; }
+  if(s.rh > s.dispH) s.rh = s.dispH;
+  if(s.ry < 0) s.ry = 0;
+  if(s.ry + s.rh > s.dispH){
+    if(mode && mode.includes('n')) s.ry = s.dispH - s.rh;
+    else s.rh = s.dispH - s.ry;
+  }
+}
+(function(){
+  const rectEl = document.getElementById('crop-rect');
+  let mode = null, startX=0, startY=0, start=null;
+  function begin(e, m){
+    if(!cropState) return;
+    mode = m;
+    startX = e.clientX; startY = e.clientY;
+    start = {rx:cropState.rx, ry:cropState.ry, rw:cropState.rw, rh:cropState.rh};
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  rectEl.addEventListener('pointerdown', (e)=>{
+    if(e.target.classList.contains('crop-handle')) return;
+    begin(e, 'move');
+  });
+  rectEl.querySelectorAll('.crop-handle').forEach(h=>{
+    h.addEventListener('pointerdown', (e)=> begin(e, h.dataset.c));
+  });
+  window.addEventListener('pointermove', (e)=>{
+    if(!mode || !cropState) return;
+    const dx = e.clientX-startX, dy = e.clientY-startY;
+    const s = cropState;
+    if(mode === 'move'){
+      s.rx = start.rx + dx; s.ry = start.ry + dy;
+      s.rx = Math.max(0, Math.min(s.rx, s.dispW - s.rw));
+      s.ry = Math.max(0, Math.min(s.ry, s.dispH - s.rh));
+    } else {
+      let {rx,ry,rw,rh} = start;
+      if(mode.includes('n')){ ry = start.ry+dy; rh = start.rh-dy; }
+      if(mode.includes('s')){ rh = start.rh+dy; }
+      if(mode.includes('w')){ rx = start.rx+dx; rw = start.rw-dx; }
+      if(mode.includes('e')){ rw = start.rw+dx; }
+      s.rx=rx; s.ry=ry; s.rw=rw; s.rh=rh;
+      clampCropRect(mode);
+    }
+    renderCropRect();
+  });
+  window.addEventListener('pointerup', ()=>{ mode = null; });
+})();
+
+document.getElementById('card-crop-apply').addEventListener('click', ()=>{
+  if(!cropState) return;
+  const s = cropState;
+  const scaleX = s.natW / s.dispW, scaleY = s.natH / s.dispH;
+  const sx = s.rx*scaleX, sy = s.ry*scaleY, sw = s.rw*scaleX, sh = s.rh*scaleY;
+  const maxOut = 900;
+  let outW, outH;
+  if(sw >= sh){ outW = Math.min(maxOut, Math.round(sw)); outH = Math.round(outW * sh/sw); }
+  else { outH = Math.min(maxOut, Math.round(sh)); outW = Math.round(outH * sw/sh); }
+  const out = document.createElement('canvas');
+  out.width = Math.max(1,outW); out.height = Math.max(1,outH);
+  out.getContext('2d').drawImage(document.getElementById('card-crop-img'),
+    sx, sy, sw, sh, 0, 0, out.width, out.height);
+  const photo = (s.node.photos||[]).find(p=> p.id === s.photoId);
+  if(photo){
+    photo.image = out.toDataURL('image/jpeg', 0.87);
+    saveLocal();
+    renderCardsPanel(s.node);
+  }
+  closeCardCrop();
+});
+
 function renderTemaEditorImage(node){
   const ws = document.getElementById('tema-b-workspace');
   const fp = document.getElementById('tema-b-filepick-wrap');
@@ -1676,6 +2139,9 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
         showNotasWindow('win-notas-list');
       }
       renderTree('tree-b', true); renderTree('tree-j', false);
+      currentCardsId = null;
+      renderTarjetasList();
+      showTarjetasWindow('win-tarjetas-list');
       toast('Biblioteca importada');
     }catch(err){ toast('El archivo no es válido'); }
   };
