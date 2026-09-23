@@ -1917,14 +1917,15 @@ function startBarajadoGame(node, onlyIds){
     idx:0, total: order.length,
     correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
     startTime: Date.now(),
-    stateOf: {}, pointResult: {}
+    stateOf: {}, pointResult: {},
+    gridCols: Math.max(1, node.cols||3)
   };
   order.forEach(p=> game.stateOf[p.id] = 'neutral');
 
   document.getElementById('game-workspace').style.display = 'none';
   document.getElementById('game-grid-wrap').style.display = 'block';
   const grid = document.getElementById('game-grid');
-  grid.style.gridTemplateColumns = `repeat(${Math.max(1, node.cols||3)}, 1fr)`;
+  grid.style.gridTemplateColumns = `repeat(${game.gridCols}, 1fr)`;
 
   const displayOrder = shuffle(photos); // dónde cae cada foto, distinto del orden de preguntas
   displayOrder.forEach(p=>{
@@ -1940,6 +1941,45 @@ function startBarajadoGame(node, onlyIds){
   showJugarWindow('win-game');
   nextTarget(true);
 }
+/* zoom de la cuadrícula barajada: pellizcar (móvil) o Ctrl+rueda (ordenador) */
+function setGameGridCols(n){
+  if(!game || game.mode !== 'barajado') return;
+  const clamped = Math.max(1, Math.min(8, Math.round(n)));
+  if(clamped === game.gridCols) return;
+  game.gridCols = clamped;
+  document.getElementById('game-grid').style.gridTemplateColumns = `repeat(${clamped}, 1fr)`;
+}
+(function(){
+  const wrap = document.getElementById('game-grid-wrap');
+  let pinchStartDist = null, pinchStartCols = null;
+  function touchDist(t1,t2){
+    return Math.hypot(t1.clientX-t2.clientX, t1.clientY-t2.clientY);
+  }
+  wrap.addEventListener('touchstart', (e)=>{
+    if(!game || game.mode !== 'barajado') return;
+    if(e.touches.length === 2){
+      pinchStartDist = touchDist(e.touches[0], e.touches[1]);
+      pinchStartCols = game.gridCols;
+    }
+  }, {passive:true});
+  wrap.addEventListener('touchmove', (e)=>{
+    if(!pinchStartDist || !game || game.mode !== 'barajado') return;
+    if(e.touches.length !== 2) return;
+    e.preventDefault();
+    const dist = touchDist(e.touches[0], e.touches[1]);
+    const ratio = dist / pinchStartDist;
+    setGameGridCols(pinchStartCols / ratio);
+  }, {passive:false});
+  ['touchend','touchcancel'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
+    if(e.touches.length < 2) pinchStartDist = null;
+  }));
+  wrap.addEventListener('wheel', (e)=>{
+    if(!e.ctrlKey) return;
+    if(!game || game.mode !== 'barajado') return;
+    e.preventDefault();
+    setGameGridCols(game.gridCols + (e.deltaY < 0 ? -1 : 1));
+  }, {passive:false});
+})();
 function handleGridTap(photoId){
   const t = currentTarget();
   if(!t) return;
