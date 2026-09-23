@@ -215,7 +215,7 @@ input[type=file]{display:none;}
 
 /* overlays flotando sobre la imagen a pantalla completa */
 #win-game{position:relative;}
-.game-grid-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;}
+.game-grid-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;touch-action:pan-y;}
 #game-grid{display:grid;gap:4px;padding:4px;
   padding-top:calc(64px + var(--safe-top));padding-bottom:calc(70px + var(--safe-bottom));}
 .game-cell{position:relative;aspect-ratio:1/1;background:#f2f2f2;overflow:hidden;
@@ -1972,6 +1972,11 @@ function setGameGridCols(n){
   }, {passive:false});
   ['touchend','touchcancel'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
     if(e.touches.length < 2) pinchStartDist = null;
+  }));
+  // Safari en iOS ignora user-scalable=no; hay que frenar también sus eventos propios de gesto
+  ['gesturestart','gesturechange','gestureend'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
+    if(!game || game.mode !== 'barajado') return;
+    e.preventDefault();
   }));
   wrap.addEventListener('wheel', (e)=>{
     if(!e.ctrlKey) return;
