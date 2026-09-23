@@ -295,14 +295,13 @@ body.playing #win-game .workspace{min-height:0;}
 /* NOTAS */
 .notas-bar-status{font-size:11.5px;color:var(--muted);}
 .notas-editor{flex:1;min-height:0;display:flex;overflow:hidden;background:#fdfdfd;}
-.notas-gutter{flex-shrink:0;width:42px;padding:10px 8px 10px 0;text-align:right;
-  font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
-  font-size:13.5px;line-height:20px;color:#b7b7bb;background:#f4f4f5;
-  border-right:1px solid var(--border);overflow:hidden;white-space:pre;user-select:none;}
-.notas-editor textarea{flex:1;min-width:0;border:none;outline:none;resize:none;
+.notas-richtext{flex:1;min-width:0;outline:none;overflow:auto;
   padding:10px 14px;background:transparent;color:var(--fg);
   font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
-  font-size:13.5px;line-height:20px;white-space:pre;overflow:auto;}
+  font-size:13.5px;line-height:20px;white-space:pre-wrap;word-wrap:break-word;}
+.notas-richtext:empty:before{content:attr(data-placeholder);color:var(--muted);}
+.notas-bold-btn b{font-family:inherit;}
+.notas-bold-btn.active{color:var(--fg);background:var(--hover);border-radius:4px;}
 </style>
 </head>
 <body>
@@ -528,12 +527,12 @@ body.playing #win-game .workspace{min-height:0;}
         <button class="back" id="back-notas-editor">←</button>
         <span class="title" id="notas-editor-title">documento</span>
         <span class="notas-bar-status" id="notas-status"></span>
+        <button class="smallbtn notas-bold-btn" id="btn-notas-bold" title="Negrita (Ctrl/Cmd+B)"><b>B</b></button>
         <button class="smallbtn" id="btn-notas-rename">renombrar</button>
         <button class="smallbtn" id="btn-notas-delete">eliminar</button>
       </div>
       <div class="notas-editor">
-        <div class="notas-gutter" id="notas-gutter">1</div>
-        <textarea id="notas-text" spellcheck="false" placeholder="Escribe aquí…"></textarea>
+        <div id="notas-text" class="notas-richtext" contenteditable="true" spellcheck="false" data-placeholder="Escribe aquí…"></div>
       </div>
     </div>
 
@@ -1756,8 +1755,8 @@ function renderNotaRow(node, depth){
   if(isFolder){
     count = `<span class="tree-count">${countNotasLeaves(node)}</span>`;
   } else {
-    const lines = (node.content || '').split('\n').length;
-    count = `<span class="tree-count">${lines}${lines===1?' línea':' líneas'}</span>`;
+    const len = notaPlainTextLength(node.content);
+    count = `<span class="tree-count">${len ? len + ' car.' : 'vacío'}</span>`;
   }
   row.innerHTML = `
     <span class="tree-tog">${tog}</span>
@@ -1959,30 +1958,39 @@ function showNotasWindow(id){
   document.querySelectorAll('#view-notas .window').forEach(w=> w.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-function updateNotasGutter(){
-  const ta = document.getElementById('notas-text');
-  const gutter = document.getElementById('notas-gutter');
-  if(!ta || !gutter) return;
-  const lines = ta.value.split('\n').length;
-  let out = '';
-  for(let i=1;i<=lines;i++) out += i + '\n';
-  gutter.textContent = out.replace(/\n$/, '');
-  gutter.scrollTop = ta.scrollTop;
+function notaPlainTextLength(content){
+  if(!content) return 0;
+  const div = document.createElement('div');
+  div.innerHTML = content;
+  return (div.textContent || '').length;
 }
-function setNotasText(val){
-  const ta = document.getElementById('notas-text');
-  if(!ta) return;
-  ta.value = val || '';
-  updateNotasGutter();
-  const el = document.getElementById('notas-status');
-  if(el) el.textContent = '';
+function notaContentToHtml(content){
+  if(content == null || content === '') return '';
+  if(content.indexOf('<') !== -1) return content; // ya está en formato enriquecido
+  const div = document.createElement('div');
+  div.textContent = content; // escapa el texto plano antiguo
+  return div.innerHTML.replace(/\n/g, '<br>');
+}
+function setNotasText(html){
+  const el = document.getElementById('notas-text');
+  if(!el) return;
+  el.innerHTML = html || '';
+  const st = document.getElementById('notas-status');
+  if(st) st.textContent = '';
+}
+function updateNotaBoldButtonState(){
+  const btn = document.getElementById('btn-notas-bold');
+  if(!btn) return;
+  let active = false;
+  try{ active = document.queryCommandState('bold'); }catch(e){}
+  btn.classList.toggle('active', active);
 }
 function openNotaEditor(id){
   const doc = findNotaNode(id);
   if(!doc || doc.type !== 'nota') return;
   currentNotaId = id;
   document.getElementById('notas-editor-title').textContent = doc.name;
-  setNotasText(doc.content || '');
+  setNotasText(notaContentToHtml(doc.content));
   showNotasWindow('win-notas-editor');
   setTimeout(()=> document.getElementById('notas-text').focus(), 30);
 }
@@ -1990,15 +1998,28 @@ function initNotasEditor(){
   renderNotasTree();
   if(notasInited) return;
   notasInited = true;
-  const ta = document.getElementById('notas-text');
-  ta.addEventListener('input', ()=>{
-    updateNotasGutter();
+  const el = document.getElementById('notas-text');
+  el.addEventListener('input', ()=>{
     const doc = findNotaNode(currentNotaId);
-    if(doc) doc.content = ta.value;
+    if(doc) doc.content = el.innerHTML;
     debouncedSaveNotas();
   });
-  ta.addEventListener('scroll', ()=>{
-    document.getElementById('notas-gutter').scrollTop = ta.scrollTop;
+  el.addEventListener('keydown', (e)=>{
+    if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'b'){
+      e.preventDefault();
+      document.getElementById('btn-notas-bold').click();
+    }
+  });
+  document.addEventListener('selectionchange', ()=>{
+    if(document.activeElement === el) updateNotaBoldButtonState();
+  });
+  document.getElementById('btn-notas-bold').addEventListener('click', ()=>{
+    el.focus();
+    document.execCommand('bold');
+    const doc = findNotaNode(currentNotaId);
+    if(doc) doc.content = el.innerHTML;
+    debouncedSaveNotas();
+    updateNotaBoldButtonState();
   });
   document.getElementById('btn-notas-root-folder').addEventListener('click', ()=> promptNewNotaFolder(null));
   document.getElementById('btn-notas-root-doc').addEventListener('click', ()=> promptNewNota(null));
