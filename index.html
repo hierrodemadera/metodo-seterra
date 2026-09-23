@@ -293,6 +293,24 @@ input[type=file]{display:none;}
   overflow:hidden;text-overflow:ellipsis;display:none;}
 .game-cell.correct .tag,.game-cell.wrong .tag{display:block;}
 @keyframes cellpulse{0%,100%{opacity:1;}50%{opacity:0.45;}}
+
+/* feedback de fallo cuando aún quedan intentos */
+.game-cell::after{content:'';position:absolute;inset:0;background:var(--c-bad);opacity:0;pointer-events:none;}
+.game-cell.miss{animation:missshake 0.38s ease-in-out;border-color:var(--c-bad);}
+.game-cell.miss::after{animation:missflash 0.55s ease-out;}
+.game-cell.miss.correct{border-color:var(--c-ok);}
+@keyframes missshake{0%,100%{transform:translateX(0);}20%{transform:translateX(-5px);}40%{transform:translateX(5px);}
+  60%{transform:translateX(-3px);}80%{transform:translateX(3px);}}
+@keyframes missflash{0%{opacity:0.45;}100%{opacity:0;}}
+.marker.miss{animation:markermiss 0.55s ease-out;}
+@keyframes markermiss{0%{box-shadow:0 0 0 0 rgba(255,0,0,0.9);background:var(--c-bad);}
+  100%{box-shadow:0 0 0 16px rgba(255,0,0,0);}}
+.attempts .dot.just{animation:dotpop 0.45s ease-out;}
+@keyframes dotpop{0%{transform:scale(1);}40%{transform:scale(2.1);}100%{transform:scale(1);}}
+.game-pill.miss{animation:missshake 0.38s ease-in-out;}
+.type-zoom-card.miss{animation:cardmiss 0.5s ease-out;}
+@keyframes cardmiss{0%{box-shadow:0 0 0 5px var(--c-bad),0 10px 40px rgba(0,0,0,0.35);}
+  100%{box-shadow:0 0 0 0 rgba(255,0,0,0),0 10px 40px rgba(0,0,0,0.35);}}
 .game-overlay-top{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;
   gap:10px;padding:calc(9px + var(--safe-top)) 12px 10px;
   background:linear-gradient(rgba(0,0,0,0.4),transparent);}
@@ -2233,6 +2251,18 @@ function setGameGridCols(n){
     setGameGridCols(game.gridCols + (e.deltaY < 0 ? -1 : 1));
   }, {passive:false});
 })();
+/* reinicia una animación CSS aunque se repita seguido */
+function flashClass(el, cls){
+  if(!el) return;
+  el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
+  clearTimeout(el._flashT);
+  el._flashT = setTimeout(()=> el.classList.remove(cls), 600);
+}
+function missFeedback(el){
+  flashClass(el, 'miss');
+  flashClass(document.getElementById('game-pill'), 'miss');
+  try{ navigator.vibrate && navigator.vibrate(35); }catch(e){}
+}
 function handleGridTap(photoId){
   const t = currentTarget();
   if(!t) return;
@@ -2252,6 +2282,7 @@ function handleGridTap(photoId){
     advance();
   } else {
     game.attemptsLeft--;
+    missFeedback(document.querySelector(`.game-cell[data-id="${photoId}"]`));
     if(game.attemptsLeft <= 0){
       game.failedIds.add(t.id);
       awaitingConfirm = true;
@@ -2305,7 +2336,8 @@ function updateHud(){
   dots.innerHTML = '';
   for(let i=0;i<3;i++){
     const d = document.createElement('div');
-    d.className = 'dot' + (i < (3-game.attemptsLeft) ? ' used' : '');
+    d.className = 'dot' + (i < (3-game.attemptsLeft) ? ' used' : '')
+      + (i === 2-game.attemptsLeft && game.attemptsLeft < 3 ? ' just' : '');
     dots.appendChild(d);
   }
 }
@@ -2351,6 +2383,7 @@ function handleTap(clientX, clientY){
     advance();
   } else {
     game.attemptsLeft--;
+    missFeedback(document.querySelector(`.marker[data-id="${nearest.id}"]`));
     if(game.attemptsLeft <= 0){
       game.failedIds.add(t.id);
       awaitingConfirm = true;
@@ -2469,9 +2502,10 @@ function renderTypeZoom(){
   dots.innerHTML = '';
   for(let i=0;i<3;i++){
     const d = document.createElement('div');
-    d.className = 'dot' + (i < 3-left ? ' used' : '');
+    d.className = 'dot' + (i < 3-left ? ' used' : '') + (tz.justUsed && i === 2-left ? ' just' : '');
     dots.appendChild(d);
   }
+  tz.justUsed = false;
 }
 function openTypeZoom(id){
   if(!game || game.playMode !== 'escribir' || tz) return;
@@ -2527,6 +2561,9 @@ function submitTypeZoom(){
   }
   game.attemptsOf[id]--;
   input.classList.remove('shake'); void input.offsetWidth; input.classList.add('shake');
+  flashClass(document.getElementById('type-zoom-card'), 'miss');
+  try{ navigator.vibrate && navigator.vibrate(35); }catch(e){}
+  tz.justUsed = true;
   if(game.attemptsOf[id] <= 0){
     tz.finished = 'failed';
     game.mistakes++;
