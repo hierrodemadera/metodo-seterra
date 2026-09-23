@@ -146,6 +146,70 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .card-actions button:hover{color:var(--fg);background:var(--hover);}
 .card-actions .card-del{color:#b00020;}
 .card-actions button + button{border-left:1px solid var(--border);}
+.card-actions button.on{color:var(--c-info);font-weight:600;}
+
+/* respuesta válida (modo escribir) */
+.card-answer{flex-shrink:0;border-top:1px solid var(--border);padding:8px 10px;display:flex;
+  flex-direction:column;gap:6px;cursor:pointer;}
+.card-answer.editing{background:rgba(21,1,254,0.04);cursor:default;}
+.ans-hint{font-size:11px;color:var(--muted);text-align:center;}
+.ans-tokens{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 6px;font-size:13.5px;line-height:1.5;}
+.ans-tok{color:var(--muted);padding:1px 3px;border-radius:4px;-webkit-user-select:none;user-select:none;}
+.ans-tok.on{color:var(--fg);text-decoration:underline;text-decoration-color:var(--c-info);
+  text-decoration-thickness:2px;text-underline-offset:4px;}
+.card-answer.editing .ans-tok{cursor:pointer;}
+.card-answer.editing .ans-tok:hover{background:var(--hover);}
+.ans-tools{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+.ans-tools button{background:#fff;border:1px solid var(--field-border);border-radius:6px;padding:3px 9px;
+  font-size:11.5px;color:var(--fg);}
+.ans-tools button.primary{background:var(--fg);color:#fff;border-color:var(--fg);}
+
+/* selector de modo de juego */
+.mode-backdrop{background:rgba(0,0,0,0.3);}
+.mode-box{position:fixed;z-index:90;left:50%;top:50%;transform:translate(-50%,-50%);width:min(90vw,320px);
+  background:var(--win);border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,0.25);padding:16px;
+  display:none;flex-direction:column;gap:8px;}
+.mode-box.open{display:flex;}
+.mode-box .mode-title{font-size:15px;font-weight:600;text-align:center;}
+.mode-box .mode-sub{font-size:12px;color:var(--muted);text-align:center;margin:-4px 0 6px;}
+.mode-opt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px 14px;
+  border:1px solid var(--field-border);border-radius:10px;background:#fff;color:var(--fg);}
+.mode-opt:hover{background:var(--hover);}
+.mode-opt b{font-size:14px;font-weight:600;}
+.mode-opt span{font-size:12px;color:var(--muted);}
+.mode-opt.last{border-color:var(--fg);}
+
+/* modo escribir: la imagen elegida se agranda por encima del mosaico */
+.type-zoom{position:fixed;left:0;right:0;top:0;height:100%;z-index:20;display:none;
+  align-items:center;justify-content:center;}
+.type-zoom.open{display:flex;}
+.type-zoom-backdrop{position:absolute;inset:0;background:rgba(10,10,10,0.55);}
+.type-zoom-card{position:relative;display:flex;flex-direction:column;gap:9px;width:min(92vw,520px);
+  background:#fff;border-radius:14px;padding:10px;box-shadow:0 10px 40px rgba(0,0,0,0.35);
+  animation:tzin 0.18s ease-out;transition:box-shadow 0.15s;}
+@keyframes tzin{from{transform:scale(0.82);opacity:0;}to{transform:scale(1);opacity:1;}}
+.type-zoom-card.ok{box-shadow:0 0 0 4px var(--c-ok),0 10px 40px rgba(0,0,0,0.35);}
+.type-zoom-card.bad{box-shadow:0 0 0 4px var(--c-bad),0 10px 40px rgba(0,0,0,0.35);}
+.type-zoom-img{display:flex;align-items:center;justify-content:center;background:#f2f2f2;
+  border-radius:10px;overflow:hidden;}
+.type-zoom-img img{width:100%;height:auto;max-height:60vh;object-fit:contain;display:block;}
+.type-zoom-close{position:absolute;top:16px;right:16px;z-index:2;width:30px;height:30px;border-radius:50%;
+  border:none;background:rgba(0,0,0,0.55);color:#fff;font-size:14px;display:flex;align-items:center;
+  justify-content:center;padding:0;}
+.type-zoom-hint{text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:18px;
+  letter-spacing:0.3em;min-height:26px;word-break:break-word;color:var(--fg);}
+.type-zoom-hint.reveal{font-family:inherit;letter-spacing:normal;color:var(--c-info);font-weight:600;}
+.type-zoom-row{display:flex;gap:8px;}
+.type-zoom-row input{flex:1;min-width:0;font-size:16px;padding:10px 12px;border:1px solid var(--field-border);
+  border-radius:8px;}
+.type-zoom-row input:focus{outline:none;border-color:var(--fg);}
+.type-zoom-row button{flex-shrink:0;}
+.type-zoom-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:18px;}
+.type-zoom-foot .attempts{margin:0;}
+.type-zoom-msg{font-size:12px;color:var(--muted);}
+@keyframes tzshake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+.type-zoom-row input.shake{animation:tzshake 0.25s;}
+.game-pill.small .name{font-size:13px;font-weight:500;}
 
 /* modal de recorte de tarjeta */
 .card-crop-box{position:fixed;z-index:500;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -455,9 +519,26 @@ body.playing #win-game .workspace{min-height:0;}
         <div class="progressbar"><div class="fill" id="game-progress"></div></div>
         <span id="game-stats">0/0</span>
       </div>
-      <div class="game-pill">
+      <div class="game-pill" id="game-pill">
         <div class="name" id="game-target">—</div>
         <div class="attempts" id="game-attempts"></div>
+      </div>
+      <div class="type-zoom" id="type-zoom">
+        <div class="type-zoom-backdrop" id="type-zoom-backdrop"></div>
+        <div class="type-zoom-card" id="type-zoom-card">
+          <button class="type-zoom-close" id="type-zoom-close" title="cerrar (Esc)">✕</button>
+          <div class="type-zoom-img"><img id="type-zoom-img" alt=""></div>
+          <div class="type-zoom-hint" id="type-zoom-hint"></div>
+          <div class="type-zoom-row">
+            <input type="text" id="type-zoom-input" placeholder="escribe el nombre"
+              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="go">
+            <button class="btn btn-primary" id="type-zoom-ok">ok</button>
+          </div>
+          <div class="type-zoom-foot">
+            <div class="attempts" id="type-zoom-attempts"></div>
+            <div class="type-zoom-msg" id="type-zoom-msg"></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -638,6 +719,16 @@ body.playing #win-game .workspace{min-height:0;}
 </div>
 
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
+
+<!-- selector de modo de juego (temas de tarjetas) -->
+<div class="ctx-backdrop mode-backdrop" id="mode-backdrop"></div>
+<div class="mode-box" id="mode-box">
+  <div class="mode-title">¿cómo quieres jugar?</div>
+  <div class="mode-sub" id="mode-tema-name"></div>
+  <button class="mode-opt" data-mode="buscar"><b>buscar la imagen</b><span>te digo un nombre y tocas su imagen</span></button>
+  <button class="mode-opt" data-mode="escribir"><b>escribir el nombre</b><span>tocas una imagen y escribes cómo se llama</span></button>
+  <button class="btn btn-block" id="mode-cancel">cancelar</button>
+</div>
 
 <!-- recorte de tarjeta (tema barajado) -->
 <div class="ctx-backdrop" id="card-crop-backdrop"></div>
@@ -1490,6 +1581,9 @@ function renderCardItem(node, photo){
   nameInput.addEventListener('focus', ()=> selectCard(photo.id));
   nameInput.addEventListener('input', ()=>{
     photo.label = nameInput.value;
+    // si cambia el texto, las palabras marcadas dejan de corresponder: se borra la marca
+    if(photo.answerIdx) delete photo.answerIdx;
+    refreshCardAnswer(card, node, photo);
     debouncedSave();
   });
   nameInput.addEventListener('keydown', (e)=>{
@@ -1505,8 +1599,23 @@ function renderCardItem(node, photo){
   });
   card.appendChild(nameInput);
 
+  const ansBox = document.createElement('div');
+  ansBox.className = 'card-answer';
+  card.appendChild(ansBox);
+
   const actions = document.createElement('div');
   actions.className = 'card-actions';
+  const ansBtn = document.createElement('button');
+  ansBtn.className = 'ans-btn';
+  ansBtn.textContent = 'respuesta';
+  ansBtn.title = 'marcar qué parte del nombre hay que escribir';
+  ansBtn.addEventListener('click', ()=>{
+    if(editingAnswerIds.has(photo.id)) editingAnswerIds.delete(photo.id);
+    else editingAnswerIds.add(photo.id);
+    selectCard(photo.id);
+    refreshCardAnswer(card, node, photo);
+  });
+  actions.appendChild(ansBtn);
   if(photo.image){
     const cropBtn = document.createElement('button');
     cropBtn.textContent = 'recortar';
@@ -1526,7 +1635,109 @@ function renderCardItem(node, photo){
   actions.appendChild(delBtn);
   card.appendChild(actions);
 
+  refreshCardAnswer(card, node, photo);
   return card;
+}
+
+/* ---------- respuesta válida: palabras subrayadas del nombre ---------- */
+const editingAnswerIds = new Set();
+function labelTokens(label){ return (label||'').trim().split(/\s+/).filter(Boolean); }
+function validAnswerIdx(photo){
+  if(!Array.isArray(photo.answerIdx) || !photo.answerIdx.length) return null;
+  const n = labelTokens(photo.label).length;
+  const idx = photo.answerIdx.filter(i=> Number.isInteger(i) && i>=0 && i<n);
+  return idx.length ? idx.sort((a,b)=>a-b) : null;
+}
+/* texto que hay que escribir: lo subrayado o, si no hay nada, el nombre entero (sin los signos de paréntesis) */
+function expectedAnswer(photo){
+  const toks = labelTokens(photo.label);
+  const idx = validAnswerIdx(photo);
+  const picked = idx ? idx.map(i=> toks[i]) : toks;
+  return picked.join(' ').replace(/[()\[\]{}]/g,' ').replace(/\s+/g,' ').trim();
+}
+/* comparación tolerante: sin mayúsculas, sin tildes, sin signos */
+function normAnswer(str){
+  return (str||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+}
+function outsideParensIdx(label){
+  const out = []; let depth = 0;
+  labelTokens(label).forEach((t,i)=>{
+    let seen = false, outside = false;
+    for(const ch of t){
+      if('([{'.includes(ch)){ depth++; continue; }
+      if(')]}'.includes(ch)){ depth = Math.max(0, depth-1); continue; }
+      if(!seen && /[\p{L}\p{N}]/u.test(ch)){ seen = true; outside = depth === 0; }
+    }
+    if(seen && outside) out.push(i);
+  });
+  return out;
+}
+function refreshCardAnswer(card, node, photo){
+  const box = card.querySelector('.card-answer');
+  const btn = card.querySelector('.ans-btn');
+  const editing = editingAnswerIds.has(photo.id);
+  const toks = labelTokens(photo.label);
+  const idx = validAnswerIdx(photo);
+  const on = new Set(idx || []);
+  if(btn) btn.classList.toggle('on', editing || !!idx);
+  box.classList.toggle('editing', editing);
+  box.innerHTML = '';
+  box.onclick = null;
+  if(!editing && !idx){ box.style.display = 'none'; return; }
+  box.style.display = '';
+
+  const hint = document.createElement('div');
+  hint.className = 'ans-hint';
+  hint.textContent = editing
+    ? (toks.length ? 'toca las palabras que cuentan como respuesta' : 'escribe primero el nombre')
+    : 'respuesta válida';
+  box.appendChild(hint);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'ans-tokens';
+  toks.forEach((t,i)=>{
+    const sp = document.createElement('span');
+    sp.className = 'ans-tok' + (on.has(i) ? ' on' : '');
+    sp.textContent = t;
+    if(editing) sp.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const set = new Set(validAnswerIdx(photo) || []);
+      set.has(i) ? set.delete(i) : set.add(i);
+      if(set.size) photo.answerIdx = [...set].sort((a,b)=>a-b); else delete photo.answerIdx;
+      saveLocal();
+      refreshCardAnswer(card, node, photo);
+    });
+    wrap.appendChild(sp);
+  });
+  box.appendChild(wrap);
+
+  if(editing){
+    const tools = document.createElement('div');
+    tools.className = 'ans-tools';
+    const mk = (label, fn, cls)=>{
+      const b = document.createElement('button');
+      b.textContent = label; if(cls) b.className = cls;
+      b.addEventListener('click', (e)=>{ e.stopPropagation(); fn(); });
+      tools.appendChild(b);
+    };
+    if(/[()\[\]{}]/.test(photo.label||'')) mk('fuera de ( )', ()=>{
+      const idx2 = outsideParensIdx(photo.label);
+      if(idx2.length) photo.answerIdx = idx2; else delete photo.answerIdx;
+      saveLocal(); refreshCardAnswer(card, node, photo);
+    });
+    if(idx) mk('quitar marca', ()=>{
+      delete photo.answerIdx; saveLocal(); refreshCardAnswer(card, node, photo);
+    });
+    mk('listo', ()=>{
+      editingAnswerIds.delete(photo.id); refreshCardAnswer(card, node, photo);
+    }, 'primary');
+    box.appendChild(tools);
+  } else {
+    box.onclick = ()=>{
+      editingAnswerIds.add(photo.id); selectCard(photo.id); refreshCardAnswer(card, node, photo);
+    };
+  }
 }
 function selectCard(id){
   selectedCardId = id;
@@ -1843,19 +2054,50 @@ function openGamePicker(temaId){
     if(!node.photos || !node.photos.length){
       toast('Este tema no tiene fotos todavía'); return;
     }
+    openModeChooser(node);
+    return;
   } else if(!node.image || node.points.length===0){
     toast('Este tema no tiene imagen o puntos todavía'); return;
   }
   playTema(node);
 }
-function playTema(node, onlyIds){
-  if(node.mode === 'barajado') startBarajadoGame(node, onlyIds);
+function playTema(node, onlyIds, playMode){
+  if(node.mode === 'barajado') startBarajadoGame(node, onlyIds, playMode || 'buscar');
   else startGame(node, onlyIds);
 }
 document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
-  if(confirm('¿Salir de la partida?')){ document.body.classList.remove('playing'); showJugarWindow('win-tree-j'); }
+  if(confirm('¿Salir de la partida?')){
+    hideTypeZoom();
+    document.body.classList.remove('playing'); showJugarWindow('win-tree-j');
+  }
 });
+
+/* ---------- selector de modo (solo temas de tarjetas) ---------- */
+let modeChooserNode = null;
+function openModeChooser(node){
+  modeChooserNode = node;
+  document.getElementById('mode-tema-name').textContent = node.name;
+  document.querySelectorAll('#mode-box .mode-opt').forEach(b=>
+    b.classList.toggle('last', b.dataset.mode === (node.lastPlayMode || 'buscar')));
+  document.getElementById('mode-box').classList.add('open');
+  document.getElementById('mode-backdrop').classList.add('open');
+}
+function closeModeChooser(){
+  document.getElementById('mode-box').classList.remove('open');
+  document.getElementById('mode-backdrop').classList.remove('open');
+  modeChooserNode = null;
+}
+document.querySelectorAll('#mode-box .mode-opt').forEach(b=> b.addEventListener('click', ()=>{
+  const node = modeChooserNode;
+  closeModeChooser();
+  if(!node) return;
+  node.lastPlayMode = b.dataset.mode;
+  saveLocal();
+  playTema(node, null, b.dataset.mode);
+}));
+document.getElementById('mode-cancel').addEventListener('click', closeModeChooser);
+document.getElementById('mode-backdrop').addEventListener('click', closeModeChooser);
 
 let game = null;
 let gamePZ = null;
@@ -1901,7 +2143,7 @@ function resetGameContainers(){
   document.getElementById('game-grid-wrap').style.display = 'none';
   document.getElementById('game-grid').innerHTML = '';
 }
-function startBarajadoGame(node, onlyIds){
+function startBarajadoGame(node, onlyIds, playMode){
   document.body.classList.add('playing');
   resetGameContainers();
   let photos = node.photos || [];
@@ -1913,6 +2155,9 @@ function startBarajadoGame(node, onlyIds){
     temaNode: node,
     node: { points: order.map(p=>({id:p.id, label:p.label})), tolerance: 8 },
     mode: 'barajado',
+    playMode: playMode || 'buscar',
+    photoOf: Object.fromEntries(photos.map(p=> [p.id, p])),
+    attemptsOf: {},
     order: order.map(p=>({id:p.id, label:p.label})),
     idx:0, total: order.length,
     correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
@@ -1934,7 +2179,10 @@ function startBarajadoGame(node, onlyIds){
     cell.dataset.id = p.id;
     cell.innerHTML = `<img src="${p.image}"><div class="tag"></div>`;
     cell.querySelector('.tag').textContent = p.label;
-    cell.addEventListener('click', ()=> handleGridTap(p.id));
+    cell.addEventListener('click', ()=>{
+      if(game.playMode === 'escribir') openTypeZoom(p.id);
+      else handleGridTap(p.id);
+    });
     grid.appendChild(cell);
   });
 
@@ -2039,6 +2287,16 @@ function markerStateUpdate(pointId, state){
 function currentTarget(){ return game.order[game.idx]; }
 
 function updateHud(){
+  const pill = document.getElementById('game-pill');
+  if(game.playMode === 'escribir'){
+    pill.classList.add('small');
+    document.getElementById('game-target').textContent = 'toca una imagen y escribe su nombre';
+    document.getElementById('game-stats').textContent = `${game.idx}/${game.total}`;
+    document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
+    document.getElementById('game-attempts').innerHTML = '';
+    return;
+  }
+  pill.classList.remove('small');
   const t = currentTarget();
   document.getElementById('game-target').textContent = t ? t.label : '—';
   document.getElementById('game-stats').textContent = `${game.idx}/${game.total}`;
@@ -2130,18 +2388,19 @@ function endGame(){
 
   // guarda en el historial del tema (mejores 10 resultados)
   const node = game.temaNode;
-  node.history = node.history || [];
+  const histKey = game.playMode === 'escribir' ? 'historyEscribir' : 'history';
+  node[histKey] = node[histKey] || [];
   const entry = {score: scorePct, seconds: secs};
-  node.history.push(entry);
-  node.history.sort((a,b)=> b.score-a.score || a.seconds-b.seconds);
-  const isNewBest = node.history[0] === entry;
-  node.history = node.history.slice(0,10);
+  node[histKey].push(entry);
+  node[histKey].sort((a,b)=> b.score-a.score || a.seconds-b.seconds);
+  const isNewBest = node[histKey][0] === entry;
+  node[histKey] = node[histKey].slice(0,10);
   saveLocal();
 
   document.getElementById('end-best-badge').style.display = isNewBest ? 'block' : 'none';
 
   const histWrap = document.getElementById('end-history');
-  histWrap.innerHTML = node.history.map((h,i)=>{
+  histWrap.innerHTML = node[histKey].map((h,i)=>{
     const t2 = String(Math.floor(h.seconds/60)).padStart(2,'0')+':'+String(h.seconds%60).padStart(2,'0');
     return `<div class="histrow${h===entry?' me':''}"><span class="rk">${i+1}.</span><span class="sc">${h.score}%</span><span class="tm">${t2}</span></div>`;
   }).join('');
@@ -2153,8 +2412,139 @@ function endGame(){
   } else failBtn.style.display = 'none';
   showJugarWindow('win-end');
 }
-document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode));
-document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds)));
+document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode, null, game.playMode));
+document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds), game.playMode));
+
+/* ============================================================
+   MODO ESCRIBIR — tocas una imagen, se agranda y escribes su nombre
+   3 intentos: en el 1º se ve 1 letra, en el 2º dos, en el 3º tres
+   ============================================================ */
+let tz = null; // {id, expected, finished}
+function maskedHint(answer, n){
+  let shown = 0, out = '';
+  for(const ch of answer){
+    if(/[\p{L}\p{N}]/u.test(ch)){ out += shown < n ? ch : '_'; shown++; }
+    else if(ch === ' ') out += '\u2003';
+    else out += ch;
+  }
+  return out;
+}
+function layoutTypeZoom(){
+  const el = document.getElementById('type-zoom');
+  if(!el.classList.contains('open')) return;
+  const vv = window.visualViewport;
+  const h = vv ? vv.height : window.innerHeight;
+  el.style.top = (vv ? vv.offsetTop : 0) + 'px';
+  el.style.height = h + 'px';
+  document.getElementById('type-zoom-img').style.maxHeight = Math.max(90, h - 190) + 'px';
+}
+if(window.visualViewport){
+  window.visualViewport.addEventListener('resize', layoutTypeZoom);
+  window.visualViewport.addEventListener('scroll', layoutTypeZoom);
+}
+window.addEventListener('resize', layoutTypeZoom);
+
+function renderTypeZoom(){
+  const left = game.attemptsOf[tz.id];
+  const hint = document.getElementById('type-zoom-hint');
+  const input = document.getElementById('type-zoom-input');
+  const msg = document.getElementById('type-zoom-msg');
+  const card = document.getElementById('type-zoom-card');
+  card.classList.remove('ok','bad');
+  if(tz.finished === 'failed'){
+    hint.classList.add('reveal');
+    hint.textContent = game.photoOf[tz.id].label;
+    card.classList.add('bad');
+    input.readOnly = true;
+    msg.textContent = 'era esta';
+    document.getElementById('type-zoom-ok').textContent = 'seguir';
+  } else {
+    hint.classList.remove('reveal');
+    hint.textContent = maskedHint(tz.expected, 4 - left); // 1ª: 1 letra, 2ª: 2, 3ª: 3
+    input.readOnly = false;
+    document.getElementById('type-zoom-ok').textContent = 'ok';
+    msg.textContent = left === 3 ? '' : `te queda${left===1?'':'n'} ${left} intento${left===1?'':'s'}`;
+  }
+  const dots = document.getElementById('type-zoom-attempts');
+  dots.innerHTML = '';
+  for(let i=0;i<3;i++){
+    const d = document.createElement('div');
+    d.className = 'dot' + (i < 3-left ? ' used' : '');
+    dots.appendChild(d);
+  }
+}
+function openTypeZoom(id){
+  if(!game || game.playMode !== 'escribir' || tz) return;
+  const st = game.stateOf[id];
+  if(st === 'correct' || st === 'wrong') return; // ya resuelta
+  const photo = game.photoOf[id];
+  if(game.attemptsOf[id] === undefined) game.attemptsOf[id] = 3;
+  tz = { id, expected: expectedAnswer(photo), finished: null };
+  document.getElementById('type-zoom-img').src = photo.image || '';
+  const input = document.getElementById('type-zoom-input');
+  input.value = '';
+  renderTypeZoom();
+  const el = document.getElementById('type-zoom');
+  el.classList.add('open');
+  layoutTypeZoom();
+  input.focus(); // dentro del toque para que iOS saque el teclado
+}
+function hideTypeZoom(){
+  const el = document.getElementById('type-zoom');
+  el.classList.remove('open');
+  document.getElementById('type-zoom-input').blur();
+  tz = null;
+  window.scrollTo(0,0);
+}
+/* cerrar: si la tarjeta ya se resolvió, cuenta y avanza; si no, se guarda los intentos que le queden */
+function closeTypeZoom(){
+  if(!tz) return;
+  const done = tz.finished;
+  hideTypeZoom();
+  if(done){
+    game.idx++;
+    updateHud();
+    if(game.idx >= game.total) setTimeout(endGame, 250);
+  }
+}
+function submitTypeZoom(){
+  if(!tz) return;
+  if(tz.finished){ closeTypeZoom(); return; }
+  const input = document.getElementById('type-zoom-input');
+  const val = normAnswer(input.value);
+  if(!val) return;
+  const id = tz.id;
+  if(val === normAnswer(tz.expected)){
+    tz.finished = 'correct';
+    game.correct++;
+    game.pointResult[id] = 4 - game.attemptsOf[id];
+    markerStateUpdate(id, 'correct');
+    document.getElementById('type-zoom-card').classList.add('ok');
+    input.readOnly = true;
+    const mine = tz;
+    setTimeout(()=>{ if(tz === mine) closeTypeZoom(); }, 450);
+    return;
+  }
+  game.attemptsOf[id]--;
+  input.classList.remove('shake'); void input.offsetWidth; input.classList.add('shake');
+  if(game.attemptsOf[id] <= 0){
+    tz.finished = 'failed';
+    game.mistakes++;
+    game.failedIds.add(id);
+    game.pointResult[id] = 'failed';
+    markerStateUpdate(id, 'wrong');
+  } else {
+    input.value = '';
+  }
+  renderTypeZoom();
+}
+document.getElementById('type-zoom-ok').addEventListener('click', submitTypeZoom);
+document.getElementById('type-zoom-close').addEventListener('click', closeTypeZoom);
+document.getElementById('type-zoom-backdrop').addEventListener('click', closeTypeZoom);
+document.getElementById('type-zoom-input').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter'){ e.preventDefault(); submitTypeZoom(); }
+  else if(e.key === 'Escape'){ e.preventDefault(); closeTypeZoom(); }
+});
 document.getElementById('end-back').addEventListener('click', ()=> showJugarWindow('win-tree-j'));
 document.getElementById('end-review').addEventListener('click', ()=>{
   const labels = {1:'acertado a la 1ª', 2:'acertado a la 2ª', 3:'acertado a la 3ª', failed:'fallado'};
