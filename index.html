@@ -2774,7 +2774,7 @@ function handleGridTap(photoId){
     const tapped = game.photoOf && game.photoOf[photoId];
     if(tapped){
       const b = (tapped.back||'').trim();
-      const txt = game.anki === 'texto' ? (b.length > 90 ? b.slice(0,88) + '…' : b) : tapped.label;
+      const txt = tapped.label || (b.length > 60 ? b.slice(0,58) + '…' : b); // el nombre; el texto solo si no tiene nombre
       if(txt) showMissName(txt);
     }
     if(game.attemptsLeft <= 0){
