@@ -140,6 +140,11 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .card-name-input{flex-shrink:0;border:none;border-top:1px solid var(--border);padding:11px 10px;font-size:14.5px;
   text-align:center;background:transparent;color:var(--fg);border-radius:0;width:100%;}
 .card-name-input:focus{outline:none;background:var(--hover);}
+.card-back-input{flex-shrink:0;border:none;border-top:1px dashed var(--border);padding:9px 10px;font-size:13px;
+  font-family:inherit;line-height:1.4;text-align:center;background:#fcfbf7;color:var(--fg);resize:none;
+  width:100%;box-sizing:border-box;border-radius:0;min-height:36px;max-height:180px;overflow-y:auto;display:block;}
+.card-back-input::placeholder{color:#bbb;}
+.card-back-input:focus{outline:none;background:#f7f4ea;}
 .card-actions{flex-shrink:0;display:flex;border-top:1px solid var(--border);}
 .card-actions button{flex:1;background:none;border:none;padding:9px 4px;font-size:12px;
   color:var(--muted);letter-spacing:normal;text-transform:none;}
@@ -178,6 +183,10 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .mode-opt b{font-size:14px;font-weight:600;}
 .mode-opt span{font-size:12px;color:var(--muted);}
 .mode-opt.last{border-color:var(--fg);}
+.mode-opt:disabled{opacity:0.45;cursor:default;}
+.mode-opt:disabled:hover{background:#fff;}
+.mode-group{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin:6px 2px 0;}
+.mode-box{max-height:calc(100vh - 40px);overflow-y:auto;}
 .round-size{display:flex;align-items:center;justify-content:space-between;gap:8px;
   margin:-4px 2px 2px;padding:0 4px;font-size:12px;color:var(--muted);}
 .round-size .stepper{display:flex;align-items:center;gap:6px;}
@@ -307,6 +316,32 @@ input[type=file]{display:none;}
   color:#fff;font-size:10px;padding:2px 4px;text-align:center;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;display:none;}
 .game-cell.correct .tag,.game-cell.wrong .tag{display:block;}
+
+/* ---- tarjetas con reverso: se dan la vuelta al resolverse ---- */
+.game-cell.anki{perspective:900px;background:transparent;container-type:size;}
+.game-cell.anki .tag{display:none !important;}
+.game-cell.anki::before,.game-cell.anki::after{z-index:3;}
+.game-cell.anki.correct::before,.game-cell.anki.wrong::before{opacity:0.26;}
+.flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 0.55s cubic-bezier(.3,.7,.3,1);}
+.game-cell.flipped .flip{transform:rotateY(180deg);}
+.flip .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f2f2f2;}
+.flip .face.b{transform:rotateY(180deg);}
+.flip .face img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;}
+.face.txt{background:#fcfbf7;box-shadow:inset 0 0 0 1px #e4dfd0;padding:7cqi;box-sizing:border-box;text-align:center;color:#222;
+  line-height:1.25;white-space:pre-wrap;word-break:break-word;hyphens:auto;}
+.face.txt.s1{font-size:14cqi;font-weight:600;} .face.txt.s2{font-size:10cqi;}
+.face.txt.s3{font-size:7.5cqi;} .face.txt.s4{font-size:6cqi;align-items:flex-start;}
+.face.txt.s4::after{content:'';position:absolute;left:0;right:0;bottom:0;height:18%;
+  background:linear-gradient(transparent,#fcfbf7);}
+/* píldora de pregunta con texto largo o con imagen */
+.game-pill.anki-q{pointer-events:auto;width:max-content;max-width:min(92vw,560px);box-sizing:border-box;padding:10px 16px;}
+.game-pill.anki-q .name{font-size:14.5px;font-weight:500;line-height:1.35;white-space:pre-wrap;
+  max-height:30vh;overflow-y:auto;text-align:left;}
+.game-pill.anki-q .name.short{text-align:center;font-weight:600;font-size:15px;}
+.game-pill.anki-img{padding:8px 8px 7px;}
+.game-pill.anki-img .name img{display:block;height:min(118px,20vh);max-width:60vw;object-fit:contain;
+  border-radius:12px;background:#fff;}
 /* velo de color sobre las ya preguntadas: se sigue viendo la imagen debajo */
 .game-cell::before{content:'';position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 0.3s;}
 .game-cell.correct::before{background:var(--c-ok);opacity:0.38;}
@@ -335,7 +370,7 @@ input[type=file]{display:none;}
   background:linear-gradient(rgba(0,0,0,0.4),transparent);}
 .game-overlay-top .back{color:#fff;background:rgba(0,0,0,0.35);border-radius:50%;width:28px;height:28px;
   display:flex;align-items:center;justify-content:center;font-size:15px;border:none;flex-shrink:0;padding:0;}
-.miss-name{position:absolute;left:50%;top:calc(50px + var(--safe-top));z-index:7;max-width:86%;
+.miss-name{position:absolute;left:50%;top:calc(50px + var(--safe-top));z-index:7;width:max-content;max-width:86vw;box-sizing:border-box;
   transform:translate(-50%,-6px);opacity:0;pointer-events:none;transition:opacity 0.2s,transform 0.2s;
   background:rgba(20,20,20,0.88);color:#fff;border-radius:18px;padding:7px 14px;font-size:13px;
   text-align:center;border-left:4px solid var(--c-bad);box-shadow:0 4px 14px rgba(0,0,0,0.25);}
@@ -775,6 +810,9 @@ body.playing #win-game .workspace{min-height:0;}
   <div class="round-size" id="round-size"><span>imágenes por ronda</span>
     <div class="stepper"><button id="rs-minus" type="button">−</button><b id="rs-val">12</b><button id="rs-plus" type="button">+</button></div></div>
   <button class="mode-opt" data-mode="escribir"><b>escribir el nombre</b><span>tocas una imagen y escribes cómo se llama</span></button>
+  <div class="mode-group">tarjetas con parte de detrás</div>
+  <button class="mode-opt" data-mode="anki-texto"><b>del texto a la imagen</b><span data-sub>te muestro lo de detrás y tocas su imagen</span></button>
+  <button class="mode-opt" data-mode="anki-imagen"><b>de la imagen al texto</b><span data-sub>te enseño la imagen y tocas su texto</span></button>
   <button class="btn btn-block" id="mode-cancel">cancelar</button>
 </div>
 
@@ -1647,6 +1685,21 @@ function renderCardItem(node, photo){
   });
   card.appendChild(nameInput);
 
+  // parte de detrás (opcional): desde una palabra hasta un texto largo
+  const backInput = document.createElement('textarea');
+  backInput.className = 'card-back-input';
+  backInput.rows = 1;
+  backInput.placeholder = 'detrás de la tarjeta (opcional)';
+  backInput.value = photo.back || '';
+  const growBack = ()=>{ backInput.style.height = 'auto'; backInput.style.height = Math.min(180, backInput.scrollHeight) + 'px'; };
+  backInput.addEventListener('focus', ()=> selectCard(photo.id));
+  backInput.addEventListener('input', ()=>{
+    if(backInput.value.trim()) photo.back = backInput.value; else delete photo.back;
+    growBack(); debouncedSave();
+  });
+  requestAnimationFrame(growBack);
+  card.appendChild(backInput);
+
   const ansBox = document.createElement('div');
   ansBox.className = 'card-answer';
   card.appendChild(ansBox);
@@ -2109,10 +2162,12 @@ function openGamePicker(temaId){
   }
   playTema(node);
 }
+function hasBack(p){ return !!(p && p.back && p.back.trim()); }
 function playTema(node, onlyIds, playMode){
   if(node.mode === 'barajado'){
     const pm = playMode || 'buscar';
-    if(pm === 'buscar-rondas') startBarajadoGame(node, onlyIds, 'buscar', clampRoundSize(node.roundSize));
+    if(pm === 'anki-texto' || pm === 'anki-imagen') startBarajadoGame(node, onlyIds, pm);
+    else if(pm === 'buscar-rondas') startBarajadoGame(node, onlyIds, 'buscar', clampRoundSize(node.roundSize));
     else startBarajadoGame(node, onlyIds, pm);
   }
   else startGame(node, onlyIds);
@@ -2133,6 +2188,13 @@ function openModeChooser(node){
   document.querySelectorAll('#mode-box .mode-opt').forEach(b=>
     b.classList.toggle('last', b.dataset.mode === (node.lastPlayMode || 'buscar')));
   document.getElementById('rs-val').textContent = clampRoundSize(node.roundSize);
+  const nBack = (node.photos||[]).filter(hasBack).length;
+  document.querySelectorAll('#mode-box .mode-opt[data-mode^="anki"]').forEach(b=>{
+    b.disabled = nBack < 2;
+    const sub = b.querySelector('[data-sub]');
+    if(!sub.dataset.orig) sub.dataset.orig = sub.textContent;
+    sub.textContent = nBack < 2 ? 'escribe texto detrás de al menos 2 tarjetas' : sub.dataset.orig;
+  });
   document.getElementById('mode-box').classList.add('open');
   document.getElementById('mode-backdrop').classList.add('open');
 }
@@ -2217,16 +2279,38 @@ function splitRounds(photos, size){
   }
   return rounds;
 }
+function backSizeClass(t){
+  const n = (t||'').trim().length;
+  return n <= 18 ? 's1' : n <= 55 ? 's2' : n <= 140 ? 's3' : 's4';
+}
+function gridCellClass(cell, state){
+  const st = state && state !== 'neutral' ? ' ' + state : '';
+  if(!cell.dataset.anki) return 'game-cell' + st;
+  return 'game-cell anki' + st + ((state === 'correct' || state === 'wrong') ? ' flipped' : '');
+}
 function renderGridCells(photos){
   const grid = document.getElementById('game-grid');
   grid.innerHTML = '';
   document.getElementById('game-grid-wrap').scrollTo(0,0);
   shuffle(photos).forEach(p=>{ // dónde cae cada foto, distinto del orden de preguntas
     const cell = document.createElement('div');
-    cell.className = 'game-cell' + (game.stateOf[p.id] && game.stateOf[p.id] !== 'neutral' ? ' '+game.stateOf[p.id] : '');
     cell.dataset.id = p.id;
-    cell.innerHTML = `<img src="${p.image}"><div class="tag"></div>`;
+    if(game.anki){
+      cell.dataset.anki = '1';
+      // cara A = lo que ves mientras está sin resolver; cara B = lo que aparece al darle la vuelta
+      const imgFace = `<div class="face img"><img src="${p.image}"></div>`;
+      const txtFace = document.createElement('div');
+      txtFace.className = 'face txt ' + backSizeClass(p.back);
+      txtFace.textContent = p.back.trim();
+      cell.innerHTML = `<div class="flip"></div><div class="tag"></div>`;
+      const flip = cell.querySelector('.flip');
+      if(game.anki === 'texto'){ flip.insertAdjacentHTML('beforeend', imgFace); txtFace.classList.add('b'); flip.appendChild(txtFace); }
+      else { flip.appendChild(txtFace); flip.insertAdjacentHTML('beforeend', imgFace.replace('face img','face img b')); }
+    } else {
+      cell.innerHTML = `<img src="${p.image}"><div class="tag"></div>`;
+    }
     cell.querySelector('.tag').textContent = p.label;
+    cell.className = gridCellClass(cell, game.stateOf[p.id]);
     cell.addEventListener('click', ()=>{
       if(Date.now() - gridZoomEndedAt < 350) return; // el dedo que queda tras pellizcar no cuenta como toque
       if(roundBannerOpen) return;
@@ -2261,6 +2345,14 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
   resetGameContainers();
   let photos = node.photos || [];
   if(onlyIds) photos = photos.filter(p=> onlyIds.has(p.id));
+  // modos de tarjetas con reverso: solo entran las que tienen texto detrás, y se juegan como "buscar"
+  let anki = null;
+  if(playMode === 'anki-texto' || playMode === 'anki-imagen'){
+    anki = playMode === 'anki-texto' ? 'texto' : 'imagen';
+    photos = photos.filter(hasBack);
+    playMode = 'buscar';
+    if(photos.length < 2){ toast('Hacen falta al menos 2 tarjetas con texto detrás'); document.body.classList.remove('playing'); return; }
+  }
   if(!photos.length){ toast('Este tema no tiene fotos todavía'); document.body.classList.remove('playing'); return; }
 
   // por rondas: cada ronda es un trozo al azar del mazo, y dentro de ella el orden de preguntas también es al azar
@@ -2269,7 +2361,8 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
   const order = [].concat(...roundOrders);
   const roundEnds = []; { let acc = 0; roundOrders.forEach(r=>{ acc += r.length; roundEnds.push(acc); }); }
   game = {
-    launchMode: roundSize ? 'buscar-rondas' : (playMode || 'buscar'),
+    launchMode: anki ? 'anki-' + anki : roundSize ? 'buscar-rondas' : (playMode || 'buscar'),
+    anki,
     rounds, roundEnds, roundIdx: 0,
     temaNode: node,
     node: { points: order.map(p=>({id:p.id, label:p.label})), tolerance: 8 },
@@ -2277,7 +2370,7 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
     playMode: playMode || 'buscar',
     photoOf: Object.fromEntries(photos.map(p=> [p.id, p])),
     attemptsOf: {}, hintOrderOf: {},
-    order: order.map(p=>({id:p.id, label:p.label})),
+    order: order.map(p=>({id:p.id, label: (p.label && p.label.trim()) || (p.back||'').trim().slice(0,60)})),
     idx:0, total: order.length,
     correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
     startTime: Date.now(),
@@ -2422,7 +2515,11 @@ function handleGridTap(photoId){
     game.attemptsLeft--;
     missFeedback(document.querySelector(`.game-cell[data-id="${photoId}"]`));
     const tapped = game.photoOf && game.photoOf[photoId];
-    if(tapped) showMissName(tapped.label);
+    if(tapped){
+      const b = (tapped.back||'').trim();
+      const txt = game.anki === 'texto' ? (b.length > 90 ? b.slice(0,88) + '…' : b) : tapped.label;
+      if(txt) showMissName(txt);
+    }
     if(game.attemptsLeft <= 0){
       game.failedIds.add(t.id);
       awaitingConfirm = true;
@@ -2450,7 +2547,7 @@ function markerStateUpdate(pointId, state){
   if(el){ el.className = 'marker ' + (state==='neutral'?'':state); }
   const cell = document.querySelector(`.game-cell[data-id="${pointId}"]`);
   if(cell){
-    cell.className = 'game-cell' + (state==='neutral'?'':' '+state);
+    cell.className = gridCellClass(cell, state);
     if(state==='revealed') cell.scrollIntoView({behavior:'smooth', block:'center'});
   }
 }
@@ -2460,7 +2557,8 @@ function currentTarget(){ return game.order[game.idx]; }
 function updateHud(){
   const pill = document.getElementById('game-pill');
   if(game.playMode === 'escribir'){
-    pill.classList.add('small');
+    pill.classList.add('small'); pill.classList.remove('anki-q','anki-img');
+    document.getElementById('game-grid').style.paddingBottom = '';
     document.getElementById('game-target').textContent = 'toca una imagen y escribe su nombre';
     document.getElementById('game-stats').textContent = `${game.idx}/${game.total}`;
     document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
@@ -2469,7 +2567,20 @@ function updateHud(){
   }
   pill.classList.remove('small');
   const t = currentTarget();
-  document.getElementById('game-target').textContent = t ? t.label : '—';
+  const tgt = document.getElementById('game-target');
+  pill.classList.toggle('anki-q', !!game.anki);
+  pill.classList.toggle('anki-img', game.anki === 'imagen');
+  tgt.classList.remove('short');
+  if(game.anki && t){
+    const ph = game.photoOf[t.id];
+    if(game.anki === 'imagen'){ tgt.innerHTML = ''; const im = document.createElement('img'); im.src = ph.image; tgt.appendChild(im); }
+    else { tgt.textContent = ph.back.trim(); if(ph.back.trim().length <= 40) tgt.classList.add('short'); tgt.scrollTop = 0; }
+    // que la última fila del mosaico no quede tapada por la pregunta
+    requestAnimationFrame(()=>{ document.getElementById('game-grid').style.paddingBottom = (pill.offsetHeight + 40) + 'px'; });
+  } else {
+    tgt.textContent = t ? t.label : '—';
+    document.getElementById('game-grid').style.paddingBottom = '';
+  }
   document.getElementById('game-stats').textContent = (game.rounds && game.rounds.length > 1)
     ? `R${game.roundIdx+1}/${game.rounds.length} · ${game.idx}/${game.total}` : `${game.idx}/${game.total}`;
   document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
@@ -2578,7 +2689,9 @@ function endGame(){
   // guarda en el historial del tema (mejores 10 resultados)
   const node = game.temaNode;
   const histKey = game.playMode === 'escribir' ? 'historyEscribir'
-    : game.launchMode === 'buscar-rondas' ? 'historyRondas' : 'history';
+    : game.launchMode === 'buscar-rondas' ? 'historyRondas'
+    : game.launchMode === 'anki-texto' ? 'historyAnkiTexto'
+    : game.launchMode === 'anki-imagen' ? 'historyAnkiImagen' : 'history';
   node[histKey] = node[histKey] || [];
   const entry = {score: scorePct, seconds: secs};
   node[histKey].push(entry);
