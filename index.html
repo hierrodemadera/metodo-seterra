@@ -184,11 +184,60 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .mode-opt span{font-size:12px;color:var(--muted);}
 .mode-opt.last{border-color:var(--fg);}
 .mode-opt:disabled{opacity:0.45;cursor:default;}
+.rs-toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg);cursor:pointer;}
+.rs-toggle input{width:18px;height:18px;accent-color:var(--fg);margin:0;}
+.round-size{margin:0 2px 2px;padding:8px 10px;border:1px solid var(--field-border);border-radius:10px;}
+.round-size .stepper.off{opacity:0.35;pointer-events:none;}
+/* elegir / letras / clasificar: panel bajo la imagen ampliada */
+.pick-reveal{text-align:center;font-weight:600;color:var(--c-info);font-size:16px;display:none;}
+.pick-reveal.show{display:block;}
+.pick-body{display:flex;flex-direction:column;gap:8px;}
+.pick-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.pick-opts.groups{display:flex;flex-wrap:wrap;justify-content:center;}
+.pick-opt{padding:11px 10px;border:1px solid var(--field-border);border-radius:10px;background:#fff;color:var(--fg);
+  font-size:14px;line-height:1.25;text-align:center;min-height:46px;word-break:break-word;}
+.pick-opts.groups .pick-opt{min-height:0;padding:10px 14px;}
+.pick-opt:hover{background:var(--hover);}
+.pick-opt.bad{border-color:var(--c-bad);color:var(--c-bad);background:#fff5f5;text-decoration:line-through;}
+.pick-opt.good{border-color:var(--c-ok);background:var(--c-ok);color:#fff;font-weight:600;}
+.pick-opt:disabled{cursor:default;}
+.pick-opt.shake,.lt-slots.shake{animation:tzshake 0.25s;}
+.pick-next{align-self:center;display:none;}
+.pick-next.show{display:inline-block;}
+.lt-slots{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;}
+.lt-word{display:flex;gap:3px;flex-wrap:nowrap;}
+.lt-slot{width:26px;height:34px;border-bottom:2px solid #999;display:flex;align-items:center;justify-content:center;
+  font-size:19px;font-weight:600;color:var(--fg);cursor:pointer;}
+.lt-slot.locked{color:var(--c-info);border-bottom-color:var(--c-info);cursor:default;}
+.lt-slot.fixed{border-bottom-color:transparent;width:auto;min-width:8px;cursor:default;}
+.lt-slot.next{border-bottom-color:var(--fg);background:rgba(0,0,0,0.04);}
+.lt-tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;}
+.lt-tile{width:38px;height:42px;border-radius:9px;border:1px solid var(--field-border);background:#fff;
+  font-size:19px;font-weight:600;color:var(--fg);padding:0;box-shadow:0 2px 0 rgba(0,0,0,0.08);}
+.lt-tile.used{visibility:hidden;}
+.lt-tools{display:flex;justify-content:center;}
+.lt-tools button{font-size:12px;}
+/* editor: fotos extra y grupo */
+.card-extras{flex-shrink:0;display:flex;gap:5px;align-items:center;padding:6px 8px;border-top:1px solid var(--border);
+  overflow-x:auto;background:#fafafa;}
+.card-extras .ex{position:relative;flex-shrink:0;width:40px;height:40px;border-radius:6px;overflow:hidden;
+  background:#eee;cursor:pointer;border:1px solid var(--border);}
+.card-extras .ex img{width:100%;height:100%;object-fit:cover;pointer-events:none;}
+.card-extras .ex .x{position:absolute;top:0;right:0;width:16px;height:16px;border:none;border-radius:0 0 0 6px;
+  background:rgba(0,0,0,0.6);color:#fff;font-size:10px;line-height:16px;padding:0;}
+.card-extras .add{flex-shrink:0;height:40px;padding:0 10px;border:1px dashed var(--field-border);border-radius:6px;
+  background:#fff;color:var(--muted);font-size:12px;}
+.card-extras .count{font-size:11px;color:var(--muted);margin-left:auto;flex-shrink:0;padding-left:4px;}
+.card-group-input{flex-shrink:0;border:none;border-top:1px solid var(--border);padding:8px 10px;font-size:12.5px;
+  text-align:center;background:transparent;color:var(--fg);border-radius:0;width:100%;box-sizing:border-box;}
+.card-group-input::placeholder{color:#bbb;}
+.card-group-input:focus{outline:none;background:var(--hover);}
+
 .mode-opt:disabled:hover{background:#fff;}
 .mode-group{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin:6px 2px 0;}
 .mode-box{max-height:calc(100vh - 40px);overflow-y:auto;}
 .round-size{display:flex;align-items:center;justify-content:space-between;gap:8px;
-  margin:-4px 2px 2px;padding:0 4px;font-size:12px;color:var(--muted);}
+  margin:0 2px 2px;padding:8px 10px;font-size:12px;color:var(--muted);border:1px solid var(--field-border);border-radius:10px;}
 .round-size .stepper{display:flex;align-items:center;gap:6px;}
 .round-size .stepper button{width:30px;height:30px;border-radius:50%;border:1px solid var(--field-border);
   background:#fff;color:var(--fg);font-size:16px;line-height:1;padding:0;}
@@ -603,6 +652,20 @@ body.playing #win-game .workspace{min-height:0;}
         <div class="name" id="game-target">—</div>
         <div class="attempts" id="game-attempts"></div>
       </div>
+      <div class="type-zoom pick-zoom" id="pick-zoom">
+        <div class="type-zoom-backdrop" id="pick-zoom-backdrop"></div>
+        <div class="type-zoom-card" id="pick-zoom-card">
+          <button class="type-zoom-close" id="pick-zoom-close" title="cerrar (Esc)">✕</button>
+          <div class="type-zoom-img"><img id="pick-zoom-img" alt=""></div>
+          <div class="pick-reveal" id="pick-reveal"></div>
+          <div class="pick-body" id="pick-body"></div>
+          <div class="type-zoom-foot">
+            <div class="attempts" id="pick-attempts"></div>
+            <button class="btn btn-primary pick-next" id="pick-next">seguir</button>
+            <div class="type-zoom-msg" id="pick-msg"></div>
+          </div>
+        </div>
+      </div>
       <div class="type-zoom" id="type-zoom">
         <div class="type-zoom-backdrop" id="type-zoom-backdrop"></div>
         <div class="type-zoom-card" id="type-zoom-card">
@@ -799,20 +862,29 @@ body.playing #win-game .workspace{min-height:0;}
 </div>
 
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
+<input type="file" id="tarjetas-file-extra" accept="image/*" multiple style="display:none;">
+<datalist id="groups-datalist"></datalist>
 
 <!-- selector de modo de juego (temas de tarjetas) -->
 <div class="ctx-backdrop mode-backdrop" id="mode-backdrop"></div>
 <div class="mode-box" id="mode-box">
   <div class="mode-title">¿cómo quieres jugar?</div>
   <div class="mode-sub" id="mode-tema-name"></div>
-  <button class="mode-opt" data-mode="buscar"><b>buscar la imagen</b><span>te digo un nombre y tocas su imagen, todas a la vez</span></button>
-  <button class="mode-opt" data-mode="buscar-rondas"><b>buscar la imagen, por rondas</b><span>el mazo se reparte al azar en rondas más pequeñas</span></button>
-  <div class="round-size" id="round-size"><span>imágenes por ronda</span>
-    <div class="stepper"><button id="rs-minus" type="button">−</button><b id="rs-val">12</b><button id="rs-plus" type="button">+</button></div></div>
-  <button class="mode-opt" data-mode="escribir"><b>escribir el nombre</b><span>tocas una imagen y escribes cómo se llama</span></button>
+  <div class="round-size" id="round-size">
+    <label class="rs-toggle"><input type="checkbox" id="rs-on"> por rondas</label>
+    <div class="stepper" id="rs-stepper"><button id="rs-minus" type="button">−</button><b id="rs-val">12</b><button id="rs-plus" type="button">+</button></div>
+  </div>
+  <div class="mode-group">reconocer</div>
+  <button class="mode-opt" data-mode="buscar"><b>buscar la imagen</b><span data-sub>te digo un nombre y tocas su imagen</span></button>
+  <button class="mode-opt" data-mode="elegir"><b>elegir el nombre</b><span data-sub>tocas una imagen y eliges su nombre entre cuatro</span></button>
+  <div class="mode-group">recordar</div>
+  <button class="mode-opt" data-mode="letras"><b>letras desordenadas</b><span data-sub>tocas una imagen y ordenas las letras de su nombre</span></button>
+  <button class="mode-opt" data-mode="escribir"><b>escribir el nombre</b><span data-sub>tocas una imagen y escribes cómo se llama</span></button>
   <div class="mode-group">tarjetas con parte de detrás</div>
   <button class="mode-opt" data-mode="anki-texto"><b>del texto a la imagen</b><span data-sub>te muestro lo de detrás y tocas su imagen</span></button>
   <button class="mode-opt" data-mode="anki-imagen"><b>de la imagen al texto</b><span data-sub>te enseño la imagen y tocas su texto</span></button>
+  <div class="mode-group">grupos</div>
+  <button class="mode-opt" data-mode="clasificar"><b>clasificar</b><span data-sub>tocas una imagen y eliges a qué grupo pertenece</span></button>
   <button class="btn btn-block" id="mode-cancel">cancelar</button>
 </div>
 
@@ -1659,6 +1731,37 @@ function renderCardItem(node, photo){
   });
   card.appendChild(imgWrap);
 
+  // más fotos de la misma tarjeta: en cada partida sale una al azar
+  if(photo.image){
+    const ex = document.createElement('div');
+    ex.className = 'card-extras';
+    (photo.extraImages||[]).forEach((src, i)=>{
+      const t = document.createElement('div');
+      t.className = 'ex'; t.title = 'tocar para ponerla como principal';
+      t.innerHTML = `<img src="${src}"><button class="x" title="quitar">✕</button>`;
+      t.addEventListener('click', ()=>{ // intercambiar con la principal
+        selectCard(photo.id);
+        const main = photo.image; photo.image = src; photo.extraImages[i] = main;
+        saveLocal(); renderCardsPanel(node);
+      });
+      t.querySelector('.x').addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if(!confirm('¿Quitar esta foto de la tarjeta?')) return;
+        photo.extraImages.splice(i,1);
+        if(!photo.extraImages.length) delete photo.extraImages;
+        saveLocal(); renderCardsPanel(node);
+      });
+      ex.appendChild(t);
+    });
+    const add = document.createElement('button');
+    add.className = 'add'; add.textContent = '+ fotos';
+    add.addEventListener('click', ()=>{ selectCard(photo.id); extraCardTargetId = photo.id; document.getElementById('tarjetas-file-extra').click(); });
+    ex.appendChild(add);
+    const n = allImages(photo).length;
+    if(n > 1){ const c = document.createElement('span'); c.className = 'count'; c.textContent = `${n} fotos`; ex.appendChild(c); }
+    card.appendChild(ex);
+  }
+
   const nameInput = document.createElement('input');
   nameInput.type = 'text';
   nameInput.className = 'card-name-input';
@@ -1699,6 +1802,19 @@ function renderCardItem(node, photo){
   });
   requestAnimationFrame(growBack);
   card.appendChild(backInput);
+
+  const groupInput = document.createElement('input');
+  groupInput.type = 'text';
+  groupInput.className = 'card-group-input';
+  groupInput.placeholder = 'grupo (opcional)';
+  groupInput.setAttribute('list', 'groups-datalist');
+  groupInput.value = photo.group || '';
+  groupInput.addEventListener('focus', ()=>{ selectCard(photo.id); refreshGroupsDatalist(node); });
+  groupInput.addEventListener('input', ()=>{
+    if(groupInput.value.trim()) photo.group = groupInput.value; else delete photo.group;
+    debouncedSave();
+  });
+  card.appendChild(groupInput);
 
   const ansBox = document.createElement('div');
   ansBox.className = 'card-answer';
@@ -1858,6 +1974,27 @@ document.getElementById('tarjetas-file-single').addEventListener('change', async
   const node = findNode(currentCardsId);
   if(node) await setCardImageFromFile(node, singleCardTargetId, file);
   singleCardTargetId = null;
+});
+function refreshGroupsDatalist(node){
+  const dl = document.getElementById('groups-datalist');
+  dl.innerHTML = '';
+  groupsOf(node.photos||[]).forEach(g=>{ const o = document.createElement('option'); o.value = g; dl.appendChild(o); });
+}
+let extraCardTargetId = null;
+document.getElementById('tarjetas-file-extra').addEventListener('change', async (e)=>{
+  const files = [...e.target.files].filter(f=> f.type.startsWith('image/'));
+  e.target.value = '';
+  const node = findNode(currentCardsId);
+  const photo = node && (node.photos||[]).find(p=> p.id === extraCardTargetId);
+  extraCardTargetId = null;
+  if(!photo || !files.length) return;
+  photo.extraImages = photo.extraImages || [];
+  for(const f of files){
+    try{ photo.extraImages.push(await fileToDownscaledDataURL(f, 800)); }catch(err){}
+  }
+  saveLocal();
+  renderCardsPanel(node);
+  toast(files.length === 1 ? 'Foto añadida' : `${files.length} fotos añadidas`);
 });
 async function setCardImageFromFile(node, photoId, file){
   const dataUrl = await fileToDownscaledDataURL(file, 1000);
@@ -2163,48 +2300,83 @@ function openGamePicker(temaId){
   playTema(node);
 }
 function hasBack(p){ return !!(p && p.back && p.back.trim()); }
-function playTema(node, onlyIds, playMode){
+function playTema(node, onlyIds, playMode, roundSize){
   if(node.mode === 'barajado'){
-    const pm = playMode || 'buscar';
-    if(pm === 'anki-texto' || pm === 'anki-imagen') startBarajadoGame(node, onlyIds, pm);
-    else if(pm === 'buscar-rondas') startBarajadoGame(node, onlyIds, 'buscar', clampRoundSize(node.roundSize));
-    else startBarajadoGame(node, onlyIds, pm);
+    let pm = playMode || 'buscar';
+    if(pm === 'buscar-rondas'){ pm = 'buscar'; roundSize = clampRoundSize(node.roundSize); }
+    startBarajadoGame(node, onlyIds, pm, roundSize || 0);
   }
   else startGame(node, onlyIds);
+}
+const ZOOM_MODES = ['escribir','elegir','letras','clasificar'];
+function isZoomMode(m){ return ZOOM_MODES.includes(m); }
+/* fotos de una tarjeta: la principal y las extra; en cada partida sale una al azar */
+function allImages(p){ return [p.image, ...(p.extraImages||[])].filter(Boolean); }
+function gameImg(p){ return (game && game.imgOf && game.imgOf[p.id]) || p.image; }
+/* registro de confusiones: al buscar A tocaste B (sirve para escoger opciones difíciles) */
+function recordConfusion(node, a, b){
+  if(!node || !a || !b || a === b) return;
+  const c = node.confusions || (node.confusions = {});
+  const m = c[a] || (c[a] = {});
+  m[b] = (m[b]||0) + 1;
+  debouncedSave();
 }
 document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
   if(confirm('¿Salir de la partida?')){
-    hideTypeZoom(); hideMissName(); hideRoundBanner();
+    hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner();
     document.body.classList.remove('playing'); showJugarWindow('win-tree-j');
   }
 });
 
 /* ---------- selector de modo (solo temas de tarjetas) ---------- */
 let modeChooserNode = null;
-function openModeChooser(node){
-  modeChooserNode = node;
-  document.getElementById('mode-tema-name').textContent = node.name;
-  document.querySelectorAll('#mode-box .mode-opt').forEach(b=>
-    b.classList.toggle('last', b.dataset.mode === (node.lastPlayMode || 'buscar')));
-  document.getElementById('rs-val').textContent = clampRoundSize(node.roundSize);
-  const nBack = (node.photos||[]).filter(hasBack).length;
-  document.querySelectorAll('#mode-box .mode-opt[data-mode^="anki"]').forEach(b=>{
-    b.disabled = nBack < 2;
-    const sub = b.querySelector('[data-sub]');
-    if(!sub.dataset.orig) sub.dataset.orig = sub.textContent;
-    sub.textContent = nBack < 2 ? 'escribe texto detrás de al menos 2 tarjetas' : sub.dataset.orig;
-  });
-  document.getElementById('mode-box').classList.add('open');
-  document.getElementById('mode-backdrop').classList.add('open');
-}
 const ROUND_MIN = 4, ROUND_MAX = 40, ROUND_DEFAULT = 12;
 function clampRoundSize(n){ n = Math.round(n || ROUND_DEFAULT); return Math.max(ROUND_MIN, Math.min(ROUND_MAX, n)); }
+function groupsOf(photos){
+  return [...new Set(photos.map(p=> (p.group||'').trim()).filter(Boolean))].sort((a,b)=> a.localeCompare(b,'es'));
+}
+/* qué hace falta en el mazo para poder jugar cada modo */
+function modeUnavailable(node, mode){
+  const photos = (node.photos||[]).filter(p=> p.image);
+  if(mode === 'anki-texto' || mode === 'anki-imagen')
+    return photos.filter(hasBack).length < 2 ? 'escribe texto detrás de al menos 2 tarjetas' : null;
+  if(mode === 'clasificar')
+    return groupsOf(photos).length < 2 ? 'pon un grupo a las tarjetas (al menos 2 grupos distintos)' : null;
+  if(mode === 'elegir') return photos.length < 2 ? 'hacen falta al menos 2 tarjetas' : null;
+  return null;
+}
+function refreshRoundUi(node){
+  document.getElementById('rs-on').checked = !!node.useRounds;
+  document.getElementById('rs-stepper').classList.toggle('off', !node.useRounds);
+  document.getElementById('rs-val').textContent = clampRoundSize(node.roundSize);
+}
+function openModeChooser(node){
+  modeChooserNode = node;
+  if(node.lastPlayMode === 'buscar-rondas'){ node.lastPlayMode = 'buscar'; node.useRounds = true; } // versión anterior
+  document.getElementById('mode-tema-name').textContent = node.name;
+  document.querySelectorAll('#mode-box .mode-opt').forEach(b=>{
+    b.classList.toggle('last', b.dataset.mode === (node.lastPlayMode || 'buscar'));
+    const why = modeUnavailable(node, b.dataset.mode);
+    b.disabled = !!why;
+    const sub = b.querySelector('[data-sub]');
+    if(!sub.dataset.orig) sub.dataset.orig = sub.textContent;
+    sub.textContent = why || sub.dataset.orig;
+  });
+  refreshRoundUi(node);
+  document.getElementById('mode-box').classList.add('open');
+  document.getElementById('mode-backdrop').classList.add('open');
+  document.getElementById('mode-box').scrollTop = 0;
+}
+document.getElementById('rs-on').addEventListener('change', (e)=>{
+  const node = modeChooserNode; if(!node) return;
+  node.useRounds = e.target.checked; refreshRoundUi(node); saveLocal();
+});
 ['rs-minus','rs-plus'].forEach(id=> document.getElementById(id).addEventListener('click', (e)=>{
   e.stopPropagation();
   const node = modeChooserNode; if(!node) return;
   node.roundSize = clampRoundSize(clampRoundSize(node.roundSize) + (id==='rs-plus' ? 2 : -2));
-  document.getElementById('rs-val').textContent = node.roundSize;
+  refreshRoundUi(node);
   saveLocal();
 }));
 function closeModeChooser(){
@@ -2218,7 +2390,7 @@ document.querySelectorAll('#mode-box .mode-opt').forEach(b=> b.addEventListener(
   if(!node) return;
   node.lastPlayMode = b.dataset.mode;
   saveLocal();
-  playTema(node, null, b.dataset.mode);
+  playTema(node, null, b.dataset.mode, node.useRounds ? clampRoundSize(node.roundSize) : 0);
 }));
 document.getElementById('mode-cancel').addEventListener('click', closeModeChooser);
 document.getElementById('mode-backdrop').addEventListener('click', closeModeChooser);
@@ -2298,7 +2470,7 @@ function renderGridCells(photos){
     if(game.anki){
       cell.dataset.anki = '1';
       // cara A = lo que ves mientras está sin resolver; cara B = lo que aparece al darle la vuelta
-      const imgFace = `<div class="face img"><img src="${p.image}"></div>`;
+      const imgFace = `<div class="face img"><img src="${gameImg(p)}"></div>`;
       const txtFace = document.createElement('div');
       txtFace.className = 'face txt ' + backSizeClass(p.back);
       txtFace.textContent = p.back.trim();
@@ -2307,14 +2479,15 @@ function renderGridCells(photos){
       if(game.anki === 'texto'){ flip.insertAdjacentHTML('beforeend', imgFace); txtFace.classList.add('b'); flip.appendChild(txtFace); }
       else { flip.appendChild(txtFace); flip.insertAdjacentHTML('beforeend', imgFace.replace('face img','face img b')); }
     } else {
-      cell.innerHTML = `<img src="${p.image}"><div class="tag"></div>`;
+      cell.innerHTML = `<img src="${gameImg(p)}"><div class="tag"></div>`;
     }
-    cell.querySelector('.tag').textContent = p.label;
+    cell.querySelector('.tag').textContent = game.playMode === 'clasificar' ? `${p.label || ''} · ${p.group.trim()}` : p.label;
     cell.className = gridCellClass(cell, game.stateOf[p.id]);
     cell.addEventListener('click', ()=>{
       if(Date.now() - gridZoomEndedAt < 350) return; // el dedo que queda tras pellizcar no cuenta como toque
       if(roundBannerOpen) return;
       if(game.playMode === 'escribir') openTypeZoom(p.id);
+      else if(isZoomMode(game.playMode)) openPickZoom(p.id);
       else handleGridTap(p.id);
     });
     grid.appendChild(cell);
@@ -2346,7 +2519,13 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
   let photos = node.photos || [];
   if(onlyIds) photos = photos.filter(p=> onlyIds.has(p.id));
   // modos de tarjetas con reverso: solo entran las que tienen texto detrás, y se juegan como "buscar"
+  const launchMode = playMode || 'buscar';
+  photos = photos.filter(p=> p.image);
   let anki = null;
+  if(playMode === 'clasificar'){
+    photos = photos.filter(p=> (p.group||'').trim());
+    if(groupsOf(photos).length < 2){ toast('Hacen falta tarjetas de al menos 2 grupos'); document.body.classList.remove('playing'); return; }
+  }
   if(playMode === 'anki-texto' || playMode === 'anki-imagen'){
     anki = playMode === 'anki-texto' ? 'texto' : 'imagen';
     photos = photos.filter(hasBack);
@@ -2361,8 +2540,11 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
   const order = [].concat(...roundOrders);
   const roundEnds = []; { let acc = 0; roundOrders.forEach(r=>{ acc += r.length; roundEnds.push(acc); }); }
   game = {
-    launchMode: anki ? 'anki-' + anki : roundSize ? 'buscar-rondas' : (playMode || 'buscar'),
+    launchMode, roundSize: roundSize || 0,
     anki,
+    imgOf: Object.fromEntries(photos.map(p=>{ const im = allImages(p); return [p.id, im[Math.floor(Math.random()*im.length)]]; })),
+    groups: groupsOf(photos),
+    optionsOf: {}, wrongPicked: {}, letrasOf: {},
     rounds, roundEnds, roundIdx: 0,
     temaNode: node,
     node: { points: order.map(p=>({id:p.id, label:p.label})), tolerance: 8 },
@@ -2514,6 +2696,7 @@ function handleGridTap(photoId){
   } else {
     game.attemptsLeft--;
     missFeedback(document.querySelector(`.game-cell[data-id="${photoId}"]`));
+    recordConfusion(game.temaNode, t.id, photoId);
     const tapped = game.photoOf && game.photoOf[photoId];
     if(tapped){
       const b = (tapped.back||'').trim();
@@ -2556,11 +2739,14 @@ function currentTarget(){ return game.order[game.idx]; }
 
 function updateHud(){
   const pill = document.getElementById('game-pill');
-  if(game.playMode === 'escribir'){
+  if(isZoomMode(game.playMode)){
     pill.classList.add('small'); pill.classList.remove('anki-q','anki-img');
     document.getElementById('game-grid').style.paddingBottom = '';
-    document.getElementById('game-target').textContent = 'toca una imagen y escribe su nombre';
-    document.getElementById('game-stats').textContent = `${game.idx}/${game.total}`;
+    document.getElementById('game-target').textContent = {
+      escribir:'toca una imagen y escribe su nombre', elegir:'toca una imagen y elige su nombre',
+      letras:'toca una imagen y ordena sus letras', clasificar:'toca una imagen y elige su grupo'}[game.playMode];
+    document.getElementById('game-stats').textContent = (game.rounds && game.rounds.length > 1)
+      ? `R${game.roundIdx+1}/${game.rounds.length} · ${game.idx}/${game.total}` : `${game.idx}/${game.total}`;
     document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
     document.getElementById('game-attempts').innerHTML = '';
     return;
@@ -2573,7 +2759,7 @@ function updateHud(){
   tgt.classList.remove('short');
   if(game.anki && t){
     const ph = game.photoOf[t.id];
-    if(game.anki === 'imagen'){ tgt.innerHTML = ''; const im = document.createElement('img'); im.src = ph.image; tgt.appendChild(im); }
+    if(game.anki === 'imagen'){ tgt.innerHTML = ''; const im = document.createElement('img'); im.src = gameImg(ph); tgt.appendChild(im); }
     else { tgt.textContent = ph.back.trim(); if(ph.back.trim().length <= 40) tgt.classList.add('short'); tgt.scrollTop = 0; }
     // que la última fila del mosaico no quede tapada por la pregunta
     requestAnimationFrame(()=>{ document.getElementById('game-grid').style.paddingBottom = (pill.offsetHeight + 40) + 'px'; });
@@ -2667,8 +2853,15 @@ function advance(){
 document.getElementById('game-zin').addEventListener('click', (e)=>{ e.stopPropagation(); gamePZ && gamePZ.zoomIn(); });
 document.getElementById('game-zout').addEventListener('click', (e)=>{ e.stopPropagation(); gamePZ && gamePZ.zoomOut(); });
 
+/* cada modo (y con/sin rondas) tiene su propio historial; conserva los nombres antiguos */
+function historyKey(mode, rounds){
+  const base = {buscar:'history', escribir:'historyEscribir', 'anki-texto':'historyAnkiTexto',
+    'anki-imagen':'historyAnkiImagen', elegir:'historyElegir', letras:'historyLetras', clasificar:'historyClasificar'}[mode] || 'history';
+  if(!rounds) return base;
+  return base === 'history' ? 'historyRondas' : base + 'Rondas';
+}
 function endGame(){
-  hideMissName(); hideRoundBanner();
+  hideMissName(); hideRoundBanner(); hidePickZoom();
   document.body.classList.remove('playing');
   const secs = Math.round((Date.now()-game.startTime)/1000);
   const mm = String(Math.floor(secs/60)).padStart(2,'0');
@@ -2688,10 +2881,7 @@ function endGame(){
 
   // guarda en el historial del tema (mejores 10 resultados)
   const node = game.temaNode;
-  const histKey = game.playMode === 'escribir' ? 'historyEscribir'
-    : game.launchMode === 'buscar-rondas' ? 'historyRondas'
-    : game.launchMode === 'anki-texto' ? 'historyAnkiTexto'
-    : game.launchMode === 'anki-imagen' ? 'historyAnkiImagen' : 'history';
+  const histKey = historyKey(game.launchMode, game.roundSize);
   node[histKey] = node[histKey] || [];
   const entry = {score: scorePct, seconds: secs};
   node[histKey].push(entry);
@@ -2715,8 +2905,8 @@ function endGame(){
   } else failBtn.style.display = 'none';
   showJugarWindow('win-end');
 }
-document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode, null, game.launchMode || game.playMode));
-document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds), game.launchMode || game.playMode));
+document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode, null, game.launchMode || game.playMode, game.roundSize));
+document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds), game.launchMode || game.playMode, game.roundSize));
 
 /* ============================================================
    MODO ESCRIBIR — tocas una imagen, se agranda y escribes su nombre
@@ -2790,7 +2980,7 @@ function openTypeZoom(id){
     const nLetters = [...tz.expected].filter(ch=> /[\p{L}\p{N}]/u.test(ch)).length;
     game.hintOrderOf[id] = shuffle([...Array(nLetters).keys()]);
   }
-  document.getElementById('type-zoom-img').src = photo.image || '';
+  document.getElementById('type-zoom-img').src = gameImg(photo) || '';
   const input = document.getElementById('type-zoom-input');
   input.value = '';
   renderTypeZoom();
@@ -2811,11 +3001,7 @@ function closeTypeZoom(){
   if(!tz) return;
   const done = tz.finished;
   hideTypeZoom();
-  if(done){
-    game.idx++;
-    updateHud();
-    if(game.idx >= game.total) setTimeout(endGame, 250);
-  }
+  if(done) advance();
 }
 function submitTypeZoom(){
   if(!tz) return;
@@ -2859,6 +3045,278 @@ document.getElementById('type-zoom-input').addEventListener('keydown', (e)=>{
   else if(e.key === 'Escape'){ e.preventDefault(); closeTypeZoom(); }
 });
 document.getElementById('end-back').addEventListener('click', ()=> showJugarWindow('win-tree-j'));
+
+/* ============================================================
+   ELEGIR EL NOMBRE · LETRAS DESORDENADAS · CLASIFICAR
+   tocas una imagen, se agranda y respondes debajo. 3 intentos.
+   ============================================================ */
+let pz = null; // {id, finished}
+function pzAttemptsMax(){ return game.playMode === 'clasificar' ? Math.min(3, game.groups.length - 1) : 3; }
+function normLabel(t){ return normAnswer(t || ''); }
+
+/* opciones de "elegir": la correcta + 3 que se le parezcan (las que confundes, luego su grupo, luego al azar) */
+function buildOptions(id){
+  const node = game.temaNode, me = game.photoOf[id];
+  const pool = Object.values(game.photoOf).length >= 4 ? Object.values(game.photoOf) : (node.photos||[]).filter(p=> p.image);
+  const conf = node.confusions || {};
+  const score = (p)=>{
+    let sc = Math.random();
+    sc += 3 * (((conf[id]||{})[p.id]||0) + ((conf[p.id]||{})[id]||0));
+    if(me.group && p.group && me.group.trim() === p.group.trim()) sc += 1.5;
+    return sc;
+  };
+  const seen = new Set([normLabel(me.label)]);
+  const picked = [];
+  pool.filter(p=> p.id !== id && (p.label||'').trim())
+      .map(p=> [score(p), p]).sort((a,b)=> b[0]-a[0])
+      .forEach(([_,p])=>{
+        const k = normLabel(p.label);
+        if(picked.length < 3 && !seen.has(k)){ seen.add(k); picked.push(p.id); }
+      });
+  return shuffle([id, ...picked]);
+}
+
+/* letras: huecos del nombre y fichas desordenadas (con alguna letra de más para despistar) */
+const isLetter = (ch)=> /[\p{L}\p{N}]/u.test(ch);
+function buildLetras(id){
+  const expected = expectedAnswer(game.photoOf[id]);
+  const chars = [...expected];
+  const nLetters = chars.filter(isLetter).length;
+  if(!game.hintOrderOf[id]) game.hintOrderOf[id] = shuffle([...Array(nLetters).keys()]);
+  const left = game.attemptsOf[id];
+  const locked = new Set(game.hintOrderOf[id].slice(0, ({3:0, 2:1, 1:3})[left] ?? 0));
+  const low = (c)=> c.toLocaleLowerCase('es');
+  const slots = []; let k = 0;
+  chars.forEach(ch=>{
+    if(isLetter(ch)){ slots.push({ch: low(ch), k, locked: locked.has(k), val: locked.has(k) ? low(ch) : null, tile: null}); k++; }
+    else slots.push({ch, fixed:true});
+  });
+  const tiles = slots.filter(sl=> !sl.fixed && !sl.locked).map(sl=> ({ch: sl.ch, used:false}));
+  const extraPool = 'aeiouaeiousrnltcdmpbgvfhjzñ';
+  const nExtra = Math.min(4, Math.max(2, Math.round(nLetters/4)));
+  for(let i=0;i<nExtra;i++) tiles.push({ch: extraPool[Math.floor(Math.random()*extraPool.length)], used:false});
+  return { slots, tiles: shuffle(tiles), fillOrder: [], kbPos: 0 };
+}
+
+function layoutPickZoom(){
+  const el = document.getElementById('pick-zoom');
+  if(!el.classList.contains('open')) return;
+  const vv = window.visualViewport;
+  const h = vv ? vv.height : window.innerHeight;
+  el.style.top = (vv ? vv.offsetTop : 0) + 'px';
+  el.style.height = h + 'px';
+  const other = document.getElementById('pick-body').offsetHeight + document.getElementById('pick-reveal').offsetHeight;
+  document.getElementById('pick-zoom-img').style.maxHeight = Math.max(90, h - other - 130) + 'px';
+}
+window.addEventListener('resize', layoutPickZoom);
+
+function openPickZoom(id){
+  if(!game || !isZoomMode(game.playMode) || pz || roundBannerOpen) return;
+  const st = game.stateOf[id];
+  if(st === 'correct' || st === 'wrong') return;
+  if(game.attemptsOf[id] === undefined) game.attemptsOf[id] = pzAttemptsMax();
+  pz = { id, finished: null };
+  if(game.playMode === 'elegir' && !game.optionsOf[id]) game.optionsOf[id] = buildOptions(id);
+  if(game.playMode === 'letras') game.letrasOf[id] = buildLetras(id);
+  if(!game.wrongPicked[id]) game.wrongPicked[id] = new Set();
+  document.getElementById('pick-zoom-img').src = gameImg(game.photoOf[id]) || '';
+  document.getElementById('pick-zoom').classList.add('open');
+  renderPickZoom();
+}
+function hidePickZoom(){
+  document.getElementById('pick-zoom').classList.remove('open');
+  pz = null;
+}
+function closePickZoom(){
+  if(!pz) return;
+  const done = pz.finished;
+  hidePickZoom();
+  if(done) advance();
+}
+function renderPickZoom(){
+  if(!pz) return;
+  const id = pz.id, photo = game.photoOf[id], mode = game.playMode;
+  const left = game.attemptsOf[id], max = pzAttemptsMax();
+  const body = document.getElementById('pick-body');
+  const card = document.getElementById('pick-zoom-card');
+  const reveal = document.getElementById('pick-reveal');
+  card.classList.remove('ok','bad');
+  if(pz.finished === 'correct') card.classList.add('ok');
+  if(pz.finished === 'failed') card.classList.add('bad');
+  reveal.classList.toggle('show', pz.finished === 'failed');
+  reveal.textContent = pz.finished === 'failed'
+    ? (mode === 'clasificar' ? `grupo: ${photo.group.trim()}` : photo.label) : '';
+  body.innerHTML = '';
+
+  if(mode === 'elegir' || mode === 'clasificar'){
+    const wrap = document.createElement('div');
+    wrap.className = 'pick-opts' + (mode === 'clasificar' ? ' groups' : '');
+    const opts = mode === 'elegir' ? game.optionsOf[id] : game.groups;
+    const correctKey = mode === 'elegir' ? id : photo.group.trim();
+    opts.forEach(o=>{
+      const b = document.createElement('button');
+      b.className = 'pick-opt';
+      b.textContent = mode === 'elegir' ? game.photoOf[o].label : o;
+      const isWrong = game.wrongPicked[id].has(o);
+      if(isWrong){ b.classList.add('bad'); b.disabled = true; }
+      if(pz.finished && o === correctKey) b.classList.add('good');
+      if(pz.finished) b.disabled = true;
+      b.addEventListener('click', ()=> pickAnswer(o === correctKey, o, b));
+      wrap.appendChild(b);
+    });
+    body.appendChild(wrap);
+  }
+
+  if(mode === 'letras'){
+    const L = game.letrasOf[id];
+    const slotsEl = document.createElement('div');
+    slotsEl.className = 'lt-slots'; slotsEl.id = 'lt-slots';
+    let word = document.createElement('div'); word.className = 'lt-word';
+    const firstEmpty = L.slots.findIndex(sl=> !sl.fixed && !sl.val);
+    L.slots.forEach((sl, i)=>{
+      if(sl.fixed && sl.ch === ' '){ slotsEl.appendChild(word); word = document.createElement('div'); word.className = 'lt-word'; return; }
+      const d = document.createElement('div');
+      d.className = 'lt-slot' + (sl.fixed ? ' fixed' : '') + (sl.locked ? ' locked' : '') + (i === firstEmpty && !pz.finished ? ' next' : '');
+      d.textContent = pz.finished === 'failed' && !sl.fixed ? sl.ch : (sl.fixed ? sl.ch : (sl.val || ''));
+      if(!sl.fixed && !sl.locked && sl.val && !pz.finished) d.addEventListener('click', ()=> letrasRemove(i));
+      word.appendChild(d);
+    });
+    slotsEl.appendChild(word);
+    body.appendChild(slotsEl);
+    if(!pz.finished){
+      const tilesEl = document.createElement('div');
+      tilesEl.className = 'lt-tiles';
+      L.tiles.forEach((t, ti)=>{
+        const b = document.createElement('button');
+        b.className = 'lt-tile' + (t.used ? ' used' : '');
+        b.textContent = t.ch;
+        b.addEventListener('click', ()=> letrasPut(ti));
+        tilesEl.appendChild(b);
+      });
+      body.appendChild(tilesEl);
+      const tools = document.createElement('div'); tools.className = 'lt-tools';
+      const del = document.createElement('button'); del.className = 'btn'; del.textContent = '⌫ borrar';
+      del.addEventListener('click', letrasBack);
+      tools.appendChild(del); body.appendChild(tools);
+    }
+  }
+
+  const dots = document.getElementById('pick-attempts');
+  dots.innerHTML = '';
+  for(let i=0;i<max;i++){
+    const d = document.createElement('div');
+    d.className = 'dot' + (i < max-left ? ' used' : '') + (pz.justUsed && i === max-left-1 ? ' just' : '');
+    dots.appendChild(d);
+  }
+  pz.justUsed = false;
+  document.getElementById('pick-next').classList.toggle('show', pz.finished === 'failed');
+  document.getElementById('pick-msg').textContent = pz.finished ? '' :
+    left === max ? '' : `te queda${left===1?'':'n'} ${left} intento${left===1?'':'s'}`;
+  layoutPickZoom();
+}
+function pickAnswer(ok, key, btn){
+  if(!pz || pz.finished) return;
+  const id = pz.id;
+  if(ok){ pickCorrect(); return; }
+  game.wrongPicked[id].add(key);
+  if(game.playMode === 'elegir') recordConfusion(game.temaNode, id, key);
+  pickWrong();
+}
+function pickCorrect(){
+  const id = pz.id;
+  pz.finished = 'correct';
+  game.correct++;
+  game.pointResult[id] = pzAttemptsMax() - game.attemptsOf[id] + 1;
+  markerStateUpdate(id, 'correct');
+  renderPickZoom();
+  const mine = pz;
+  setTimeout(()=>{ if(pz === mine) closePickZoom(); }, 550);
+}
+function pickWrong(){
+  const id = pz.id;
+  game.attemptsOf[id]--;
+  pz.justUsed = true;
+  flashClass(document.getElementById('pick-zoom-card'), 'miss');
+  try{ navigator.vibrate && navigator.vibrate(35); }catch(e){}
+  if(game.attemptsOf[id] <= 0){
+    pz.finished = 'failed';
+    game.mistakes++;
+    game.failedIds.add(id);
+    game.pointResult[id] = 'failed';
+    markerStateUpdate(id, 'wrong');
+  } else if(game.playMode === 'letras'){
+    game.letrasOf[id] = buildLetras(id); // nuevo intento, con más letras fijadas
+  }
+  renderPickZoom();
+  if(game.playMode === 'letras' && !pz.finished){
+    const el = document.getElementById('lt-slots');
+    if(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+  }
+}
+function letrasPut(ti, at){
+  if(!pz || pz.finished) return;
+  const L = game.letrasOf[pz.id];
+  const t = L.tiles[ti]; if(!t || t.used) return;
+  const si = (at !== undefined && L.slots[at] && !L.slots[at].fixed && !L.slots[at].val) ? at
+    : L.slots.findIndex(sl=> !sl.fixed && !sl.val);
+  if(si < 0) return;
+  L.kbPos = si + 1;
+  L.slots[si].val = t.ch; L.slots[si].tile = ti; t.used = true; L.fillOrder.push(si);
+  renderPickZoom();
+  if(!L.slots.some(sl=> !sl.fixed && !sl.val)) setTimeout(letrasCheck, 160);
+}
+function letrasRemove(si){
+  if(!pz || pz.finished) return;
+  const L = game.letrasOf[pz.id];
+  const sl = L.slots[si]; if(!sl || sl.fixed || sl.locked || !sl.val) return;
+  if(sl.tile !== null) L.tiles[sl.tile].used = false;
+  sl.val = null; sl.tile = null;
+  L.fillOrder = L.fillOrder.filter(x=> x !== si);
+  L.kbPos = Math.min(L.kbPos, si);
+  renderPickZoom();
+}
+function letrasBack(){
+  if(!pz || pz.finished) return;
+  const L = game.letrasOf[pz.id];
+  const si = L.fillOrder[L.fillOrder.length-1];
+  if(si !== undefined) letrasRemove(si);
+}
+function letrasCheck(){
+  if(!pz || pz.finished || game.playMode !== 'letras') return;
+  const L = game.letrasOf[pz.id];
+  if(L.slots.some(sl=> !sl.fixed && !sl.val)) return;
+  const built = L.slots.map(sl=> sl.fixed ? sl.ch : sl.val).join('');
+  if(normAnswer(built) === normAnswer(expectedAnswer(game.photoOf[pz.id]))) pickCorrect();
+  else pickWrong();
+}
+document.getElementById('pick-zoom-close').addEventListener('click', closePickZoom);
+document.getElementById('pick-zoom-backdrop').addEventListener('click', closePickZoom);
+document.getElementById('pick-next').addEventListener('click', closePickZoom);
+document.addEventListener('keydown', (e)=>{
+  if(!pz) return;
+  if(e.key === 'Escape'){ e.preventDefault(); closePickZoom(); return; }
+  if(e.key === 'Enter' && pz.finished){ e.preventDefault(); closePickZoom(); return; }
+  if(game.playMode !== 'letras' || pz.finished) return;
+  if(e.key === 'Backspace'){ e.preventDefault(); letrasBack(); return; }
+  if(e.key.length === 1){
+    const strip = (c)=> c.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const L = game.letrasOf[pz.id];
+    if(!isLetter(e.key)) return;
+    e.preventDefault();
+    // con teclado se escribe la palabra entera: las letras ya fijadas se "saltan" si las tecleas
+    let pos = L.kbPos;
+    while(pos < L.slots.length && (L.slots[pos].fixed || (L.slots[pos].val && !L.slots[pos].locked))) pos++;
+    if(pos < L.slots.length && L.slots[pos].locked){
+      if(strip(L.slots[pos].ch) === strip(e.key)){ L.kbPos = pos + 1; return; }
+      while(pos < L.slots.length && (L.slots[pos].fixed || L.slots[pos].val)) pos++;
+    }
+    // si tecleas la letra sin tilde y en ese hueco va con tilde, se usa la ficha con tilde
+    const want = pos < L.slots.length && strip(L.slots[pos].ch) === strip(e.key) ? L.slots[pos].ch : e.key.toLocaleLowerCase('es');
+    const exact = L.tiles.findIndex(t=> !t.used && t.ch === want);
+    const ti = exact >= 0 ? exact : L.tiles.findIndex(t=> !t.used && strip(t.ch) === strip(e.key));
+    if(ti >= 0) letrasPut(ti, pos < L.slots.length ? pos : undefined);
+  }
+});
 document.getElementById('end-review').addEventListener('click', ()=>{
   const labels = {1:'acertado a la 1ª', 2:'acertado a la 2ª', 3:'acertado a la 3ª', failed:'fallado'};
   const list = document.getElementById('review-list');
