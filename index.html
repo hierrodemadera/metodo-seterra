@@ -178,6 +178,21 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .mode-opt b{font-size:14px;font-weight:600;}
 .mode-opt span{font-size:12px;color:var(--muted);}
 .mode-opt.last{border-color:var(--fg);}
+.round-size{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  margin:-4px 2px 2px;padding:0 4px;font-size:12px;color:var(--muted);}
+.round-size .stepper{display:flex;align-items:center;gap:6px;}
+.round-size .stepper button{width:30px;height:30px;border-radius:50%;border:1px solid var(--field-border);
+  background:#fff;color:var(--fg);font-size:16px;line-height:1;padding:0;}
+.round-size .stepper b{min-width:24px;text-align:center;color:var(--fg);font-size:14px;}
+/* aviso entre rondas */
+.round-banner{position:absolute;inset:0;z-index:15;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.72);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.round-banner.show{opacity:1;pointer-events:auto;}
+.round-banner .rb-card{background:rgba(20,20,20,0.92);color:#fff;border-radius:16px;padding:18px 28px;text-align:center;
+  transform:scale(0.92);transition:transform 0.25s;}
+.round-banner.show .rb-card{transform:scale(1);}
+.round-banner .rb-title{font-size:20px;font-weight:700;}
+.round-banner .rb-sub{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;}
 
 /* modo escribir: la imagen elegida se agranda por encima del mosaico */
 .type-zoom{position:fixed;left:0;right:0;top:0;height:100%;z-index:20;display:none;
@@ -279,8 +294,8 @@ input[type=file]{display:none;}
 
 /* overlays flotando sobre la imagen a pantalla completa */
 #win-game{position:relative;}
-.game-grid-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;touch-action:pan-y;}
-#game-grid{display:grid;gap:4px;padding:4px;
+.game-grid-wrap{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;background:#fff;touch-action:pan-x pan-y;}
+#game-grid{display:grid;gap:4px;padding:4px;box-sizing:border-box;width:100%;margin:0 auto;
   padding-top:calc(64px + var(--safe-top));padding-bottom:calc(70px + var(--safe-bottom));}
 .game-cell{position:relative;aspect-ratio:1/1;background:#f2f2f2;overflow:hidden;
   border:3px solid transparent;box-sizing:border-box;}
@@ -292,6 +307,10 @@ input[type=file]{display:none;}
   color:#fff;font-size:10px;padding:2px 4px;text-align:center;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;display:none;}
 .game-cell.correct .tag,.game-cell.wrong .tag{display:block;}
+/* velo de color sobre las ya preguntadas: se sigue viendo la imagen debajo */
+.game-cell::before{content:'';position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.game-cell.correct::before{background:var(--c-ok);opacity:0.38;}
+.game-cell.wrong::before{background:var(--c-bad);opacity:0.38;}
 @keyframes cellpulse{0%,100%{opacity:1;}50%{opacity:0.45;}}
 
 /* feedback de fallo cuando aún quedan intentos */
@@ -543,6 +562,7 @@ body.playing #win-game .workspace{min-height:0;}
         <div class="progressbar"><div class="fill" id="game-progress"></div></div>
         <span id="game-stats">0/0</span>
       </div>
+      <div class="round-banner" id="round-banner"><div class="rb-card"><div class="rb-title" id="rb-title"></div><div class="rb-sub" id="rb-sub"></div></div></div>
       <div class="miss-name" id="miss-name"><b id="miss-name-text"></b></div>
       <div class="game-pill" id="game-pill">
         <div class="name" id="game-target">—</div>
@@ -750,7 +770,10 @@ body.playing #win-game .workspace{min-height:0;}
 <div class="mode-box" id="mode-box">
   <div class="mode-title">¿cómo quieres jugar?</div>
   <div class="mode-sub" id="mode-tema-name"></div>
-  <button class="mode-opt" data-mode="buscar"><b>buscar la imagen</b><span>te digo un nombre y tocas su imagen</span></button>
+  <button class="mode-opt" data-mode="buscar"><b>buscar la imagen</b><span>te digo un nombre y tocas su imagen, todas a la vez</span></button>
+  <button class="mode-opt" data-mode="buscar-rondas"><b>buscar la imagen, por rondas</b><span>el mazo se reparte al azar en rondas más pequeñas</span></button>
+  <div class="round-size" id="round-size"><span>imágenes por ronda</span>
+    <div class="stepper"><button id="rs-minus" type="button">−</button><b id="rs-val">12</b><button id="rs-plus" type="button">+</button></div></div>
   <button class="mode-opt" data-mode="escribir"><b>escribir el nombre</b><span>tocas una imagen y escribes cómo se llama</span></button>
   <button class="btn btn-block" id="mode-cancel">cancelar</button>
 </div>
@@ -2087,13 +2110,17 @@ function openGamePicker(temaId){
   playTema(node);
 }
 function playTema(node, onlyIds, playMode){
-  if(node.mode === 'barajado') startBarajadoGame(node, onlyIds, playMode || 'buscar');
+  if(node.mode === 'barajado'){
+    const pm = playMode || 'buscar';
+    if(pm === 'buscar-rondas') startBarajadoGame(node, onlyIds, 'buscar', clampRoundSize(node.roundSize));
+    else startBarajadoGame(node, onlyIds, pm);
+  }
   else startGame(node, onlyIds);
 }
 document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
   if(confirm('¿Salir de la partida?')){
-    hideTypeZoom(); hideMissName();
+    hideTypeZoom(); hideMissName(); hideRoundBanner();
     document.body.classList.remove('playing'); showJugarWindow('win-tree-j');
   }
 });
@@ -2105,9 +2132,19 @@ function openModeChooser(node){
   document.getElementById('mode-tema-name').textContent = node.name;
   document.querySelectorAll('#mode-box .mode-opt').forEach(b=>
     b.classList.toggle('last', b.dataset.mode === (node.lastPlayMode || 'buscar')));
+  document.getElementById('rs-val').textContent = clampRoundSize(node.roundSize);
   document.getElementById('mode-box').classList.add('open');
   document.getElementById('mode-backdrop').classList.add('open');
 }
+const ROUND_MIN = 4, ROUND_MAX = 40, ROUND_DEFAULT = 12;
+function clampRoundSize(n){ n = Math.round(n || ROUND_DEFAULT); return Math.max(ROUND_MIN, Math.min(ROUND_MAX, n)); }
+['rs-minus','rs-plus'].forEach(id=> document.getElementById(id).addEventListener('click', (e)=>{
+  e.stopPropagation();
+  const node = modeChooserNode; if(!node) return;
+  node.roundSize = clampRoundSize(clampRoundSize(node.roundSize) + (id==='rs-plus' ? 2 : -2));
+  document.getElementById('rs-val').textContent = node.roundSize;
+  saveLocal();
+}));
 function closeModeChooser(){
   document.getElementById('mode-box').classList.remove('open');
   document.getElementById('mode-backdrop').classList.remove('open');
@@ -2168,15 +2205,72 @@ function resetGameContainers(){
   document.getElementById('game-grid-wrap').style.display = 'none';
   document.getElementById('game-grid').innerHTML = '';
 }
-function startBarajadoGame(node, onlyIds, playMode){
+/* reparte al azar en rondas de tamaño parecido (sin ronda final raquítica) */
+function splitRounds(photos, size){
+  const all = shuffle(photos);
+  const n = Math.max(1, Math.ceil(all.length / size));
+  const rounds = [];
+  let k = 0;
+  for(let r=0; r<n; r++){
+    const len = Math.floor(all.length / n) + (r < all.length % n ? 1 : 0);
+    rounds.push(all.slice(k, k+len)); k += len;
+  }
+  return rounds;
+}
+function renderGridCells(photos){
+  const grid = document.getElementById('game-grid');
+  grid.innerHTML = '';
+  document.getElementById('game-grid-wrap').scrollTo(0,0);
+  shuffle(photos).forEach(p=>{ // dónde cae cada foto, distinto del orden de preguntas
+    const cell = document.createElement('div');
+    cell.className = 'game-cell' + (game.stateOf[p.id] && game.stateOf[p.id] !== 'neutral' ? ' '+game.stateOf[p.id] : '');
+    cell.dataset.id = p.id;
+    cell.innerHTML = `<img src="${p.image}"><div class="tag"></div>`;
+    cell.querySelector('.tag').textContent = p.label;
+    cell.addEventListener('click', ()=>{
+      if(Date.now() - gridZoomEndedAt < 350) return; // el dedo que queda tras pellizcar no cuenta como toque
+      if(roundBannerOpen) return;
+      if(game.playMode === 'escribir') openTypeZoom(p.id);
+      else handleGridTap(p.id);
+    });
+    grid.appendChild(cell);
+  });
+}
+let roundBannerOpen = false;
+function showRoundBanner(title, sub, then){
+  const b = document.getElementById('round-banner');
+  document.getElementById('rb-title').textContent = title;
+  document.getElementById('rb-sub').textContent = sub || '';
+  roundBannerOpen = true;
+  b.classList.add('show');
+  clearTimeout(b._t);
+  const done = ()=>{
+    if(!roundBannerOpen) return;
+    clearTimeout(b._t); roundBannerOpen = false; b.classList.remove('show'); b.onclick = null;
+    then && then();
+  };
+  b.onclick = done;                 // tocar para seguir ya
+  b._t = setTimeout(done, 1500);    // o sigue sola en un momento
+}
+function hideRoundBanner(){
+  const b = document.getElementById('round-banner');
+  clearTimeout(b._t); roundBannerOpen = false; b.classList.remove('show'); b.onclick = null;
+}
+function startBarajadoGame(node, onlyIds, playMode, roundSize){
   document.body.classList.add('playing');
   resetGameContainers();
   let photos = node.photos || [];
   if(onlyIds) photos = photos.filter(p=> onlyIds.has(p.id));
   if(!photos.length){ toast('Este tema no tiene fotos todavía'); document.body.classList.remove('playing'); return; }
 
-  const order = shuffle(photos);
+  // por rondas: cada ronda es un trozo al azar del mazo, y dentro de ella el orden de preguntas también es al azar
+  const rounds = roundSize ? splitRounds(photos, roundSize) : [photos];
+  const roundOrders = rounds.map(r=> shuffle(r));
+  const order = [].concat(...roundOrders);
+  const roundEnds = []; { let acc = 0; roundOrders.forEach(r=>{ acc += r.length; roundEnds.push(acc); }); }
   game = {
+    launchMode: roundSize ? 'buscar-rondas' : (playMode || 'buscar'),
+    rounds, roundEnds, roundIdx: 0,
     temaNode: node,
     node: { points: order.map(p=>({id:p.id, label:p.label})), tolerance: 8 },
     mode: 'barajado',
@@ -2188,7 +2282,8 @@ function startBarajadoGame(node, onlyIds, playMode){
     correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
     startTime: Date.now(),
     stateOf: {}, pointResult: {},
-    gridCols: Math.max(1, node.cols||3)
+    gridCols: Math.max(1, node.cols||3),
+    zoom: 1
   };
   order.forEach(p=> game.stateOf[p.id] = 'neutral');
 
@@ -2196,55 +2291,76 @@ function startBarajadoGame(node, onlyIds, playMode){
   document.getElementById('game-grid-wrap').style.display = 'block';
   const grid = document.getElementById('game-grid');
   grid.style.gridTemplateColumns = `repeat(${game.gridCols}, 1fr)`;
-
-  const displayOrder = shuffle(photos); // dónde cae cada foto, distinto del orden de preguntas
-  displayOrder.forEach(p=>{
-    const cell = document.createElement('div');
-    cell.className = 'game-cell';
-    cell.dataset.id = p.id;
-    cell.innerHTML = `<img src="${p.image}"><div class="tag"></div>`;
-    cell.querySelector('.tag').textContent = p.label;
-    cell.addEventListener('click', ()=>{
-      if(game.playMode === 'escribir') openTypeZoom(p.id);
-      else handleGridTap(p.id);
-    });
-    grid.appendChild(cell);
-  });
+  grid.style.width = '';
+  hideRoundBanner();
+  renderGridCells(rounds[0]);
 
   showJugarWindow('win-game');
   nextTarget(true);
+  if(rounds.length > 1) showRoundBanner(`ronda 1 de ${rounds.length}`, `${rounds[0].length} imágenes`);
 }
-/* zoom de la cuadrícula barajada: pellizcar (móvil) o Ctrl+rueda (ordenador) */
-function setGameGridCols(n){
+/* zoom de la cuadrícula barajada: pellizcar (móvil) o Ctrl+rueda (ordenador).
+   Es un zoom de verdad: las imágenes NO se recolocan, solo crecen o encogen,
+   y lo que tienes entre los dedos (o bajo el ratón) se queda donde está. */
+let gridZoomEndedAt = 0;
+window.addEventListener('resize', ()=>{ // al girar el móvil, mantener el zoom relativo al nuevo ancho
+  if(game && game.mode === 'barajado' && game.zoom && game.zoom !== 1){
+    const wrap = document.getElementById('game-grid-wrap');
+    document.getElementById('game-grid').style.width = (wrap.clientWidth * game.zoom) + 'px';
+  }
+});
+const GRID_ZOOM_MIN = 0.35, GRID_ZOOM_MAX = 5;
+/* z: zoom nuevo. (cx,cy): punto de pantalla relativo al contenedor que debe quedar fijo.
+   anchor: punto de la cuadrícula (en px a zoom 1) que debe quedar bajo (cx,cy). */
+function applyGridZoom(z, cx, cy, anchor){
   if(!game || game.mode !== 'barajado') return;
-  const clamped = Math.max(1, Math.min(8, Math.round(n)));
-  if(clamped === game.gridCols) return;
-  game.gridCols = clamped;
-  document.getElementById('game-grid').style.gridTemplateColumns = `repeat(${clamped}, 1fr)`;
+  const wrap = document.getElementById('game-grid-wrap');
+  const grid = document.getElementById('game-grid');
+  game.zoom = Math.max(GRID_ZOOM_MIN, Math.min(GRID_ZOOM_MAX, z));
+  const W = wrap.clientWidth;
+  grid.style.width = (W * game.zoom) + 'px';
+  const {left, top} = gridOrigin(grid); // al alejar, la cuadrícula queda centrada
+  wrap.scrollLeft = anchor.x * game.zoom + left - cx;
+  wrap.scrollTop  = anchor.y * game.zoom + top  - cy;
+}
+/* esquina donde empiezan las imágenes (el margen de arriba no crece con el zoom) */
+function gridOrigin(grid){
+  const cs = getComputedStyle(grid);
+  return { left: grid.offsetLeft + parseFloat(cs.paddingLeft), top: grid.offsetTop + parseFloat(cs.paddingTop) };
+}
+/* punto de la cuadrícula (a zoom 1) que hay ahora mismo bajo (cx,cy) */
+function gridAnchorAt(cx, cy){
+  const wrap = document.getElementById('game-grid-wrap');
+  const grid = document.getElementById('game-grid');
+  const z = game.zoom || 1, o = gridOrigin(grid);
+  return { x: (wrap.scrollLeft + cx - o.left) / z,
+           y: (wrap.scrollTop  + cy - o.top)  / z };
 }
 (function(){
   const wrap = document.getElementById('game-grid-wrap');
-  let pinchStartDist = null, pinchStartCols = null;
-  function touchDist(t1,t2){
-    return Math.hypot(t1.clientX-t2.clientX, t1.clientY-t2.clientY);
-  }
+  let pinch = null, raf = 0, pending = null;
+  const mid = (a,b)=>{ const r = wrap.getBoundingClientRect();
+    return { x:(a.clientX+b.clientX)/2 - r.left, y:(a.clientY+b.clientY)/2 - r.top }; };
+  const dist = (a,b)=> Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
   wrap.addEventListener('touchstart', (e)=>{
     if(!game || game.mode !== 'barajado') return;
     if(e.touches.length === 2){
-      pinchStartDist = touchDist(e.touches[0], e.touches[1]);
-      pinchStartCols = game.gridCols;
+      const m = mid(e.touches[0], e.touches[1]);
+      pinch = { d0: dist(e.touches[0], e.touches[1]), z0: game.zoom || 1, anchor: gridAnchorAt(m.x, m.y) };
     }
   }, {passive:true});
   wrap.addEventListener('touchmove', (e)=>{
-    if(!pinchStartDist || !game || game.mode !== 'barajado') return;
-    if(e.touches.length !== 2) return;
+    if(!pinch || !game || game.mode !== 'barajado' || e.touches.length !== 2) return;
     e.preventDefault();
-    const dist = touchDist(e.touches[0], e.touches[1]);
-    const ratio = dist / pinchStartDist;
-    setGameGridCols(pinchStartCols / ratio);
+    const m = mid(e.touches[0], e.touches[1]);
+    pending = { z: pinch.z0 * dist(e.touches[0], e.touches[1]) / pinch.d0, x: m.x, y: m.y };
+    if(!raf) raf = requestAnimationFrame(()=>{ // una actualización por fotograma, va más fluido
+      raf = 0;
+      if(pinch && pending) applyGridZoom(pending.z, pending.x, pending.y, pinch.anchor);
+    });
   }, {passive:false});
   ['touchend','touchcancel'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
-    if(e.touches.length < 2) pinchStartDist = null;
+    if(pinch && e.touches.length < 2){ pinch = null; pending = null; gridZoomEndedAt = Date.now(); }
   }));
   // Safari en iOS ignora user-scalable=no; hay que frenar también sus eventos propios de gesto
   ['gesturestart','gesturechange','gestureend'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
@@ -2255,7 +2371,9 @@ function setGameGridCols(n){
     if(!e.ctrlKey) return;
     if(!game || game.mode !== 'barajado') return;
     e.preventDefault();
-    setGameGridCols(game.gridCols + (e.deltaY < 0 ? -1 : 1));
+    const r = wrap.getBoundingClientRect();
+    const cx = e.clientX - r.left, cy = e.clientY - r.top;
+    applyGridZoom((game.zoom||1) * Math.exp(-e.deltaY * 0.004), cx, cy, gridAnchorAt(cx, cy));
   }, {passive:false});
 })();
 /* reinicia una animación CSS aunque se repita seguido */
@@ -2352,7 +2470,8 @@ function updateHud(){
   pill.classList.remove('small');
   const t = currentTarget();
   document.getElementById('game-target').textContent = t ? t.label : '—';
-  document.getElementById('game-stats').textContent = `${game.idx}/${game.total}`;
+  document.getElementById('game-stats').textContent = (game.rounds && game.rounds.length > 1)
+    ? `R${game.roundIdx+1}/${game.rounds.length} · ${game.idx}/${game.total}` : `${game.idx}/${game.total}`;
   document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
   const dots = document.getElementById('game-attempts');
   dots.innerHTML = '';
@@ -2417,15 +2536,28 @@ function handleTap(clientX, clientY){
 }
 function advance(){
   game.idx++;
-  if(game.idx >= game.total){ setTimeout(endGame, 250); }
-  else { nextTarget(); }
+  if(game.idx >= game.total){ setTimeout(endGame, 250); return; }
+  if(game.rounds && game.rounds.length > 1 && game.idx === game.roundEnds[game.roundIdx]){
+    // ronda terminada: se deja ver cómo ha quedado un momento y se pasa a la siguiente
+    const r = ++game.roundIdx, g = game;
+    roundBannerOpen = true; // bloquea toques durante la pausa
+    setTimeout(()=>{
+      if(game !== g) return;
+      renderGridCells(g.rounds[r]);
+      nextTarget();
+      roundBannerOpen = false;
+      showRoundBanner(`ronda ${r+1} de ${g.rounds.length}`, `${g.rounds[r].length} imágenes`);
+    }, 700);
+    return;
+  }
+  nextTarget();
 }
 
 document.getElementById('game-zin').addEventListener('click', (e)=>{ e.stopPropagation(); gamePZ && gamePZ.zoomIn(); });
 document.getElementById('game-zout').addEventListener('click', (e)=>{ e.stopPropagation(); gamePZ && gamePZ.zoomOut(); });
 
 function endGame(){
-  hideMissName();
+  hideMissName(); hideRoundBanner();
   document.body.classList.remove('playing');
   const secs = Math.round((Date.now()-game.startTime)/1000);
   const mm = String(Math.floor(secs/60)).padStart(2,'0');
@@ -2445,7 +2577,8 @@ function endGame(){
 
   // guarda en el historial del tema (mejores 10 resultados)
   const node = game.temaNode;
-  const histKey = game.playMode === 'escribir' ? 'historyEscribir' : 'history';
+  const histKey = game.playMode === 'escribir' ? 'historyEscribir'
+    : game.launchMode === 'buscar-rondas' ? 'historyRondas' : 'history';
   node[histKey] = node[histKey] || [];
   const entry = {score: scorePct, seconds: secs};
   node[histKey].push(entry);
@@ -2469,8 +2602,8 @@ function endGame(){
   } else failBtn.style.display = 'none';
   showJugarWindow('win-end');
 }
-document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode, null, game.playMode));
-document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds), game.playMode));
+document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode, null, game.launchMode || game.playMode));
+document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds), game.launchMode || game.playMode));
 
 /* ============================================================
    MODO ESCRIBIR — tocas una imagen, se agranda y escribes su nombre
