@@ -215,7 +215,8 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .lt-tile{width:38px;height:42px;border-radius:9px;border:1px solid var(--field-border);background:#fff;
   font-size:19px;font-weight:600;color:var(--fg);padding:0;box-shadow:0 2px 0 rgba(0,0,0,0.08);}
 .lt-tile.used{visibility:hidden;}
-.lt-tools{display:flex;justify-content:center;}
+.lt-tools{display:flex;justify-content:center;gap:8px;}
+.lt-tools .lt-skip{color:var(--c-bad);border-color:rgba(255,0,0,0.35);}
 .lt-tools button{font-size:12px;}
 /* editor: fotos extra y grupo */
 .card-extras{flex-shrink:0;display:flex;gap:5px;align-items:center;padding:6px 8px;border-top:1px solid var(--border);
@@ -438,22 +439,20 @@ input[type=file]{display:none;}
 .game-pill .attempts .dot.used{background:var(--c-bad);}
 
 /* ---- clasificar: cajas de colores a las que arrastras las tarjetas ---- */
-.sort-panel{flex:1 1 auto;min-height:0;display:none;flex-direction:column;gap:6px;background:#f6f6f6;border-top:1px solid var(--border);
-  padding:8px 8px calc(8px + var(--safe-bottom));overflow-y:auto;position:relative;z-index:5;}
+.sort-panel{flex-shrink:0;display:none;flex-direction:column;gap:6px;background:#f6f6f6;border-top:1px solid var(--border);
+  padding:8px 8px calc(8px + var(--safe-bottom));max-height:42vh;overflow-y:auto;position:relative;z-index:5;}
 .sort-panel.on{display:flex;}
 .sort-hint{font-size:11.5px;color:var(--muted);text-align:center;}
-.sort-boxes{flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));grid-auto-rows:minmax(96px,1fr);gap:8px;}
+.sort-boxes{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px;}
 .sort-box{--c:#888;position:relative;border-radius:12px;background:#fff;border:2px solid var(--c);
   padding:6px 8px 6px 12px;min-height:54px;display:flex;flex-direction:column;gap:4px;cursor:pointer;
   transition:transform 0.12s, box-shadow 0.12s;overflow:hidden;-webkit-user-select:none;user-select:none;}
-.sort-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--c);}
-.sort-box{background:color-mix(in srgb, var(--c) 7%, #fff);}
+.sort-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c);}
 .sort-box .sb-top{display:flex;align-items:flex-start;gap:6px;}
-.sort-box{padding:9px 10px 9px 16px !important;}
-.sort-box .sb-name{flex:1;font-size:14px;font-weight:700;line-height:1.2;color:#222;}
-.sort-box .sb-count{font-size:12.5px;font-weight:700;color:#fff;background:var(--c);border-radius:9px;padding:1px 7px;flex-shrink:0;}
-.sort-box .sb-thumbs{display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start;flex:1;overflow:hidden;}
-.sort-box .sb-thumbs img{width:34px;height:34px;border-radius:7px;object-fit:cover;background:#eee;}
+.sort-box .sb-name{flex:1;font-size:12px;font-weight:600;line-height:1.2;color:#222;}
+.sort-box .sb-count{font-size:11px;font-weight:700;color:#fff;background:var(--c);border-radius:9px;padding:1px 7px;flex-shrink:0;}
+.sort-box .sb-thumbs{display:flex;flex-wrap:wrap;gap:3px;}
+.sort-box .sb-thumbs img{width:22px;height:22px;border-radius:5px;object-fit:cover;background:#eee;}
 .sort-box .sb-thumbs img.failed{outline:2px solid var(--c-bad);outline-offset:-2px;}
 .sort-box.hover{transform:scale(1.05);box-shadow:0 0 0 4px color-mix(in srgb, var(--c) 35%, transparent);background:color-mix(in srgb, var(--c) 12%, #fff);}
 .sort-box.armed{box-shadow:0 0 0 2px color-mix(in srgb, var(--c) 30%, transparent);}
@@ -2485,8 +2484,6 @@ function startGame(node, onlyIds){
    BARAJADO — piezas sueltas repartidas al azar entre casillas
    ============================================================ */
 function resetGameContainers(){
-  const gw = document.getElementById('game-grid-wrap'); gw.style.flex = ''; gw.style.height = '';
-  if(game) game.baseGridW = null;
   document.getElementById('sort-panel').classList.remove('on');
   document.getElementById('game-pill').style.display = '';
   document.getElementById('game-workspace').style.display = '';
@@ -2638,11 +2635,9 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
    y lo que tienes entre los dedos (o bajo el ratón) se queda donde está. */
 let gridZoomEndedAt = 0;
 window.addEventListener('resize', ()=>{ // al girar el móvil, mantener el zoom relativo al nuevo ancho
-  if(game && game.mode === 'barajado' && game.playMode === 'clasificar' && document.getElementById('sort-panel').classList.contains('on')){ layoutSort(); return; }
   if(game && game.mode === 'barajado' && game.zoom && game.zoom !== 1){
     const wrap = document.getElementById('game-grid-wrap');
-    if(game.playMode === 'clasificar') layoutSort();
-    else document.getElementById('game-grid').style.width = (wrap.clientWidth * game.zoom) + 'px';
+    document.getElementById('game-grid').style.width = (wrap.clientWidth * game.zoom) + 'px';
   }
 });
 const GRID_ZOOM_MIN = 0.35, GRID_ZOOM_MAX = 5;
@@ -2653,7 +2648,7 @@ function applyGridZoom(z, cx, cy, anchor){
   const wrap = document.getElementById('game-grid-wrap');
   const grid = document.getElementById('game-grid');
   game.zoom = Math.max(GRID_ZOOM_MIN, Math.min(GRID_ZOOM_MAX, z));
-  const W = game.baseGridW || wrap.clientWidth; // en clasificar la fila base es más estrecha
+  const W = wrap.clientWidth;
   grid.style.width = (W * game.zoom) + 'px';
   const {left, top} = gridOrigin(grid); // al alejar, la cuadrícula queda centrada
   wrap.scrollLeft = anchor.x * game.zoom + left - cx;
@@ -2802,7 +2797,7 @@ function updateHud(){
   const pill = document.getElementById('game-pill');
   if(game.playMode === 'clasificar'){
     pill.style.display = 'none';
-    document.getElementById('game-grid').style.paddingBottom = '8px';
+    document.getElementById('game-grid').style.paddingBottom = '16px';
     document.getElementById('game-stats').textContent = (game.rounds && game.rounds.length > 1)
       ? `R${game.roundIdx+1}/${game.rounds.length} · ${game.idx}/${game.total}` : `${game.idx}/${game.total}`;
     document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
@@ -3126,24 +3121,7 @@ function setupSortBoxes(){
   game.sort = { selected: null, placed: {} };
   game.groups.forEach(g=> game.sort.placed[g] = []);
   document.getElementById('sort-panel').classList.add('on');
-  game.gridCols = 3;
-  document.getElementById('game-grid').style.gridTemplateColumns = 'repeat(3, 1fr)';
   renderSortBoxes();
-  requestAnimationFrame(layoutSort);
-}
-/* arriba solo cabe una fila de tres imágenes (el resto, con scroll); las cajas ocupan todo lo demás */
-function layoutSort(){
-  if(!game || game.playMode !== 'clasificar') return;
-  const win = document.getElementById('win-game'), wrap = document.getElementById('game-grid-wrap');
-  const grid = document.getElementById('game-grid');
-  const H = win.clientHeight, W = win.clientWidth;
-  const top = parseFloat(getComputedStyle(grid).paddingTop) || 0;
-  const maxWrap = Math.round(H * 0.45);                          // las cajas, al menos algo más de la mitad
-  const cell = Math.max(60, Math.min((W - 16) / 3, maxWrap - top - 14));
-  wrap.style.flex = '0 0 auto';
-  wrap.style.height = Math.round(top + cell + 14) + 'px';
-  game.baseGridW = Math.round(cell * 3 + 16);
-  grid.style.width = (game.baseGridW * (game.zoom || 1)) + 'px';
 }
 function renderSortBoxes(){
   const wrap = document.getElementById('sort-boxes');
@@ -3309,7 +3287,6 @@ function attachSortDrag(cell, id){
   }, {passive:true});
   cell.addEventListener('mousedown', (e)=>{
     if(e.button !== 0 || roundBannerOpen) return;
-    e.preventDefault(); // evita que el navegador seleccione y desplace mientras arrastras
     sortDrag = { id, x0: e.clientX, y0: e.clientY, active:false, mouse:true, cellEl: cell };
   });
   cell.addEventListener('contextmenu', (e)=>{ if(game && game.playMode === 'clasificar') e.preventDefault(); });
@@ -3492,7 +3469,10 @@ function renderPickZoom(){
       const tools = document.createElement('div'); tools.className = 'lt-tools';
       const del = document.createElement('button'); del.className = 'btn'; del.textContent = '⌫ borrar';
       del.addEventListener('click', letrasBack);
-      tools.appendChild(del); body.appendChild(tools);
+      const skip = document.createElement('button'); skip.className = 'btn lt-skip'; skip.textContent = 'no lo sé →';
+      skip.title = 'ver la solución (cuenta como fallo)';
+      skip.addEventListener('click', pickGiveUp);
+      tools.appendChild(del); tools.appendChild(skip); body.appendChild(tools);
     }
   }
 
@@ -3547,6 +3527,18 @@ function pickWrong(){
     const el = document.getElementById('lt-slots');
     if(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
   }
+}
+/* "no lo sé": enseña la solución y cuenta como fallo, sin tener que gastar los intentos */
+function pickGiveUp(){
+  if(!pz || pz.finished) return;
+  const id = pz.id;
+  game.attemptsOf[id] = 0;
+  pz.finished = 'failed';
+  game.mistakes++;
+  game.failedIds.add(id);
+  game.pointResult[id] = 'failed';
+  markerStateUpdate(id, 'wrong');
+  renderPickZoom();
 }
 function letrasPut(ti, at){
   if(!pz || pz.finished) return;
