@@ -384,6 +384,13 @@ input[type=file]{display:none;}
   line-height:1.25;white-space:pre-wrap;word-break:break-word;hyphens:auto;}
 .face.txt.s1{font-size:14cqi;font-weight:600;} .face.txt.s2{font-size:10cqi;}
 .face.txt.s3{font-size:7.5cqi;} .face.txt.s4{font-size:6cqi;align-items:flex-start;}
+.face.txt.named{flex-direction:column;align-items:stretch;justify-content:flex-start;padding-top:0;}
+.face.txt .face-name{flex-shrink:0;margin:0 -7cqi 4cqi;padding:3.5cqi 5cqi;background:#222;color:#fff;
+  font-size:8cqi;font-weight:700;line-height:1.15;white-space:normal;}
+.game-cell.wrong .face-name{background:var(--c-bad);}
+.game-cell.correct .face-name{background:var(--c-ok);}
+.face.txt .face-body{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.face.txt.s4 .face-body{align-items:flex-start;}
 .face.txt.s4::after{content:'';position:absolute;left:0;right:0;bottom:0;height:18%;
   background:linear-gradient(transparent,#fcfbf7);}
 /* píldora de pregunta con texto largo o con imagen */
@@ -2532,7 +2539,15 @@ function renderGridCells(photos){
       txtFace.textContent = p.back.trim();
       cell.innerHTML = `<div class="flip"></div><div class="tag"></div>`;
       const flip = cell.querySelector('.flip');
-      if(game.anki === 'texto'){ flip.insertAdjacentHTML('beforeend', imgFace); txtFace.classList.add('b'); flip.appendChild(txtFace); }
+      if(game.anki === 'texto'){
+        // al darse la vuelta, además del texto se ve el nombre del perro
+        txtFace.textContent = '';
+        txtFace.classList.add('named');
+        const nm = document.createElement('div'); nm.className = 'face-name'; nm.textContent = p.label || '';
+        const bd = document.createElement('div'); bd.className = 'face-body'; bd.textContent = p.back.trim();
+        txtFace.appendChild(nm); txtFace.appendChild(bd);
+        flip.insertAdjacentHTML('beforeend', imgFace); txtFace.classList.add('b'); flip.appendChild(txtFace);
+      }
       else { flip.appendChild(txtFace); flip.insertAdjacentHTML('beforeend', imgFace.replace('face img','face img b')); }
     } else {
       cell.innerHTML = `<img src="${gameImg(p)}"><div class="tag"></div>`;
