@@ -216,6 +216,8 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
   font-size:19px;font-weight:600;color:var(--fg);padding:0;box-shadow:0 2px 0 rgba(0,0,0,0.08);}
 .lt-tile.used{visibility:hidden;}
 .lt-tools{display:flex;justify-content:center;gap:8px;}
+.type-zoom-foot .lt-skip{margin-left:auto;padding:6px 12px;font-size:12px;}
+.lt-skip{color:var(--c-bad) !important;border-color:rgba(255,0,0,0.35) !important;}
 .lt-tools .lt-skip{color:var(--c-bad);border-color:rgba(255,0,0,0.35);}
 .lt-tools button{font-size:12px;}
 /* editor: fotos extra y grupo */
@@ -728,6 +730,7 @@ body.playing #win-game .workspace{min-height:0;}
           <div class="type-zoom-foot">
             <div class="attempts" id="type-zoom-attempts"></div>
             <div class="type-zoom-msg" id="type-zoom-msg"></div>
+            <button class="btn lt-skip" id="type-zoom-skip" title="ver la solución (cuenta como fallo)">no lo sé →</button>
           </div>
         </div>
       </div>
@@ -3032,6 +3035,7 @@ function renderTypeZoom(){
     dots.appendChild(d);
   }
   tz.justUsed = false;
+  document.getElementById('type-zoom-skip').style.display = tz.finished ? 'none' : '';
 }
 function openTypeZoom(id){
   if(!game || game.playMode !== 'escribir' || tz) return;
@@ -3101,6 +3105,19 @@ function submitTypeZoom(){
   }
   renderTypeZoom();
 }
+/* "no lo sé": enseña el nombre y cuenta como fallo, sin gastar los intentos */
+function giveUpTypeZoom(){
+  if(!tz || tz.finished) return;
+  const id = tz.id;
+  game.attemptsOf[id] = 0;
+  tz.finished = 'failed';
+  game.mistakes++;
+  game.failedIds.add(id);
+  game.pointResult[id] = 'failed';
+  markerStateUpdate(id, 'wrong');
+  renderTypeZoom();
+}
+document.getElementById('type-zoom-skip').addEventListener('click', giveUpTypeZoom);
 document.getElementById('type-zoom-ok').addEventListener('click', submitTypeZoom);
 document.getElementById('type-zoom-close').addEventListener('click', closeTypeZoom);
 document.getElementById('type-zoom-backdrop').addEventListener('click', closeTypeZoom);
