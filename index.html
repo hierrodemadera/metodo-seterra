@@ -437,6 +437,49 @@ input[type=file]{display:none;}
 .game-pill .attempts .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);}
 .game-pill .attempts .dot.used{background:var(--c-bad);}
 
+/* ---- clasificar: cajas de colores a las que arrastras las tarjetas ---- */
+.sort-panel{flex-shrink:0;display:none;flex-direction:column;gap:6px;background:#f6f6f6;border-top:1px solid var(--border);
+  padding:8px 8px calc(8px + var(--safe-bottom));max-height:42vh;overflow-y:auto;position:relative;z-index:5;}
+.sort-panel.on{display:flex;}
+.sort-hint{font-size:11.5px;color:var(--muted);text-align:center;}
+.sort-boxes{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px;}
+.sort-box{--c:#888;position:relative;border-radius:12px;background:#fff;border:2px solid var(--c);
+  padding:6px 8px 6px 12px;min-height:54px;display:flex;flex-direction:column;gap:4px;cursor:pointer;
+  transition:transform 0.12s, box-shadow 0.12s;overflow:hidden;-webkit-user-select:none;user-select:none;}
+.sort-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c);}
+.sort-box .sb-top{display:flex;align-items:flex-start;gap:6px;}
+.sort-box .sb-name{flex:1;font-size:12px;font-weight:600;line-height:1.2;color:#222;}
+.sort-box .sb-count{font-size:11px;font-weight:700;color:#fff;background:var(--c);border-radius:9px;padding:1px 7px;flex-shrink:0;}
+.sort-box .sb-thumbs{display:flex;flex-wrap:wrap;gap:3px;}
+.sort-box .sb-thumbs img{width:22px;height:22px;border-radius:5px;object-fit:cover;background:#eee;}
+.sort-box .sb-thumbs img.failed{outline:2px solid var(--c-bad);outline-offset:-2px;}
+.sort-box.hover{transform:scale(1.05);box-shadow:0 0 0 4px color-mix(in srgb, var(--c) 35%, transparent);background:color-mix(in srgb, var(--c) 12%, #fff);}
+.sort-box.armed{box-shadow:0 0 0 2px color-mix(in srgb, var(--c) 30%, transparent);}
+.sort-box.good{animation:boxgood 0.5s ease-out;}
+@keyframes boxgood{0%{background:var(--c);}100%{background:#fff;}}
+.sort-box.bad{animation:missshake 0.38s ease-in-out;border-color:var(--c-bad);}
+.game-cell.sort{touch-action:pan-x pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+.game-cell.sort.picked{outline:3px solid #111;outline-offset:-3px;transform:scale(0.94);transition:transform 0.12s;}
+.game-cell.sort.lifting{transform:scale(1.06);transition:transform 0.15s;}
+.game-cell.sort.dragging{opacity:0.25;}
+.game-cell.sort.placed{animation:cellout 0.35s ease-in forwards;pointer-events:none;}
+@keyframes cellout{to{transform:scale(0.4);opacity:0;}}
+.game-cell .cdots{position:absolute;top:4px;left:4px;display:flex;gap:3px;z-index:4;}
+.game-cell .cdots i{width:7px;height:7px;border-radius:50%;background:var(--c-bad);box-shadow:0 0 0 1.5px #fff;}
+.drag-ghost{position:fixed;z-index:60;pointer-events:none;width:92px;border-radius:12px;overflow:hidden;background:#fff;
+  box-shadow:0 10px 26px rgba(0,0,0,0.35);transform:translate(-50%,-115%) rotate(-3deg);}
+.drag-ghost img{width:92px;height:92px;object-fit:cover;display:block;}
+/* ver lo que hay dentro de una caja */
+.sort-view{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,0.5);}
+.sort-view.open{display:flex;}
+.sort-view .sv-card{--c:#888;background:#fff;border-radius:16px;width:min(92vw,560px);max-height:80vh;overflow:auto;
+  border-top:8px solid var(--c);padding:14px;}
+.sort-view .sv-title{font-weight:700;font-size:16px;margin-bottom:10px;display:flex;justify-content:space-between;gap:8px;}
+.sort-view .sv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;}
+.sort-view .sv-item{font-size:11.5px;text-align:center;line-height:1.2;}
+.sort-view .sv-item img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#eee;display:block;margin-bottom:4px;}
+.sort-view .sv-item.failed img{outline:3px solid var(--c-bad);outline-offset:-3px;}
+.sort-view .sv-empty{color:var(--muted);font-size:13px;text-align:center;padding:14px;}
 body.playing .topbar{display:none;}
 body.playing .view{padding:0;}
 body.playing .app{max-width:none;}
@@ -640,6 +683,10 @@ body.playing #win-game .workspace{min-height:0;}
       </div>
       <div class="game-grid-wrap" id="game-grid-wrap" style="display:none;">
         <div id="game-grid"></div>
+      </div>
+      <div class="sort-panel" id="sort-panel">
+        <div class="sort-hint" id="sort-hint">arrastra cada imagen a su grupo, o tócala y luego toca el grupo</div>
+        <div class="sort-boxes" id="sort-boxes"></div>
       </div>
       <div class="game-overlay-top">
         <button class="back" id="back-game">←</button>
@@ -864,6 +911,7 @@ body.playing #win-game .workspace{min-height:0;}
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
 <input type="file" id="tarjetas-file-extra" accept="image/*" multiple style="display:none;">
 <datalist id="groups-datalist"></datalist>
+<div class="sort-view" id="sort-view"><div class="sv-card" id="sv-card"><div class="sv-title"><span id="sv-title"></span><span id="sv-count"></span></div><div class="sv-grid" id="sv-grid"></div></div></div>
 
 <!-- selector de modo de juego (temas de tarjetas) -->
 <div class="ctx-backdrop mode-backdrop" id="mode-backdrop"></div>
@@ -2308,7 +2356,7 @@ function playTema(node, onlyIds, playMode, roundSize){
   }
   else startGame(node, onlyIds);
 }
-const ZOOM_MODES = ['escribir','elegir','letras','clasificar'];
+const ZOOM_MODES = ['escribir','elegir','letras'];
 function isZoomMode(m){ return ZOOM_MODES.includes(m); }
 /* fotos de una tarjeta: la principal y las extra; en cada partida sale una al azar */
 function allImages(p){ return [p.image, ...(p.extraImages||[])].filter(Boolean); }
@@ -2324,7 +2372,7 @@ function recordConfusion(node, a, b){
 document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
   if(confirm('¿Salir de la partida?')){
-    hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner();
+    hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner(); endSortDrag(); closeSortView();
     document.body.classList.remove('playing'); showJugarWindow('win-tree-j');
   }
 });
@@ -2435,6 +2483,8 @@ function startGame(node, onlyIds){
    BARAJADO — piezas sueltas repartidas al azar entre casillas
    ============================================================ */
 function resetGameContainers(){
+  document.getElementById('sort-panel').classList.remove('on');
+  document.getElementById('game-pill').style.display = '';
   document.getElementById('game-workspace').style.display = '';
   document.getElementById('game-grid-wrap').style.display = 'none';
   document.getElementById('game-grid').innerHTML = '';
@@ -2457,6 +2507,7 @@ function backSizeClass(t){
 }
 function gridCellClass(cell, state){
   const st = state && state !== 'neutral' ? ' ' + state : '';
+  if(cell.dataset.sort) return 'game-cell sort' + st;
   if(!cell.dataset.anki) return 'game-cell' + st;
   return 'game-cell anki' + st + ((state === 'correct' || state === 'wrong') ? ' flipped' : '');
 }
@@ -2467,6 +2518,7 @@ function renderGridCells(photos){
   shuffle(photos).forEach(p=>{ // dónde cae cada foto, distinto del orden de preguntas
     const cell = document.createElement('div');
     cell.dataset.id = p.id;
+    if(game.playMode === 'clasificar') cell.dataset.sort = '1';
     if(game.anki){
       cell.dataset.anki = '1';
       // cara A = lo que ves mientras está sin resolver; cara B = lo que aparece al darle la vuelta
@@ -2481,15 +2533,17 @@ function renderGridCells(photos){
     } else {
       cell.innerHTML = `<img src="${gameImg(p)}"><div class="tag"></div>`;
     }
-    cell.querySelector('.tag').textContent = game.playMode === 'clasificar' ? `${p.label || ''} · ${p.group.trim()}` : p.label;
+    cell.querySelector('.tag').textContent = p.label;
     cell.className = gridCellClass(cell, game.stateOf[p.id]);
     cell.addEventListener('click', ()=>{
       if(Date.now() - gridZoomEndedAt < 350) return; // el dedo que queda tras pellizcar no cuenta como toque
       if(roundBannerOpen) return;
+      if(game.playMode === 'clasificar'){ sortTapCell(p.id); return; }
       if(game.playMode === 'escribir') openTypeZoom(p.id);
       else if(isZoomMode(game.playMode)) openPickZoom(p.id);
       else handleGridTap(p.id);
     });
+    if(game.playMode === 'clasificar') attachSortDrag(cell, p.id);
     grid.appendChild(cell);
   });
 }
@@ -2568,6 +2622,7 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
   grid.style.gridTemplateColumns = `repeat(${game.gridCols}, 1fr)`;
   grid.style.width = '';
   hideRoundBanner();
+  if(game.playMode === 'clasificar') setupSortBoxes();
   renderGridCells(rounds[0]);
 
   showJugarWindow('win-game');
@@ -2739,6 +2794,14 @@ function currentTarget(){ return game.order[game.idx]; }
 
 function updateHud(){
   const pill = document.getElementById('game-pill');
+  if(game.playMode === 'clasificar'){
+    pill.style.display = 'none';
+    document.getElementById('game-grid').style.paddingBottom = '16px';
+    document.getElementById('game-stats').textContent = (game.rounds && game.rounds.length > 1)
+      ? `R${game.roundIdx+1}/${game.rounds.length} · ${game.idx}/${game.total}` : `${game.idx}/${game.total}`;
+    document.getElementById('game-progress').style.width = (game.idx/game.total*100)+'%';
+    return;
+  }
   if(isZoomMode(game.playMode)){
     pill.classList.add('small'); pill.classList.remove('anki-q','anki-img');
     document.getElementById('game-grid').style.paddingBottom = '';
@@ -2861,7 +2924,7 @@ function historyKey(mode, rounds){
   return base === 'history' ? 'historyRondas' : base + 'Rondas';
 }
 function endGame(){
-  hideMissName(); hideRoundBanner(); hidePickZoom();
+  hideMissName(); hideRoundBanner(); hidePickZoom(); endSortDrag(); closeSortView();
   document.body.classList.remove('playing');
   const secs = Math.round((Date.now()-game.startTime)/1000);
   const mm = String(Math.floor(secs/60)).padStart(2,'0');
@@ -3045,6 +3108,214 @@ document.getElementById('type-zoom-input').addEventListener('keydown', (e)=>{
   else if(e.key === 'Escape'){ e.preventDefault(); closeTypeZoom(); }
 });
 document.getElementById('end-back').addEventListener('click', ()=> showJugarWindow('win-tree-j'));
+
+/* ============================================================
+   CLASIFICAR — cajas de colores; arrastras (o tocas y tocas) cada imagen a su grupo.
+   Lo que colocas se queda dentro de su caja: así ves juntas las de la misma familia.
+   ============================================================ */
+const SORT_COLORS = ['#e63946','#f08c2e','#d4a72c','#2a9d8f','#3a7bd5','#8e6bd1','#d65db1','#5b9a3c','#a0643b','#4f6d8a','#17a2b8','#c2185b'];
+function sortColor(g){ const i = game.groups.indexOf(g); return SORT_COLORS[(i < 0 ? 0 : i) % SORT_COLORS.length]; }
+function sortMaxAttempts(){ return Math.min(3, game.groups.length - 1); }
+function setupSortBoxes(){
+  game.sort = { selected: null, placed: {} };
+  game.groups.forEach(g=> game.sort.placed[g] = []);
+  document.getElementById('sort-panel').classList.add('on');
+  renderSortBoxes();
+}
+function renderSortBoxes(){
+  const wrap = document.getElementById('sort-boxes');
+  wrap.innerHTML = '';
+  game.groups.forEach(g=>{
+    const box = document.createElement('div');
+    box.className = 'sort-box' + (game.sort.selected ? ' armed' : '');
+    box.dataset.g = g;
+    box.style.setProperty('--c', sortColor(g));
+    const list = game.sort.placed[g];
+    box.innerHTML = `<div class="sb-top"><div class="sb-name"></div><div class="sb-count">${list.length}</div></div><div class="sb-thumbs"></div>`;
+    box.querySelector('.sb-name').textContent = g;
+    const th = box.querySelector('.sb-thumbs');
+    list.slice(-12).forEach(it=>{
+      const im = document.createElement('img');
+      im.src = gameImg(game.photoOf[it.id]);
+      if(it.failed) im.className = 'failed';
+      th.appendChild(im);
+    });
+    box.addEventListener('click', ()=>{
+      if(Date.now() - sortDragEndedAt < 300) return;
+      if(game.sort.selected) sortDrop(game.sort.selected, g);
+      else openSortView(g);
+    });
+    wrap.appendChild(box);
+  });
+}
+function flashBox(g, cls){
+  const box = document.querySelector(`#sort-boxes .sort-box[data-g="${CSS.escape(g)}"]`);
+  flashClass(box, cls);
+}
+function sortTapCell(id){
+  if(!game || game.playMode !== 'clasificar' || roundBannerOpen) return;
+  if(Date.now() - sortDragEndedAt < 300) return;
+  const st = game.stateOf[id];
+  if(st === 'correct' || st === 'wrong') return;
+  game.sort.selected = game.sort.selected === id ? null : id;
+  document.querySelectorAll('.game-cell.sort.picked').forEach(c=> c.classList.remove('picked'));
+  if(game.sort.selected) document.querySelector(`.game-cell[data-id="${id}"]`).classList.add('picked');
+  document.querySelectorAll('#sort-boxes .sort-box').forEach(b=> b.classList.toggle('armed', !!game.sort.selected));
+}
+function renderCellDots(id){
+  const cell = document.querySelector(`.game-cell[data-id="${id}"]`);
+  if(!cell) return;
+  let d = cell.querySelector('.cdots');
+  const used = sortMaxAttempts() - game.attemptsOf[id];
+  if(!used){ if(d) d.remove(); return; }
+  if(!d){ d = document.createElement('div'); d.className = 'cdots'; cell.appendChild(d); }
+  d.innerHTML = '<i></i>'.repeat(used);
+}
+function sortDrop(id, g){
+  if(!game || game.playMode !== 'clasificar') return;
+  const st = game.stateOf[id];
+  if(st === 'correct' || st === 'wrong') return;
+  if(game.attemptsOf[id] === undefined) game.attemptsOf[id] = sortMaxAttempts();
+  const photo = game.photoOf[id], right = photo.group.trim();
+  const cell = document.querySelector(`.game-cell[data-id="${id}"]`);
+  game.sort.selected = null;
+  if(g === right){
+    game.correct++;
+    game.pointResult[id] = sortMaxAttempts() - game.attemptsOf[id] + 1;
+    game.stateOf[id] = 'correct';
+    game.sort.placed[right].push({id});
+  } else {
+    game.attemptsOf[id]--;
+    flashBox(g, 'bad');
+    missFeedback(cell);
+    if(game.attemptsOf[id] > 0){
+      renderCellDots(id);
+      if(cell) cell.classList.remove('picked');
+      document.querySelectorAll('#sort-boxes .sort-box').forEach(b=> b.classList.remove('armed'));
+      return;
+    }
+    // sin intentos: va sola a su caja, marcada como fallo
+    game.mistakes++;
+    game.failedIds.add(id);
+    game.pointResult[id] = 'failed';
+    game.stateOf[id] = 'wrong';
+    game.sort.placed[right].push({id, failed:true});
+    showMissName(`${photo.label} → ${right}`);
+  }
+  if(cell){ cell.classList.remove('picked'); cell.classList.add('placed'); setTimeout(()=> cell.remove(), 360); }
+  renderSortBoxes();
+  flashBox(right, 'good');
+  advance();
+}
+function openSortView(g){
+  const card = document.getElementById('sv-card');
+  card.style.setProperty('--c', sortColor(g));
+  document.getElementById('sv-title').textContent = g;
+  const list = game.sort.placed[g];
+  document.getElementById('sv-count').textContent = list.length ? `${list.length}` : '';
+  const grid = document.getElementById('sv-grid');
+  grid.innerHTML = list.length ? '' : '<div class="sv-empty">todavía no has puesto nada aquí</div>';
+  list.forEach(it=>{
+    const p = game.photoOf[it.id];
+    const d = document.createElement('div');
+    d.className = 'sv-item' + (it.failed ? ' failed' : '');
+    d.innerHTML = `<img src="${gameImg(p)}"><span></span>`;
+    d.querySelector('span').textContent = p.label;
+    grid.appendChild(d);
+  });
+  document.getElementById('sort-view').classList.add('open');
+}
+function closeSortView(){ document.getElementById('sort-view').classList.remove('open'); }
+document.getElementById('sort-view').addEventListener('click', closeSortView);
+
+/* ---- arrastrar: en táctil, mantén pulsado un momento y arrastra (si deslizas enseguida, es desplazar) ---- */
+let sortDrag = null, sortDragEndedAt = 0;
+function boxAt(x, y){
+  const el = document.elementFromPoint(x, y);
+  return el && el.closest ? el.closest('#sort-boxes .sort-box') : null;
+}
+function startSortDrag(id, x, y){
+  const cell = document.querySelector(`.game-cell[data-id="${id}"]`);
+  if(!cell) return;
+  const ghost = document.createElement('div');
+  ghost.className = 'drag-ghost';
+  ghost.innerHTML = `<img src="${gameImg(game.photoOf[id])}">`;
+  document.body.appendChild(ghost);
+  cell.classList.remove('lifting'); cell.classList.add('dragging');
+  sortDrag.active = true; sortDrag.ghost = ghost; sortDrag.cell = cell;
+  moveSortDrag(x, y);
+  try{ navigator.vibrate && navigator.vibrate(15); }catch(e){}
+}
+function moveSortDrag(x, y){
+  if(!sortDrag || !sortDrag.active) return;
+  sortDrag.ghost.style.left = x + 'px'; sortDrag.ghost.style.top = y + 'px';
+  const box = boxAt(x, y);
+  if(box !== sortDrag.hover){
+    if(sortDrag.hover) sortDrag.hover.classList.remove('hover');
+    sortDrag.hover = box;
+    if(box) box.classList.add('hover');
+  }
+  // si arrastras cerca del borde de las cajas, que se desplacen solas
+  const panel = document.getElementById('sort-panel'), r = panel.getBoundingClientRect();
+  if(x >= r.left && x <= r.right){
+    if(y > r.bottom - 30) panel.scrollTop += 8;
+    else if(y > r.top && y < r.top + 26) panel.scrollTop -= 8;
+  }
+}
+function endSortDrag(x, y){
+  if(!sortDrag) return;
+  const d = sortDrag; sortDrag = null;
+  clearTimeout(d.timer);
+  if(d.cellEl) d.cellEl.classList.remove('lifting');
+  if(!d.active) return;
+  sortDragEndedAt = Date.now();
+  if(d.ghost) d.ghost.remove();
+  if(d.hover) d.hover.classList.remove('hover');
+  if(d.cell) d.cell.classList.remove('dragging');
+  const box = x !== undefined ? boxAt(x, y) : null;
+  if(box) sortDrop(d.id, box.dataset.g);
+}
+function attachSortDrag(cell, id){
+  cell.addEventListener('touchstart', (e)=>{
+    if(e.touches.length !== 1 || roundBannerOpen){ endSortDrag(); return; }
+    const t = e.touches[0];
+    sortDrag = { id, x0: t.clientX, y0: t.clientY, active:false, cellEl: cell };
+    sortDrag.timer = setTimeout(()=>{
+      if(sortDrag && sortDrag.id === id && !sortDrag.active){ cell.classList.add('lifting'); startSortDrag(id, sortDrag.x0, sortDrag.y0); }
+    }, 220);
+  }, {passive:true});
+  cell.addEventListener('mousedown', (e)=>{
+    if(e.button !== 0 || roundBannerOpen) return;
+    sortDrag = { id, x0: e.clientX, y0: e.clientY, active:false, mouse:true, cellEl: cell };
+  });
+  cell.addEventListener('contextmenu', (e)=>{ if(game && game.playMode === 'clasificar') e.preventDefault(); });
+}
+document.addEventListener('touchmove', (e)=>{
+  if(!sortDrag) return;
+  if(e.touches.length !== 1){ endSortDrag(); return; }
+  const t = e.touches[0];
+  if(!sortDrag.active){
+    if(Math.hypot(t.clientX - sortDrag.x0, t.clientY - sortDrag.y0) > 10) endSortDrag(); // quería desplazar
+    return;
+  }
+  e.preventDefault();
+  moveSortDrag(t.clientX, t.clientY);
+}, {passive:false});
+document.addEventListener('touchend', (e)=>{
+  if(!sortDrag) return;
+  const t = e.changedTouches[0];
+  endSortDrag(t.clientX, t.clientY);
+});
+document.addEventListener('touchcancel', ()=> endSortDrag());
+document.addEventListener('mousemove', (e)=>{
+  if(!sortDrag || !sortDrag.mouse) return;
+  if(!sortDrag.active && Math.hypot(e.clientX - sortDrag.x0, e.clientY - sortDrag.y0) > 5) startSortDrag(sortDrag.id, e.clientX, e.clientY);
+  else moveSortDrag(e.clientX, e.clientY);
+});
+document.addEventListener('mouseup', (e)=>{
+  if(!sortDrag || !sortDrag.mouse) return;
+  endSortDrag(e.clientX, e.clientY);
+});
 
 /* ============================================================
    ELEGIR EL NOMBRE · LETRAS DESORDENADAS · CLASIFICAR
