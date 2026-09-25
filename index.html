@@ -254,6 +254,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 /* editor: fotos extra y grupo */
 .card-extras{flex-shrink:0;display:flex;gap:5px;align-items:center;padding:6px 8px;border-top:1px solid var(--border);
   overflow-x:auto;background:#fafafa;}
+.card-extras.ghost{visibility:hidden;}
 .card-extras .ex{position:relative;flex-shrink:0;width:40px;height:40px;border-radius:6px;overflow:hidden;
   background:#eee;cursor:pointer;border:1px solid var(--border);}
 .card-extras .ex img{width:100%;height:100%;object-fit:cover;pointer-events:none;}
@@ -1923,10 +1924,11 @@ function renderCardItem(node, photo){
   });
   card.appendChild(imgWrap);
 
-  // más fotos de la misma tarjeta: en cada partida sale una al azar
-  if(photo.image){
+  // más fotos de la misma tarjeta: en cada partida sale una al azar.
+  // La tira está siempre (invisible si aún no hay imagen) para que la tarjeta no cambie de alto al poner la foto.
+  {
     const ex = document.createElement('div');
-    ex.className = 'card-extras';
+    ex.className = 'card-extras' + (photo.image ? '' : ' ghost');
     (photo.extraImages||[]).forEach((src, i)=>{
       const t = document.createElement('div');
       t.className = 'ex'; t.title = 'tocar para ponerla como principal';
@@ -1934,14 +1936,14 @@ function renderCardItem(node, photo){
       t.addEventListener('click', ()=>{ // intercambiar con la principal
         selectCard(photo.id);
         const main = photo.image; photo.image = src; photo.extraImages[i] = main;
-        saveLocal(); renderCardsPanel(node);
+        saveLocal(); replaceCardItem(node, photo);
       });
       t.querySelector('.x').addEventListener('click', (e)=>{
         e.stopPropagation();
         if(!confirm('¿Quitar esta foto de la tarjeta?')) return;
         photo.extraImages.splice(i,1);
         if(!photo.extraImages.length) delete photo.extraImages;
-        saveLocal(); renderCardsPanel(node);
+        saveLocal(); replaceCardItem(node, photo);
       });
       ex.appendChild(t);
     });
@@ -2219,7 +2221,7 @@ document.getElementById('tarjetas-file-extra').addEventListener('change', async 
     try{ photo.extraImages.push(await fileToDownscaledDataURL(f, 800)); }catch(err){}
   }
   saveLocal();
-  renderCardsPanel(node);
+  replaceCardItem(node, photo);
   toast(files.length === 1 ? 'Foto añadida' : `${files.length} fotos añadidas`);
 });
 async function setCardImageFromFile(node, photoId, file){
@@ -2228,7 +2230,16 @@ async function setCardImageFromFile(node, photoId, file){
   if(!photo) return;
   photo.image = dataUrl;
   saveLocal();
-  renderCardsPanel(node);
+  replaceCardItem(node, photo);
+}
+/* redibuja solo una tarjeta, en su sitio: la página no se mueve */
+function replaceCardItem(node, photo){
+  const old = document.querySelector(`#tarjetas-grid .card-item[data-id="${photo.id}"]`);
+  if(!old){ renderCardsPanel(node); return; }
+  const grid = document.getElementById('tarjetas-grid');
+  const scroll = grid.scrollTop;
+  old.replaceWith(renderCardItem(node, photo));
+  grid.scrollTop = scroll;
 }
 document.getElementById('tarjetas-add').addEventListener('click', ()=>{
   const node = findNode(currentCardsId);
