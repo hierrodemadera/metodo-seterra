@@ -127,6 +127,37 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .card-item{flex:0 0 250px;width:250px;flex-shrink:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;
   background:var(--win);display:flex;flex-direction:column;}
 .card-item.selected{outline:2px solid var(--c-info);outline-offset:-2px;}
+.card-item.grouped{border:3px solid var(--gc);}
+.card-item.moved{animation:cardmoved 1s ease-out;}
+@keyframes cardmoved{0%{box-shadow:0 0 0 8px color-mix(in srgb, var(--gc, #888) 45%, transparent);}100%{box-shadow:0 0 0 0 transparent;}}
+.cards-section{flex:0 0 100%;display:flex;align-items:center;gap:10px;margin:6px 0 -8px;
+  font-size:14px;font-weight:700;color:var(--fg);}
+.cards-section:first-child{margin-top:0;}
+.cards-section .dot{width:14px;height:14px;border-radius:4px;background:var(--gc);flex-shrink:0;}
+.cards-section .n{font-size:12px;font-weight:600;color:#fff;background:var(--gc);border-radius:9px;padding:1px 8px;}
+.cards-section .line{flex:1;height:2px;background:var(--gc);opacity:0.35;border-radius:2px;}
+.cards-section.none{--gc:#bbb;color:var(--muted);}
+/* pestañas dentro del mazo */
+.deck-tabs{display:flex;gap:4px;padding:8px 12px 0;border-bottom:1px solid var(--border);flex-shrink:0;}
+.deck-tabs button{border:none;background:none;padding:8px 14px;font-size:13px;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-1px;border-radius:0;}
+.deck-tabs button.on{color:var(--fg);border-bottom-color:var(--fg);font-weight:600;}
+.groups-panel{flex:1;min-height:0;overflow-y:auto;padding:16px;display:none;flex-direction:column;gap:14px;}
+.groups-panel.on{display:flex;}
+.gp-item{--gc:#888;border:1px solid var(--border);border-left:8px solid var(--gc);border-radius:10px;background:var(--win);
+  padding:12px 14px;display:flex;flex-direction:column;gap:8px;max-width:760px;}
+.gp-head{display:flex;align-items:center;gap:10px;}
+.gp-name{flex:1;font-size:15px;font-weight:700;border:1px solid transparent;border-radius:6px;padding:4px 6px;margin:-4px -6px;
+  background:transparent;color:var(--fg);min-width:0;}
+.gp-name:focus{border-color:var(--field-border);outline:none;background:#fff;}
+.gp-count{font-size:12px;font-weight:600;color:#fff;background:var(--gc);border-radius:9px;padding:1px 8px;flex-shrink:0;}
+.gp-thumbs{display:flex;flex-wrap:wrap;gap:4px;}
+.gp-thumbs img{width:30px;height:30px;border-radius:6px;object-fit:cover;background:#eee;}
+.gp-notes{width:100%;box-sizing:border-box;min-height:60px;border:1px solid var(--field-border);border-radius:8px;
+  padding:8px 10px;font-family:inherit;font-size:13.5px;line-height:1.45;resize:vertical;background:#fcfbf7;}
+.gp-empty{color:var(--muted);font-size:13px;text-align:center;padding:30px 10px;line-height:1.6;}
+.sort-view .sv-notes{font-size:13px;line-height:1.45;color:#333;background:#f7f7f7;border-radius:10px;padding:10px 12px;
+  margin:-2px 0 12px;white-space:pre-wrap;}
 .card-img-wrap{position:relative;width:250px;height:250px;flex-shrink:0;background:#f2f2f2;
   display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;}
 .card-img-wrap img{width:100%;height:100%;object-fit:contain;pointer-events:none;}
@@ -880,6 +911,10 @@ body.playing #win-game .workspace{min-height:0;}
         <button class="back" id="back-tarjetas-editor">←</button>
         <span class="title" id="tarjetas-editor-title">tema</span>
       </div>
+      <div class="deck-tabs" id="deck-tabs">
+        <button data-tab="cards" class="on">tarjetas</button>
+        <button data-tab="groups">grupos y notas</button>
+      </div>
       <div class="cards-toolbar">
         <button class="btn" id="tarjetas-add">+ tarjeta</button>
         <button class="btn" id="tarjetas-addmany">+ varias tarjetas</button>
@@ -892,6 +927,7 @@ body.playing #win-game .workspace{min-height:0;}
         </span>
       </div>
       <div class="cards-grid" id="tarjetas-grid"></div>
+      <div class="groups-panel" id="groups-panel"></div>
       <div class="win-content" style="flex:0;border-top:1px solid var(--border);">
         <div class="field" style="margin-bottom:10px;">
           <span class="lbl">nombre del tema</span>
@@ -922,7 +958,7 @@ body.playing #win-game .workspace{min-height:0;}
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
 <input type="file" id="tarjetas-file-extra" accept="image/*" multiple style="display:none;">
 <datalist id="groups-datalist"></datalist>
-<div class="sort-view" id="sort-view"><div class="sv-card" id="sv-card"><div class="sv-title"><span id="sv-title"></span><span id="sv-count"></span></div><div class="sv-grid" id="sv-grid"></div></div></div>
+<div class="sort-view" id="sort-view"><div class="sv-card" id="sv-card"><div class="sv-title"><span id="sv-title"></span><span id="sv-count"></span></div><div class="sv-notes" id="sv-notes"></div><div class="sv-grid" id="sv-grid"></div></div></div>
 
 <!-- selector de modo de juego (temas de tarjetas) -->
 <div class="ctx-backdrop mode-backdrop" id="mode-backdrop"></div>
@@ -1702,6 +1738,59 @@ function showTarjetasWindow(id){
   document.querySelectorAll('#view-tarjetas .window').forEach(w=> w.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
+function setDeckTab(tab){
+  document.querySelectorAll('#deck-tabs button').forEach(b=> b.classList.toggle('on', b.dataset.tab === tab));
+  const onCards = tab === 'cards';
+  document.querySelector('#win-tarjetas-editor .cards-toolbar').style.display = onCards ? '' : 'none';
+  document.getElementById('tarjetas-grid').style.display = onCards ? '' : 'none';
+  document.getElementById('groups-panel').classList.toggle('on', !onCards);
+  const node = findNode(currentCardsId);
+  if(!node) return;
+  if(onCards) renderCardsPanel(node); else renderGroupsPanel(node);
+}
+document.querySelectorAll('#deck-tabs button').forEach(b=> b.addEventListener('click', ()=> setDeckTab(b.dataset.tab)));
+function renderGroupsPanel(node){
+  const panel = document.getElementById('groups-panel');
+  panel.innerHTML = '';
+  const photos = node.photos || [];
+  const groups = groupsOf(photos);
+  if(!groups.length){
+    panel.innerHTML = '<div class="gp-empty">Todavía no hay grupos.<br>Escribe un grupo en las tarjetas y aparecerá aquí para añadirle notas.</div>';
+    return;
+  }
+  node.groupNotes = node.groupNotes || {};
+  groups.forEach(g=>{
+    const list = photos.filter(p=> (p.group||'').trim() === g);
+    const item = document.createElement('div');
+    item.className = 'gp-item';
+    item.style.setProperty('--gc', groupColor(node, g));
+    item.innerHTML = `<div class="gp-head"><input class="gp-name" title="tocar para cambiar el nombre del grupo"><span class="gp-count">${list.length}</span></div>
+      <div class="gp-thumbs"></div><textarea class="gp-notes" placeholder="notas: qué significa el nombre, qué tienen en común…"></textarea>`;
+    const name = item.querySelector('.gp-name');
+    name.value = g;
+    name.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); name.blur(); } });
+    name.addEventListener('change', ()=>{ // renombrar el grupo en todas sus tarjetas
+      const nv = name.value.trim();
+      if(!nv || nv === g){ name.value = g; return; }
+      photos.forEach(p=>{ if((p.group||'').trim() === g) p.group = nv; });
+      const old = node.groupNotes[g];
+      delete node.groupNotes[g];
+      if(old) node.groupNotes[nv] = node.groupNotes[nv] ? node.groupNotes[nv] + '\n' + old : old;
+      saveLocal(); renderGroupsPanel(node); toast(`Grupo renombrado: ${nv}`);
+    });
+    const th = item.querySelector('.gp-thumbs');
+    list.forEach(p=>{ if(p.image){ const im = document.createElement('img'); im.src = p.image; im.title = p.label || ''; th.appendChild(im); } });
+    const ta = item.querySelector('.gp-notes');
+    ta.value = node.groupNotes[g] || '';
+    const grow = ()=>{ ta.style.height = 'auto'; ta.style.height = Math.max(60, ta.scrollHeight + 2) + 'px'; };
+    ta.addEventListener('input', ()=>{
+      if(ta.value.trim()) node.groupNotes[g] = ta.value; else delete node.groupNotes[g];
+      grow(); debouncedSave();
+    });
+    panel.appendChild(item);
+    requestAnimationFrame(grow);
+  });
+}
 function openCardsEditor(id){
   const node = findNode(id);
   if(!node) return;
@@ -1711,7 +1800,7 @@ function openCardsEditor(id){
   document.getElementById('tarjetas-name').value = node.name;
   document.getElementById('tarjetas-cols').value = node.cols || 3;
   showTarjetasWindow('win-tarjetas-editor');
-  renderCardsPanel(node);
+  setDeckTab('cards');
 }
 document.getElementById('tarjetas-name').addEventListener('input', (e)=>{
   const node = findNode(currentCardsId);
@@ -1753,12 +1842,56 @@ function renderCardsPanel(node){
     grid.innerHTML = '<div class="tree-empty">Aún no hay tarjetas.<br>Crea una o sube imágenes arriba.</div>';
     return;
   }
-  photos.forEach(photo=> grid.appendChild(renderCardItem(node, photo)));
+  const groups = groupsOf(photos);
+  if(!groups.length){ photos.forEach(photo=> grid.appendChild(renderCardItem(node, photo))); return; }
+  // agrupadas: un apartado por grupo (mismo color que en el juego) y al final las que no tienen grupo
+  const section = (name, color, n, none)=>{
+    const h = document.createElement('div');
+    h.className = 'cards-section' + (none ? ' none' : '');
+    if(color) h.style.setProperty('--gc', color);
+    h.innerHTML = `<span class="dot"></span><span class="t"></span><span class="n">${n}</span><span class="line"></span>`;
+    h.querySelector('.t').textContent = name;
+    grid.appendChild(h);
+  };
+  groups.forEach(g=>{
+    const list = photos.filter(p=> (p.group||'').trim() === g);
+    section(g, groupColor(node, g), list.length);
+    list.forEach(photo=> grid.appendChild(renderCardItem(node, photo)));
+  });
+  const rest = photos.filter(p=> !(p.group||'').trim());
+  if(rest.length){
+    section('sin grupo', null, rest.length, true);
+    rest.forEach(photo=> grid.appendChild(renderCardItem(node, photo)));
+  }
+}
+/* vuelve a dibujar las tarjetas sin perder dónde estabas escribiendo */
+function rerenderCardsKeepFocus(node, focusSel){
+  const grid = document.getElementById('tarjetas-grid');
+  const scroll = grid.scrollTop;
+  let target = focusSel;
+  const ae = document.activeElement;
+  if(!target && ae && grid.contains(ae) && ae.closest('.card-item')){
+    const cls = ['card-name-input','card-back-input','card-group-input'].find(c=> ae.classList.contains(c));
+    if(cls) target = { id: ae.closest('.card-item').dataset.id, cls, sel: [ae.selectionStart, ae.selectionEnd] };
+  }
+  renderCardsPanel(node);
+  grid.scrollTop = scroll;
+  if(target){
+    const el = grid.querySelector(`.card-item[data-id="${target.id}"] .${target.cls}`);
+    if(el){
+      el.focus({preventScroll:true});
+      el.closest('.card-item').scrollIntoView({block:'nearest'});
+      if(target.sel && el.setSelectionRange) try{ el.setSelectionRange(target.sel[0], target.sel[1]); }catch(e){}
+      else if(target.selectAll && el.select) el.select();
+    }
+  }
 }
 function renderCardItem(node, photo){
   const card = document.createElement('div');
   card.className = 'card-item' + (photo.id === selectedCardId ? ' selected' : '');
   card.dataset.id = photo.id;
+  const myGroup = (photo.group||'').trim();
+  if(myGroup){ card.classList.add('grouped'); card.style.setProperty('--gc', groupColor(node, myGroup)); }
 
   const imgWrap = document.createElement('div');
   imgWrap.className = 'card-img-wrap';
@@ -1872,6 +2005,40 @@ function renderCardItem(node, photo){
   groupInput.addEventListener('input', ()=>{
     if(groupInput.value.trim()) photo.group = groupInput.value; else delete photo.group;
     debouncedSave();
+  });
+  // al terminar de escribir el grupo (Intro o salir del campo), la tarjeta se coloca en su apartado
+  let groupAtFocus = myGroup;
+  groupInput.addEventListener('focus', ()=>{ groupAtFocus = (photo.group||'').trim(); });
+  const commitGroup = (nextFocus)=>{
+    const now = (photo.group||'').trim();
+    if(now) photo.group = now;
+    saveLocal();
+    if(now === groupAtFocus && !nextFocus) return;
+    const moved = now !== groupAtFocus;
+    groupAtFocus = now;
+    setTimeout(()=>{ // deja que el foco llegue a donde has tocado antes de redibujar
+      rerenderCardsKeepFocus(node, nextFocus);
+      if(moved){
+        const el = document.querySelector(`#tarjetas-grid .card-item[data-id="${photo.id}"]`);
+        if(el){ el.classList.add('moved'); if(!nextFocus) el.scrollIntoView({block:'nearest', behavior:'smooth'}); }
+        toast(now ? `→ ${now}` : 'sin grupo');
+      }
+    }, 0);
+  };
+  groupInput.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Enter') return;
+    e.preventDefault();
+    // Intro: pasa al grupo de la siguiente tarjeta (en el orden que ves ahora)
+    const inputs = [...document.querySelectorAll('#tarjetas-grid .card-group-input')];
+    const next = inputs[inputs.indexOf(groupInput)+1];
+    const nextFocus = next ? { id: next.closest('.card-item').dataset.id, cls:'card-group-input', selectAll:true } : null;
+    groupInput.dataset.skipBlur = '1';
+    groupInput.blur();
+    commitGroup(nextFocus);
+  });
+  groupInput.addEventListener('blur', ()=>{
+    if(groupInput.dataset.skipBlur){ delete groupInput.dataset.skipBlur; return; }
+    commitGroup(null);
   });
   card.appendChild(groupInput);
 
@@ -3147,7 +3314,8 @@ document.getElementById('end-back').addEventListener('click', ()=> showJugarWind
    Lo que colocas se queda dentro de su caja: así ves juntas las de la misma familia.
    ============================================================ */
 const SORT_COLORS = ['#e63946','#f08c2e','#d4a72c','#2a9d8f','#3a7bd5','#8e6bd1','#d65db1','#5b9a3c','#a0643b','#4f6d8a','#17a2b8','#c2185b'];
-function sortColor(g){ const i = game.groups.indexOf(g); return SORT_COLORS[(i < 0 ? 0 : i) % SORT_COLORS.length]; }
+function groupColor(node, g){ const i = groupsOf((node && node.photos) || []).indexOf(g); return SORT_COLORS[(i < 0 ? 0 : i) % SORT_COLORS.length]; }
+function sortColor(g){ return groupColor(game.temaNode, g); }
 function sortMaxAttempts(){ return Math.min(3, game.groups.length - 1); }
 function setupSortBoxes(){
   game.sort = { selected: null, placed: {} };
@@ -3244,6 +3412,9 @@ function openSortView(g){
   const card = document.getElementById('sv-card');
   card.style.setProperty('--c', sortColor(g));
   document.getElementById('sv-title').textContent = g;
+  const note = ((game.temaNode.groupNotes || {})[g] || '').trim();
+  const nEl = document.getElementById('sv-notes');
+  nEl.textContent = note; nEl.style.display = note ? '' : 'none';
   const list = game.sort.placed[g];
   document.getElementById('sv-count').textContent = list.length ? `${list.length}` : '';
   const grid = document.getElementById('sv-grid');
