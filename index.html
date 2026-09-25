@@ -71,6 +71,9 @@ button{cursor:pointer;}
 .tree-menu-btn{background:none;border:none;color:var(--muted);font-size:15px;padding:2px 6px;
   flex-shrink:0;line-height:1;}
 .tree-menu-btn:hover{color:var(--fg);}
+.tree-export-btn{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:11.5px;
+  padding:2px 7px;flex-shrink:0;line-height:1.4;margin-right:2px;}
+.tree-export-btn:hover{color:var(--fg);border-color:var(--fg);}
 .tree-children{display:none;}
 .tree-children.open{display:block;}
 .tree-empty{padding:24px 6px;color:var(--muted);font-size:13px;text-align:center;}
@@ -654,8 +657,9 @@ body.playing #win-game .workspace{min-height:0;}
     <div class="window active" id="win-tree-b">
       <div class="win-tb">
         <span class="title">biblioteca</span>
-        <button class="smallbtn" id="btn-export">exportar</button>
-        <button class="smallbtn" id="btn-import">importar</button>
+        <button class="smallbtn" id="btn-import-deck" title="Añadir uno o varios mazos guardados">+ importar mazo</button>
+        <button class="smallbtn" id="btn-export" title="Exportar toda la biblioteca (data.json para GitHub)">exportar todo</button>
+        <button class="smallbtn" id="btn-import" title="Reemplazar toda la biblioteca por un data.json">importar todo</button>
       </div>
       <div class="tree-toolbar">
         <button class="smallbtn" id="btn-root-folder">+ carpeta</button>
@@ -957,6 +961,7 @@ body.playing #win-game .workspace{min-height:0;}
 </div>
 
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
+<input type="file" id="input-import-deck" accept=".json,application/json" multiple style="display:none;">
 <input type="file" id="tarjetas-file-extra" accept="image/*" multiple style="display:none;">
 <datalist id="groups-datalist"></datalist>
 <div class="sort-view" id="sort-view"><div class="sv-card" id="sv-card"><div class="sv-title"><span id="sv-title"></span><span id="sv-count"></span></div><div class="sv-notes" id="sv-notes"></div><div class="sv-grid" id="sv-grid"></div></div></div>
@@ -1016,10 +1021,60 @@ function uid(){ return 'id'+Math.random().toString(36).slice(2,9)+Date.now().toS
 let tree = [];
 let notas = [];
 
-function loadLocal(){
+/* Se guarda en IndexedDB, que no tiene el límite de ~5 MB de localStorage.
+   (localStorage solo se lee una vez, para pasar los datos antiguos a IndexedDB.) */
+const IDB_NAME = 'metodo_seterra', IDB_STORE = 'kv';
+let idbPromise = null;
+function idbOpen(){
+  if(idbPromise) return idbPromise;
+  idbPromise = new Promise((resolve, reject)=>{
+    if(!('indexedDB' in window)){ reject(new Error('sin IndexedDB')); return; }
+    const req = indexedDB.open(IDB_NAME, 1);
+    req.onupgradeneeded = ()=> req.result.createObjectStore(IDB_STORE);
+    req.onsuccess = ()=> resolve(req.result);
+    req.onerror = ()=> reject(req.error);
+  });
+  return idbPromise;
+}
+async function idbGet(key){
+  const db = await idbOpen();
+  return new Promise((resolve, reject)=>{
+    const r = db.transaction(IDB_STORE, 'readonly').objectStore(IDB_STORE).get(key);
+    r.onsuccess = ()=> resolve(r.result === undefined ? null : r.result);
+    r.onerror = ()=> reject(r.error);
+  });
+}
+async function idbSet(key, value){
+  const db = await idbOpen();
+  return new Promise((resolve, reject)=>{
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    tx.objectStore(IDB_STORE).put(value, key);
+    tx.oncomplete = ()=> resolve();
+    tx.onerror = ()=> reject(tx.error);
+    tx.onabort = ()=> reject(tx.error);
+  });
+}
+let useIdb = true;
+async function loadLocal(){
+  if(useIdb){
+    try{
+      const v = await idbGet(KEY);
+      if(v) return v;
+    }catch(e){ useIdb = false; }
+  }
+  // datos antiguos (o navegador sin IndexedDB)
   try{ const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
 }
+let saveChain = Promise.resolve();
 function saveLocal(){
+  if(useIdb){
+    const snapshot = tree; // IndexedDB copia el objeto al guardarlo
+    saveChain = saveChain.then(()=> idbSet(KEY, snapshot)).then(()=>{
+      // ya está a salvo en IndexedDB: se libera la copia antigua de localStorage
+      try{ if(localStorage.getItem(KEY) !== null) localStorage.removeItem(KEY); }catch(e){}
+    }).catch(()=> toast('No se pudo guardar'));
+    return;
+  }
   try{ localStorage.setItem(KEY, JSON.stringify(tree)); }
   catch(e){ toast('No se pudo guardar (memoria del navegador llena)'); }
 }
@@ -1029,7 +1084,10 @@ function debouncedSave(){
   debouncedSaveTimer = setTimeout(saveLocal, 400);
 }
 
-function loadLocalNotasRaw(){
+async function loadLocalNotasRaw(){
+  if(useIdb){
+    try{ const v = await idbGet(KEY_NOTAS); if(v !== null) return v; }catch(e){}
+  }
   try{ return localStorage.getItem(KEY_NOTAS); }catch(e){ return null; }
 }
 function migrateNotasArray(arr){
@@ -1054,6 +1112,13 @@ function normalizeRemoteNotas(remoteNotas){
   return null;
 }
 function saveLocalNotas(){
+  if(useIdb){
+    const raw = JSON.stringify(notas);
+    saveChain = saveChain.then(()=> idbSet(KEY_NOTAS, raw)).then(()=>{
+      try{ if(localStorage.getItem(KEY_NOTAS) !== null) localStorage.removeItem(KEY_NOTAS); }catch(e){}
+    }).catch(()=> toast('No se pudo guardar el documento'));
+    return;
+  }
   try{ localStorage.setItem(KEY_NOTAS, JSON.stringify(notas)); }
   catch(e){ toast('No se pudo guardar el documento (memoria del navegador llena)'); }
 }
@@ -1069,9 +1134,12 @@ function debouncedSaveNotas(){
 }
 
 async function boot(){
-  const cached = loadLocal();
+  // pide al navegador que no borre estos datos por su cuenta si se queda sin espacio
+  try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist(); }catch(e){}
+  const cached = await loadLocal();
   tree = cached || [];
-  const cachedNotasRaw = loadLocalNotasRaw();
+  if(cached) saveLocal(); // si venían de localStorage, quedan pasados a IndexedDB
+  const cachedNotasRaw = await loadLocalNotasRaw();
   notas = cachedNotasRaw !== null ? parseNotasValue(cachedNotasRaw) : null;
   if(!cached){
     try{
@@ -1213,10 +1281,12 @@ function renderRow(node, depth, editable, containerId){
     <span class="tree-tog">${tog}</span>
     <span class="tree-name">${escapeHtml(node.name)}</span>
     ${count}
+    ${editable && !isFolder ? '<button class="tree-export-btn" title="guardar este mazo en un archivo">⤓ exportar</button>' : ''}
     ${editable ? '<button class="tree-menu-btn">⋯</button>' : ''}
   `;
   row.addEventListener('click', (e)=>{
     if(e.target.classList.contains('tree-menu-btn')) return;
+    if(e.target.classList.contains('tree-export-btn')){ e.stopPropagation(); exportDeck(node); return; }
     if(dragJustHappened){ dragJustHappened = false; return; }
     if(isFolder){
       node.expanded = !node.expanded;
@@ -1233,7 +1303,7 @@ function renderRow(node, depth, editable, containerId){
       openCtxMenu(e.currentTarget, node);
     });
     row.addEventListener('pointerdown', (e)=>{
-      if(e.target.classList.contains('tree-menu-btn')) return;
+      if(e.target.classList.contains('tree-menu-btn') || e.target.classList.contains('tree-export-btn')) return;
       startTreeDrag(e, node, row, containerId);
     });
   }
@@ -3842,6 +3912,83 @@ document.getElementById('btn-export').addEventListener('click', ()=>{
   toast('Sube este archivo a tu repo, junto al index.html');
 });
 document.getElementById('btn-import').addEventListener('click', ()=> document.getElementById('input-import-file').click());
+
+/* ---------- mazos sueltos: un archivo por mazo, con su nombre ---------- */
+const DECK_FORMAT = 'metodo-seterra-mazo';
+function deckFileName(name){
+  const clean = (name || 'mazo').replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, ' ').trim() || 'mazo';
+  return clean + '.json';
+}
+function downloadJson(obj, filename){
+  const blob = new Blob([JSON.stringify(obj)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=> URL.revokeObjectURL(a.href), 4000);
+}
+function exportDeck(node){
+  downloadJson({ format: DECK_FORMAT, version: 1, exportedAt: Date.now(), mazo: node }, deckFileName(node.name));
+  toast(`Mazo «${node.name}» exportado`);
+}
+function allIds(nodes, out = new Set()){
+  (nodes||[]).forEach(n=>{ out.add(n.id); if(n.type === 'folder') allIds(n.children, out); });
+  return out;
+}
+function findInTree(nodes, id){
+  for(const n of nodes||[]){
+    if(n.id === id) return n;
+    if(n.type === 'folder'){ const f = findInTree(n.children, id); if(f) return f; }
+  }
+  return null;
+}
+function replaceInTree(nodes, id, fresh){
+  for(let i=0;i<(nodes||[]).length;i++){
+    if(nodes[i].id === id){ nodes[i] = fresh; return true; }
+    if(nodes[i].type === 'folder' && replaceInTree(nodes[i].children, id, fresh)) return true;
+  }
+  return false;
+}
+/* acepta un mazo exportado, o un data.json entero (del que se sacan todos sus mazos) */
+function decksFromFile(data){
+  if(data && data.format === DECK_FORMAT && data.mazo) return [data.mazo];
+  if(data && data.type === 'tema') return [data];
+  const t = data && (data.tree || (Array.isArray(data) ? data : null));
+  if(!t) return [];
+  const out = [];
+  (function walk(nodes){ (nodes||[]).forEach(n=>{ if(n.type === 'folder') walk(n.children); else if(n.type === 'tema') out.push(n); }); })(t);
+  return out;
+}
+function importDecks(decks){
+  let added = 0, replaced = 0;
+  decks.forEach(deck=>{
+    if(!deck || deck.type !== 'tema') return;
+    const existing = findInTree(tree, deck.id);
+    if(existing){
+      const replace = confirm(`Ya tienes el mazo «${existing.name}».\n\nAceptar: reemplazarlo por el del archivo.\nCancelar: añadirlo como copia.`);
+      if(replace){ replaceInTree(tree, deck.id, deck); replaced++; return; }
+      deck = JSON.parse(JSON.stringify(deck));
+      deck.id = uid();
+      deck.name = deck.name + ' (copia)';
+    }
+    tree.push(deck); added++;
+  });
+  if(!added && !replaced){ toast('No se encontró ningún mazo en el archivo'); return; }
+  saveLocal();
+  renderTree('tree-b', true); renderTree('tree-j', false); renderTarjetasList();
+  toast([added ? `${added} mazo${added>1?'s':''} añadido${added>1?'s':''}` : '', replaced ? `${replaced} reemplazado${replaced>1?'s':''}` : ''].filter(Boolean).join(' · '));
+}
+document.getElementById('btn-import-deck').addEventListener('click', ()=> document.getElementById('input-import-deck').click());
+document.getElementById('input-import-deck').addEventListener('change', async (e)=>{
+  const files = [...e.target.files];
+  e.target.value = '';
+  const decks = [];
+  for(const f of files){
+    try{ decks.push(...decksFromFile(JSON.parse(await f.text()))); }
+    catch(err){ toast(`«${f.name}» no es un mazo válido`); }
+  }
+  if(decks.length) importDecks(decks);
+});
 document.getElementById('input-import-file').addEventListener('change', (e)=>{
   const file = e.target.files[0];
   if(!file) return;
