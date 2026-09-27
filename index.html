@@ -498,8 +498,15 @@ input[type=file]{display:none;}
 .game-cell.revealed{border-color:var(--c-info);animation:cellpulse 0.9s ease-in-out infinite;}
 .game-cell.wrong{border-color:var(--c-bad);}
 .game-cell .tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,20,20,0.85);
-  color:#fff;font-size:10px;padding:2px 4px;text-align:center;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;display:none;}
+  color:#fff;font-size:10px;padding:2px 4px;text-align:center;display:none;}
+.game-cell .tag .nm{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* etiquetas de la tarjeta, debajo del nombre, cuando ya se ha resuelto */
+.cell-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:1px 6px;margin-top:1px;font-size:9px;line-height:1.3;
+  color:rgba(255,255,255,0.85);max-height:2.6em;overflow:hidden;}
+.cell-tags span{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;}
+.cell-tags i{width:6px;height:6px;border-radius:50%;background:var(--cc,#fff);flex-shrink:0;}
+.face-name .cell-tags{font-size:6cqi;font-weight:400;margin-top:1.5cqi;justify-content:flex-start;max-height:none;}
+.face-name .cell-tags i{width:4.5cqi;height:4.5cqi;}
 .game-cell.correct .tag,.game-cell.wrong .tag{display:block;}
 
 /* ---- tarjetas con reverso: se dan la vuelta al resolverse ---- */
@@ -3351,6 +3358,21 @@ function gridCellClass(cell, state){
   if(!cell.dataset.anki) return 'game-cell' + st;
   return 'game-cell anki' + st + ((state === 'correct' || state === 'wrong') ? ' flipped' : '');
 }
+/* etiquetas de una tarjeta (todas sus categorías) para enseñarlas al resolverla */
+function cellTagsEl(p){
+  const node = game && game.temaNode;
+  const items = [];
+  tagCats(node).forEach(cat=> tagVals(p, cat.id).forEach(v=> items.push([v, tagColor(node, cat.id, v), cat.name])));
+  if(!items.length) return null;
+  const el = document.createElement('div'); el.className = 'cell-tags';
+  items.forEach(([v, color, catName])=>{
+    const s = document.createElement('span'); s.title = catName + ': ' + v;
+    const d = document.createElement('i'); d.style.setProperty('--cc', color);
+    s.appendChild(d); s.appendChild(document.createTextNode(v));
+    el.appendChild(s);
+  });
+  return el;
+}
 function renderGridCells(photos){
   const grid = document.getElementById('game-grid');
   grid.innerHTML = '';
@@ -3373,6 +3395,7 @@ function renderGridCells(photos){
         txtFace.textContent = '';
         txtFace.classList.add('named');
         const nm = document.createElement('div'); nm.className = 'face-name'; nm.textContent = p.label || '';
+        const ftg = cellTagsEl(p); if(ftg) nm.appendChild(ftg);
         const bd = document.createElement('div'); bd.className = 'face-body'; bd.textContent = p.back.trim();
         txtFace.appendChild(nm); txtFace.appendChild(bd);
         flip.insertAdjacentHTML('beforeend', imgFace); txtFace.classList.add('b'); flip.appendChild(txtFace);
@@ -3381,7 +3404,10 @@ function renderGridCells(photos){
     } else {
       cell.innerHTML = `<img src="${gameImg(p)}"><div class="tag"></div>`;
     }
-    cell.querySelector('.tag').textContent = p.label;
+    const tagEl = cell.querySelector('.tag');
+    const nmEl = document.createElement('span'); nmEl.className = 'nm'; nmEl.textContent = p.label;
+    tagEl.appendChild(nmEl);
+    const ctg = cellTagsEl(p); if(ctg) tagEl.appendChild(ctg);
     cell.className = gridCellClass(cell, game.stateOf[p.id]);
     cell.addEventListener('click', ()=>{
       if(Date.now() - gridZoomEndedAt < 350) return; // el dedo que queda tras pellizcar no cuenta como toque
