@@ -140,13 +140,115 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .cards-section .n{font-size:12px;font-weight:600;color:#fff;background:var(--gc);border-radius:9px;padding:1px 8px;}
 .cards-section .line{flex:1;height:2px;background:var(--gc);opacity:0.35;border-radius:2px;}
 .cards-section.none{--gc:#bbb;color:var(--muted);}
+/* etiquetas en cada tarjeta del editor */
+.card-tags{flex-shrink:0;border-top:1px solid var(--border);padding:6px 8px;display:flex;flex-direction:column;gap:4px;}
+.card-tags:empty{display:none;}
+.ct-row{display:flex;align-items:flex-start;gap:6px;min-height:26px;}
+.ct-lbl{flex:0 0 58px;font-size:10.5px;color:var(--muted);padding-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ct-box{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:4px;align-items:center;}
+.chip{display:inline-flex;align-items:center;gap:5px;max-width:100%;padding:3px 4px 3px 8px;border-radius:12px;
+  font-size:12px;line-height:1.2;background:color-mix(in srgb, var(--cc, #888) 14%, #fff);color:#222;
+  border:1px solid color-mix(in srgb, var(--cc, #888) 45%, transparent);}
+.chip .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.chip .x{border:none;background:none;color:#777;font-size:12px;line-height:1;padding:0 3px;border-radius:8px;}
+.chip .x:hover{color:var(--c-bad);}
+.ct-input{flex:1;min-width:60px;border:none;background:transparent;font-size:12px;padding:4px 2px;color:var(--fg);border-radius:0;}
+.card-tags input.ct-input{border:none;border-bottom:1px solid transparent;box-shadow:none;background:transparent;
+  border-radius:0;padding:4px 2px;height:auto;width:auto;min-width:60px;flex:1;font-size:12px;margin:0;}
+.card-tags input.ct-input:focus{border-bottom-color:var(--field-border);outline:none;}
+.ct-input::placeholder{color:#bbb;}
+.ct-input:focus{outline:none;border-bottom:1px solid var(--field-border);}
+/* barra de orden / selección */
+.cards-subbar{display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid var(--border);
+  flex-shrink:0;font-size:12.5px;color:var(--muted);flex-wrap:wrap;}
+.cards-subbar select{font-size:12.5px;padding:4px 6px;border:1px solid var(--field-border);border-radius:6px;background:#fff;color:var(--fg);}
+.cards-subbar .grow{flex:1;}
+.cards-subbar .linkbtn{border:none;background:none;color:var(--fg);font-size:12.5px;padding:4px 2px;text-decoration:underline;
+  text-underline-offset:3px;text-decoration-color:var(--border);}
+.cards-subbar .linkbtn.on{font-weight:600;text-decoration-color:var(--fg);}
+.cards-section{cursor:pointer;-webkit-user-select:none;user-select:none;}
+.cards-section .arr{width:12px;color:var(--muted);font-size:11px;flex-shrink:0;}
+/* seleccionar varias */
+.cards-grid.selecting .card-item{position:relative;}
+.cards-grid.selecting .card-item::after{content:'';position:absolute;inset:0;z-index:3;cursor:pointer;}
+.cards-grid.selecting .card-item .sel-check{display:flex;}
+.sel-check{display:none;position:absolute;top:8px;left:8px;z-index:4;width:24px;height:24px;border-radius:50%;
+  border:2px solid #fff;background:rgba(0,0,0,0.25);box-shadow:0 1px 4px rgba(0,0,0,0.3);
+  align-items:center;justify-content:center;color:#fff;font-size:14px;pointer-events:none;}
+.card-item.picked .sel-check{background:var(--c-info);}
+.cards-grid.selecting .card-item.picked{outline:3px solid var(--c-info);outline-offset:-3px;}
+.sel-bar{display:none;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:var(--win);
+  flex-shrink:0;flex-wrap:wrap;}
+.sel-bar.on{display:flex;}
+.sel-bar .n{font-size:13px;font-weight:600;margin-right:auto;}
+/* diálogo de etiquetar */
+.tag-dialog{position:fixed;z-index:95;left:50%;top:50%;transform:translate(-50%,-50%);width:min(90vw,340px);
+  background:var(--win);border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,0.25);padding:16px;display:none;flex-direction:column;gap:10px;}
+.tag-dialog.open{display:flex;}
+.tag-dialog .td-title{font-size:15px;font-weight:600;text-align:center;}
+.tag-dialog label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:4px;}
+.tag-dialog select,.tag-dialog input{font-size:14px;padding:8px 10px;border:1px solid var(--field-border);border-radius:8px;background:#fff;color:var(--fg);}
+.tag-dialog .td-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:4px;}
+/* pestaña etiquetas */
+.tags-panel{flex:1;min-height:0;overflow-y:auto;padding:16px;display:none;flex-direction:column;gap:16px;}
+.tags-panel.on{display:flex;}
+.tp-top{display:flex;align-items:center;gap:10px;}
+.tp-top .hint{font-size:12px;color:var(--muted);}
+.tc-block{flex-shrink:0;border:1px solid var(--border);border-radius:12px;background:var(--win);max-width:780px;overflow:hidden;}
+.tc-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);background:#fafafa;}
+.tc-head .tog{border:none;background:none;color:var(--muted);font-size:12px;width:18px;padding:0;}
+.tc-name{flex:1;min-width:0;font-size:15px;font-weight:700;border:1px solid transparent;border-radius:6px;padding:4px 6px;background:transparent;color:var(--fg);}
+.tc-name:focus{border-color:var(--field-border);outline:none;background:#fff;}
+.tc-meta{font-size:11.5px;color:var(--muted);white-space:nowrap;}
+.tc-head .ib{border:none;background:none;color:var(--muted);font-size:13px;padding:4px 6px;border-radius:6px;}
+.tc-head .ib:hover{color:var(--fg);background:var(--hover);}
+.tc-head .ib.del:hover{color:var(--c-bad);}
+.tc-body{display:flex;flex-direction:column;}
+.tc-block.closed .tc-body{display:none;}
+.tc-block.closed .tc-head{border-bottom:none;}
+.tv-row{--cc:#888;display:grid;grid-template-columns:6px 1fr auto;gap:4px 10px;padding:10px 12px 10px 0;border-bottom:1px solid var(--border);}
+.tv-row:last-child{border-bottom:none;}
+.tv-row .bar{grid-row:1 / span 3;background:var(--cc);border-radius:0 3px 3px 0;}
+.tv-name{font-size:14px;font-weight:600;border:1px solid transparent;border-radius:6px;padding:3px 6px;margin-left:-6px;background:transparent;color:var(--fg);min-width:0;}
+.tv-name:focus{border-color:var(--field-border);outline:none;background:#fff;}
+.tv-right{display:flex;align-items:center;gap:4px;}
+.tv-count{font-size:11.5px;font-weight:600;color:#fff;background:var(--cc);border-radius:9px;padding:1px 8px;}
+.tv-right .ib{border:none;background:none;color:var(--muted);font-size:12px;padding:3px 6px;border-radius:6px;}
+.tv-right .ib:hover{color:var(--c-bad);}
+.tv-thumbs{grid-column:2 / span 2;display:flex;flex-wrap:wrap;gap:3px;}
+.tv-thumbs img{width:26px;height:26px;border-radius:5px;object-fit:cover;background:#eee;}
+.tv-notes{grid-column:2 / span 2;width:100%;box-sizing:border-box;min-height:34px;border:1px solid var(--field-border);border-radius:8px;
+  padding:6px 9px;font-family:inherit;font-size:13px;line-height:1.45;resize:vertical;background:#fcfbf7;}
+.tv-empty,.tp-empty{color:var(--muted);font-size:13px;padding:14px;line-height:1.6;}
+.tp-empty{text-align:center;padding:30px 10px;}
+/* filtro al jugar */
+.pick-filter{border:1px solid var(--field-border);border-radius:10px;margin:0 2px;}
+.pf-head{display:flex;align-items:center;gap:8px;padding:9px 10px;cursor:pointer;-webkit-user-select:none;user-select:none;}
+.pf-head .lbl{font-size:13px;color:var(--fg);}
+.pf-head .sum{flex:1;text-align:right;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.pf-head .sum.on{color:var(--fg);font-weight:600;}
+.pf-head .sum.zero{color:var(--c-bad);}
+.pf-head .arr{font-size:11px;color:var(--muted);}
+.pf-body{display:none;flex-direction:column;gap:8px;padding:0 10px 10px;}
+.pick-filter.open .pf-body{display:flex;}
+.pf-cat{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
+.pf-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.pf-chip{--cc:#888;border:1px solid color-mix(in srgb, var(--cc) 45%, transparent);background:#fff;color:var(--fg);
+  border-radius:14px;padding:4px 10px;font-size:12px;line-height:1.2;}
+.pf-chip .n{color:var(--muted);margin-left:4px;font-size:11px;}
+.pf-chip.on{background:var(--cc);border-color:var(--cc);color:#fff;}
+.pf-chip.on .n{color:rgba(255,255,255,0.8);}
+.pf-chip.none{--cc:#999;font-style:italic;}
+.pf-foot{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--muted);}
+.pf-foot button{white-space:nowrap;flex-shrink:0;border:none;background:none;color:var(--fg);font-size:12px;text-decoration:underline;text-underline-offset:3px;padding:2px;}
+.mode-subrow{display:flex;align-items:center;gap:8px;margin:-4px 2px 0;padding:0 4px;font-size:12px;color:var(--muted);}
+.mode-subrow select{flex:1;font-size:12.5px;padding:5px 6px;border:1px solid var(--field-border);border-radius:6px;background:#fff;color:var(--fg);}
+.end-note{font-size:12px;color:var(--muted);text-align:center;margin-top:-4px;}
 /* pestañas dentro del mazo */
 .deck-tabs{display:flex;gap:4px;padding:8px 12px 0;border-bottom:1px solid var(--border);flex-shrink:0;}
 .deck-tabs button{border:none;background:none;padding:8px 14px;font-size:13px;color:var(--muted);
   border-bottom:2px solid transparent;margin-bottom:-1px;border-radius:0;}
 .deck-tabs button.on{color:var(--fg);border-bottom-color:var(--fg);font-weight:600;}
-.groups-panel{flex:1;min-height:0;overflow-y:auto;padding:16px;display:none;flex-direction:column;gap:14px;}
-.groups-panel.on{display:flex;}
 .gp-item{--gc:#888;border:1px solid var(--border);border-left:8px solid var(--gc);border-radius:10px;background:var(--win);
   padding:12px 14px;display:flex;flex-direction:column;gap:8px;max-width:760px;}
 .gp-head{display:flex;align-items:center;gap:10px;}
@@ -266,10 +368,6 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .card-extras .add{flex-shrink:0;height:40px;padding:0 10px;border:1px dashed var(--field-border);border-radius:6px;
   background:#fff;color:var(--muted);font-size:12px;}
 .card-extras .count{font-size:11px;color:var(--muted);margin-left:auto;flex-shrink:0;padding-left:4px;}
-.card-group-input{flex-shrink:0;border:none;border-top:1px solid var(--border);padding:8px 10px;font-size:12.5px;
-  text-align:center;background:transparent;color:var(--fg);border-radius:0;width:100%;box-sizing:border-box;}
-.card-group-input::placeholder{color:#bbb;}
-.card-group-input:focus{outline:none;background:var(--hover);}
 
 .mode-opt:disabled:hover{background:#fff;}
 .mode-group{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin:6px 2px 0;}
@@ -787,6 +885,7 @@ body.playing #win-game .workspace{min-height:0;}
         <div id="end-best-badge" style="display:none;color:var(--c-info);font-size:11px;
           letter-spacing:0.08em;text-transform:uppercase;margin:-10px 0 14px;">nuevo mejor resultado</div>
         <div id="end-history" style="width:100%;max-width:260px;margin-bottom:16px;"></div>
+        <div class="end-note" id="end-note"></div>
         <button class="btn btn-primary" id="end-again">jugar de nuevo</button>
         <button class="btn" id="end-review">revisión</button>
         <button class="btn" id="end-fails" style="display:none;">repasar solo los fallos</button>
@@ -918,7 +1017,7 @@ body.playing #win-game .workspace{min-height:0;}
       </div>
       <div class="deck-tabs" id="deck-tabs">
         <button data-tab="cards" class="on">tarjetas</button>
-        <button data-tab="groups">grupos y notas</button>
+        <button data-tab="tags">etiquetas</button>
       </div>
       <div class="cards-toolbar">
         <button class="btn" id="tarjetas-add">+ tarjeta</button>
@@ -931,8 +1030,15 @@ body.playing #win-game .workspace{min-height:0;}
           <input type="number" id="tarjetas-cols" min="1" step="1">
         </span>
       </div>
+      <div class="cards-subbar" id="cards-subbar"></div>
       <div class="cards-grid" id="tarjetas-grid"></div>
-      <div class="groups-panel" id="groups-panel"></div>
+      <div class="sel-bar" id="sel-bar">
+        <span class="n" id="sel-count">0 seleccionadas</span>
+        <button class="btn" id="sel-tag">etiquetar</button>
+        <button class="btn" id="sel-untag">quitar etiqueta</button>
+        <button class="btn btn-primary" id="sel-done">listo</button>
+      </div>
+      <div class="tags-panel" id="tags-panel"></div>
       <div class="win-content" style="flex:0;border-top:1px solid var(--border);">
         <div class="field" style="margin-bottom:10px;">
           <span class="lbl">nombre del tema</span>
@@ -963,7 +1069,7 @@ body.playing #win-game .workspace{min-height:0;}
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
 <input type="file" id="input-import-deck" accept=".json,application/json" multiple style="display:none;">
 <input type="file" id="tarjetas-file-extra" accept="image/*" multiple style="display:none;">
-<datalist id="groups-datalist"></datalist>
+<div class="tag-dialog" id="tag-dialog"></div>
 <div class="sort-view" id="sort-view"><div class="sv-card" id="sv-card"><div class="sv-title"><span id="sv-title"></span><span id="sv-count"></span></div><div class="sv-notes" id="sv-notes"></div><div class="sv-grid" id="sv-grid"></div></div></div>
 
 <!-- selector de modo de juego (temas de tarjetas) -->
@@ -971,6 +1077,7 @@ body.playing #win-game .workspace{min-height:0;}
 <div class="mode-box" id="mode-box">
   <div class="mode-title">¿cómo quieres jugar?</div>
   <div class="mode-sub" id="mode-tema-name"></div>
+  <div class="pick-filter" id="pick-filter"></div>
   <div class="round-size" id="round-size">
     <label class="rs-toggle"><input type="checkbox" id="rs-on"> por rondas</label>
     <div class="stepper" id="rs-stepper"><button id="rs-minus" type="button">−</button><b id="rs-val">12</b><button id="rs-plus" type="button">+</button></div>
@@ -984,8 +1091,9 @@ body.playing #win-game .workspace{min-height:0;}
   <div class="mode-group">tarjetas con parte de detrás</div>
   <button class="mode-opt" data-mode="anki-texto"><b>del texto a la imagen</b><span data-sub>te muestro lo de detrás y tocas su imagen</span></button>
   <button class="mode-opt" data-mode="anki-imagen"><b>de la imagen al texto</b><span data-sub>te enseño la imagen y tocas su texto</span></button>
-  <div class="mode-group">grupos</div>
-  <button class="mode-opt" data-mode="clasificar"><b>clasificar</b><span data-sub>tocas una imagen y eliges a qué grupo pertenece</span></button>
+  <div class="mode-group">etiquetas</div>
+  <button class="mode-opt" data-mode="clasificar"><b>clasificar</b><span data-sub>arrastras cada imagen a la caja de su etiqueta</span></button>
+  <div class="mode-subrow" id="sort-cat-row"><span>por</span><select id="sort-cat-select"></select></div>
   <button class="btn btn-block" id="mode-cancel">cancelar</button>
 </div>
 
@@ -1020,6 +1128,50 @@ function uid(){ return 'id'+Math.random().toString(36).slice(2,9)+Date.now().toS
 
 let tree = [];
 let notas = [];
+
+/* ---------- ETIQUETAS ----------
+   node.tagCats  = [{id, name}]            categorías del mazo (las crea el usuario)
+   photo.tags    = {catId: [valor, ...]}   una tarjeta puede tener varios valores por categoría
+   node.tagNotes = {catId: {valor: nota}}  nota de cada valor
+   El antiguo photo.group pasa a la categoría "Grupo". */
+const TAG_NONE = '__none__';
+function tagCats(node){ return (node && node.tagCats) || []; }
+function tagCat(node, catId){ return tagCats(node).find(c=> c.id === catId) || null; }
+function tagVals(photo, catId){ return ((photo && photo.tags && photo.tags[catId]) || []).filter(v=> v && v.trim()); }
+function valuesOf(node, catId, photos){
+  const set = new Set();
+  (photos || (node && node.photos) || []).forEach(p=> tagVals(p, catId).forEach(v=> set.add(v)));
+  return [...set].sort((a,b)=> a.localeCompare(b,'es'));
+}
+function setTagVals(photo, catId, vals){
+  const clean = [...new Set(vals.map(v=> v.trim()).filter(Boolean))];
+  photo.tags = photo.tags || {};
+  if(clean.length) photo.tags[catId] = clean; else delete photo.tags[catId];
+  if(!Object.keys(photo.tags).length) delete photo.tags;
+}
+function migrateTemaTags(node){
+  if(!node || node.type !== 'tema') return;
+  const photos = node.photos || [];
+  const hasOld = photos.some(p=> p.group) || node.groupNotes;
+  if(hasOld){
+    node.tagCats = node.tagCats || [];
+    let cat = node.tagCats.find(c=> c.name.toLowerCase() === 'grupo');
+    if(!cat){ cat = {id: 'cat_grupo', name: 'Grupo'}; node.tagCats.unshift(cat); }
+    photos.forEach(p=>{
+      if(p.group && p.group.trim()) setTagVals(p, cat.id, [...tagVals(p, cat.id), p.group.trim()]);
+      delete p.group;
+    });
+    if(node.groupNotes){
+      node.tagNotes = node.tagNotes || {};
+      node.tagNotes[cat.id] = Object.assign({}, node.groupNotes, node.tagNotes[cat.id] || {});
+      delete node.groupNotes;
+    }
+  }
+}
+function normalizeTree(nodes){
+  (nodes||[]).forEach(n=>{ if(n.type === 'folder') normalizeTree(n.children); else migrateTemaTags(n); });
+  return nodes;
+}
 
 /* Se guarda en IndexedDB, que no tiene el límite de ~5 MB de localStorage.
    (localStorage solo se lee una vez, para pasar los datos antiguos a IndexedDB.) */
@@ -1137,7 +1289,7 @@ async function boot(){
   // pide al navegador que no borre estos datos por su cuenta si se queda sin espacio
   try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist(); }catch(e){}
   const cached = await loadLocal();
-  tree = cached || [];
+  tree = normalizeTree(cached || []);
   if(cached) saveLocal(); // si venían de localStorage, quedan pasados a IndexedDB
   const cachedNotasRaw = await loadLocalNotasRaw();
   notas = cachedNotasRaw !== null ? parseNotasValue(cachedNotasRaw) : null;
@@ -1146,7 +1298,7 @@ async function boot(){
       const res = await fetch('data.json',{cache:'no-store'});
       if(res.ok){
         const remote = await res.json();
-        tree = remote.tree || remote || [];
+        tree = normalizeTree(remote.tree || remote || []);
         if(notas === null){
           const rn = normalizeRemoteNotas(remote.notas);
           if(rn) notas = rn;
@@ -1168,7 +1320,7 @@ document.getElementById('btn-refresh').addEventListener('click', async ()=>{
     const res = await fetch('data.json',{cache:'no-store'});
     if(!res.ok){ toast('No hay data.json publicado'); return; }
     const remote = await res.json();
-    tree = remote.tree || remote || [];
+    tree = normalizeTree(remote.tree || remote || []);
     const rn = normalizeRemoteNotas(remote.notas);
     if(rn) notas = rn;
     saveLocal();
@@ -1809,57 +1961,446 @@ function showTarjetasWindow(id){
   document.querySelectorAll('#view-tarjetas .window').forEach(w=> w.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
+let deckTab = 'cards';
 function setDeckTab(tab){
+  deckTab = tab;
   document.querySelectorAll('#deck-tabs button').forEach(b=> b.classList.toggle('on', b.dataset.tab === tab));
   const onCards = tab === 'cards';
+  if(!onCards) setCardSelecting(false);
   document.querySelector('#win-tarjetas-editor .cards-toolbar').style.display = onCards ? '' : 'none';
+  document.getElementById('cards-subbar').style.display = onCards ? '' : 'none';
   document.getElementById('tarjetas-grid').style.display = onCards ? '' : 'none';
-  document.getElementById('groups-panel').classList.toggle('on', !onCards);
+  document.getElementById('tags-panel').classList.toggle('on', !onCards);
   const node = findNode(currentCardsId);
   if(!node) return;
-  if(onCards) renderCardsPanel(node); else renderGroupsPanel(node);
+  if(onCards){ renderCardsSubbar(node); renderCardsPanel(node); } else renderTagsPanel(node);
 }
 document.querySelectorAll('#deck-tabs button').forEach(b=> b.addEventListener('click', ()=> setDeckTab(b.dataset.tab)));
-function renderGroupsPanel(node){
-  const panel = document.getElementById('groups-panel');
-  panel.innerHTML = '';
-  const photos = node.photos || [];
-  const groups = groupsOf(photos);
-  if(!groups.length){
-    panel.innerHTML = '<div class="gp-empty">Todavía no hay grupos.<br>Escribe un grupo en las tarjetas y aparecerá aquí para añadirle notas.</div>';
+
+/* categoría por la que se ordenan las tarjetas en el editor */
+function editSortCat(node){
+  const cats = tagCats(node);
+  if(node.editSortCat === '') return null;               // el usuario eligió "sin orden"
+  if(node.editSortCat && cats.some(c=> c.id === node.editSortCat)) return node.editSortCat;
+  return cats.length ? cats[0].id : null;
+}
+function renderCardsSubbar(node){
+  const bar = document.getElementById('cards-subbar');
+  bar.innerHTML = '';
+  const cats = tagCats(node);
+  if(!cats.length){
+    const b = document.createElement('button');
+    b.className = 'linkbtn'; b.textContent = '+ añadir etiquetas para ordenar el mazo';
+    b.addEventListener('click', ()=>{ setDeckTab('tags'); setTimeout(()=> addTagCategory(node), 0); });
+    bar.appendChild(b);
     return;
   }
-  node.groupNotes = node.groupNotes || {};
-  groups.forEach(g=>{
-    const list = photos.filter(p=> (p.group||'').trim() === g);
-    const item = document.createElement('div');
-    item.className = 'gp-item';
-    item.style.setProperty('--gc', groupColor(node, g));
-    item.innerHTML = `<div class="gp-head"><input class="gp-name" title="tocar para cambiar el nombre del grupo"><span class="gp-count">${list.length}</span></div>
-      <div class="gp-thumbs"></div><textarea class="gp-notes" placeholder="notas: qué significa el nombre, qué tienen en común…"></textarea>`;
-    const name = item.querySelector('.gp-name');
-    name.value = g;
-    name.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); name.blur(); } });
-    name.addEventListener('change', ()=>{ // renombrar el grupo en todas sus tarjetas
-      const nv = name.value.trim();
-      if(!nv || nv === g){ name.value = g; return; }
-      photos.forEach(p=>{ if((p.group||'').trim() === g) p.group = nv; });
-      const old = node.groupNotes[g];
-      delete node.groupNotes[g];
-      if(old) node.groupNotes[nv] = node.groupNotes[nv] ? node.groupNotes[nv] + '\n' + old : old;
-      saveLocal(); renderGroupsPanel(node); toast(`Grupo renombrado: ${nv}`);
+  const lbl = document.createElement('span'); lbl.textContent = 'ordenar por';
+  const sel = document.createElement('select');
+  sel.innerHTML = '<option value="">sin orden</option>' + cats.map(c=> `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+  sel.value = editSortCat(node) || '';
+  sel.addEventListener('change', ()=>{ node.editSortCat = sel.value; saveLocal(); collapsedSections.clear(); renderCardsPanel(node); });
+  const grow = document.createElement('span'); grow.className = 'grow';
+  const selBtn = document.createElement('button');
+  selBtn.className = 'linkbtn' + (cardSel.on ? ' on' : ''); selBtn.id = 'sel-toggle';
+  selBtn.textContent = cardSel.on ? 'dejar de seleccionar' : 'seleccionar varias';
+  selBtn.addEventListener('click', ()=> setCardSelecting(!cardSel.on));
+  bar.append(lbl, sel, grow, selBtn);
+}
+
+const collapsedSections = new Set();
+function renderCardsPanel(node){
+  const grid = document.getElementById('tarjetas-grid');
+  grid.innerHTML = '';
+  grid.classList.toggle('selecting', cardSel.on);
+  const photos = node.photos || (node.photos = []);
+  if(!photos.length){
+    grid.innerHTML = '<div class="tree-empty">Aún no hay tarjetas.<br>Crea una o sube imágenes arriba.</div>';
+    return;
+  }
+  const catId = editSortCat(node);
+  const values = catId ? valuesOf(node, catId) : [];
+  if(!catId || !values.length){ photos.forEach(photo=> grid.appendChild(renderCardItem(node, photo))); return; }
+  // un apartado por valor (con el mismo color que en el juego); una tarjeta con varios valores sale en cada uno
+  const section = (key, name, color, list, none)=>{
+    const h = document.createElement('div');
+    const closed = collapsedSections.has(catId + '|' + key);
+    h.className = 'cards-section' + (none ? ' none' : '');
+    if(color) h.style.setProperty('--gc', color);
+    h.innerHTML = `<span class="arr">${closed ? '▸' : '▾'}</span><span class="dot"></span><span class="t"></span><span class="n">${list.length}</span><span class="line"></span>`;
+    h.querySelector('.t').textContent = name;
+    h.title = cardSel.on ? 'seleccionar todas las de este apartado' : 'plegar / desplegar';
+    h.addEventListener('click', ()=>{
+      if(cardSel.on){ // en modo selección, el título selecciona (o quita) todo el apartado
+        const allIn = list.every(p=> cardSel.ids.has(p.id));
+        list.forEach(p=> allIn ? cardSel.ids.delete(p.id) : cardSel.ids.add(p.id));
+        refreshSelectionMarks(); return;
+      }
+      const k = catId + '|' + key;
+      collapsedSections.has(k) ? collapsedSections.delete(k) : collapsedSections.add(k);
+      rerenderCardsKeepFocus(node);
     });
-    const th = item.querySelector('.gp-thumbs');
-    list.forEach(p=>{ if(p.image){ const im = document.createElement('img'); im.src = p.image; im.title = p.label || ''; th.appendChild(im); } });
-    const ta = item.querySelector('.gp-notes');
-    ta.value = node.groupNotes[g] || '';
-    const grow = ()=>{ ta.style.height = 'auto'; ta.style.height = Math.max(60, ta.scrollHeight + 2) + 'px'; };
-    ta.addEventListener('input', ()=>{
-      if(ta.value.trim()) node.groupNotes[g] = ta.value; else delete node.groupNotes[g];
-      grow(); debouncedSave();
+    grid.appendChild(h);
+    if(!closed) list.forEach(photo=> grid.appendChild(renderCardItem(node, photo)));
+  };
+  values.forEach(v=> section(v, v, tagColor(node, catId, v), photos.filter(p=> tagVals(p, catId).includes(v))));
+  const rest = photos.filter(p=> !tagVals(p, catId).length);
+  if(rest.length) section(TAG_NONE, 'sin ' + tagCat(node, catId).name.toLowerCase(), null, rest, true);
+}
+/* vuelve a dibujar las tarjetas sin perder dónde estabas escribiendo */
+function rerenderCardsKeepFocus(node, focusSel){
+  const grid = document.getElementById('tarjetas-grid');
+  const scroll = grid.scrollTop;
+  let target = focusSel;
+  const ae = document.activeElement;
+  if(!target && ae && grid.contains(ae) && ae.closest('.card-item')){
+    const cls = ['card-name-input','card-back-input','ct-input'].find(c=> ae.classList.contains(c));
+    if(cls) target = { id: ae.closest('.card-item').dataset.id, cls, cat: ae.dataset.cat, sel: [ae.selectionStart, ae.selectionEnd] };
+  }
+  renderCardsPanel(node);
+  grid.scrollTop = scroll;
+  if(target) focusCardField(target);
+}
+function focusCardField(target){
+  const grid = document.getElementById('tarjetas-grid');
+  const sel = `.card-item[data-id="${target.id}"] .${target.cls}` + (target.cat ? `[data-cat="${CSS.escape(target.cat)}"]` : '');
+  const el = grid.querySelector(sel);
+  if(!el) return;
+  el.focus({preventScroll:true});
+  el.closest('.card-item').scrollIntoView({block:'nearest'});
+  if(target.sel && el.setSelectionRange) try{ el.setSelectionRange(target.sel[0], target.sel[1]); }catch(e){}
+}
+
+/* etiquetas dentro de una tarjeta: una línea por categoría */
+function datalistFor(node, catId){
+  let dl = document.getElementById('dl-' + catId);
+  if(!dl){ dl = document.createElement('datalist'); dl.id = 'dl-' + catId; document.body.appendChild(dl); }
+  dl.innerHTML = '';
+  valuesOf(node, catId).forEach(v=>{ const o = document.createElement('option'); o.value = v; dl.appendChild(o); });
+  return dl.id;
+}
+function makeChip(node, photo, catId, v){
+  const chip = document.createElement('span');
+  chip.className = 'chip'; chip.style.setProperty('--cc', tagColor(node, catId, v));
+  chip.innerHTML = '<span class="t"></span><button class="x" title="quitar">✕</button>';
+  chip.querySelector('.t').textContent = v;
+  chip.querySelector('.x').addEventListener('mousedown', (e)=> e.preventDefault()); // no robar el foco
+  chip.querySelector('.x').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    setTagVals(photo, catId, tagVals(photo, catId).filter(x=> x !== v));
+    saveLocal();
+    if(catId === editSortCat(node)) rerenderCardsKeepFocus(node);   // cambia de apartado
+    else refreshCardChips(node, photo);
+  });
+  return chip;
+}
+/* actualiza las etiquetas de una tarjeta sin redibujarla (no se pierde lo que estás escribiendo) */
+function refreshCardChips(node, photo){
+  document.querySelectorAll(`#tarjetas-grid .card-item[data-id="${photo.id}"]`).forEach(card=>{
+    card.querySelectorAll('.ct-row').forEach(row=>{
+      const input = row.querySelector('.ct-input'), box = row.querySelector('.ct-box'), catId = input.dataset.cat;
+      box.querySelectorAll('.chip').forEach(c=> c.remove());
+      tagVals(photo, catId).forEach(v=> box.insertBefore(makeChip(node, photo, catId, v), input));
+      input.placeholder = tagVals(photo, catId).length ? '+' : 'añadir…';
     });
-    panel.appendChild(item);
-    requestAnimationFrame(grow);
+  });
+}
+const pendingResort = new Set(); // tarjetas cuyo apartado cambió mientras escribías
+function renderCardTags(node, photo){
+  const wrap = document.createElement('div');
+  wrap.className = 'card-tags';
+  tagCats(node).forEach(cat=>{
+    const row = document.createElement('div'); row.className = 'ct-row';
+    const lbl = document.createElement('span'); lbl.className = 'ct-lbl'; lbl.textContent = cat.name; lbl.title = cat.name;
+    const box = document.createElement('div'); box.className = 'ct-box';
+    tagVals(photo, cat.id).forEach(v=> box.appendChild(makeChip(node, photo, cat.id, v)));
+    const input = document.createElement('input');
+    input.type = 'text'; input.className = 'ct-input'; input.dataset.cat = cat.id;
+    input.placeholder = tagVals(photo, cat.id).length ? '+' : 'añadir…';
+    input.title = 'Intro: añadir y pasar a la siguiente tarjeta · coma: añadir otro valor';
+    input.setAttribute('list', 'dl-' + cat.id);
+    input.addEventListener('focus', ()=>{ selectCard(photo.id); datalistFor(node, cat.id); });
+    const isSort = ()=> cat.id === editSortCat(node);
+    // añade lo escrito como valor; el campo se vacía al momento para seguir escribiendo
+    const commit = ()=>{
+      const v = input.value.replace(/,/g,' ').trim();
+      input.value = '';
+      if(!v || tagVals(photo, cat.id).some(x=> x.toLowerCase() === v.toLowerCase())) return false;
+      const known = valuesOf(node, cat.id).find(x=> x.toLowerCase() === v.toLowerCase()); // respeta cómo ya lo escribiste
+      setTagVals(photo, cat.id, [...tagVals(photo, cat.id), known || v]);
+      saveLocal();
+      refreshCardChips(node, photo);
+      if(isSort()) pendingResort.add(photo.id);
+      return true;
+    };
+    const finish = (target)=>{ // al terminar con esta tarjeta, se recoloca si cambió de apartado
+      if(pendingResort.has(photo.id)){
+        pendingResort.delete(photo.id);
+        setTimeout(()=>{
+          rerenderCardsKeepFocus(node, target);
+          const el = document.querySelector(`#tarjetas-grid .card-item[data-id="${photo.id}"]`);
+          if(el) el.classList.add('moved');
+        }, 0);
+      } else if(target) focusCardField(target);
+    };
+    input.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        commit();
+        // Intro pasa a la misma categoría de la siguiente tarjeta (en el orden que ves ahora)
+        const all = [...document.querySelectorAll(`#tarjetas-grid .ct-input[data-cat="${CSS.escape(cat.id)}"]`)];
+        const next = all[all.indexOf(input) + 1];
+        const target = next ? { id: next.closest('.card-item').dataset.id, cls: 'ct-input', cat: cat.id } : null;
+        input.dataset.skipBlur = '1';
+        finish(target);
+        return;
+      }
+      if(e.key === ','){ e.preventDefault(); commit(); return; }
+      if(e.key === 'Backspace' && !input.value){
+        const vals = tagVals(photo, cat.id);
+        if(vals.length){
+          e.preventDefault();
+          setTagVals(photo, cat.id, vals.slice(0, -1)); saveLocal();
+          refreshCardChips(node, photo);
+          if(isSort()) pendingResort.add(photo.id);
+        }
+      }
+    });
+    // al elegir una sugerencia de la lista se añade directamente; la coma del teclado del móvil también separa
+    input.addEventListener('input', (e)=>{
+      if(e.inputType === 'insertReplacementText' || (!e.inputType && input.value && valuesOf(node, cat.id).includes(input.value))) commit();
+      else if(input.value.includes(',')) commit();
+    });
+    input.addEventListener('blur', ()=>{
+      if(input.dataset.skipBlur){ delete input.dataset.skipBlur; return; }
+      if(input.value.trim()) commit();
+      if(pendingResort.has(photo.id)) setTimeout(()=> finish(null), 0);
+    });
+    box.appendChild(input);
+    row.append(lbl, box);
+    wrap.appendChild(row);
+  });
+  return wrap;
+}
+
+/* ---------- seleccionar varias tarjetas y etiquetarlas de golpe ---------- */
+const cardSel = { on: false, ids: new Set() };
+function setCardSelecting(on){
+  cardSel.on = on;
+  if(!on) cardSel.ids.clear();
+  document.getElementById('sel-bar').classList.toggle('on', on);
+  const node = findNode(currentCardsId);
+  if(node && deckTab === 'cards'){ renderCardsSubbar(node); renderCardsPanel(node); }
+  refreshSelectionMarks();
+}
+function refreshSelectionMarks(){
+  document.querySelectorAll('#tarjetas-grid .card-item').forEach(c=> c.classList.toggle('picked', cardSel.ids.has(c.dataset.id)));
+  const n = cardSel.ids.size;
+  document.getElementById('sel-count').textContent = n === 1 ? '1 seleccionada' : `${n} seleccionadas`;
+  document.getElementById('sel-tag').disabled = !n;
+  document.getElementById('sel-untag').disabled = !n;
+}
+document.getElementById('tarjetas-grid').addEventListener('click', (e)=>{
+  if(!cardSel.on) return;
+  const card = e.target.closest('.card-item');
+  if(!card) return;
+  e.preventDefault(); e.stopPropagation();
+  const id = card.dataset.id;
+  cardSel.ids.has(id) ? cardSel.ids.delete(id) : cardSel.ids.add(id);
+  refreshSelectionMarks();
+}, true);
+document.getElementById('sel-done').addEventListener('click', ()=> setCardSelecting(false));
+
+function closeTagDialog(){
+  document.getElementById('tag-dialog').classList.remove('open');
+  document.getElementById('mode-backdrop').classList.remove('open');
+}
+function openTagDialog(mode){
+  const node = findNode(currentCardsId);
+  if(!node || !cardSel.ids.size) return;
+  const photos = node.photos.filter(p=> cardSel.ids.has(p.id));
+  const dlg = document.getElementById('tag-dialog');
+  const cats = tagCats(node);
+  const n = photos.length;
+  const catOpts = cats.map(c=> `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+  if(mode === 'add'){
+    dlg.innerHTML = `<div class="td-title">etiquetar ${n} tarjeta${n>1?'s':''}</div>
+      <label>categoría<select id="td-cat">${catOpts}<option value="__new__">nueva categoría…</option></select></label>
+      <label id="td-newcat-l" style="display:none">nombre de la categoría<input id="td-newcat" placeholder="por ejemplo, País"></label>
+      <label>valor<input id="td-val" placeholder="por ejemplo, España"></label>
+      <div class="td-btns"><button class="btn" id="td-cancel">cancelar</button><button class="btn btn-primary" id="td-ok">etiquetar</button></div>`;
+  } else {
+    dlg.innerHTML = `<div class="td-title">quitar etiqueta a ${n} tarjeta${n>1?'s':''}</div>
+      <label>categoría<select id="td-cat">${catOpts}</select></label>
+      <label>valor<select id="td-valsel"></select></label>
+      <div class="td-btns"><button class="btn" id="td-cancel">cancelar</button><button class="btn btn-primary" id="td-ok">quitar</button></div>`;
+  }
+  const catSel = dlg.querySelector('#td-cat');
+  const sortCat = editSortCat(node);
+  if(sortCat) catSel.value = sortCat;
+  if(!cats.length && mode === 'add') catSel.value = '__new__';
+  const sync = ()=>{
+    const c = catSel.value;
+    if(mode === 'add'){
+      dlg.querySelector('#td-newcat-l').style.display = c === '__new__' ? '' : 'none';
+      const vi = dlg.querySelector('#td-val');
+      if(c !== '__new__') vi.setAttribute('list', datalistFor(node, c)); else vi.removeAttribute('list');
+    } else {
+      const present = [...new Set(photos.flatMap(p=> tagVals(p, c)))].sort((a,b)=> a.localeCompare(b,'es'));
+      dlg.querySelector('#td-valsel').innerHTML = present.length
+        ? `<option value="${TAG_NONE}">todos los valores de esta categoría</option>` + present.map(v=> `<option>${escapeHtml(v)}</option>`).join('')
+        : '<option value="">(ninguna tiene valor aquí)</option>';
+    }
+  };
+  catSel.addEventListener('change', sync); sync();
+  dlg.querySelector('#td-cancel').addEventListener('click', closeTagDialog);
+  dlg.querySelector('#td-ok').addEventListener('click', ()=>{
+    let c = catSel.value;
+    if(mode === 'add'){
+      if(c === '__new__'){
+        const name = dlg.querySelector('#td-newcat').value.trim();
+        if(!name){ dlg.querySelector('#td-newcat').focus(); return; }
+        c = createTagCat(node, name).id;
+      }
+      const raw = dlg.querySelector('#td-val').value.trim();
+      if(!raw){ dlg.querySelector('#td-val').focus(); return; }
+      const v = valuesOf(node, c).find(x=> x.toLowerCase() === raw.toLowerCase()) || raw;
+      photos.forEach(p=>{ if(!tagVals(p, c).includes(v)) setTagVals(p, c, [...tagVals(p, c), v]); });
+      toast(`${n} tarjeta${n>1?'s':''} → ${v}`);
+    } else {
+      const v = dlg.querySelector('#td-valsel').value;
+      if(!v) { closeTagDialog(); return; }
+      photos.forEach(p=> setTagVals(p, c, v === TAG_NONE ? [] : tagVals(p, c).filter(x=> x !== v)));
+      toast('Etiqueta quitada');
+    }
+    saveLocal(); closeTagDialog();
+    renderCardsSubbar(node); rerenderCardsKeepFocus(node); refreshSelectionMarks();
+  });
+  dlg.classList.add('open');
+  document.getElementById('mode-backdrop').classList.add('open');
+  const first = dlg.querySelector(mode === 'add' ? (catSel.value === '__new__' ? '#td-newcat' : '#td-val') : '#td-valsel');
+  if(first) setTimeout(()=> first.focus(), 30);
+  dlg.onkeydown = (e)=>{ if(e.key === 'Enter' && e.target.tagName === 'INPUT'){ e.preventDefault(); dlg.querySelector('#td-ok').click(); } if(e.key === 'Escape') closeTagDialog(); };
+}
+document.getElementById('sel-tag').addEventListener('click', ()=> openTagDialog('add'));
+document.getElementById('sel-untag').addEventListener('click', ()=> openTagDialog('remove'));
+document.getElementById('mode-backdrop').addEventListener('click', ()=>{ if(document.getElementById('tag-dialog').classList.contains('open')) closeTagDialog(); });
+
+/* ---------- pestaña ETIQUETAS: categorías, valores y notas ---------- */
+function createTagCat(node, name){
+  node.tagCats = node.tagCats || [];
+  const cat = { id: 'cat_' + uid(), name };
+  node.tagCats.push(cat);
+  saveLocal();
+  return cat;
+}
+function addTagCategory(node){
+  const name = (prompt('Nombre de la categoría (por ejemplo: País, Época, Grupo…)') || '').trim();
+  if(!name) return;
+  if(tagCats(node).some(c=> c.name.toLowerCase() === name.toLowerCase())){ toast('Ya existe esa categoría'); return; }
+  createTagCat(node, name);
+  renderTagsPanel(node);
+  toast(`Categoría «${name}» creada: ahora cada tarjeta tiene una línea para ella`);
+}
+const closedTagCats = new Set();
+function renderTagsPanel(node){
+  const panel = document.getElementById('tags-panel');
+  panel.innerHTML = '';
+  const photos = node.photos || [];
+  const cats = tagCats(node);
+  const top = document.createElement('div'); top.className = 'tp-top';
+  const addBtn = document.createElement('button'); addBtn.className = 'btn'; addBtn.textContent = '+ nueva categoría';
+  addBtn.addEventListener('click', ()=> addTagCategory(node));
+  const hint = document.createElement('span'); hint.className = 'hint';
+  hint.textContent = cats.length ? 'los valores se ponen en cada tarjeta, o a varias a la vez con «seleccionar varias»' : '';
+  top.append(addBtn, hint);
+  panel.appendChild(top);
+  if(!cats.length){
+    const e = document.createElement('div'); e.className = 'tp-empty';
+    e.innerHTML = 'Las etiquetas ordenan un mazo por dentro.<br>Crea una categoría, por ejemplo <b>País</b>, y ponle a cada tarjeta su valor, como <b>España</b>.<br>Después podrás jugar solo las de España, o clasificarlas en cajas por país.';
+    panel.appendChild(e);
+    return;
+  }
+  node.tagNotes = node.tagNotes || {};
+  cats.forEach((cat, ci)=>{
+    const values = valuesOf(node, cat.id);
+    const untagged = photos.filter(p=> !tagVals(p, cat.id).length).length;
+    const block = document.createElement('div');
+    block.className = 'tc-block' + (closedTagCats.has(cat.id) ? ' closed' : '');
+    block.innerHTML = `<div class="tc-head">
+        <button class="tog">${closedTagCats.has(cat.id) ? '▸' : '▾'}</button>
+        <input class="tc-name" title="tocar para cambiar el nombre">
+        <span class="tc-meta">${values.length} valor${values.length===1?'':'es'}${untagged ? ` · ${untagged} sin etiquetar` : ''}</span>
+        <button class="ib up" title="subir">↑</button><button class="ib down" title="bajar">↓</button><button class="ib del" title="eliminar categoría">✕</button>
+      </div><div class="tc-body"></div>`;
+    const nameIn = block.querySelector('.tc-name');
+    nameIn.value = cat.name;
+    nameIn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); nameIn.blur(); } });
+    nameIn.addEventListener('change', ()=>{
+      const nv = nameIn.value.trim();
+      if(!nv){ nameIn.value = cat.name; return; }
+      cat.name = nv; saveLocal();
+    });
+    block.querySelector('.tog').addEventListener('click', ()=>{
+      closedTagCats.has(cat.id) ? closedTagCats.delete(cat.id) : closedTagCats.add(cat.id);
+      renderTagsPanel(node);
+    });
+    const move = (d)=>{ const j = ci + d; if(j < 0 || j >= cats.length) return;
+      [node.tagCats[ci], node.tagCats[j]] = [node.tagCats[j], node.tagCats[ci]]; saveLocal(); renderTagsPanel(node); };
+    block.querySelector('.up').disabled = ci === 0;
+    block.querySelector('.down').disabled = ci === cats.length - 1;
+    block.querySelector('.up').addEventListener('click', ()=> move(-1));
+    block.querySelector('.down').addEventListener('click', ()=> move(1));
+    block.querySelector('.del').addEventListener('click', ()=>{
+      if(!confirm(`¿Eliminar la categoría «${cat.name}»? Se quitará de todas las tarjetas, con sus notas.`)) return;
+      node.tagCats = node.tagCats.filter(c=> c.id !== cat.id);
+      photos.forEach(p=> setTagVals(p, cat.id, []));
+      delete node.tagNotes[cat.id];
+      if(node.editSortCat === cat.id) delete node.editSortCat;
+      if(node.sortCat === cat.id) delete node.sortCat;
+      if(node.playFilter) delete node.playFilter[cat.id];
+      saveLocal(); renderTagsPanel(node);
+    });
+    const body = block.querySelector('.tc-body');
+    if(!values.length){
+      const e = document.createElement('div'); e.className = 'tv-empty';
+      e.textContent = 'Todavía no hay valores. Escríbelos en la línea «' + cat.name + '» de cada tarjeta.';
+      body.appendChild(e);
+    }
+    const notes = node.tagNotes[cat.id] || (node.tagNotes[cat.id] = {});
+    values.forEach(v=>{
+      const list = photos.filter(p=> tagVals(p, cat.id).includes(v));
+      const row = document.createElement('div');
+      row.className = 'tv-row';
+      row.style.setProperty('--cc', tagColor(node, cat.id, v));
+      row.innerHTML = `<span class="bar"></span><input class="tv-name" title="tocar para cambiar el nombre">
+        <span class="tv-right"><span class="tv-count">${list.length}</span><button class="ib" title="quitar este valor de todas las tarjetas">✕</button></span>
+        <div class="tv-thumbs"></div><textarea class="tv-notes" rows="1" placeholder="nota: qué significa, qué tienen en común…"></textarea>`;
+      const vn = row.querySelector('.tv-name');
+      vn.value = v;
+      vn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); vn.blur(); } });
+      vn.addEventListener('change', ()=>{ // renombrar en todas las tarjetas (si ya existe, se fusionan)
+        const nv = vn.value.trim();
+        if(!nv || nv === v){ vn.value = v; return; }
+        photos.forEach(p=>{ const vals = tagVals(p, cat.id); if(vals.includes(v)) setTagVals(p, cat.id, vals.map(x=> x === v ? nv : x)); });
+        if(notes[v]){ notes[nv] = notes[nv] ? notes[nv] + '\n' + notes[v] : notes[v]; delete notes[v]; }
+        saveLocal(); renderTagsPanel(node);
+      });
+      row.querySelector('.ib').addEventListener('click', ()=>{
+        if(!confirm(`¿Quitar «${v}» de ${list.length} tarjeta${list.length>1?'s':''}?`)) return;
+        list.forEach(p=> setTagVals(p, cat.id, tagVals(p, cat.id).filter(x=> x !== v)));
+        delete notes[v]; saveLocal(); renderTagsPanel(node);
+      });
+      const th = row.querySelector('.tv-thumbs');
+      list.slice(0, 24).forEach(p=>{ if(p.image){ const im = document.createElement('img'); im.src = p.image; im.title = p.label || ''; th.appendChild(im); } });
+      const ta = row.querySelector('.tv-notes');
+      ta.value = notes[v] || '';
+      const grow = ()=>{ ta.style.height = 'auto'; ta.style.height = Math.max(34, ta.scrollHeight + 2) + 'px'; };
+      ta.addEventListener('input', ()=>{ if(ta.value.trim()) notes[v] = ta.value; else delete notes[v]; grow(); debouncedSave(); });
+      body.appendChild(row);
+      requestAnimationFrame(grow);
+    });
+    panel.appendChild(block);
   });
 }
 function openCardsEditor(id){
@@ -1871,6 +2412,8 @@ function openCardsEditor(id){
   document.getElementById('tarjetas-name').value = node.name;
   document.getElementById('tarjetas-cols').value = node.cols || 3;
   showTarjetasWindow('win-tarjetas-editor');
+  cardSel.on = false; cardSel.ids.clear(); collapsedSections.clear();
+  document.getElementById('sel-bar').classList.remove('on');
   setDeckTab('cards');
 }
 document.getElementById('tarjetas-name').addEventListener('input', (e)=>{
@@ -1905,64 +2448,15 @@ document.getElementById('tarjetas-delete').addEventListener('click', ()=>{
   showTarjetasWindow('win-tarjetas-list');
 });
 
-function renderCardsPanel(node){
-  const grid = document.getElementById('tarjetas-grid');
-  grid.innerHTML = '';
-  const photos = node.photos || (node.photos = []);
-  if(!photos.length){
-    grid.innerHTML = '<div class="tree-empty">Aún no hay tarjetas.<br>Crea una o sube imágenes arriba.</div>';
-    return;
-  }
-  const groups = groupsOf(photos);
-  if(!groups.length){ photos.forEach(photo=> grid.appendChild(renderCardItem(node, photo))); return; }
-  // agrupadas: un apartado por grupo (mismo color que en el juego) y al final las que no tienen grupo
-  const section = (name, color, n, none)=>{
-    const h = document.createElement('div');
-    h.className = 'cards-section' + (none ? ' none' : '');
-    if(color) h.style.setProperty('--gc', color);
-    h.innerHTML = `<span class="dot"></span><span class="t"></span><span class="n">${n}</span><span class="line"></span>`;
-    h.querySelector('.t').textContent = name;
-    grid.appendChild(h);
-  };
-  groups.forEach(g=>{
-    const list = photos.filter(p=> (p.group||'').trim() === g);
-    section(g, groupColor(node, g), list.length);
-    list.forEach(photo=> grid.appendChild(renderCardItem(node, photo)));
-  });
-  const rest = photos.filter(p=> !(p.group||'').trim());
-  if(rest.length){
-    section('sin grupo', null, rest.length, true);
-    rest.forEach(photo=> grid.appendChild(renderCardItem(node, photo)));
-  }
-}
-/* vuelve a dibujar las tarjetas sin perder dónde estabas escribiendo */
-function rerenderCardsKeepFocus(node, focusSel){
-  const grid = document.getElementById('tarjetas-grid');
-  const scroll = grid.scrollTop;
-  let target = focusSel;
-  const ae = document.activeElement;
-  if(!target && ae && grid.contains(ae) && ae.closest('.card-item')){
-    const cls = ['card-name-input','card-back-input','card-group-input'].find(c=> ae.classList.contains(c));
-    if(cls) target = { id: ae.closest('.card-item').dataset.id, cls, sel: [ae.selectionStart, ae.selectionEnd] };
-  }
-  renderCardsPanel(node);
-  grid.scrollTop = scroll;
-  if(target){
-    const el = grid.querySelector(`.card-item[data-id="${target.id}"] .${target.cls}`);
-    if(el){
-      el.focus({preventScroll:true});
-      el.closest('.card-item').scrollIntoView({block:'nearest'});
-      if(target.sel && el.setSelectionRange) try{ el.setSelectionRange(target.sel[0], target.sel[1]); }catch(e){}
-      else if(target.selectAll && el.select) el.select();
-    }
-  }
-}
 function renderCardItem(node, photo){
   const card = document.createElement('div');
   card.className = 'card-item' + (photo.id === selectedCardId ? ' selected' : '');
   card.dataset.id = photo.id;
-  const myGroup = (photo.group||'').trim();
-  if(myGroup){ card.classList.add('grouped'); card.style.setProperty('--gc', groupColor(node, myGroup)); }
+  const sc = editSortCat(node), myVal = sc ? tagVals(photo, sc)[0] : null;
+  if(myVal){ card.classList.add('grouped'); card.style.setProperty('--gc', tagColor(node, sc, myVal)); }
+  if(cardSel.ids.has(photo.id)) card.classList.add('picked');
+  const check = document.createElement('span'); check.className = 'sel-check'; check.textContent = '✓';
+  card.appendChild(check);
 
   const imgWrap = document.createElement('div');
   imgWrap.className = 'card-img-wrap';
@@ -2067,52 +2561,7 @@ function renderCardItem(node, photo){
   requestAnimationFrame(growBack);
   card.appendChild(backInput);
 
-  const groupInput = document.createElement('input');
-  groupInput.type = 'text';
-  groupInput.className = 'card-group-input';
-  groupInput.placeholder = 'grupo (opcional)';
-  groupInput.setAttribute('list', 'groups-datalist');
-  groupInput.value = photo.group || '';
-  groupInput.addEventListener('focus', ()=>{ selectCard(photo.id); refreshGroupsDatalist(node); });
-  groupInput.addEventListener('input', ()=>{
-    if(groupInput.value.trim()) photo.group = groupInput.value; else delete photo.group;
-    debouncedSave();
-  });
-  // al terminar de escribir el grupo (Intro o salir del campo), la tarjeta se coloca en su apartado
-  let groupAtFocus = myGroup;
-  groupInput.addEventListener('focus', ()=>{ groupAtFocus = (photo.group||'').trim(); });
-  const commitGroup = (nextFocus)=>{
-    const now = (photo.group||'').trim();
-    if(now) photo.group = now;
-    saveLocal();
-    if(now === groupAtFocus && !nextFocus) return;
-    const moved = now !== groupAtFocus;
-    groupAtFocus = now;
-    setTimeout(()=>{ // deja que el foco llegue a donde has tocado antes de redibujar
-      rerenderCardsKeepFocus(node, nextFocus);
-      if(moved){
-        const el = document.querySelector(`#tarjetas-grid .card-item[data-id="${photo.id}"]`);
-        if(el){ el.classList.add('moved'); if(!nextFocus) el.scrollIntoView({block:'nearest', behavior:'smooth'}); }
-        toast(now ? `→ ${now}` : 'sin grupo');
-      }
-    }, 0);
-  };
-  groupInput.addEventListener('keydown', (e)=>{
-    if(e.key !== 'Enter') return;
-    e.preventDefault();
-    // Intro: pasa al grupo de la siguiente tarjeta (en el orden que ves ahora)
-    const inputs = [...document.querySelectorAll('#tarjetas-grid .card-group-input')];
-    const next = inputs[inputs.indexOf(groupInput)+1];
-    const nextFocus = next ? { id: next.closest('.card-item').dataset.id, cls:'card-group-input', selectAll:true } : null;
-    groupInput.dataset.skipBlur = '1';
-    groupInput.blur();
-    commitGroup(nextFocus);
-  });
-  groupInput.addEventListener('blur', ()=>{
-    if(groupInput.dataset.skipBlur){ delete groupInput.dataset.skipBlur; return; }
-    commitGroup(null);
-  });
-  card.appendChild(groupInput);
+  card.appendChild(renderCardTags(node, photo));
 
   const ansBox = document.createElement('div');
   ansBox.className = 'card-answer';
@@ -2273,11 +2722,6 @@ document.getElementById('tarjetas-file-single').addEventListener('change', async
   if(node) await setCardImageFromFile(node, singleCardTargetId, file);
   singleCardTargetId = null;
 });
-function refreshGroupsDatalist(node){
-  const dl = document.getElementById('groups-datalist');
-  dl.innerHTML = '';
-  groupsOf(node.photos||[]).forEach(g=>{ const o = document.createElement('option'); o.value = g; dl.appendChild(o); });
-}
 let extraCardTargetId = null;
 document.getElementById('tarjetas-file-extra').addEventListener('change', async (e)=>{
   const files = [...e.target.files].filter(f=> f.type.startsWith('image/'));
@@ -2304,11 +2748,11 @@ async function setCardImageFromFile(node, photoId, file){
 }
 /* redibuja solo una tarjeta, en su sitio: la página no se mueve */
 function replaceCardItem(node, photo){
-  const old = document.querySelector(`#tarjetas-grid .card-item[data-id="${photo.id}"]`);
-  if(!old){ renderCardsPanel(node); return; }
+  const olds = document.querySelectorAll(`#tarjetas-grid .card-item[data-id="${photo.id}"]`);
+  if(!olds.length){ renderCardsPanel(node); return; }
   const grid = document.getElementById('tarjetas-grid');
   const scroll = grid.scrollTop;
-  old.replaceWith(renderCardItem(node, photo));
+  olds.forEach(old=> old.replaceWith(renderCardItem(node, photo))); // puede salir en varios apartados
   grid.scrollTop = scroll;
 }
 document.getElementById('tarjetas-add').addEventListener('click', ()=>{
@@ -2606,12 +3050,18 @@ function openGamePicker(temaId){
   }
   playTema(node);
 }
+const TAG_COLORS = ['#e63946','#f08c2e','#d4a72c','#2a9d8f','#3a7bd5','#8e6bd1','#d65db1','#5b9a3c','#a0643b','#4f6d8a','#17a2b8','#c2185b'];
+/* el color de un valor depende de su posición entre todos los valores de su categoría en el mazo */
+function tagColor(node, catId, v){
+  const i = valuesOf(node, catId).indexOf(v);
+  return TAG_COLORS[(i < 0 ? 0 : i) % TAG_COLORS.length];
+}
 function hasBack(p){ return !!(p && p.back && p.back.trim()); }
-function playTema(node, onlyIds, playMode, roundSize){
+function playTema(node, onlyIds, playMode, roundSize, opts){
   if(node.mode === 'barajado'){
     let pm = playMode || 'buscar';
     if(pm === 'buscar-rondas'){ pm = 'buscar'; roundSize = clampRoundSize(node.roundSize); }
-    startBarajadoGame(node, onlyIds, pm, roundSize || 0);
+    startBarajadoGame(node, onlyIds, pm, roundSize || 0, opts || {});
   }
   else startGame(node, onlyIds);
 }
@@ -2640,16 +3090,103 @@ document.getElementById('back-game').addEventListener('click', (e)=>{
 let modeChooserNode = null;
 const ROUND_MIN = 4, ROUND_MAX = 40, ROUND_DEFAULT = 12;
 function clampRoundSize(n){ n = Math.round(n || ROUND_DEFAULT); return Math.max(ROUND_MIN, Math.min(ROUND_MAX, n)); }
-function groupsOf(photos){
-  return [...new Set(photos.map(p=> (p.group||'').trim()).filter(Boolean))].sort((a,b)=> a.localeCompare(b,'es'));
+/* filtro de la partida: dentro de una categoría se suman los valores; entre categorías se cruzan */
+function filterActive(node){ const f = node.playFilter || {}; return Object.values(f).some(a=> a && a.length); }
+function passesFilter(node, p, f){
+  f = f || node.playFilter || {};
+  return tagCats(node).every(cat=>{
+    const want = f[cat.id];
+    if(!want || !want.length) return true;
+    const vals = tagVals(p, cat.id);
+    return want.some(w=> w === TAG_NONE ? !vals.length : vals.includes(w));
+  });
 }
+function filteredPhotos(node){
+  const photos = (node.photos||[]).filter(p=> p.image);
+  return filterActive(node) ? photos.filter(p=> passesFilter(node, p)) : photos;
+}
+/* categorías con las que se puede clasificar (al menos 2 valores entre las tarjetas que entran) */
+function sortableCats(node, photos){ return tagCats(node).filter(c=> valuesOf(node, c.id, photos).length >= 2); }
+function renderPickFilter(node){
+  const box = document.getElementById('pick-filter');
+  const cats = tagCats(node).filter(c=> valuesOf(node, c.id).length);
+  box.style.display = cats.length ? '' : 'none';
+  if(!cats.length) return;
+  const f = node.playFilter = node.playFilter || {};
+  const all = (node.photos||[]).filter(p=> p.image);
+  const fp = filteredPhotos(node);
+  const active = filterActive(node);
+  const picked = cats.flatMap(c=> (f[c.id]||[]).map(v=> v === TAG_NONE ? 'sin ' + c.name.toLowerCase() : v));
+  const wasOpen = box.classList.contains('open');
+  box.innerHTML = `<div class="pf-head"><span class="lbl">tarjetas</span><span class="sum"></span><span class="arr">${wasOpen ? '▴' : '▾'}</span></div><div class="pf-body"></div>`;
+  const sum = box.querySelector('.sum');
+  sum.textContent = !active ? `todo el mazo · ${all.length}` : (fp.length ? `${picked.join(', ')} · ${fp.length}` : 'ninguna tarjeta');
+  sum.classList.toggle('on', active && fp.length > 0);
+  sum.classList.toggle('zero', active && !fp.length);
+  box.querySelector('.pf-head').addEventListener('click', ()=>{ box.classList.toggle('open'); box.querySelector('.arr').textContent = box.classList.contains('open') ? '▴' : '▾'; });
+  const body = box.querySelector('.pf-body');
+  cats.forEach(cat=>{
+    const t = document.createElement('div'); t.className = 'pf-cat'; t.textContent = cat.name;
+    const chips = document.createElement('div'); chips.className = 'pf-chips';
+    const want = f[cat.id] || [];
+    const toggle = (v)=>{
+      const cur = new Set(f[cat.id] || []);
+      cur.has(v) ? cur.delete(v) : cur.add(v);
+      if(cur.size) f[cat.id] = [...cur]; else delete f[cat.id];
+      saveLocal(); refreshModeChooser(node);
+    };
+    valuesOf(node, cat.id).forEach(v=>{
+      const c = document.createElement('button');
+      c.className = 'pf-chip' + (want.includes(v) ? ' on' : '');
+      c.style.setProperty('--cc', tagColor(node, cat.id, v));
+      c.innerHTML = '<span></span><span class="n"></span>';
+      c.firstChild.textContent = v;
+      c.lastChild.textContent = all.filter(p=> tagVals(p, cat.id).includes(v)).length;
+      c.addEventListener('click', ()=> toggle(v));
+      chips.appendChild(c);
+    });
+    const noneN = all.filter(p=> !tagVals(p, cat.id).length).length;
+    if(noneN){
+      const c = document.createElement('button');
+      c.className = 'pf-chip none' + (want.includes(TAG_NONE) ? ' on' : '');
+      c.innerHTML = '<span>sin etiqueta</span><span class="n"></span>';
+      c.lastChild.textContent = noneN;
+      c.addEventListener('click', ()=> toggle(TAG_NONE));
+      chips.appendChild(c);
+    }
+    body.append(t, chips);
+  });
+  const foot = document.createElement('div'); foot.className = 'pf-foot';
+  foot.innerHTML = '<span>misma categoría: se suman · distintas: se cruzan</span>';
+  if(active){
+    const clr = document.createElement('button'); clr.textContent = 'jugar todo';
+    clr.addEventListener('click', ()=>{ node.playFilter = {}; saveLocal(); refreshModeChooser(node); });
+    foot.appendChild(clr);
+  }
+  body.appendChild(foot);
+}
+function refreshSortCatRow(node){
+  const row = document.getElementById('sort-cat-row');
+  const cats = sortableCats(node, filteredPhotos(node));
+  if(node.sortCat && !cats.some(c=> c.id === node.sortCat)) delete node.sortCat;
+  row.style.display = cats.length > 1 ? '' : 'none';
+  const sel = document.getElementById('sort-cat-select');
+  sel.innerHTML = cats.map(c=> `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+  if(cats.length) sel.value = node.sortCat || cats[0].id;
+}
+document.getElementById('sort-cat-select').addEventListener('change', (e)=>{
+  const node = modeChooserNode; if(!node) return;
+  node.sortCat = e.target.value; saveLocal();
+});
 /* qué hace falta en el mazo para poder jugar cada modo */
 function modeUnavailable(node, mode){
-  const photos = (node.photos||[]).filter(p=> p.image);
+  const photos = filteredPhotos(node);
+  if(!photos.length) return filterActive(node) ? 'ninguna tarjeta cumple el filtro' : 'este mazo no tiene imágenes';
   if(mode === 'anki-texto' || mode === 'anki-imagen')
     return photos.filter(hasBack).length < 2 ? 'escribe texto detrás de al menos 2 tarjetas' : null;
   if(mode === 'clasificar')
-    return groupsOf(photos).length < 2 ? 'pon un grupo a las tarjetas (al menos 2 grupos distintos)' : null;
+    return sortableCats(node, photos).length ? null
+      : (tagCats(node).length ? 'hacen falta al menos 2 valores distintos en una categoría' : 'pon etiquetas a las tarjetas en «Crear tarjetas»');
   if(mode === 'elegir') return photos.length < 2 ? 'hacen falta al menos 2 tarjetas' : null;
   return null;
 }
@@ -2662,6 +3199,15 @@ function openModeChooser(node){
   modeChooserNode = node;
   if(node.lastPlayMode === 'buscar-rondas'){ node.lastPlayMode = 'buscar'; node.useRounds = true; } // versión anterior
   document.getElementById('mode-tema-name').textContent = node.name;
+  document.getElementById('pick-filter').classList.remove('open');
+  refreshModeChooser(node);
+  document.getElementById('mode-box').classList.add('open');
+  document.getElementById('mode-backdrop').classList.add('open');
+  document.getElementById('mode-box').scrollTop = 0;
+}
+function refreshModeChooser(node){
+  renderPickFilter(node);
+  refreshSortCatRow(node);
   document.querySelectorAll('#mode-box .mode-opt').forEach(b=>{
     b.classList.toggle('last', b.dataset.mode === (node.lastPlayMode || 'buscar'));
     const why = modeUnavailable(node, b.dataset.mode);
@@ -2671,9 +3217,6 @@ function openModeChooser(node){
     sub.textContent = why || sub.dataset.orig;
   });
   refreshRoundUi(node);
-  document.getElementById('mode-box').classList.add('open');
-  document.getElementById('mode-backdrop').classList.add('open');
-  document.getElementById('mode-box').scrollTop = 0;
 }
 document.getElementById('rs-on').addEventListener('change', (e)=>{
   const node = modeChooserNode; if(!node) return;
@@ -2697,7 +3240,9 @@ document.querySelectorAll('#mode-box .mode-opt').forEach(b=> b.addEventListener(
   if(!node) return;
   node.lastPlayMode = b.dataset.mode;
   saveLocal();
-  playTema(node, null, b.dataset.mode, node.useRounds ? clampRoundSize(node.roundSize) : 0);
+  const filtered = filterActive(node);
+  const ids = filtered ? new Set(filteredPhotos(node).map(p=> p.id)) : null;
+  playTema(node, ids, b.dataset.mode, node.useRounds ? clampRoundSize(node.roundSize) : 0, { filtered });
 }));
 document.getElementById('mode-cancel').addEventListener('click', closeModeChooser);
 document.getElementById('mode-backdrop').addEventListener('click', closeModeChooser);
@@ -2834,7 +3379,8 @@ function hideRoundBanner(){
   const b = document.getElementById('round-banner');
   clearTimeout(b._t); roundBannerOpen = false; b.classList.remove('show'); b.onclick = null;
 }
-function startBarajadoGame(node, onlyIds, playMode, roundSize){
+function startBarajadoGame(node, onlyIds, playMode, roundSize, opts){
+  opts = opts || {};
   document.body.classList.add('playing');
   resetGameContainers();
   let photos = node.photos || [];
@@ -2842,10 +3388,13 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
   // modos de tarjetas con reverso: solo entran las que tienen texto detrás, y se juegan como "buscar"
   const launchMode = playMode || 'buscar';
   photos = photos.filter(p=> p.image);
-  let anki = null;
+  let anki = null, sortCatId = null;
   if(playMode === 'clasificar'){
-    photos = photos.filter(p=> (p.group||'').trim());
-    if(groupsOf(photos).length < 2){ toast('Hacen falta tarjetas de al menos 2 grupos'); document.body.classList.remove('playing'); return; }
+    const cats = sortableCats(node, photos);
+    sortCatId = (opts.sortCat && cats.some(c=> c.id === opts.sortCat)) ? opts.sortCat
+      : (node.sortCat && cats.some(c=> c.id === node.sortCat)) ? node.sortCat : (cats[0] && cats[0].id);
+    if(sortCatId) photos = photos.filter(p=> tagVals(p, sortCatId).length);
+    if(!sortCatId || valuesOf(node, sortCatId, photos).length < 2){ toast('Hacen falta tarjetas con al menos 2 etiquetas distintas'); document.body.classList.remove('playing'); return; }
   }
   if(playMode === 'anki-texto' || playMode === 'anki-imagen'){
     anki = playMode === 'anki-texto' ? 'texto' : 'imagen';
@@ -2864,7 +3413,11 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize){
     launchMode, roundSize: roundSize || 0,
     anki,
     imgOf: Object.fromEntries(photos.map(p=>{ const im = allImages(p); return [p.id, im[Math.floor(Math.random()*im.length)]]; })),
-    groups: groupsOf(photos),
+    sortCatId,
+    groups: sortCatId ? valuesOf(node, sortCatId, photos) : [],
+    baseIds: onlyIds ? new Set(onlyIds) : null,
+    filtered: !!opts.filtered,
+    reviewFails: !!opts.reviewFails,
     optionsOf: {}, wrongPicked: {}, letrasOf: {},
     rounds, roundEnds, roundIdx: 0,
     temaNode: node,
@@ -3211,14 +3764,21 @@ function endGame(){
 
   // guarda en el historial del tema (mejores 10 resultados)
   const node = game.temaNode;
-  const histKey = historyKey(game.launchMode, game.roundSize);
+  // clasificar guarda récord por categoría; las partidas filtradas o de repaso no cuentan
+  const histKey = historyKey(game.launchMode, game.roundSize) + (game.sortCatId && game.sortCatId !== 'cat_grupo' ? '_' + game.sortCatId : '');
   node[histKey] = node[histKey] || [];
+  const counts = !game.filtered && !game.reviewFails;
   const entry = {score: scorePct, seconds: secs};
-  node[histKey].push(entry);
-  node[histKey].sort((a,b)=> b.score-a.score || a.seconds-b.seconds);
-  const isNewBest = node[histKey][0] === entry;
-  node[histKey] = node[histKey].slice(0,10);
-  saveLocal();
+  let isNewBest = false;
+  if(counts){
+    node[histKey].push(entry);
+    node[histKey].sort((a,b)=> b.score-a.score || a.seconds-b.seconds);
+    isNewBest = node[histKey][0] === entry;
+    node[histKey] = node[histKey].slice(0,10);
+    saveLocal();
+  }
+  document.getElementById('end-note').textContent = counts ? ''
+    : game.filtered ? 'partida con filtro de etiquetas · no cuenta para el récord' : 'repaso de fallos · no cuenta para el récord';
 
   document.getElementById('end-best-badge').style.display = isNewBest ? 'block' : 'none';
 
@@ -3235,8 +3795,10 @@ function endGame(){
   } else failBtn.style.display = 'none';
   showJugarWindow('win-end');
 }
-document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode, null, game.launchMode || game.playMode, game.roundSize));
-document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds), game.launchMode || game.playMode, game.roundSize));
+document.getElementById('end-again').addEventListener('click', ()=> playTema(game.temaNode, game.baseIds, game.launchMode || game.playMode, game.roundSize,
+  { filtered: game.filtered, reviewFails: game.reviewFails, sortCat: game.sortCatId }));
+document.getElementById('end-fails').addEventListener('click', ()=> playTema(game.temaNode, new Set(game.failedIds), game.launchMode || game.playMode, game.roundSize,
+  { filtered: game.filtered, reviewFails: true, sortCat: game.sortCatId }));
 
 /* ============================================================
    MODO ESCRIBIR — tocas una imagen, se agranda y escribes su nombre
@@ -3395,8 +3957,7 @@ document.getElementById('end-back').addEventListener('click', ()=> showJugarWind
    Lo que colocas se queda dentro de su caja: así ves juntas las de la misma familia.
    ============================================================ */
 const SORT_COLORS = ['#e63946','#f08c2e','#d4a72c','#2a9d8f','#3a7bd5','#8e6bd1','#d65db1','#5b9a3c','#a0643b','#4f6d8a','#17a2b8','#c2185b'];
-function groupColor(node, g){ const i = groupsOf((node && node.photos) || []).indexOf(g); return SORT_COLORS[(i < 0 ? 0 : i) % SORT_COLORS.length]; }
-function sortColor(g){ return groupColor(game.temaNode, g); }
+function sortColor(g){ return tagColor(game.temaNode, game.sortCatId, g); }
 function sortMaxAttempts(){ return Math.min(3, game.groups.length - 1); }
 function setupSortBoxes(){
   game.sort = { selected: null, placed: {} };
@@ -3458,10 +4019,12 @@ function sortDrop(id, g){
   const st = game.stateOf[id];
   if(st === 'correct' || st === 'wrong') return;
   if(game.attemptsOf[id] === undefined) game.attemptsOf[id] = sortMaxAttempts();
-  const photo = game.photoOf[id], right = photo.group.trim();
+  const photo = game.photoOf[id], rights = tagVals(photo, game.sortCatId);
+  let right = rights[0];
   const cell = document.querySelector(`.game-cell[data-id="${id}"]`);
   game.sort.selected = null;
-  if(g === right){
+  if(rights.includes(g)){
+    right = g;                      // con varios valores, vale cualquiera de sus cajas
     game.correct++;
     game.pointResult[id] = sortMaxAttempts() - game.attemptsOf[id] + 1;
     game.stateOf[id] = 'correct';
@@ -3482,7 +4045,7 @@ function sortDrop(id, g){
     game.pointResult[id] = 'failed';
     game.stateOf[id] = 'wrong';
     game.sort.placed[right].push({id, failed:true});
-    showMissName(`${photo.label} → ${right}`);
+    showMissName(`${photo.label} → ${rights.join(' / ')}`);
   }
   if(cell){ cell.classList.remove('picked'); cell.classList.add('placed'); setTimeout(()=> cell.remove(), 360); }
   renderSortBoxes();
@@ -3493,7 +4056,7 @@ function openSortView(g){
   const card = document.getElementById('sv-card');
   card.style.setProperty('--c', sortColor(g));
   document.getElementById('sv-title').textContent = g;
-  const note = ((game.temaNode.groupNotes || {})[g] || '').trim();
+  const note = (((game.temaNode.tagNotes || {})[game.sortCatId] || {})[g] || '').trim();
   const nEl = document.getElementById('sv-notes');
   nEl.textContent = note; nEl.style.display = note ? '' : 'none';
   const list = game.sort.placed[g];
@@ -3618,7 +4181,9 @@ function buildOptions(id){
   const score = (p)=>{
     let sc = Math.random();
     sc += 3 * (((conf[id]||{})[p.id]||0) + ((conf[p.id]||{})[id]||0));
-    if(me.group && p.group && me.group.trim() === p.group.trim()) sc += 1.5;
+    let shared = 0;
+    tagCats(node).forEach(c=>{ const mine = tagVals(me, c.id); if(tagVals(p, c.id).some(v=> mine.includes(v))) shared++; });
+    sc += Math.min(3, shared * 1.5);
     return sc;
   };
   const seen = new Set([normLabel(me.label)]);
@@ -3701,14 +4266,14 @@ function renderPickZoom(){
   if(pz.finished === 'failed') card.classList.add('bad');
   reveal.classList.toggle('show', pz.finished === 'failed');
   reveal.textContent = pz.finished === 'failed'
-    ? (mode === 'clasificar' ? `grupo: ${photo.group.trim()}` : photo.label) : '';
+    ? (mode === 'clasificar' ? tagVals(photo, game.sortCatId).join(' / ') : photo.label) : '';
   body.innerHTML = '';
 
   if(mode === 'elegir' || mode === 'clasificar'){
     const wrap = document.createElement('div');
     wrap.className = 'pick-opts' + (mode === 'clasificar' ? ' groups' : '');
     const opts = mode === 'elegir' ? game.optionsOf[id] : game.groups;
-    const correctKey = mode === 'elegir' ? id : photo.group.trim();
+    const correctKey = mode === 'elegir' ? id : tagVals(photo, game.sortCatId)[0];
     opts.forEach(o=>{
       const b = document.createElement('button');
       b.className = 'pick-opt';
@@ -3960,6 +4525,7 @@ function decksFromFile(data){
   return out;
 }
 function importDecks(decks){
+  normalizeTree(decks);
   let added = 0, replaced = 0;
   decks.forEach(deck=>{
     if(!deck || deck.type !== 'tema') return;
@@ -3999,7 +4565,7 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
       const incoming = data.tree || data;
       if(!Array.isArray(incoming)) throw new Error('formato inválido');
       if(tree.length && !confirm('Esto reemplazará tu biblioteca actual. ¿Continuar?')) return;
-      tree = incoming;
+      tree = normalizeTree(incoming);
       saveLocal();
       const rn = normalizeRemoteNotas(data.notas);
       if(rn){
