@@ -71,8 +71,8 @@ button{cursor:pointer;}
 .tree-menu-btn{background:none;border:none;color:var(--muted);font-size:15px;padding:2px 6px;
   flex-shrink:0;line-height:1;}
 .tree-menu-btn:hover{color:var(--fg);}
-.tree-export-btn{background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:11.5px;
-  padding:2px 7px;flex-shrink:0;line-height:1.4;margin-right:2px;}
+.tree-export-btn{background:none;border:none;border-radius:6px;color:var(--muted);font-size:14px;
+  padding:2px 6px;flex-shrink:0;line-height:1;}
 .tree-export-btn:hover{color:var(--fg);border-color:var(--fg);}
 .tree-children{display:none;}
 .tree-children.open{display:block;}
@@ -119,7 +119,15 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--
 .hr{height:1px;background:var(--border);margin:16px 0;}
 
 /* TARJETAS (temas barajados) */
-#view-tarjetas .app{max-width:1100px;}
+.smallbtn.strong{color:var(--fg);font-weight:600;}
+/* nuevo mazo */
+.new-deck-types{display:flex;flex-direction:column;gap:6px;}
+.new-deck-types label{flex-direction:row !important;align-items:flex-start;gap:10px !important;padding:10px 12px;
+  border:1px solid var(--field-border);border-radius:10px;cursor:pointer;color:var(--fg) !important;font-size:13.5px !important;}
+.new-deck-types label.on{border-color:var(--fg);}
+.new-deck-types input{margin-top:2px;accent-color:var(--fg);}
+.new-deck-types b{display:block;font-weight:600;}
+.new-deck-types span{display:block;font-size:12px;color:var(--muted);margin-top:1px;}
 .cards-toolbar{display:flex;align-items:center;gap:8px;padding:10px 12px;
   border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;}
 .cards-cols-field{display:flex;align-items:center;gap:6px;margin-left:auto;}
@@ -671,68 +679,88 @@ body.playing #win-game .workspace{min-height:0;}
 
 @media(max-width:420px){.win-content{padding:10px 4px;}}
 
-/* ===================== LIENZO ===================== */
-.lz-app{display:flex;flex-direction:column;width:100%;height:100%;flex:1;min-height:0;}
-.lz-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;
-  border-bottom:1px solid var(--border);background:var(--win);flex-shrink:0;}
-.lz-grp{display:flex;align-items:center;gap:6px;}
-.lz-toolbar input[type=number]{width:60px;background:#fff;border:1px solid var(--field-border);
-  padding:6px 7px;font-size:13px;border-radius:6px;}
-.lz-toolbar input[type=color]{width:26px;height:26px;border:1px solid var(--field-border);border-radius:6px;
-  padding:0;background:none;}
-.lz-sep{width:1px;align-self:stretch;background:var(--border);}
-.lz-spacer{flex:1;}
-.lz-zoomlabel{font-size:12px;color:var(--muted);min-width:38px;text-align:center;}
-.lz-viewport{flex:1;overflow:auto;position:relative;display:flex;align-items:center;
-  justify-content:center;padding:24px;background:#f2f2f2;}
-.lz-canvas-wrap{position:relative;box-shadow:0 2px 18px rgba(0,0,0,0.12);flex-shrink:0;}
-#lz-canvas{position:relative;overflow:hidden;}
-.lz-item{position:absolute;cursor:grab;outline:2px solid transparent;user-select:none;touch-action:none;}
-.lz-item.selected{outline:2px solid var(--c-info);}
-.lz-frame{width:100%;height:100%;overflow:hidden;position:relative;}
-.lz-frame img{position:absolute;pointer-events:none;}
-.lz-rectfill{width:100%;height:100%;}
-.lz-del{position:absolute;top:-11px;right:-11px;width:22px;height:22px;border-radius:50%;
-  background:var(--c-bad);color:#fff;border:2px solid #fff;font-size:12px;line-height:1;
-  display:none;align-items:center;justify-content:center;cursor:pointer;}
-.lz-item.selected .lz-del{display:flex;}
-.lz-rs{position:absolute;bottom:-7px;right:-7px;width:14px;height:14px;border-radius:50%;
-  background:var(--c-info);border:2px solid #fff;display:none;cursor:nwse-resize;}
-.lz-item.selected.solo .lz-rs{display:block;}
-.lz-hint-empty{position:absolute;color:var(--muted);font-size:13px;text-align:center;
-  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1.6;}
-.lz-namewash{position:absolute;inset:0;pointer-events:none;display:none;box-sizing:border-box;
-  background:rgba(10,138,63,0.16);border:2px solid var(--c-ok);}
-.lz-item.named .lz-namewash{display:block;}
-.lz-nametag{position:absolute;bottom:3px;left:3px;right:3px;background:rgba(10,138,63,0.9);
-  color:#fff;font-size:10px;padding:2px 5px;border-radius:4px;text-align:center;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;display:none;}
-.lz-item.named .lz-nametag{display:block;}
-.lz-marquee{position:absolute;z-index:4;border:1.5px dashed var(--c-info);
-  background:rgba(21,1,254,0.08);pointer-events:none;}
-.lz-point{position:absolute;transform:translate(-50%,-50%);z-index:7;}
-.lz-point-dot{width:16px;height:16px;border-radius:50%;background:var(--c-info);
-  border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,0.25);cursor:grab;}
-.lz-point-tag{position:absolute;top:20px;left:50%;transform:translateX(-50%);
-  background:rgba(21,1,254,0.9);color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;
-  white-space:nowrap;pointer-events:none;}
-.lz-point-del{position:absolute;top:-9px;right:-9px;width:16px;height:16px;border-radius:50%;
-  background:var(--c-bad);color:#fff;border:2px solid #fff;font-size:10px;line-height:1;
-  display:none;align-items:center;justify-content:center;cursor:pointer;}
-.lz-point:hover .lz-point-del{display:flex;}
-
-/* recorte estilo Photoshop: recuadro de 4 vértices sobre la imagen completa */
-.lz-crop-backdrop{position:fixed;inset:0;z-index:499;background:transparent;}
-.lz-cropfull{position:fixed;z-index:500;pointer-events:none;}
-.lz-cropfull img{width:100%;height:100%;display:block;}
-.lz-croprect{position:fixed;z-index:502;border:2px solid var(--c-info);cursor:move;
-  box-shadow:0 0 0 2000px rgba(0,0,0,0.55);}
-.lz-crop-handle{position:absolute;z-index:503;width:18px;height:18px;
-  background:var(--c-info);border:2px solid #fff;border-radius:50%;}
-.lz-crop-handle[data-c="nw"]{top:-9px;left:-9px;cursor:nwse-resize;}
-.lz-crop-handle[data-c="ne"]{top:-9px;right:-9px;cursor:nesw-resize;}
-.lz-crop-handle[data-c="sw"]{bottom:-9px;left:-9px;cursor:nesw-resize;}
-.lz-crop-handle[data-c="se"]{bottom:-9px;right:-9px;cursor:nwse-resize;}
+/* ===================== OCLUSIÓN ===================== */
+#view-biblioteca .app.wide{max-width:1100px;}
+.occ-toolbar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;}
+.occ-grp{display:flex;gap:4px;}
+.occ-toolbar .grow{flex:1;}
+.occ-toolbar .btn{padding:6px 11px;font-size:13px;}
+.occ-toolbar .btn.ic{width:34px;padding:6px 0;text-align:center;}
+.occ-toolbar .btn:disabled{opacity:0.4;}
+.occ-body{flex:1;min-height:0;display:flex;}
+.occ-ws{position:relative;flex:1;min-width:0;overflow:hidden;background:#eceff2;touch-action:none;cursor:crosshair;}
+.occ-ws.dragover{outline:3px dashed var(--c-info);outline-offset:-6px;}
+.occ-stage{position:absolute;top:0;left:0;transform-origin:0 0;--inv:1;}
+.occ-stage img{display:block;max-width:none;user-select:none;-webkit-user-select:none;pointer-events:none;box-shadow:0 2px 12px rgba(0,0,0,0.12);}
+.occ-mask{position:absolute;box-sizing:border-box;background:rgba(255,226,120,0.88);border:calc(2px*var(--inv)) solid #d9a400;cursor:move;}
+.occ-mask.unnamed{background:rgba(255,226,120,0.6);border-style:dashed;}
+.occ-mask.sel{border-color:var(--c-info);box-shadow:0 0 0 calc(2px*var(--inv)) rgba(21,1,254,0.25);}
+.occ-mask .n{position:absolute;top:calc(2px*var(--inv));left:calc(3px*var(--inv));font-size:calc(12px*var(--inv));font-weight:700;color:#7a5a00;line-height:1;}
+.occ-mask .h{position:absolute;width:calc(16px*var(--inv));height:calc(16px*var(--inv));border-radius:50%;background:var(--c-info);
+  border:calc(2px*var(--inv)) solid #fff;box-sizing:border-box;}
+.occ-mask .h[data-c=nw]{left:calc(-8px*var(--inv));top:calc(-8px*var(--inv));cursor:nwse-resize;}
+.occ-mask .h[data-c=ne]{right:calc(-8px*var(--inv));top:calc(-8px*var(--inv));cursor:nesw-resize;}
+.occ-mask .h[data-c=sw]{left:calc(-8px*var(--inv));bottom:calc(-8px*var(--inv));cursor:nesw-resize;}
+.occ-mask .h[data-c=se]{right:calc(-8px*var(--inv));bottom:calc(-8px*var(--inv));cursor:nwse-resize;}
+.occ-empty{position:absolute;inset:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  border:2px dashed var(--field-border);border-radius:14px;cursor:pointer;color:var(--fg);background:#fff;}
+.occ-empty span{font-size:12.5px;color:var(--muted);}
+.occ-side{width:290px;flex-shrink:0;border-left:1px solid var(--border);display:flex;flex-direction:column;min-height:0;background:var(--win);}
+.occ-side-hd{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:2px;}
+.occ-side-hd #occ-count{font-size:13px;font-weight:600;white-space:nowrap;}
+.occ-side-hd .hint{font-size:11px;color:var(--muted);line-height:1.35;}
+.occ-list{flex:1;overflow-y:auto;padding:6px;}
+.occ-list-empty{color:var(--muted);font-size:12.5px;line-height:1.6;padding:14px 8px;text-align:center;}
+.occ-row{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:8px;}
+.occ-row.sel{background:rgba(21,1,254,0.06);}
+.occ-row .n{width:22px;height:22px;border-radius:6px;background:#ffe278;color:#7a5a00;font-size:11.5px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.occ-row.sel .n{background:var(--c-info);color:#fff;}
+.occ-row input[type=text]{flex:1;min-width:0;font-size:13.5px;padding:7px 9px;}
+.occ-row .x{border:none;background:none;color:var(--muted);font-size:12px;padding:4px 6px;border-radius:6px;}
+.occ-row .x:hover{color:var(--c-bad);}
+@media (max-width:760px){
+  .occ-body{flex-direction:column;}
+  .occ-side{width:auto;border-left:none;border-top:1px solid var(--border);max-height:38%;}
+  .occ-side-hd{flex-direction:row;align-items:baseline;gap:10px;}
+}
+/* partida de oclusión */
+.og-mask{position:absolute;box-sizing:border-box;border-radius:2px;pointer-events:none;}
+.og-mask.hid{background:#ffe278;border:2px solid #d9a400;}
+.og-mask.q{background:#ff7b6b;border:2px solid #c0392b;animation:ogpulse 1.1s ease-in-out infinite;}
+.og-mask.q.show{background:rgba(255,255,255,0.15);animation:none;border:3px solid var(--c-info);}
+@keyframes ogpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,80,60,0.6);}50%{box-shadow:0 0 0 7px rgba(255,80,60,0);}}
+.og-mask.open{background:transparent;border:2px solid rgba(0,0,0,0.25);}
+.og-mask.open.soft{border:1px dashed rgba(0,0,0,0.3);}
+.og-mask.open.correct{border:3px solid var(--c-ok);background:rgba(10,138,63,0.08);}
+.og-mask.open.wrong{border:3px solid var(--c-bad);background:rgba(254,1,16,0.06);}
+.og-mask .lb{position:absolute;left:50%;top:100%;transform:translate(-50%,3px);white-space:nowrap;background:rgba(20,20,20,0.85);
+  color:#fff;font-size:11px;padding:2px 7px;border-radius:8px;z-index:2;}
+.og-mask.miss{animation:missshake 0.38s ease-in-out;border-color:var(--c-bad);}
+#win-game.occ-ans .workspace{margin-bottom:150px;}
+.occ-panel{position:absolute;left:50%;bottom:calc(12px + var(--safe-bottom));transform:translateX(-50%);z-index:7;
+  width:min(94vw,520px);box-sizing:border-box;background:var(--win);border-radius:14px;box-shadow:0 6px 28px rgba(0,0,0,0.22);
+  padding:12px;display:none;flex-direction:column;gap:9px;}
+.occ-panel.on{display:flex;}
+.occ-panel.ok{box-shadow:0 0 0 4px var(--c-ok),0 6px 28px rgba(0,0,0,0.22);}
+.occ-panel.miss{animation:cardmiss 0.5s ease-out;}
+.op-hint{text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:17px;letter-spacing:0.14em;min-height:22px;color:var(--fg);}
+.op-hint.reveal{font-family:inherit;letter-spacing:normal;color:var(--c-info);font-weight:600;}
+.op-body{display:flex;gap:8px;justify-content:center;}
+.op-body input[type=text]{flex:1;min-width:0;font-size:16px;padding:10px 12px;}
+.op-body .btn{flex-shrink:0;}
+.op-body .op-wide{flex:1;}
+.op-body .op-no{color:var(--c-bad);}
+.op-foot{display:flex;align-items:center;justify-content:space-between;min-height:18px;}
+.op-foot .attempts{margin:0;}
+.op-foot .op-skip{margin-left:auto;padding:5px 11px;font-size:12px;}
+/* selector de modo: solo lo que corresponde a cada tipo de mazo */
+#mode-box.occ .bj-only{display:none !important;}
+#mode-box:not(.occ) .occ-only{display:none !important;}
+.seg{display:flex;border:1px solid var(--field-border);border-radius:8px;overflow:hidden;flex:1;}
+.seg button{flex:1;border:none;background:#fff;font-size:12px;padding:6px 4px;color:var(--muted);}
+.seg button + button{border-left:1px solid var(--field-border);}
+.seg button.on{background:var(--fg);color:#fff;}
 
 /* NOTAS */
 .notas-bar-status{font-size:11.5px;color:var(--muted);}
@@ -756,10 +784,8 @@ body.playing #win-game .workspace{min-height:0;}
     <button class="smallbtn" id="btn-refresh" title="Actualizar desde lo publicado">⟳ actualizar</button>
   </div>
   <div class="app-tabs">
-    <button class="app-tab active" data-tab="biblioteca">Biblioteca</button>
+    <button class="app-tab active" data-tab="biblioteca">Mazos</button>
     <button class="app-tab" data-tab="jugar">Jugar</button>
-    <button class="app-tab" data-tab="lienzo">Lienzo</button>
-    <button class="app-tab" data-tab="tarjetas">Crear tarjetas</button>
     <button class="app-tab" data-tab="notas">Notas</button>
   </div>
 </div>
@@ -770,14 +796,10 @@ body.playing #win-game .workspace{min-height:0;}
 
     <div class="window active" id="win-tree-b">
       <div class="win-tb">
-        <span class="title">biblioteca</span>
-        <button class="smallbtn" id="btn-import-deck" title="Añadir uno o varios mazos guardados">+ importar mazo</button>
-        <button class="smallbtn" id="btn-export" title="Exportar toda la biblioteca (data.json para GitHub)">exportar todo</button>
-        <button class="smallbtn" id="btn-import" title="Reemplazar toda la biblioteca por un data.json">importar todo</button>
-      </div>
-      <div class="tree-toolbar">
+        <span class="title">mazos</span>
         <button class="smallbtn" id="btn-root-folder">+ carpeta</button>
-        <button class="smallbtn" id="btn-root-tema">+ tema</button>
+        <button class="smallbtn strong" id="btn-root-tema">+ mazo</button>
+        <button class="tree-menu-btn" id="btn-lib-menu" title="importar y exportar">⋯</button>
       </div>
       <div class="win-content" id="tree-b"></div>
     </div>
@@ -785,7 +807,7 @@ body.playing #win-game .workspace{min-height:0;}
     <div class="window" id="win-tema-b">
       <div class="win-tb">
         <button class="back" id="back-tema-b">←</button>
-        <span class="title" id="tema-b-title">tema</span>
+        <span class="title" id="tema-b-title">mazo</span>
         <button class="smallbtn" id="tema-b-play">jugar</button>
       </div>
       <div style="padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;">
@@ -811,12 +833,71 @@ body.playing #win-game .workspace{min-height:0;}
       </div>
       <div class="win-content" style="flex:0;border-top:1px solid var(--border);">
         <div class="field" style="margin-bottom:10px;">
-          <span class="lbl">nombre del tema</span>
+          <span class="lbl">nombre del mazo</span>
           <input type="text" id="tema-b-name">
         </div>
         <div class="row2">
           <button class="btn btn-block" id="tema-b-changeimg">cambiar imagen</button>
           <button class="btn btn-danger btn-block" id="tema-b-delete">eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="win-tarjetas-editor">
+      <div class="win-tb">
+        <button class="back" id="back-tarjetas-editor">←</button>
+        <span class="title" id="tarjetas-editor-title">mazo</span>
+        <button class="smallbtn strong" id="tarjetas-play">jugar</button>
+        <button class="tree-menu-btn" id="tarjetas-menu" title="renombrar, exportar, eliminar">⋯</button>
+      </div>
+      <div class="deck-tabs" id="deck-tabs">
+        <button data-tab="cards" class="on">tarjetas</button>
+        <button data-tab="tags">etiquetas</button>
+      </div>
+      <div class="cards-toolbar">
+        <button class="btn" id="tarjetas-add">+ tarjeta</button>
+        <button class="btn" id="tarjetas-addmany">+ varias tarjetas</button>
+        <button class="btn" id="tarjetas-addfiles">+ subir imágenes</button>
+        <input type="file" id="tarjetas-file-bulk" accept="image/*" multiple>
+        <input type="file" id="tarjetas-file-single" accept="image/*">
+        <span class="cards-cols-field">
+          <span class="lbl">columnas</span>
+          <input type="number" id="tarjetas-cols" min="1" step="1">
+        </span>
+      </div>
+      <div class="cards-subbar" id="cards-subbar"></div>
+      <div class="cards-grid" id="tarjetas-grid"></div>
+      <div class="sel-bar" id="sel-bar">
+        <span class="n" id="sel-count">0 seleccionadas</span>
+        <button class="btn" id="sel-tag">etiquetar</button>
+        <button class="btn" id="sel-untag">quitar etiqueta</button>
+        <button class="btn btn-primary" id="sel-done">listo</button>
+      </div>
+      <div class="tags-panel" id="tags-panel"></div>
+    </div>
+
+    <div class="window" id="win-occ-editor">
+      <div class="win-tb">
+        <button class="back" id="back-occ">←</button>
+        <span class="title" id="occ-title">mazo</span>
+        <button class="smallbtn strong" id="occ-play">jugar</button>
+        <button class="tree-menu-btn" id="occ-menu" title="renombrar, exportar, eliminar">⋯</button>
+      </div>
+      <div class="occ-toolbar">
+        <div class="occ-grp"><button class="btn" id="occ-img-btn">imagen</button><button class="btn" id="occ-crop">recortar</button></div>
+        <div class="occ-grp"><button class="btn ic" id="occ-undo" title="deshacer (Ctrl+Z)">↶</button><button class="btn ic" id="occ-redo" title="rehacer (Ctrl+Y)">↷</button></div>
+        <span class="grow"></span>
+        <div class="occ-grp"><button class="btn ic" id="occ-zout" title="alejar">−</button><button class="btn" id="occ-fit">ajustar</button><button class="btn ic" id="occ-zin" title="acercar">+</button></div>
+        <input type="file" id="occ-file" accept="image/*">
+      </div>
+      <div class="occ-body">
+        <div class="occ-ws" id="occ-ws">
+          <div class="occ-stage" id="occ-stage"></div>
+          <div class="occ-empty" id="occ-empty"><b>+ elegir imagen</b><span>o pégala o arrástrala aquí</span></div>
+        </div>
+        <div class="occ-side">
+          <div class="occ-side-hd"><span id="occ-count">0 zonas</span><span class="hint">arrastra sobre la imagen para tapar una zona · dos dedos para mover y ampliar</span></div>
+          <div class="occ-list" id="occ-list"></div>
         </div>
       </div>
     </div>
@@ -829,7 +910,7 @@ body.playing #win-game .workspace{min-height:0;}
   <div class="app">
 
     <div class="window active" id="win-tree-j">
-      <div class="win-tb"><span class="title">elige un tema</span></div>
+      <div class="win-tb"><span class="title">elige un mazo</span></div>
       <div class="win-content" id="tree-j"></div>
     </div>
 
@@ -856,6 +937,11 @@ body.playing #win-game .workspace{min-height:0;}
       <div class="game-tagline" id="game-tagline"></div>
       <div class="round-banner" id="round-banner"><div class="rb-card"><div class="rb-title" id="rb-title"></div><div class="rb-sub" id="rb-sub"></div></div></div>
       <div class="miss-name" id="miss-name"><b id="miss-name-text"></b></div>
+      <div class="occ-panel" id="occ-panel">
+        <div class="op-hint"></div>
+        <div class="op-body"></div>
+        <div class="op-foot"><div class="attempts op-dots"></div><button class="btn lt-skip op-skip">no lo sé →</button></div>
+      </div>
       <div class="game-pill" id="game-pill">
         <div class="name" id="game-target">—</div>
         <div class="attempts" id="game-attempts"></div>
@@ -922,65 +1008,6 @@ body.playing #win-game .workspace{min-height:0;}
 
 </div>
 
-<!-- ===================== LIENZO ===================== -->
-<div class="view" id="view-lienzo" style="padding:0;">
-  <div class="lz-app">
-    <div class="lz-toolbar">
-      <div class="lz-grp">
-        <button class="btn btn-primary" id="lz-btn-add">+ imágenes</button>
-        <input type="file" id="lz-file-input" accept="image/*" multiple>
-      </div>
-      <div class="lz-sep"></div>
-      <div class="lz-grp">
-        <input type="number" id="lz-cv-w" value="1600" min="100" step="10" title="ancho">
-        <span style="color:var(--muted);">×</span>
-        <input type="number" id="lz-cv-h" value="1200" min="100" step="10" title="alto">
-        <button class="btn" id="lz-btn-resize">aplicar</button>
-      </div>
-      <div class="lz-sep"></div>
-      <input type="color" id="lz-cv-bg" value="#ffffff" title="fondo">
-      <div class="lz-sep"></div>
-      <div class="lz-grp">
-        <button class="btn" id="lz-btn-undo" title="Deshacer (Ctrl+Z)">←</button>
-        <button class="btn" id="lz-btn-redo" title="Rehacer (Ctrl+Y)">→</button>
-      </div>
-      <div class="lz-sep"></div>
-      <div class="lz-grp">
-        <button class="btn" id="lz-btn-select">seleccionar</button>
-        <button class="btn" id="lz-btn-point">+ punto</button>
-        <button class="btn" id="lz-btn-rect">+ rectángulo</button>
-        <input type="color" id="lz-rect-color" value="#ffffff" title="color del rectángulo">
-        <button class="btn" id="lz-btn-front">frente</button>
-        <button class="btn" id="lz-btn-back">fondo</button>
-        <button class="btn" id="lz-btn-crop">recortar</button>
-        <button class="btn btn-danger" id="lz-btn-del">eliminar</button>
-      </div>
-      <div class="lz-spacer"></div>
-      <div class="lz-grp">
-        <button class="btn" id="lz-zoom-out">–</button>
-        <span class="lz-zoomlabel" id="lz-zoom-label">100%</span>
-        <button class="btn" id="lz-zoom-in">+</button>
-        <button class="btn" id="lz-zoom-fit">ajustar</button>
-      </div>
-      <div class="lz-sep"></div>
-      <button class="btn" id="lz-btn-export">exportar PNG</button>
-    </div>
-    <div class="lz-toolbar" style="border-top:none;">
-      <div class="lz-grp" style="flex:1;min-width:200px;">
-        <input type="text" id="lz-item-name" placeholder="nombre de la imagen seleccionada" disabled style="width:100%;">
-      </div>
-      <button class="btn btn-primary" id="lz-btn-send">enviar a Biblioteca</button>
-      <button class="btn" id="lz-btn-send-shuffle">enviar como barajado (con scroll)</button>
-    </div>
-    <div class="lz-viewport" id="lz-viewport">
-      <div class="lz-canvas-wrap" id="lz-canvas-wrap">
-        <div id="lz-canvas"></div>
-      </div>
-      <div class="lz-marquee" id="lz-marquee" style="display:none;"></div>
-    </div>
-  </div>
-</div>
-
 <!-- ===================== NOTAS ===================== -->
 <div class="view" id="view-notas">
   <div class="app">
@@ -1014,60 +1041,6 @@ body.playing #win-game .workspace{min-height:0;}
 </div>
 
 <!-- ===================== CREAR TARJETAS ===================== -->
-<div class="view" id="view-tarjetas">
-  <div class="app">
-
-    <div class="window active" id="win-tarjetas-list">
-      <div class="win-tb">
-        <span class="title">crear tarjetas</span>
-      </div>
-      <div class="tree-toolbar">
-        <button class="smallbtn" id="btn-tarjetas-new">+ nuevo tema de tarjetas</button>
-      </div>
-      <div class="win-content" id="tarjetas-list"></div>
-    </div>
-
-    <div class="window" id="win-tarjetas-editor">
-      <div class="win-tb">
-        <button class="back" id="back-tarjetas-editor">←</button>
-        <span class="title" id="tarjetas-editor-title">tema</span>
-      </div>
-      <div class="deck-tabs" id="deck-tabs">
-        <button data-tab="cards" class="on">tarjetas</button>
-        <button data-tab="tags">etiquetas</button>
-      </div>
-      <div class="cards-toolbar">
-        <button class="btn" id="tarjetas-add">+ tarjeta</button>
-        <button class="btn" id="tarjetas-addmany">+ varias tarjetas</button>
-        <button class="btn" id="tarjetas-addfiles">+ subir imágenes</button>
-        <input type="file" id="tarjetas-file-bulk" accept="image/*" multiple>
-        <input type="file" id="tarjetas-file-single" accept="image/*">
-        <span class="cards-cols-field">
-          <span class="lbl">columnas</span>
-          <input type="number" id="tarjetas-cols" min="1" step="1">
-        </span>
-      </div>
-      <div class="cards-subbar" id="cards-subbar"></div>
-      <div class="cards-grid" id="tarjetas-grid"></div>
-      <div class="sel-bar" id="sel-bar">
-        <span class="n" id="sel-count">0 seleccionadas</span>
-        <button class="btn" id="sel-tag">etiquetar</button>
-        <button class="btn" id="sel-untag">quitar etiqueta</button>
-        <button class="btn btn-primary" id="sel-done">listo</button>
-      </div>
-      <div class="tags-panel" id="tags-panel"></div>
-      <div class="win-content" style="flex:0;border-top:1px solid var(--border);">
-        <div class="field" style="margin-bottom:10px;">
-          <span class="lbl">nombre del tema</span>
-          <input type="text" id="tarjetas-name">
-        </div>
-        <button class="btn btn-danger btn-block" id="tarjetas-delete">eliminar tema</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <!-- context menu -->
 <div class="ctx-backdrop" id="ctx-backdrop"></div>
 <div class="ctx-menu" id="ctx-menu" style="display:none;"></div>
@@ -1085,6 +1058,7 @@ body.playing #win-game .workspace{min-height:0;}
 
 <input type="file" id="input-import-file" accept="application/json" style="display:none;">
 <input type="file" id="input-import-deck" accept=".json,application/json" multiple style="display:none;">
+<button id="btn-import-deck" hidden></button><button id="btn-export" hidden></button><button id="btn-import" hidden></button>
 <input type="file" id="tarjetas-file-extra" accept="image/*" multiple style="display:none;">
 <div class="tag-dialog" id="tag-dialog"></div>
 <div class="sort-view" id="sort-view"><div class="sv-card" id="sv-card"><div class="sv-title"><span id="sv-title"></span><span id="sv-count"></span></div><div class="sv-notes" id="sv-notes"></div><div class="sv-grid" id="sv-grid"></div></div></div>
@@ -1099,11 +1073,8 @@ body.playing #win-game .workspace{min-height:0;}
     <label class="rs-toggle"><input type="checkbox" id="rs-on"> por rondas</label>
     <div class="stepper" id="rs-stepper"><button id="rs-minus" type="button">−</button><b id="rs-val">12</b><button id="rs-plus" type="button">+</button></div>
   </div>
-  <div class="mode-group">reconocer</div>
+  <div class="mode-group">nombre</div>
   <button class="mode-opt" data-mode="buscar"><b>buscar la imagen</b><span data-sub>te digo un nombre y tocas su imagen</span></button>
-  <button class="mode-opt" data-mode="elegir"><b>elegir el nombre</b><span data-sub>tocas una imagen y eliges su nombre entre cuatro</span></button>
-  <div class="mode-group">recordar</div>
-  <button class="mode-opt" data-mode="letras"><b>letras desordenadas</b><span data-sub>tocas una imagen y ordenas las letras de su nombre</span></button>
   <button class="mode-opt" data-mode="escribir"><b>escribir el nombre</b><span data-sub>tocas una imagen y escribes cómo se llama</span></button>
   <div class="mode-group">tarjetas con parte de detrás</div>
   <button class="mode-opt" data-mode="anki-texto"><b>del texto a la imagen</b><span data-sub>te muestro lo de detrás y tocas su imagen</span></button>
@@ -1111,6 +1082,11 @@ body.playing #win-game .workspace{min-height:0;}
   <div class="mode-group">etiquetas</div>
   <button class="mode-opt" data-mode="clasificar"><b>clasificar</b><span data-sub>arrastras cada imagen a la caja de su etiqueta</span></button>
   <div class="mode-subrow" id="sort-cat-row"><span>por</span><select id="sort-cat-select"></select></div>
+  <div class="mode-group occ-only">zonas</div>
+  <button class="mode-opt occ-only" data-mode="occ-escribir"><b>escribir</b><span data-sub>se marca una zona y escribes qué hay debajo</span></button>
+  <button class="mode-opt occ-only" data-mode="occ-destapar"><b>destapar</b><span data-sub>piensas la respuesta, la destapas y te puntúas</span></button>
+  <div class="mode-subrow occ-only" id="occ-hide-row"><span>tapar</span><div class="seg" id="occ-hide-seg"><button data-v="all">todas</button><button data-v="one">solo la preguntada</button></div></div>
+  <button class="mode-opt occ-only" data-mode="occ-buscar"><b>buscar la zona</b><span data-sub>te digo un nombre y tocas su zona</span></button>
   <button class="btn btn-block" id="mode-cancel">cancelar</button>
 </div>
 
@@ -1416,7 +1392,7 @@ function renderTree(containerId, editable){
   container.innerHTML = '';
   if(tree.length === 0){
     container.innerHTML = '<div class="tree-empty">Aún no hay nada aquí.' +
-      (editable ? '<br>Crea una carpeta o un tema arriba.' : '<br>Ve a Biblioteca para crear tu primera colección.') +
+      (editable ? '<br>Crea tu primer mazo con «+ mazo».' : '<br>Crea tu primer mazo en «Mazos».') +
       '</div>';
     return;
   }
@@ -1445,12 +1421,13 @@ function renderRow(node, depth, editable, containerId){
   const isFolder = node.type === 'folder';
   const tog = isFolder ? (node.expanded ? '−' : '+') : '';
   const count = isFolder ? `<span class="tree-count">${countTemas(node)}</span>`
-    : (node.mode==='barajado' ? '<span class="tree-count">barajado</span>' : '');
+    : (node.mode==='barajado' ? `<span class="tree-count">${(node.photos||[]).length} tarjetas</span>`
+      : node.mode==='oclusion' ? `<span class="tree-count">${(node.masks||[]).length} zonas</span>` : '<span class="tree-count">mapa</span>');
   row.innerHTML = `
     <span class="tree-tog">${tog}</span>
     <span class="tree-name">${escapeHtml(node.name)}</span>
     ${count}
-    ${editable && !isFolder ? '<button class="tree-export-btn" title="guardar este mazo en un archivo">⤓ exportar</button>' : ''}
+    ${editable && !isFolder ? '<button class="tree-export-btn" title="exportar este mazo a un archivo">⤓</button>' : ''}
     ${editable ? '<button class="tree-menu-btn">⋯</button>' : ''}
   `;
   row.addEventListener('click', (e)=>{
@@ -1589,20 +1566,22 @@ function escapeHtml(str){
 /* ============================================================
    CONTEXT MENU
    ============================================================ */
-function openCtxMenu(anchorEl, node){
+function openCtxMenu(anchorEl, node, opts){
+  opts = opts || {};
   const menu = document.getElementById('ctx-menu');
   const backdrop = document.getElementById('ctx-backdrop');
   const items = [];
   if(node.type === 'folder'){
+    items.push(['+ mazo aquí', ()=> promptNewTema(node)]);
     items.push(['+ subcarpeta', ()=> promptNewFolder(node)]);
-    items.push(['+ tema', ()=> promptNewTema(node)]);
   }
-  items.push(['renombrar', ()=> promptRename(node)]);
-  if(node.type === 'tema'){
+  if(node.type === 'tema' && !opts.inEditor){
     items.push(['jugar', ()=>{ closeCtx(); switchToTab('jugar'); openGamePicker(node.id); }]);
   }
+  items.push(['renombrar', ()=> promptRename(node)]);
+  if(node.type === 'tema') items.push(['exportar mazo', ()=> exportDeck(node)]);
   items.push(['__sep__', null]);
-  items.push([node.type==='folder' ? 'eliminar carpeta' : 'eliminar tema', ()=> deleteNode(node), true]);
+  items.push([node.type==='folder' ? 'eliminar carpeta' : 'eliminar mazo', ()=> deleteNode(node), true]);
 
   menu.innerHTML = items.map(([label,,danger])=>{
     if(label === '__sep__') return '<div class="ctx-sep"></div>';
@@ -1621,6 +1600,20 @@ function openCtxMenu(anchorEl, node){
   menu.querySelectorAll('.ctx-item').forEach((el,i)=>{
     el.addEventListener('click', ()=>{ closeCtx(); realItems[i][1](); });
   });
+}
+/* menú genérico: [[texto, acción, peligro?], ['__sep__']] */
+function openMenuAt(anchorEl, items){
+  const menu = document.getElementById('ctx-menu');
+  menu.innerHTML = items.map(([label,,danger])=> label === '__sep__' ? '<div class="ctx-sep"></div>'
+    : `<div class="ctx-item${danger?' danger':''}">${escapeHtml(label)}</div>`).join('');
+  const rect = anchorEl.getBoundingClientRect();
+  menu.style.display = 'block';
+  let top = rect.bottom + 4, left = rect.right - 210;
+  if(left < 8) left = 8;
+  menu.style.top = top+'px'; menu.style.left = left+'px';
+  document.getElementById('ctx-backdrop').classList.add('open');
+  const real = items.filter(i=> i[0] !== '__sep__');
+  menu.querySelectorAll('.ctx-item').forEach((el,i)=> el.addEventListener('click', ()=>{ closeCtx(); real[i][1](); }));
 }
 function closeCtx(){
   document.getElementById('ctx-menu').style.display='none';
@@ -1668,14 +1661,36 @@ function promptNewFolder(parentNode){
   });
 }
 function promptNewTema(parentNode){
-  openPrompt('nombre del tema', '', (val)=>{
-    if(!val) return;
-    const node = {id:uid(), type:'tema', name:val, image:null, points:[], tolerance:8};
+  const dlg = document.getElementById('tag-dialog');
+  dlg.innerHTML = `<div class="td-title">nuevo mazo</div>
+    <label>nombre<input id="nd-name" placeholder="por ejemplo, Razas de perros"></label>
+    <div class="new-deck-types">
+      <label class="on"><input type="radio" name="nd-type" value="cards" checked><div><b>tarjetas</b><span>una imagen y un nombre por tarjeta</span></div></label>
+      <label><input type="radio" name="nd-type" value="occ"><div><b>oclusión</b><span>una imagen con zonas tapadas: recuerdas qué hay debajo</span></div></label>
+      <label><input type="radio" name="nd-type" value="map"><div><b>mapa</b><span>una sola imagen con puntos que hay que localizar</span></div></label>
+    </div>
+    <div class="td-btns"><button class="btn" id="nd-cancel">cancelar</button><button class="btn btn-primary" id="nd-ok">crear</button></div>`;
+  dlg.querySelectorAll('input[name=nd-type]').forEach(r=> r.addEventListener('change', ()=>
+    dlg.querySelectorAll('.new-deck-types label').forEach(l=> l.classList.toggle('on', l.querySelector('input').checked))));
+  const close = ()=>{ dlg.classList.remove('open'); document.getElementById('mode-backdrop').classList.remove('open'); };
+  dlg.querySelector('#nd-cancel').addEventListener('click', close);
+  dlg.querySelector('#nd-ok').addEventListener('click', ()=>{
+    const name = dlg.querySelector('#nd-name').value.trim();
+    if(!name){ dlg.querySelector('#nd-name').focus(); return; }
+    const kind = dlg.querySelector('input[name=nd-type]:checked').value;
+    const node = kind === 'map' ? {id:uid(), type:'tema', name, image:null, points:[], tolerance:8}
+               : kind === 'occ' ? {id:uid(), type:'tema', mode:'oclusion', name, image:null, masks:[]}
+               : {id:uid(), type:'tema', mode:'barajado', name, cols:3, photos:[]};
     (parentNode ? parentNode.children : tree).push(node);
     if(parentNode) parentNode.expanded = true;
+    close();
     saveLocal(); renderTree('tree-b', true); renderTree('tree-j', false);
     openTemaEditor(node.id);
   });
+  dlg.onkeydown = (e)=>{ if(e.key === 'Enter' && e.target.id === 'nd-name'){ e.preventDefault(); dlg.querySelector('#nd-ok').click(); } if(e.key === 'Escape') close(); };
+  dlg.classList.add('open');
+  document.getElementById('mode-backdrop').classList.add('open');
+  setTimeout(()=> dlg.querySelector('#nd-name').focus(), 30);
 }
 function promptRename(node){
   openPrompt('nuevo nombre', node.name, (val)=>{
@@ -1684,11 +1699,12 @@ function promptRename(node){
     saveLocal(); renderTree('tree-b', true); renderTree('tree-j', false);
     if(node.type==='tema' && currentTemaId===node.id) document.getElementById('tema-b-title').textContent = val;
     if(node.type==='tema' && currentCardsId===node.id) document.getElementById('tarjetas-editor-title').textContent = val;
-    if(document.getElementById('view-tarjetas').classList.contains('active')) renderTarjetasList();
+    if(node.type==='tema' && occ.node===node) document.getElementById('occ-title').textContent = val;
+    if(document.getElementById('view-biblioteca').classList.contains('active')) renderTarjetasList();
   });
 }
 function deleteNode(node){
-  const label = node.type==='folder' ? `la carpeta "${node.name}" y todo su contenido` : `el tema "${node.name}"`;
+  const label = node.type==='folder' ? `la carpeta "${node.name}" y todo su contenido` : `el mazo "${node.name}"`;
   if(!confirm(`¿Eliminar ${label}? No se puede deshacer.`)) return;
   const arr = findParentArray(node.id);
   if(arr){
@@ -1697,11 +1713,19 @@ function deleteNode(node){
     saveLocal();
     renderTree('tree-b', true); renderTree('tree-j', false);
     showTreeOnly();
-    if(document.getElementById('view-tarjetas').classList.contains('active')) renderTarjetasList();
+    if(document.getElementById('view-biblioteca').classList.contains('active')) renderTarjetasList();
   }
 }
 
 document.getElementById('btn-root-folder').addEventListener('click', ()=> promptNewFolder(null));
+document.getElementById('btn-lib-menu').addEventListener('click', (e)=>{
+  openMenuAt(e.currentTarget, [
+    ['importar mazo…', ()=> document.getElementById('btn-import-deck').click()],
+    ['__sep__'],
+    ['exportar todo (data.json)', ()=> document.getElementById('btn-export').click()],
+    ['importar todo (data.json)…', ()=> document.getElementById('btn-import').click()],
+  ]);
+});
 document.getElementById('btn-root-tema').addEventListener('click', ()=> promptNewTema(null));
 
 /* ============================================================
@@ -1710,6 +1734,8 @@ document.getElementById('btn-root-tema').addEventListener('click', ()=> promptNe
 function showWindow(id){
   document.querySelectorAll('#view-biblioteca .window').forEach(w=>w.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  // los editores de tarjetas y de oclusión usan todo el ancho; la lista y el editor de mapa, el ancho normal
+  document.querySelector('#view-biblioteca .app').classList.toggle('wide', id === 'win-tarjetas-editor' || id === 'win-occ-editor');
 }
 function showTreeOnly(){ showWindow('win-tree-b'); }
 
@@ -1904,10 +1930,10 @@ let editorPZ = null;
 function openTemaEditor(id){
   const node = findNode(id);
   if(node.mode === 'barajado'){
-    switchToTab('tarjetas');
     openCardsEditor(id);
     return;
   }
+  if(node.mode === 'oclusion'){ openOccEditor(id); return; }
   currentTemaId = id;
   document.getElementById('tema-b-title').textContent = node.name;
   document.getElementById('tema-b-name').value = node.name;
@@ -1932,34 +1958,8 @@ function findAllBarajadoTemas(nodes, out){
   });
   return out;
 }
-function renderTarjetasList(){
-  const wrap = document.getElementById('tarjetas-list');
-  const temas = findAllBarajadoTemas();
-  wrap.innerHTML = '';
-  if(!temas.length){
-    wrap.innerHTML = '<div class="tree-empty">Aún no hay temas de tarjetas.<br>Crea el primero arriba.</div>';
-    return;
-  }
-  temas.forEach(node=>{
-    const row = document.createElement('div');
-    row.className = 'tree-row';
-    const count = (node.photos||[]).length;
-    row.innerHTML = `
-      <span class="tree-name">${escapeHtml(node.name)}</span>
-      <span class="tree-count">${count} tarjeta${count===1?'':'s'}</span>
-      <button class="tree-menu-btn">⋯</button>
-    `;
-    row.addEventListener('click', (e)=>{
-      if(e.target.classList.contains('tree-menu-btn')) return;
-      openCardsEditor(node.id);
-    });
-    row.querySelector('.tree-menu-btn').addEventListener('click', (e)=>{
-      e.stopPropagation();
-      openCtxMenu(e.currentTarget, node);
-    });
-    wrap.appendChild(row);
-  });
-}
+/* antes había una lista aparte de mazos de tarjetas; ahora todo está en «Mazos» */
+function renderTarjetasList(){ renderTree('tree-b', true); }
 function promptNewTemaBarajado(){
   openPrompt('nombre del tema de tarjetas', '', (val)=>{
     if(!val) return;
@@ -1969,14 +1969,20 @@ function promptNewTemaBarajado(){
     openCardsEditor(node.id);
   });
 }
-document.getElementById('btn-tarjetas-new').addEventListener('click', ()=> promptNewTemaBarajado());
 document.getElementById('back-tarjetas-editor').addEventListener('click', ()=>{
-  renderTarjetasList();
+  setCardSelecting(false);
   showTarjetasWindow('win-tarjetas-list');
 });
+document.getElementById('tarjetas-play').addEventListener('click', ()=>{
+  const node = findNode(currentCardsId); if(!node) return;
+  switchToTab('jugar'); openGamePicker(node.id);
+});
+document.getElementById('tarjetas-menu').addEventListener('click', (e)=>{
+  const node = findNode(currentCardsId); if(node) openCtxMenu(e.currentTarget, node, { inEditor: true });
+});
 function showTarjetasWindow(id){
-  document.querySelectorAll('#view-tarjetas .window').forEach(w=> w.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  if(id === 'win-tarjetas-list'){ renderTree('tree-b', true); showTreeOnly(); }
+  else showWindow(id);
 }
 let deckTab = 'cards';
 function setDeckTab(tab){
@@ -2303,6 +2309,7 @@ document.getElementById('sel-tag').addEventListener('click', ()=> openTagDialog(
 document.getElementById('sel-untag').addEventListener('click', ()=> openTagDialog('remove'));
 document.getElementById('mode-backdrop').addEventListener('click', ()=>{ if(document.getElementById('tag-dialog').classList.contains('open')) closeTagDialog(); });
 
+
 /* ---------- pestaña ETIQUETAS: categorías, valores y notas ---------- */
 function createTagCat(node, name){
   node.tagCats = node.tagCats || [];
@@ -2426,23 +2433,12 @@ function openCardsEditor(id){
   currentCardsId = id;
   selectedCardId = null;
   document.getElementById('tarjetas-editor-title').textContent = node.name;
-  document.getElementById('tarjetas-name').value = node.name;
   document.getElementById('tarjetas-cols').value = node.cols || 3;
   showTarjetasWindow('win-tarjetas-editor');
   cardSel.on = false; cardSel.ids.clear(); collapsedSections.clear();
   document.getElementById('sel-bar').classList.remove('on');
   setDeckTab('cards');
 }
-document.getElementById('tarjetas-name').addEventListener('input', (e)=>{
-  const node = findNode(currentCardsId);
-  if(!node) return;
-  const val = e.target.value.trim();
-  if(val){ node.name = val; debouncedSave();
-    document.getElementById('tarjetas-editor-title').textContent = val; }
-});
-document.getElementById('tarjetas-name').addEventListener('change', ()=>{
-  renderTree('tree-b',true); renderTree('tree-j',false);
-});
 document.getElementById('tarjetas-cols').addEventListener('change', (e)=>{
   const node = findNode(currentCardsId);
   if(!node) return;
@@ -2451,20 +2447,6 @@ document.getElementById('tarjetas-cols').addEventListener('change', (e)=>{
   e.target.value = cols;
   saveLocal();
 });
-document.getElementById('tarjetas-delete').addEventListener('click', ()=>{
-  const node = findNode(currentCardsId);
-  if(!node) return;
-  if(!confirm(`¿Eliminar el tema "${node.name}" y todas sus tarjetas? No se puede deshacer.`)) return;
-  const arr = findParentArray(node.id);
-  if(arr){
-    arr.splice(arr.indexOf(node),1);
-    saveLocal();
-    renderTree('tree-b', true); renderTree('tree-j', false);
-  }
-  renderTarjetasList();
-  showTarjetasWindow('win-tarjetas-list');
-});
-
 function renderCardItem(node, photo){
   const card = document.createElement('div');
   card.className = 'card-item' + (photo.id === selectedCardId ? ' selected' : '');
@@ -2816,7 +2798,7 @@ document.getElementById('tarjetas-file-bulk').addEventListener('change', async (
 
 /* pegar (Ctrl+V) en la tarjeta seleccionada */
 document.addEventListener('paste', async (e)=>{
-  if(!document.getElementById('view-tarjetas').classList.contains('active')) return;
+  if(!document.getElementById('view-biblioteca').classList.contains('active')) return;
   if(!document.getElementById('win-tarjetas-editor').classList.contains('active')) return;
   const node = findNode(currentCardsId);
   if(!node || !selectedCardId) return;
@@ -2835,8 +2817,14 @@ const CROP_MIN = 30;
 function openCardCrop(node, photoId){
   const photo = (node.photos||[]).find(p=> p.id === photoId);
   if(!photo || !photo.image) return;
+  openImageCrop(photo.image, 900, null, { node, photoId });
+}
+/* recorte de cualquier imagen: onApply(dataUrl, {x,y,w,h} en fracciones de la imagen original) */
+function openImageCrop(src, maxOut, onApply, extra){
+  extra = extra || {};
+  const node = extra.node, photoId = extra.photoId;
   const img = document.getElementById('card-crop-img');
-  img.src = photo.image;
+  img.src = src;
   const box = document.getElementById('card-crop-box');
   const backdrop = document.getElementById('card-crop-backdrop');
   const doOpen = ()=>{
@@ -2845,7 +2833,7 @@ function openCardCrop(node, photoId){
     requestAnimationFrame(()=>{
       const dispW = img.clientWidth, dispH = img.clientHeight;
       cropState = {
-        node, photoId, natW: img.naturalWidth, natH: img.naturalHeight,
+        node, photoId, onApply, maxOut, natW: img.naturalWidth, natH: img.naturalHeight,
         dispW, dispH,
         rx: dispW*0.1, ry: dispH*0.1, rw: dispW*0.8, rh: dispH*0.8
       };
@@ -2933,7 +2921,7 @@ document.getElementById('card-crop-apply').addEventListener('click', ()=>{
   const s = cropState;
   const scaleX = s.natW / s.dispW, scaleY = s.natH / s.dispH;
   const sx = s.rx*scaleX, sy = s.ry*scaleY, sw = s.rw*scaleX, sh = s.rh*scaleY;
-  const maxOut = 900;
+  const maxOut = s.maxOut || 900;
   let outW, outH;
   if(sw >= sh){ outW = Math.min(maxOut, Math.round(sw)); outH = Math.round(outW * sh/sw); }
   else { outH = Math.min(maxOut, Math.round(sh)); outW = Math.round(outH * sw/sh); }
@@ -2941,6 +2929,11 @@ document.getElementById('card-crop-apply').addEventListener('click', ()=>{
   out.width = Math.max(1,outW); out.height = Math.max(1,outH);
   out.getContext('2d').drawImage(document.getElementById('card-crop-img'),
     sx, sy, sw, sh, 0, 0, out.width, out.height);
+  if(s.onApply){
+    const url = out.toDataURL('image/jpeg', 0.9);
+    const f = { x: sx / s.natW, y: sy / s.natH, w: sw / s.natW, h: sh / s.natH };
+    closeCardCrop(); s.onApply(url, f); return;
+  }
   const photo = (s.node.photos||[]).find(p=> p.id === s.photoId);
   if(photo){
     photo.image = out.toDataURL('image/jpeg', 0.87);
@@ -3058,12 +3051,14 @@ function openGamePicker(temaId){
   if(!node || node.type !== 'tema') return;
   if(node.mode === 'barajado'){
     if(!node.photos || !node.photos.length){
-      toast('Este tema no tiene fotos todavía'); return;
+      toast('Este mazo no tiene tarjetas todavía'); return;
     }
     openModeChooser(node);
     return;
+  } else if(node.mode === 'oclusion'){
+    openModeChooser(node); return;
   } else if(!node.image || node.points.length===0){
-    toast('Este tema no tiene imagen o puntos todavía'); return;
+    toast('Este mazo no tiene imagen o puntos todavía'); return;
   }
   playTema(node);
 }
@@ -3075,6 +3070,7 @@ function tagColor(node, catId, v){
 }
 function hasBack(p){ return !!(p && p.back && p.back.trim()); }
 function playTema(node, onlyIds, playMode, roundSize, opts){
+  if(node.mode === 'oclusion'){ startOccGame(node, onlyIds, playMode, opts); return; }
   if(node.mode === 'barajado'){
     let pm = playMode || 'buscar';
     if(pm === 'buscar-rondas'){ pm = 'buscar'; roundSize = clampRoundSize(node.roundSize); }
@@ -3098,7 +3094,7 @@ function recordConfusion(node, a, b){
 document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
   if(confirm('¿Salir de la partida?')){
-    hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner(); endSortDrag(); closeSortView();
+    hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner(); endSortDrag(); closeSortView(); hideOccPanel();
     document.body.classList.remove('playing'); showJugarWindow('win-tree-j');
   }
 });
@@ -3239,6 +3235,8 @@ function refreshRoundUi(node){
 function openModeChooser(node){
   modeChooserNode = node;
   if(node.lastPlayMode === 'buscar-rondas'){ node.lastPlayMode = 'buscar'; node.useRounds = true; } // versión anterior
+  if(node.lastPlayMode === 'elegir' || node.lastPlayMode === 'letras') node.lastPlayMode = 'buscar'; // modos retirados
+  if(node.mode === 'oclusion' && !/^occ-/.test(node.lastPlayMode || '')) node.lastPlayMode = 'occ-escribir';
   document.getElementById('mode-tema-name').textContent = node.name;
   document.getElementById('pick-filter').classList.remove('open');
   refreshModeChooser(node);
@@ -3247,6 +3245,21 @@ function openModeChooser(node){
   document.getElementById('mode-box').scrollTop = 0;
 }
 function refreshModeChooser(node){
+  const box = document.getElementById('mode-box');
+  box.classList.toggle('occ', node.mode === 'oclusion');
+  if(node.mode === 'oclusion'){
+    box.querySelectorAll('.mode-opt.occ-only').forEach(b=>{
+      b.classList.toggle('last', b.dataset.mode === (node.lastPlayMode || 'occ-escribir'));
+      const why = occModeUnavailable(node, b.dataset.mode);
+      b.disabled = !!why;
+      const sub = b.querySelector('[data-sub]');
+      if(!sub.dataset.orig) sub.dataset.orig = sub.textContent;
+      sub.textContent = why || sub.dataset.orig;
+    });
+    const all = node.occHideAll !== false;
+    document.querySelectorAll('#occ-hide-seg button').forEach(x=> x.classList.toggle('on', (x.dataset.v === 'all') === all));
+    return;
+  }
   renderPickFilter(node);
   refreshSortCatRow(node);
   document.querySelectorAll('#mode-box .mode-opt').forEach(b=>{
@@ -3275,6 +3288,10 @@ function closeModeChooser(){
   document.getElementById('mode-backdrop').classList.remove('open');
   modeChooserNode = null;
 }
+// marca lo que solo sirve para mazos de tarjetas, para ocultarlo con los de oclusión
+document.querySelectorAll('#mode-box > *').forEach(el=>{
+  if(!el.classList.contains('occ-only') && !el.classList.contains('mode-title') && !el.classList.contains('mode-sub') && el.id !== 'mode-cancel') el.classList.add('bj-only');
+});
 document.querySelectorAll('#mode-box .mode-opt').forEach(b=> b.addEventListener('click', ()=>{
   const node = modeChooserNode;
   closeModeChooser();
@@ -3328,6 +3345,10 @@ function startGame(node, onlyIds){
    BARAJADO — piezas sueltas repartidas al azar entre casillas
    ============================================================ */
 function resetGameContainers(){
+  hideOccPanel();
+  document.getElementById('win-game').classList.remove('occ-game', 'occ-ans');
+  document.getElementById('game-pill').style.display = '';
+  document.getElementById('game-workspace').onclick = null;
   document.getElementById('game-tagline').classList.remove('on');
   document.getElementById('win-game').classList.remove('tagged');
   document.getElementById('sort-panel').classList.remove('on');
@@ -3464,7 +3485,7 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize, opts){
     playMode = 'buscar';
     if(photos.length < 2){ toast('Hacen falta al menos 2 tarjetas con texto detrás'); document.body.classList.remove('playing'); return; }
   }
-  if(!photos.length){ toast('Este tema no tiene fotos todavía'); document.body.classList.remove('playing'); return; }
+  if(!photos.length){ toast('Este mazo no tiene tarjetas todavía'); document.body.classList.remove('playing'); return; }
 
   // por rondas: cada ronda es un trozo al azar del mazo, y dentro de ella el orden de preguntas también es al azar
   const rounds = roundSize ? splitRounds(photos, roundSize) : [photos];
@@ -3803,11 +3824,13 @@ document.getElementById('game-zout').addEventListener('click', (e)=>{ e.stopProp
 /* cada modo (y con/sin rondas) tiene su propio historial; conserva los nombres antiguos */
 function historyKey(mode, rounds){
   const base = {buscar:'history', escribir:'historyEscribir', 'anki-texto':'historyAnkiTexto',
-    'anki-imagen':'historyAnkiImagen', elegir:'historyElegir', letras:'historyLetras', clasificar:'historyClasificar'}[mode] || 'history';
+    'anki-imagen':'historyAnkiImagen', elegir:'historyElegir', letras:'historyLetras', clasificar:'historyClasificar',
+    'occ-escribir':'historyOccEscribir', 'occ-destapar':'historyOccDestapar', 'occ-buscar':'historyOccBuscar'}[mode] || 'history';
   if(!rounds) return base;
   return base === 'history' ? 'historyRondas' : base + 'Rondas';
 }
 function endGame(){
+  hideOccPanel();
   hideMissName(); hideRoundBanner(); hidePickZoom(); endSortDrag(); closeSortView();
   document.body.classList.remove('playing');
   const secs = Math.round((Date.now()-game.startTime)/1000);
@@ -5005,28 +5028,460 @@ function initNotasEditor(){
 }
 
 /* ============================================================
-   API expuesta para el módulo del Lienzo (script independiente)
+   OCLUSIÓN — una imagen con zonas tapadas (como el image occlusion de Anki)
+   node = {type:'tema', mode:'oclusion', name, image, masks:[{id,x,y,w,h,label}]}  (x,y,w,h en % de la imagen)
    ============================================================ */
-window.MSApp = {
-  uid,
-  openPrompt,
-  appendTargetId: null,
-  pushRootNode(node){
-    tree.push(node);
-    saveLocal();
-    renderTree('tree-b', true);
-    renderTree('tree-j', false);
-  },
-  appendPhotosToTema(id, photos){
-    const node = findNode(id);
-    if(!node || node.mode !== 'barajado') return false;
-    node.photos = (node.photos||[]).concat(photos);
-    saveLocal();
-    renderTree('tree-b', true);
-    renderTree('tree-j', false);
-    return true;
+const occ = { node: null, scale: 1, tx: 0, ty: 0, sel: null, undo: [], redo: [], ptrs: new Map(), act: null };
+function occMasks(node){ return (node && node.masks) || (node.masks = []); }
+
+function openOccEditor(id){
+  const node = findNode(id);
+  if(!node) return;
+  occ.node = node; occ.sel = null; occ.undo = []; occ.redo = [];
+  document.getElementById('occ-title').textContent = node.name;
+  showWindow('win-occ-editor');
+  occRenderAll(true);
+}
+function occSnapshot(){ occ.undo.push(JSON.stringify(occMasks(occ.node))); if(occ.undo.length > 80) occ.undo.shift(); occ.redo = []; }
+function occRestore(from, to){
+  if(!from.length) return;
+  to.push(JSON.stringify(occMasks(occ.node)));
+  occ.node.masks = JSON.parse(from.pop());
+  if(occ.sel && !occ.node.masks.some(m=> m.id === occ.sel)) occ.sel = null;
+  saveLocal(); occRenderMasks(); occRenderList();
+}
+document.getElementById('occ-undo').addEventListener('click', ()=> occRestore(occ.undo, occ.redo));
+document.getElementById('occ-redo').addEventListener('click', ()=> occRestore(occ.redo, occ.undo));
+
+function occRenderAll(refit){
+  const node = occ.node, stage = document.getElementById('occ-stage');
+  const empty = !node.image;
+  document.getElementById('occ-empty').style.display = empty ? '' : 'none';
+  document.getElementById('occ-crop').disabled = empty;
+  stage.style.display = empty ? 'none' : '';
+  if(empty){ stage.innerHTML = ''; occRenderList(); return; }
+  stage.innerHTML = `<img id="occ-img" draggable="false">`;
+  const img = stage.querySelector('img');
+  img.onload = ()=>{ img.width = img.naturalWidth; img.height = img.naturalHeight; if(refit) occFit(); else occApply(); occRenderMasks(); };
+  img.src = node.image;
+  occRenderList();
+}
+function occFit(){
+  const ws = document.getElementById('occ-ws'), img = document.getElementById('occ-img');
+  if(!img || !img.naturalWidth) return;
+  const W = ws.clientWidth, H = ws.clientHeight;
+  occ.scale = Math.min(W / img.naturalWidth, H / img.naturalHeight) * 0.96;
+  occ.tx = (W - img.naturalWidth * occ.scale) / 2;
+  occ.ty = (H - img.naturalHeight * occ.scale) / 2;
+  occApply();
+}
+function occApply(){
+  const stage = document.getElementById('occ-stage');
+  stage.style.transform = `translate(${occ.tx}px,${occ.ty}px) scale(${occ.scale})`;
+  stage.style.setProperty('--inv', 1 / occ.scale);
+}
+function occZoom(f, cx, cy){
+  const ws = document.getElementById('occ-ws');
+  if(cx === undefined){ cx = ws.clientWidth / 2; cy = ws.clientHeight / 2; }
+  const ns = Math.max(0.05, Math.min(20, occ.scale * f)), r = ns / occ.scale;
+  occ.tx = cx - (cx - occ.tx) * r; occ.ty = cy - (cy - occ.ty) * r; occ.scale = ns; occApply();
+}
+document.getElementById('occ-zin').addEventListener('click', ()=> occZoom(1.3));
+document.getElementById('occ-zout').addEventListener('click', ()=> occZoom(1/1.3));
+document.getElementById('occ-fit').addEventListener('click', occFit);
+window.addEventListener('resize', ()=>{ if(document.getElementById('win-occ-editor').classList.contains('active')) occFit(); });
+
+function occRenderMasks(){
+  const stage = document.getElementById('occ-stage');
+  stage.querySelectorAll('.occ-mask').forEach(el=> el.remove());
+  occMasks(occ.node).forEach((m, i)=>{
+    const el = document.createElement('div');
+    el.className = 'occ-mask' + (m.id === occ.sel ? ' sel' : '') + (m.label && m.label.trim() ? '' : ' unnamed');
+    el.dataset.id = m.id;
+    el.style.left = m.x + '%'; el.style.top = m.y + '%'; el.style.width = m.w + '%'; el.style.height = m.h + '%';
+    el.innerHTML = `<span class="n">${i + 1}</span>` + (m.id === occ.sel ? ['nw','ne','sw','se'].map(c=> `<i class="h" data-c="${c}"></i>`).join('') : '');
+    stage.appendChild(el);
+  });
+}
+function occRenderList(){
+  const list = document.getElementById('occ-list'), masks = occMasks(occ.node);
+  document.getElementById('occ-count').textContent = masks.length === 1 ? '1 zona' : `${masks.length} zonas`;
+  list.innerHTML = '';
+  if(!masks.length){
+    list.innerHTML = `<div class="occ-list-empty">${occ.node.image ? 'Arrastra sobre la imagen para tapar una zona.<br>Luego escribe aquí lo que hay debajo.' : 'Primero elige una imagen.'}</div>`;
+    return;
   }
-};
+  masks.forEach((m, i)=>{
+    const row = document.createElement('div');
+    row.className = 'occ-row' + (m.id === occ.sel ? ' sel' : '');
+    row.dataset.id = m.id;
+    row.innerHTML = `<span class="n">${i + 1}</span><input type="text" placeholder="¿qué hay debajo?"><button class="x" title="borrar zona">✕</button>`;
+    const inp = row.querySelector('input');
+    inp.value = m.label || '';
+    inp.addEventListener('focus', ()=> occSelect(m.id, false));
+    inp.addEventListener('input', ()=>{
+      m.label = inp.value; debouncedSave();
+      const el = document.querySelector(`#occ-stage .occ-mask[data-id="${m.id}"]`);
+      if(el) el.classList.toggle('unnamed', !inp.value.trim());
+    });
+    inp.addEventListener('keydown', (e)=>{
+      if(e.key !== 'Enter') return;
+      e.preventDefault();
+      const next = list.querySelectorAll('.occ-row input')[i + 1];
+      if(next) next.focus(); else inp.blur();
+    });
+    row.querySelector('.x').addEventListener('click', ()=> occDelete(m.id));
+    list.appendChild(row);
+  });
+}
+function occSelect(id, focusName){
+  occ.sel = id;
+  document.querySelectorAll('#occ-list .occ-row').forEach(r=> r.classList.toggle('sel', r.dataset.id === id));
+  occRenderMasks();
+  if(id){
+    const row = document.querySelector(`#occ-list .occ-row[data-id="${id}"]`);
+    if(row){ row.scrollIntoView({block:'nearest'}); if(focusName) row.querySelector('input').focus({preventScroll:true}); }
+  }
+}
+function occDelete(id){
+  occSnapshot();
+  occ.node.masks = occMasks(occ.node).filter(m=> m.id !== id);
+  if(occ.sel === id) occ.sel = null;
+  saveLocal(); occRenderMasks(); occRenderList();
+}
+
+/* dibujar / mover / redimensionar zonas con un dedo; dos dedos (o la rueda) para mover y hacer zoom */
+(function(){
+  const ws = document.getElementById('occ-ws');
+  const toPct = (cx, cy)=>{
+    const r = document.getElementById('occ-img').getBoundingClientRect();
+    return { x: (cx - r.left) / r.width * 100, y: (cy - r.top) / r.height * 100 };
+  };
+  const clampM = (m)=>{
+    m.w = Math.min(m.w, 100); m.h = Math.min(m.h, 100);
+    m.x = Math.max(0, Math.min(100 - m.w, m.x)); m.y = Math.max(0, Math.min(100 - m.h, m.y));
+  };
+  ws.addEventListener('pointerdown', (e)=>{
+    if(!occ.node || !occ.node.image || !document.getElementById('occ-img')) return;
+    ws.setPointerCapture(e.pointerId);
+    occ.ptrs.set(e.pointerId, {x: e.clientX, y: e.clientY});
+    if(occ.ptrs.size === 2){
+      if(occ.act && occ.act.type === 'draw' && occ.act.mask){ occMasks(occ.node).splice(occMasks(occ.node).indexOf(occ.act.mask), 1); occRenderMasks(); }
+      const [a, b] = [...occ.ptrs.values()];
+      occ.act = { type: 'pinch', d: Math.hypot(a.x - b.x, a.y - b.y), mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 };
+      return;
+    }
+    if(occ.ptrs.size > 2) return;
+    const p = toPct(e.clientX, e.clientY);
+    const handle = e.target.closest('.h'), maskEl = e.target.closest('.occ-mask');
+    if(handle && maskEl){
+      const m = occMasks(occ.node).find(x=> x.id === maskEl.dataset.id);
+      occ.act = { type: 'resize', m, c: handle.dataset.c, start: {...m}, p0: p, snap: JSON.stringify(occMasks(occ.node)) };
+    } else if(maskEl){
+      const m = occMasks(occ.node).find(x=> x.id === maskEl.dataset.id);
+      occSelect(m.id, false);
+      occ.act = { type: 'move', m, start: {...m}, p0: p, snap: JSON.stringify(occMasks(occ.node)), moved: false };
+    } else {
+      occ.act = { type: 'draw', p0: p, mask: null, snap: JSON.stringify(occMasks(occ.node)) };
+    }
+  });
+  ws.addEventListener('pointermove', (e)=>{
+    if(!occ.ptrs.has(e.pointerId)) return;
+    occ.ptrs.set(e.pointerId, {x: e.clientX, y: e.clientY});
+    const a = occ.act; if(!a) return;
+    if(a.type === 'pinch' && occ.ptrs.size === 2){
+      const [p1, p2] = [...occ.ptrs.values()];
+      const d = Math.hypot(p1.x - p2.x, p1.y - p2.y), mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
+      const r = ws.getBoundingClientRect();
+      occ.tx += mx - a.mx; occ.ty += my - a.my;
+      occZoom(d / a.d, mx - r.left, my - r.top);
+      a.d = d; a.mx = mx; a.my = my;
+      return;
+    }
+    const p = toPct(e.clientX, e.clientY);
+    if(a.type === 'draw'){
+      const x = Math.max(0, Math.min(a.p0.x, p.x)), y = Math.max(0, Math.min(a.p0.y, p.y));
+      const w = Math.min(100, Math.max(a.p0.x, p.x)) - x, h = Math.min(100, Math.max(a.p0.y, p.y)) - y;
+      if(!a.mask){
+        if(w < 0.8 && h < 0.8) return;
+        a.mask = { id: 'm' + uid(), x, y, w, h, label: '' };
+        occMasks(occ.node).push(a.mask);
+        occ.sel = a.mask.id;
+      }
+      Object.assign(a.mask, { x, y, w, h });
+      occRenderMasks();
+    } else if(a.type === 'move'){
+      const dx = p.x - a.p0.x, dy = p.y - a.p0.y;
+      if(Math.abs(dx) + Math.abs(dy) > 0.3) a.moved = true;
+      a.m.x = a.start.x + dx; a.m.y = a.start.y + dy; clampM(a.m);
+      occRenderMasks();
+    } else if(a.type === 'resize'){
+      const s = a.start, dx = p.x - a.p0.x, dy = p.y - a.p0.y;
+      let x1 = s.x, y1 = s.y, x2 = s.x + s.w, y2 = s.y + s.h;
+      if(a.c.includes('w')) x1 += dx; else x2 += dx;
+      if(a.c.includes('n')) y1 += dy; else y2 += dy;
+      a.m.x = Math.max(0, Math.min(x1, x2)); a.m.y = Math.max(0, Math.min(y1, y2));
+      a.m.w = Math.max(0.8, Math.min(100, Math.max(x1, x2)) - a.m.x); a.m.h = Math.max(0.8, Math.min(100, Math.max(y1, y2)) - a.m.y);
+      occRenderMasks();
+    }
+  });
+  const end = (e)=>{
+    occ.ptrs.delete(e.pointerId);
+    const a = occ.act;
+    if(occ.ptrs.size > 0){ if(a && a.type === 'pinch') occ.act = { type: 'idle' }; return; }
+    occ.act = null;
+    if(!a || a.type === 'pinch' || a.type === 'idle') return;
+    if(a.type === 'draw'){
+      if(a.mask){ occ.undo.push(a.snap); occ.redo = []; saveLocal(); occRenderList(); occSelect(a.mask.id, true); }
+      else occSelect(null);                       // toque en vacío: quitar la selección
+    } else if(a.type === 'move' && !a.moved){
+      occSelect(a.m.id, false);
+    } else {
+      occ.undo.push(a.snap); occ.redo = []; saveLocal();
+    }
+  };
+  ws.addEventListener('pointerup', end);
+  ws.addEventListener('pointercancel', end);
+  ws.addEventListener('wheel', (e)=>{
+    if(!document.getElementById('occ-img')) return;
+    e.preventDefault();
+    const r = ws.getBoundingClientRect();
+    if(e.ctrlKey || e.metaKey) occZoom(Math.exp(-e.deltaY * 0.01), e.clientX - r.left, e.clientY - r.top);
+    else { occ.tx -= e.deltaX; occ.ty -= e.deltaY; occApply(); }
+  }, {passive: false});
+  // imagen: elegir, soltar o pegar
+  document.getElementById('occ-empty').addEventListener('click', ()=> document.getElementById('occ-file').click());
+  ['dragover','dragenter'].forEach(ev=> ws.addEventListener(ev, (e)=>{ e.preventDefault(); ws.classList.add('dragover'); }));
+  ['dragleave','drop'].forEach(ev=> ws.addEventListener(ev, ()=> ws.classList.remove('dragover')));
+  ws.addEventListener('drop', (e)=>{
+    e.preventDefault();
+    const f = [...(e.dataTransfer.files || [])].find(f=> f.type.startsWith('image/'));
+    if(f) occSetImageFile(f);
+  });
+})();
+document.getElementById('occ-img-btn').addEventListener('click', ()=> document.getElementById('occ-file').click());
+document.getElementById('occ-file').addEventListener('change', (e)=>{
+  const f = e.target.files[0]; e.target.value = '';
+  if(f) occSetImageFile(f);
+});
+async function occSetImageFile(file){
+  if(!occ.node) return;
+  if(occ.node.image && occMasks(occ.node).length && !confirm('¿Cambiar la imagen? Las zonas se quedan en la misma posición.')) return;
+  const url = await fileToDownscaledDataURL(file, 1600);
+  occ.node.image = url; saveLocal(); occRenderAll(true);
+}
+document.addEventListener('paste', (e)=>{
+  if(!document.getElementById('win-occ-editor').classList.contains('active')) return;
+  if(!document.getElementById('view-biblioteca').classList.contains('active')) return;
+  const it = [...(e.clipboardData.items || [])].find(i=> i.type && i.type.startsWith('image/'));
+  if(!it) return;
+  e.preventDefault();
+  occSetImageFile(it.getAsFile());
+});
+document.addEventListener('keydown', (e)=>{
+  if(!document.getElementById('win-occ-editor').classList.contains('active')) return;
+  if(!document.getElementById('view-biblioteca').classList.contains('active')) return;
+  const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !typing){ e.preventDefault(); e.shiftKey ? occRestore(occ.redo, occ.undo) : occRestore(occ.undo, occ.redo); }
+  else if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y' && !typing){ e.preventDefault(); occRestore(occ.redo, occ.undo); }
+  else if((e.key === 'Delete' || e.key === 'Backspace') && !typing && occ.sel){ e.preventDefault(); occDelete(occ.sel); }
+  else if(e.key === 'Escape' && !typing) occSelect(null);
+});
+// recortar la imagen: las zonas se recolocan para seguir tapando lo mismo
+document.getElementById('occ-crop').addEventListener('click', ()=>{
+  const node = occ.node; if(!node || !node.image) return;
+  openImageCrop(node.image, 1600, (dataUrl, f)=>{
+    occSnapshot();
+    node.image = dataUrl;
+    node.masks = occMasks(node).map(m=>{
+      const x1 = Math.max(0, (m.x / 100 - f.x) / f.w * 100), y1 = Math.max(0, (m.y / 100 - f.y) / f.h * 100);
+      const x2 = Math.min(100, ((m.x + m.w) / 100 - f.x) / f.w * 100), y2 = Math.min(100, ((m.y + m.h) / 100 - f.y) / f.h * 100);
+      return { ...m, x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
+    }).filter(m=> m.w > 0.5 && m.h > 0.5);
+    saveLocal(); occRenderAll(true);
+  });
+});
+document.getElementById('back-occ').addEventListener('click', ()=>{ saveLocal(); renderTree('tree-b', true); showTreeOnly(); });
+document.getElementById('occ-play').addEventListener('click', ()=>{ if(occ.node){ switchToTab('jugar'); openGamePicker(occ.node.id); } });
+document.getElementById('occ-menu').addEventListener('click', (e)=>{ if(occ.node) openCtxMenu(e.currentTarget, occ.node, { inEditor: true }); });
+
+/* ---------- jugar una oclusión ---------- */
+let occGame = null;
+function occModeUnavailable(node, mode){
+  if(!node.image) return 'este mazo no tiene imagen';
+  const n = occMasks(node).filter(m=> (m.label||'').trim()).length;
+  if(!n) return 'pon nombre a las zonas en «Mazos»';
+  if(mode === 'occ-buscar' && n < 2) return 'hacen falta al menos 2 zonas con nombre';
+  return null;
+}
+function startOccGame(node, onlyIds, playMode, opts){
+  opts = opts || {};
+  let masks = occMasks(node).filter(m=> (m.label||'').trim());
+  if(onlyIds) masks = masks.filter(m=> onlyIds.has(m.id));
+  if(!masks.length){ toast('Pon nombre a las zonas primero'); return; }
+  document.body.classList.add('playing');
+  resetGameContainers();
+  const order = shuffle(masks);
+  game = {
+    mode: 'oclusion', occ: true, launchMode: playMode, playMode, roundSize: 0,
+    temaNode: node, node, baseIds: onlyIds ? new Set(onlyIds) : null, filtered: false, reviewFails: !!opts.reviewFails,
+    order: order.map(m=> ({ id: m.id, label: m.label.trim() })), maskOf: Object.fromEntries(masks.map(m=> [m.id, m])),
+    idx: 0, total: order.length, correct: 0, mistakes: 0, failedIds: new Set(),
+    startTime: Date.now(), stateOf: {}, pointResult: {}, attemptsLeft: 3, hintOrder: null,
+    hideAll: node.occHideAll !== false || playMode === 'occ-buscar'
+  };
+  masks.forEach(m=> game.stateOf[m.id] = 'neutral');
+  const stage = document.getElementById('game-stage');
+  stage.innerHTML = `<img src="${node.image}" id="game-img">`;
+  occGame = { awaiting: false };
+  const winGame = document.getElementById('win-game');
+  winGame.classList.add('occ-game');
+  winGame.classList.toggle('occ-ans', playMode !== 'occ-buscar');
+  showJugarWindow('win-game');
+  const img = document.getElementById('game-img');
+  const ws = document.getElementById('game-workspace');
+  const bootG = ()=>{
+    gamePZ = makePanZoom(ws, stage, {});
+    occGameRenderMasks(); gamePZ.fit(); occNext();
+  };
+  if(img.complete) bootG(); else img.onload = bootG;
+  ws.onclick = (e)=> occGameTap(e.clientX, e.clientY);
+}
+function occTarget(){ return game.order[game.idx]; }
+function occGameRenderMasks(){
+  const stage = document.getElementById('game-stage');
+  stage.querySelectorAll('.og-mask').forEach(el=> el.remove());
+  const t = occTarget();
+  // también se pintan las zonas sin nombre, siempre tapadas
+  occMasks(game.temaNode).forEach(m=>{
+    const st = game.stateOf[m.id];
+    let cls = 'og-mask';
+    if(st === undefined) cls += ' hid';                                        // zona sin nombre: siempre tapada
+    else if(st === 'correct' || st === 'wrong') cls += ' open ' + st;
+    else if(st === 'revealed') cls += ' q show';
+    else if(t && m.id === t.id && game.playMode !== 'occ-buscar') cls += ' q';
+    else cls += game.hideAll ? ' hid' : ' open soft';
+    const el = document.createElement('div');
+    el.className = cls; el.dataset.id = m.id;
+    el.style.left = m.x + '%'; el.style.top = m.y + '%'; el.style.width = m.w + '%'; el.style.height = m.h + '%';
+    if(st === 'correct' || st === 'wrong' || st === 'revealed'){ const l = document.createElement('span'); l.className = 'lb'; l.textContent = m.label; el.appendChild(l); }
+    stage.appendChild(el);
+  });
+}
+function occHud(){
+  document.getElementById('game-stats').textContent = `${game.idx}/${game.total}`;
+  document.getElementById('game-progress').style.width = (game.idx / game.total * 100) + '%';
+  const pill = document.getElementById('game-pill'), t = occTarget();
+  pill.classList.remove('small','anki-q','anki-img');
+  if(game.playMode === 'occ-buscar'){
+    pill.style.display = '';
+    document.getElementById('game-target').textContent = t ? t.label : '—';
+    const dots = document.getElementById('game-attempts'); dots.innerHTML = '';
+    for(let i=0;i<3;i++){ const d = document.createElement('div'); d.className = 'dot' + (i < 3 - game.attemptsLeft ? ' used' : ''); dots.appendChild(d); }
+  } else pill.style.display = 'none';
+}
+function occNext(){
+  if(game.idx >= game.total){ hideOccPanel(); setTimeout(endGame, 300); return; }
+  game.attemptsLeft = 3; game.hintOrder = null; occGame.awaiting = false; occGame.finished = null; occGame.shown = false;
+  occGameRenderMasks(); occHud();
+  if(game.playMode !== 'occ-buscar') renderOccPanel(true);
+  // si la zona preguntada no se ve, se centra
+  const el = document.querySelector(`#game-stage .og-mask.q`);
+  if(el && el.scrollIntoViewIfNeeded) {}
+}
+function occAdvance(){ game.idx++; occNext(); }
+function occMark(id, result){
+  if(result === 'correct'){ game.correct++; game.pointResult[id] = 4 - game.attemptsLeft; game.stateOf[id] = 'correct'; }
+  else { game.mistakes++; game.failedIds.add(id); game.pointResult[id] = 'failed'; game.stateOf[id] = 'wrong'; }
+}
+function occGameTap(cx, cy){
+  if(!game || !game.occ || game.playMode !== 'occ-buscar' || !gamePZ || gamePZ.wasDrag()) return;
+  const t = occTarget(); if(!t) return;
+  const {x, y} = gamePZ.toStageCoords(cx, cy);
+  const hits = occMasks(game.temaNode).filter(m=> game.stateOf[m.id] !== undefined && x >= m.x && x <= m.x + m.w && y >= m.y && y <= m.y + m.h)
+    .sort((a, b)=> a.w * a.h - b.w * b.h);
+  const hit = hits[0]; if(!hit) return;
+  if(occGame.awaiting){ if(hit.id === t.id){ occMark(t.id, 'wrong'); occAdvance(); } return; }
+  if(game.stateOf[hit.id] === 'correct' || game.stateOf[hit.id] === 'wrong') return;
+  if(hit.id === t.id){ occMark(t.id, 'correct'); occAdvance(); return; }
+  game.attemptsLeft--;
+  missFeedback(document.querySelector(`#game-stage .og-mask[data-id="${hit.id}"]`));
+  showMissName(hit.label);
+  if(game.attemptsLeft <= 0){ occGame.awaiting = true; game.stateOf[t.id] = 'revealed'; occGameRenderMasks(); }
+  occHud();
+}
+/* panel de respuesta (escribir / destapar) */
+function hideOccPanel(){ document.getElementById('occ-panel').classList.remove('on'); }
+function renderOccPanel(fresh){
+  const panel = document.getElementById('occ-panel'), t = occTarget();
+  panel.classList.add('on');
+  const body = panel.querySelector('.op-body'), hint = panel.querySelector('.op-hint');
+  const dots = panel.querySelector('.op-dots'), skip = panel.querySelector('.op-skip');
+  const expected = expectedAnswer(game.maskOf[t.id]);
+  if(!game.hintOrder){
+    const n = [...expected].filter(ch=> /[\p{L}\p{N}]/u.test(ch)).length;
+    game.hintOrder = shuffle([...Array(n).keys()]);
+  }
+  body.innerHTML = '';
+  hint.classList.remove('reveal');
+  if(game.playMode === 'occ-escribir'){
+    if(occGame.finished){
+      hint.classList.add('reveal'); hint.textContent = t.label;
+      const b = document.createElement('button'); b.className = 'btn btn-primary'; b.textContent = 'seguir';
+      b.addEventListener('click', occAdvance); body.appendChild(b); setTimeout(()=> b.focus(), 30);
+    } else {
+      hint.textContent = maskedHint(expected, ({3:0, 2:1, 1:3})[game.attemptsLeft] ?? 0, game.hintOrder);
+      body.innerHTML = `<input type="text" id="op-input" placeholder="¿qué hay en la zona marcada?" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="go"><button class="btn btn-primary" id="op-ok">ok</button>`;
+      const inp = body.querySelector('input');
+      const submit = ()=>{
+        const v = normAnswer(inp.value); if(!v) return;
+        if(v === normAnswer(expected)){ occMark(t.id, 'correct'); occGameRenderMasks(); panel.classList.add('ok'); setTimeout(()=>{ panel.classList.remove('ok'); occAdvance(); }, 450); return; }
+        game.attemptsLeft--;
+        flashClass(panel, 'miss');
+        if(game.attemptsLeft <= 0){ occMark(t.id, 'wrong'); occGame.finished = true; occGameRenderMasks(); }
+        renderOccPanel();
+      };
+      body.querySelector('#op-ok').addEventListener('click', submit);
+      inp.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); submit(); } });
+      setTimeout(()=> inp.focus({preventScroll:true}), 30);
+    }
+  } else { // destapar
+    if(!occGame.shown){
+      hint.textContent = 'piensa qué hay en la zona marcada';
+      const b = document.createElement('button'); b.className = 'btn btn-primary op-wide'; b.textContent = 'destapar';
+      b.addEventListener('click', ()=>{ occGame.shown = true; game.stateOf[t.id] = 'revealed'; occGameRenderMasks(); renderOccPanel(); });
+      body.appendChild(b); setTimeout(()=> b.focus(), 30);
+    } else {
+      hint.classList.add('reveal'); hint.textContent = t.label;
+      const no = document.createElement('button'); no.className = 'btn op-no'; no.textContent = 'no lo sabía';
+      const yes = document.createElement('button'); yes.className = 'btn btn-primary'; yes.textContent = 'lo sabía';
+      no.addEventListener('click', ()=>{ occMark(t.id, 'wrong'); occAdvance(); });
+      yes.addEventListener('click', ()=>{ occMark(t.id, 'correct'); occAdvance(); });
+      body.append(no, yes);
+    }
+  }
+  dots.innerHTML = '';
+  if(game.playMode === 'occ-escribir') for(let i=0;i<3;i++){ const d = document.createElement('div'); d.className = 'dot' + (i < 3 - game.attemptsLeft ? ' used' : ''); dots.appendChild(d); }
+  skip.style.display = game.playMode === 'occ-escribir' && !occGame.finished ? '' : 'none';
+}
+document.querySelector('#occ-panel .op-skip').addEventListener('click', ()=>{
+  if(!game || !game.occ || occGame.finished) return;
+  const t = occTarget(); game.attemptsLeft = 0; occMark(t.id, 'wrong'); occGame.finished = true; occGameRenderMasks(); renderOccPanel();
+});
+document.addEventListener('keydown', (e)=>{
+  if(!game || !game.occ || !document.getElementById('occ-panel').classList.contains('on')) return;
+  if(e.target.tagName === 'INPUT') return;
+  if(game.playMode === 'occ-destapar'){
+    if(!occGame.shown && (e.key === ' ' || e.key === 'Enter')){ e.preventDefault(); document.querySelector('#occ-panel .op-body button').click(); }
+    else if(occGame.shown && e.key === '1'){ document.querySelector('#occ-panel .op-no').click(); }
+    else if(occGame.shown && (e.key === '2' || e.key === 'Enter')){ e.preventDefault(); document.querySelector('#occ-panel .op-body .btn-primary').click(); }
+  }
+});
+document.querySelectorAll('#occ-hide-seg button').forEach(b=> b.addEventListener('click', ()=>{
+  const node = modeChooserNode; if(!node) return;
+  node.occHideAll = b.dataset.v === 'all'; saveLocal();
+  document.querySelectorAll('#occ-hide-seg button').forEach(x=> x.classList.toggle('on', x === b));
+}));
 
 /* ============================================================
    BOOT
@@ -5035,827 +5490,6 @@ boot();
 })();
 </script>
 
-<script>
-/* ============================================================
-   LIENZO — composición de imágenes en un canvas libre
-   ============================================================ */
-(function(){
-"use strict";
 
-let W = 1600, H = 1200, bg = '#ffffff';
-let items = []; // {id, imgEl, natW, natH, x,y,w,h, z, csx,csy,csw,csh, label}
-let freePoints = []; // {id, x, y, label}  <- puntos sueltos, en px del lienzo
-let nextZ = 1;
-let selectedIds = new Set();
-let selectMode = false;
-let pointMode = false;
-let rectMode = false;
-let viewScale = 1;
-let uidc = 0;
-function uid(){ return 'lz'+(++uidc); }
-
-const canvas = document.getElementById('lz-canvas');
-const canvasWrap = document.getElementById('lz-canvas-wrap');
-const viewport = document.getElementById('lz-viewport');
-const cropBtn = document.getElementById('lz-btn-crop');
-const nameInput = document.getElementById('lz-item-name');
-const selectBtn = document.getElementById('lz-btn-select');
-const pointBtn = document.getElementById('lz-btn-point');
-const rectBtn = document.getElementById('lz-btn-rect');
-const rectColorInput = document.getElementById('lz-rect-color');
-const marqueeEl = document.getElementById('lz-marquee');
-
-function toast(msg){
-  const el = document.getElementById('toast');
-  if(!el) return;
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(toast._t);
-  toast._t = setTimeout(()=> el.classList.remove('show'), 2000);
-}
-
-/* ---------- tamaño de lienzo / zoom de vista ---------- */
-function applyCanvasSize(){
-  canvas.style.width = W+'px';
-  canvas.style.height = H+'px';
-  canvas.style.background = bg;
-  renderEmptyHint();
-}
-function fitZoom(){
-  const availW = viewport.clientWidth - 48, availH = viewport.clientHeight - 48;
-  viewScale = Math.max(0.05, Math.min(availW/W, availH/H, 2));
-  applyZoom();
-}
-function applyZoom(){
-  canvasWrap.style.width = (W*viewScale)+'px';
-  canvasWrap.style.height = (H*viewScale)+'px';
-  canvas.style.transform = `scale(${viewScale})`;
-  canvas.style.transformOrigin = '0 0';
-  document.getElementById('lz-zoom-label').textContent = Math.round(viewScale*100)+'%';
-  if(cropEditId) positionCropOverlay();
-}
-document.getElementById('lz-zoom-in').addEventListener('click', ()=>{ viewScale=Math.min(3, viewScale*1.2); applyZoom(); });
-document.getElementById('lz-zoom-out').addEventListener('click', ()=>{ viewScale=Math.max(0.05, viewScale/1.2); applyZoom(); });
-document.getElementById('lz-zoom-fit').addEventListener('click', fitZoom);
-window.addEventListener('resize', ()=>{ if(document.getElementById('view-lienzo').classList.contains('active')) fitZoom(); });
-viewport.addEventListener('scroll', ()=>{ if(cropEditId) positionCropOverlay(); });
-
-document.getElementById('lz-btn-resize').addEventListener('click', ()=>{
-  pushUndo();
-  W = Math.max(100, +document.getElementById('lz-cv-w').value || W);
-  H = Math.max(100, +document.getElementById('lz-cv-h').value || H);
-  applyCanvasSize();
-  fitZoom();
-});
-let bgEditSnapshotted = false;
-document.getElementById('lz-cv-bg').addEventListener('input', (e)=>{
-  if(!bgEditSnapshotted){ pushUndo(); bgEditSnapshotted = true; }
-  bg = e.target.value;
-  canvas.style.background = bg;
-});
-document.getElementById('lz-cv-bg').addEventListener('change', ()=>{ bgEditSnapshotted = false; });
-
-function renderEmptyHint(){
-  let hint = canvas.querySelector('.lz-hint-empty');
-  if(items.length === 0){
-    if(!hint){
-      hint = document.createElement('div');
-      hint.className = 'lz-hint-empty';
-      hint.innerHTML = 'arrastra imágenes aquí,<br>pégalas con Ctrl+V,<br>o usa "+ imágenes"';
-      canvas.appendChild(hint);
-    }
-  } else if(hint){ hint.remove(); }
-}
-
-/* ---------- deshacer / rehacer ---------- */
-let undoStack = [], redoStack = [];
-const MAX_UNDO = 60;
-function snapshotState(){
-  return {
-    items: items.map(it=>({...it})),
-    freePoints: freePoints.map(fp=>({...fp})),
-    nextZ, W, H, bg
-  };
-}
-function restoreState(snap){
-  items = snap.items.map(it=>({...it}));
-  freePoints = snap.freePoints.map(fp=>({...fp}));
-  nextZ = snap.nextZ; W = snap.W; H = snap.H; bg = snap.bg;
-  document.getElementById('lz-cv-w').value = W;
-  document.getElementById('lz-cv-h').value = H;
-  document.getElementById('lz-cv-bg').value = bg;
-  selectedIds.clear();
-  if(cropEditId) closeCropOverlay();
-  applyCanvasSize();
-  fitZoom();
-  canvas.innerHTML = '';
-  renderEmptyHint();
-  items.forEach(renderItem);
-  freePoints.forEach(renderFreePoint);
-  refreshSelectionUI();
-}
-function pushUndo(){
-  undoStack.push(snapshotState());
-  if(undoStack.length > MAX_UNDO) undoStack.shift();
-  redoStack = [];
-}
-function undo(){
-  if(!undoStack.length){ toast('Nada que deshacer'); return; }
-  redoStack.push(snapshotState());
-  restoreState(undoStack.pop());
-}
-function redo(){
-  if(!redoStack.length){ toast('Nada que rehacer'); return; }
-  undoStack.push(snapshotState());
-  restoreState(redoStack.pop());
-}
-document.getElementById('lz-btn-undo').addEventListener('click', undo);
-document.getElementById('lz-btn-redo').addEventListener('click', redo);
-function clearCanvas(){
-  items = [];
-  freePoints = [];
-  selectedIds.clear();
-  nextZ = 1;
-  canvas.innerHTML = '';
-  setMode(null);
-  renderEmptyHint();
-  refreshSelectionUI();
-}
-
-/* ---------- render de cada imagen según su recorte actual ---------- */
-function syncImgStyle(item){
-  if(item.kind === 'rect') return;
-  const el = canvas.querySelector(`.lz-item[data-id="${item.id}"] img`);
-  if(!el) return;
-  const scale = item.w/item.csw;
-  el.style.left = (-item.csx*scale)+'px';
-  el.style.top = (-item.csy*scale)+'px';
-  el.style.width = (item.natW*scale)+'px';
-  el.style.height = (item.natH*scale)+'px';
-}
-
-/* ---------- añadir imágenes ---------- */
-function addImageFile(file, dropX, dropY, cascadeIdx){
-  const GRID = 150;
-  const reader = new FileReader();
-  reader.onload = ()=>{
-    const img = new Image();
-    img.onload = ()=>{
-      const maxW = Math.min(img.naturalWidth, GRID-20, 130);
-      const w = maxW;
-      const h = w * (img.naturalHeight/img.naturalWidth);
-      let x, y;
-      if(dropX !== undefined){
-        x = dropX - w/2 + (cascadeIdx||0)*18;
-        y = dropY - h/2 + (cascadeIdx||0)*18;
-      } else {
-        const cols = Math.max(1, Math.floor(W/GRID));
-        const col = items.length % cols, row = Math.floor(items.length/cols);
-        x = 10 + col*GRID;
-        y = 10 + row*GRID;
-      }
-      const item = {
-        id:uid(), kind:'image', imgEl:img, natW:img.naturalWidth, natH:img.naturalHeight,
-        x, y, w, h, z: nextZ++,
-        csx:0, csy:0, csw:img.naturalWidth, csh:img.naturalHeight,
-        label:''
-      };
-      pushUndo();
-      items.push(item);
-      renderItem(item);
-      renderEmptyHint();
-    };
-    img.src = reader.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-document.getElementById('lz-btn-add').addEventListener('click', ()=> document.getElementById('lz-file-input').click());
-document.getElementById('lz-file-input').addEventListener('change', (e)=>{
-  [...e.target.files].forEach(f=> addImageFile(f));
-  e.target.value = '';
-});
-
-['dragover','dragenter'].forEach(ev=> viewport.addEventListener(ev, (e)=> e.preventDefault()));
-viewport.addEventListener('drop', (e)=>{
-  e.preventDefault();
-  const files = [...(e.dataTransfer.files||[])].filter(f=> f.type.startsWith('image/'));
-  if(!files.length) return;
-  const rect = canvas.getBoundingClientRect();
-  const cx = (e.clientX - rect.left)/viewScale;
-  const cy = (e.clientY - rect.top)/viewScale;
-  files.forEach((f,i)=> addImageFile(f, cx, cy, i));
-});
-document.addEventListener('paste', (e)=>{
-  if(!document.getElementById('view-lienzo').classList.contains('active')) return;
-  const files = [...(e.clipboardData.items||[])]
-    .filter(it=> it.type && it.type.startsWith('image/'))
-    .map(it=> it.getAsFile()).filter(Boolean);
-  if(!files.length) return;
-  files.forEach((f,i)=> addImageFile(f, W/2, H/2, i));
-  toast(files.length>1 ? `${files.length} imágenes pegadas` : 'Imagen pegada');
-});
-
-/* ---------- render + interacción de cada item ---------- */
-function renderItem(item){
-  const el = document.createElement('div');
-  el.className = 'lz-item';
-  el.dataset.id = item.id;
-  el.style.left = item.x+'px';
-  el.style.top = item.y+'px';
-  el.style.width = item.w+'px';
-  el.style.height = item.h+'px';
-  el.style.zIndex = item.z;
-  el.innerHTML = item.kind === 'rect'
-    ? `<div class="lz-frame"><div class="lz-rectfill" style="background:${item.color};"></div></div>
-       <div class="lz-namewash"></div><div class="lz-nametag"></div>
-       <div class="lz-del">✕</div><div class="lz-rs"></div>`
-    : `<div class="lz-frame"><img src="${item.imgEl.src}" draggable="false"></div>
-       <div class="lz-namewash"></div><div class="lz-nametag"></div>
-       <div class="lz-del">✕</div><div class="lz-rs"></div>`;
-  canvas.appendChild(el);
-  syncImgStyle(item);
-  syncNameWash(item);
-
-  el.addEventListener('pointerdown', (e)=>{
-    if(e.target.classList.contains('lz-del') || e.target.classList.contains('lz-rs')) return;
-    if(pointMode || selectMode || rectMode) return; // en estos modos, el gesto lo gestiona el lienzo
-    e.preventDefault();
-    if(e.shiftKey){ toggleSelect(item.id); return; }
-    if(!selectedIds.has(item.id)) selectOnly(item.id);
-    el.setPointerCapture(e.pointerId);
-    let snapshotted = false;
-    const startX = e.clientX, startY = e.clientY;
-    const groupIds = [...selectedIds];
-    const startPos = new Map(groupIds.map(id=>{ const o = items.find(i=>i.id===id); return [id,{x:o.x,y:o.y}]; }));
-    function onMove(ev){
-      if(!snapshotted){ pushUndo(); snapshotted = true; }
-      const dx = (ev.clientX-startX)/viewScale, dy = (ev.clientY-startY)/viewScale;
-      groupIds.forEach(id=>{
-        const o = items.find(i=>i.id===id);
-        const start = startPos.get(id);
-        o.x = start.x+dx; o.y = start.y+dy;
-        const oe = canvas.querySelector(`.lz-item[data-id="${id}"]`);
-        if(oe){ oe.style.left = o.x+'px'; oe.style.top = o.y+'px'; }
-      });
-    }
-    function onUp(){ el.removeEventListener('pointermove', onMove); el.removeEventListener('pointerup', onUp); }
-    el.addEventListener('pointermove', onMove);
-    el.addEventListener('pointerup', onUp);
-  });
-
-  el.querySelector('.lz-del').addEventListener('pointerdown', (e)=> e.stopPropagation());
-  el.querySelector('.lz-del').addEventListener('click', (e)=>{ e.stopPropagation(); pushUndo(); removeItem(item.id); });
-
-  const rs = el.querySelector('.lz-rs');
-  rs.addEventListener('pointerdown', (e)=>{
-    e.stopPropagation(); e.preventDefault();
-    selectOnly(item.id);
-    rs.setPointerCapture(e.pointerId);
-    let snapshotted = false;
-    const startX = e.clientX, startY = e.clientY;
-    const ow = item.w, oh = item.h, ratio = oh/ow;
-    const freeResize = item.kind === 'rect';
-    function onMove(ev){
-      if(!snapshotted){ pushUndo(); snapshotted = true; }
-      const dx = (ev.clientX-startX)/viewScale;
-      item.w = Math.max(16, ow+dx);
-      if(freeResize){
-        const dy = (ev.clientY-startY)/viewScale;
-        item.h = Math.max(16, oh+dy);
-      } else {
-        item.h = item.w*ratio;
-      }
-      el.style.width = item.w+'px'; el.style.height = item.h+'px';
-      syncImgStyle(item);
-    }
-    function onUp(){ rs.removeEventListener('pointermove', onMove); rs.removeEventListener('pointerup', onUp); }
-    rs.addEventListener('pointermove', onMove);
-    rs.addEventListener('pointerup', onUp);
-  });
-}
-function syncNameWash(item){
-  const el = canvas.querySelector(`.lz-item[data-id="${item.id}"]`);
-  if(!el) return;
-  const has = !!(item.label && item.label.trim());
-  el.classList.toggle('named', has);
-  const tag = el.querySelector('.lz-nametag');
-  if(tag) tag.textContent = has ? item.label.trim() : '';
-}
-
-/* ---------- selección (única, múltiple con shift, y por recuadro) ---------- */
-function refreshSelectionUI(){
-  canvas.querySelectorAll('.lz-item').forEach(el=>{
-    const sel = selectedIds.has(el.dataset.id);
-    el.classList.toggle('selected', sel);
-    el.classList.toggle('solo', sel && selectedIds.size===1);
-  });
-  const single = getSingleSelected();
-  if(single){
-    nameInput.disabled = false;
-    nameInput.value = single.label || '';
-    nameInput.placeholder = 'nombre de la imagen seleccionada';
-  } else {
-    nameInput.disabled = true;
-    nameInput.value = '';
-    nameInput.placeholder = selectedIds.size>1 ? `${selectedIds.size} imágenes seleccionadas` : 'nombre de la imagen seleccionada';
-  }
-}
-function selectOnly(id){
-  if(cropEditId && cropEditId !== id) applyCropAndClose();
-  selectedIds = new Set(id ? [id] : []);
-  refreshSelectionUI();
-}
-function toggleSelect(id){
-  if(cropEditId && cropEditId !== id) applyCropAndClose();
-  if(selectedIds.has(id)) selectedIds.delete(id); else selectedIds.add(id);
-  refreshSelectionUI();
-}
-function setSelection(ids){ selectedIds = new Set(ids); refreshSelectionUI(); }
-function addToSelection(ids){ ids.forEach(id=> selectedIds.add(id)); refreshSelectionUI(); }
-function clearSelection(){ if(cropEditId) applyCropAndClose(); selectedIds.clear(); refreshSelectionUI(); }
-function getSelected(){ return items.filter(it=> selectedIds.has(it.id)); }
-function getSingleSelected(){ return selectedIds.size===1 ? items.find(it=> selectedIds.has(it.id)) : null; }
-
-nameInput.addEventListener('focus', ()=> pushUndo());
-nameInput.addEventListener('input', ()=>{
-  const it = getSingleSelected();
-  if(!it) return;
-  it.label = nameInput.value;
-  syncNameWash(it);
-});
-
-function setMode(which){
-  selectMode = which==='select';
-  pointMode = which==='point';
-  rectMode = which==='rect';
-  selectBtn.classList.toggle('btn-primary', selectMode);
-  selectBtn.textContent = selectMode ? 'seleccionando…' : 'seleccionar';
-  pointBtn.classList.toggle('btn-primary', pointMode);
-  pointBtn.textContent = pointMode ? 'toca para nombrar…' : '+ punto';
-  rectBtn.classList.toggle('btn-primary', rectMode);
-  rectBtn.textContent = rectMode ? 'dibujando…' : '+ rectángulo';
-}
-selectBtn.addEventListener('click', ()=> setMode(selectMode ? null : 'select'));
-pointBtn.addEventListener('click', ()=> setMode(pointMode ? null : 'point'));
-rectBtn.addEventListener('click', ()=> setMode(rectMode ? null : 'rect'));
-
-function addRect(x,y,w,h){
-  pushUndo();
-  const item = { id:uid(), kind:'rect', x,y,w,h, z:nextZ++, color: rectColorInput.value, label:'' };
-  items.push(item);
-  renderItem(item);
-  renderEmptyHint();
-  return item;
-}
-function startDrawRect(e){
-  const startClientX = e.clientX, startClientY = e.clientY;
-  const cr = canvas.getBoundingClientRect();
-  let dragging = false;
-  function onMove(ev){
-    const dx = ev.clientX-startClientX, dy = ev.clientY-startClientY;
-    if(!dragging && Math.hypot(dx,dy) < 4) return;
-    dragging = true;
-    marqueeEl.style.display = 'block';
-    const vpRect = viewport.getBoundingClientRect();
-    marqueeEl.style.left = (Math.min(startClientX,ev.clientX)-vpRect.left)+'px';
-    marqueeEl.style.top = (Math.min(startClientY,ev.clientY)-vpRect.top)+'px';
-    marqueeEl.style.width = Math.abs(dx)+'px';
-    marqueeEl.style.height = Math.abs(dy)+'px';
-  }
-  function onUp(ev){
-    document.removeEventListener('pointermove', onMove);
-    document.removeEventListener('pointerup', onUp);
-    marqueeEl.style.display = 'none';
-    if(!dragging) return;
-    const x1 = (Math.min(startClientX,ev.clientX)-cr.left)/viewScale;
-    const y1 = (Math.min(startClientY,ev.clientY)-cr.top)/viewScale;
-    const w1 = Math.abs(ev.clientX-startClientX)/viewScale;
-    const h1 = Math.abs(ev.clientY-startClientY)/viewScale;
-    if(w1 < 6 || h1 < 6) return;
-    const it = addRect(x1,y1,w1,h1);
-    selectOnly(it.id);
-  }
-  document.addEventListener('pointermove', onMove);
-  document.addEventListener('pointerup', onUp);
-}
-
-/* ---------- puntos sueltos (independientes de las imágenes) ---------- */
-function renderFreePoint(fp){
-  const el = document.createElement('div');
-  el.className = 'lz-point';
-  el.dataset.id = fp.id;
-  el.style.left = fp.x+'px';
-  el.style.top = fp.y+'px';
-  el.innerHTML = `<div class="lz-point-dot"></div><div class="lz-point-tag"></div><div class="lz-point-del">✕</div>`;
-  el.querySelector('.lz-point-tag').textContent = fp.label;
-  canvas.appendChild(el);
-
-  el.addEventListener('pointerdown', (e)=>{
-    if(e.target.classList.contains('lz-point-del')) return;
-    e.stopPropagation(); e.preventDefault();
-    pushUndo();
-    el.setPointerCapture(e.pointerId);
-    const startX=e.clientX, startY=e.clientY, ox=fp.x, oy=fp.y;
-    let moved = false;
-    function onMove(ev){
-      const dx=(ev.clientX-startX)/viewScale, dy=(ev.clientY-startY)/viewScale;
-      if(Math.hypot(dx,dy)>3) moved=true;
-      fp.x=ox+dx; fp.y=oy+dy;
-      el.style.left=fp.x+'px'; el.style.top=fp.y+'px';
-    }
-    function onUp(){
-      el.removeEventListener('pointermove', onMove);
-      el.removeEventListener('pointerup', onUp);
-      if(!moved && window.MSApp){
-        window.MSApp.openPrompt('nombre de este punto', fp.label, (val)=>{
-          if(val == null || val === '') return;
-          fp.label = val;
-          el.querySelector('.lz-point-tag').textContent = val;
-        });
-      }
-    }
-    el.addEventListener('pointermove', onMove);
-    el.addEventListener('pointerup', onUp);
-  });
-  el.querySelector('.lz-point-del').addEventListener('pointerdown', (e)=> e.stopPropagation());
-  el.querySelector('.lz-point-del').addEventListener('click', (e)=>{
-    e.stopPropagation();
-    pushUndo();
-    freePoints = freePoints.filter(p=> p.id !== fp.id);
-    el.remove();
-  });
-}
-
-function startMarquee(e){
-  const startClientX = e.clientX, startClientY = e.clientY;
-  const shiftHeld = e.shiftKey;
-  const vpRect = viewport.getBoundingClientRect();
-  let dragging = false;
-  function onMove(ev){
-    const dx = ev.clientX-startClientX, dy = ev.clientY-startClientY;
-    if(!dragging && Math.hypot(dx,dy) < 4) return;
-    dragging = true;
-    marqueeEl.style.display = 'block';
-    marqueeEl.style.left = (Math.min(startClientX,ev.clientX)-vpRect.left)+'px';
-    marqueeEl.style.top = (Math.min(startClientY,ev.clientY)-vpRect.top)+'px';
-    marqueeEl.style.width = Math.abs(dx)+'px';
-    marqueeEl.style.height = Math.abs(dy)+'px';
-  }
-  function onUp(ev){
-    document.removeEventListener('pointermove', onMove);
-    document.removeEventListener('pointerup', onUp);
-    marqueeEl.style.display = 'none';
-    if(dragging){
-      const cr = canvas.getBoundingClientRect();
-      const rx1 = (Math.min(startClientX,ev.clientX)-cr.left)/viewScale;
-      const ry1 = (Math.min(startClientY,ev.clientY)-cr.top)/viewScale;
-      const rx2 = (Math.max(startClientX,ev.clientX)-cr.left)/viewScale;
-      const ry2 = (Math.max(startClientY,ev.clientY)-cr.top)/viewScale;
-      const hit = items.filter(it=> it.x < rx2 && it.x+it.w > rx1 && it.y < ry2 && it.y+it.h > ry1).map(it=>it.id);
-      if(shiftHeld) addToSelection(hit); else setSelection(hit);
-    } else {
-      const under = document.elementFromPoint(ev.clientX, ev.clientY);
-      const itemEl = under && under.closest ? under.closest('.lz-item') : null;
-      if(itemEl){ if(shiftHeld) toggleSelect(itemEl.dataset.id); else selectOnly(itemEl.dataset.id); }
-      else if(!shiftHeld) clearSelection();
-    }
-  }
-  document.addEventListener('pointermove', onMove);
-  document.addEventListener('pointerup', onUp);
-}
-canvas.addEventListener('pointerdown', (e)=>{
-  if(e.target.classList.contains('lz-del') || e.target.classList.contains('lz-rs')
-     || e.target.classList.contains('lz-point-del')) return;
-  if(rectMode){
-    if(e.target.closest('.lz-point')) return;
-    startDrawRect(e);
-    return;
-  }
-  if(pointMode){
-    if(e.target.closest('.lz-point')) return; // ya lo gestiona el propio punto (mover/renombrar)
-    if(!window.MSApp) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX-rect.left)/viewScale, y = (e.clientY-rect.top)/viewScale;
-    window.MSApp.openPrompt('nombre de este punto', '', (label)=>{
-      if(!label) return;
-      pushUndo();
-      const fp = {id: uid(), x, y, label};
-      freePoints.push(fp);
-      renderFreePoint(fp);
-    });
-    return;
-  }
-  if(selectMode){ startMarquee(e); return; }
-  if(e.target === canvas) clearSelection();
-});
-
-function removeItem(id){
-  if(cropEditId === id) closeCropOverlay();
-  items = items.filter(it=> it.id !== id);
-  const el = canvas.querySelector(`.lz-item[data-id="${id}"]`);
-  if(el) el.remove();
-  selectedIds.delete(id);
-  renderEmptyHint();
-  refreshSelectionUI();
-}
-
-document.getElementById('lz-btn-del').addEventListener('click', ()=>{
-  if(selectedIds.size===0){ toast('Selecciona antes una imagen'); return; }
-  pushUndo();
-  [...selectedIds].forEach(id=> removeItem(id));
-});
-document.getElementById('lz-btn-front').addEventListener('click', ()=>{
-  const sel = getSelected(); if(!sel.length){ toast('Selecciona antes una imagen'); return; }
-  pushUndo();
-  sel.forEach(it=>{ it.z = nextZ++; const el=canvas.querySelector(`.lz-item[data-id="${it.id}"]`); if(el) el.style.zIndex=it.z; });
-});
-document.getElementById('lz-btn-back').addEventListener('click', ()=>{
-  const sel = getSelected(); if(!sel.length){ toast('Selecciona antes una imagen'); return; }
-  pushUndo();
-  let minZ = Math.min(0, ...items.filter(it=>it.kind!=='cell').map(i=>i.z));
-  sel.forEach(it=>{ minZ--; it.z = minZ; const el=canvas.querySelector(`.lz-item[data-id="${it.id}"]`); if(el) el.style.zIndex=it.z; });
-});
-
-document.addEventListener('keydown', (e)=>{
-  if(!document.getElementById('view-lienzo').classList.contains('active')) return;
-  if(e.key === 'Escape' && cropEditId){ closeCropOverlay(); return; }
-  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='z' && !e.shiftKey){ e.preventDefault(); undo(); return; }
-  if((e.ctrlKey||e.metaKey) && (e.key.toLowerCase()==='y' || (e.key.toLowerCase()==='z' && e.shiftKey))){ e.preventDefault(); redo(); return; }
-  if((e.key==='Delete' || e.key==='Backspace') && selectedIds.size && document.activeElement.tagName !== 'INPUT'){
-    e.preventDefault();
-    pushUndo();
-    [...selectedIds].forEach(id=> removeItem(id));
-  }
-});
-
-/* ---------- RECORTAR: recuadro de 4 vértices sobre la imagen completa, estilo Photoshop ---------- */
-let cropEditId = null, cropFull = null, cropRect = null, cropOverlayEl = null;
-
-function enterCropMode(id){
-  const it = items.find(i=>i.id===id);
-  if(!it) return;
-  cropEditId = id;
-  const scale = it.w/it.csw;
-  cropFull = { x: it.x - it.csx*scale, y: it.y - it.csy*scale, w: it.natW*scale, h: it.natH*scale };
-  cropRect = { x: it.x, y: it.y, w: it.w, h: it.h };
-  buildCropOverlay(it);
-  positionCropOverlay();
-  cropBtn.textContent = 'listo';
-  cropBtn.classList.add('btn-primary');
-  const el = canvas.querySelector(`.lz-item[data-id="${id}"]`);
-  if(el) el.style.visibility = 'hidden';
-}
-
-function buildCropOverlay(it){
-  const wrap = document.createElement('div');
-  wrap.id = 'lz-crop-overlay';
-  wrap.innerHTML = `
-    <div class="lz-crop-backdrop" id="lz-crop-backdrop"></div>
-    <div class="lz-cropfull" id="lz-cropfull"><img src="${it.imgEl.src}"></div>
-    <div class="lz-croprect" id="lz-croprect">
-      <div class="lz-crop-handle" data-c="nw"></div>
-      <div class="lz-crop-handle" data-c="ne"></div>
-      <div class="lz-crop-handle" data-c="sw"></div>
-      <div class="lz-crop-handle" data-c="se"></div>
-    </div>`;
-  document.body.appendChild(wrap);
-  cropOverlayEl = wrap;
-
-  wrap.querySelector('#lz-crop-backdrop').addEventListener('click', ()=> applyCropAndClose());
-
-  const rectEl = wrap.querySelector('#lz-croprect');
-  rectEl.addEventListener('pointerdown', (e)=>{
-    if(e.target.classList.contains('lz-crop-handle')) return;
-    e.preventDefault();
-    rectEl.setPointerCapture(e.pointerId);
-    const sx=e.clientX, sy=e.clientY, ox=cropRect.x, oy=cropRect.y;
-    function onMove(ev){
-      const dx=(ev.clientX-sx)/viewScale, dy=(ev.clientY-sy)/viewScale;
-      cropRect.x = Math.min(Math.max(cropFull.x, ox+dx), cropFull.x+cropFull.w-cropRect.w);
-      cropRect.y = Math.min(Math.max(cropFull.y, oy+dy), cropFull.y+cropFull.h-cropRect.h);
-      positionCropOverlay();
-    }
-    function onUp(){ rectEl.removeEventListener('pointermove',onMove); rectEl.removeEventListener('pointerup',onUp); }
-    rectEl.addEventListener('pointermove', onMove);
-    rectEl.addEventListener('pointerup', onUp);
-  });
-
-  wrap.querySelectorAll('.lz-crop-handle').forEach(handle=>{
-    handle.addEventListener('pointerdown', (e)=>{
-      e.stopPropagation(); e.preventDefault();
-      handle.setPointerCapture(e.pointerId);
-      const corner = handle.dataset.c;
-      const sx=e.clientX, sy=e.clientY;
-      const start = {x:cropRect.x, y:cropRect.y, w:cropRect.w, h:cropRect.h};
-      const MIN = 24;
-      function onMove(ev){
-        const dx=(ev.clientX-sx)/viewScale, dy=(ev.clientY-sy)/viewScale;
-        let {x,y,w,h} = start;
-        if(corner.includes('e')) w = Math.min(cropFull.x+cropFull.w-start.x, Math.max(MIN, start.w+dx));
-        if(corner.includes('s')) h = Math.min(cropFull.y+cropFull.h-start.y, Math.max(MIN, start.h+dy));
-        if(corner.includes('w')){
-          const nx = Math.max(cropFull.x, Math.min(start.x+start.w-MIN, start.x+dx));
-          w = start.w+(start.x-nx); x = nx;
-        }
-        if(corner.includes('n')){
-          const ny = Math.max(cropFull.y, Math.min(start.y+start.h-MIN, start.y+dy));
-          h = start.h+(start.y-ny); y = ny;
-        }
-        cropRect = {x,y,w,h};
-        positionCropOverlay();
-      }
-      function onUp(){ handle.removeEventListener('pointermove',onMove); handle.removeEventListener('pointerup',onUp); }
-      handle.addEventListener('pointermove', onMove);
-      handle.addEventListener('pointerup', onUp);
-    });
-  });
-}
-
-function positionCropOverlay(){
-  if(!cropOverlayEl) return;
-  const cr = canvas.getBoundingClientRect();
-  const full = document.getElementById('lz-cropfull');
-  full.style.left = (cr.left+cropFull.x*viewScale)+'px';
-  full.style.top = (cr.top+cropFull.y*viewScale)+'px';
-  full.style.width = (cropFull.w*viewScale)+'px';
-  full.style.height = (cropFull.h*viewScale)+'px';
-  const rectEl = document.getElementById('lz-croprect');
-  rectEl.style.left = (cr.left+cropRect.x*viewScale)+'px';
-  rectEl.style.top = (cr.top+cropRect.y*viewScale)+'px';
-  rectEl.style.width = (cropRect.w*viewScale)+'px';
-  rectEl.style.height = (cropRect.h*viewScale)+'px';
-}
-
-function closeCropOverlay(){
-  if(cropOverlayEl){ cropOverlayEl.remove(); cropOverlayEl = null; }
-  if(cropEditId){
-    const el = canvas.querySelector(`.lz-item[data-id="${cropEditId}"]`);
-    if(el) el.style.visibility = '';
-  }
-  cropEditId = null; cropFull = null; cropRect = null;
-  cropBtn.textContent = 'recortar';
-  cropBtn.classList.remove('btn-primary');
-}
-
-function applyCropAndClose(){
-  const it = items.find(i=>i.id===cropEditId);
-  if(it && cropFull && cropRect){
-    pushUndo();
-    const scale = it.w/it.csw;
-    it.csx = (cropRect.x - cropFull.x)/scale;
-    it.csy = (cropRect.y - cropFull.y)/scale;
-    it.csw = cropRect.w/scale;
-    it.csh = cropRect.h/scale;
-    it.h = it.w * (it.csh/it.csw);
-    const el = canvas.querySelector(`.lz-item[data-id="${it.id}"]`);
-    if(el) el.style.height = it.h+'px';
-    syncImgStyle(it);
-  }
-  closeCropOverlay();
-}
-
-cropBtn.addEventListener('click', ()=>{
-  if(cropEditId){ applyCropAndClose(); return; }
-  const it = getSingleSelected();
-  if(!it){ toast(selectedIds.size>1 ? 'Selecciona solo una imagen para recortar' : 'Selecciona antes una imagen'); return; }
-  if(it.kind === 'rect' || it.kind === 'cell'){ toast('Esto no se puede recortar'); return; }
-  enterCropMode(it.id);
-});
-
-document.querySelectorAll('.app-tab').forEach(btn=>{
-  btn.addEventListener('click', ()=>{ if(cropEditId) applyCropAndClose(); });
-});
-
-/* ---------- exportar ---------- */
-function renderComposite(){
-  const out = document.createElement('canvas');
-  out.width = W; out.height = H;
-  const ctx = out.getContext('2d');
-  ctx.fillStyle = bg;
-  ctx.fillRect(0,0,W,H);
-  items.slice().sort((a,b)=>a.z-b.z).forEach(it=>{
-    if(it.kind === 'rect'){
-      ctx.fillStyle = it.color;
-      ctx.fillRect(it.x, it.y, it.w, it.h);
-    } else {
-      ctx.drawImage(it.imgEl, it.csx, it.csy, it.csw, it.csh, it.x, it.y, it.w, it.h);
-    }
-  });
-  return out;
-}
-document.getElementById('lz-btn-export').addEventListener('click', ()=>{
-  if(items.length===0){ toast('El lienzo está vacío'); return; }
-  renderComposite().toBlob((blob)=>{
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'lienzo.png';
-    a.click();
-    toast('Imagen exportada');
-  }, 'image/png');
-});
-
-document.getElementById('lz-btn-send').addEventListener('click', ()=>{
-  if(items.length===0 && freePoints.length===0){ toast('El lienzo está vacío'); return; }
-  const named = items.filter(it=> it.kind!=='rect' && it.label && it.label.trim());
-  if(!window.MSApp){ toast('No se pudo conectar con la Biblioteca'); return; }
-
-  if(named.length===0 && freePoints.length===0){
-    toast('Ponle nombre al menos a una imagen, o coloca al menos un punto'); return;
-  }
-  window.MSApp.openPrompt('nombre para este tema', '', (name)=>{
-    if(!name) return;
-    const src = renderComposite();
-    const maxDim = 1800;
-    let dataUrl;
-    if(Math.max(src.width, src.height) <= maxDim){
-      dataUrl = src.toDataURL('image/png');
-    } else {
-      const scale = maxDim/Math.max(src.width, src.height);
-      const small = document.createElement('canvas');
-      small.width = Math.round(src.width*scale);
-      small.height = Math.round(src.height*scale);
-      small.getContext('2d').drawImage(src, 0, 0, small.width, small.height);
-      dataUrl = small.toDataURL('image/jpeg', 0.87);
-    }
-    // imágenes nombradas enteras -> un punto con radio ajustado a su propio tamaño
-    const regionPoints = named.map(it=>({
-      id: window.MSApp.uid(),
-      x: (it.x+it.w/2)/W*100,
-      y: (it.y+it.h/2)/H*100,
-      r: Math.max(((it.w/2)/W*100), ((it.h/2)/H*100)) * 0.85,
-      label: it.label.trim()
-    }));
-    // puntos sueltos -> tolerancia normal del tema
-    const loosePoints = freePoints.map(fp=>({
-      id: window.MSApp.uid(),
-      x: fp.x/W*100,
-      y: fp.y/H*100,
-      label: fp.label
-    }));
-    const points = [...regionPoints, ...loosePoints];
-    const node = { id: window.MSApp.uid(), type:'tema', mode:'fijo', name, image:dataUrl, points, tolerance:8 };
-    window.MSApp.pushRootNode(node);
-    const unnamedImages = items.filter(it=> it.kind!=='rect' && it.kind!=='cell' && !(it.label && it.label.trim())).length;
-    toast(unnamedImages>0 ? `Tema creado (${unnamedImages} imagen(es) sin nombre no se añadieron)` : 'Tema creado en Biblioteca');
-    pushUndo();
-    clearCanvas();
-  });
-});
-
-document.getElementById('lz-btn-send-shuffle').addEventListener('click', ()=>{
-  const named = items.filter(it=> it.kind!=='rect' && it.label && it.label.trim());
-  if(named.length===0){ toast('Nombra al menos una imagen antes de enviarla'); return; }
-  if(!window.MSApp){ toast('No se pudo conectar con la Biblioteca'); return; }
-
-  const makePhotos = ()=> named.map(it=>{
-    const out = document.createElement('canvas');
-    out.width = Math.max(1, Math.round(it.csw));
-    out.height = Math.max(1, Math.round(it.csh));
-    out.getContext('2d').drawImage(it.imgEl, it.csx, it.csy, it.csw, it.csh, 0, 0, out.width, out.height);
-    return { id: window.MSApp.uid(), image: out.toDataURL('image/jpeg', 0.88), label: it.label.trim() };
-  });
-  const unnamedImages = items.filter(it=> it.kind!=='rect' && !(it.label && it.label.trim())).length;
-
-  if(window.MSApp.appendTargetId){
-    const targetId = window.MSApp.appendTargetId;
-    const photos = makePhotos();
-    const ok = window.MSApp.appendPhotosToTema(targetId, photos);
-    window.MSApp.appendTargetId = null;
-    document.getElementById('lz-btn-send-shuffle').textContent = 'enviar como barajado (con scroll)';
-    if(ok){
-      toast(unnamedImages>0
-        ? `${photos.length} fotos añadidas (${unnamedImages} sin nombre no se añadieron)`
-        : `${photos.length} fotos añadidas al tema`);
-      pushUndo();
-      clearCanvas();
-    } else {
-      toast('No se encontró ese tema — no se ha añadido nada');
-    }
-    return;
-  }
-
-  window.MSApp.openPrompt('nombre para este tema', '', (name)=>{
-    if(!name) return;
-    window.MSApp.openPrompt('columnas de la cuadrícula', '3', (colsStr)=>{
-      const cols = Math.max(1, Math.round(+colsStr || 3));
-      const photos = makePhotos();
-      const node = { id: window.MSApp.uid(), type:'tema', mode:'barajado', name, cols, photos };
-      window.MSApp.pushRootNode(node);
-      toast(unnamedImages>0
-        ? `Tema barajado creado (${photos.length} fotos, ${unnamedImages} sin nombre no se añadieron)`
-        : `Tema barajado creado (${photos.length} fotos)`);
-      pushUndo();
-      clearCanvas();
-    });
-  });
-});
-
-document.querySelector('.app-tab[data-tab="lienzo"]').addEventListener('click', ()=> fitZoom());
-
-applyCanvasSize();
-fitZoom();
-})();
-</script>
 </body>
 </html>
