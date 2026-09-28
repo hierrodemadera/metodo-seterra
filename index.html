@@ -3136,7 +3136,7 @@ function filteredPhotos(node){
 function sortableCats(node, photos){ return tagCats(node).filter(c=> valuesOf(node, c.id, photos).length >= 2); }
 function renderPickFilter(node){
   const box = document.getElementById('pick-filter');
-  const cats = tagCats(node).filter(c=> valuesOf(node, c.id).length);
+  const cats = tagCats(node).filter(c=> valuesOf(node, c.id, (node.photos||[]).filter(p=> p.image)).length);
   box.style.display = cats.length ? '' : 'none';
   if(!cats.length) return;
   const f = node.playFilter = node.playFilter || {};
@@ -3162,7 +3162,7 @@ function renderPickFilter(node){
       if(cur.size) f[cat.id] = [...cur]; else delete f[cat.id];
       saveLocal(); refreshModeChooser(node);
     };
-    valuesOf(node, cat.id).forEach(v=>{
+    valuesOf(node, cat.id, all).forEach(v=>{            // solo valores de tarjetas que se pueden jugar (con imagen)
       const c = document.createElement('button');
       c.className = 'pf-chip' + (want.includes(v) ? ' on' : '');
       c.style.setProperty('--cc', tagColor(node, cat.id, v));
