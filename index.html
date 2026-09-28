@@ -71,6 +71,8 @@ button{cursor:pointer;}
 .tree-menu-btn{background:none;border:none;color:var(--muted);font-size:15px;padding:2px 6px;
   flex-shrink:0;line-height:1;}
 .tree-menu-btn:hover{color:var(--fg);}
+.tree-edit-btn{background:none;border:none;color:var(--muted);font-size:14px;padding:2px 6px;flex-shrink:0;line-height:1;border-radius:6px;}
+.tree-edit-btn:hover{color:var(--fg);}
 .tree-export-btn{background:none;border:none;border-radius:6px;color:var(--muted);font-size:14px;
   padding:2px 6px;flex-shrink:0;line-height:1;}
 .tree-export-btn:hover{color:var(--fg);border-color:var(--fg);}
@@ -785,7 +787,6 @@ body.playing #win-game .workspace{min-height:0;}
   </div>
   <div class="app-tabs">
     <button class="app-tab active" data-tab="biblioteca">Mazos</button>
-    <button class="app-tab" data-tab="jugar">Jugar</button>
     <button class="app-tab" data-tab="notas">Notas</button>
   </div>
 </div>
@@ -1413,6 +1414,11 @@ function renderNodes(nodes, depth, editable, containerId){
   return wrap;
 }
 
+function deckIsEmpty(node){
+  if(node.mode === 'barajado') return !(node.photos||[]).some(p=> p.image);
+  if(node.mode === 'oclusion') return !node.image || !(node.masks||[]).some(m=> (m.label||'').trim());
+  return !node.image || !(node.points||[]).length;
+}
 function renderRow(node, depth, editable, containerId){
   const row = document.createElement('div');
   row.className = 'tree-row ' + node.type;
@@ -1427,19 +1433,20 @@ function renderRow(node, depth, editable, containerId){
     <span class="tree-tog">${tog}</span>
     <span class="tree-name">${escapeHtml(node.name)}</span>
     ${count}
-    ${editable && !isFolder ? '<button class="tree-export-btn" title="exportar este mazo a un archivo">⤓</button>' : ''}
+    ${editable && !isFolder ? '<button class="tree-edit-btn" title="editar">✎</button><button class="tree-export-btn" title="exportar este mazo a un archivo">⤓</button>' : ''}
     ${editable ? '<button class="tree-menu-btn">⋯</button>' : ''}
   `;
   row.addEventListener('click', (e)=>{
     if(e.target.classList.contains('tree-menu-btn')) return;
     if(e.target.classList.contains('tree-export-btn')){ e.stopPropagation(); exportDeck(node); return; }
+    if(e.target.classList.contains('tree-edit-btn')){ e.stopPropagation(); openTemaEditor(node.id); return; }
     if(dragJustHappened){ dragJustHappened = false; return; }
     if(isFolder){
       node.expanded = !node.expanded;
       if(editable) saveLocal();
       renderTree(containerId, editable);
     } else {
-      if(editable) openTemaEditor(node.id);
+      if(deckIsEmpty(node)) openTemaEditor(node.id);   // aún no hay nada que jugar: directo a editarlo
       else openGamePicker(node.id);
     }
   });
@@ -1449,7 +1456,7 @@ function renderRow(node, depth, editable, containerId){
       openCtxMenu(e.currentTarget, node);
     });
     row.addEventListener('pointerdown', (e)=>{
-      if(e.target.classList.contains('tree-menu-btn') || e.target.classList.contains('tree-export-btn')) return;
+      if(e.target.classList.contains('tree-menu-btn') || e.target.classList.contains('tree-export-btn') || e.target.classList.contains('tree-edit-btn')) return;
       startTreeDrag(e, node, row, containerId);
     });
   }
@@ -1576,7 +1583,7 @@ function openCtxMenu(anchorEl, node, opts){
     items.push(['+ subcarpeta', ()=> promptNewFolder(node)]);
   }
   if(node.type === 'tema' && !opts.inEditor){
-    items.push(['jugar', ()=>{ closeCtx(); switchToTab('jugar'); openGamePicker(node.id); }]);
+    items.push(['editar', ()=> openTemaEditor(node.id)]);
   }
   items.push(['renombrar', ()=> promptRename(node)]);
   if(node.type === 'tema') items.push(['exportar mazo', ()=> exportDeck(node)]);
@@ -1975,7 +1982,7 @@ document.getElementById('back-tarjetas-editor').addEventListener('click', ()=>{
 });
 document.getElementById('tarjetas-play').addEventListener('click', ()=>{
   const node = findNode(currentCardsId); if(!node) return;
-  switchToTab('jugar'); openGamePicker(node.id);
+  openGamePicker(node.id);
 });
 document.getElementById('tarjetas-menu').addEventListener('click', (e)=>{
   const node = findNode(currentCardsId); if(node) openCtxMenu(e.currentTarget, node, { inEditor: true });
@@ -3029,13 +3036,19 @@ document.getElementById('tema-b-name').addEventListener('input', (e)=>{
 document.getElementById('tema-b-name').addEventListener('change', ()=>{ renderTree('tree-b',true); renderTree('tree-j',false); });
 document.getElementById('tema-b-delete').addEventListener('click', ()=> deleteNode(findNode(currentTemaId)));
 document.getElementById('tema-b-play').addEventListener('click', ()=>{
-  const id = currentTemaId;
-  switchToTab('jugar');
-  openGamePicker(id);
+  openGamePicker(currentTemaId);
 });
 
+function backToDecks(){
+  showJugarWindow('win-tree-j');
+  renderTree('tree-b', true);
+  switchToTab('biblioteca');
+  const node = findNode(currentCardsId);
+  if(node && document.getElementById('win-tarjetas-editor').classList.contains('active')) renderCardsPanel(node);
+}
 function switchToTab(name){
-  document.querySelectorAll('.app-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+  const tabName = name === 'jugar' ? 'biblioteca' : name; // la partida pertenece a «Mazos»
+  document.querySelectorAll('.app-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tabName));
   document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id==='view-'+name));
 }
 
@@ -3070,6 +3083,7 @@ function tagColor(node, catId, v){
 }
 function hasBack(p){ return !!(p && p.back && p.back.trim()); }
 function playTema(node, onlyIds, playMode, roundSize, opts){
+  switchToTab('jugar');
   if(node.mode === 'oclusion'){ startOccGame(node, onlyIds, playMode, opts); return; }
   if(node.mode === 'barajado'){
     let pm = playMode || 'buscar';
@@ -3095,7 +3109,7 @@ document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
   if(confirm('¿Salir de la partida?')){
     hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner(); endSortDrag(); closeSortView(); hideOccPanel();
-    document.body.classList.remove('playing'); showJugarWindow('win-tree-j');
+    document.body.classList.remove('playing'); backToDecks();
   }
 });
 
@@ -4037,7 +4051,7 @@ document.getElementById('type-zoom-input').addEventListener('keydown', (e)=>{
   if(e.key === 'Enter'){ e.preventDefault(); submitTypeZoom(); }
   else if(e.key === 'Escape'){ e.preventDefault(); closeTypeZoom(); }
 });
-document.getElementById('end-back').addEventListener('click', ()=> showJugarWindow('win-tree-j'));
+document.getElementById('end-back').addEventListener('click', backToDecks);
 
 /* ============================================================
    CLASIFICAR — cajas de colores; arrastras (o tocas y tocas) cada imagen a su grupo.
@@ -5302,7 +5316,7 @@ document.getElementById('occ-crop').addEventListener('click', ()=>{
   });
 });
 document.getElementById('back-occ').addEventListener('click', ()=>{ saveLocal(); renderTree('tree-b', true); showTreeOnly(); });
-document.getElementById('occ-play').addEventListener('click', ()=>{ if(occ.node){ switchToTab('jugar'); openGamePicker(occ.node.id); } });
+document.getElementById('occ-play').addEventListener('click', ()=>{ if(occ.node) openGamePicker(occ.node.id); });
 document.getElementById('occ-menu').addEventListener('click', (e)=>{ if(occ.node) openCtxMenu(e.currentTarget, occ.node, { inEditor: true }); });
 
 /* ---------- jugar una oclusión ---------- */
