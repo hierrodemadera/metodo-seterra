@@ -3558,14 +3558,9 @@ function gridMaxCols(){
   const W = document.getElementById('game-grid-wrap').clientWidth || window.innerWidth;
   return Math.max(1, Math.min(12, Math.floor((W - 8) / GRID_CELL_MIN)));
 }
-/* n columnas; shift = huecos al principio, para poder correr toda la cuadrícula de lado
-   y que la imagen pellizcada caiga justo en la columna que hay bajo los dedos */
-function setGridCols(n, shift){
-  const grid = document.getElementById('game-grid');
+function setGridCols(n){
   game.gridCols = n;
-  game.gridShift = shift || 0;
-  grid.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
-  [...grid.children].forEach((c, i)=> c.style.gridColumnStart = (i === 0 && game.gridShift) ? String(game.gridShift + 1) : '');
+  document.getElementById('game-grid').style.gridTemplateColumns = `repeat(${n}, 1fr)`;
 }
 window.addEventListener('resize', ()=>{ // al girar el móvil caben más o menos columnas
   if(game && game.mode === 'barajado' && game.gridCols > gridMaxCols()) setGridCols(gridMaxCols());
@@ -3621,8 +3616,12 @@ function gridZoomCommit(z){
     const size = (grid.clientWidth - padL - padR - (cols - 1) * gap) / cols;
     const fingerX = (z.x != null ? z.x : z.x0) - grid.getBoundingClientRect().left - padL;
     const col = Math.max(0, Math.min(cols - 1, Math.floor((fingerX + gap / 2) / (size + gap))));
+    // para que caiga ahí sin dejar huecos arriba, las primeras imágenes de la cuadrícula pasan al
+    // final (como una cinta que da la vuelta): el orden de todas las demás no cambia
     const ai = cells.indexOf(z.cell);
-    setGridCols(cols, ((col - ai) % cols + cols) % cols);
+    const r = ((ai - col) % cols + cols) % cols;
+    for(let i = 0; i < r; i++) grid.appendChild(cells[i]);
+    setGridCols(cols);
     const node = game.temaNode;
     if(node && node.cols !== cols){ node.cols = cols; saveLocal(); }
   }
