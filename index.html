@@ -3437,7 +3437,7 @@ function renderGridCells(photos){
       }
       else { flip.appendChild(txtFace); flip.insertAdjacentHTML('beforeend', imgFace.replace('face img','face img b')); }
     } else {
-      cell.innerHTML = `<img src="${gameImg(p)}"><div class="tag"></div>`;
+      cell.innerHTML = `<img src="${gameImg(p)}" decoding="async"><div class="tag"></div>`;
     }
     const tagEl = cell.querySelector('.tag');
     const nmEl = document.createElement('span'); nmEl.className = 'nm'; nmEl.textContent = p.label;
@@ -3635,7 +3635,8 @@ function gridZoomCommit(z){
   // las que se dejan de ver se desvanecen donde estaban.
   const top = vis.top, bottom = vis.bottom;
   const inView = r=> r.bottom > top && r.top < bottom;
-  const DUR = 320, EASE = 'cubic-bezier(.25,.9,.3,1)';
+  const DUR = 460, EASE = 'cubic-bezier(.22,.75,.25,1)';
+  const anims = [];
   cells.forEach(c=>{
     const f = first.get(c), l = c.getBoundingClientRect();
     const fIn = inView(f), lIn = inView(l);
@@ -3648,17 +3649,23 @@ function gridZoomCommit(z){
       frames = [{ transform: from }, { transform: 'none' }];
     } else if(lIn){ // entra: aparece en su sitio
       frames = [{ transform: 'scale(0.9)', opacity: 0 }, { transform: 'none', opacity: 1 }];
-      opts = { duration: DUR, easing: 'ease-out', delay: 60 };
+      opts = { duration: DUR, easing: 'ease-out', delay: 80 };
       opts.fill = 'backwards';
     } else { // sale: se queda donde estaba y se desvanece
       frames = [{ transform: from, opacity: 1 }, { transform: from, opacity: 0 }];
-      opts = { duration: 180, easing: 'ease-out' };
+      opts = { duration: 240, easing: 'ease-out' };
     }
     c.style.transformOrigin = (fIn && lIn) || !lIn ? '0 0' : '50% 50%';
     const anim = c.animate(frames, opts);
+    anim.pause(); // quieta en su primer fotograma (= lo que se veía al soltar)
+    anims.push(anim);
     c._zAnim = anim;
     anim.onfinish = anim.oncancel = ()=>{ if(c._zAnim === anim){ c._zAnim = null; c.style.transformOrigin = ''; } };
   });
+  // recolocar las imágenes cuesta un momento al navegador (sobre todo en iPad). Si el reloj de la
+  // animación empezase ya, se comería ese momento y se vería el final de golpe. Por eso arranca
+  // cuando el navegador ya ha pintado la cuadrícula nueva.
+  requestAnimationFrame(()=> requestAnimationFrame(()=> anims.forEach(a=>{ if(a.playState === 'paused') a.play(); })));
 }
 (function(){
   const wrap = document.getElementById('game-grid-wrap');
