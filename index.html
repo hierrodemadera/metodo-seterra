@@ -498,7 +498,7 @@ input[type=file]{display:none;}
 
 /* overlays flotando sobre la imagen a pantalla completa */
 #win-game{position:relative;}
-.game-grid-wrap{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;background:#fff;touch-action:pan-x pan-y;}
+.game-grid-wrap{flex:1;overflow:auto;overflow-anchor:none;-webkit-overflow-scrolling:touch;background:#fff;touch-action:pan-x pan-y;}
 #game-grid{display:grid;gap:4px;padding:4px;box-sizing:border-box;width:100%;margin:0 auto;
   padding-top:calc(64px + var(--safe-top));padding-bottom:calc(70px + var(--safe-bottom));}
 .game-cell{position:relative;aspect-ratio:1/1;background:#f2f2f2;overflow:hidden;
@@ -3590,14 +3590,16 @@ function gridZoomBegin(clientX, clientY){
   if(!cell) return null;
   const r = cell.getBoundingClientRect(), g = grid.getBoundingClientRect();
   grid.style.transition = 'none';
+  grid.style.willChange = 'transform'; // la cuadrícula va a su propia capa: se mueve sin redibujar
   grid.style.transformOrigin = `${clientX - g.left}px ${clientY - g.top}px`;
   wrap.style.overflow = 'hidden'; // que el navegador no desplace nada por su cuenta durante el gesto
   return { cols0: game.gridCols, x0: clientX, y0: clientY, cell, fy: (clientY - r.top) / r.height, s: 1 };
 }
 /* durante el gesto: solo se escala la imagen de la cuadrícula, sin recolocar nada */
 function gridZoomPreview(z, scale, clientX, clientY){
-  const lo = z.cols0 / (gridMaxCols() + 0.6), hi = z.cols0 / 0.6; // un poco de margen elástico
-  z.s = Math.max(lo, Math.min(hi, scale));
+  // pasado el máximo o el mínimo no frena en seco: cede cada vez menos, como una goma
+  const lo = z.cols0 / (gridMaxCols() + 0.4), hi = z.cols0 / 0.75;
+  z.s = scale > hi ? hi * Math.pow(scale / hi, 0.25) : scale < lo ? lo * Math.pow(scale / lo, 0.25) : scale;
   document.getElementById('game-grid').style.transform =
     `translate(${clientX - z.x0}px, ${clientY - z.y0}px) scale(${z.s})`;
   z.x = clientX; z.y = clientY;
@@ -3610,7 +3612,7 @@ function gridZoomCommit(z){
   const vis = wrap.getBoundingClientRect();
   const first = new Map(cells.map(c=> [c, c.getBoundingClientRect()]));
   const fingerY = (z.y != null ? z.y : z.y0);
-  grid.style.transform = ''; grid.style.transformOrigin = '';
+  grid.style.transform = ''; grid.style.transformOrigin = ''; grid.style.willChange = '';
   wrap.style.overflow = '';
   if(cols !== game.gridCols){
     // la imagen pellizcada cae en la columna que hay bajo los dedos, y las de su fila siguen a sus lados
@@ -3627,23 +3629,36 @@ function gridZoomCommit(z){
   // la imagen ancla, con su fila, vuelve a quedar bajo los dedos (a la misma altura relativa)
   const ar = z.cell.getBoundingClientRect();
   wrap.scrollTop += (ar.top + z.fy * ar.height) - fingerY;
-  // FLIP: cada imagen sale de donde se veía y se desliza a su sitio nuevo
-  const inView = r=> r.bottom > vis.top - 40 && r.top < vis.bottom + 40;
-  const moving = [];
+  // FLIP: cada imagen sale de donde se veía y se desliza a su sitio nuevo.
+  // Se anima con la API de animaciones del navegador: va en la tarjeta gráfica, sin tirones.
+  // Las que no se veían no cruzan la pantalla volando: aparecen suavemente en su sitio;
+  // las que se dejan de ver se desvanecen donde estaban.
+  const top = vis.top, bottom = vis.bottom;
+  const inView = r=> r.bottom > top && r.top < bottom;
+  const DUR = 320, EASE = 'cubic-bezier(.25,.9,.3,1)';
   cells.forEach(c=>{
     const f = first.get(c), l = c.getBoundingClientRect();
-    if(!inView(f) && !inView(l)) return;
-    if(Math.abs(f.left - l.left) < 0.5 && Math.abs(f.top - l.top) < 0.5 && Math.abs(f.width - l.width) < 0.5) return;
-    c.style.transition = 'none';
-    c.style.transformOrigin = '0 0';
-    c.style.transform = `translate(${f.left - l.left}px, ${f.top - l.top}px) scale(${f.width / l.width})`;
-    moving.push(c);
+    const fIn = inView(f), lIn = inView(l);
+    if(!fIn && !lIn) return;
+    if(c._zAnim){ c._zAnim.cancel(); c._zAnim = null; }
+    const from = `translate(${f.left - l.left}px, ${f.top - l.top}px) scale(${f.width / l.width})`;
+    let frames, opts = { duration: DUR, easing: EASE };
+    if(fIn && lIn){
+      if(Math.abs(f.left - l.left) < 0.5 && Math.abs(f.top - l.top) < 0.5 && Math.abs(f.width - l.width) < 0.5) return;
+      frames = [{ transform: from }, { transform: 'none' }];
+    } else if(lIn){ // entra: aparece en su sitio
+      frames = [{ transform: 'scale(0.9)', opacity: 0 }, { transform: 'none', opacity: 1 }];
+      opts = { duration: DUR, easing: 'ease-out', delay: 60 };
+      opts.fill = 'backwards';
+    } else { // sale: se queda donde estaba y se desvanece
+      frames = [{ transform: from, opacity: 1 }, { transform: from, opacity: 0 }];
+      opts = { duration: 180, easing: 'ease-out' };
+    }
+    c.style.transformOrigin = (fIn && lIn) || !lIn ? '0 0' : '50% 50%';
+    const anim = c.animate(frames, opts);
+    c._zAnim = anim;
+    anim.onfinish = anim.oncancel = ()=>{ if(c._zAnim === anim){ c._zAnim = null; c.style.transformOrigin = ''; } };
   });
-  if(!moving.length) return;
-  void grid.offsetWidth;
-  moving.forEach(c=>{ c.style.transition = 'transform 0.34s cubic-bezier(.2,.8,.2,1)'; c.style.transform = ''; });
-  clearTimeout(grid._flipT);
-  grid._flipT = setTimeout(()=> moving.forEach(c=>{ c.style.transition = ''; c.style.transformOrigin = ''; }), 380);
 }
 (function(){
   const wrap = document.getElementById('game-grid-wrap');
