@@ -3529,16 +3529,15 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize, opts){
     correct:0, mistakes:0, attemptsLeft:3, failedIds:new Set(),
     startTime: Date.now(),
     stateOf: {}, pointResult: {},
-    gridCols: Math.max(1, node.cols||3),
-    zoom: 1
+    gridCols: Math.max(1, node.cols||3)
   };
   order.forEach(p=> game.stateOf[p.id] = 'neutral');
 
   document.getElementById('game-workspace').style.display = 'none';
   document.getElementById('game-grid-wrap').style.display = 'block';
   const grid = document.getElementById('game-grid');
-  grid.style.gridTemplateColumns = `repeat(${game.gridCols}, 1fr)`;
-  grid.style.width = '';
+  grid.style.width = ''; grid.style.transform = '';
+  setGridCols(Math.min(game.gridCols, gridMaxCols()));
   hideRoundBanner();
   if(game.playMode === 'clasificar') setupSortBoxes();
   renderGridCells(rounds[0]);
@@ -3548,81 +3547,137 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize, opts){
   nextTarget(true);
   if(rounds.length > 1) showRoundBanner(`ronda 1 de ${rounds.length}`, `${rounds[0].length} imágenes`);
 }
-/* zoom de la cuadrícula barajada: pellizcar (móvil) o Ctrl+rueda (ordenador).
-   Es un zoom de verdad: las imágenes NO se recolocan, solo crecen o encogen,
-   y lo que tienes entre los dedos (o bajo el ratón) se queda donde está. */
+/* zoom de la cuadrícula barajada, como el carrete del iPhone: pellizcar (móvil) o Ctrl+rueda / pellizco
+   del trackpad (ordenador). Mientras pellizcas, la cuadrícula crece o encoge bajo los dedos; al soltar,
+   se queda en el número de columnas más cercano. La fila que pellizcabas se queda a la misma altura y
+   las demás imágenes se deslizan hasta su sitio nuevo, para que se vea adónde va cada una.
+   El número de columnas se recuerda en cada mazo. */
 let gridZoomEndedAt = 0;
-window.addEventListener('resize', ()=>{ // al girar el móvil, mantener el zoom relativo al nuevo ancho
-  if(game && game.mode === 'barajado' && game.zoom && game.zoom !== 1){
-    const wrap = document.getElementById('game-grid-wrap');
-    document.getElementById('game-grid').style.width = (wrap.clientWidth * game.zoom) + 'px';
-  }
+const GRID_CELL_MIN = 48; // px: más pequeñas ya no se distinguen
+function gridMaxCols(){
+  const W = document.getElementById('game-grid-wrap').clientWidth || window.innerWidth;
+  return Math.max(1, Math.min(12, Math.floor((W - 8) / GRID_CELL_MIN)));
+}
+function setGridCols(n){
+  game.gridCols = n;
+  document.getElementById('game-grid').style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+}
+window.addEventListener('resize', ()=>{ // al girar el móvil caben más o menos columnas
+  if(game && game.mode === 'barajado' && game.gridCols > gridMaxCols()) setGridCols(gridMaxCols());
 });
-const GRID_ZOOM_MIN = 0.35, GRID_ZOOM_MAX = 5;
-/* z: zoom nuevo. (cx,cy): punto de pantalla relativo al contenedor que debe quedar fijo.
-   anchor: punto de la cuadrícula (en px a zoom 1) que debe quedar bajo (cx,cy). */
-function applyGridZoom(z, cx, cy, anchor){
-  if(!game || game.mode !== 'barajado') return;
-  const wrap = document.getElementById('game-grid-wrap');
-  const grid = document.getElementById('game-grid');
-  game.zoom = Math.max(GRID_ZOOM_MIN, Math.min(GRID_ZOOM_MAX, z));
-  const W = wrap.clientWidth;
-  grid.style.width = (W * game.zoom) + 'px';
-  const {left, top} = gridOrigin(grid); // al alejar, la cuadrícula queda centrada
-  wrap.scrollLeft = anchor.x * game.zoom + left - cx;
-  wrap.scrollTop  = anchor.y * game.zoom + top  - cy;
+/* imagen bajo un punto de la pantalla (o la más cercana, si cae entre dos) */
+function gridCellAt(clientX, clientY){
+  const el = document.elementFromPoint(clientX, clientY);
+  const hit = el && el.closest && el.closest('#game-grid .game-cell');
+  if(hit) return hit;
+  let best = null, bd = Infinity;
+  document.querySelectorAll('#game-grid .game-cell').forEach(c=>{
+    const r = c.getBoundingClientRect();
+    const dx = Math.max(r.left - clientX, 0, clientX - r.right), dy = Math.max(r.top - clientY, 0, clientY - r.bottom);
+    const d = dx*dx + dy*dy; if(d < bd){ bd = d; best = c; }
+  });
+  return best;
 }
-/* esquina donde empiezan las imágenes (el margen de arriba no crece con el zoom) */
-function gridOrigin(grid){
-  const cs = getComputedStyle(grid);
-  return { left: grid.offsetLeft + parseFloat(cs.paddingLeft), top: grid.offsetTop + parseFloat(cs.paddingTop) };
+/* empieza el gesto: guarda qué imagen hay bajo los dedos y en qué punto de ella */
+function gridZoomBegin(clientX, clientY){
+  const wrap = document.getElementById('game-grid-wrap'), grid = document.getElementById('game-grid');
+  const cell = gridCellAt(clientX, clientY);
+  if(!cell) return null;
+  const r = cell.getBoundingClientRect(), g = grid.getBoundingClientRect();
+  grid.style.transition = 'none';
+  grid.style.transformOrigin = `${clientX - g.left}px ${clientY - g.top}px`;
+  wrap.style.overflow = 'hidden'; // que el navegador no desplace nada por su cuenta durante el gesto
+  return { cols0: game.gridCols, x0: clientX, y0: clientY, cell, fy: (clientY - r.top) / r.height, s: 1 };
 }
-/* punto de la cuadrícula (a zoom 1) que hay ahora mismo bajo (cx,cy) */
-function gridAnchorAt(cx, cy){
-  const wrap = document.getElementById('game-grid-wrap');
-  const grid = document.getElementById('game-grid');
-  const z = game.zoom || 1, o = gridOrigin(grid);
-  return { x: (wrap.scrollLeft + cx - o.left) / z,
-           y: (wrap.scrollTop  + cy - o.top)  / z };
+/* durante el gesto: solo se escala la imagen de la cuadrícula, sin recolocar nada */
+function gridZoomPreview(z, scale, clientX, clientY){
+  const lo = z.cols0 / (gridMaxCols() + 0.6), hi = z.cols0 / 0.6; // un poco de margen elástico
+  z.s = Math.max(lo, Math.min(hi, scale));
+  document.getElementById('game-grid').style.transform =
+    `translate(${clientX - z.x0}px, ${clientY - z.y0}px) scale(${z.s})`;
+  z.x = clientX; z.y = clientY;
+}
+/* al soltar: columnas nuevas; la fila del ancla se queda a la altura de los dedos y lo demás se desliza */
+function gridZoomCommit(z){
+  const wrap = document.getElementById('game-grid-wrap'), grid = document.getElementById('game-grid');
+  const cols = Math.max(1, Math.min(gridMaxCols(), Math.round(z.cols0 / z.s)));
+  const cells = [...grid.children];
+  const vis = wrap.getBoundingClientRect();
+  const first = new Map(cells.map(c=> [c, c.getBoundingClientRect()]));
+  const fingerY = (z.y != null ? z.y : z.y0);
+  grid.style.transform = ''; grid.style.transformOrigin = '';
+  wrap.style.overflow = '';
+  if(cols !== game.gridCols){
+    setGridCols(cols);
+    const node = game.temaNode;
+    if(node && node.cols !== cols){ node.cols = cols; saveLocal(); }
+  }
+  // la imagen ancla, con su fila, vuelve a quedar bajo los dedos (a la misma altura relativa)
+  const ar = z.cell.getBoundingClientRect();
+  wrap.scrollTop += (ar.top + z.fy * ar.height) - fingerY;
+  // FLIP: cada imagen sale de donde se veía y se desliza a su sitio nuevo
+  const inView = r=> r.bottom > vis.top - 40 && r.top < vis.bottom + 40;
+  const moving = [];
+  cells.forEach(c=>{
+    const f = first.get(c), l = c.getBoundingClientRect();
+    if(!inView(f) && !inView(l)) return;
+    if(Math.abs(f.left - l.left) < 0.5 && Math.abs(f.top - l.top) < 0.5 && Math.abs(f.width - l.width) < 0.5) return;
+    c.style.transition = 'none';
+    c.style.transformOrigin = '0 0';
+    c.style.transform = `translate(${f.left - l.left}px, ${f.top - l.top}px) scale(${f.width / l.width})`;
+    moving.push(c);
+  });
+  if(!moving.length) return;
+  void grid.offsetWidth;
+  moving.forEach(c=>{ c.style.transition = 'transform 0.34s cubic-bezier(.2,.8,.2,1)'; c.style.transform = ''; });
+  clearTimeout(grid._flipT);
+  grid._flipT = setTimeout(()=> moving.forEach(c=>{ c.style.transition = ''; c.style.transformOrigin = ''; }), 380);
 }
 (function(){
   const wrap = document.getElementById('game-grid-wrap');
-  let pinch = null, raf = 0, pending = null;
-  const mid = (a,b)=>{ const r = wrap.getBoundingClientRect();
-    return { x:(a.clientX+b.clientX)/2 - r.left, y:(a.clientY+b.clientY)/2 - r.top }; };
+  let z = null, d0 = 0, raf = 0, pending = null;
+  const mid = (a,b)=> ({ x:(a.clientX+b.clientX)/2, y:(a.clientY+b.clientY)/2 });
   const dist = (a,b)=> Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
+  const active = ()=> game && game.mode === 'barajado';
   wrap.addEventListener('touchstart', (e)=>{
-    if(!game || game.mode !== 'barajado') return;
-    if(e.touches.length === 2){
-      const m = mid(e.touches[0], e.touches[1]);
-      pinch = { d0: dist(e.touches[0], e.touches[1]), z0: game.zoom || 1, anchor: gridAnchorAt(m.x, m.y) };
-    }
+    if(!active() || e.touches.length !== 2) return;
+    const m = mid(e.touches[0], e.touches[1]);
+    d0 = dist(e.touches[0], e.touches[1]) || 1;
+    z = gridZoomBegin(m.x, m.y);
   }, {passive:true});
   wrap.addEventListener('touchmove', (e)=>{
-    if(!pinch || !game || game.mode !== 'barajado' || e.touches.length !== 2) return;
+    if(!z || !active() || e.touches.length !== 2) return;
     e.preventDefault();
     const m = mid(e.touches[0], e.touches[1]);
-    pending = { z: pinch.z0 * dist(e.touches[0], e.touches[1]) / pinch.d0, x: m.x, y: m.y };
+    pending = { s: dist(e.touches[0], e.touches[1]) / d0, x: m.x, y: m.y };
     if(!raf) raf = requestAnimationFrame(()=>{ // una actualización por fotograma, va más fluido
       raf = 0;
-      if(pinch && pending) applyGridZoom(pending.z, pending.x, pending.y, pinch.anchor);
+      if(z && pending) gridZoomPreview(z, pending.s, pending.x, pending.y);
     });
   }, {passive:false});
   ['touchend','touchcancel'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
-    if(pinch && e.touches.length < 2){ pinch = null; pending = null; gridZoomEndedAt = Date.now(); }
+    if(z && e.touches.length < 2){
+      if(raf){ cancelAnimationFrame(raf); raf = 0; }
+      if(pending) gridZoomPreview(z, pending.s, pending.x, pending.y);
+      gridZoomCommit(z);
+      z = null; pending = null; gridZoomEndedAt = Date.now();
+    }
   }));
   // Safari en iOS ignora user-scalable=no; hay que frenar también sus eventos propios de gesto
   ['gesturestart','gesturechange','gestureend'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
-    if(!game || game.mode !== 'barajado') return;
+    if(!active()) return;
     e.preventDefault();
   }));
+  // ordenador: Ctrl+rueda o pellizco del trackpad; se aplica cuando dejas de mover la rueda
+  let wz = null, wsum = 0, wT = 0;
   wrap.addEventListener('wheel', (e)=>{
-    if(!e.ctrlKey) return;
-    if(!game || game.mode !== 'barajado') return;
+    if(!e.ctrlKey || !active()) return;
     e.preventDefault();
-    const r = wrap.getBoundingClientRect();
-    const cx = e.clientX - r.left, cy = e.clientY - r.top;
-    applyGridZoom((game.zoom||1) * Math.exp(-e.deltaY * 0.004), cx, cy, gridAnchorAt(cx, cy));
+    if(!wz){ wz = gridZoomBegin(e.clientX, e.clientY); wsum = 0; if(!wz) return; }
+    wsum += e.deltaY;
+    gridZoomPreview(wz, Math.exp(-wsum * 0.006), wz.x0, wz.y0);
+    clearTimeout(wT);
+    wT = setTimeout(()=>{ if(wz){ gridZoomCommit(wz); wz = null; gridZoomEndedAt = Date.now(); } }, 220);
   }, {passive:false});
 })();
 /* reinicia una animación CSS aunque se repita seguido */
