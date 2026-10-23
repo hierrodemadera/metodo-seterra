@@ -3547,10 +3547,13 @@ function startBarajadoGame(node, onlyIds, playMode, roundSize, opts){
   nextTarget(true);
   if(rounds.length > 1) showRoundBanner(`ronda 1 de ${rounds.length}`, `${rounds[0].length} imágenes`);
 }
-/* zoom de la cuadrícula barajada, como el carrete del iPhone: pellizcar (móvil) o Ctrl+rueda / pellizco
-   del trackpad (ordenador). Mientras pellizcas, la cuadrícula crece o encoge bajo los dedos; al soltar,
-   se queda en el número de columnas más cercano. La fila que pellizcabas se queda a la misma altura y
-   las demás imágenes se deslizan hasta su sitio nuevo, para que se vea adónde va cada una.
+/* zoom de la cuadrícula barajada, como el carrete de Fotos (iPhone/iPad/Mac).
+   Igual que hace Apple (UICollectionViewTransitionLayout): el pellizco no escala una foto de la
+   cuadrícula, sino que va LLEVANDO cada imagen, poco a poco, desde su sitio con N columnas a su
+   sitio con N±1 columnas. El movimiento va pegado a los dedos: si abres un poco, se mueven un poco;
+   si vuelves atrás, vuelven. Al pasar al siguiente nivel se encadena el siguiente (3→4→5…).
+   Al soltar, termina el paso si ibas más de la mitad, o vuelve atrás si no.
+   La fila de la imagen que pellizcas se queda a la altura de los dedos.
    El número de columnas se recuerda en cada mazo. */
 let gridZoomEndedAt = 0;
 const GRID_CELL_MIN = 48; // px: más pequeñas ya no se distinguen
@@ -3578,106 +3581,184 @@ function gridCellAt(clientX, clientY){
   });
   return best;
 }
-/* empieza el gesto: guarda qué imagen hay bajo los dedos y en qué punto de ella */
-function gridZoomBegin(clientX, clientY){
-  const wrap = document.getElementById('game-grid-wrap'), grid = document.getElementById('game-grid');
-  const cell = gridCellAt(clientX, clientY);
-  if(!cell) return null;
-  const r = cell.getBoundingClientRect(), g = grid.getBoundingClientRect();
-  grid.style.transition = 'none';
-  grid.style.transformOrigin = `${clientX - g.left}px ${clientY - g.top}px`;
-  wrap.style.overflow = 'hidden'; // que el navegador no desplace nada por su cuenta durante el gesto
-  return { cols0: game.gridCols, x0: clientX, y0: clientY, cell, fy: (clientY - r.top) / r.height, s: 1 };
-}
-/* durante el gesto: solo se escala la imagen de la cuadrícula, sin recolocar nada */
-function gridZoomPreview(z, scale, clientX, clientY){
-  const lo = z.cols0 / (gridMaxCols() + 0.6), hi = z.cols0 / 0.6; // un poco de margen elástico
-  z.s = Math.max(lo, Math.min(hi, scale));
-  document.getElementById('game-grid').style.transform =
-    `translate(${clientX - z.x0}px, ${clientY - z.y0}px) scale(${z.s})`;
-  z.x = clientX; z.y = clientY;
-}
-/* al soltar: columnas nuevas; la fila del ancla se queda a la altura de los dedos y lo demás se desliza */
-function gridZoomCommit(z){
-  const wrap = document.getElementById('game-grid-wrap'), grid = document.getElementById('game-grid');
-  const cols = Math.max(1, Math.min(gridMaxCols(), Math.round(z.cols0 / z.s)));
-  const cells = [...grid.children];
-  const vis = wrap.getBoundingClientRect();
-  const first = new Map(cells.map(c=> [c, c.getBoundingClientRect()]));
-  const fingerY = (z.y != null ? z.y : z.y0);
-  grid.style.transform = ''; grid.style.transformOrigin = '';
-  wrap.style.overflow = '';
-  if(cols !== game.gridCols){
-    setGridCols(cols);
-    const node = game.temaNode;
-    if(node && node.cols !== cols){ node.cols = cols; saveLocal(); }
+const gridZoom = (function(){
+  const wrap = document.getElementById('game-grid-wrap');
+  const grid = document.getElementById('game-grid');
+  let z = null;          // gesto en curso
+  let settling = false;  // animación de soltar en marcha
+  const lerp = (a,b,t)=> a + (b-a)*t;
+
+  /* medidas de la cuadrícula (todo en px, relativo al contenido del contenedor) */
+  function geom(){
+    const cs = getComputedStyle(grid);
+    const padL = parseFloat(cs.paddingLeft), padR = parseFloat(cs.paddingRight);
+    const padT = parseFloat(cs.paddingTop), padB = parseFloat(cs.paddingBottom);
+    const gap = parseFloat(cs.columnGap) || 0;
+    const wr = wrap.getBoundingClientRect(), gr = grid.getBoundingClientRect();
+    return { padL, padT, padB, gap, cw: grid.clientWidth - padL - padR,
+      gridLeft: gr.left - wr.left, gridTop: gr.top - wr.top + wrap.scrollTop,
+      vh: wrap.clientHeight, wrapTop: wr.top, n: grid.children.length };
   }
-  // la imagen ancla, con su fila, vuelve a quedar bajo los dedos (a la misma altura relativa)
-  const ar = z.cell.getBoundingClientRect();
-  wrap.scrollTop += (ar.top + z.fy * ar.height) - fingerY;
-  // FLIP: cada imagen sale de donde se veía y se desliza a su sitio nuevo
-  const inView = r=> r.bottom > vis.top - 40 && r.top < vis.bottom + 40;
-  const moving = [];
-  cells.forEach(c=>{
-    const f = first.get(c), l = c.getBoundingClientRect();
-    if(!inView(f) && !inView(l)) return;
-    if(Math.abs(f.left - l.left) < 0.5 && Math.abs(f.top - l.top) < 0.5 && Math.abs(f.width - l.width) < 0.5) return;
-    c.style.transition = 'none';
-    c.style.transformOrigin = '0 0';
-    c.style.transform = `translate(${f.left - l.left}px, ${f.top - l.top}px) scale(${f.width / l.width})`;
-    moving.push(c);
-  });
-  if(!moving.length) return;
-  void grid.offsetWidth;
-  moving.forEach(c=>{ c.style.transition = 'transform 0.34s cubic-bezier(.2,.8,.2,1)'; c.style.transform = ''; });
-  clearTimeout(grid._flipT);
-  grid._flipT = setTimeout(()=> moving.forEach(c=>{ c.style.transition = ''; c.style.transformOrigin = ''; }), 380);
-}
+  const size = (g,c)=> (g.cw - (c-1)*g.gap) / c;
+  const pos = (g,i,c)=>{ const s = size(g,c);
+    return { x: g.padL + (i % c)*(s + g.gap), y: g.padT + Math.floor(i / c)*(s + g.gap), s }; };
+  const maxScroll = (g,c)=>{ const s = size(g,c), rows = Math.ceil(g.n / c);
+    return Math.max(0, g.gridTop + g.padT + rows*(s + g.gap) - g.gap + g.padB - g.vh); };
+  const clampScroll = (g,c,o)=> Math.max(0, Math.min(maxScroll(g,c), o));
+
+  /* empieza un paso: la cuadrícula está quieta con z.from columnas y scroll z.S */
+  function startSegment(){
+    z.g = geom();
+    z.S = wrap.scrollTop;
+    z.cells = [...grid.children];
+    z.ai = z.cells.indexOf(z.anchor);
+    const a = pos(z.g, z.ai, z.from);
+    // en qué punto de la imagen ancla están los dedos (en vertical)
+    z.fy = (z.fingerY + z.S - z.g.gridTop - a.y) / a.s;
+    z.to = null; z.t = 0; z.ends = {};
+  }
+  /* dónde queda el scroll para que la fila ancla siga bajo los dedos, con c columnas a medio camino t */
+  function rawOffset(c, t){
+    const g = z.g, a0 = pos(g, z.ai, z.from), a1 = pos(g, z.ai, c);
+    const y = lerp(a0.y, a1.y, t), s = lerp(a0.s, a1.s, t);
+    return y + z.fy * s + g.gridTop - z.fingerY;
+  }
+  function offsetAt(c, t){
+    // cerca de los bordes no se puede dejar la fila en su sitio: se corrige poco a poco
+    if(!z.ends[c]){ const r1 = rawOffset(c, 1); z.ends[c] = { r0: rawOffset(c, 0), r1, c1: clampScroll(z.g, c, r1) }; }
+    const e = z.ends[c];
+    return rawOffset(c, t) + (1-t)*(z.S - e.r0) + t*(e.c1 - e.r1);
+  }
+  /* coloca cada imagen a medio camino (t) entre su sitio con z.from columnas y con c columnas */
+  function render(c, t){
+    const g = z.g, from = z.from, O = offsetAt(c, t), sA = size(g, from);
+    const lo = -sA * 2, hi = g.vh + sA * 2;
+    for(let i = 0; i < z.cells.length; i++){
+      const cell = z.cells[i];
+      const A = pos(g, i, from), B = pos(g, i, c);
+      const dy = A.y + g.gridTop - z.S;                 // dónde está ahora (sin mover)
+      const ry = lerp(A.y, B.y, t) + g.gridTop - O;     // dónde tiene que verse
+      const s = lerp(A.s, B.s, t);
+      if((dy + sA < lo || dy > hi) && (ry + s < lo || ry > hi)){
+        if(cell._zt){ cell.style.transform = ''; cell.style.opacity = ''; cell._zt = false; }
+        continue;
+      }
+      // las que cambian de punta a punta de la fila (de un extremo al otro) no cruzan la pantalla en
+      // diagonal por encima de las demás: se desvanecen en su lado y aparecen en el otro
+      let x = lerp(A.x, B.x, t), op = '';
+      if(Math.abs(B.x - A.x) > g.cw * 0.5){ x = t < 0.5 ? A.x : B.x; op = String(Math.abs(1 - 2*t)); }
+      cell.style.transform = `translate(${x - A.x}px, ${ry - dy}px) scale(${s / A.s})`;
+      cell.style.opacity = op;
+      cell._zt = true;
+    }
+  }
+  function clearTransforms(){
+    (z ? z.cells : [...grid.children]).forEach(c=>{ if(c._zt){ c.style.transform = ''; c.style.opacity = ''; c._zt = false; } });
+  }
+  /* fija el nivel c como el nuevo de verdad (sin salto visible) */
+  function commit(c){
+    const O = offsetAt(c, 1);
+    clearTransforms();
+    setGridCols(c);
+    wrap.scrollTop = O;
+    z.from = c;
+  }
+  /* scale: cuánto has abierto/cerrado los dedos desde el principio del gesto */
+  function update(scale){
+    if(!z || settling) return;
+    const max = gridMaxCols();
+    for(let guard = 0; guard < 12; guard++){
+      const r = scale / z.base;
+      const c = r >= 1 ? z.from - 1 : z.from + 1;           // abrir = menos columnas (más grandes)
+      if(c < 1 || c > max){ if(z.to) render(z.to, 0); z.to = null; z.t = 0; return; }
+      const ratio = size(z.g, c) / size(z.g, z.from);
+      const t = Math.log(r) / Math.log(ratio);
+      if(t >= 1){ // llegado al siguiente nivel: se fija y se sigue con el próximo
+        commit(c);
+        z.base *= ratio;
+        startSegment();
+        continue;
+      }
+      if(z.to && z.to !== c) render(z.to, 0);
+      z.to = c; z.t = Math.max(0, t);
+      render(c, z.t);
+      return;
+    }
+  }
+  function begin(clientX, clientY, scale){
+    if(settling || !game || game.mode !== 'barajado') return false;
+    const anchor = gridCellAt(clientX, clientY);
+    if(!anchor) return false;
+    wrap.style.overflow = 'hidden'; // que el navegador no desplace nada por su cuenta durante el gesto
+    z = { anchor, fingerY: clientY - wrap.getBoundingClientRect().top, from: game.gridCols, base: scale || 1 };
+    z.cells = [...grid.children];
+    z.cells.forEach(c=>{ c.style.transformOrigin = '0 0'; c.style.transition = 'none'; });
+    startSegment();
+    return true;
+  }
+  /* al soltar: acaba el paso si ibas más de la mitad; si no, vuelve atrás */
+  function end(){
+    if(!z || settling) return;
+    const c = z.to, t0 = z.t, goal = (c && t0 >= 0.5) ? 1 : 0;
+    const finish = ()=>{
+      if(c && goal === 1) commit(c); else { const O = offsetAt(c || z.from, 0); clearTransforms(); wrap.scrollTop = O; }
+      z.cells.forEach(cell=>{ cell.style.transformOrigin = ''; cell.style.transition = ''; });
+      wrap.style.overflow = '';
+      const node = game && game.temaNode;
+      if(node && node.cols !== game.gridCols){ node.cols = game.gridCols; saveLocal(); }
+      z = null; settling = false; gridZoomEndedAt = Date.now();
+    };
+    if(!c || Math.abs(goal - t0) < 0.001){ finish(); return; }
+    settling = true;
+    const dur = 140 + 160 * Math.abs(goal - t0), start = performance.now();
+    const step = (now)=>{
+      const k = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - k, 3); // frena al llegar
+      render(c, lerp(t0, goal, e));
+      if(k < 1) requestAnimationFrame(step); else finish();
+    };
+    requestAnimationFrame(step);
+  }
+  return { begin, update, end, active: ()=> !!z };
+})();
 (function(){
   const wrap = document.getElementById('game-grid-wrap');
-  let z = null, d0 = 0, raf = 0, pending = null;
+  let d0 = 0, raf = 0, pending = 0;
   const mid = (a,b)=> ({ x:(a.clientX+b.clientX)/2, y:(a.clientY+b.clientY)/2 });
   const dist = (a,b)=> Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
-  const active = ()=> game && game.mode === 'barajado';
+  const playing = ()=> game && game.mode === 'barajado';
   wrap.addEventListener('touchstart', (e)=>{
-    if(!active() || e.touches.length !== 2) return;
+    if(!playing() || e.touches.length !== 2 || gridZoom.active()) return;
     const m = mid(e.touches[0], e.touches[1]);
     d0 = dist(e.touches[0], e.touches[1]) || 1;
-    z = gridZoomBegin(m.x, m.y);
+    gridZoom.begin(m.x, m.y, 1);
   }, {passive:true});
   wrap.addEventListener('touchmove', (e)=>{
-    if(!z || !active() || e.touches.length !== 2) return;
+    if(!gridZoom.active() || e.touches.length !== 2) return;
     e.preventDefault();
-    const m = mid(e.touches[0], e.touches[1]);
-    pending = { s: dist(e.touches[0], e.touches[1]) / d0, x: m.x, y: m.y };
-    if(!raf) raf = requestAnimationFrame(()=>{ // una actualización por fotograma, va más fluido
-      raf = 0;
-      if(z && pending) gridZoomPreview(z, pending.s, pending.x, pending.y);
-    });
+    pending = dist(e.touches[0], e.touches[1]) / d0;
+    if(!raf) raf = requestAnimationFrame(()=>{ raf = 0; gridZoom.update(pending); }); // una vez por fotograma
   }, {passive:false});
   ['touchend','touchcancel'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
-    if(z && e.touches.length < 2){
-      if(raf){ cancelAnimationFrame(raf); raf = 0; }
-      if(pending) gridZoomPreview(z, pending.s, pending.x, pending.y);
-      gridZoomCommit(z);
-      z = null; pending = null; gridZoomEndedAt = Date.now();
+    if(gridZoom.active() && e.touches.length < 2){
+      if(raf){ cancelAnimationFrame(raf); raf = 0; gridZoom.update(pending); }
+      gridZoom.end(); gridZoomEndedAt = Date.now();
     }
   }));
   // Safari en iOS ignora user-scalable=no; hay que frenar también sus eventos propios de gesto
   ['gesturestart','gesturechange','gestureend'].forEach(ev=> wrap.addEventListener(ev, (e)=>{
-    if(!active()) return;
+    if(!playing()) return;
     e.preventDefault();
   }));
-  // ordenador: Ctrl+rueda o pellizco del trackpad; se aplica cuando dejas de mover la rueda
-  let wz = null, wsum = 0, wT = 0;
+  // ordenador: Ctrl+rueda o pellizco del trackpad; al dejar de mover la rueda se suelta
+  let wsum = 0, wT = 0;
   wrap.addEventListener('wheel', (e)=>{
-    if(!e.ctrlKey || !active()) return;
+    if(!e.ctrlKey || !playing()) return;
     e.preventDefault();
-    if(!wz){ wz = gridZoomBegin(e.clientX, e.clientY); wsum = 0; if(!wz) return; }
-    wsum += e.deltaY;
-    gridZoomPreview(wz, Math.exp(-wsum * 0.006), wz.x0, wz.y0);
+    if(!gridZoom.active()){ if(!gridZoom.begin(e.clientX, e.clientY, 1)) return; wsum = 0; }
+    wsum += e.deltaY * (e.deltaMode === 1 ? 33 : 1);
+    gridZoom.update(Math.exp(-wsum * 0.006));
     clearTimeout(wT);
-    wT = setTimeout(()=>{ if(wz){ gridZoomCommit(wz); wz = null; gridZoomEndedAt = Date.now(); } }, 220);
+    wT = setTimeout(()=> gridZoom.end(), 180);
   }, {passive:false});
 })();
 /* reinicia una animación CSS aunque se repita seguido */
