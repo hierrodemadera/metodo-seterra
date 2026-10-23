@@ -556,6 +556,9 @@ input[type=file]{display:none;}
 .game-cell.correct::before{background:var(--c-ok);opacity:0.38;}
 .game-cell.wrong::before{background:var(--c-bad);opacity:0.38;}
 @keyframes cellpulse{0%,100%{opacity:1;}50%{opacity:0.45;}}
+/* tras un zoom, la imagen que pellizcaste va por encima de las demás y se marca un momento, para seguirla con la vista */
+.game-cell.zoom-focus{z-index:4;outline:3px solid rgba(20,20,20,0);outline-offset:-3px;animation:zoomfocus 1.1s ease-out;}
+@keyframes zoomfocus{0%,45%{outline-color:rgba(20,20,20,0.85);}100%{outline-color:rgba(20,20,20,0);}}
 
 /* feedback de fallo cuando aún quedan intentos */
 .game-cell::after{content:'';position:absolute;inset:0;background:var(--c-bad);opacity:0;pointer-events:none;}
@@ -3626,6 +3629,11 @@ function gridZoomCommit(z){
   const inView = r=> r.bottom > top && r.top < bottom;
   const DUR = 460, EASE = 'cubic-bezier(.22,.75,.25,1)';
   const anims = [];
+  if(cols !== z.cols0){
+    const a = z.cell;
+    a.classList.remove('zoom-focus'); void a.offsetWidth; a.classList.add('zoom-focus');
+    clearTimeout(a._focusT); a._focusT = setTimeout(()=> a.classList.remove('zoom-focus'), 1150);
+  }
   cells.forEach(c=>{
     const f = first.get(c), l = c.getBoundingClientRect();
     const fIn = inView(f), lIn = inView(l);
