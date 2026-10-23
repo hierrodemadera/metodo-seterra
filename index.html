@@ -1328,7 +1328,7 @@ document.getElementById('btn-refresh').addEventListener('click', async ()=>{
     renderTarjetasList();
     showTarjetasWindow('win-tarjetas-list');
     toast('Actualizado');
-  }catch(e){ toast('No se pudo actualizar'); }
+  }catch(e){ toast(navigator.onLine === false ? 'Sin conexión: tus mazos siguen aquí' : 'No se pudo actualizar'); }
 });
 
 /* ============================================================
@@ -5501,6 +5501,11 @@ document.querySelectorAll('#occ-hide-seg button').forEach(b=> b.addEventListener
    BOOT
    ============================================================ */
 boot();
+
+/* sin conexión: guarda una copia de la app para poder abrirla sin internet (solo en la web publicada) */
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
 })();
 </script>
 
