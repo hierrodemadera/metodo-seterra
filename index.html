@@ -3610,17 +3610,7 @@ function gridZoomCommit(z){
   grid.style.transform = ''; grid.style.transformOrigin = ''; grid.style.willChange = '';
   wrap.style.overflow = '';
   if(cols !== game.gridCols){
-    // la imagen pellizcada cae en la columna que hay bajo los dedos, y las de su fila siguen a sus lados
-    const cs = getComputedStyle(grid), gap = parseFloat(cs.columnGap) || 0;
-    const padL = parseFloat(cs.paddingLeft), padR = parseFloat(cs.paddingRight);
-    const size = (grid.clientWidth - padL - padR - (cols - 1) * gap) / cols;
-    const fingerX = (z.x != null ? z.x : z.x0) - grid.getBoundingClientRect().left - padL;
-    const col = Math.max(0, Math.min(cols - 1, Math.floor((fingerX + gap / 2) / (size + gap))));
-    // para que caiga ahí sin dejar huecos arriba, las primeras imágenes de la cuadrícula pasan al
-    // final (como una cinta que da la vuelta): el orden de todas las demás no cambia
-    const ai = cells.indexOf(z.cell);
-    const r = ((ai - col) % cols + cols) % cols;
-    for(let i = 0; i < r; i++) grid.appendChild(cells[i]);
+    // las imágenes nunca cambian de orden: cada una conserva su puesto durante toda la partida
     setGridCols(cols);
     const node = game.temaNode;
     if(node && node.cols !== cols){ node.cols = cols; saveLocal(); }
