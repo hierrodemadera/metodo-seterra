@@ -16,7 +16,9 @@
   --win:#ffffff;--hover:rgba(0,0,0,0.035);
   --c-info:#1501fe;   /* revelado, esperando confirmación */
   --c-bad:#fe0110;    /* fallado, cerrado */
-  --c-ok:#0a8a3f;      /* acertado */
+  --c-ok:#0a8a3f;      /* acertado a la 1ª */
+  --c-ok2:#e0b400;     /* acertado a la 2ª (amarillo) */
+  --c-ok3:#f07800;     /* acertado a la 3ª (naranja) */
   --c-neutral:#999;    /* punto sin tocar */
   --safe-top:env(safe-area-inset-top,0px);
   --safe-bottom:env(safe-area-inset-bottom,0px);
@@ -676,6 +678,16 @@ body.playing #win-game .workspace{min-height:0;}
 .reviewrow .res{font-size:11px;letter-spacing:normal;text-transform:none;flex-shrink:0;}
 .reviewrow .res.r-ok{color:var(--c-ok);}
 .reviewrow .res.r-bad{color:var(--c-bad);}
+.reviewrow .res.try2{color:#b38f00;}.reviewrow .res.try3{color:var(--c-ok3);}
+/* acertado a la 2ª (amarillo) y a la 3ª (naranja) */
+.game-cell.correct.try2{border-color:var(--c-ok2);}.game-cell.correct.try3{border-color:var(--c-ok3);}
+.game-cell.correct.try2::before{background:var(--c-ok2);}.game-cell.correct.try3::before{background:var(--c-ok3);}
+.game-cell.correct.try2 .face-name{background:var(--c-ok2);}.game-cell.correct.try3 .face-name{background:var(--c-ok3);}
+.game-cell.miss.correct.try2{border-color:var(--c-ok2);}.game-cell.miss.correct.try3{border-color:var(--c-ok3);}
+.marker.correct.try2{background:var(--c-ok2);}.marker.correct.try3{background:var(--c-ok3);}
+.og-mask.open.correct.try2{border-color:var(--c-ok2);background:rgba(224,180,0,0.1);}.og-mask.open.correct.try3{border-color:var(--c-ok3);background:rgba(240,120,0,0.08);}
+.sort-box .sb-thumbs img.try2{outline:2px solid var(--c-ok2);outline-offset:-2px;}.sort-box .sb-thumbs img.try3{outline:2px solid var(--c-ok3);outline-offset:-2px;}
+.sort-view .sv-item.try2 img{outline:3px solid var(--c-ok2);outline-offset:-3px;}.sort-view .sv-item.try3 img{outline:3px solid var(--c-ok3);outline-offset:-3px;}
 
 .toast{position:fixed;bottom:calc(16px + var(--safe-bottom));left:50%;transform:translateX(-50%);
   background:var(--fg);color:#fff;padding:9px 16px;border-radius:20px;font-size:12.5px;
@@ -3390,8 +3402,13 @@ function backSizeClass(t){
   const n = (t||'').trim().length;
   return n <= 18 ? 's1' : n <= 55 ? 's2' : n <= 140 ? 's3' : 's4';
 }
+/* acertado a la 2ª → amarillo, a la 3ª → naranja (a la 1ª, verde; fallado, rojo) */
+function tryCls(id){
+  const r = game && game.pointResult ? game.pointResult[id] : null;
+  return r === 2 ? ' try2' : (typeof r === 'number' && r >= 3) ? ' try3' : '';
+}
 function gridCellClass(cell, state){
-  const st = state && state !== 'neutral' ? ' ' + state : '';
+  const st = state && state !== 'neutral' ? ' ' + state + (state === 'correct' ? tryCls(cell.dataset.id) : '') : '';
   if(cell.dataset.sort) return 'game-cell sort' + st;
   if(!cell.dataset.anki) return 'game-cell' + st;
   return 'game-cell anki' + st + ((state === 'correct' || state === 'wrong') ? ' flipped' : '');
@@ -3749,9 +3766,9 @@ function handleGridTap(photoId){
     return;
   }
   if(photoId === t.id){
-    markerStateUpdate(t.id, 'correct');
     game.correct++;
     game.pointResult[t.id] = 4 - game.attemptsLeft;
+    markerStateUpdate(t.id, 'correct');
     advance();
   } else {
     game.attemptsLeft--;
@@ -3777,7 +3794,7 @@ function renderGameMarkers(){
   stage.querySelectorAll('.marker').forEach(el=>el.remove());
   game.node.points.forEach(p=>{
     const m = document.createElement('div');
-    m.className = 'marker ' + (game.stateOf[p.id]==='neutral' ? '' : game.stateOf[p.id]);
+    m.className = 'marker ' + (game.stateOf[p.id]==='neutral' ? '' : game.stateOf[p.id] + (game.stateOf[p.id]==='correct' ? tryCls(p.id) : ''));
     m.dataset.id = p.id;
     m.style.left = p.x+'%'; m.style.top = p.y+'%';
     m.innerHTML = `<div class="tag">${escapeHtml(p.label)}</div>`;
@@ -3787,7 +3804,7 @@ function renderGameMarkers(){
 function markerStateUpdate(pointId, state){
   game.stateOf[pointId] = state;
   const el = document.querySelector(`.marker[data-id="${pointId}"]`);
-  if(el){ el.className = 'marker ' + (state==='neutral'?'':state); }
+  if(el){ el.className = 'marker ' + (state==='neutral'?'':state + (state==='correct' ? tryCls(pointId) : '')); }
   const cell = document.querySelector(`.game-cell[data-id="${pointId}"]`);
   if(cell){
     cell.className = gridCellClass(cell, state);
@@ -3883,9 +3900,9 @@ function handleTap(clientX, clientY){
   if(!nearest) return; // toque en vacío: no cuenta como fallo
 
   if(nearest.id === t.id){
-    markerStateUpdate(t.id, 'correct');
     game.correct++;
     game.pointResult[t.id] = 4 - game.attemptsLeft; // 3,2,1 intentos restantes -> 1º,2º,3º intento
+    markerStateUpdate(t.id, 'correct');
     advance();
   } else {
     game.attemptsLeft--;
@@ -4167,7 +4184,7 @@ function renderSortBoxes(){
     list.slice(-12).forEach(it=>{
       const im = document.createElement('img');
       im.src = gameImg(game.photoOf[it.id]);
-      if(it.failed) im.className = 'failed';
+      if(it.failed) im.className = 'failed'; else if(it.tries >= 2) im.className = it.tries === 2 ? 'try2' : 'try3';
       th.appendChild(im);
     });
     box.addEventListener('click', ()=>{
@@ -4215,7 +4232,7 @@ function sortDrop(id, g){
     game.correct++;
     game.pointResult[id] = sortMaxAttempts() - game.attemptsOf[id] + 1;
     game.stateOf[id] = 'correct';
-    game.sort.placed[right].push({id});
+    game.sort.placed[right].push({id, tries: game.pointResult[id]});
   } else {
     game.attemptsOf[id]--;
     flashBox(g, 'bad');
@@ -4253,7 +4270,7 @@ function openSortView(g){
   list.forEach(it=>{
     const p = game.photoOf[it.id];
     const d = document.createElement('div');
-    d.className = 'sv-item' + (it.failed ? ' failed' : '');
+    d.className = 'sv-item' + (it.failed ? ' failed' : it.tries === 2 ? ' try2' : it.tries >= 3 ? ' try3' : '');
     d.innerHTML = `<img src="${gameImg(p)}"><span></span>`;
     d.querySelector('span').textContent = p.label;
     grid.appendChild(d);
@@ -4646,7 +4663,7 @@ document.getElementById('end-review').addEventListener('click', ()=>{
   list.innerHTML = game.order.map(p=>{
     const r = game.pointResult[p.id];
     const ok = r===1||r===2||r===3;
-    return `<div class="reviewrow"><span>${escapeHtml(p.label)}</span><span class="res ${ok?'r-ok':'r-bad'}">${labels[r]||'—'}</span></div>`;
+    return `<div class="reviewrow"><span>${escapeHtml(p.label)}</span><span class="res ${ok?'r-ok':'r-bad'}${r===2?' try2':r===3?' try3':''}">${labels[r]||'—'}</span></div>`;
   }).join('');
   showJugarWindow('win-review');
 });
@@ -5457,7 +5474,7 @@ function occGameRenderMasks(){
     const st = game.stateOf[m.id];
     let cls = 'og-mask';
     if(st === undefined) cls += ' hid';                                        // zona sin nombre: siempre tapada
-    else if(st === 'correct' || st === 'wrong') cls += ' open ' + st;
+    else if(st === 'correct' || st === 'wrong') cls += ' open ' + st + (st === 'correct' ? tryCls(m.id) : '');
     else if(st === 'revealed') cls += ' q show';
     else if(t && m.id === t.id && game.playMode !== 'occ-buscar') cls += ' q';
     else cls += game.hideAll ? ' hid' : ' open soft';
