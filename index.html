@@ -1404,19 +1404,52 @@ body.vz-main #vz-toggle{display:none;}
 #vz .vz-folds .vz-fgo{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 #vz .vz-folds .vz-fgo:hover{background:rgba(0,0,0,.06);}
 .vz-folds .vz-note-t{margin:0 16px 8px 70px;}
-.vz-cbody{padding:2px 14px 16px 70px;}
+.vz-cbody{padding:4px 18px 20px 70px;}
 .vz-subh{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin:14px 0 6px;}
 .vz-subh i{width:10px;height:10px;border-radius:3px;}
 .vz-subh small{font-weight:500;opacity:.6;letter-spacing:0;}
-.vz-cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 14px;}
-#vz .vz-cm{display:flex;align-items:center;gap:10px;padding:5px 6px !important;border-radius:10px;text-align:left;min-width:0;}
-#vz .vz-cm:hover{background:rgba(0,0,0,.05);}
-.vz-cmi{width:42px;height:42px;border-radius:9px;flex-shrink:0;background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#f2f2f4;}
-.vz-cm .nm{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+.vz-cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;margin-bottom:6px;}
+#vz .vz-cm{display:flex;flex-direction:column;background:#fff !important;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.14),0 0 0 .5px rgba(0,0,0,.06);text-align:center;min-width:0;transition:transform .12s;}
+#vz .vz-cm:active{transform:scale(.97);}
+#vz .vz-cm:hover{box-shadow:0 3px 12px rgba(0,0,0,.18),0 0 0 .5px rgba(0,0,0,.06);}
+.vz-cmi{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;width:100%;background-size:contain;background-position:center;background-repeat:no-repeat;background-origin:content-box;padding:8px;box-sizing:border-box;}
+.vz-cmi em{font-style:normal;font-size:13px;line-height:1.35;opacity:.7;overflow:hidden;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;}
+.vz-cm .nm{font-size:15px;font-weight:600;line-height:1.25;padding:9px 8px 11px;border-top:3px solid var(--gc);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
 .vz-fam > .vz-cbody{padding:6px 0 20px;}
-@media (max-width:600px){ .vz-cbody{padding:2px 10px 14px 12px;} .vz-folds .vz-note-t{margin-left:14px;} .vz-cgrid{grid-template-columns:1fr 1fr;} .vz-fname{font-size:16px;} }
+@media (max-width:600px){ .vz-cbody{padding:2px 10px 14px 12px;} .vz-folds .vz-note-t{margin-left:14px;} .vz-cgrid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;} .vz-fname{font-size:16px;} }
 .vz-folds .vz-fold.open .vz-fchev{transform:none !important;}
 #vz .vz-root{line-height:1.05;word-break:break-word;}
+
+/* panorama */
+.vz-pano{margin:6px 0 0;border-radius:16px;background:#fbfbfc;box-shadow:0 1px 4px rgba(0,0,0,.12);overflow:hidden;}
+.vz-pb{position:absolute;}
+.vz-pbh{height:42px;border-radius:10px;display:flex;align-items:center;gap:10px;padding:0 14px;font-weight:800;font-size:19px;cursor:pointer;white-space:nowrap;overflow:hidden;}
+.vz-pbh small{font-weight:600;opacity:.75;font-size:15px;}
+.vz-pbn{font-size:13px;line-height:18px;opacity:.6;margin:8px 2px 0;overflow:hidden;}
+.vz-pbs{display:flex;align-items:center;gap:7px;height:30px;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;opacity:.75;margin-top:4px;}
+.vz-pbs i{width:10px;height:10px;border-radius:3px;}
+.vz-pbs small{font-weight:500;letter-spacing:0;opacity:.6;}
+.vz-pbg{display:grid;gap:12px;margin-top:12px;}
+.vz-pcard{width:150px;height:182px;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.15);cursor:pointer;background:#fff;}
+.vz-pcard .ci{flex:1;background:#fff center/contain no-repeat;background-origin:content-box;padding:6px;display:flex;align-items:center;justify-content:center;}
+.vz-pcard .ci em{font-style:normal;font-size:11px;opacity:.7;overflow:hidden;}
+.vz-pcard .nm{font-size:13px;font-weight:600;text-align:center;padding:6px 6px 8px;line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+/* ventana flotante de tarjeta */
+#vz-cpop{position:fixed;inset:0;z-index:72;display:flex;align-items:center;justify-content:center;padding:20px;}
+.vz-cpdim{position:absolute;inset:0;background:rgba(0,0,0,.4);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);animation:vzin .18s ease-out;}
+.vz-cpw{position:relative;background:#fff;border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.35);width:min(960px,100%);max-height:min(88vh,760px);display:flex;gap:22px;padding:22px;box-sizing:border-box;animation:vzin .2s ease-out;border-top:6px solid var(--gc);}
+.vz-cpimg{flex:1 1 55%;min-width:0;display:flex;flex-direction:column;gap:10px;overflow:auto;align-items:center;justify-content:center;}
+.vz-cpimg img{max-width:100%;max-height:min(70vh,620px);object-fit:contain;border-radius:12px;}
+.vz-cpside{flex:1 1 45%;min-width:0;display:flex;flex-direction:column;gap:12px;overflow:auto;padding-right:30px;-webkit-user-select:text;user-select:text;}
+.vz-cpts{display:flex;flex-direction:column;gap:8px;}
+.vz-cpt p{margin:6px 2px 0;font-size:14px;line-height:1.45;opacity:.7;}
+#vz .vz-cpx{position:absolute;top:12px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.06);font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;}
+#vz .vz-cpn{position:absolute;top:50%;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;}
+#vz .vz-cpn svg{width:22px;height:22px;}
+.vz-cpn.prev{left:-16px;}.vz-cpn.next{right:-16px;}
+#vz-cpop button{font:inherit;color:inherit;border:0;cursor:pointer;}
+@media (max-width:700px){ .vz-cpw{flex-direction:column;padding:16px;max-height:92vh;overflow:auto;} .vz-cpimg img{max-height:42vh;} .vz-cpside{padding-right:0;overflow:visible;} .vz-cpn.prev{left:4px;}.vz-cpn.next{right:4px;} .vz-cpn{top:30%;} }
+#vz .pzv-tools button{background:rgba(255,255,255,.95);box-shadow:0 1px 6px rgba(0,0,0,.2);}
 
 </style>
 </head>
@@ -6310,6 +6343,7 @@ const VZICO = {
   pz: VZI + '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7.5 21l2-3M16.5 21l-2-3"/></svg>',
   folder: VZI + '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
   plus: VZI + '<path d="M12 5v14M5 12h14"/></svg>',
+  pano: VZI + '<rect x="2.5" y="3.5" width="8" height="10" rx="1.2"/><rect x="13.5" y="3.5" width="8" height="6" rx="1.2"/><rect x="13.5" y="12.5" width="8" height="8" rx="1.2"/><rect x="2.5" y="16.5" width="8" height="4" rx="1.2"/></svg>',
   tree: VZI + '<rect x="9" y="2.5" width="6" height="5" rx="1.2"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/><path d="M12 7.5v4.5M5.5 16.5V12h13v4.5"/></svg>',
   mosaic: VZI + '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
   list: VZI + '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r=".8"/><circle cx="4.5" cy="12" r=".8"/><circle cx="4.5" cy="18" r=".8"/></svg>',
@@ -6340,6 +6374,7 @@ function vzBuild(){
   });
   document.addEventListener('keydown', e=>{
     if(!vzEl.classList.contains('open') || document.body.classList.contains('pz-open') || e.target.matches('input,textarea')) return;
+    if(vzPopState){ if(e.key === 'Escape') vzCardPopClose(); if(e.key === 'ArrowRight') vzCardPopStep(1); if(e.key === 'ArrowLeft') vzCardPopStep(-1); return; }
     if(e.key === 'Escape'){ if(document.getElementById('vz-pop')) return vzClosePop(); if(vzHostKey) return; if(document.getElementById('ctx-menu').style.display === 'block') return; if(vzPos > 0) vzBack(); }
     if(vzCur().t === 'card' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) vzStepCard(e.key === 'ArrowRight' ? 1 : -1);
   });
@@ -6352,7 +6387,7 @@ function vzFwd(){ if(vzPos < vzStack.length - 1){ vzPos++; vzRender(true); } }
 function vzOpen(){ if(!vzEl) vzBuild(); vzEl.classList.add('open'); document.body.classList.add('vz-on'); vzSetTog(); vzRender(true); }
 function vzClose(){ if(vzEl) vzEl.classList.remove('open'); vzClosePop(); document.body.classList.remove('vz-on'); vzSetTog(); }
 /* pantallas que se pueden ver como esquema radial */
-function vzIsRad(){ const s = vzCur(); if(s.t !== 'deck') return false; const n = findNode(s.id); return !!(n && n.mode === 'barajado' && vzDeckView(n) === 'scheme'); }
+function vzIsRad(){ const s = vzCur(); if(s.t !== 'deck') return false; const n = findNode(s.id); return !!(n && n.mode === 'barajado' && ['scheme', 'pano'].includes(vzDeckView(n))); }
 function vzIsRadOld(){
   const s = vzCur(); if(vzMode !== 'radial') return false;
   if(s.t === 'root') return tree.length > 0 && tree.length <= 14;
@@ -6393,7 +6428,7 @@ function vzCrumb(){
 }
 function vzGroupName(node, v){ const g = vzGroups(node).find(x=> x.v === v); return g ? (g.name || node.name) : (v || node.name); }
 function vzRender(anim){
-  vzCrumb(); vzClosePop();
+  vzCrumb(); vzClosePop(); vzCardPopClose();
   const s = vzCur(), y = anim ? 0 : vzBody.scrollTop;
   vzBody.className = 'vz-body';
   const node = s.id ? (vzIsNotes(s) ? findNotaNode(s.id) : findNode(s.id)) : null;
@@ -6566,7 +6601,7 @@ function vzSplit(node, cards, cat){
   if(none.length) out.push({ v: TAG_NONE, name: 'Sin ' + cat.name.toLowerCase(), color: '#8e8e93', cards: none });
   return out;
 }
-function vzDeckView(node){ return ['scheme', 'mosaic', 'list'].includes(node.vzView) ? node.vzView : 'scheme'; }
+function vzDeckView(node){ return ['scheme', 'mosaic', 'list', 'pano'].includes(node.vzView) ? node.vzView : 'scheme'; }
 /* la página del mazo: esquema, mosaico o lista de sus grupos (solo aquí se cambia la vista) */
 function vzDeckHome(node){
   const cat = vzCat(node), groups = vzGroups(node).filter(g=> g.cards.length);
@@ -6574,11 +6609,116 @@ function vzDeckHome(node){
   const view = vzDeckView(node), enc = g=> encodeURIComponent(vzGKey(g));
   let body = '';
   if(view === 'scheme') body = `<div class="vz-radw" id="vz-radw"></div>`;
+  else if(view === 'pano') body = `<div class="vz-radw vz-pano" id="vz-pano"></div>`;
   else if(view === 'mosaic') body = `<div class="vz-mos plain groups">${groups.map(g=> `<button class="vz-tile plain" data-grp="${node.id}|${enc(g)}" style="background:${g.color};color:${vzIsDark(g.color) ? '#fff' : '#1c1c1e'}"><b>${escapeHtml(g.name)}</b><small>${g.cards.length} tarjetas</small></button>`).join('')}</div>`;
   else body = `<div class="vz-ll vz-gl">${groups.map(g=> `<div class="vz-lr" role="button" data-grp="${node.id}|${enc(g)}" style="--d:0"><span class="vz-sw big" style="background:${g.color}"></span><span class="nm">${escapeHtml(g.name)}</span><span class="sb">${g.cards.length} tarjetas</span>${VZICO.chev}</div>`).join('')}</div>`;
   vzBody.innerHTML = `<div class="vz-fam${view === 'scheme' ? ' vz-schemepage' : ''}">${vzHeader(node, vzDeckActions(node, true))}${body}</div>`;
   if(view === 'scheme') vzFillScheme(node, groups);
+  if(view === 'pano') vzFillPano(node, groups);
 }
+/* ---------- panorama: todo el mazo de un vistazo, cada grupo un bloque con sus tarjetas ---------- */
+function vzFillPano(node, groups){
+  const el = document.getElementById('vz-pano'); if(!el) return;
+  el.style.height = Math.max(440, vzBody.clientHeight - (el.getBoundingClientRect().top - vzBody.getBoundingClientRect().top) - 12) + 'px';
+  const W = 150, H = 182, G = 12, CW = W + G, BG = 64, sc = vzSubCat(node);
+  const blocks = groups.map(g=>{
+    let parts = sc ? vzSplit(node, g.cards, sc) : [{ v: TAG_NONE, cards: g.cards }];
+    if(parts.length === 1 && parts[0].v === TAG_NONE) parts = [{ name: '', cards: g.cards }];
+    const n = Math.max(...parts.map(x=> x.cards.length)), nc = Math.max(2, Math.min(6, Math.ceil(Math.sqrt(g.cards.length * .9)), n));
+    const noteH = g.note ? 14 + Math.min(6, Math.ceil(g.note.length / (nc * 26))) * 18 : 0;
+    let h = 54 + noteH; parts.forEach(x=>{ h += (x.name ? 30 : 0) + Math.ceil(x.cards.length / nc) * (H + G); });
+    return { g, parts, nc, noteH, w: nc * CW - G, h };
+  });
+  const area = blocks.reduce((a, b)=> a + (b.w + BG) * (b.h + BG), 0), target = Math.max(...blocks.map(b=> b.w), Math.sqrt(area * 1.7));
+  let x = 0, y = 0, rowH = 0, maxW = 0, html = '';
+  blocks.forEach(b=>{
+    if(x > 0 && x + b.w > target){ y += rowH + BG; x = 0; rowH = 0; }
+    const g = b.g, dk = vzIsDark(g.color), enc = encodeURIComponent(vzGKey(g));
+    let inner = `<div class="vz-pbh" data-grp="${node.id}|${enc}" style="background:${g.color};color:${dk ? '#fff' : '#1c1c1e'}">${escapeHtml(g.name)}<small>${g.cards.length}</small></div>${g.note ? `<div class="vz-pbn" style="height:${b.noteH - 10}px">${escapeHtml(g.note)}</div>` : ''}`;
+    b.parts.forEach(pt=>{
+      if(pt.name) inner += `<div class="vz-pbs"><i style="background:${pt.color}"></i>${escapeHtml(pt.name)}<small>${pt.cards.length}</small></div>`;
+      inner += `<div class="vz-pbg" style="grid-template-columns:repeat(${b.nc},${W}px)">${pt.cards.map(p=> `<div class="vz-pcard" data-pcard="${node.id}|${p.id}" style="background:${vzMix(g.color, .16)}"><span class="ci" data-img="${node.id}|${p.id}">${p.image ? '' : `<em>${escapeHtml((p.back || '').slice(0, 80))}</em>`}</span><span class="nm">${escapeHtml(vzLabel(p))}</span></div>`).join('')}</div>`;
+    });
+    html += `<div class="vz-pb" style="left:${x}px;top:${y}px;width:${b.w}px">${inner}</div>`;
+    x += b.w + BG; rowH = Math.max(rowH, b.h); maxW = Math.max(maxW, x - BG);
+  });
+  const totalH = y + rowH;
+  el.innerHTML = `<div class="pzv"><div class="pzv-world">${html}</div><div class="pzv-tools"><button data-z="out" title="Alejar">−</button><button data-z="fit" title="Ver todo">⤢</button><button data-z="in" title="Acercar">+</button></div></div>`;
+  vzLoadImgs();
+  const order = []; blocks.forEach(b=> b.parts.forEach(pt=> pt.cards.forEach(p=>{ if(!order.includes(p.id)) order.push(p.id); })));
+  vzPanZoom(el.querySelector('.pzv'), { x: 0, y: 0, w: maxW, h: totalH }, t=>{
+    const c = t.closest('[data-pcard]'); if(c){ const [d, cid] = c.dataset.pcard.split('|'); vzCardPop(d, cid, order); return; }
+    const h = t.closest('[data-grp]'); if(h){ const [id, e] = h.dataset.grp.split('|'), v = decodeURIComponent(e), g = vzGroups(node).find(q=> vzGKey(q) === v); vzGo({ t: 'group', id, v: g ? g.v : v }); }
+  }, 'pano:' + node.id);
+}
+/* mover y ampliar (arrastrar, pellizcar, rueda) con toque para abrir */
+const vzPZ = {}; // vista guardada por panorama
+function vzPanZoom(pv, content, onTap, key){
+  const w = pv.querySelector('.pzv-world'), st = { x: 0, y: 0, z: 1 };
+  const apply = anim=>{ w.style.transition = anim ? 'transform .4s cubic-bezier(.2,.8,.2,1)' : ''; w.style.transform = `translate(${st.x}px,${st.y}px) scale(${st.z})`; if(key) vzPZ[key] = Object.assign({}, st); };
+  const fit = anim=>{ const W = pv.clientWidth, H = pv.clientHeight, pad = 24; st.z = Math.max(.04, Math.min(1.5, (W - pad*2) / Math.max(content.w, 1), (H - pad*2) / Math.max(content.h, 1))); st.x = W/2 - (content.x + content.w/2) * st.z; st.y = H/2 - (content.y + content.h/2) * st.z; apply(anim); };
+  if(key && vzPZ[key]){ Object.assign(st, vzPZ[key]); apply(false); } else fit(false);
+  const zoomAt = (k, sx, sy)=>{ const z = Math.max(.04, Math.min(5, st.z * k)); st.x = sx - (sx - st.x) * z / st.z; st.y = sy - (sy - st.y) * z / st.z; st.z = z; apply(false); };
+  const P = new Map(); let g = null;
+  pv.addEventListener('pointerdown', e=>{
+    if(e.target.closest('.pzv-tools')) return;
+    try{ pv.setPointerCapture(e.pointerId); }catch(err){}
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if(P.size === 1) g = { sx: e.clientX, sy: e.clientY, ox: st.x, oy: st.y, moved: false, target: e.target };
+    else if(P.size === 2){ const [a, c] = [...P.values()]; g = { pinch: true, d: Math.hypot(a.x - c.x, a.y - c.y), z: st.z, ox: st.x, oy: st.y, mx: (a.x + c.x)/2, my: (a.y + c.y)/2, moved: true }; }
+  });
+  pv.addEventListener('pointermove', e=>{
+    if(!P.has(e.pointerId) || !g) return;
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const r = pv.getBoundingClientRect();
+    if(g.pinch && P.size >= 2){ const [a, c] = [...P.values()], d = Math.hypot(a.x - c.x, a.y - c.y), mx = (a.x + c.x)/2, my = (a.y + c.y)/2, z = Math.max(.04, Math.min(5, g.z * d / g.d));
+      const wx = (g.mx - r.left - g.ox) / g.z, wy = (g.my - r.top - g.oy) / g.z; st.z = z; st.x = mx - r.left - wx * z; st.y = my - r.top - wy * z; apply(false); return; }
+    if(!g.pinch){ const dx = e.clientX - g.sx, dy = e.clientY - g.sy; if(!g.moved && Math.hypot(dx, dy) > 6) g.moved = true; if(g.moved){ st.x = g.ox + dx; st.y = g.oy + dy; apply(false); } }
+  });
+  const up = e=>{
+    if(!P.has(e.pointerId)) return; P.delete(e.pointerId);
+    if(g && !g.moved && !g.pinch && P.size === 0 && e.type === 'pointerup' && g.target) onTap(g.target);
+    if(P.size === 0) g = null; else if(g && g.pinch && P.size === 1){ const [a] = [...P.values()]; g = { sx: a.x, sy: a.y, ox: st.x, oy: st.y, moved: true }; }
+  };
+  pv.addEventListener('pointerup', up); pv.addEventListener('pointercancel', up);
+  pv.addEventListener('wheel', e=>{ e.preventDefault(); const r = pv.getBoundingClientRect(); if(e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * .01), e.clientX - r.left, e.clientY - r.top); else { st.x -= e.deltaX; st.y -= e.deltaY; apply(false); } }, { passive: false });
+  pv.querySelector('.pzv-tools').addEventListener('click', e=>{ const t = e.target.closest('button'); if(!t) return; if(t.dataset.z === 'fit') fit(true); else zoomAt(t.dataset.z === 'in' ? 1.35 : 1/1.35, pv.clientWidth/2, pv.clientHeight/2); });
+}
+/* ---------- ventana flotante con toda la información de una tarjeta ---------- */
+let vzPopState = null;
+function vzCardPop(deckId, cid, order){
+  const node = findNode(deckId), p = node && (node.photos || []).find(x=> x.id === cid); if(!p) return;
+  vzPopState = { deckId, cid, order: order || [] };
+  let el = document.getElementById('vz-cpop'); if(!el){ el = document.createElement('div'); el.id = 'vz-cpop'; vzEl.appendChild(el); }
+  const imgs = allImages(p), i = vzPopState.order.indexOf(cid), cat = vzCat(node), gcol = cat && tagVals(p, cat.id)[0] ? tagColor(node, cat.id, tagVals(p, cat.id)[0]) : vzColor(node);
+  const tags = [];
+  tagCats(node).forEach(c=> tagVals(p, c.id).forEach(val=>{ const note = ((node.tagNotes || {})[c.id] || {})[val]; tags.push(`<div class="vz-cpt"><span class="vz-tag" style="background:${vzMix(tagColor(node, c.id, val), .3)}"><i style="background:${tagColor(node, c.id, val)}"></i><small>${escapeHtml(c.name)}</small>${escapeHtml(val)}</span>${note ? `<p>${escapeHtml(note)}</p>` : ''}</div>`); }));
+  el.innerHTML = `<div class="vz-cpdim"></div><div class="vz-cpw" style="--gc:${gcol}">
+    <button class="vz-cpx" data-cp="close" aria-label="Cerrar">×</button>
+    <div class="vz-cpimg">${imgs.length ? imgs.map((s, k)=> `<img data-k="${k}" alt="">`).join('') : `<div class="vz-ci tx big">${escapeHtml(p.back || '')}</div>`}</div>
+    <div class="vz-cpside">
+      <div class="vz-cvn">${escapeHtml(vzLabel(p))}</div>
+      <div class="vz-cvd">${escapeHtml(node.name)}${i >= 0 && vzPopState.order.length > 1 ? ` · ${i + 1} de ${vzPopState.order.length}` : ''}</div>
+      ${p.back && imgs.length ? `<div class="vz-cvb">${escapeHtml(p.back)}</div>` : ''}
+      ${tags.length ? `<div class="vz-cpts">${tags.join('')}</div>` : ''}
+      <div class="vz-chips"><button class="vz-chip" data-cp="open">Abrir ficha</button><button class="vz-chip" data-cp="edit">${VZICO.edit}Editar</button><button class="vz-chip" data-cp="pz">${VZICO.pz}A una pizarra</button></div>
+    </div>
+    ${vzPopState.order.length > 1 ? `<button class="vz-cpn prev" data-cp="-1" aria-label="Anterior">${VZICO.back}</button><button class="vz-cpn next" data-cp="1" aria-label="Siguiente">${VZICO.fwd}</button>` : ''}
+  </div>`;
+  el.querySelectorAll('img[data-k]').forEach(im=> im.src = imgs[+im.dataset.k]);
+  if(!el._wired){ el._wired = true; el.addEventListener('click', e=>{
+    e.stopPropagation();
+    if(e.target.closest('.vz-cpdim')) return vzCardPopClose();
+    const b = e.target.closest('[data-cp]'); if(!b) return; const a = b.dataset.cp, st = vzPopState; if(!st) return;
+    if(a === 'close') return vzCardPopClose();
+    if(a === '1' || a === '-1') return vzCardPopStep(+a);
+    if(a === 'open'){ vzCardPopClose(); vzGo({ t: 'card', id: st.deckId, cid: st.cid }); }
+    if(a === 'edit'){ vzCardPopClose(); vzGo({ t: 'edit', id: st.deckId, cid: st.cid }); }
+    if(a === 'pz' && window.pizarra) window.pizarra.attach({ deck: st.deckId, cid: st.cid }, b);
+  }); }
+}
+function vzCardPopStep(d){ const st = vzPopState; if(!st || st.order.length < 2) return; const i = st.order.indexOf(st.cid); vzCardPop(st.deckId, st.order[(i + d + st.order.length) % st.order.length], st.order); }
+function vzCardPopClose(){ const el = document.getElementById('vz-cpop'); if(el) el.remove(); vzPopState = null; }
 function vzFillScheme(node, groups){
   const el = document.getElementById('vz-radw'); if(!el) return;
   const H = Math.max(420, vzBody.clientHeight - (el.getBoundingClientRect().top - vzBody.getBoundingClientRect().top) - 12);
@@ -6640,7 +6780,7 @@ function vzFolder(node){
 function vzDeckActions(node, home){
   const cats = tagCats(node).filter(c=> valuesOf(node, c.id, node.photos || []).length), cur = vzCat(node), sub = vzSubCat(node), view = vzDeckView(node);
   const hasGroups = cur && vzGroups(node).filter(g=> g.cards.length).length > 1;
-  const seg = home && hasGroups ? `<span class="vz-fsp"></span><span class="vz-seg big">${[['scheme', VZICO.tree, 'Esquema'], ['mosaic', VZICO.mosaic, 'Mosaico'], ['list', VZICO.list, 'Lista']].map(([v, ic, t])=> `<button data-dview="${v}" class="${view === v ? 'on' : ''}" title="${t}">${ic}</button>`).join('')}</span>` : '';
+  const seg = home && hasGroups ? `<span class="vz-fsp"></span><span class="vz-seg big">${[['scheme', VZICO.tree, 'Esquema'], ['mosaic', VZICO.mosaic, 'Mosaico'], ['list', VZICO.list, 'Lista'], ['pano', VZICO.pano, 'Panorama: todas las tarjetas']].map(([v, ic, t])=> `<button data-dview="${v}" class="${view === v ? 'on' : ''}" title="${t}">${ic}</button>`).join('')}</span>` : '';
   const subs = cur ? cats.filter(c=> c.id !== cur.id) : [];
   return `<div class="vz-chips">
     <button class="vz-chip vz-play" data-play="${node.id}">${VZICO.play}Jugar</button>
@@ -6655,7 +6795,7 @@ function vzDeckActions(node, home){
 }
 /* tarjeta pequeña: foto y nombre (en las listas que se despliegan) */
 function vzCardMini(node, p, color, v){
-  return `<button class="vz-cm" data-card="${node.id}|${p.id}"${v !== undefined ? ` data-gv="${encodeURIComponent(v == null ? '' : v)}"` : ''}><span class="vz-cmi" data-img="${node.id}|${p.id}" style="background-color:${vzMix(color, .35)}"></span><span class="nm">${escapeHtml(vzLabel(p))}</span></button>`;
+  return `<button class="vz-cm" data-card="${node.id}|${p.id}"${v !== undefined ? ` data-gv="${encodeURIComponent(v == null ? '' : v)}"` : ''} style="--gc:${color}"><span class="vz-cmi" data-img="${node.id}|${p.id}" style="background-color:${vzMix(color, .14)}">${p.image ? '' : `<em>${escapeHtml((p.back || '').slice(0, 90))}</em>`}</span><span class="nm">${escapeHtml(vzLabel(p))}</span></button>`;
 }
 function vzCardTile(node, p, color, v){
   const tags = [];
@@ -6688,7 +6828,9 @@ function vzCardsBlock(node, g){
   const grid = cards=> `<div class="vz-cgrid">${cards.map(p=> vzCardMini(node, p, g.color, g.v)).join('')}</div>`;
   const sc = vzSubCat(node);
   if(!sc) return `<div class="vz-cbody">${grid(g.cards)}</div>`;
-  return `<div class="vz-cbody">${vzSplit(node, g.cards, sc).map(x=> `<div class="vz-subh"><i style="background:${x.color}"></i>${escapeHtml(x.name)}<small>${x.cards.length}</small></div>${grid(x.cards)}`).join('')}</div>`;
+  const parts = vzSplit(node, g.cards, sc);
+  if(parts.length === 1 && parts[0].v === TAG_NONE) return `<div class="vz-cbody">${grid(g.cards)}</div>`;
+  return `<div class="vz-cbody">${parts.map(x=> `<div class="vz-subh"><i style="background:${x.color}"></i>${escapeHtml(x.name)}<small>${x.cards.length}</small></div>${grid(x.cards)}`).join('')}</div>`;
 }
 function vzDeck(node){
   const groups = vzGroups(node), cat = vzCat(node);
@@ -6980,10 +7122,29 @@ function vzResetTo(stack){ vzStack = stack; vzPos = stack.length - 1; vzRender(t
 /* los colores elegidos para los grupos se respetan en toda la app (juego, etiquetas…) */
 { const _tc = tagColor; tagColor = function(node, catId, v){ const o = node && node.tagValColors && node.tagValColors[catId] && node.tagValColors[catId][v]; return o || _tc(node, catId, v); }; }
 /* si cambian los mazos o las notas, la vista se repinta (salvo con un editor abierto) */
-{ const _sl = saveLocal; let t = 0; saveLocal = function(){ const r = _sl.apply(this, arguments); if(vzEl && vzHostKey) vzCrumb(); if(vzEl && vzEl.classList.contains('open') && !vzHostKey){ clearTimeout(t); t = setTimeout(()=>{ if(!document.getElementById('vz-pop') && !vzHostKey) vzRender(); }, 120); } return r; }; }
+{ const _sl = saveLocal; let t = 0; saveLocal = function(){ const r = _sl.apply(this, arguments); if(vzEl && vzHostKey) vzCrumb(); if(vzEl && vzEl.classList.contains('open') && !vzHostKey){ clearTimeout(t); t = setTimeout(()=>{ try{ vzAddFci(); }catch(e){} if(!document.getElementById('vz-pop') && !vzHostKey) vzRender(); }, 120); } return r; }; }
 { const _rn = renderNotasTree; renderNotasTree = function(){ const r = _rn.apply(this, arguments); if(vzEl && vzHostKey) vzCrumb(); else if(vzEl && vzEl.classList.contains('open') && (vzCur().t === 'notes' || vzCur().t === 'root')) vzRender(); return r; }; }
+
+/* ---------- subgrupos de los perros: secciones de la FCI (se añaden una vez, sin tocar lo demás) ---------- */
+const VZ_FCI = {"Beauceron": "Perros pastores", "Bergamasco": "Perros pastores", "Bobtail (antiguo perro pastor inglés)": "Perros pastores", "Border Collie": "Perros pastores", "Collie Barbudo": "Perros pastores", "Collie de pelo corto": "Perros pastores", "Corgi Galés de Cardigan": "Perros pastores", "Corgi Galés de Pembroke": "Perros pastores", "Komondor": "Perros pastores", "Kuvasz Húngaro": "Perros pastores", "Laekenois": "Perros pastores", "Lancashire Heeler": "Perros pastores", "Pastor Australiano": "Perros pastores", "Pastor Belga Groenendael": "Perros pastores", "Pastor Belga Malinois": "Perros pastores", "Pastor Belga Tervueren": "Perros pastores", "Pastor de Brie o Briard": "Perros pastores", "Pastor de Los Pirineos": "Perros pastores", "Pastor de Maremma": "Perros pastores", "Shetland Sheepdog": "Perros pastores", "Pastor Garafiano": "Perros pastores", "Pastor Polaco de las llanuras": "Perros pastores", "Perro de pastor Mallorquín": "Perros pastores", "Perro Leonés de Pastor": "Perros pastores", "Perro Lobo Checoslovaco": "Perros pastores", "Perro Pastor Blanco Suizo": "Perros pastores", "Perro Pastor Catalán o gos d'atura": "Perros pastores", "Perro Pastor Vasco": "Perros pastores", "Puli Húngaro": "Perros pastores", "Pastor Alemán": "Perros pastores", "Rough Collie (Pastor Escocés)": "Perros pastores", "Schipperke": "Perros pastores", "Boyero de Flandes": "Boyeros", "Pastor Ganadero Australiano": "Boyeros", "Affenpinscher": "Pinscher y schnauzer", "Dóberman": "Pinscher y schnauzer", "Perro mini Pinscher": "Pinscher y schnauzer", "Pinscher Alemán": "Pinscher y schnauzer", "Schnauzer": "Pinscher y schnauzer", "Schnauzer Gigante": "Pinscher y schnauzer", "Schnauzer Miniatura": "Pinscher y schnauzer", "Bóxer": "Molosos tipo dogo", "Bulldog": "Molosos tipo dogo", "Bullmastiff": "Molosos tipo dogo", "Dogo Argentino": "Molosos tipo dogo", "Dogo de Burdeos": "Molosos tipo dogo", "Mastín Inglés (o Mastiff)": "Molosos tipo dogo", "Mastín Napolitano": "Molosos tipo dogo", "Perro Cane Corso (Mastín Italiano)": "Molosos tipo dogo", "Gran Danés": "Molosos tipo dogo", "Rottweiler": "Molosos tipo dogo", "Shar Pei": "Molosos tipo dogo", "Hovawart": "Molosos de montaña", "Leonberger": "Molosos de montaña", "Mastín Español": "Molosos de montaña", "Mastín Tibetano": "Molosos de montaña", "Pastor de Anatolia": "Molosos de montaña", "Perro de montaña de los Pirineos": "Molosos de montaña", "Perro Pastor del Cáucaso": "Molosos de montaña", "Perro Serra da Estrela": "Molosos de montaña", "San Bernardo": "Molosos de montaña", "Terranova o Newfoundland": "Molosos de montaña", "Boyero de Berna": "Boyeros suizos", "Terrier de Airedale": "Terriers grandes y medianos", "Bedlington Terrier": "Terriers grandes y medianos", "Border Terrier": "Terriers grandes y medianos", "Fox Terrier de pelo duro": "Terriers grandes y medianos", "Fox Terrier de pelo liso": "Terriers grandes y medianos", "Kerry Blue Terrier": "Terriers grandes y medianos", "Lakeland Terrier": "Terriers grandes y medianos", "Manchester Terrier": "Terriers grandes y medianos", "Parson Jack Russell Terrier": "Terriers grandes y medianos", "Soft Coated Wheaten Terrier": "Terriers grandes y medianos", "Australian Terrier": "Terriers pequeños", "Bodeguero Andaluz": "Terriers pequeños", "Cairn Terrier": "Terriers pequeños", "Dandie Dinmont Terrier": "Terriers pequeños", "Ratonero Valenciano": "Terriers pequeños", "Sealyham Terrier": "Terriers pequeños", "Skye Terrier": "Terriers pequeños", "Terrier Checo": "Terriers pequeños", "Terrier Escocés": "Terriers pequeños", "West Highland White Terrier": "Terriers pequeños", "American Staffordshire Terrier": "Terriers tipo bull", "Bull Terrier miniatura": "Terriers tipo bull", "Perro Bull Terrier": "Terriers tipo bull", "Pitbull Terrier Americano": "Terriers tipo bull", "Staffordshire Bull Terrier": "Terriers tipo bull", "Silky Terrier Australiano": "Terriers de compañía", "Yorkshire Terrier": "Terriers de compañía", "Husky Siberiano": "Nórdicos de trineo", "Malamute de Alaska": "Nórdicos de trineo", "Perro de Groenlandia": "Nórdicos de trineo", "Samoyedo": "Nórdicos de trineo", "Cazador de Alces Noruego (elkhound noruego)": "Nórdicos de caza", "Spitz Finlandés": "Nórdicos de caza", "Buhund Noruego": "Nórdicos de guarda y pastoreo", "Pastor Lapón de Suecia": "Nórdicos de guarda y pastoreo", "Perro Finlandés de Laponia": "Nórdicos de guarda y pastoreo", "Keeshond": "Spitz europeos", "Spitz Alemán Mediano": "Spitz europeos", "Spitz Alemán Pequeño": "Spitz europeos", "Pomerania": "Spitz europeos", "Perro Esquimal Americano": "Spitz europeos", "Akita Japonés": "Spitz asiáticos", "Chow Chow": "Spitz asiáticos", "Shiba Inu Japonés": "Spitz asiáticos", "Spitz Japonés": "Spitz asiáticos", "Basenji": "Tipo primitivo", "Perro de Canaán": "Tipo primitivo", "Perro del Faraón": "Tipo primitivo", "Xoloitzcuintle (mediano)": "Tipo primitivo", "Podenco Canario": "Primitivos de caza (podencos)", "Podenco Ibicenco": "Primitivos de caza (podencos)", "Podenco Maneto": "Primitivos de caza (podencos)", "Podenco Portugués": "Primitivos de caza (podencos)", "Bloodhound": "Sabuesos grandes", "Foxhound": "Sabuesos grandes", "Gran Azul de Gascuña": "Sabuesos grandes", "Otterhound": "Sabuesos grandes", "Hamilton Stövare": "Sabuesos medianos", "Sabueso Español": "Sabuesos medianos", "Basset Azul de Gascuña": "Sabuesos pequeños (bassets y beagle)", "Basset Grifón Vandeano": "Sabuesos pequeños (bassets y beagle)", "Basset Hound": "Sabuesos pequeños (bassets y beagle)", "Basset Leonado de Bretaña": "Sabuesos pequeños (bassets y beagle)", "Beagle": "Sabuesos pequeños (bassets y beagle)", "Sabueso Bávaro de Montaña": "Sabuesos de rastro", "Crestado Rodesiano": "Razas semejantes", "Dálmata": "Razas semejantes", "Bracco Italiano": "Continentales tipo braco", "Braco Alemán": "Continentales tipo braco", "Braco Húngaro": "Continentales tipo braco", "Braco Húngaro (pelo duro)": "Continentales tipo braco", "El Perro Pachón Navarro": "Continentales tipo braco", "Perdiguero de Burgos": "Continentales tipo braco", "Perdiguero Portugués": "Continentales tipo braco", "Braco de Weimar": "Continentales tipo braco", "Bretón": "Continentales tipo spaniel", "Münsterländer (grande)": "Continentales tipo spaniel", "Spaniel Holandés": "Continentales tipo spaniel", "Spinone Italiano": "Continentales tipo grifón", "Perro Pointer Inglés": "Pointer", "Setter Escocés": "Setters", "Setter Inglés": "Setters", "Setter Irlandés": "Setters", "Setter Irlandés Rojo y Blanco": "Setters", "Cobrador de Nueva Escocia": "Cobradores (retrievers)", "Golden Retriever": "Cobradores (retrievers)", "Labrador Retriever": "Cobradores (retrievers)", "Retriever de Chesapeake": "Cobradores (retrievers)", "Retriever de pelo liso": "Cobradores (retrievers)", "Retriever de pelo rizado": "Cobradores (retrievers)", "Clumber Spaniel": "Levantadores (spaniels)", "Cocker Spaniel": "Levantadores (spaniels)", "Cocker Spaniel Americano": "Levantadores (spaniels)", "Field Spaniel": "Levantadores (spaniels)", "Springer Spaniel Galés": "Levantadores (spaniels)", "Springer Spaniel Inglés": "Levantadores (spaniels)", "Sussex Spaniel": "Levantadores (spaniels)", "Perro de Agua Español": "Perros de agua", "Perro de agua irlandés": "Perros de agua", "Perro de Agua Portugués": "Perros de agua", "Bichón Maltés": "Bichones y similares", "Cotón de Tulear": "Bichones y similares", "Habanero": "Bichones y similares", "Löwchen": "Bichones y similares", "Caniche Enano": "Caniches", "Grifón de Bruselas": "Belgas pequeños", "Crestado Chino": "Sin pelo", "Lhasa Apso": "Tibetanos", "Shih Tzu": "Tibetanos", "Spaniel Tibetano": "Tibetanos", "Terrier Tibetano": "Tibetanos", "Cavalier King Charles Spaniel": "Spaniels de compañía", "King Charles Spaniel": "Spaniels de compañía", "Chin Japonés": "Spaniels de compañía", "Papillón": "Spaniels de compañía", "Boston Terrier": "Molosos pequeños", "Bulldog Francés": "Molosos pequeños", "Carlino": "Molosos pequeños", "Afgano": "Lebreles de pelo largo", "Borzoi": "Lebreles de pelo largo", "Saluki (galgo persa)": "Lebreles de pelo largo", "Lebrel Escocés": "Lebreles de pelo duro", "Lobero Irlandés": "Lebreles de pelo duro", "Galgo": "Lebreles de pelo corto", "Galgo Italiano": "Lebreles de pelo corto", "Sloughi (galgo árabe)": "Lebreles de pelo corto", "Whippet": "Lebreles de pelo corto", "Teckel (pelo largo)": "Teckel estándar", "Teckel (pelo duro)": "Teckel estándar", "Teckel (pelo liso)": "Teckel estándar", "Teckel miniatura": "Teckel miniatura"};
+function vzAddFci(){
+  let n = 0;
+  (function walk(ns){ ns.forEach(d=>{
+    if(d.type === 'folder') return walk(d.children || []);
+    if(d.mode !== 'barajado' || d.fciDone || !/razas de perros/i.test(d.name || '')) return;
+    const hits = (d.photos || []).filter(p=> VZ_FCI[(p.label || '').trim()]);
+    if(hits.length < 20) return;
+    d.tagCats = d.tagCats || [];
+    let cat = d.tagCats.find(c=> c.id === 'cat_seccion' || c.name.toLowerCase() === 'sección');
+    if(!cat){ cat = { id: 'cat_seccion', name: 'Sección' }; d.tagCats.push(cat); }
+    hits.forEach(p=>{ if(!tagVals(p, cat.id).length) setTagVals(p, cat.id, [VZ_FCI[p.label.trim()]]); });
+    if(!d.vzSub) d.vzSub = cat.id;
+    d.fciDone = true; n++;
+  }); })(tree);
+  if(n) saveLocal();
+}
 /* la app arranca directamente aquí */
-{ const _boot = boot; boot = async function(){ vzOpen(); try{ return await _boot.apply(this, arguments); }finally{ if(!vzHostKey) vzRender(); } }; }
+{ const _boot = boot; boot = async function(){ vzOpen(); try{ return await _boot.apply(this, arguments); }finally{ try{ vzAddFci(); }catch(e){} if(!vzHostKey) vzRender(); } }; }
 
 /* ---------- puente para la pizarra ---------- */
 window.seterraApi = {
