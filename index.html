@@ -1065,8 +1065,8 @@ body.pz-open{overflow:hidden;}
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.3;
   -webkit-user-select:none;user-select:none;--vzdot:rgba(0,0,0,.2);--vzpanel:rgba(255,255,255,.94);--vzb:rgba(0,0,0,.09);--vzh:rgba(0,0,0,.06);--vzsel:#2f8cf5;}
 #vz.open{display:flex;flex-direction:column;}
-#vz :is(.vz-top,.vz-body,#vz-pop) :is(button,input){font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0;}
-#vz :is(.vz-top,.vz-body,#vz-pop) svg{display:block;}
+#vz :where(.vz-top,.vz-body,#vz-pop) :where(button,input){font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0;}
+#vz :where(.vz-top,.vz-body,#vz-pop) svg{display:block;}
 .vz-top{display:flex;flex-wrap:wrap;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 10px 8px 10px;align-items:center;flex-shrink:0;z-index:2;}
 .vz-bar{display:flex;align-items:center;gap:2px;background:var(--vzpanel);border-radius:22px;padding:4px;box-shadow:0 2px 14px rgba(0,0,0,.12),0 0 0 .5px var(--vzb);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);min-width:0;}
 .vz-b{height:36px;min-width:36px;padding:0 10px !important;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;}
@@ -1326,6 +1326,39 @@ body.vz-main #vz-toggle{display:none;}
 .vz-fh{padding-right:112px;}
 #vz > .view .win-tb .smallbtn,#vz > .view .win-tb .tree-menu-btn{border-radius:16px;background:rgba(0,0,0,.06);padding:7px 14px;font-weight:600;border:0;}
 #vz > .view .win-tb .smallbtn.strong{background:#1c1c1e;color:#fff;}
+
+/* pestañas Mazos / Notas */
+.vz-tabs{padding:4px;}
+#vz .vz-tab{height:36px;padding:0 16px;border-radius:18px;font-weight:600;opacity:.6;}
+#vz .vz-tab.on{background:#1c1c1e;color:#fff;opacity:1;}
+/* módulos / lista */
+.vz-seg{display:inline-flex;background:rgba(0,0,0,.06);border-radius:16px;padding:3px;gap:2px;}
+#vz .vz-seg button{width:34px;height:28px;border-radius:13px;display:flex;align-items:center;justify-content:center;opacity:.55;}
+#vz .vz-seg button svg{width:17px;height:17px;}
+#vz .vz-seg button.on{background:#fff;opacity:1;box-shadow:0 1px 3px rgba(0,0,0,.15);}
+.vz-chips .vz-fsp{flex:1;}
+.vz-mos.plain{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));}
+.vz-tile.plain{min-height:96px;}
+.vz-tile.plain b{font-size:18px;padding-right:26px;}
+.vz-tile.doc{border:1px solid rgba(0,0,0,.08);}
+.vz-ll{background:#fff;border-radius:14px;box-shadow:0 1px 4px rgba(0,0,0,.12);overflow:hidden;margin-bottom:20px;}
+.vz-lr{display:flex;align-items:center;gap:10px;padding:9px 8px 9px calc(8px + var(--d) * 26px);border-bottom:.5px solid rgba(0,0,0,.08);cursor:pointer;min-height:46px;box-sizing:border-box;}
+.vz-lr:last-child{border-bottom:0;}
+.vz-lr:hover{background:rgba(0,0,0,.035);}
+.vz-disc{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0;opacity:.55;}
+.vz-disc svg{width:15px;height:15px;transition:transform .15s;}
+.vz-disc.on svg{transform:rotate(90deg);}
+.vz-disc:hover{background:rgba(0,0,0,.07);opacity:1;}
+.vz-disc.sp{visibility:hidden;}
+.vz-sw{width:18px;height:18px;border-radius:5px;flex-shrink:0;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.15);}
+.vz-sw.f{clip-path:polygon(0 14%,40% 14%,50% 0,100% 0,100% 100%,0 100%);width:22px;border-radius:3px;}
+.vz-lr .nm{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.vz-lr .sb{font-size:13px;opacity:.5;white-space:nowrap;}
+.vz-lmore{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700;font-size:18px;letter-spacing:-1px;opacity:.5;flex-shrink:0;}
+.vz-lmore:hover{background:rgba(0,0,0,.07);opacity:1;}
+@media (max-width:600px){ .vz-lr .sb{display:none;}
+  .vz-top{gap:6px;} .vz-tabs{order:0;} .vz-search{order:1;flex:1 1 0 !important;min-width:0 !important;} .vz-pzb{order:2;} .vz-nav{order:3;flex:1 1 100%;} .vz-nav .vz-crumb{max-width:none;flex:1;}
+  #vz .vz-tab{padding:0 12px;} }
 
 </style>
 </head>
@@ -6230,9 +6263,10 @@ const VZICO = {
 function vzBuild(){
   vzEl = document.createElement('div'); vzEl.id = 'vz';
   vzEl.innerHTML = `<div class="vz-top">
-      <div class="vz-bar"><button class="vz-b" data-v="back" aria-label="Atrás">${VZICO.back}</button><button class="vz-b" data-v="fwd" aria-label="Adelante">${VZICO.fwd}</button><button class="vz-b" data-v="home" aria-label="Inicio">${VZICO.home}</button><div class="vz-crumb"></div></div>
+      <div class="vz-bar vz-tabs"><button class="vz-tab" data-tab="mazos">Mazos</button><button class="vz-tab" data-tab="notas">Notas</button></div>
+      <div class="vz-bar vz-nav"><button class="vz-b" data-v="back" aria-label="Atrás">${VZICO.back}</button><button class="vz-b" data-v="fwd" aria-label="Adelante">${VZICO.fwd}</button><button class="vz-b" data-v="home" aria-label="Inicio">${VZICO.home}</button><div class="vz-crumb"></div></div>
       <div class="vz-bar vz-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px;opacity:.6;flex-shrink:0"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input type="search" placeholder="buscar tarjeta, etiqueta…" autocomplete="off" spellcheck="false"></div>
-      <div class="vz-bar"><button class="vz-b" data-v="pz" title="Pizarra" aria-label="Pizarra">${VZICO.pz}</button></div>
+      <div class="vz-bar vz-pzb"><button class="vz-b" data-v="pz" title="Pizarra" aria-label="Pizarra">${VZICO.pz}</button></div>
     </div>
     <div class="vz-body"></div>`;
   document.body.appendChild(vzEl);
@@ -6273,13 +6307,14 @@ function vzCrumb(){
   const s = vzCur(), c = vzEl.querySelector('.vz-crumb');
   const parts = [];
   const node = s.id ? (vzIsNotes(s) ? findNotaNode(s.id) : findNode(s.id)) : null;
-  if(s.t === 'root') parts.push('BIBLIOTECA');
+  const home = vzTab === 'notas' ? 'NOTAS' : 'MAZOS';
+  vzEl.querySelectorAll('.vz-tab').forEach(b=> b.classList.toggle('on', b.dataset.tab === vzTab));
+  if(s.t === 'root' || (s.t === 'notes' && !s.id)) parts.push(home);
   else {
-    parts.push(`<a data-v="home">BIBLIOTECA</a>`);
+    parts.push(`<a data-v="home">${home}</a>`);
     if(s.t === 'search') parts.push('Búsqueda');
     else if(vzIsNotes(s)){
-      if(!node) parts.push('Notas');
-      else { parts.push(`<a data-notes="">Notas</a>`); vzNotaPath(node.id).forEach(p=> parts.push(`<a data-notes="${p.id}">${escapeHtml(p.name)}</a>`)); parts.push(escapeHtml(node.name)); }
+      { vzNotaPath(node.id).forEach(p=> parts.push(`<a data-notes="${p.id}">${escapeHtml(p.name)}</a>`)); parts.push(escapeHtml(node.name)); }
     }
     else if(node){
       vzPath(node.id).forEach(p=> parts.push(`<a data-open="${p.id}">${escapeHtml(p.name)}</a>`));
@@ -6304,7 +6339,7 @@ function vzRender(anim){
   const s = vzCur(), y = anim ? 0 : vzBody.scrollTop;
   vzBody.className = 'vz-body' + (vzIsRad() ? ' root' : '');
   const node = s.id ? (vzIsNotes(s) ? findNotaNode(s.id) : findNode(s.id)) : null;
-  if(s.t !== 'root' && s.t !== 'search' && !(s.t === 'notes' && !s.id) && !node){ vzStack = [{ t: 'root' }]; vzPos = 0; return vzRender(true); }
+  if(s.t !== 'root' && s.t !== 'search' && !(s.t === 'notes' && !s.id) && !node){ vzStack = [vzTab === 'notas' ? { t: 'notes', id: null } : { t: 'root' }]; vzPos = 0; return vzRender(true); }
   if(s.t === 'edit'){ vzHost('b', 'edit:' + s.id + ':' + (s.cid || ''), ()=>{ vzOpenEditor(s.id); if(s.cid) setTimeout(()=>{ selectCard(s.cid); const el = document.querySelector(`#tarjetas-grid .card-item[data-id="${s.cid}"]`); if(el) el.scrollIntoView({ block: 'center' }); }, 60); }); return; }
   if(s.t === 'note'){ vzHost('n', 'note:' + s.id, ()=> vzOpenNote(s.id)); return; }
   vzUnhost();
@@ -6421,13 +6456,45 @@ function vzLibrary(node){
   const kids = node ? (node.children || []) : tree;
   let head;
   if(node) head = vzHeader(node);
-  else { let d = 0, c = 0; tree.forEach(n=>{ const st = vzStats(n); d += st.decks; c += st.cards; }); head = `<div class="vz-lh">Biblioteca<small>${d} mazos · ${c} tarjetas</small><button class="vz-hmore" data-libmenu="1" title="Importar, exportar, actualizar">⋯</button></div>`; }
+  else { let d = 0, c = 0; tree.forEach(n=>{ const st = vzStats(n); d += st.decks; c += st.cards; }); head = `<div class="vz-lh">Mazos<small>${d} mazos · ${c} tarjetas</small><button class="vz-hmore" data-libmenu="1" title="Importar, exportar, actualizar">⋯</button></div>`; }
   const pid = node ? node.id : '';
-  const add = `<div class="vz-chips"><button class="vz-chip" data-newfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-newdeck="${pid}">${VZICO.plus}Nuevo mazo</button></div>`;
-  const tiles = kids.map(k=> vzTile(vzNodeItem(k))).join('');
-  const nN = notas.reduce((a, n)=> a + countNotasLeaves(n), 0);
-  const notesSec = node ? '' : `<div class="vz-sech">Notas</div><div class="vz-mos"><button class="vz-tile notes" data-notes=""><b>Notas</b><small>${nN} ${nN === 1 ? 'documento' : 'documentos'}</small></button></div>`;
-  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? `<div class="vz-mos">${tiles}</div>` : `<div class="vz-empty">${node ? 'Carpeta vacía: crea dentro un mazo o una subcarpeta.' : 'Aún no hay mazos: crea el primero.'}</div>`}${notesSec}</div>`;
+  const add = `<div class="vz-chips"><button class="vz-chip" data-newfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-newdeck="${pid}">${VZICO.plus}Nuevo mazo</button><span class="vz-fsp"></span>${vzViewSeg('mazos')}</div>`;
+  const items = kids.map(vzDeckItem);
+  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? vzItems(items, 'mazos') : `<div class="vz-empty">${node ? 'Carpeta vacía: crea dentro un mazo o una subcarpeta.' : 'Aún no hay mazos: crea el primero.'}</div>`}</div>`;
+}
+/* ---------- módulos o lista, como las carpetas del ordenador ---------- */
+let vzTab = 'mazos';
+const vzTabState = { mazos: { stack: [{ t: 'root' }], pos: 0 }, notas: { stack: [{ t: 'notes', id: null }], pos: 0 } };
+let vzLibView = { mazos: 'grid', notas: 'grid' };
+try{ Object.assign(vzLibView, JSON.parse(localStorage.getItem('seterra_vz_lib') || '{}')); }catch(e){}
+function vzViewSeg(tab){ const v = vzLibView[tab]; return `<span class="vz-seg"><button data-libview="${tab}|grid" class="${v === 'grid' ? 'on' : ''}" title="Módulos">${VZICO.mosaic}</button><button data-libview="${tab}|list" class="${v === 'list' ? 'on' : ''}" title="Lista">${VZICO.list}</button></span>`; }
+function vzSwitchTab(tab){
+  if(tab === vzTab){ vzGo(tab === 'notas' ? { t: 'notes', id: null } : { t: 'root' }); return; }
+  vzTabState[vzTab] = { stack: vzStack, pos: vzPos };
+  vzTab = tab; vzStack = vzTabState[tab].stack; vzPos = vzTabState[tab].pos;
+  vzRender(true);
+}
+function vzDeckItem(n){
+  const f = n.type === 'folder';
+  return { id: n.id, name: n.name, sub: vzSub(n), color: vzColor(n), folder: f, open: `data-open="${n.id}"`, more: `data-more="${n.id}"`, toggle: `data-ltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(vzDeckItem) : null };
+}
+const VZ_NFOLD = '#c8b77e', VZ_NDOC = '#f2d45c';
+function vzNotaItem(n){
+  const f = n.type === 'folder', c = f ? countNotasLeaves(n) : 0;
+  return { id: n.id, name: n.name, sub: f ? c + (c === 1 ? ' documento' : ' documentos') : '', color: f ? VZ_NFOLD : VZ_NDOC, folder: f, doc: !f, open: `data-nopen="${n.id}"`, more: `data-nmore="${n.id}"`, toggle: `data-nltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(vzNotaItem) : null };
+}
+function vzItems(items, tab){
+  if(vzLibView[tab] === 'list') return `<div class="vz-ll">${vzListRows(items, 0)}</div>`;
+  return `<div class="vz-mos plain">${items.map(it=>{ const dark = vzIsDark(it.color);
+    return `<button class="vz-tile plain${it.folder ? ' kind-fold' : ''}${it.doc ? ' doc' : ''}" ${it.open} style="background:${it.color};color:${dark ? '#fff' : '#1c1c1e'}"><span class="vz-more" ${it.more} title="Opciones">⋯</span><b>${escapeHtml(it.name)}</b>${it.sub ? `<small>${escapeHtml(it.sub)}</small>` : ''}</button>`; }).join('')}</div>`;
+}
+function vzListRows(items, depth){
+  return items.map(it=> `<div class="vz-lr" role="button" ${it.open} style="--d:${depth}">
+      ${it.folder ? `<span class="vz-disc${it.expanded ? ' on' : ''}" ${it.toggle} title="${it.expanded ? 'Plegar' : 'Desplegar'}">${VZICO.fwd}</span>` : '<span class="vz-disc sp"></span>'}
+      <span class="vz-sw${it.folder ? ' f' : ''}" style="background:${it.color}"></span>
+      <span class="nm">${escapeHtml(it.name)}</span><span class="sb">${escapeHtml(it.sub)}</span>
+      <span class="vz-lmore" ${it.more} title="Opciones">⋯</span></div>`
+    + (it.folder && it.expanded ? vzListRows(it.kids(), depth + 1) : '')).join('');
 }
 /* al entrar en un mazo: su esquema (el mazo arriba y sus grupos colgando hacia abajo).
    Tocar un grupo abre la lista de ese grupo; tocar el mazo abre la lista con todos los grupos plegables. */
@@ -6624,11 +6691,12 @@ function vzColorPop(anchor, cur, onPick, onReset){
 /* ---------- toques ---------- */
 function vzClick(e){
   const t = e.target;
+  if(t.closest('#vz > .view')) return; // dentro de los editores mandan sus propios botones
   if(t.closest('#vz-pop')) return;
   const v = t.closest('[data-v]');
   if(v){ const a = v.dataset.v;
     if(a === 'back') vzBack(); if(a === 'fwd') vzFwd();
-    if(a === 'home'){ vzQ = ''; vzEl.querySelector('.vz-search input').value = ''; vzGo({ t: 'root' }); }
+    if(a === 'home'){ vzQ = ''; vzEl.querySelector('.vz-search input').value = ''; vzGo(vzTab === 'notas' ? { t: 'notes', id: null } : { t: 'root' }); }
     if(a === 'pz' && window.pizarra) window.pizarra.open();
     return; }
   const vm = t.closest('[data-vm]'); if(vm){ vzSetMode(vm.dataset.vm); vzRender(); return; }
@@ -6640,6 +6708,10 @@ function vzClick(e){
   if(x = t.closest('[data-more]')){ e.stopPropagation(); const n = findNode(x.dataset.more); if(n) vzMoreMenu(x, n); return; }
   if(x = t.closest('[data-nmore]')){ e.stopPropagation(); const n = findNotaNode(x.dataset.nmore); if(n) vzNotaMenu(x, n); return; }
   if(x = t.closest('[data-libmenu]')){ vzLibMenu(x); return; }
+  if(x = t.closest('.vz-tab[data-tab]')){ vzSwitchTab(x.dataset.tab); return; }
+  if(x = t.closest('[data-libview]')){ const [tb, v] = x.dataset.libview.split('|'); vzLibView[tb] = v; try{ localStorage.setItem('seterra_vz_lib', JSON.stringify(vzLibView)); }catch(err){} vzRender(); return; }
+  if(x = t.closest('[data-ltoggle]')){ const n = findNode(x.dataset.ltoggle); if(n){ n.expanded = !n.expanded; saveLocal(); vzRender(); } return; }
+  if(x = t.closest('[data-nltoggle]')){ const n = findNotaNode(x.dataset.nltoggle); if(n){ n.expanded = !n.expanded; saveLocalNotas(); vzRender(); } return; }
   if(x = t.closest('[data-notes]')){ vzGo({ t: 'notes', id: x.dataset.notes || null }); return; }
   if(x = t.closest('[data-nopen]')){ const n = findNotaNode(x.dataset.nopen); if(!n) return; vzGo(n.type === 'folder' ? { t: 'notes', id: n.id } : { t: 'note', id: n.id }); return; }
   if(x = t.closest('[data-nnewfolder]')){ promptNewNotaFolder(x.dataset.nnewfolder ? findNotaNode(x.dataset.nnewfolder) : null); return; }
@@ -6697,11 +6769,8 @@ function vzNotes(folder){
   const n = folder ? countNotasLeaves(folder) : notas.reduce((a, k)=> a + countNotasLeaves(k), 0);
   const pid = folder ? folder.id : '';
   const head = `<div class="vz-lh">${escapeHtml(folder ? folder.name : 'Notas')}<small>${n} ${n === 1 ? 'documento' : 'documentos'}</small>${folder ? `<button class="vz-hmore" data-nmore="${folder.id}" title="Opciones">⋯</button>` : ''}</div>`;
-  const add = `<div class="vz-chips"><button class="vz-chip" data-nnewfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-nnewdoc="${pid}">${VZICO.plus}Nuevo documento</button></div>`;
-  const tiles = kids.map(k=> k.type === 'folder'
-    ? `<button class="vz-tile nfold kind-fold" data-nopen="${k.id}"><span class="vz-more" data-nmore="${k.id}" title="Opciones">⋯</span><b>${escapeHtml(k.name)}</b><small>${countNotasLeaves(k)} documentos</small></button>`
-    : `<button class="vz-tile doc" data-nopen="${k.id}"><span class="vz-more" data-nmore="${k.id}" title="Opciones">⋯</span><span class="pv">${escapeHtml(vzPlain(k.content).slice(0, 260))}</span><span><b>${escapeHtml(k.name)}</b></span></button>`).join('');
-  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? `<div class="vz-mos">${tiles}</div>` : `<div class="vz-empty">${folder ? 'Carpeta vacía.' : 'Aún no hay notas: crea el primer documento.'}</div>`}</div>`;
+  const add = `<div class="vz-chips"><button class="vz-chip" data-nnewfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-nnewdoc="${pid}">${VZICO.plus}Nuevo documento</button><span class="vz-fsp"></span>${vzViewSeg('notas')}</div>`;
+  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? vzItems(kids.map(vzNotaItem), 'notas') : `<div class="vz-empty">${folder ? 'Carpeta vacía.' : 'Aún no hay notas: crea el primer documento.'}</div>`}</div>`;
 }
 /* ---------- editores dentro de la vista ---------- */
 let vzHostKey = null, vzOpening = false;
@@ -6780,7 +6849,7 @@ function vzResetTo(stack){ vzStack = stack; vzPos = stack.length - 1; vzRender(t
 { const _dn = deleteNode; deleteNode = function(node){ const par = vzParentOf(node.id), r = _dn.apply(this, arguments);
   if(vzEl && !findNode(node.id)){ const st = [{ t: 'root' }]; if(par) vzPath(par.id).concat([par]).forEach(p=> st.push({ t: 'folder', id: p.id })); vzUnhost(); vzResetTo(st); } return r; }; }
 { const _dd = deleteNotaNode; deleteNotaNode = function(node){ const par = vzNotaParent(node.id), r = _dd.apply(this, arguments);
-  if(vzEl && !findNotaNode(node.id)){ const st = [{ t: 'root' }, { t: 'notes', id: null }]; if(par) vzNotaPath(par.id).concat([par]).forEach(p=> st.push({ t: 'notes', id: p.id })); vzUnhost(); vzResetTo(st); } return r; }; }
+  if(vzEl && !findNotaNode(node.id)){ const st = [{ t: 'notes', id: null }]; if(par) vzNotaPath(par.id).concat([par]).forEach(p=> st.push({ t: 'notes', id: p.id })); vzUnhost(); vzResetTo(st); } return r; }; }
 /* la partida ocupa toda la pantalla; al terminar se vuelve a donde estabas */
 { const _pt = playTema; playTema = function(){ if(vzEl){ vzClosePop(); vzEl.classList.add('away'); } return _pt.apply(this, arguments); }; }
 { const _bd = backToDecks; backToDecks = function(){ const r = _bd.apply(this, arguments); if(vzEl){ vzEl.classList.remove('away'); if(!vzHostKey) vzRender(); } return r; }; }
@@ -6806,7 +6875,7 @@ window.seterraApi = {
     return { name: n.name, color: vzColor(n), count: vzDeckCount(n), groups: vzGroups(n, catId).filter(g=> g.cards.length).map(g=> ({ name: g.name, color: g.color, note: g.note, cards: g.cards.map(p=> ({ cid: p.id, name: vzLabel(p) })) })) };
   },
   overview(){ return tree.map(n=> ({ name: n.name, sub: vzSub(n), color: vzColor(n), children: n.type === 'folder' ? (n.children || []).map(k=> ({ name: k.name, color: vzColor(k) })) : vzGroups(n.mode === 'barajado' ? n : { photos: [] }).filter(g=> g.name).map(g=> ({ name: g.name, color: g.color })) })); },
-  showCard(deck, cid){ vzOpen(); const n = findNode(deck); if(n && (n.photos || []).some(p=> p.id === cid)) vzGo({ t: 'card', id: deck, cid }); },
+  showCard(deck, cid){ vzOpen(); if(vzTab !== 'mazos') vzSwitchTab('mazos'); const n = findNode(deck); if(n && (n.photos || []).some(p=> p.id === cid)) vzGo({ t: 'card', id: deck, cid }); },
   toast: m=> toast(m),
   onClose(){ if(vzEl && vzEl.classList.contains('open')) vzRender(); }
 };
