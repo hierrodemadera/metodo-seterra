@@ -1060,6 +1060,20 @@ body.pz-open{overflow:hidden;}
 .pz-card.gone{opacity:.5;font-style:italic;}
 .pz-th{width:40px;height:40px;border-radius:8px;flex-shrink:0;background:#f2f2f4 center/cover no-repeat;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);}
 
+/* enlaces */
+.pz-it.has-link::after{content:"";position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:#2f8cf5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1'/%3E%3Cpath d='M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1'/%3E%3C/svg%3E") center/13px no-repeat;box-shadow:0 1px 3px rgba(0,0,0,.3);pointer-events:none;}
+.pz-pick{max-height:min(70vh,520px);display:flex;flex-direction:column;min-width:280px;}
+.pz-pick .pz-mlist{overflow:auto;flex:1;min-height:0;}
+.pz-msearch{margin:4px 8px 6px;padding:8px 10px;border-radius:10px;border:1px solid rgba(0,0,0,.12);font:inherit;font-size:15px;outline:none;}
+/* visor fijo del esquema (en la página del mazo) */
+.pzv{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab;}
+.pzv:active{cursor:grabbing;}
+.pzv-world{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0;}
+.pzv .pzv-go{cursor:pointer;}
+.pzv .pz-line .hit,.pzv .pz-ink .hit{pointer-events:none;}
+.pzv-tools{position:absolute;right:10px;bottom:10px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:90%;}
+.pzv-tools button{height:34px;min-width:34px;padding:0 12px;border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 1px 6px rgba(0,0,0,.18);font:inherit;font-size:15px;font-weight:600;border:0;color:#1c1c1e;cursor:pointer;}
+
 /* ===== CARA VISUAL (estética Freeform) ===== */
 #vz{position:fixed;inset:0;z-index:45;display:none;background:#fff;color:#1c1c1e;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.3;
@@ -1359,6 +1373,50 @@ body.vz-main #vz-toggle{display:none;}
 @media (max-width:600px){ .vz-lr .sb{display:none;}
   .vz-top{gap:6px;} .vz-tabs{order:0;} .vz-search{order:1;flex:1 1 0 !important;min-width:0 !important;} .vz-pzb{order:2;} .vz-nav{order:3;flex:1 1 100%;} .vz-nav .vz-crumb{max-width:none;flex:1;}
   #vz .vz-tab{padding:0 12px;} }
+
+/* ===== página del mazo: esquema / mosaico / lista ===== */
+.vz-seg.big{padding:3px;}
+#vz .vz-seg.big button{width:40px;height:32px;border-radius:15px;}
+#vz .vz-seg.big button.on{background:var(--vzsel);color:#fff;opacity:1;}
+.vz-grp{margin-top:-2px;}
+.vz-chips .sep{width:1px;height:22px;background:rgba(0,0,0,.12);margin:0 4px;}
+.vz-radw{position:relative;margin:6px -12px 0;min-height:420px;}
+.vz-radw.custom{margin:6px 0 0;border-radius:16px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.12);overflow:hidden;}
+#vz .vz-root{position:absolute;border-radius:50%;background:#1c1c1e;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:800;line-height:1.1;box-shadow:0 2px 8px rgba(0,0,0,.25);padding:6px !important;}
+#vz .vz-root small{font-size:.42em;font-weight:500;opacity:.8;margin-top:4px;}
+.vz-mos.groups{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
+.vz-mos.groups .vz-tile{min-height:120px;}
+.vz-gl{max-width:900px;margin:8px auto 20px;}
+.vz-gl .vz-lr{padding:12px 14px;min-height:58px;}
+.vz-gl .vz-lr .nm{font-size:17px;}
+.vz-sw.big{width:26px;height:26px;border-radius:7px;}
+/* lista con todos los grupos plegables */
+.vz-folds{background:#fff;border-radius:14px;box-shadow:0 1px 4px rgba(0,0,0,.12);overflow:hidden;margin:6px 0 24px;}
+.vz-folds .vz-gsec{border-bottom:.5px solid rgba(0,0,0,.09);margin:0;}
+.vz-folds .vz-gsec:last-child{border-bottom:0;}
+.vz-folds .vz-fold{display:flex;align-items:center;gap:12px;padding:12px 10px 12px 12px;background:none !important;border-radius:0;cursor:pointer;min-height:56px;box-sizing:border-box;}
+.vz-folds .vz-fold:hover{background:rgba(0,0,0,.03) !important;}
+.vz-folds .vz-fchev{width:22px;height:22px;opacity:.5;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.vz-folds .vz-fchev svg{width:16px;height:16px;transition:transform .15s;}
+.vz-folds .vz-fold.open .vz-fchev svg{transform:rotate(90deg);}
+.vz-fname{font-weight:600;font-size:17px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.vz-fcount{font-size:15px;opacity:.5;font-variant-numeric:tabular-nums;}
+#vz .vz-folds .vz-fgo{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#vz .vz-folds .vz-fgo:hover{background:rgba(0,0,0,.06);}
+.vz-folds .vz-note-t{margin:0 16px 8px 70px;}
+.vz-cbody{padding:2px 14px 16px 70px;}
+.vz-subh{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin:14px 0 6px;}
+.vz-subh i{width:10px;height:10px;border-radius:3px;}
+.vz-subh small{font-weight:500;opacity:.6;letter-spacing:0;}
+.vz-cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 14px;}
+#vz .vz-cm{display:flex;align-items:center;gap:10px;padding:5px 6px !important;border-radius:10px;text-align:left;min-width:0;}
+#vz .vz-cm:hover{background:rgba(0,0,0,.05);}
+.vz-cmi{width:42px;height:42px;border-radius:9px;flex-shrink:0;background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#f2f2f4;}
+.vz-cm .nm{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+.vz-fam > .vz-cbody{padding:6px 0 20px;}
+@media (max-width:600px){ .vz-cbody{padding:2px 10px 14px 12px;} .vz-folds .vz-note-t{margin-left:14px;} .vz-cgrid{grid-template-columns:1fr 1fr;} .vz-fname{font-size:16px;} }
+.vz-folds .vz-fold.open .vz-fchev{transform:none !important;}
+#vz .vz-root{line-height:1.05;word-break:break-word;}
 
 </style>
 </head>
@@ -6294,7 +6352,7 @@ function vzFwd(){ if(vzPos < vzStack.length - 1){ vzPos++; vzRender(true); } }
 function vzOpen(){ if(!vzEl) vzBuild(); vzEl.classList.add('open'); document.body.classList.add('vz-on'); vzSetTog(); vzRender(true); }
 function vzClose(){ if(vzEl) vzEl.classList.remove('open'); vzClosePop(); document.body.classList.remove('vz-on'); vzSetTog(); }
 /* pantallas que se pueden ver como esquema radial */
-function vzIsRad(){ return false; }
+function vzIsRad(){ const s = vzCur(); if(s.t !== 'deck') return false; const n = findNode(s.id); return !!(n && n.mode === 'barajado' && vzDeckView(n) === 'scheme'); }
 function vzIsRadOld(){
   const s = vzCur(); if(vzMode !== 'radial') return false;
   if(s.t === 'root') return tree.length > 0 && tree.length <= 14;
@@ -6337,7 +6395,7 @@ function vzGroupName(node, v){ const g = vzGroups(node).find(x=> x.v === v); ret
 function vzRender(anim){
   vzCrumb(); vzClosePop();
   const s = vzCur(), y = anim ? 0 : vzBody.scrollTop;
-  vzBody.className = 'vz-body' + (vzIsRad() ? ' root' : '');
+  vzBody.className = 'vz-body';
   const node = s.id ? (vzIsNotes(s) ? findNotaNode(s.id) : findNode(s.id)) : null;
   if(s.t !== 'root' && s.t !== 'search' && !(s.t === 'notes' && !s.id) && !node){ vzStack = [vzTab === 'notas' ? { t: 'notes', id: null } : { t: 'root' }]; vzPos = 0; return vzRender(true); }
   if(s.t === 'edit'){ vzHost('b', 'edit:' + s.id + ':' + (s.cid || ''), ()=>{ vzOpenEditor(s.id); if(s.cid) setTimeout(()=>{ selectCard(s.cid); const el = document.querySelector(`#tarjetas-grid .card-item[data-id="${s.cid}"]`); if(el) el.scrollIntoView({ block: 'center' }); }, 60); }); return; }
@@ -6496,20 +6554,70 @@ function vzListRows(items, depth){
       <span class="vz-lmore" ${it.more} title="Opciones">⋯</span></div>`
     + (it.folder && it.expanded ? vzListRows(it.kids(), depth + 1) : '')).join('');
 }
-/* al entrar en un mazo: su esquema (el mazo arriba y sus grupos colgando hacia abajo).
-   Tocar un grupo abre la lista de ese grupo; tocar el mazo abre la lista con todos los grupos plegables. */
+/* subgrupos: una segunda categoría que reparte las tarjetas de cada grupo */
+function vzSubCat(node){
+  if(!node.vzSub) return null;
+  const main = vzCat(node), c = tagCat(node, node.vzSub);
+  return c && (!main || c.id !== main.id) && valuesOf(node, c.id, node.photos || []).length ? c : null;
+}
+function vzSplit(node, cards, cat){
+  const out = valuesOf(node, cat.id, cards).map(v=> ({ v, name: v, color: tagColor(node, cat.id, v), cards: cards.filter(p=> tagVals(p, cat.id).includes(v)) }));
+  const none = cards.filter(p=> !tagVals(p, cat.id).length);
+  if(none.length) out.push({ v: TAG_NONE, name: 'Sin ' + cat.name.toLowerCase(), color: '#8e8e93', cards: none });
+  return out;
+}
+function vzDeckView(node){ return ['scheme', 'mosaic', 'list'].includes(node.vzView) ? node.vzView : 'scheme'; }
+/* la página del mazo: esquema, mosaico o lista de sus grupos (solo aquí se cambia la vista) */
 function vzDeckHome(node){
   const cat = vzCat(node), groups = vzGroups(node).filter(g=> g.cards.length);
   if(!cat || groups.length < 2) return vzDeck(node);
-  const col = vzColor(node), dark = vzIsDark(col);
-  const lis = groups.map(g=> `<li><button class="vt-n gr" data-grp="${node.id}|${encodeURIComponent(vzGKey(g))}" style="background:${vzMix(g.color, .5)};--gc:${g.color}"><b>${escapeHtml(g.name)}</b><small>${g.cards.length}</small></button></li>`).join('');
-  vzBody.innerHTML = `<div class="vz-fam">${vzHeader(node, vzDeckActions(node))}
-    <div class="vt-wrap in"><div class="vt">
-      <button class="vt-n vt-root" data-all="${node.id}" style="background:${col};color:${dark ? '#fff' : '#1c1c1e'}"><b>${escapeHtml(node.name)}</b><small>Todos los grupos · ${vzDeckCount(node)} tarjetas</small></button>
-      <ul class="vt-sub">${lis}</ul>
-    </div><p class="vt-hint">Toca un grupo para ver sus tarjetas, o el mazo para verlos todos en lista (plegables).</p></div></div>`;
+  const view = vzDeckView(node), enc = g=> encodeURIComponent(vzGKey(g));
+  let body = '';
+  if(view === 'scheme') body = `<div class="vz-radw" id="vz-radw"></div>`;
+  else if(view === 'mosaic') body = `<div class="vz-mos plain groups">${groups.map(g=> `<button class="vz-tile plain" data-grp="${node.id}|${enc(g)}" style="background:${g.color};color:${vzIsDark(g.color) ? '#fff' : '#1c1c1e'}"><b>${escapeHtml(g.name)}</b><small>${g.cards.length} tarjetas</small></button>`).join('')}</div>`;
+  else body = `<div class="vz-ll vz-gl">${groups.map(g=> `<div class="vz-lr" role="button" data-grp="${node.id}|${enc(g)}" style="--d:0"><span class="vz-sw big" style="background:${g.color}"></span><span class="nm">${escapeHtml(g.name)}</span><span class="sb">${g.cards.length} tarjetas</span>${VZICO.chev}</div>`).join('')}</div>`;
+  vzBody.innerHTML = `<div class="vz-fam${view === 'scheme' ? ' vz-schemepage' : ''}">${vzHeader(node, vzDeckActions(node, true))}${body}</div>`;
+  if(view === 'scheme') vzFillScheme(node, groups);
 }
-
+function vzFillScheme(node, groups){
+  const el = document.getElementById('vz-radw'); if(!el) return;
+  const H = Math.max(420, vzBody.clientHeight - (el.getBoundingClientRect().top - vzBody.getBoundingClientRect().top) - 12);
+  el.style.height = H + 'px';
+  const enc = g=> encodeURIComponent(vzGKey(g));
+  el.innerHTML = vzRadialHTML(node.name, vzDeckCount(node) + ' tarjetas', groups.map(g=> ({ attr: `data-grp="${node.id}|${enc(g)}"`, label: g.name, sub: g.cards.length + ' tarjetas', color: g.color })), vzColor(node), el.clientWidth, H, `data-all="${node.id}"`);
+  // si tiene un esquema hecho en la pizarra, se ve ese (fijo: solo se navega)
+  if(window.pizarra && window.pizarra.viewScheme) window.pizarra.viewScheme(node.id, el, {}).then(ok=>{ if(ok) el.classList.add('custom'); }).catch(()=>{});
+}
+function vzRadialHTML(center, sub, items, cc, W, H, centerAttr){
+  const n = items.length, portrait = H > W * 1.1;
+  const nw = Math.max(96, Math.min(200, W * (portrait ? .3 : .15))), nh = portrait ? 58 : 66;
+  const rx = Math.max(60, W/2 - nw/2 - 10), ry = Math.max(60, H/2 - nh/2 - 12), cx = W/2, cy = H/2;
+  const rr = Math.max(48, Math.min(96, Math.min(W, H) * .13));
+  let lines = '', nodes = '';
+  items.forEach((it, i)=>{
+    const a = -Math.PI/2 + i * 2 * Math.PI / n, x = cx + Math.cos(a) * rx, y = cy + Math.sin(a) * ry;
+    lines += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${it.color}" stroke-opacity=".6" stroke-width="2.5"/>`;
+    nodes += `<button class="vz-node" ${it.attr} style="left:${x - nw/2}px;top:${y - nh/2}px;width:${nw}px;height:${nh}px;background:${it.color};color:${vzIsDark(it.color) ? '#fff' : '#1c1c1e'};font-size:${Math.round((portrait ? 14 : 17) * (it.label.length > 30 ? .72 : it.label.length > 20 ? .84 : 1))}px">${escapeHtml(it.label)}<small>${escapeHtml(it.sub || '')}</small></button>`;
+  });
+  const dk = cc && vzIsDark(cc);
+  return `<svg class="vz-lines" viewBox="0 0 ${W} ${H}">${lines}</svg>${nodes}<button class="vz-root" ${centerAttr || ''} style="left:${cx - rr}px;top:${cy - rr}px;width:${rr*2}px;height:${rr*2}px;font-size:${Math.round(rr * (center.length > 18 ? .19 : center.length > 10 ? .23 : .3))}px${cc ? `;background:${cc};color:${dk ? '#fff' : '#1c1c1e'}` : ''}">${escapeHtml(center)}<small>${escapeHtml(sub)}</small></button>`;
+}
+/* seguir un enlace de un esquema o pizarra */
+function vzFollow(l){
+  if(!l) return;
+  if(l.k === 'note'){ if(!findNotaNode(l.id)) return toast('Esa nota ya no existe'); if(vzTab !== 'notas') vzSwitchTab('notas'); vzGo({ t: 'note', id: l.id }); return; }
+  if(vzTab !== 'mazos') vzSwitchTab('mazos');
+  const n = findNode(l.deck || l.id); if(!n) return toast('Ya no existe');
+  if(l.k === 'deck'){ vzGo({ t: n.type === 'folder' ? 'folder' : 'deck', id: n.id }); return; }
+  if(l.k === 'all'){ vzGo({ t: 'all', id: n.id }); return; }
+  if(l.k === 'card'){ if(!(n.photos || []).some(p=> p.id === l.cid)) return toast('Esa tarjeta ya no existe'); vzGo({ t: 'card', id: n.id, cid: l.cid }); return; }
+  if(l.k === 'group'){
+    if(l.cat && tagCat(n, l.cat) && (vzCat(n) || {}).id !== l.cat){ n.vzCat = l.cat; saveLocal(); }
+    const g = vzGroups(n).find(x=> vzGKey(x) === (l.v == null ? '' : l.v));
+    if(!g) return toast('Ese grupo ya no existe');
+    vzGo({ t: 'group', id: n.id, v: g.v });
+  }
+}
 /* ---------- pantallas ---------- */
 function vzRoot(){
   let d = 0, c = 0; tree.forEach(n=>{ const s = vzStats(n); d += s.decks; c += s.cards; });
@@ -6529,14 +6637,25 @@ function vzFolder(node){
   if(vzIsRad()){ vzRadial(node.name, vzSub(node), kids.map(k=> vzNodeItem(k)), vzColor(node)); return; }
   vzLayout(node.name, vzSub(node), kids.map(k=> vzNodeItem(k)), { head, empty: 'Carpeta vacía.' });
 }
-function vzDeckActions(node){
-  const cats = tagCats(node).filter(c=> valuesOf(node, c.id, node.photos || []).length), cur = vzCat(node);
+function vzDeckActions(node, home){
+  const cats = tagCats(node).filter(c=> valuesOf(node, c.id, node.photos || []).length), cur = vzCat(node), sub = vzSubCat(node), view = vzDeckView(node);
+  const hasGroups = cur && vzGroups(node).filter(g=> g.cards.length).length > 1;
+  const seg = home && hasGroups ? `<span class="vz-fsp"></span><span class="vz-seg big">${[['scheme', VZICO.tree, 'Esquema'], ['mosaic', VZICO.mosaic, 'Mosaico'], ['list', VZICO.list, 'Lista']].map(([v, ic, t])=> `<button data-dview="${v}" class="${view === v ? 'on' : ''}" title="${t}">${ic}</button>`).join('')}</span>` : '';
+  const subs = cur ? cats.filter(c=> c.id !== cur.id) : [];
   return `<div class="vz-chips">
     <button class="vz-chip vz-play" data-play="${node.id}">${VZICO.play}Jugar</button>
     <button class="vz-chip" data-edit="${node.id}">${VZICO.edit}Editar</button>
+    ${home && hasGroups && view === 'scheme' ? `<button class="vz-chip" data-scheme="${node.id}">${VZICO.tree}Editar esquema</button>` : ''}
     <button class="vz-chip" data-pzdeck="${node.id}">${VZICO.pz}A una pizarra</button>
-    ${cats.length ? `<span class="sep"></span><span class="vz-chl">Agrupar por</span>${cats.map(c=> `<button class="vz-chip${cur && cur.id === c.id ? ' on' : ''}" data-gcat="${c.id}">${escapeHtml(c.name)}</button>`).join('')}<button class="vz-chip${!cur ? ' on' : ''}" data-gcat="">Sin agrupar</button>` : ''}
-  </div>`;
+    ${home && hasGroups ? `<button class="vz-chip" data-all="${node.id}">${VZICO.list}Todas las tarjetas</button>` : ''}
+    ${seg}
+  </div>
+  ${cats.length ? `<div class="vz-chips vz-grp"><span class="vz-chl">Agrupar por</span>${cats.map(c=> `<button class="vz-chip${cur && cur.id === c.id ? ' on' : ''}" data-gcat="${c.id}">${escapeHtml(c.name)}</button>`).join('')}<button class="vz-chip${!cur ? ' on' : ''}" data-gcat="">Sin agrupar</button>
+    ${subs.length ? `<span class="sep"></span><span class="vz-chl">Subgrupos</span>${subs.map(c=> `<button class="vz-chip${sub && sub.id === c.id ? ' on' : ''}" data-scat="${c.id}">${escapeHtml(c.name)}</button>`).join('')}<button class="vz-chip${!sub ? ' on' : ''}" data-scat="">Ninguno</button>` : ''}</div>` : ''}`;
+}
+/* tarjeta pequeña: foto y nombre (en las listas que se despliegan) */
+function vzCardMini(node, p, color, v){
+  return `<button class="vz-cm" data-card="${node.id}|${p.id}"${v !== undefined ? ` data-gv="${encodeURIComponent(v == null ? '' : v)}"` : ''}><span class="vz-cmi" data-img="${node.id}|${p.id}" style="background-color:${vzMix(color, .35)}"></span><span class="nm">${escapeHtml(vzLabel(p))}</span></button>`;
 }
 function vzCardTile(node, p, color, v){
   const tags = [];
@@ -6553,13 +6672,11 @@ const vzOpenG = {}; // id del mazo -> Set de grupos abiertos
 const vzGKey = g=> g.v == null ? '' : g.v;
 function vzIsOpen(node, g){ return !!(vzOpenG[node.id] && vzOpenG[node.id].has(vzGKey(g))); }
 function vzFoldHead(node, g){
-  const open = vzIsOpen(node, g), dark = vzIsDark(g.color), enc = encodeURIComponent(vzGKey(g));
-  const peek = open ? '' : `<span class="vz-peek">${g.cards.filter(p=> p.image).slice(0, 6).map(p=> `<i data-img="${node.id}|${p.id}"></i>`).join('')}</span>`;
-  return `<div class="vz-fold${open ? ' open' : ''}" data-fold="${node.id}|${enc}" style="--gc:${g.color};background:${vzMix(g.color, open ? .16 : .1)}">
-      <span class="vz-fchev">${VZICO.fwd}</span>
-      <span class="vz-gchip" style="background:${g.color};color:${dark ? '#fff' : '#1c1c1e'}">${escapeHtml(g.name)}<small>${g.cards.length}</small></span>
-      ${peek}<span class="vz-fsp"></span>
-      ${g.v != null && g.v !== TAG_NONE ? `<button class="vz-colorbtn sm" data-gcolor="${node.id}|${enc}" title="Color del grupo" style="background:${g.color}"></button>` : ''}
+  const open = vzIsOpen(node, g), enc = encodeURIComponent(vzGKey(g));
+  return `<div class="vz-fold${open ? ' open' : ''}" data-fold="${node.id}|${enc}">
+      <span class="vz-fchev">${VZICO.fwd}</span><span class="vz-sw big" style="background:${g.color}"></span>
+      <span class="vz-fname">${escapeHtml(g.name)}</span><span class="vz-fsp"></span>
+      <span class="vz-fcount">${g.cards.length}</span>
       <button class="vz-fgo" data-grp="${node.id}|${enc}" title="Abrir solo este grupo">${VZICO.chev}</button>
     </div>${open && g.note ? `<div class="vz-note-t">${escapeHtml(g.note)}</div>` : ''}`;
 }
@@ -6568,8 +6685,10 @@ function vzGroupHead(node, g, lvl){
   return `<div class="vz-gh lv${lvl || 1}"><button class="vz-gchip" data-grp="${node.id}|${encodeURIComponent(g.v == null ? '' : g.v)}" style="background:${vzShade(g.color, (lvl || 1) - 1)};color:${(lvl || 1) === 1 && dark ? '#fff' : '#1c1c1e'}">${escapeHtml(g.name)}<small>${g.cards.length}</small></button>${g.v != null && g.v !== TAG_NONE ? `<button class="vz-colorbtn sm" data-gcolor="${node.id}|${encodeURIComponent(g.v)}" title="Color del grupo" style="background:${g.color}"></button>` : ''}</div>${g.note ? `<div class="vz-note-t">${escapeHtml(g.note)}</div>` : ''}`;
 }
 function vzCardsBlock(node, g){
-  if(vzM() === 'list') return `<div class="vz-list">${g.cards.map(p=> vzCardRow(node, p, g.color, g.v)).join('')}</div>`;
-  return `<div class="vz-cg">${g.cards.map(p=> vzCardTile(node, p, g.color, g.v)).join('')}</div>`;
+  const grid = cards=> `<div class="vz-cgrid">${cards.map(p=> vzCardMini(node, p, g.color, g.v)).join('')}</div>`;
+  const sc = vzSubCat(node);
+  if(!sc) return `<div class="vz-cbody">${grid(g.cards)}</div>`;
+  return `<div class="vz-cbody">${vzSplit(node, g.cards, sc).map(x=> `<div class="vz-subh"><i style="background:${x.color}"></i>${escapeHtml(x.name)}<small>${x.cards.length}</small></div>${grid(x.cards)}`).join('')}</div>`;
 }
 function vzDeck(node){
   const groups = vzGroups(node), cat = vzCat(node);
@@ -6587,12 +6706,13 @@ function vzDeck(node){
     const nOpen = named.filter(g=> vzIsOpen(node, g)).length;
     h += `<div class="vz-chips vz-foldbar"><span class="vz-chl">${named.length} grupos${nOpen ? ' · ' + nOpen + (nOpen === 1 ? ' abierto' : ' abiertos') : ''}</span><button class="vz-chip" data-foldall="${node.id}"${nOpen === named.length ? ' disabled' : ''}>Desplegar todo</button><button class="vz-chip" data-unfoldall="${node.id}"${nOpen ? '' : ' disabled'}>Plegar todo</button></div>`;
   }
+  let f = '';
   groups.forEach(g=>{
     if(!g.cards.length) return;
     if(!g.name){ h += vzCardsBlock(node, g); return; }
-    h += `<section class="vz-gsec">${vzFoldHead(node, g)}${vzIsOpen(node, g) ? vzCardsBlock(node, g) : ''}</section>`;
+    f += `<section class="vz-gsec">${vzFoldHead(node, g)}${vzIsOpen(node, g) ? vzCardsBlock(node, g) : ''}</section>`;
   });
-  vzBody.innerHTML = h + '</div>';
+  vzBody.innerHTML = h + (f ? `<div class="vz-folds">${f}</div>` : '') + '</div>';
 }
 function vzGroupScreen(node, v){
   const g = vzGroups(node).find(x=> x.v === v);
@@ -6731,6 +6851,9 @@ function vzClick(e){
   }
   if(x = t.closest('[data-edit]')){ vzGo({ t: 'edit', id: x.dataset.edit }); return; }
   if(x = t.closest('[data-editcard]')){ const [id, cid] = x.dataset.editcard.split('|'); vzGo({ t: 'edit', id, cid }); return; }
+  if(x = t.closest('[data-dview]')){ const n = findNode(vzCur().id); n.vzView = x.dataset.dview; saveLocal(); vzRender(); return; }
+  if(x = t.closest('[data-scat]')){ const n = findNode(vzCur().id); n.vzSub = x.dataset.scat; saveLocal(); vzRender(); return; }
+  if(x = t.closest('[data-scheme]')){ const id = x.dataset.scheme; if(window.pizarra) window.pizarra.editScheme(id); return; }
   if(x = t.closest('[data-gcat]')){ const n = findNode(vzCur().id); n.vzCat = x.dataset.gcat; saveLocal(); vzRender(); return; }
   if(x = t.closest('[data-pzdeck]')){ const n = findNode(x.dataset.pzdeck); if(window.pizarra) window.pizarra.addDeck(n.id, x, n.name); return; }
   if(x = t.closest('[data-pzg]')){
@@ -6808,6 +6931,7 @@ function vzMoreMenu(anchor, n){
   if(i > 0) items.push(['Mover antes', ()=>{ if(vzReorder(arr, n, -1)) saveLocal(); }]);
   if(i < arr.length - 1) items.push(['Mover después', ()=>{ if(vzReorder(arr, n, 1)) saveLocal(); }]);
   if(deck) items.push(['Exportar mazo', ()=> exportDeck(n)]);
+  if(deck && n.mode === 'barajado' && window.pizarra) items.push(['Volver al esquema automático', ()=>{ if(!confirm('¿Quitar el esquema personalizado de este mazo? (la pizarra va a «Eliminadas recientemente»)')) return; window.pizarra.resetScheme(n.id).then(ok=>{ toast(ok ? 'Esquema automático' : 'Este mazo no tenía esquema personalizado'); vzRender(); }); }]);
   items.push(['__sep__']);
   items.push([deck ? 'Eliminar mazo' : 'Eliminar carpeta', ()=> deleteNode(n), true]);
   openMenuAt(anchor, items);
@@ -6872,10 +6996,14 @@ window.seterraApi = {
   allDecks(){ const out = []; (function walk(ns){ ns.forEach(n=>{ if(n.type === 'folder') walk(n.children || []); else if(n.mode === 'barajado') out.push({ id: n.id, name: n.name, path: vzPath(n.id).map(p=> p.name).join(' / '), count: vzDeckCount(n), color: vzColor(n) }); }); })(tree); return out; },
   deckModel(id, catId){
     const n = findNode(id); if(!n || n.mode !== 'barajado') return null;
-    return { name: n.name, color: vzColor(n), count: vzDeckCount(n), groups: vzGroups(n, catId).filter(g=> g.cards.length).map(g=> ({ name: g.name, color: g.color, note: g.note, cards: g.cards.map(p=> ({ cid: p.id, name: vzLabel(p) })) })) };
+    const cat = catId === undefined ? vzCat(n) : (catId ? tagCat(n, catId) : null);
+    return { name: n.name, color: vzColor(n), count: vzDeckCount(n), cat: cat ? cat.id : null, groups: vzGroups(n, catId).filter(g=> g.cards.length).map(g=> ({ v: g.v, name: g.name, color: g.color, note: g.note, cards: g.cards.map(p=> ({ cid: p.id, name: vzLabel(p) })) })) };
   },
   overview(){ return tree.map(n=> ({ name: n.name, sub: vzSub(n), color: vzColor(n), children: n.type === 'folder' ? (n.children || []).map(k=> ({ name: k.name, color: vzColor(k) })) : vzGroups(n.mode === 'barajado' ? n : { photos: [] }).filter(g=> g.name).map(g=> ({ name: g.name, color: g.color })) })); },
   showCard(deck, cid){ vzOpen(); if(vzTab !== 'mazos') vzSwitchTab('mazos'); const n = findNode(deck); if(n && (n.photos || []).some(p=> p.id === cid)) vzGo({ t: 'card', id: deck, cid }); },
+  allNodes(){ const out = []; (function walk(ns){ ns.forEach(n=>{ out.push({ id: n.id, name: n.name, path: vzPath(n.id).map(p=> p.name).join(' / ') || (n.type === 'folder' ? 'carpeta' : 'mazo'), color: vzColor(n) }); if(n.type === 'folder') walk(n.children || []); }); })(tree); return out; },
+  allNotes(){ const out = []; (function walk(ns, path){ ns.forEach(n=>{ if(n.type === 'folder') walk(n.children || [], path.concat(n.name)); else out.push({ id: n.id, name: n.name, path: path.join(' / ') }); }); })(notas, []); return out; },
+  follow(l){ vzFollow(l); },
   toast: m=> toast(m),
   onClose(){ if(vzEl && vzEl.classList.contains('open')) vzRender(); }
 };
@@ -7071,6 +7199,7 @@ function unionBox(items){
 /* puntos de conexión: centro de cada lado */
 function sidePt(it, side){
   const b = box(it), cx = b.x + b.w/2, cy = b.y + b.h/2;
+  if(side === 'c') return { x: cx, y: cy };
   let p = side === 't' ? {x: cx, y: b.y} : side === 'b' ? {x: cx, y: b.y + b.h} : side === 'l' ? {x: b.x, y: cy} : {x: b.x + b.w, y: cy};
   if(it.r){ const a = it.r*Math.PI/180, dx = p.x - cx, dy = p.y - cy; p = { x: cx + dx*Math.cos(a) - dy*Math.sin(a), y: cy + dx*Math.sin(a) + dy*Math.cos(a) }; }
   return p;
@@ -7278,7 +7407,7 @@ function placeEl(el, it){
 }
 function itemClass(it){
   return 'pz-it pz-' + ({ note:'note', text:'text', shape:'shape', table:'table', img:'img', link:'link', card:'card', file:'file', ink:'ink', line:'line' }[it.t]) +
-    (it.t === 'ink' && TOOLS[it.tool] && TOOLS[it.tool].hl ? ' hl' : '') + (it.lock ? ' locked' : '');
+    (it.t === 'ink' && TOOLS[it.tool] && TOOLS[it.tool].hl ? ' hl' : '') + (it.lock ? ' locked' : '') + (it.link ? ' has-link' : '');
 }
 function styleEl(el, it){
   el.className = itemClass(it) + (editing && editing.id === it.id ? ' editing' : '');
@@ -7403,6 +7532,8 @@ function drawCtx(){
     if(items.every(i=> ['note','shape','text','table'].includes(i.t))) h += btn('textstyle', 'Aa');
     if(one && ['note','shape','text'].includes(one.t)) h += btn('edit', 'Editar texto');
     if(one && one.t === 'table') h += btn('tablemenu', 'Tabla');
+    if(one && !isLine(one) && one.t !== 'ink') h += btn('linkto', one.link ? 'Enlace ✓' : 'Enlace');
+    if(one && one.link) h += btn('follow', 'Ir →');
     h += '<span class="vs"></span>' + btn('arrange', 'Disponer') + btn('dup', 'Duplicar') + btn('copy', 'Copiar') + btn('del', 'Eliminar');
   }
   if(bar._h !== h){ bar.innerHTML = h; bar._h = h; } // sin rehacerla si no cambia: así no se pierde un toque a medias
@@ -7625,6 +7756,8 @@ function onCtx(a, btn){
   if(a === 'openfile'){ openFile(one); return; }
   if(a === 'openlink'){ window.open(one.url, '_blank', 'noopener'); return; }
   if(a === 'editlink'){ askLink(one); return; }
+  if(a === 'linkto'){ linkMenu(one, btn); return; }
+  if(a === 'follow'){ followLink(one.link, true); return; }
   if(a === 'edit'){ startEdit(one.id); return; }
   if(a === 'dup') return duplicate();
   if(a === 'copy') return copySel();
@@ -9117,7 +9250,144 @@ async function generateAll(force){
 }
 async function autoSeed(){}
 
-window.pizarra = { open, close, attach, attachMany, dump, restore, generateAll, addDeck: (id, anchor, name)=> attachMany([{}], name || 'mazo', anchor, id) };
+/* ================= ESQUEMAS DE MAZO Y ENLACES =================
+   Cada mazo puede tener su propia pizarra-esquema (gen 'scheme:<id>'): en el mazo se ve fija
+   (solo se navega: tocar algo con enlace te lleva ahí) y con «Editar esquema» se abre aquí. */
+function linkLabel(l){
+  if(!l) return '';
+  if(l.k === 'url'){ try{ return new URL(l.url).hostname.replace(/^www\./, ''); }catch(e){ return l.url; } }
+  return l.label || ({ all: 'Todo el mazo', group: 'Grupo', card: 'Tarjeta', deck: 'Mazo', board: 'Pizarra', scene: 'Escena', note: 'Nota' }[l.k] || '');
+}
+/* menú con buscador: lista de opciones [{label, sub, val}] */
+function pickList(anchor, title, list, cb){
+  const row = o=> `<button class="pz-mi" data-m="${esc(o.val)}" data-f="${esc(fold(o.label + ' ' + (o.sub || '')))}"><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.dot ? `<i style="display:inline-block;width:12px;height:12px;border-radius:4px;background:${o.dot};margin-right:8px;vertical-align:-1px"></i>` : ''}${esc(o.label)}</span>${o.sub ? `<small style="opacity:.5;font-size:12px;margin-left:8px;white-space:nowrap">${esc(o.sub)}</small>` : ''}</button>`;
+  openMenu(anchor, `<div class="pz-mh">${esc(title)}</div>${list.length > 8 ? `<input class="pz-msearch" placeholder="Buscar…" autocomplete="off">` : ''}<div class="pz-mlist">${list.map(row).join('') || '<div class="pz-mh" style="opacity:.5">No hay nada</div>'}</div>`,
+    m=>{ closeMenu(); cb(m); }, { cls: 'pz-pick', onMount: m=>{ const inp = $('.pz-msearch', m); if(!inp) return; setTimeout(()=> inp.focus(), 30);
+      inp.addEventListener('input', ()=>{ const q = fold(inp.value).trim(); $$('[data-f]', m).forEach(b=> b.style.display = !q || b.dataset.f.includes(q) ? '' : 'none'); }); } });
+}
+function setLink(it, l){ change(()=>{ if(l) it.link = l; else delete it.link; }); drawCtx(); toast(l ? 'Enlace: ' + linkLabel(l) : 'Enlace quitado'); }
+function linkMenu(it, anchor){
+  const opts = [['url','Página web…'],['deck','Mazo o carpeta…'],['group','Grupo de un mazo…'],['card','Tarjeta…'],['note','Nota…'],['board','Otra pizarra…']];
+  if(B.scenes && B.scenes.length) opts.push(['scene','Escena de esta pizarra…']);
+  openMenu(anchor, `<div class="pz-mh">Al tocarlo, llevar a…</div>${it.link ? `<div class="pz-mh" style="opacity:.6;text-transform:none;letter-spacing:0">Ahora: ${esc(linkLabel(it.link))}</div>` : ''}` +
+    opts.map(([k, l])=> `<button class="pz-mi" data-m="${k}">${l}</button>`).join('') + (it.link ? `<div class="pz-msep"></div><button class="pz-mi" data-m="none" style="color:#ff3b30">Quitar enlace</button>` : ''), k=>{
+    closeMenu();
+    if(k === 'none') return setLink(it, null);
+    if(k === 'url'){ const u = prompt('Dirección (https://…)', it.link && it.link.k === 'url' ? it.link.url : 'https://'); if(!u || u === 'https://') return; return setLink(it, { k: 'url', url: /^https?:\/\//i.test(u) ? u : 'https://' + u }); }
+    if(k === 'deck'){ const l = (API.allNodes ? API.allNodes() : []); return pickList(anchor, 'Mazo o carpeta', l.map(n=> ({ label: n.name, sub: n.path, val: n.id, dot: n.color })), v=>{ const n = l.find(x=> x.id === v); setLink(it, { k: 'deck', id: v, label: n ? n.name : '' }); }); }
+    if(k === 'group'){ const ds = API.allDecks ? API.allDecks() : []; return pickList(anchor, 'Elige el mazo', ds.map(d=> ({ label: d.name, sub: d.path, val: d.id, dot: d.color })), id=>{
+      const m = API.deckModel(id); if(!m || !m.groups.some(g=> g.name)){ toast('Ese mazo no tiene grupos'); return; }
+      pickList(anchor, 'Grupo de «' + m.name + '»', m.groups.filter(g=> g.name).map((g, i)=> ({ label: g.name, sub: g.cards.length + '', val: String(i), dot: g.color })), i=>{ const g = m.groups.filter(g=> g.name)[+i]; setLink(it, { k: 'group', deck: id, cat: m.cat, v: g.v, label: g.name }); }); }); }
+    if(k === 'card'){ const cs = API.allCards ? API.allCards() : []; return pickList(anchor, 'Tarjeta', cs.map(c=> ({ label: c.name, sub: c.deckName, val: c.deck + '|' + c.cid })), v=>{ const [d, c] = v.split('|'), x = cs.find(q=> q.deck === d && q.cid === c); setLink(it, { k: 'card', deck: d, cid: c, label: x ? x.name : '' }); }); }
+    if(k === 'note'){ const ns = API.allNotes ? API.allNotes() : []; return pickList(anchor, 'Nota', ns.map(n=> ({ label: n.name, sub: n.path, val: n.id })), v=>{ const n = ns.find(x=> x.id === v); setLink(it, { k: 'note', id: v, label: n ? n.name : '' }); }); }
+    if(k === 'board'){ const bs = S.boards.filter(b=> !b.trashed && b.id !== B.id); return pickList(anchor, 'Pizarra', bs.map(b=> ({ label: b.name, val: b.id })), v=>{ const b = bs.find(x=> x.id === v); setLink(it, { k: 'board', id: v, label: b ? b.name : '' }); }); }
+    if(k === 'scene') return pickList(anchor, 'Escena', B.scenes.map((sc, i)=> ({ label: sc.name || 'Escena ' + (i + 1), val: String(i) })), v=> setLink(it, { k: 'scene', i: +v, label: B.scenes[+v].name || 'Escena ' + (+v + 1) }));
+  });
+}
+/* seguir un enlace desde la pizarra (editando) */
+function followLink(l, fromEditor){
+  if(!l) return;
+  if(l.k === 'url'){ window.open(l.url, '_blank', 'noopener'); return; }
+  if(l.k === 'board'){ if(!S.boards.some(b=> b.id === l.id && !b.trashed)){ toast('Esa pizarra ya no existe'); return; } if(fromEditor && root && root.classList.contains('open')) switchBoard(l.id); else openBoard(l.id); return; }
+  if(l.k === 'scene'){ if(fromEditor && root && root.classList.contains('open')) goScene(l.i); return; }
+  if(fromEditor) close();
+  if(API.follow) API.follow(l);
+}
+async function openBoard(id){ await load(); if(S.boards.some(b=> b.id === id)) S.cur = id; await open(); }
+function schemeBoard(deckId){ return S && S.boards.find(b=> !b.trashed && b.gen === 'scheme:' + deckId); }
+/* esquema automático, como el de la vista: el mazo en el centro y sus grupos alrededor */
+function schemeItems(deckId){
+  const d = API.deckModel ? API.deckModel(deckId) : null; if(!d) return [];
+  const gs = d.groups.filter(g=> g.name && g.cards.length), n = gs.length, col = d.color || '#1c1c1e';
+  const R = 300, W = 300, H = 112, rx = Math.max(560, n * 52), ry = Math.max(400, n * 36);
+  const C = { id: 'i' + uid(), t: 'shape', kind: 'circle', x: -R/2, y: -R/2, w: R, h: R, fill: col, stroke: '#1c1c1e', sw: 0, fs: 36, bold: true, color: isDark(col) ? '#ffffff' : '#1c1c1e', align: 'center', text: d.name + '\n' + d.count + ' tarjetas', link: { k: 'all', deck: deckId, label: 'Todo el mazo' } };
+  const lines = [], boxes = [];
+  gs.forEach((g, i)=>{
+    const a = -Math.PI/2 + i * 2 * Math.PI / Math.max(n, 1), cx = Math.cos(a) * rx, cy = Math.sin(a) * ry;
+    const it = { id: 'i' + uid(), t: 'shape', kind: 'rrect', x: cx - W/2, y: cy - H/2, w: W, h: H, fill: g.color, stroke: '#1c1c1e', sw: 0, fs: 26, color: isDark(g.color) ? '#ffffff' : '#1c1c1e', align: 'center', text: g.name + '\n' + g.cards.length + ' tarjetas', link: { k: 'group', deck: deckId, cat: d.cat, v: g.v, label: g.name } };
+    lines.push({ id: 'i' + uid(), t: 'line', a: { id: C.id, side: 'c' }, b: { id: it.id }, cs: 'straight', color: g.color, sw: 3.5 });
+    boxes.push(it);
+  });
+  return lines.concat([C], boxes);
+}
+async function editScheme(deckId){
+  await load();
+  let b = schemeBoard(deckId);
+  if(!b){
+    const d = API.deckModel ? API.deckModel(deckId) : null;
+    let f = S.folders.find(x=> x.name === 'Esquemas de mazos' && !x.trashed && !x.parent);
+    if(!f){ f = { id: 'f' + uid(), name: 'Esquemas de mazos', parent: null, created: Date.now() }; S.folders.push(f); }
+    b = newBoard('Esquema · ' + (d ? d.name : 'mazo')); b.items = schemeItems(deckId); b.gen = 'scheme:' + deckId; b.fit = true; b.view = null; b.folder = f.id; S.boards.push(b);
+  }
+  S.cur = b.id; saveNow(); await open();
+}
+async function resetScheme(deckId){ await load(); const b = schemeBoard(deckId); if(!b) return false; b.trashed = Date.now(); saveNow(); return true; }
+async function hasScheme(deckId){ await load(); return !!schemeBoard(deckId); }
+/* ---------- visor fijo (sin editar): mover, ampliar y tocar enlaces ---------- */
+async function viewScheme(deckId, host, opts){
+  await load();
+  const b = schemeBoard(deckId); if(!b || !host.isConnected) return false;
+  await loadAssets(b);
+  if(!host.isConnected) return false;
+  opts = opts || {};
+  host.innerHTML = `<div class="pzv"><div class="pzv-world"></div><div class="pzv-tools">${(b.scenes || []).map((sc, i)=> `<button data-sc="${i}">${esc(sc.name || 'Escena ' + (i + 1))}</button>`).join('')}<button data-z="out" title="Alejar">−</button><button data-z="fit" title="Ver todo">⤢</button><button data-z="in" title="Acercar">+</button></div></div>`;
+  const pv = $('.pzv', host), w = $('.pzv-world', pv), keep = B;
+  B = b;
+  try{
+    b.items.forEach(it=>{
+      if(it.t === 'ink' && !it.d) it.d = inkPath(it.pts, it.size, (TOOLS[it.tool] || {}).pressure);
+      const el = document.createElement('div'); el.dataset.id = it.id; el.innerHTML = itemHTML(it); styleEl(el, it); placeEl(el, it);
+      el.className = itemClass(it).replace(' has-link', '') + (it.link || it.t === 'card' || it.t === 'link' ? ' pzv-go' : '');
+      w.appendChild(el);
+    });
+  } finally { B = keep; }
+  const st = { x: 0, y: 0, z: 1 };
+  const apply = anim=>{ w.style.transition = anim ? 'transform .45s cubic-bezier(.2,.8,.2,1)' : ''; w.style.transform = `translate(${st.x}px,${st.y}px) scale(${st.z})`; };
+  const fitTo = (r, anim, pad)=>{ const W = pv.clientWidth, H = pv.clientHeight; pad = pad == null ? 30 : pad; st.z = clamp(Math.min((W - pad*2) / Math.max(r.w, 1), (H - pad*2) / Math.max(r.h, 1)), .05, 2); st.x = W/2 - (r.x + r.w/2) * st.z; st.y = H/2 - (r.y + r.h/2) * st.z; apply(anim); };
+  B = b; const u = unionBox(b.items); B = keep;
+  const fitAll = anim=> u ? fitTo(u, anim) : apply(anim);
+  fitAll(false);
+  const zoomAt = (k, sx, sy)=>{ const z = clamp(st.z * k, .05, 6); st.x = sx - (sx - st.x) * z / st.z; st.y = sy - (sy - st.y) * z / st.z; st.z = z; apply(false); };
+  const P = new Map(); let g = null;
+  pv.addEventListener('pointerdown', e=>{
+    if(e.target.closest('.pzv-tools')) return;
+    try{ pv.setPointerCapture(e.pointerId); }catch(err){}
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if(P.size === 1) g = { sx: e.clientX, sy: e.clientY, ox: st.x, oy: st.y, moved: false, target: e.target };
+    else if(P.size === 2){ const [a, c] = [...P.values()]; g = { pinch: true, d: Math.hypot(a.x - c.x, a.y - c.y), z: st.z, ox: st.x, oy: st.y, mx: (a.x + c.x)/2, my: (a.y + c.y)/2, moved: true }; }
+  });
+  pv.addEventListener('pointermove', e=>{
+    if(!P.has(e.pointerId) || !g) return;
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const r = pv.getBoundingClientRect();
+    if(g.pinch && P.size >= 2){ const [a, c] = [...P.values()], d = Math.hypot(a.x - c.x, a.y - c.y), mx = (a.x + c.x)/2, my = (a.y + c.y)/2, z = clamp(g.z * d / g.d, .05, 6);
+      const wx = (g.mx - r.left - g.ox) / g.z, wy = (g.my - r.top - g.oy) / g.z; st.z = z; st.x = mx - r.left - wx * z; st.y = my - r.top - wy * z; apply(false); return; }
+    if(!g.pinch){ const dx = e.clientX - g.sx, dy = e.clientY - g.sy; if(!g.moved && Math.hypot(dx, dy) > 6) g.moved = true; if(g.moved){ st.x = g.ox + dx; st.y = g.oy + dy; apply(false); } }
+  });
+  const up = e=>{
+    if(!P.has(e.pointerId)) return; P.delete(e.pointerId);
+    if(g && !g.moved && !g.pinch && P.size === 0 && e.type === 'pointerup'){
+      const el = g.target.closest && g.target.closest('.pzv-go'), it = el && b.items.find(i=> i.id === el.dataset.id);
+      if(it){
+        if(it.link && it.link.k === 'scene'){ const sc = (b.scenes || [])[it.link.i]; if(sc) fitTo(sc, true, 0); }
+        else if(it.link) followLink(it.link, false);
+        else if(it.t === 'card'){ if(API.follow) API.follow({ k: 'card', deck: it.deck, cid: it.cid }); }
+        else if(it.t === 'link') window.open(it.url, '_blank', 'noopener');
+      }
+    }
+    if(P.size === 0) g = null; else if(g && g.pinch && P.size === 1){ const [a] = [...P.values()]; g = { sx: a.x, sy: a.y, ox: st.x, oy: st.y, moved: true }; }
+  };
+  pv.addEventListener('pointerup', up); pv.addEventListener('pointercancel', up);
+  pv.addEventListener('wheel', e=>{ e.preventDefault(); const r = pv.getBoundingClientRect(); if(e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * .01), e.clientX - r.left, e.clientY - r.top); else { st.x -= e.deltaX; st.y -= e.deltaY; apply(false); } }, { passive: false });
+  $('.pzv-tools', pv).addEventListener('click', e=>{
+    const t = e.target.closest('button'); if(!t) return;
+    if(t.dataset.sc != null){ const sc = b.scenes[+t.dataset.sc]; if(sc) fitTo(sc, true, 0); return; }
+    if(t.dataset.z === 'fit') fitAll(true);
+    else zoomAt(t.dataset.z === 'in' ? 1.3 : 1/1.3, pv.clientWidth/2, pv.clientHeight/2);
+  });
+  return true;
+}
+window.pizarra = { open, close, openBoard, editScheme, resetScheme, hasScheme, viewScheme, attach, attachMany, dump, restore, generateAll, addDeck: (id, anchor, name)=> attachMany([{}], name || 'mazo', anchor, id) };
 })();
 
 </script>
