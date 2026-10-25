@@ -1291,6 +1291,9 @@ body.vz-on #pz{z-index:46;}
 .vt-sub li:last-child::before{bottom:auto;height:24px;}
 .vt-sub li::after{content:"";position:absolute;left:0;top:24px;width:18px;border-top:2px solid rgba(0,0,0,.18);}
 
+.vt-wrap.in{padding:18px 0 40px;}
+#vz .vz-chip svg{width:15px;height:15px;}
+
 </style>
 </head>
 <body>
@@ -6175,12 +6178,14 @@ if(vzMode === 'radial') vzMode = 'tree';
 if(!['tree','mosaic','list'].includes(vzMode)) vzMode = 'mosaic';
 if(!['mosaic','list'].includes(vzLastCards)) vzLastCards = 'mosaic';
 /* modo con el que se pintan las tarjetas (en el esquema, el último que usaste) */
-const vzM = ()=> vzMode === 'tree' ? vzLastCards : vzMode;
+const vzM = ()=> 'list'; // las tarjetas siempre en lista
 function vzSetMode(m){ vzMode = m; if(m !== 'tree') vzLastCards = m; try{ localStorage.setItem('seterra_vz_view', vzMode); localStorage.setItem('seterra_vz_cards', vzLastCards); }catch(e){} }
 const VZI = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">';
 const VZICO = {
   back: VZI + '<path d="M15 5l-7 7 7 7"/></svg>', fwd: VZI + '<path d="M9 5l7 7-7 7"/></svg>', home: VZI + '<path d="M4 11l8-7 8 7v9H4z"/></svg>',
   pz: VZI + '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7.5 21l2-3M16.5 21l-2-3"/></svg>',
+  folder: VZI + '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  plus: VZI + '<path d="M12 5v14M5 12h14"/></svg>',
   tree: VZI + '<rect x="9" y="2.5" width="6" height="5" rx="1.2"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/><path d="M12 7.5v4.5M5.5 16.5V12h13v4.5"/></svg>',
   mosaic: VZI + '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
   list: VZI + '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r=".8"/><circle cx="4.5" cy="12" r=".8"/><circle cx="4.5" cy="18" r=".8"/></svg>',
@@ -6193,7 +6198,6 @@ function vzBuild(){
   vzEl = document.createElement('div'); vzEl.id = 'vz';
   vzEl.innerHTML = `<div class="vz-top">
       <div class="vz-bar"><button class="vz-b" data-v="back" aria-label="Atrás">${VZICO.back}</button><button class="vz-b" data-v="fwd" aria-label="Adelante">${VZICO.fwd}</button><button class="vz-b" data-v="home" aria-label="Inicio">${VZICO.home}</button><div class="vz-crumb"></div></div>
-      <div class="vz-bar vz-views"><button class="vz-b" data-vm="tree" title="Esquema">${VZICO.tree}</button><button class="vz-b" data-vm="mosaic" title="Mosaico">${VZICO.mosaic}</button><button class="vz-b" data-vm="list" title="Lista">${VZICO.list}</button></div>
       <div class="vz-bar vz-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px;opacity:.6;flex-shrink:0"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input type="search" placeholder="buscar tarjeta, etiqueta…" autocomplete="off" spellcheck="false"></div>
       <div class="vz-bar"><button class="vz-b" data-v="pz" title="Pizarra" aria-label="Pizarra">${VZICO.pz}</button></div>
     </div>
@@ -6233,7 +6237,7 @@ function vzCrumb(){
   const s = vzCur(), c = vzEl.querySelector('.vz-crumb');
   const parts = [];
   const node = s.id ? findNode(s.id) : null;
-  if(s.t === 'root') parts.push('MÉTODO SETERRA');
+  if(s.t === 'root') parts.push('BIBLIOTECA');
   else {
     parts.push(`<a data-v="home">BIBLIOTECA</a>`);
     if(s.t === 'search') parts.push('Búsqueda');
@@ -6242,6 +6246,7 @@ function vzCrumb(){
       if(s.t === 'folder' || s.t === 'deck') parts.push(escapeHtml(node.name));
       else {
         parts.push(`<a data-open="${node.id}">${escapeHtml(node.name)}</a>`);
+        if(s.t === 'all') parts.push('Todos los grupos');
         if(s.t === 'group') parts.push(escapeHtml(vzGroupName(node, s.v)));
         if(s.t === 'card'){ const p = (node.photos || []).find(x=> x.id === s.cid); if(s.v !== undefined) parts.push(`<a data-grp="${node.id}|${encodeURIComponent(s.v == null ? '' : s.v)}">${escapeHtml(vzGroupName(node, s.v))}</a>`); parts.push(escapeHtml(p ? vzLabel(p) : '')); }
       }
@@ -6251,8 +6256,6 @@ function vzCrumb(){
   c.scrollLeft = c.scrollWidth;
   vzEl.querySelector('[data-v=back]').disabled = vzPos === 0;
   vzEl.querySelector('[data-v=fwd]').disabled = vzPos >= vzStack.length - 1;
-  vzEl.querySelector('.vz-views').style.display = s.t === 'search' ? 'none' : '';
-  vzEl.querySelectorAll('[data-vm]').forEach(b=> b.classList.toggle('on', b.dataset.vm === vzMode));
 }
 function vzGroupName(node, v){ const g = vzGroups(node).find(x=> x.v === v); return g ? (g.name || node.name) : (v || node.name); }
 function vzRender(anim){
@@ -6261,10 +6264,10 @@ function vzRender(anim){
   vzBody.className = 'vz-body' + (vzIsRad() ? ' root' : '');
   const node = s.id ? findNode(s.id) : null;
   if(s.t !== 'root' && s.t !== 'search' && !node){ vzStack = [{ t: 'root' }]; vzPos = 0; return vzRender(true); }
-  if(vzMode === 'tree' && s.t !== 'search') vzTree(s.t === 'root' ? null : node, s.t === 'group' || s.t === 'card' ? s.v : undefined, s.t === 'card' ? s.cid : null);
-  else if(s.t === 'root') vzRoot();
-  else if(s.t === 'folder') vzFolder(node);
-  else if(s.t === 'deck') node.mode === 'barajado' ? vzDeck(node) : vzMap(node);
+  if(s.t === 'root') vzLibrary(null);
+  else if(s.t === 'folder') vzLibrary(node);
+  else if(s.t === 'deck') node.mode === 'barajado' ? vzDeckHome(node) : vzMap(node);
+  else if(s.t === 'all') vzDeck(node);
   else if(s.t === 'group') vzGroupScreen(node, s.v);
   else if(s.t === 'card') vzCard(node, s.cid, s.v);
   else vzSearch();
@@ -6365,6 +6368,31 @@ function vzTree(node, hv){
       <button class="vt-n vt-root" ${rootAttr} style="background:${rootCol};color:${dark ? '#fff' : '#1c1c1e'}"><b>${escapeHtml(rootLabel)}</b><small>${escapeHtml(rootSub)}</small></button>
       ${!top ? '<div class="vz-empty">Vacío</div>' : node && node.type !== 'folder' ? `<ul class="vt-sub">${top}</ul>` : `<ul class="vt-l1">${top}</ul>`}
     </div><p class="vt-hint">Toca cualquier recuadro para ir ahí y ver sus tarjetas.</p></div>`;
+}
+
+/* ---------- biblioteca: carpetas y mazos, igual que en «Mazos» (y se pueden crear aquí) ---------- */
+function vzLibrary(node){
+  const kids = node ? (node.children || []) : tree;
+  let head;
+  if(node) head = vzHeader(node);
+  else { let d = 0, c = 0; tree.forEach(n=>{ const st = vzStats(n); d += st.decks; c += st.cards; }); head = `<div class="vz-lh">Biblioteca<small>${d} mazos · ${c} tarjetas</small></div>`; }
+  const pid = node ? node.id : '';
+  const add = `<div class="vz-chips"><button class="vz-chip" data-newfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-newdeck="${pid}">${VZICO.plus}Nuevo mazo</button></div>`;
+  const tiles = kids.map(k=> vzTile(vzNodeItem(k))).join('');
+  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? `<div class="vz-mos">${tiles}</div>` : `<div class="vz-empty">${node ? 'Carpeta vacía: crea dentro un mazo o una subcarpeta.' : 'Aún no hay mazos: crea el primero.'}</div>`}</div>`;
+}
+/* al entrar en un mazo: su esquema (el mazo arriba y sus grupos colgando hacia abajo).
+   Tocar un grupo abre la lista de ese grupo; tocar el mazo abre la lista con todos los grupos plegables. */
+function vzDeckHome(node){
+  const cat = vzCat(node), groups = vzGroups(node).filter(g=> g.cards.length);
+  if(!cat || groups.length < 2) return vzDeck(node);
+  const col = vzColor(node), dark = vzIsDark(col);
+  const lis = groups.map(g=> `<li><button class="vt-n gr" data-grp="${node.id}|${encodeURIComponent(vzGKey(g))}" style="background:${vzMix(g.color, .5)};--gc:${g.color}"><b>${escapeHtml(g.name)}</b><small>${g.cards.length}</small></button></li>`).join('');
+  vzBody.innerHTML = `<div class="vz-fam">${vzHeader(node, vzDeckActions(node))}
+    <div class="vt-wrap in"><div class="vt">
+      <button class="vt-n vt-root" data-all="${node.id}" style="background:${col};color:${dark ? '#fff' : '#1c1c1e'}"><b>${escapeHtml(node.name)}</b><small>Todos los grupos · ${vzDeckCount(node)} tarjetas</small></button>
+      <ul class="vt-sub">${lis}</ul>
+    </div><p class="vt-hint">Toca un grupo para ver sus tarjetas, o el mazo para verlos todos en lista (plegables).</p></div></div>`;
 }
 
 /* ---------- pantallas ---------- */
@@ -6555,11 +6583,10 @@ function vzClick(e){
     if(a === 'pz' && window.pizarra) window.pizarra.open();
     return; }
   const vm = t.closest('[data-vm]'); if(vm){ vzSetMode(vm.dataset.vm); vzRender(); return; }
-  if(vzMode === 'tree' && t.closest('.vt')){
-    vzSetMode(vzLastCards);
-    if(t.closest('[data-treeroot]')){ vzRender(); return; }
-    const o = t.closest('[data-open]'); if(o && vzCur().id === o.dataset.open){ vzRender(); return; }
-  }
+  let y0;
+  if(y0 = t.closest('[data-all]')){ vzGo({ t: 'all', id: y0.dataset.all }); return; }
+  if(y0 = t.closest('[data-newfolder]')){ const pn = y0.dataset.newfolder ? findNode(y0.dataset.newfolder) : null; promptNewFolder(pn); return; }
+  if(y0 = t.closest('[data-newdeck]')){ const pn = y0.dataset.newdeck ? findNode(y0.dataset.newdeck) : null; promptNewTema(pn); return; }
   let x;
   if(x = t.closest('[data-color]')){ const n = findNode(x.dataset.color); vzColorPop(x, vzColor(n), c=>{ n.color = c; saveLocal(); }, n.color ? ()=>{ delete n.color; saveLocal(); } : null); return; }
   if(x = t.closest('[data-gcolor]')){
@@ -6607,6 +6634,7 @@ vzTog.addEventListener('click', ()=>{ if(vzEl && vzEl.classList.contains('open')
 vzSetTog();
 /* al empezar una partida o editar, la vista visual se aparta */
 { const _pt = playTema; playTema = function(){ vzClose(); return _pt.apply(this, arguments); }; }
+{ const _oe = openTemaEditor; openTemaEditor = function(){ vzClose(); switchToTab('biblioteca'); return _oe.apply(this, arguments); }; }
 /* los colores elegidos para los grupos se respetan en toda la app (juego, etiquetas…) */
 { const _tc = tagColor; tagColor = function(node, catId, v){ const o = node && node.tagValColors && node.tagValColors[catId] && node.tagValColors[catId][v]; return o || _tc(node, catId, v); }; }
 /* si cambian los mazos (editor, importar, actualizar…), la vista visual se repinta */
