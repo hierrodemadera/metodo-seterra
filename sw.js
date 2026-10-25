@@ -14,7 +14,7 @@ self.addEventListener('install', e=>{
 
 self.addEventListener('activate', e=>{
   e.waitUntil((async ()=>{
-    for(const k of await caches.keys()) if(k !== CACHE) await caches.delete(k);
+    for(const k of await caches.keys()) if(k.startsWith('seterra-app-') && k !== CACHE) await caches.delete(k); // solo las suyas: en el mismo dominio está también la app de cocina
     await self.clients.claim();
   })());
 });
