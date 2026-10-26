@@ -1450,6 +1450,10 @@ body.vz-main #vz-toggle{display:none;}
 #vz-cpop button{font:inherit;color:inherit;border:0;cursor:pointer;}
 @media (max-width:700px){ .vz-cpw{flex-direction:column;padding:16px;max-height:92vh;overflow:auto;} .vz-cpimg img{max-height:42vh;} .vz-cpside{padding-right:0;overflow:visible;} .vz-cpn.prev{left:4px;}.vz-cpn.next{right:4px;} .vz-cpn{top:30%;} }
 #vz .pzv-tools button{background:rgba(255,255,255,.95);box-shadow:0 1px 6px rgba(0,0,0,.2);}
+.vz-sw.pick{cursor:pointer;transition:transform .12s;}
+.vz-sw.pick:hover{transform:scale(1.15);}
+.vz-ll .vz-sw{width:22px;height:22px;border-radius:6px;}
+.vz-ll .vz-sw.f{width:26px;border-radius:3px;}
 
 </style>
 </head>
@@ -1916,9 +1920,9 @@ async function loadLocalNotasRaw(){
 function migrateNotasArray(arr){
   return (arr||[]).map(item=>{
     if(item && item.type === 'folder'){
-      return { id:item.id||uid(), type:'folder', name:item.name||'carpeta', expanded: !!item.expanded, children: migrateNotasArray(item.children||[]) };
+      return Object.assign({ id:item.id||uid(), type:'folder', name:item.name||'carpeta', expanded: !!item.expanded, children: migrateNotasArray(item.children||[]) }, item.color ? { color:item.color } : {});
     }
-    return { id:(item&&item.id)||uid(), type:'nota', name:(item&&item.name)||'documento', content:(item&&item.content)||'' };
+    return Object.assign({ id:(item&&item.id)||uid(), type:'nota', name:(item&&item.name)||'documento', content:(item&&item.content)||'' }, item && item.color ? { color:item.color } : {});
   });
 }
 function parseNotasValue(raw){
@@ -6574,17 +6578,17 @@ function vzDeckItem(n){
 const VZ_NFOLD = '#c8b77e', VZ_NDOC = '#f2d45c';
 function vzNotaItem(n){
   const f = n.type === 'folder', c = f ? countNotasLeaves(n) : 0;
-  return { id: n.id, name: n.name, sub: f ? c + (c === 1 ? ' documento' : ' documentos') : '', color: f ? VZ_NFOLD : VZ_NDOC, folder: f, doc: !f, open: `data-nopen="${n.id}"`, more: `data-nmore="${n.id}"`, toggle: `data-nltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(vzNotaItem) : null };
+  return { id: n.id, name: n.name, sub: f ? c + (c === 1 ? ' documento' : ' documentos') : '', color: n.color || (f ? VZ_NFOLD : VZ_NDOC), folder: f, doc: !f, swatch: `data-ncolor="${n.id}"`, open: `data-nopen="${n.id}"`, more: `data-nmore="${n.id}"`, toggle: `data-nltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(vzNotaItem) : null };
 }
 function vzItems(items, tab){
-  if(vzLibView[tab] === 'list') return `<div class="vz-ll">${vzListRows(items, 0)}</div>`;
+  if(tab === 'notas' || vzLibView[tab] === 'list') return `<div class="vz-ll">${vzListRows(items, 0)}</div>`;
   return `<div class="vz-mos plain">${items.map(it=>{ const dark = vzIsDark(it.color);
     return `<button class="vz-tile plain${it.folder ? ' kind-fold' : ''}${it.doc ? ' doc' : ''}" ${it.open} style="background:${it.color};color:${dark ? '#fff' : '#1c1c1e'}"><span class="vz-more" ${it.more} title="Opciones">⋯</span><b>${escapeHtml(it.name)}</b>${it.sub ? `<small>${escapeHtml(it.sub)}</small>` : ''}</button>`; }).join('')}</div>`;
 }
 function vzListRows(items, depth){
   return items.map(it=> `<div class="vz-lr" role="button" ${it.open} style="--d:${depth}">
       ${it.folder ? `<span class="vz-disc${it.expanded ? ' on' : ''}" ${it.toggle} title="${it.expanded ? 'Plegar' : 'Desplegar'}">${VZICO.fwd}</span>` : '<span class="vz-disc sp"></span>'}
-      <span class="vz-sw${it.folder ? ' f' : ''}" style="background:${it.color}"></span>
+      <span class="vz-sw${it.folder ? ' f' : ''}${it.swatch ? ' pick' : ''}" ${it.swatch || ''} style="background:${it.color}"${it.swatch ? ' title="Cambiar color"' : ''}></span>
       <span class="nm">${escapeHtml(it.name)}</span><span class="sb">${escapeHtml(it.sub)}</span>
       <span class="vz-lmore" ${it.more} title="Opciones">⋯</span></div>`
     + (it.folder && it.expanded ? vzListRows(it.kids(), depth + 1) : '')).join('');
@@ -6973,6 +6977,7 @@ function vzClick(e){
   if(x = t.closest('.vz-tab[data-tab]')){ vzSwitchTab(x.dataset.tab); return; }
   if(x = t.closest('[data-libview]')){ const [tb, v] = x.dataset.libview.split('|'); vzLibView[tb] = v; try{ localStorage.setItem('seterra_vz_lib', JSON.stringify(vzLibView)); }catch(err){} vzRender(); return; }
   if(x = t.closest('[data-ltoggle]')){ const n = findNode(x.dataset.ltoggle); if(n){ n.expanded = !n.expanded; saveLocal(); vzRender(); } return; }
+  if(x = t.closest('[data-ncolor]')){ e.stopPropagation(); const n = findNotaNode(x.dataset.ncolor); if(n) vzNotaColor(x, n); return; }
   if(x = t.closest('[data-nltoggle]')){ const n = findNotaNode(x.dataset.nltoggle); if(n){ n.expanded = !n.expanded; saveLocalNotas(); vzRender(); } return; }
   if(x = t.closest('[data-notes]')){ vzGo({ t: 'notes', id: x.dataset.notes || null }); return; }
   if(x = t.closest('[data-nopen]')){ const n = findNotaNode(x.dataset.nopen); if(!n) return; vzGo(n.type === 'folder' ? { t: 'notes', id: n.id } : { t: 'note', id: n.id }); return; }
@@ -7034,7 +7039,7 @@ function vzNotes(folder){
   const n = folder ? countNotasLeaves(folder) : notas.reduce((a, k)=> a + countNotasLeaves(k), 0);
   const pid = folder ? folder.id : '';
   const head = `<div class="vz-lh">${escapeHtml(folder ? folder.name : 'Notas')}<small>${n} ${n === 1 ? 'documento' : 'documentos'}</small>${folder ? `<button class="vz-hmore" data-nmore="${folder.id}" title="Opciones">⋯</button>` : ''}</div>`;
-  const add = `<div class="vz-chips"><button class="vz-chip" data-nnewfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-nnewdoc="${pid}">${VZICO.plus}Nuevo documento</button><span class="vz-fsp"></span>${vzViewSeg('notas')}</div>`;
+  const add = `<div class="vz-chips"><button class="vz-chip" data-nnewfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-nnewdoc="${pid}">${VZICO.plus}Nuevo documento</button></div>`;
   vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? vzItems(kids.map(vzNotaItem), 'notas') : `<div class="vz-empty">${folder ? 'Carpeta vacía.' : 'Aún no hay notas: crea el primer documento.'}</div>`}</div>`;
 }
 /* ---------- editores dentro de la vista ---------- */
@@ -7085,6 +7090,7 @@ function vzNotaMenu(anchor, n){
   else items.push(['Abrir', ()=> vzGo({ t: 'note', id: n.id })]);
   items.push(['__sep__']);
   items.push(['Renombrar', ()=> promptRenameNota(n)]);
+  items.push(['Color…', ()=> vzNotaColor(anchor, n)]);
   items.push(['Mover a…', ()=> vzMovePicker(anchor, n, vzNotaFolders(notas, 0, []), (a, f)=> isValidNotaDropFolder(a, f) && findNotaParentArray(a.id) !== f.children, ()=> moveNotaToRoot(n), (a, f)=> moveNotaInto(a, f), 'Notas (principal)')]);
   if(i > 0) items.push(['Mover antes', ()=>{ if(vzReorder(arr, n, -1)){ saveLocalNotas(); renderNotasTree(); } }]);
   if(i < arr.length - 1) items.push(['Mover después', ()=>{ if(vzReorder(arr, n, 1)){ saveLocalNotas(); renderNotasTree(); } }]);
@@ -7092,6 +7098,7 @@ function vzNotaMenu(anchor, n){
   items.push([n.type === 'folder' ? 'Eliminar carpeta' : 'Eliminar documento', ()=> deleteNotaNode(n), true]);
   openMenuAt(anchor, items);
 }
+function vzNotaColor(anchor, n){ vzColorPop(anchor, n.color || (n.type === 'folder' ? VZ_NFOLD : VZ_NDOC), c=>{ n.color = c; saveLocalNotas(); }, n.color ? ()=>{ delete n.color; saveLocalNotas(); } : null); }
 function vzLibMenu(anchor){
   openMenuAt(anchor, [
     ['Importar mazo…', ()=> document.getElementById('btn-import-deck').click()],
