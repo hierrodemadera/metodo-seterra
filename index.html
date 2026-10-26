@@ -3135,6 +3135,13 @@ document.getElementById('tarjetas-cols').addEventListener('change', (e)=>{
   e.target.value = cols;
   saveLocal();
 });
+/* las fotos del editor se cargan al acercarse a la pantalla: con muchas tarjetas, cargarlas todas de golpe cuelga el móvil */
+let lazyIO = null;
+function lazyImg(img, src){
+  if(!('IntersectionObserver' in window)){ img.src = src; return; }
+  if(!lazyIO) lazyIO = new IntersectionObserver(ents=> ents.forEach(en=>{ if(en.isIntersecting){ const im = en.target; lazyIO.unobserve(im); if(im._src){ im.src = im._src; im._src = null; } } }), { rootMargin: '700px 0px' });
+  img._src = src; img.decoding = 'async'; lazyIO.observe(img);
+}
 function renderCardItem(node, photo){
   const card = document.createElement('div');
   card.className = 'card-item' + (photo.id === selectedCardId ? ' selected' : '');
@@ -3148,7 +3155,8 @@ function renderCardItem(node, photo){
   const imgWrap = document.createElement('div');
   imgWrap.className = 'card-img-wrap';
   if(photo.image){
-    imgWrap.innerHTML = `<img src="${photo.image}"><button class="card-replace-btn" title="cambiar imagen">✎</button>`;
+    imgWrap.innerHTML = `<img alt=""><button class="card-replace-btn" title="cambiar imagen">✎</button>`;
+    lazyImg(imgWrap.querySelector('img'), photo.image);
     imgWrap.querySelector('.card-replace-btn').addEventListener('click', (e)=>{
       e.stopPropagation();
       selectCard(photo.id);
@@ -3183,7 +3191,8 @@ function renderCardItem(node, photo){
     (photo.extraImages||[]).forEach((src, i)=>{
       const t = document.createElement('div');
       t.className = 'ex'; t.title = 'tocar para ponerla como principal';
-      t.innerHTML = `<img src="${src}"><button class="x" title="quitar">✕</button>`;
+      t.innerHTML = `<img alt=""><button class="x" title="quitar">✕</button>`;
+      lazyImg(t.querySelector('img'), src);
       t.addEventListener('click', ()=>{ // intercambiar con la principal
         selectCard(photo.id);
         const main = photo.image; photo.image = src; photo.extraImages[i] = main;
@@ -6361,7 +6370,7 @@ function vzBuild(){
   vzEl.innerHTML = `<div class="vz-top">
       <div class="vz-bar vz-tabs"><button class="vz-tab" data-tab="mazos">Mazos</button><button class="vz-tab" data-tab="notas">Notas</button></div>
       <div class="vz-bar vz-nav"><button class="vz-b" data-v="back" aria-label="Atrás">${VZICO.back}</button><button class="vz-b" data-v="fwd" aria-label="Adelante">${VZICO.fwd}</button><button class="vz-b" data-v="home" aria-label="Inicio">${VZICO.home}</button><div class="vz-crumb"></div></div>
-      <div class="vz-bar vz-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px;opacity:.6;flex-shrink:0"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input type="search" placeholder="buscar tarjeta, etiqueta…" autocomplete="off" spellcheck="false"></div>
+      <div class="vz-bar vz-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px;opacity:.6;flex-shrink:0"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input type="text" inputmode="search" enterkeyhint="search" placeholder="buscar tarjeta, etiqueta…" autocomplete="off" spellcheck="false"></div>
       <div class="vz-bar vz-pzb"><button class="vz-b" data-v="pz" title="Pizarra" aria-label="Pizarra">${VZICO.pz}</button></div>
     </div>
     <div class="vz-body"></div>`;
@@ -6453,12 +6462,19 @@ function vzRender(anim){
   if(anim && vzBody.firstElementChild) vzBody.firstElementChild.classList.add('vz-in');
 }
 /* las fotos se ponen después de pintar (son grandes: así no se copian en el HTML) */
+let vzIO = null;
+function vzSetImg(el){
+  const [d, c] = el.dataset.img.split('|'), node = findNode(d), p = node && (node.photos || []).find(x=> x.id === c);
+  const src = p && (p.image || ''); if(!src) return;
+  if(el.tagName === 'IMG') el.src = src; else el.style.backgroundImage = `url("${src}")`;
+}
 function vzLoadImgs(){
-  vzBody.querySelectorAll('[data-img]').forEach(el=>{
-    const [d, c] = el.dataset.img.split('|'), node = findNode(d), p = node && (node.photos || []).find(x=> x.id === c);
-    const src = p && (p.image || ''); if(!src) return;
-    if(el.tagName === 'IMG') el.src = src; else el.style.backgroundImage = `url("${src}")`;
-  });
+  // las fotos se ponen solo cuando se acercan a la pantalla (con muchas, cargarlas todas cuelga el móvil)
+  if(!('IntersectionObserver' in window)){ vzBody.querySelectorAll('[data-img]').forEach(vzSetImg); }
+  else {
+    if(!vzIO) vzIO = new IntersectionObserver(ents=> ents.forEach(en=>{ if(en.isIntersecting){ vzIO.unobserve(en.target); vzSetImg(en.target); } }), { rootMargin: '800px' });
+    vzBody.querySelectorAll('[data-img]').forEach(el=> vzIO.observe(el));
+  }
   vzBody.querySelectorAll('[data-mapimg]').forEach(el=>{ const n = findNode(el.dataset.mapimg); if(n && n.image) el.style.backgroundImage = `url("${n.image}")`; });
 }
 /* ---------- piezas comunes ---------- */
