@@ -6573,7 +6573,7 @@ function vzLibrary(node){
   if(node) head = vzHeader(node);
   else { let d = 0, c = 0; tree.forEach(n=>{ const st = vzStats(n); d += st.decks; c += st.cards; }); head = `<div class="vz-lh">Mazos<small>${d} mazos · ${c} tarjetas</small><button class="vz-hmore" data-libmenu="1" title="Importar, exportar, actualizar">⋯</button></div>`; }
   const pid = node ? node.id : '';
-  const add = `<div class="vz-chips"><button class="vz-chip" data-newfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-newdeck="${pid}">${VZICO.plus}Nuevo mazo</button><span class="vz-fsp"></span>${vzViewSeg('mazos')}</div>`;
+  const add = `<div class="vz-chips"><button class="vz-chip" data-newfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-newdeck="${pid}">${VZICO.plus}Nuevo mazo</button></div>`;
   const items = kids.map(vzDeckItem);
   vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? vzItems(items, 'mazos') : `<div class="vz-empty">${node ? 'Carpeta vacía: crea dentro un mazo o una subcarpeta.' : 'Aún no hay mazos: crea el primero.'}</div>`}</div>`;
 }
@@ -6591,7 +6591,7 @@ function vzSwitchTab(tab){
 }
 function vzDeckItem(n){
   const f = n.type === 'folder';
-  return { id: n.id, name: n.name, sub: vzSub(n), color: vzColor(n), folder: f, open: `data-open="${n.id}"`, more: `data-more="${n.id}"`, toggle: `data-ltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(vzDeckItem) : null };
+  return { id: n.id, name: n.name, sub: vzSub(n), color: vzColor(n), folder: f, swatch: `data-color="${n.id}"`, open: `data-open="${n.id}"`, more: `data-more="${n.id}"`, toggle: `data-ltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(vzDeckItem) : null };
 }
 const VZ_NFOLD = '#c8b77e', VZ_NDOC = '#f2d45c';
 function vzNotaItem(n){
@@ -6599,7 +6599,8 @@ function vzNotaItem(n){
   return { id: n.id, name: n.name, sub: f ? c + (c === 1 ? ' documento' : ' documentos') : '', color: n.color || (f ? VZ_NFOLD : VZ_NDOC), folder: f, doc: !f, swatch: `data-ncolor="${n.id}"`, open: `data-nopen="${n.id}"`, more: `data-nmore="${n.id}"`, toggle: `data-nltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(vzNotaItem) : null };
 }
 function vzItems(items, tab){
-  if(tab === 'notas' || vzLibView[tab] === 'list') return `<div class="vz-ll">${vzListRows(items, 0)}</div>`;
+  // mazos y notas: siempre en lista
+  if(true) return `<div class="vz-ll">${vzListRows(items, 0)}</div>`;
   return `<div class="vz-mos plain">${items.map(it=>{ const dark = vzIsDark(it.color);
     return `<button class="vz-tile plain${it.folder ? ' kind-fold' : ''}${it.doc ? ' doc' : ''}" ${it.open} style="background:${it.color};color:${dark ? '#fff' : '#1c1c1e'}"><span class="vz-more" ${it.more} title="Opciones">⋯</span><b>${escapeHtml(it.name)}</b>${it.sub ? `<small>${escapeHtml(it.sub)}</small>` : ''}</button>`; }).join('')}</div>`;
 }
