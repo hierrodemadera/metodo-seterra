@@ -1910,7 +1910,7 @@ function saveLocal(){
 let debouncedSaveTimer;
 function debouncedSave(){
   clearTimeout(debouncedSaveTimer);
-  debouncedSaveTimer = setTimeout(saveLocal, 400);
+  debouncedSaveTimer = setTimeout(()=> saveLocal(), 400);
 }
 
 async function loadLocalNotasRaw(){
@@ -4831,7 +4831,7 @@ document.getElementById('type-zoom-input').addEventListener('keydown', (e)=>{
   if(e.key === 'Enter'){ e.preventDefault(); submitTypeZoom(); }
   else if(e.key === 'Escape'){ e.preventDefault(); closeTypeZoom(); }
 });
-document.getElementById('end-back').addEventListener('click', backToDecks);
+document.getElementById('end-back').addEventListener('click', ()=> backToDecks());
 
 /* ============================================================
    CLASIFICAR — cajas de colores; arrastras (o tocas y tocas) cada imagen a su grupo.
