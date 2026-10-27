@@ -1175,7 +1175,7 @@ body.pz-open{overflow:hidden;}
 .vz-row .rn{flex:1;font-weight:600;font-size:16px;min-width:0;overflow:hidden;text-overflow:ellipsis;}
 .vz-row .rs{opacity:.5;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40%;}
 .vz-sq{width:28px;height:28px;border-radius:8px;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);}
-.vz-sq.ph{width:44px;height:44px;background-size:cover;background-position:center;}
+.vz-sq.ph{width:52px;height:52px;background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#fff !important;}
 /* filas (estanterías que se deslizan en horizontal) */
 .vz-shelf{display:flex;gap:10px;align-items:stretch;margin:12px 0;}
 .vz-shh{flex:0 0 170px;border-radius:16px;padding:14px !important;text-align:left;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;box-shadow:0 1px 4px rgba(0,0,0,.16);}
@@ -1456,6 +1456,37 @@ body.vz-main #vz-toggle{display:none;}
 .vz-sw.pick:hover{transform:scale(1.15);}
 .vz-ll .vz-sw{width:22px;height:22px;border-radius:6px;}
 .vz-ll .vz-sw.f{width:26px;border-radius:3px;}
+
+
+/* ===== ESQUEMAS ===== */
+/* bloque vivo (pizarra y visor) */
+.pz-block{border-radius:16px;display:flex;flex-direction:column;justify-content:center;padding:0 2.4em 0 .9em;box-sizing:border-box;box-shadow:0 1px 3px rgba(0,0,0,.2);overflow:hidden;line-height:1.15;}
+.pz-block .bkp{font-size:.62em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pz-block .bkn{font-size:1.05em;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pz-block .bkc{font-size:.68em;opacity:.8;margin-top:.15em;}
+.pz-block .bkplay,.pz-block .bkchev{display:none;}
+.pz-block.gone{opacity:.45;}
+.pzv .pz-block .bkplay{display:flex;position:absolute;right:.45em;top:50%;transform:translateY(-50%);width:1.7em;height:1.7em;border-radius:50%;background:rgba(255,255,255,.92);color:#1c1c1e;align-items:center;justify-content:center;font-size:.8em;padding-left:.12em;box-sizing:border-box;box-shadow:0 1px 3px rgba(0,0,0,.25);}
+.pzv .pz-block .bkchev{display:block;position:absolute;left:50%;bottom:.15em;width:.5em;height:.5em;margin-left:-.25em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);opacity:.55;}
+.pzv .pz-block.open .bkchev{transform:rotate(-135deg);bottom:.05em;}
+.pzv .pz-block.open{box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(0,0,0,.18);}
+/* tarjetas desplegadas de un bloque */
+.pzv-exp{position:absolute;z-index:20;background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.22),0 0 0 2px var(--bc);padding:12px;box-sizing:border-box;}
+.pzv-en{margin:0 2px 10px;font-size:14px;line-height:1.4;color:#555;white-space:pre-wrap;}
+.pzv-eg{display:grid;gap:8px;}
+.pzv-ec{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border-radius:10px;padding:4px 2px;}
+.pzv-ec i{width:88px;height:88px;border-radius:10px;background:#f4f4f6 center/contain no-repeat;}
+.pzv-ec span{font-size:12px;font-weight:600;text-align:center;line-height:1.2;max-width:96px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:#1c1c1e;}
+/* recorrido */
+.pzv-tour{position:absolute;left:10px;bottom:10px;display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.96);border-radius:20px;padding:3px;box-shadow:0 1px 6px rgba(0,0,0,.2);max-width:calc(100% - 170px);}
+.pzv-tour button{width:34px;height:34px;border-radius:17px;border:0;background:#1c1c1e;color:#fff;font-size:20px;line-height:1;cursor:pointer;flex-shrink:0;}
+.pzv-tn{font-size:14px;font-weight:600;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+/* pestaña */
+.vz-schv{margin:6px 0 0;border-radius:16px;background:#fbfbfc;box-shadow:0 1px 4px rgba(0,0,0,.12);overflow:hidden;}
+.pz-bdot{width:14px;height:14px;border-radius:4px;flex-shrink:0;margin-right:8px;}
+#pz.scheme #pz-title span{color:#5e5ce6;}
+@media (max-width:600px){ #vz .vz-tab{padding:0 9px;font-size:14px;} .pzv-tour{max-width:calc(100% - 150px);} .pzv-tn{font-size:12px;} }
+#pz .pz-row button.on,#pz-attach .pz-row button.on{color:#fff !important;}
 
 </style>
 </head>
@@ -2000,6 +2031,7 @@ document.getElementById('btn-refresh').addEventListener('click', async ()=>{
     tree = normalizeTree(remote.tree || remote || []);
     const rn = normalizeRemoteNotas(remote.notas);
     if(rn) notas = rn;
+    if(Array.isArray(remote.esquemas)){ esquemas = remote.esquemas; saveEsq(true); }
     saveLocal();
     saveLocalNotas();
     renderTree('tree-b', true);
@@ -5350,7 +5382,7 @@ document.getElementById('back-review').addEventListener('click', ()=> showJugarW
    EXPORT / IMPORT
    ============================================================ */
 document.getElementById('btn-export').addEventListener('click', ()=>{
-  const blob = new Blob([JSON.stringify({tree, notas, exportedAt: Date.now()}, null, 0)], {type:'application/json'});
+  const blob = new Blob([JSON.stringify({tree, notas, esquemas, exportedAt: Date.now()}, null, 0)], {type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'data.json';
@@ -5448,6 +5480,7 @@ document.getElementById('input-import-file').addEventListener('change', (e)=>{
       if(tree.length && !confirm('Esto reemplazará tu biblioteca actual. ¿Continuar?')) return;
       tree = normalizeTree(incoming);
       saveLocal();
+      if(Array.isArray(data.esquemas)){ esquemas = data.esquemas; saveEsq(true); }
       const rn = normalizeRemoteNotas(data.notas);
       if(rn){
         notas = rn;
@@ -6370,7 +6403,7 @@ const VZICO = {
 function vzBuild(){
   vzEl = document.createElement('div'); vzEl.id = 'vz';
   vzEl.innerHTML = `<div class="vz-top">
-      <div class="vz-bar vz-tabs"><button class="vz-tab" data-tab="mazos">Mazos</button><button class="vz-tab" data-tab="notas">Notas</button></div>
+      <div class="vz-bar vz-tabs"><button class="vz-tab" data-tab="mazos">Mazos</button><button class="vz-tab" data-tab="notas">Notas</button><button class="vz-tab" data-tab="esquemas">Esquemas</button></div>
       <div class="vz-bar vz-nav"><button class="vz-b" data-v="back" aria-label="Atrás">${VZICO.back}</button><button class="vz-b" data-v="fwd" aria-label="Adelante">${VZICO.fwd}</button><button class="vz-b" data-v="home" aria-label="Inicio">${VZICO.home}</button><div class="vz-crumb"></div></div>
       <div class="vz-bar vz-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px;opacity:.6;flex-shrink:0"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input type="text" inputmode="search" enterkeyhint="search" placeholder="buscar tarjeta, etiqueta…" autocomplete="off" spellcheck="false"></div>
       <div class="vz-bar vz-pzb"><button class="vz-b" data-v="pz" title="Pizarra" aria-label="Pizarra">${VZICO.pz}</button></div>
@@ -6402,7 +6435,7 @@ function vzFwd(){ if(vzPos < vzStack.length - 1){ vzPos++; vzRender(true); } }
 function vzOpen(){ if(!vzEl) vzBuild(); vzEl.classList.add('open'); document.body.classList.add('vz-on'); vzSetTog(); vzRender(true); }
 function vzClose(){ if(vzEl) vzEl.classList.remove('open'); vzClosePop(); document.body.classList.remove('vz-on'); vzSetTog(); }
 /* pantallas que se pueden ver como esquema radial */
-function vzIsRad(){ const s = vzCur(); if(s.t !== 'deck') return false; const n = findNode(s.id); return !!(n && n.mode === 'barajado' && ['scheme', 'pano'].includes(vzDeckView(n))); }
+function vzIsRad(){ const s = vzCur(); if(s.t === 'scheme') return true; if(s.t !== 'deck') return false; const n = findNode(s.id); return !!(n && n.mode === 'barajado' && ['scheme', 'pano'].includes(vzDeckView(n))); }
 function vzIsRadOld(){
   const s = vzCur(); if(vzMode !== 'radial') return false;
   if(s.t === 'root') return tree.length > 0 && tree.length <= 14;
@@ -6414,13 +6447,14 @@ function vzIsRadOld(){
 function vzCrumb(){
   const s = vzCur(), c = vzEl.querySelector('.vz-crumb');
   const parts = [];
-  const node = s.id ? (vzIsNotes(s) ? findNotaNode(s.id) : findNode(s.id)) : null;
-  const home = vzTab === 'notas' ? 'NOTAS' : 'MAZOS';
+  const node = vzFindFor(s);
+  const home = vzTab === 'notas' ? 'NOTAS' : vzTab === 'esquemas' ? 'ESQUEMAS' : 'MAZOS';
   vzEl.querySelectorAll('.vz-tab').forEach(b=> b.classList.toggle('on', b.dataset.tab === vzTab));
-  if(s.t === 'root' || (s.t === 'notes' && !s.id)) parts.push(home);
+  if(s.t === 'root' || (s.t === 'notes' && !s.id) || (s.t === 'schemes' && !s.id)) parts.push(home);
   else {
     parts.push(`<a data-v="home">${home}</a>`);
     if(s.t === 'search') parts.push('Búsqueda');
+    else if(vzIsSch(s)){ esqPath(node.id).forEach(p=> parts.push(`<a data-sopen="${p.id}">${escapeHtml(p.name)}</a>`)); parts.push(escapeHtml(node.name)); }
     else if(vzIsNotes(s)){
       { vzNotaPath(node.id).forEach(p=> parts.push(`<a data-notes="${p.id}">${escapeHtml(p.name)}</a>`)); parts.push(escapeHtml(node.name)); }
     }
@@ -6446,8 +6480,8 @@ function vzRender(anim){
   vzCrumb(); vzClosePop(); vzCardPopClose();
   const s = vzCur(), y = anim ? 0 : vzBody.scrollTop;
   vzBody.className = 'vz-body';
-  const node = s.id ? (vzIsNotes(s) ? findNotaNode(s.id) : findNode(s.id)) : null;
-  if(s.t !== 'root' && s.t !== 'search' && !(s.t === 'notes' && !s.id) && !node){ vzStack = [vzTab === 'notas' ? { t: 'notes', id: null } : { t: 'root' }]; vzPos = 0; return vzRender(true); }
+  const node = vzFindFor(s);
+  if(s.t !== 'root' && s.t !== 'search' && !(s.t === 'notes' && !s.id) && !(s.t === 'schemes' && !s.id) && !node){ vzStack = [vzHomeState()]; vzPos = 0; return vzRender(true); }
   if(s.t === 'edit'){ vzHost('b', 'edit:' + s.id + ':' + (s.cid || ''), ()=>{ vzOpenEditor(s.id); if(s.cid) setTimeout(()=>{ selectCard(s.cid); const el = document.querySelector(`#tarjetas-grid .card-item[data-id="${s.cid}"]`); if(el) el.scrollIntoView({ block: 'center' }); }, 60); }); return; }
   if(s.t === 'note'){ vzHost('n', 'note:' + s.id, ()=> vzOpenNote(s.id)); return; }
   vzUnhost();
@@ -6458,6 +6492,8 @@ function vzRender(anim){
   else if(s.t === 'all') vzDeck(node);
   else if(s.t === 'group') vzGroupScreen(node, s.v);
   else if(s.t === 'card') vzCard(node, s.cid, s.v);
+  else if(s.t === 'schemes') vzSchemes(node);
+  else if(s.t === 'scheme') vzScheme(node);
   else vzSearch();
   vzBody.scrollTop = y;
   vzLoadImgs();
@@ -6584,7 +6620,7 @@ let vzLibView = { mazos: 'grid', notas: 'grid' };
 try{ Object.assign(vzLibView, JSON.parse(localStorage.getItem('seterra_vz_lib') || '{}')); }catch(e){}
 function vzViewSeg(tab){ const v = vzLibView[tab]; return `<span class="vz-seg"><button data-libview="${tab}|grid" class="${v === 'grid' ? 'on' : ''}" title="Módulos">${VZICO.mosaic}</button><button data-libview="${tab}|list" class="${v === 'list' ? 'on' : ''}" title="Lista">${VZICO.list}</button></span>`; }
 function vzSwitchTab(tab){
-  if(tab === vzTab){ vzGo(tab === 'notas' ? { t: 'notes', id: null } : { t: 'root' }); return; }
+  if(tab === vzTab){ vzGo(vzHomeState()); return; }
   vzTabState[vzTab] = { stack: vzStack, pos: vzPos };
   vzTab = tab; vzStack = vzTabState[tab].stack; vzPos = vzTabState[tab].pos;
   vzRender(true);
@@ -6624,11 +6660,11 @@ function vzSplit(node, cards, cat){
   if(none.length) out.push({ v: TAG_NONE, name: 'Sin ' + cat.name.toLowerCase(), color: '#8e8e93', cards: none });
   return out;
 }
-function vzDeckView(node){ return ['scheme', 'mosaic', 'list', 'pano'].includes(node.vzView) ? node.vzView : 'scheme'; }
+function vzDeckView(node){ return ['mosaic', 'list'].includes(node.vzView) ? node.vzView : 'mosaic'; }
 /* la página del mazo: esquema, mosaico o lista de sus grupos (solo aquí se cambia la vista) */
 function vzDeckHome(node){
   const cat = vzCat(node), groups = vzGroups(node).filter(g=> g.cards.length);
-  if(!cat || groups.length < 2) return vzDeck(node);
+  if(!cat || groups.length < 2) return vzDeck(node, true);
   const view = vzDeckView(node), enc = g=> encodeURIComponent(vzGKey(g));
   let body = '';
   if(view === 'scheme') body = `<div class="vz-radw" id="vz-radw"></div>`;
@@ -6803,7 +6839,7 @@ function vzFolder(node){
 function vzDeckActions(node, home){
   const cats = tagCats(node).filter(c=> valuesOf(node, c.id, node.photos || []).length), cur = vzCat(node), sub = vzSubCat(node), view = vzDeckView(node);
   const hasGroups = cur && vzGroups(node).filter(g=> g.cards.length).length > 1;
-  const seg = home && hasGroups ? `<span class="vz-fsp"></span><span class="vz-seg big">${[['scheme', VZICO.tree, 'Esquema'], ['mosaic', VZICO.mosaic, 'Mosaico'], ['list', VZICO.list, 'Lista'], ['pano', VZICO.pano, 'Panorama: todas las tarjetas']].map(([v, ic, t])=> `<button data-dview="${v}" class="${view === v ? 'on' : ''}" title="${t}">${ic}</button>`).join('')}</span>` : '';
+  const seg = home && (node.photos || []).length ? `<span class="vz-fsp"></span><span class="vz-seg big">${[['mosaic', VZICO.mosaic, 'Módulos'], ['list', VZICO.list, 'Lista']].map(([v, ic, t])=> `<button data-dview="${v}" class="${view === v ? 'on' : ''}" title="${t}">${ic}</button>`).join('')}</span>` : '';
   const subs = cur ? cats.filter(c=> c.id !== cur.id) : [];
   return `<div class="vz-chips">
     <button class="vz-chip vz-play" data-play="${node.id}">${VZICO.play}Jugar</button>
@@ -6813,8 +6849,7 @@ function vzDeckActions(node, home){
     ${home && hasGroups ? `<button class="vz-chip" data-all="${node.id}">${VZICO.list}Todas las tarjetas</button>` : ''}
     ${seg}
   </div>
-  ${cats.length ? `<div class="vz-chips vz-grp"><span class="vz-chl">Agrupar por</span>${cats.map(c=> `<button class="vz-chip${cur && cur.id === c.id ? ' on' : ''}" data-gcat="${c.id}">${escapeHtml(c.name)}</button>`).join('')}<button class="vz-chip${!cur ? ' on' : ''}" data-gcat="">Sin agrupar</button>
-    ${subs.length ? `<span class="sep"></span><span class="vz-chl">Subgrupos</span>${subs.map(c=> `<button class="vz-chip${sub && sub.id === c.id ? ' on' : ''}" data-scat="${c.id}">${escapeHtml(c.name)}</button>`).join('')}<button class="vz-chip${!sub ? ' on' : ''}" data-scat="">Ninguno</button>` : ''}</div>` : ''}`;
+`;
 }
 /* tarjeta pequeña: foto y nombre (en las listas que se despliegan) */
 function vzCardMini(node, p, color, v){
@@ -6848,16 +6883,18 @@ function vzGroupHead(node, g, lvl){
   return `<div class="vz-gh lv${lvl || 1}"><button class="vz-gchip" data-grp="${node.id}|${encodeURIComponent(g.v == null ? '' : g.v)}" style="background:${vzShade(g.color, (lvl || 1) - 1)};color:${(lvl || 1) === 1 && dark ? '#fff' : '#1c1c1e'}">${escapeHtml(g.name)}<small>${g.cards.length}</small></button>${g.v != null && g.v !== TAG_NONE ? `<button class="vz-colorbtn sm" data-gcolor="${node.id}|${encodeURIComponent(g.v)}" title="Color del grupo" style="background:${g.color}"></button>` : ''}</div>${g.note ? `<div class="vz-note-t">${escapeHtml(g.note)}</div>` : ''}`;
 }
 function vzCardsBlock(node, g){
-  const grid = cards=> `<div class="vz-cgrid">${cards.map(p=> vzCardMini(node, p, g.color, g.v)).join('')}</div>`;
+  // módulos: tarjetas grandes; lista: filas con foto pequeña y nombre
+  const grid = vzDeckView(node) === 'list' ? cards=> `<div class="vz-list">${cards.map(p=> vzCardRow(node, p, g.color, g.v)).join('')}</div>`
+    : cards=> `<div class="vz-cgrid">${cards.map(p=> vzCardMini(node, p, g.color, g.v)).join('')}</div>`;
   const sc = vzSubCat(node);
   if(!sc) return `<div class="vz-cbody">${grid(g.cards)}</div>`;
   const parts = vzSplit(node, g.cards, sc);
   if(parts.length === 1 && parts[0].v === TAG_NONE) return `<div class="vz-cbody">${grid(g.cards)}</div>`;
   return `<div class="vz-cbody">${parts.map(x=> `<div class="vz-subh"><i style="background:${x.color}"></i>${escapeHtml(x.name)}<small>${x.cards.length}</small></div>${grid(x.cards)}`).join('')}</div>`;
 }
-function vzDeck(node){
+function vzDeck(node, home){
   const groups = vzGroups(node), cat = vzCat(node);
-  const head = vzHeader(node, vzDeckActions(node));
+  const head = vzHeader(node, vzDeckActions(node, home));
   if(vzIsRad()){
     // esquema: el mazo en el centro y sus grupos alrededor (con la cabecera arriba)
     vzRadial(node.name, groups.length + ' grupos · ' + vzDeckCount(node) + ' tarjetas', groups.map(g=> ({ attr: `data-grp="${node.id}|${encodeURIComponent(g.v == null ? '' : g.v)}"`, label: g.name, sub: g.cards.length + ' tarjetas', color: g.color })), vzColor(node), 54);
@@ -6977,11 +7014,12 @@ function vzColorPop(anchor, cur, onPick, onReset){
 function vzClick(e){
   const t = e.target;
   if(t.closest('#vz > .view')) return; // dentro de los editores mandan sus propios botones
+  if(esqClick(e, t)) return;
   if(t.closest('#vz-pop')) return;
   const v = t.closest('[data-v]');
   if(v){ const a = v.dataset.v;
     if(a === 'back') vzBack(); if(a === 'fwd') vzFwd();
-    if(a === 'home'){ vzQ = ''; vzEl.querySelector('.vz-search input').value = ''; vzGo(vzTab === 'notas' ? { t: 'notes', id: null } : { t: 'root' }); }
+    if(a === 'home'){ vzQ = ''; vzEl.querySelector('.vz-search input').value = ''; vzGo(vzHomeState()); }
     if(a === 'pz' && window.pizarra) window.pizarra.open();
     return; }
   const vm = t.closest('[data-vm]'); if(vm){ vzSetMode(vm.dataset.vm); vzRender(); return; }
@@ -7097,7 +7135,6 @@ function vzMoreMenu(anchor, n){
   if(i > 0) items.push(['Mover antes', ()=>{ if(vzReorder(arr, n, -1)) saveLocal(); }]);
   if(i < arr.length - 1) items.push(['Mover después', ()=>{ if(vzReorder(arr, n, 1)) saveLocal(); }]);
   if(deck) items.push(['Exportar mazo', ()=> exportDeck(n)]);
-  if(deck && n.mode === 'barajado' && window.pizarra) items.push(['Volver al esquema automático', ()=>{ if(!confirm('¿Quitar el esquema personalizado de este mazo? (la pizarra va a «Eliminadas recientemente»)')) return; window.pizarra.resetScheme(n.id).then(ok=>{ toast(ok ? 'Esquema automático' : 'Este mazo no tenía esquema personalizado'); vzRender(); }); }]);
   items.push(['__sep__']);
   items.push([deck ? 'Eliminar mazo' : 'Eliminar carpeta', ()=> deleteNode(n), true]);
   openMenuAt(anchor, items);
@@ -7195,6 +7232,329 @@ window.seterraApi = {
   onClose(){ if(vzEl && vzEl.classList.contains('open')) vzRender(); }
 };
 window.vista = { open: vzOpen, close: vzClose };
+
+
+/* ================= ESQUEMAS =================
+   Pestaña propia. Un esquema es una pizarra «especial»: se ve fija (solo para navegar y estudiar)
+   y se edita en la pizarra. Se guardan con los mazos y las notas (data.json → «esquemas»).
+   esquema = { id, type:'scheme', name, color?, created, updated, board:{ items, scenes, opts }, assets:{ id: dataURL } }
+   carpeta = { id, type:'folder', name, color?, expanded, children:[...] } */
+const KEY_ESQ = 'metodo_seterra_esquemas_v1';
+let esquemas = [];
+let esqSaveT = 0;
+function saveEsq(now){
+  clearTimeout(esqSaveT);
+  const go = ()=>{
+    const raw = JSON.stringify(esquemas);
+    (useIdb ? idbSet(KEY_ESQ, raw) : Promise.reject()).catch(()=>{ try{ localStorage.setItem(KEY_ESQ, raw); }catch(e){ toast('No se pudo guardar el esquema'); } });
+  };
+  if(now) go(); else esqSaveT = setTimeout(go, 300);
+}
+async function loadEsq(){
+  let raw = null;
+  try{ if(useIdb) raw = await idbGet(KEY_ESQ); }catch(e){}
+  if(raw == null){ try{ raw = localStorage.getItem(KEY_ESQ); }catch(e){} }
+  if(raw == null) return false;
+  try{ esquemas = typeof raw === 'string' ? JSON.parse(raw) : raw; }catch(e){ esquemas = []; }
+  if(!Array.isArray(esquemas)) esquemas = [];
+  return true;
+}
+function esqFind(id, nodes){ for(const n of (nodes || esquemas)){ if(n.id === id) return n; if(n.type === 'folder'){ const f = esqFind(id, n.children || []); if(f) return f; } } return null; }
+function esqParentArr(id, nodes){ nodes = nodes || esquemas; for(const n of nodes){ if(n.id === id) return nodes; if(n.type === 'folder'){ const f = esqParentArr(id, n.children || []); if(f) return f; } } return null; }
+function esqParent(id, nodes, parent){ for(const n of (nodes || esquemas)){ if(n.id === id) return parent || null; if(n.type === 'folder'){ const f = esqParent(id, n.children || [], n); if(f !== undefined) return f; } } return undefined; }
+function esqPath(id){ const out = []; let p = esqParent(id); while(p){ out.unshift(p); p = esqParent(p.id); } return out; }
+function esqCount(n){ return n.type === 'folder' ? (n.children || []).reduce((a, k)=> a + esqCount(k), 0) : 1; }
+function esqWithin(root, id){ if(root.id === id) return true; return root.type === 'folder' && (root.children || []).some(c=> esqWithin(c, id)); }
+const VZ_SCH = '#5e5ce6', VZ_SFOLD = '#8e8e93';
+function esqColor(n){ return n.color || (n.type === 'folder' ? VZ_SFOLD : VZ_SCH); }
+function esqNew(name, board, assets){ return { id: 'e' + uid(), type: 'scheme', name: name || 'Esquema', created: Date.now(), updated: Date.now(), board: board || { items: [], scenes: [] }, assets: assets || {} }; }
+function esqSub(sc){
+  const its = (sc.board && sc.board.items) || [];
+  const nb = its.filter(i=> i.t === 'block').length, nc = its.filter(i=> i.t === 'card').length, ns = ((sc.board && sc.board.scenes) || []).length;
+  const out = [];
+  if(nb) out.push(nb + (nb === 1 ? ' bloque' : ' bloques'));
+  if(nc) out.push(nc + (nc === 1 ? ' tarjeta' : ' tarjetas'));
+  if(ns) out.push(ns + (ns === 1 ? ' paso' : ' pasos') + ' de recorrido');
+  return out.join(' · ') || 'vacío';
+}
+
+/* ---------- pestaña ---------- */
+vzTabState.esquemas = { stack: [{ t: 'schemes', id: null }], pos: 0 };
+function vzHomeState(){ return vzTab === 'notas' ? { t: 'notes', id: null } : vzTab === 'esquemas' ? { t: 'schemes', id: null } : { t: 'root' }; }
+function vzIsSch(s){ return s.t === 'schemes' || s.t === 'scheme'; }
+function vzFindFor(s){ if(!s.id) return null; return vzIsNotes(s) ? findNotaNode(s.id) : vzIsSch(s) ? esqFind(s.id) : findNode(s.id); }
+
+function esqItem(n){
+  const f = n.type === 'folder', c = f ? esqCount(n) : 0;
+  return { id: n.id, name: n.name, sub: f ? c + (c === 1 ? ' esquema' : ' esquemas') : esqSub(n), color: esqColor(n), folder: f, swatch: `data-scolor="${n.id}"`, open: `data-sopen="${n.id}"`, more: `data-smore="${n.id}"`, toggle: `data-sltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(esqItem) : null };
+}
+function vzSchemes(folder){
+  const kids = folder ? (folder.children || []) : esquemas, pid = folder ? folder.id : '';
+  const n = folder ? esqCount(folder) : esquemas.reduce((a, k)=> a + esqCount(k), 0);
+  const head = `<div class="vz-lh">${escapeHtml(folder ? folder.name : 'Esquemas')}<small>${n} ${n === 1 ? 'esquema' : 'esquemas'}</small><button class="vz-hmore" data-smenu="${pid}" title="Opciones">⋯</button></div>`;
+  const add = `<div class="vz-chips"><button class="vz-chip" data-snewfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-snew="${pid}">${VZICO.plus}Nuevo esquema</button></div>`;
+  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? `<div class="vz-ll">${vzListRows(kids.map(esqItem), 0)}</div>` : `<div class="vz-empty">${folder ? 'Carpeta vacía.' : 'Aún no hay esquemas. Crea uno en blanco o a partir de un mazo.'}</div>`}</div>`;
+}
+/* ---------- un esquema: se ve fijo, solo para navegar y estudiar ---------- */
+let esqCtl = null;
+function vzScheme(sc){
+  const col = esqColor(sc), dk = vzIsDark(col), path = esqPath(sc.id);
+  vzBody.innerHTML = `<div class="vz-fam vz-schpage">
+    <div class="vz-fh" style="background:${col};color:${dk ? '#fff' : '#1c1c1e'}"><div class="vz-fhp">${path.length ? path.map(p=> escapeHtml(p.name)).join(' · ') : 'Esquema'}</div><div class="vz-fht">${escapeHtml(sc.name)}</div><div class="vz-fhs">${escapeHtml(esqSub(sc))}</div>
+      <button class="vz-hmore" data-smore="${sc.id}" title="Opciones">⋯</button><button class="vz-colorbtn" data-scolor="${sc.id}" title="Cambiar color" style="background:${col}"></button></div>
+    <div class="vz-chips"><button class="vz-chip vz-play" data-splay="${sc.id}">${VZICO.play}Jugar todo el esquema</button><button class="vz-chip" data-sedit="${sc.id}">${VZICO.edit}Editar</button></div>
+    <div class="vz-radw vz-schv" id="vz-schv"></div></div>`;
+  const el = document.getElementById('vz-schv');
+  el.style.height = Math.max(420, vzBody.clientHeight - (el.getBoundingClientRect().top - vzBody.getBoundingClientRect().top) - 12) + 'px';
+  esqCtl = null;
+  if(!window.pizarra || !window.pizarra.viewData){ el.innerHTML = '<div class="vz-empty">No se pudo abrir el visor.</div>'; return; }
+  if(!((sc.board && sc.board.items) || []).length){ el.innerHTML = `<div class="vz-empty" style="padding:40px 20px">Este esquema está vacío. Toca «Editar» para dibujarlo en la pizarra.</div>`; return; }
+  window.pizarra.viewData({ items: sc.board.items || [], scenes: sc.board.scenes || [], assets: sc.assets || {} }, el, {
+    key: 'esq:' + sc.id,
+    onCard: (deck, cid, order)=> vzCardPop(deck, cid, order),
+    onPlay: ref=> esqPlayRef(ref)
+  }).then(c=>{ esqCtl = c; }).catch(()=>{});
+}
+/* ---------- bloques vivos: un mazo, un grupo o un subgrupo, siempre al día ---------- */
+function esqMatch(p, cat, v){ const vals = tagVals(p, cat); return v === TAG_NONE ? !vals.length : vals.includes(v); }
+function esqBlock(ref){
+  const n = ref && findNode(ref.deck);
+  if(!n || n.mode !== 'barajado') return { exists: false, name: (ref && ref.label) || 'Bloque', path: 'ya no existe', color: '#8e8e93', count: 0, cards: [] };
+  let cards = (n.photos || []).filter(p=> p.image || p.label), name = n.name, color = vzColor(n), path = 'Mazo', note = '';
+  if(ref.cat && ref.v != null){
+    const c = tagCat(n, ref.cat);
+    cards = cards.filter(p=> esqMatch(p, ref.cat, ref.v));
+    name = ref.v === TAG_NONE ? 'Sin ' + (c ? c.name.toLowerCase() : 'grupo') : ref.v; color = ref.v === TAG_NONE ? '#8e8e93' : tagColor(n, ref.cat, ref.v); path = n.name;
+    note = ((n.tagNotes || {})[ref.cat] || {})[ref.v] || '';
+    if(ref.scat && ref.sv != null){
+      const c2 = tagCat(n, ref.scat);
+      cards = cards.filter(p=> esqMatch(p, ref.scat, ref.sv));
+      path = name; name = ref.sv === TAG_NONE ? 'Sin ' + (c2 ? c2.name.toLowerCase() : 'subgrupo') : ref.sv; color = ref.sv === TAG_NONE ? '#8e8e93' : tagColor(n, ref.scat, ref.sv);
+      note = ((n.tagNotes || {})[ref.scat] || {})[ref.sv] || '';
+    }
+  }
+  return { exists: true, name, path, color, note, count: cards.length, cards: cards.map(p=> ({ cid: p.id, name: vzLabel(p), image: p.image || '' })) };
+}
+function esqBlockTree(){
+  const out = [];
+  (function walk(ns){ ns.forEach(n=>{
+    if(n.type === 'folder') return walk(n.children || []);
+    if(n.mode !== 'barajado') return;
+    const cat = vzCat(n), sc = vzSubCat(n);
+    out.push({ ref: { deck: n.id }, name: n.name, color: vzColor(n), count: vzDeckCount(n), depth: 0 });
+    if(cat) vzGroups(n).filter(g=> g.cards.length).forEach(g=>{
+      out.push({ ref: { deck: n.id, cat: cat.id, v: g.v }, name: g.name, color: g.color, count: g.cards.length, depth: 1 });
+      if(sc) vzSplit(n, g.cards, sc).filter(x=> x.v !== TAG_NONE).forEach(x=> out.push({ ref: { deck: n.id, cat: cat.id, v: g.v, scat: sc.id, sv: x.v }, name: x.name, color: x.color, count: x.cards.length, depth: 2 }));
+    });
+  }); })(tree);
+  return out;
+}
+/* ---------- estudiar desde el esquema ---------- */
+function esqPlayRef(ref){
+  const n = ref && findNode(ref.deck); if(!n) return toast('Ese mazo ya no existe');
+  n.playFilter = {};
+  if(ref.cat && ref.v != null) n.playFilter[ref.cat] = [ref.v];
+  if(ref.scat && ref.sv != null) n.playFilter[ref.scat] = [ref.sv];
+  saveLocal(); openGamePicker(n.id);
+}
+const esqPlayNodes = {};
+function esqPlayAll(sc){
+  const by = new Map(), add = (d, c)=>{ if(!by.has(d)) by.set(d, new Set()); by.get(d).add(c); };
+  ((sc.board && sc.board.items) || []).forEach(it=>{
+    if(it.t === 'card' && it.deck) add(it.deck, it.cid);
+    if(it.t === 'block' && it.ref){ esqBlock(it.ref).cards.forEach(c=> add(it.ref.deck, c.cid)); }
+  });
+  const photos = [], cats = [], notes = {}, cols = {};
+  by.forEach((ids, d)=>{
+    const n = findNode(d); if(!n) return;
+    (n.photos || []).forEach(p=>{ if(ids.has(p.id) && !photos.includes(p)) photos.push(p); });
+    tagCats(n).forEach(c=>{ if(!cats.some(x=> x.id === c.id)) cats.push(c); });
+    Object.entries(n.tagNotes || {}).forEach(([k, v])=> notes[k] = Object.assign({}, v, notes[k] || {}));
+    Object.entries(n.tagValColors || {}).forEach(([k, v])=> cols[k] = Object.assign({}, v, cols[k] || {}));
+  });
+  if(!photos.some(p=> p.image)) return toast('Este esquema no tiene tarjetas ni bloques de mazos');
+  // un «mazo» de paso con todas las tarjetas que salen en el esquema (aunque sean de mazos distintos)
+  const node = esqPlayNodes[sc.id] = Object.assign(esqPlayNodes[sc.id] || { id: 'esq-' + sc.id, type: 'tema', mode: 'barajado', cols: 3 }, { name: sc.name, photos, tagCats: cats, tagNotes: notes, tagValColors: cols, playFilter: {} });
+  openModeChooser(node);
+}
+/* ---------- crear un esquema automáticamente a partir de un mazo ---------- */
+function esqFromDeck(deckId){
+  const n = findNode(deckId); if(!n) return null;
+  const cat = vzCat(n), sc = vzSubCat(n), groups = cat ? vzGroups(n).filter(g=> g.cards.length) : [];
+  const id = ()=> 'i' + uid(), items = [], scenes = [];
+  const fci = /razas de perros/i.test(n.name) && sc && sc.id === 'cat_seccion';
+  const CW = 400, GAP = 70, COLS = Math.max(1, Math.min(4, groups.length || 1));
+  const totalW = COLS * CW + (COLS - 1) * GAP;
+  const col = vzColor(n);
+  items.push({ id: id(), t: 'text', x: 0, y: 4, w: totalW - 420, h: 80, fs: 54, bold: true, color: '#1c1c1e', text: n.name });
+  items.push({ id: id(), t: 'block', ref: { deck: n.id }, x: totalW - 380, y: 0, w: 380, h: 92 });
+  const intro = fci
+    ? 'Las razas se ordenan como lo hace la FCI (Federación Cinológica Internacional): en grupos según el trabajo para el que se criaron y, dentro de cada grupo, en secciones.\nToca un bloque para desplegar sus tarjetas, toca una tarjeta para verla entera y usa ▶ para jugar solo ese grupo o sección.'
+    : 'Toca un bloque para desplegar sus tarjetas, toca una tarjeta para verla entera y usa ▶ para jugar solo ese grupo' + (sc ? ' o subgrupo.' : '.');
+  const introH = 46 + Math.ceil(intro.length / (totalW / 11)) * 28 + (intro.split('\n').length - 1) * 28;
+  items.push({ id: id(), t: 'note', x: 0, y: 116, w: totalW, h: introH, fs: 20, align: 'left', fill: '#fff3c4', text: intro });
+  let y = 116 + introH + 60, x = 0, rowH = 0, colI = 0;
+  if(!groups.length){
+    items.push({ id: id(), t: 'note', x: 0, y, w: CW, h: 120, fs: 18, fill: '#e4e4e6', text: 'Este mazo aún no tiene grupos: añade etiquetas en Editar → etiquetas y vuelve a crear el esquema.' });
+  }
+  groups.forEach(g=>{
+    if(colI === COLS){ colI = 0; x = 0; y += rowH + GAP; rowH = 0; }
+    let yy = y;
+    items.push({ id: id(), t: 'block', ref: { deck: n.id, cat: cat.id, v: g.v }, x, y: yy, w: CW, h: 92 }); yy += 92 + 14;
+    if(g.note){ const h = 30 + Math.ceil(g.note.length / 36) * 23; items.push({ id: id(), t: 'note', x, y: yy, w: CW, h, fs: 16, align: 'left', fill: vzMix(g.color, .2), text: g.note }); yy += h + 16; }
+    const subs = sc ? vzSplit(n, g.cards, sc).filter(s=> s.v !== TAG_NONE) : [];
+    if(subs.length){
+      const top = yy;
+      subs.forEach(s=>{
+        items.push({ id: id(), t: 'block', ref: { deck: n.id, cat: cat.id, v: g.v, scat: sc.id, sv: s.v }, x: x + 30, y: yy, w: CW - 30, h: 66 }); yy += 66;
+        const sn = ((n.tagNotes || {})[sc.id] || {})[s.v];
+        if(sn){ const h = 18 + Math.ceil(sn.length / 34) * 20; items.push({ id: id(), t: 'text', x: x + 36, y: yy + 4, w: CW - 40, h, fs: 14, color: '#6e6e73', text: sn }); yy += h + 6; }
+        yy += 12;
+      });
+      items.push({ id: id(), t: 'shape', kind: 'rrect', x: x + 10, y: top, w: 7, h: yy - top - 12, fill: g.color, stroke: '#1c1c1e', sw: 0, fs: 10, text: '' });
+    }
+    const h = yy - y;
+    scenes.push({ name: g.name, x: x - 30, y: y - 30, w: CW + 60, h: h + 60 });
+    rowH = Math.max(rowH, h); x += CW + GAP; colI++;
+  });
+  const H = y + rowH;
+  scenes.unshift({ name: 'Todo', x: -40, y: -40, w: totalW + 80, h: H + 80 });
+  return { items, scenes, opts: { grid: true } };
+}
+/* el primer esquema de ejemplo: los perros por grupos y secciones de la FCI */
+function esqSeed(){
+  let made = 0;
+  (function walk(ns){ ns.forEach(d=>{
+    if(d.type === 'folder') return walk(d.children || []);
+    if(d.mode === 'barajado' && /razas de perros/i.test(d.name || '') && !made){
+      const b = esqFromDeck(d.id); if(!b) return;
+      const sc = esqNew('Razas de perros (grupos FCI)', b, {}); sc.color = vzColor(d); esquemas.push(sc); made++;
+    }
+  }); })(tree);
+  return made;
+}
+/* ---------- menús ---------- */
+function esqFolders(nodes, depth, out){ (nodes || esquemas).forEach(n=>{ if(n.type === 'folder'){ out.push([n, depth]); esqFolders(n.children || [], depth + 1, out); } }); return out; }
+function esqMove(n, folder){
+  const arr = esqParentArr(n.id); if(!arr) return;
+  arr.splice(arr.indexOf(n), 1);
+  if(folder){ folder.children = folder.children || []; folder.children.push(n); folder.expanded = true; toast('Movido a «' + folder.name + '»'); }
+  else { esquemas.push(n); toast('Movido a Esquemas'); }
+  saveEsq(); vzRender();
+}
+function esqDelete(n){
+  if(!confirm(`¿Eliminar ${n.type === 'folder' ? 'la carpeta «' + n.name + '» y todo su contenido' : 'el esquema «' + n.name + '»'}? No se puede deshacer.`)) return;
+  const arr = esqParentArr(n.id); if(!arr) return;
+  const par = esqParent(n.id);
+  arr.splice(arr.indexOf(n), 1); saveEsq();
+  const st = [{ t: 'schemes', id: null }]; if(par) esqPath(par.id).concat([par]).forEach(p=> st.push({ t: 'schemes', id: p.id }));
+  vzResetTo(st);
+}
+function esqRename(n){ openPrompt('nuevo nombre', n.name, v=>{ if(!v) return; n.name = v; n.updated = Date.now(); saveEsq(); vzRender(); }); }
+function esqColorPop(anchor, n){ vzColorPop(anchor, esqColor(n), c=>{ n.color = c; saveEsq(); }, n.color ? ()=>{ delete n.color; saveEsq(); } : null); }
+function esqMenu(anchor, n){
+  const arr = esqParentArr(n.id) || esquemas, i = arr.indexOf(n), items = [];
+  if(n.type === 'folder'){ items.push(['Nuevo esquema aquí', ()=> esqNewMenu(anchor, n)]); items.push(['Nueva subcarpeta', ()=> esqNewFolder(n)]); }
+  else { items.push(['Abrir', ()=> vzGo({ t: 'scheme', id: n.id })]); items.push(['Editar en la pizarra', ()=> esqEdit(n)]); items.push(['▶ Jugar todo el esquema', ()=> esqPlayAll(n)]); }
+  items.push(['__sep__']);
+  items.push(['Renombrar', ()=> esqRename(n)]);
+  items.push(['Color…', ()=> esqColorPop(anchor, n)]);
+  items.push(['Mover a…', ()=>{
+    const list = [['Esquemas (principal)', ()=> esqMove(n, null)]];
+    esqFolders(esquemas, 0, []).forEach(([f, d])=>{ if(!esqWithin(n, f.id) && esqParentArr(n.id) !== f.children) list.push(['   '.repeat(d + 1) + f.name, ()=> esqMove(n, f)]); });
+    setTimeout(()=> openMenuAt(anchor, list), 0);
+  }]);
+  if(i > 0) items.push(['Mover antes', ()=>{ if(vzReorder(arr, n, -1)){ saveEsq(); vzRender(); } }]);
+  if(i < arr.length - 1) items.push(['Mover después', ()=>{ if(vzReorder(arr, n, 1)){ saveEsq(); vzRender(); } }]);
+  if(n.type !== 'folder'){
+    items.push(['Duplicar', ()=>{ const c = JSON.parse(JSON.stringify(n)); c.id = 'e' + uid(); c.name = n.name + ' (copia)'; c.created = c.updated = Date.now(); arr.splice(i + 1, 0, c); saveEsq(); vzRender(); }]);
+    items.push(['Exportar esquema', ()=>{ downloadJson({ format: 'seterra-esquema', version: 1, exportedAt: Date.now(), esquema: n }, (n.name || 'esquema').replace(/[\\/:*?"<>|]+/g, '') + '.esquema.json'); toast('Esquema exportado'); }]);
+  }
+  items.push(['__sep__']);
+  items.push([n.type === 'folder' ? 'Eliminar carpeta' : 'Eliminar esquema', ()=> esqDelete(n), true]);
+  openMenuAt(anchor, items);
+}
+function esqNewFolder(parent){
+  openPrompt('nombre de la carpeta', '', v=>{ if(!v) return; const f = { id: 'e' + uid(), type: 'folder', name: v, expanded: true, children: [] }; (parent ? (parent.children = parent.children || []) : esquemas).push(f); if(parent) parent.expanded = true; saveEsq(); vzRender(); });
+}
+function esqAdd(parent, sc){ (parent ? (parent.children = parent.children || []) : esquemas).push(sc); if(parent) parent.expanded = true; saveEsq(true); }
+function esqNewMenu(anchor, parent){
+  setTimeout(()=> openMenuAt(anchor, [
+    ['En blanco (lo dibujas en la pizarra)', ()=> openPrompt('nombre del esquema', '', v=>{ if(!v) return; const sc = esqNew(v, { items: [{ id: 'i' + uid(), t: 'text', x: 0, y: 0, w: 600, h: 70, fs: 48, bold: true, color: '#1c1c1e', text: v }], scenes: [] }); esqAdd(parent, sc); vzGo({ t: 'scheme', id: sc.id }); esqEdit(sc); })],
+    ['A partir de un mazo (automático)…', ()=>{
+      const ds = []; (function walk(ns, d){ ns.forEach(n=>{ if(n.type === 'folder') walk(n.children || [], d + 1); else if(n.mode === 'barajado') ds.push(n); }); })(tree, 0);
+      if(!ds.length) return toast('No hay mazos de tarjetas');
+      setTimeout(()=> openMenuAt(anchor, ds.map(d=> [d.name, ()=>{ const b = esqFromDeck(d.id); const sc = esqNew('Esquema · ' + d.name, b, {}); sc.color = vzColor(d); esqAdd(parent, sc); vzGo({ t: 'scheme', id: sc.id }); }])), 0);
+    }],
+    ['Importar esquema…', ()=> esqImportPick(parent)]
+  ]), 0);
+}
+function esqImportPick(parent){
+  let inp = document.getElementById('esq-import');
+  if(!inp){ inp = document.createElement('input'); inp.type = 'file'; inp.id = 'esq-import'; inp.accept = '.json,application/json'; inp.multiple = true; inp.style.display = 'none'; document.body.appendChild(inp); }
+  inp.onchange = async ()=>{
+    let n = 0;
+    for(const f of [...inp.files]){
+      try{
+        const d = JSON.parse(await f.text());
+        const list = d && d.esquema ? [d.esquema] : Array.isArray(d && d.esquemas) ? d.esquemas : (d && d.type === 'scheme') ? [d] : [];
+        list.forEach(sc=>{ if(!sc || (sc.type !== 'scheme' && sc.type !== 'folder')) return; const c = JSON.parse(JSON.stringify(sc)); if(esqFind(c.id)) c.id = 'e' + uid(); esqAdd(parent, c); n++; });
+      }catch(e){}
+    }
+    inp.value = '';
+    toast(n ? (n === 1 ? 'Esquema importado' : n + ' esquemas importados') : 'No se encontró ningún esquema en el archivo');
+    vzRender();
+  };
+  inp.click();
+}
+/* ---------- editar en la pizarra ---------- */
+function esqEdit(sc){ if(!window.pizarra || !window.pizarra.editData) return toast('No se pudo abrir la pizarra'); window.pizarra.editData({ id: sc.id, name: sc.name, board: sc.board || { items: [], scenes: [] }, assets: sc.assets || {} }); }
+/* la pizarra devuelve los cambios mientras editas */
+function esqSaveFromBoard(id, board, assets, name){
+  const sc = esqFind(id); if(!sc) return false;
+  sc.board = board; sc.assets = assets || {}; if(name) sc.name = name; sc.updated = Date.now();
+  saveEsq(); return true;
+}
+/* ---------- toques ---------- */
+function esqClick(e, t){
+  let x;
+  if(x = t.closest('[data-smore]')){ e.stopPropagation(); const n = esqFind(x.dataset.smore); if(n) esqMenu(x, n); return true; }
+  if(x = t.closest('[data-smenu]')){ const n = x.dataset.smenu ? esqFind(x.dataset.smenu) : null; if(n) esqMenu(x, n); else openMenuAt(x, [['Importar esquema…', ()=> esqImportPick(null)]]); return true; }
+  if(x = t.closest('[data-scolor]')){ e.stopPropagation(); const n = esqFind(x.dataset.scolor); if(n) esqColorPop(x, n); return true; }
+  if(x = t.closest('[data-sltoggle]')){ const n = esqFind(x.dataset.sltoggle); if(n){ n.expanded = !n.expanded; saveEsq(); vzRender(); } return true; }
+  if(x = t.closest('[data-snewfolder]')){ esqNewFolder(x.dataset.snewfolder ? esqFind(x.dataset.snewfolder) : null); return true; }
+  if(x = t.closest('[data-snew]')){ esqNewMenu(x, x.dataset.snew ? esqFind(x.dataset.snew) : null); return true; }
+  if(x = t.closest('[data-sedit]')){ const n = esqFind(x.dataset.sedit); if(n) esqEdit(n); return true; }
+  if(x = t.closest('[data-splay]')){ const n = esqFind(x.dataset.splay); if(n) esqPlayAll(n); return true; }
+  if(x = t.closest('[data-sopen]')){ const n = esqFind(x.dataset.sopen); if(n) vzGo({ t: n.type === 'folder' ? 'schemes' : 'scheme', id: n.id }); return true; }
+  return false;
+}
+/* enlaces a esquemas */
+{ const _f = vzFollow; vzFollow = function(l){
+  if(l && l.k === 'scheme'){ if(!esqFind(l.id)) return toast('Ese esquema ya no existe'); if(vzTab !== 'esquemas') vzSwitchTab('esquemas'); vzGo({ t: 'scheme', id: l.id }); return; }
+  return _f.apply(this, arguments);
+}; }
+Object.assign(window.seterraApi, {
+  blockInfo: ref=> esqBlock(ref),
+  blockTree: ()=> esqBlockTree(),
+  playRef: ref=> esqPlayRef(ref),
+  cardPop: (d, c, order)=> vzCardPop(d, c, order),
+  allSchemes(){ const out = []; (function walk(ns, path){ ns.forEach(n=>{ if(n.type === 'folder') walk(n.children || [], path.concat(n.name)); else out.push({ id: n.id, name: n.name, path: path.join(' / ') }); }); })(esquemas, []); return out; },
+  saveScheme: (id, board, assets, name)=> esqSaveFromBoard(id, board, assets, name),
+  createScheme(name, board, assets){ const sc = esqNew(name, board, assets); esqAdd(null, sc); return sc.id; }
+});
+/* al arrancar: se cargan los esquemas (y la primera vez se crea el de ejemplo de los perros) */
+{ const _b = boot; boot = async function(){
+  const had = await loadEsq();
+  const r = await _b.apply(this, arguments);
+  if(!had){
+    try{ const res = await fetch('data.json', { cache: 'no-store' }); if(res.ok){ const d = await res.json(); if(Array.isArray(d.esquemas)) esquemas = d.esquemas; } }catch(e){}
+    if(!esquemas.length) esqSeed();
+    saveEsq(true);
+    if(!vzHostKey) vzRender();
+  }
+  return r;
+}; }
 
 boot();
 
@@ -7328,6 +7688,7 @@ async function load(){
   try{ S = await idbGet('state'); }catch(e){ S = null; }
   if(!S || !Array.isArray(S.boards) || !S.boards.length){ const b = newBoard('Pizarra'); S = { cur: b.id, boards: [b], ui: {} }; }
   S.folders = S.folders || [];
+  S.boards = S.boards.filter(b=> !b.schemeId); // copias de trabajo de esquemas que quedaron abiertas
   { const lim = Date.now() - 30*864e5; S.boards = S.boards.filter(b=> !(b.trashed && b.trashed < lim)); S.folders = S.folders.filter(f=> !(f.trashed && f.trashed < lim)); if(!S.boards.some(b=> !b.trashed)){ const b = newBoard('Pizarra'); S.boards.push(b); S.cur = b.id; } }
   S.ui = Object.assign({ tool:'pluma', color:'#1c1c1e', sizes:{}, finger:false, eraserMode:'pixel', conn:true }, S.ui || {});
   B = S.boards.find(b=> b.id === S.cur && !b.trashed) || S.boards.find(b=> !b.trashed);
@@ -7335,7 +7696,7 @@ async function load(){
 }
 let saveT = 0;
 function save(){ if(!B) return; B.updated = Date.now(); clearTimeout(saveT); saveT = setTimeout(saveNow, 350); }
-function saveNow(){ clearTimeout(saveT); if(!S) return; idbSet('state', S).catch(()=> toast('No se pudo guardar la pizarra')); }
+function saveNow(){ clearTimeout(saveT); if(!S) return; try{ syncScheme(); }catch(e){} idbSet('state', S).catch(()=> toast('No se pudo guardar la pizarra')); }
 async function loadAssets(board){
   const ids = new Set(board.items.filter(i=> i.t === 'img' || i.t === 'file').map(i=> i.asset));
   await Promise.all([...ids].filter(id=> !assets[id]).map(async id=>{ try{ const v = await idbGet('asset:' + id); if(v) assets[id] = v; }catch(e){} }));
@@ -7547,6 +7908,7 @@ function itemHTML(it){
       const inf = (API.info && API.info(it)) || {};
       return `<div class="ci"><img alt="" draggable="false"></div><span class="n">${esc(inf.name || it.name || 'Tarjeta')}${it.sub !== false && inf.deck ? `<small>${esc(inf.deck)}</small>` : ''}</span>`;
     }
+    case 'block': { const inf = blockInfo(it); return `<div class="bkp">${esc(inf.path)}</div><div class="bkn">${esc(inf.name)}</div><div class="bkc">${inf.count} ${inf.count === 1 ? 'tarjeta' : 'tarjetas'}</div><span class="bkplay" title="Jugar">▶</span><span class="bkchev"></span>`; }
     case 'file': return `<div class="fi">${IC.file}</div><div class="fn"><b>${esc(it.fname || 'Archivo')}</b><small>${esc(fmtSize(it.size))}</small></div>`;
     case 'ink': {
       const t = TOOLS[it.tool] || TOOLS.pluma;
@@ -7593,7 +7955,7 @@ function placeEl(el, it){
   el.style.transform = `translate(${it.x}px,${it.y}px)` + (it.r ? ` rotate(${it.r}deg)` : '');
 }
 function itemClass(it){
-  return 'pz-it pz-' + ({ note:'note', text:'text', shape:'shape', table:'table', img:'img', link:'link', card:'card', file:'file', ink:'ink', line:'line' }[it.t]) +
+  return 'pz-it pz-' + ({ note:'note', text:'text', shape:'shape', table:'table', img:'img', link:'link', card:'card', file:'file', ink:'ink', line:'line', block:'block' }[it.t]) +
     (it.t === 'ink' && TOOLS[it.tool] && TOOLS[it.tool].hl ? ' hl' : '') + (it.lock ? ' locked' : '') + (it.link ? ' has-link' : '');
 }
 function styleEl(el, it){
@@ -7610,6 +7972,7 @@ function styleEl(el, it){
     el.style.borderColor = it.fill && it.fill !== '#ffffff' ? 'rgba(0,0,0,.08)' : '';
   }
   if(it.t === 'link') el.style.fontSize = clamp(it.h * .2, 10, 90) + 'px';
+  if(it.t === 'block'){ const inf = blockInfo(it), c = it.fill || inf.color; el.style.background = c; el.style.color = isDark(c) ? '#fff' : '#1c1c1e'; el.style.fontSize = clamp(Math.min(it.h * .24, it.w * .07), 8, 90) + 'px'; el.classList.toggle('gone', !inf.exists); }
   if(it.t === 'file') el.style.fontSize = clamp(it.h * .22, 10, 90) + 'px';
 }
 function renderItem(it){
@@ -7712,7 +8075,7 @@ function drawCtx(){
     if(one && one.t === 'card') h += btn('open', 'Ver la tarjeta') + btn('copyname', 'Copiar nombre');
     if(one && one.t === 'link') h += btn('openlink', 'Abrir enlace') + btn('editlink', 'Editar');
     if(one && one.t === 'file') h += btn('openfile', 'Abrir archivo');
-    const colorable = items.every(i=> ['note','shape','line','ink','text','card'].includes(i.t));
+    const colorable = items.every(i=> ['note','shape','line','ink','text','card','block'].includes(i.t));
     if(colorable){ const c = colorOf(items[0]); h += `<button data-c="color"><span class="cs" style="background:${c === 'transparent' ? 'conic-gradient(#ddd 25%,#fff 0 50%,#ddd 0 75%,#fff 0)' : c}"></span>Color</button>`; }
     if(one && one.t === 'shape') h += btn('border', 'Borde');
     if(one && one.t === 'line') h += btn('linestyle', 'Estilo');
@@ -7733,7 +8096,7 @@ function drawCtx(){
   if(y + bh > r.height - 70) y = Math.max(64, Math.min(r.height - 70 - bh, s.y + 10));
   bar.style.left = clamp(x, 8, r.width - bw - 8) + 'px'; bar.style.top = y + 'px';
 }
-function colorOf(it){ return it.t === 'card' ? (it.fill || '#ffffff') : it.t === 'note' ? (it.fill || NOTE_COLORS[0]) : it.t === 'shape' ? (it.fill || '#5ab4f0') : it.t === 'text' ? (it.color || '#1c1c1e') : (it.color || '#1c1c1e'); }
+function colorOf(it){ if(it.t === 'block') return it.fill || blockInfo(it).color; return it.t === 'card' ? (it.fill || '#ffffff') : it.t === 'note' ? (it.fill || NOTE_COLORS[0]) : it.t === 'shape' ? (it.fill || '#5ab4f0') : it.t === 'text' ? (it.color || '#1c1c1e') : (it.color || '#1c1c1e'); }
 
 
 /* activar botones al levantar el dedo (y no solo con «click»): tras algunos gestos el
@@ -7951,8 +8314,8 @@ function onCtx(a, btn){
   if(a === 'del') return delSel();
   if(a === 'color'){
     const it = items[0];
-    const list = it.t === 'card' ? REC_COLORS : it.t === 'note' ? NOTE_COLORS : it.t === 'shape' ? SHAPE_COLORS : it.t === 'text' ? TEXT_COLORS : INK_COLORS.concat(['#ff9500','#af52de','#8e8e93','#ffffff']);
-    const apply = c=> change(()=> items.forEach(i=>{ if(i.t === 'note' || i.t === 'shape' || i.t === 'card') i.fill = c; else { i.color = c; } if(i.t === 'note') S.ui.noteColor = c; }));
+    const list = it.t === 'card' || it.t === 'block' ? REC_COLORS : it.t === 'note' ? NOTE_COLORS : it.t === 'shape' ? SHAPE_COLORS : it.t === 'text' ? TEXT_COLORS : INK_COLORS.concat(['#ff9500','#af52de','#8e8e93','#ffffff']);
+    const apply = c=> change(()=> items.forEach(i=>{ if(i.t === 'note' || i.t === 'shape' || i.t === 'card' || i.t === 'block') i.fill = c; else { i.color = c; } if(i.t === 'note') S.ui.noteColor = c; }));
     openMenu(btn, swatches(list, colorOf(it), 'c'), m=>{ apply(m.slice(2)); closeMenu(); }, { onMount: m=> $('input[type=color]', m).addEventListener('input', e=> apply(e.target.value)) });
     return;
   }
@@ -8652,8 +9015,8 @@ function onUiClick(e){
     case 'attach': return openMenu(b, `<button class="pz-mi" data-m="trick">${IC.card}Tarjeta o mazo</button><div class="pz-msep"></div>
       <button class="pz-mi" data-m="photo">${IC.photo}Elegir foto</button><button class="pz-mi" data-m="cam">${IC.camera}Hacer foto</button>
       <div class="pz-msep"></div><button class="pz-mi" data-m="link">${IC.link}Añadir un enlace</button><button class="pz-mi" data-m="file">${IC.file}Añadir un archivo…</button>`,
-      m=>{ closeMenu(); if(m === 'card') pickTrick(b); if(m === 'photo') $('#pz-file', root).click(); if(m === 'cam') $('#pz-cam', root).click(); if(m === 'link') askLink(); if(m === 'file') $('#pz-anyfile', root).click(); });
-    case 'card': return pickTrick(b);
+      m=>{ closeMenu(); if(m === 'card' || m === 'trick') pickTrick(b); if(m === 'photo') $('#pz-file', root).click(); if(m === 'cam') $('#pz-cam', root).click(); if(m === 'link') askLink(); if(m === 'file') $('#pz-anyfile', root).click(); });
+    case 'card': case 'trick': return pickTrick(b);
     case 'undo': if(editing) stopEdit(); return undo();
     case 'redo': return redo();
     case 'share': return openMenu(b, `<button class="pz-mi" data-m="pdf">${IC.pdf}Imprimir o guardar en PDF</button><button class="pz-mi" data-m="png">${IC.photo}Guardar como imagen</button>
@@ -8700,6 +9063,12 @@ function pickTrick(anchor){
   const decks = (API.allDecks ? API.allDecks() : []);
   const rowsHTML = q=>{
     const qq = norm(q).trim();
+    if(pickMode === 'blocks'){
+      const all = API.blockTree ? API.blockTree() : [];
+      blkList = all.filter(b=> !qq || norm(b.name).includes(qq));
+      if(!blkList.length) return `<p style="opacity:.6;padding:12px">Nada con ese nombre</p>`;
+      return blkList.map((b, i)=> `<button class="pz-ri" data-m="blk:${i}" style="padding-left:${10 + b.depth * 22}px"><span class="pz-bdot" style="background:${b.color}"></span><span class="n">${b.depth ? '' : '<b>'}${esc(b.name)}${b.depth ? '' : '</b>'}<small>${['Mazo entero', 'Grupo', 'Subgrupo'][b.depth]} · ${b.count} tarjetas</small></span></button>`).join('');
+    }
     if(pickMode === 'decks'){
       const list = decks.filter(d=> !qq || norm(d.name + ' ' + d.path).includes(qq));
       if(!list.length) return `<p style="opacity:.6;padding:12px">Nada con ese nombre</p>`;
@@ -8710,12 +9079,13 @@ function pickTrick(anchor){
     return list.map(c=> `<button class="pz-ri" data-m="c:${c.deck}|${c.cid}"><span class="pz-th" data-thumb="${c.deck}|${c.cid}"></span><span class="n">${esc(c.name)}<small>${esc(c.deckName)}</small></span></button>`).join('');
   };
   const thumbs = el=> el.querySelectorAll('[data-thumb]').forEach(t=>{ const [d, c] = t.dataset.thumb.split('|'); const inf = API.info ? API.info({ deck: d, cid: c }) : {}; if(inf.image) t.style.backgroundImage = `url("${inf.image}")`; });
-  let placed = 0, mnu;
-  const seg = ()=> `<div class="pz-row" style="padding:2px 6px 6px"><button data-m="mode:cards" class="${pickMode === 'cards' ? 'on' : ''}">Tarjetas</button><button data-m="mode:decks" class="${pickMode === 'decks' ? 'on' : ''}">Mazo entero</button></div>`;
+  let placed = 0, mnu, blkList = [];
+  const seg = ()=> `<div class="pz-row" style="padding:2px 6px 6px"><button data-m="mode:cards" class="${pickMode === 'cards' ? 'on' : ''}">Tarjetas</button><button data-m="mode:decks" class="${pickMode === 'decks' ? 'on' : ''}">Mazo entero</button><button data-m="mode:blocks" class="${pickMode === 'blocks' ? 'on' : ''}">Bloques</button></div>`;
   mnu = openMenu(anchor, seg() + `<div style="padding:2px 6px 8px"><input class="pz-in" type="search" placeholder="Buscar" autocomplete="off"></div><div class="pz-list">${rowsHTML('')}</div>`,
     m=>{
       if(m.startsWith('mode:')){ pickMode = m.slice(5); const q = $('input', mnu).value; $('.pz-row', mnu).outerHTML = seg(); $('.pz-list', mnu).innerHTML = rowsHTML(q); thumbs(mnu); return; }
       const c = viewCenter(), k = 20 / V().z;
+      if(m.startsWith('blk:')){ const b = blkList[+m.slice(4)]; if(b){ addBlock(b.ref, { x: c.x + placed*k, y: c.y + placed*k*5 }); placed++; toast('Bloque añadido: ' + b.name); } return; }
       if(m.startsWith('deck:')){
         closeMenu();
         const items = deckItems(m.slice(5), c);
@@ -8739,16 +9109,17 @@ function askLink(it){
 
 /* --- pizarras --- */
 function boardsMenu(anchor){
-  const list = S.boards.filter(b=> !b.trashed).sort((a, b)=> (b.fav?1:0) - (a.fav?1:0) || b.updated - a.updated);
+  const list = S.boards.filter(b=> !b.trashed && !b.schemeId).sort((a, b)=> (b.fav?1:0) - (a.fav?1:0) || b.updated - a.updated);
   openMenu(anchor, `<button class="pz-mi" data-m="all">${IC.boards}Todas las pizarras…</button><div class="pz-msep"></div><div class="pz-mh">Pizarras</div>` + list.map(b=> `<button class="pz-mi" data-m="open:${b.id}">${b.id === B.id ? IC.check : '<span style="width:20px"></span>'}<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(b.name)}</span></button>`).join('') +
     `<div class="pz-msep"></div><button class="pz-mi" data-m="rename">Renombrar</button><button class="pz-mi" data-m="dup">${IC.copy}Duplicar</button><button class="pz-mi" data-m="new">${IC.newb}Nueva pizarra</button>
-    <div class="pz-msep"></div><button class="pz-mi danger" data-m="del">${IC.trash}Eliminar esta pizarra</button>`,
+    ${B.schemeId ? '' : `<button class="pz-mi" data-m="toscheme">${IC.boards}Convertir en esquema</button><div class="pz-msep"></div><button class="pz-mi danger" data-m="del">${IC.trash}Eliminar esta pizarra</button>`}`,
     m=>{
       closeMenu();
       if(m === 'all') return openBrowser();
       if(m.startsWith('open:')) return switchBoard(m.slice(5));
       if(m === 'rename'){ const n = prompt('Nombre de la pizarra', B.name); if(n && n.trim()){ B.name = n.trim(); save(); drawTitle(); } }
-      if(m === 'dup'){ const c = clone(B); c.id = 'b' + uid(); c.name = B.name + ' (copia)'; c.created = c.updated = Date.now(); c.fav = false; S.boards.push(c); switchBoard(c.id); }
+      if(m === 'toscheme') return toScheme();
+      if(m === 'dup'){ const c = clone(B); delete c.schemeId; c.id = 'b' + uid(); c.name = B.name + ' (copia)'; c.created = c.updated = Date.now(); c.fav = false; S.boards.push(c); switchBoard(c.id); }
       if(m === 'new') createBoard();
       if(m === 'del'){
         if(!confirm(`¿Eliminar la pizarra «${B.name}»? Se queda 30 días en «Eliminadas recientemente».`)) return;
@@ -8759,7 +9130,8 @@ function boardsMenu(anchor){
       }
     });
 }
-function createBoard(){ const n = prompt('Nombre de la nueva pizarra', 'Sin título ' + (S.boards.length + 1)); if(n == null) return; const b = newBoard(n.trim() || 'Sin título'); S.boards.push(b); switchBoard(b.id); }
+function createBoard(){ newSchemeMenu($('[data-a=newboard]', root)); }
+function createBoardPlain(){ const n = prompt('Nombre de la nueva pizarra', 'Sin título ' + (S.boards.length + 1)); if(n == null) return; const b = newBoard(n.trim() || 'Sin título'); S.boards.push(b); switchBoard(b.id); }
 async function switchBoard(id){
   stopEdit(); saveNow();
   B = S.boards.find(b=> b.id === id) || S.boards[0]; S.cur = B.id;
@@ -8771,7 +9143,7 @@ async function switchBoard(id){
   drawTitle(); applyView(); render(); drawSceneNav(); updateBotR(); updateUndo(); saveNow();
   if(B.fit){ delete B.fit; setTimeout(fitContent, 60); }
 }
-function drawTitle(){ $('#pz-title span', root).textContent = B.name; }
+function drawTitle(){ $('#pz-title span', root).textContent = (B.schemeId ? 'Esquema · ' : '') + B.name; root.classList.toggle('scheme', !!B.schemeId); }
 
 /* --- exportar --- */
 function exportBoard(){
@@ -8877,7 +9249,7 @@ async function open(){
   if(B.view.x === 0 && B.view.y === 0 && !B.items.length){ B.view = { x: vp.clientWidth/2, y: vp.clientHeight/2, z: 1 }; applyView(); }
   setDrawMode(drawMode);
 }
-function close(){ if(!root) return; stopEdit(); closeMenu(); closeBrowser(); closeFind(); closeScenes(); saveNow(); root.classList.remove('open'); document.body.classList.remove('pz-open'); if(API.onClose) API.onClose(); }
+function close(){ if(!root) return; stopEdit(); closeMenu(); closeBrowser(); closeFind(); closeScenes(); saveNow(); dropSchemeBoards(); saveNow(); root.classList.remove('open'); document.body.classList.remove('pz-open'); if(API.onClose) API.onClose(); }
 
 /* ---------- añadir tarjeta(s) a una pizarra desde cualquier sitio de la app (sin abrir la pizarra) ---------- */
 async function attach(ref, anchor){ const inf = (API.info && API.info(ref)) || {}; return attachMany([ref], inf.name || 'tarjeta', anchor); }
@@ -8886,7 +9258,7 @@ async function attachMany(refs, label, anchor, asDeck){
   if(!refs || !refs.length) return;
   let host = document.getElementById('pz-attach'); if(host) host.remove();
   host = document.createElement('div'); host.id = 'pz-attach';
-  const list = S.boards.filter(b=> !b.trashed).sort((a, b)=> (b.fav?1:0) - (a.fav?1:0) || b.updated - a.updated);
+  const list = S.boards.filter(b=> !b.trashed && !b.schemeId).sort((a, b)=> (b.fav?1:0) - (a.fav?1:0) || b.updated - a.updated);
   const has = b=> refs.length === 1 ? b.items.filter(i=> i.t === 'card' && i.deck === refs[0].deck && i.cid === refs[0].cid).length : 0;
   host.innerHTML = `<div class="pz-dim"></div><div class="pz-menu"><div class="pz-mh">Añadir ${refs.length > 1 ? esc(label) + ' (' + refs.length + ')' : '«' + esc(label) + '»'} a…</div>` +
     list.map(b=>{ const n = has(b);
@@ -9175,17 +9547,17 @@ function tileHTML(b){
   return `<div class="tile" data-bd="open:${b.id}"><div class="th">${boardThumb(b)}</div><div class="tt"><b>${esc(b.name)}${b.id === B.id ? ' •' : ''}</b><small>${sub}</small></div><button class="fv${b.fav ? ' on' : ''}" data-bd="fav:${b.id}" aria-label="Favorita">${b.fav ? '★' : '☆'}</button><button class="op" data-bd="bopts:${b.id}" aria-label="Opciones">···</button></div>`;
 }
 function folderTileHTML(f){
-  const n = S.boards.filter(b=> !b.trashed && b.folder === f.id).length;
+  const n = S.boards.filter(b=> !b.trashed && !b.schemeId && b.folder === f.id).length;
   return `<div class="tile" data-bd="loc:f:${f.id}"><div class="th folder">${IC.folder}</div><div class="tt"><b>${esc(f.name)}</b><small>${n} pizarras</small></div><button class="op" data-bd="fopts:${f.id}" aria-label="Opciones">···</button></div>`;
 }
 function drawBrowserList(){
   const box = document.getElementById('pz-bl'); if(!box) return;
   const qf = fold(br.q).trim(), loc = br.loc;
   let folders = [], boards = [], trashMode = false, note = '';
-  if(qf){ boards = sortBoards(S.boards.filter(b=> !b.trashed && boardMatches(b, qf))); note = boards.length + (boards.length === 1 ? ' pizarra con «' : ' pizarras con «') + esc(br.q.trim()) + '»'; }
-  else if(loc.t === 'all'){ boards = sortBoards(S.boards.filter(b=> !b.trashed)); }
-  else if(loc.t === 'fav'){ boards = sortBoards(S.boards.filter(b=> !b.trashed && b.fav)); }
-  else if(loc.t === 'folder'){ folders = S.folders.filter(f=> !f.trashed && f.parent === loc.id); boards = sortBoards(S.boards.filter(b=> !b.trashed && b.folder === loc.id)); }
+  if(qf){ boards = sortBoards(S.boards.filter(b=> !b.trashed && !b.schemeId && boardMatches(b, qf))); note = boards.length + (boards.length === 1 ? ' pizarra con «' : ' pizarras con «') + esc(br.q.trim()) + '»'; }
+  else if(loc.t === 'all'){ boards = sortBoards(S.boards.filter(b=> !b.trashed && !b.schemeId)); }
+  else if(loc.t === 'fav'){ boards = sortBoards(S.boards.filter(b=> !b.trashed && !b.schemeId && b.fav)); }
+  else if(loc.t === 'folder'){ folders = S.folders.filter(f=> !f.trashed && f.parent === loc.id); boards = sortBoards(S.boards.filter(b=> !b.trashed && !b.schemeId && b.folder === loc.id)); }
   else if(loc.t === 'trash'){ trashMode = true; }
   let h = '';
   if(trashMode){
@@ -9443,7 +9815,7 @@ async function autoSeed(){}
 function linkLabel(l){
   if(!l) return '';
   if(l.k === 'url'){ try{ return new URL(l.url).hostname.replace(/^www\./, ''); }catch(e){ return l.url; } }
-  return l.label || ({ all: 'Todo el mazo', group: 'Grupo', card: 'Tarjeta', deck: 'Mazo', board: 'Pizarra', scene: 'Escena', note: 'Nota' }[l.k] || '');
+  return l.label || ({ scheme: 'Esquema', all: 'Todo el mazo', group: 'Grupo', card: 'Tarjeta', deck: 'Mazo', board: 'Pizarra', scene: 'Escena', note: 'Nota' }[l.k] || '');
 }
 /* menú con buscador: lista de opciones [{label, sub, val}] */
 function pickList(anchor, title, list, cb){
@@ -9454,7 +9826,7 @@ function pickList(anchor, title, list, cb){
 }
 function setLink(it, l){ change(()=>{ if(l) it.link = l; else delete it.link; }); drawCtx(); toast(l ? 'Enlace: ' + linkLabel(l) : 'Enlace quitado'); }
 function linkMenu(it, anchor){
-  const opts = [['url','Página web…'],['deck','Mazo o carpeta…'],['group','Grupo de un mazo…'],['card','Tarjeta…'],['note','Nota…'],['board','Otra pizarra…']];
+  const opts = [['url','Página web…'],['deck','Mazo o carpeta…'],['group','Grupo de un mazo…'],['card','Tarjeta…'],['note','Nota…'],['scheme','Esquema…'],['board','Otra pizarra…']];
   if(B.scenes && B.scenes.length) opts.push(['scene','Escena de esta pizarra…']);
   openMenu(anchor, `<div class="pz-mh">Al tocarlo, llevar a…</div>${it.link ? `<div class="pz-mh" style="opacity:.6;text-transform:none;letter-spacing:0">Ahora: ${esc(linkLabel(it.link))}</div>` : ''}` +
     opts.map(([k, l])=> `<button class="pz-mi" data-m="${k}">${l}</button>`).join('') + (it.link ? `<div class="pz-msep"></div><button class="pz-mi" data-m="none" style="color:#ff3b30">Quitar enlace</button>` : ''), k=>{
@@ -9467,7 +9839,8 @@ function linkMenu(it, anchor){
       pickList(anchor, 'Grupo de «' + m.name + '»', m.groups.filter(g=> g.name).map((g, i)=> ({ label: g.name, sub: g.cards.length + '', val: String(i), dot: g.color })), i=>{ const g = m.groups.filter(g=> g.name)[+i]; setLink(it, { k: 'group', deck: id, cat: m.cat, v: g.v, label: g.name }); }); }); }
     if(k === 'card'){ const cs = API.allCards ? API.allCards() : []; return pickList(anchor, 'Tarjeta', cs.map(c=> ({ label: c.name, sub: c.deckName, val: c.deck + '|' + c.cid })), v=>{ const [d, c] = v.split('|'), x = cs.find(q=> q.deck === d && q.cid === c); setLink(it, { k: 'card', deck: d, cid: c, label: x ? x.name : '' }); }); }
     if(k === 'note'){ const ns = API.allNotes ? API.allNotes() : []; return pickList(anchor, 'Nota', ns.map(n=> ({ label: n.name, sub: n.path, val: n.id })), v=>{ const n = ns.find(x=> x.id === v); setLink(it, { k: 'note', id: v, label: n ? n.name : '' }); }); }
-    if(k === 'board'){ const bs = S.boards.filter(b=> !b.trashed && b.id !== B.id); return pickList(anchor, 'Pizarra', bs.map(b=> ({ label: b.name, val: b.id })), v=>{ const b = bs.find(x=> x.id === v); setLink(it, { k: 'board', id: v, label: b ? b.name : '' }); }); }
+    if(k === 'scheme'){ const ss = API.allSchemes ? API.allSchemes() : []; return pickList(anchor, 'Esquema', ss.map(x=> ({ label: x.name, sub: x.path, val: x.id })), v=>{ const x = ss.find(q=> q.id === v); setLink(it, { k: 'scheme', id: v, label: x ? x.name : '' }); }); }
+    if(k === 'board'){ const bs = S.boards.filter(b=> !b.trashed && !b.schemeId && b.id !== B.id); return pickList(anchor, 'Pizarra', bs.map(b=> ({ label: b.name, val: b.id })), v=>{ const b = bs.find(x=> x.id === v); setLink(it, { k: 'board', id: v, label: b ? b.name : '' }); }); }
     if(k === 'scene') return pickList(anchor, 'Escena', B.scenes.map((sc, i)=> ({ label: sc.name || 'Escena ' + (i + 1), val: String(i) })), v=> setLink(it, { k: 'scene', i: +v, label: B.scenes[+v].name || 'Escena ' + (+v + 1) }));
   });
 }
@@ -9574,7 +9947,156 @@ async function viewScheme(deckId, host, opts){
   });
   return true;
 }
-window.pizarra = { open, close, openBoard, editScheme, resetScheme, hasScheme, viewScheme, attach, attachMany, dump, restore, generateAll, addDeck: (id, anchor, name)=> attachMany([{}], name || 'mazo', anchor, id) };
+
+/* ================= ESQUEMAS EN LA PIZARRA =================
+   · Bloque vivo (t:'block'): un mazo, un grupo o un subgrupo con su nombre y número de tarjetas siempre al día.
+     En el esquema se despliega para ver sus tarjetas y tiene ▶ para jugar solo eso.
+   · Un esquema se edita aquí como una pizarra más, pero no sale entre las pizarras: se guarda en Esquemas. */
+function blockInfo(it){ return (API.blockInfo && API.blockInfo(it.ref)) || { exists: false, name: 'Bloque', path: '', color: '#8e8e93', count: 0, cards: [] }; }
+function addBlock(ref, at){
+  const lv = ref.scat ? 2 : ref.cat ? 1 : 0;
+  return addItem(placeNew({ t: 'block', ref, w: [380, 360, 320][lv], h: [92, 88, 66][lv] }, at));
+}
+/* ---------- editar un esquema ---------- */
+async function editData(sc){
+  await load();
+  S.boards = S.boards.filter(b=> b.schemeId !== sc.id);
+  Object.entries(sc.assets || {}).forEach(([k, v])=>{ if(!assets[k]){ assets[k] = v; idbSet('asset:' + k, v).catch(()=>{}); } });
+  const b = newBoard(sc.name); b.schemeId = sc.id;
+  b.items = clone((sc.board && sc.board.items) || []); b.scenes = clone((sc.board && sc.board.scenes) || []);
+  b.opts = Object.assign(b.opts, (sc.board && sc.board.opts) || {}); b.view = null; b.fit = true;
+  S.boards.push(b); S.cur = b.id; saveNow();
+  await open();
+}
+/* lo que cambias en un esquema se guarda en Esquemas (no en las pizarras) */
+function syncScheme(){
+  if(!B || !B.schemeId || !API.saveScheme) return;
+  const used = {};
+  B.items.forEach(i=>{ if(i.asset && assets[i.asset]) used[i.asset] = assets[i.asset]; });
+  const ok = API.saveScheme(B.schemeId, { items: clone(B.items), scenes: clone(B.scenes || []), opts: clone(B.opts || {}) }, used, B.name);
+  if(ok === false){ delete B.schemeId; toast('Este esquema ya no existe: se queda como pizarra'); }
+}
+/* al salir, las copias de trabajo de los esquemas se quitan de las pizarras */
+function dropSchemeBoards(){
+  if(!S) return;
+  S.boards = S.boards.filter(b=> !b.schemeId);
+  if(!S.boards.some(b=> !b.trashed)){ const nb = newBoard('Pizarra'); S.boards.push(nb); }
+  if(!S.boards.some(b=> b.id === S.cur && !b.trashed)) S.cur = (S.boards.find(b=> !b.trashed) || S.boards[0]).id;
+  B = S.boards.find(b=> b.id === S.cur);
+}
+function newSchemeMenu(anchor){
+  openMenu(anchor || { x: innerWidth/2, y: 80 }, `<div class="pz-mh">Crear</div><button class="pz-mi" data-m="board">${IC.newb}Nueva pizarra</button><button class="pz-mi" data-m="scheme">${IC.boards}Nuevo esquema</button><div class="pz-mh" style="text-transform:none;letter-spacing:0;opacity:.55;font-weight:400">Los esquemas no se guardan entre las pizarras: viven en la pestaña Esquemas.</div>`, m=>{
+    closeMenu();
+    if(m === 'board') return createBoardPlain();
+    const n = prompt('Nombre del esquema', 'Esquema nuevo'); if(n == null) return;
+    const name = n.trim() || 'Esquema nuevo';
+    const id = API.createScheme ? API.createScheme(name, { items: [], scenes: [] }, {}) : null;
+    if(!id){ toast('No se pudo crear el esquema'); return; }
+    const b = newBoard(name); b.schemeId = id; S.boards.push(b); switchBoard(b.id);
+    toast('Esquema creado: se guarda en la pestaña Esquemas');
+  });
+}
+function toScheme(){
+  if(!B || B.schemeId) return;
+  if(!confirm(`¿Convertir «${B.name}» en esquema? Dejará de estar entre las pizarras y pasará a la pestaña Esquemas.`)) return;
+  const used = {}; B.items.forEach(i=>{ if(i.asset && assets[i.asset]) used[i.asset] = assets[i.asset]; });
+  const id = API.createScheme ? API.createScheme(B.name, { items: clone(B.items), scenes: clone(B.scenes || []), opts: clone(B.opts || {}) }, used) : null;
+  if(!id) return toast('No se pudo convertir');
+  B.schemeId = id; save(); drawTitle(); toast('Ahora es un esquema (pestaña Esquemas)');
+}
+/* ---------- visor fijo: navegar y estudiar (sin editar) ---------- */
+const viewMem = {}; // posición y bloques abiertos de cada esquema
+async function viewData(data, host, opts){
+  await load();
+  opts = opts || {};
+  Object.entries(data.assets || {}).forEach(([k, v])=>{ if(!assets[k]) assets[k] = v; });
+  if(!host.isConnected) return null;
+  const tmp = { items: data.items || [], scenes: data.scenes || [] };
+  const mem = viewMem[opts.key] = viewMem[opts.key] || { open: new Set(), st: null, sc: -1 };
+  const scenes = tmp.scenes;
+  host.innerHTML = `<div class="pzv"><div class="pzv-world"></div>
+    ${scenes.length ? `<div class="pzv-tour"><button data-tour="-1" title="Anterior">‹</button><span class="pzv-tn"></span><button data-tour="1" title="Siguiente">›</button></div>` : ''}
+    <div class="pzv-tools"><button data-z="out" title="Alejar">−</button><button data-z="fit" title="Ver todo">⤢</button><button data-z="in" title="Acercar">+</button></div></div>`;
+  const pv = $('.pzv', host), w = $('.pzv-world', pv), keep = B;
+  const draw = ()=>{
+    w.innerHTML = '';
+    B = tmp;
+    try{
+      tmp.items.forEach(it=>{
+        if(it.t === 'ink' && !it.d) it.d = inkPath(it.pts, it.size, (TOOLS[it.tool] || {}).pressure);
+        const el = document.createElement('div'); el.dataset.id = it.id; el.innerHTML = itemHTML(it); styleEl(el, it); placeEl(el, it);
+        el.className = itemClass(it).replace(' has-link', '') + (it.link || it.t === 'card' || it.t === 'link' || it.t === 'block' ? ' pzv-go' : '') + (it.t === 'block' && mem.open.has(it.id) ? ' open' : '');
+        w.appendChild(el);
+      });
+      tmp.items.forEach(it=>{ if(it.t === 'block' && mem.open.has(it.id)) w.appendChild(expandEl(it)); });
+    } finally { B = keep; }
+  };
+  const expandEl = it=>{
+    const inf = blockInfo(it), cols = clamp(Math.ceil(Math.sqrt(inf.cards.length * 1.3)), 2, 6), cw = 104;
+    const W = Math.max(it.w, cols * cw + 24);
+    const el = document.createElement('div'); el.className = 'pzv-exp'; el.dataset.for = it.id;
+    el.style.cssText = `left:${it.x}px;top:${it.y + it.h + 8}px;width:${W}px;--bc:${inf.color}`;
+    el.innerHTML = (inf.note ? `<p class="pzv-en">${esc(inf.note)}</p>` : '') + `<div class="pzv-eg" style="grid-template-columns:repeat(${cols},${cw - 8}px)">${inf.cards.map(c=> `<div class="pzv-ec" data-vc="${it.ref.deck}|${c.cid}"><i data-src="${esc(c.cid)}"></i><span>${esc(c.name)}</span></div>`).join('') || '<span style="opacity:.6">Sin tarjetas</span>'}</div>`;
+    el.querySelectorAll('i[data-src]').forEach((im, k)=>{ const c = inf.cards[k]; if(c && c.image) im.style.backgroundImage = `url("${c.image}")`; });
+    return el;
+  };
+  draw();
+  const st = { x: 0, y: 0, z: 1 };
+  const apply = anim=>{ w.style.transition = anim ? 'transform .45s cubic-bezier(.2,.8,.2,1)' : ''; w.style.transform = `translate(${st.x}px,${st.y}px) scale(${st.z})`; mem.st = Object.assign({}, st); };
+  const fitTo = (r, anim, pad)=>{ const W = pv.clientWidth, H = pv.clientHeight; pad = pad == null ? 30 : pad; st.z = clamp(Math.min((W - pad*2) / Math.max(r.w, 1), (H - pad*2) / Math.max(r.h, 1)), .04, 2.5); st.x = W/2 - (r.x + r.w/2) * st.z; st.y = H/2 - (r.y + r.h/2) * st.z; apply(anim); };
+  B = tmp; const u = unionBox(tmp.items); B = keep;
+  const fitAll = anim=> u ? fitTo(u, anim) : apply(anim);
+  const tourName = ()=>{ const t = $('.pzv-tn', pv); if(t) t.textContent = mem.sc < 0 ? 'Recorrido · ' + scenes.length + ' pasos' : (mem.sc + 1) + '/' + scenes.length + ' · ' + (scenes[mem.sc].name || 'Paso ' + (mem.sc + 1)); };
+  const goScene = i=>{ if(!scenes.length) return; mem.sc = ((i % scenes.length) + scenes.length) % scenes.length; fitTo(scenes[mem.sc], true, 10); tourName(); };
+  if(mem.st){ Object.assign(st, mem.st); apply(false); } else fitAll(false);
+  tourName();
+  const zoomAt = (k, sx, sy)=>{ const z = clamp(st.z * k, .04, 6); st.x = sx - (sx - st.x) * z / st.z; st.y = sy - (sy - st.y) * z / st.z; st.z = z; apply(false); };
+  const tap = t=>{
+    const vc = t.closest('[data-vc]');
+    if(vc){ const [d, c] = vc.dataset.vc.split('|'), exp = vc.closest('.pzv-exp'), it = exp && tmp.items.find(i=> i.id === exp.dataset.for); const order = it ? blockInfo(it).cards.map(x=> x.cid) : [c]; if(opts.onCard) opts.onCard(d, c, order); return; }
+    const el = t.closest('.pzv-go'), it = el && tmp.items.find(i=> i.id === el.dataset.id);
+    if(!it) return;
+    if(it.t === 'block'){
+      if(t.closest('.bkplay')){ if(opts.onPlay) opts.onPlay(it.ref); return; }
+      if(it.link){ followLink(it.link, false); return; }
+      if(mem.open.has(it.id)) mem.open.delete(it.id); else mem.open.add(it.id);
+      draw(); return;
+    }
+    if(it.link && it.link.k === 'scene'){ const i = it.link.i; if(scenes[i]) goScene(i); return; }
+    if(it.link){ followLink(it.link, false); return; }
+    if(it.t === 'card'){ const order = tmp.items.filter(i=> i.t === 'card' && i.deck === it.deck).map(i=> i.cid); if(opts.onCard) opts.onCard(it.deck, it.cid, order); return; }
+    if(it.t === 'link') window.open(it.url, '_blank', 'noopener');
+  };
+  const P = new Map(); let g = null;
+  pv.addEventListener('pointerdown', e=>{
+    if(e.target.closest('.pzv-tools,.pzv-tour')) return;
+    try{ pv.setPointerCapture(e.pointerId); }catch(err){}
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if(P.size === 1) g = { sx: e.clientX, sy: e.clientY, ox: st.x, oy: st.y, moved: false, target: e.target };
+    else if(P.size === 2){ const [a, c] = [...P.values()]; g = { pinch: true, d: Math.hypot(a.x - c.x, a.y - c.y), z: st.z, ox: st.x, oy: st.y, mx: (a.x + c.x)/2, my: (a.y + c.y)/2, moved: true }; }
+  });
+  pv.addEventListener('pointermove', e=>{
+    if(!P.has(e.pointerId) || !g) return;
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const r = pv.getBoundingClientRect();
+    if(g.pinch && P.size >= 2){ const [a, c] = [...P.values()], d = Math.hypot(a.x - c.x, a.y - c.y), mx = (a.x + c.x)/2, my = (a.y + c.y)/2, z = clamp(g.z * d / g.d, .04, 6);
+      const wx = (g.mx - r.left - g.ox) / g.z, wy = (g.my - r.top - g.oy) / g.z; st.z = z; st.x = mx - r.left - wx * z; st.y = my - r.top - wy * z; apply(false); return; }
+    if(!g.pinch){ const dx = e.clientX - g.sx, dy = e.clientY - g.sy; if(!g.moved && Math.hypot(dx, dy) > 6) g.moved = true; if(g.moved){ st.x = g.ox + dx; st.y = g.oy + dy; apply(false); } }
+  });
+  const up = e=>{
+    if(!P.has(e.pointerId)) return; P.delete(e.pointerId);
+    if(g && !g.moved && !g.pinch && P.size === 0 && e.type === 'pointerup' && g.target) tap(g.target);
+    if(P.size === 0) g = null; else if(g && g.pinch && P.size === 1){ const [a] = [...P.values()]; g = { sx: a.x, sy: a.y, ox: st.x, oy: st.y, moved: true }; }
+  };
+  pv.addEventListener('pointerup', up); pv.addEventListener('pointercancel', up);
+  pv.addEventListener('wheel', e=>{ e.preventDefault(); const r = pv.getBoundingClientRect(); if(e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * .01), e.clientX - r.left, e.clientY - r.top); else { st.x -= e.deltaX; st.y -= e.deltaY; apply(false); } }, { passive: false });
+  $('.pzv-tools', pv).addEventListener('click', e=>{ const t = e.target.closest('button'); if(!t) return; if(t.dataset.z === 'fit'){ mem.sc = -1; tourName(); fitAll(true); } else zoomAt(t.dataset.z === 'in' ? 1.3 : 1/1.3, pv.clientWidth/2, pv.clientHeight/2); });
+  const tour = $('.pzv-tour', pv);
+  if(tour) tour.addEventListener('click', e=>{ const t = e.target.closest('[data-tour]'); if(!t) return; goScene(mem.sc < 0 ? (+t.dataset.tour > 0 ? 0 : scenes.length - 1) : mem.sc + +t.dataset.tour); });
+  return { goScene, fit: ()=> fitAll(true) };
+}
+
+window.pizarra = { editData, viewData, open, close, openBoard, editScheme, resetScheme, hasScheme, viewScheme, attach, attachMany, dump, restore, generateAll, addDeck: (id, anchor, name)=> attachMany([{}], name || 'mazo', anchor, id) };
 })();
 
 </script>
