@@ -1510,13 +1510,15 @@ body.playing img{-webkit-user-drag:none;}
 #vz .vz-note-t,#vz .vz-cvn,#vz .vz-cvb,#vz .vz-cvd,#vz .vz-tagnote,#vz .vz-cpside,#vz .vz-cpside *,#vz .vz-cpt p,#vz .vz-fht,#vz .vz-fhs,#vz .vz-fhp,#vz .vz-lh,#back-peek .bp-text,#back-peek .bp-name{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default;}
 .back-peek-shield{position:fixed;inset:0;z-index:60;background:transparent;}
 /* jugar un grupo o una sección directamente desde la lista */
-#vz .vz-folds .vz-fplay{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#1c1c1e;color:#fff;}
-#vz .vz-folds .vz-fplay svg{width:14px;height:14px;margin-left:2px;}
+#vz .vz-folds .vz-fplay{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#f2f2f4;color:#3a3a3c;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08);}
+#vz .vz-folds .vz-fplay:hover{background:#e8e8ec;}
+#vz .vz-folds .vz-fplay svg{width:13px;height:13px;margin-left:2px;}
 #vz .vz-folds .vz-fplay:active{transform:scale(.92);}
-#vz .vz-splay{display:inline-flex;align-items:center;gap:5px;margin-left:auto;height:28px;padding:0 12px;border-radius:14px;background:rgba(0,0,0,.07);font-size:12px;font-weight:700;letter-spacing:0;text-transform:none;color:#1c1c1e;opacity:1;}
+#vz .vz-splay{display:inline-flex;align-items:center;gap:5px;margin-left:auto;height:28px;padding:0 12px;border-radius:14px;background:#f2f2f4;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08);font-size:12px;font-weight:700;letter-spacing:0;text-transform:none;color:#1c1c1e;opacity:1;}
 #vz .vz-splay svg{width:11px;height:11px;}
 #vz .vz-subh{opacity:1;}
 #vz .vz-subh > i,#vz .vz-subh > small{opacity:.75;}
+#vz .vz-folds .vz-fcount{min-width:2.4em;text-align:right;flex-shrink:0;}
 
 </style>
 </head>
@@ -6948,8 +6950,8 @@ function vzFoldHead(node, g){
   return `<div class="vz-fold${open ? ' open' : ''}" data-fold="${node.id}|${enc}">
       <span class="vz-fchev">${VZICO.fwd}</span><span class="vz-sw big" style="background:${g.color}"></span>
       <span class="vz-fname">${escapeHtml(g.name)}</span><span class="vz-fsp"></span>
-      <button class="vz-fplay" data-playg="${node.id}|${enc}" title="Jugar solo este grupo" aria-label="Jugar solo este grupo">${VZICO.play}</button>
       <span class="vz-fcount">${g.cards.length}</span>
+      <button class="vz-fplay" data-playg="${node.id}|${enc}" title="Jugar solo este grupo" aria-label="Jugar solo este grupo">${VZICO.play}</button>
       <button class="vz-fgo" data-grp="${node.id}|${enc}" title="Abrir solo este grupo">${VZICO.chev}</button>
     </div>${open && g.note ? `<div class="vz-note-t">${escapeHtml(g.note)}</div>` : ''}`;
 }
