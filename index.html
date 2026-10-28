@@ -1487,6 +1487,21 @@ body.vz-main #vz-toggle{display:none;}
 #pz.scheme #pz-title span{color:#5e5ce6;}
 @media (max-width:600px){ #vz .vz-tab{padding:0 9px;font-size:14px;} .pzv-tour{max-width:calc(100% - 150px);} .pzv-tn{font-size:12px;} }
 #pz .pz-row button.on,#pz-attach .pz-row button.on{color:#fff !important;}
+/* juego · mantener pulsada una tarjeta para ver su reverso */
+.game-cell{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;}
+.game-cell img{-webkit-user-drag:none;}
+#back-peek{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;perspective:1200px;}
+#back-peek .bp-dim{position:absolute;inset:0;background:rgba(0,0,0,.35);animation:bpfade .15s ease-out;}
+#back-peek .bp-card{position:relative;width:min(440px,100%);max-height:84vh;overflow:auto;background:#fcfbf7;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);padding:18px 20px 14px;box-sizing:border-box;animation:bpflip .32s cubic-bezier(.2,.8,.2,1);color:#1c1c1e;}
+#back-peek .bp-x{position:absolute;top:10px;right:12px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(0,0,0,.07);font-size:22px;line-height:1;cursor:pointer;color:#1c1c1e;}
+#back-peek .bp-img{display:flex;justify-content:center;margin:0 34px 10px;}
+#back-peek .bp-img img{max-width:100%;max-height:26vh;object-fit:contain;border-radius:10px;}
+#back-peek .bp-name{font-size:20px;font-weight:800;text-align:center;margin-bottom:8px;}
+#back-peek .bp-hint{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;opacity:.45;margin-bottom:8px;}
+#back-peek .bp-text{font-size:17px;line-height:1.5;white-space:pre-wrap;text-align:center;}
+#back-peek .bp-foot{font-size:12px;opacity:.45;text-align:center;margin-top:12px;}
+@keyframes bpflip{from{transform:rotateY(-90deg);opacity:.3;}to{transform:none;opacity:1;}}
+@keyframes bpfade{from{opacity:0;}to{opacity:1;}}
 
 </style>
 </head>
@@ -3832,7 +3847,7 @@ function recordConfusion(node, a, b){
 document.getElementById('back-game').addEventListener('click', (e)=>{
   e.stopPropagation();
   if(confirm('¿Salir de la partida?')){
-    hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner(); endSortDrag(); closeSortView(); hideOccPanel();
+    hideTypeZoom(); hidePickZoom(); hideMissName(); hideRoundBanner(); endSortDrag(); closeSortView(); hideOccPanel(); closeBackPeek();
     document.body.classList.remove('playing'); backToDecks();
   }
 });
@@ -4173,7 +4188,9 @@ function renderGridCells(photos){
     tagEl.appendChild(nmEl);
     const ctg = cellTagsEl(p); if(ctg) tagEl.appendChild(ctg);
     cell.className = gridCellClass(cell, game.stateOf[p.id]);
+    if(game.playMode === 'buscar' && !game.anki && hasBack(p)) attachBackPeek(cell, p);
     cell.addEventListener('click', ()=>{
+      if(cell._peek && Date.now() - cell._peek < 900) return; // venía de mantener pulsado: solo se mira el reverso
       if(Date.now() - gridZoomEndedAt < 350) return; // el dedo que queda tras pellizcar no cuenta como toque
       if(roundBannerOpen) return;
       if(game.playMode === 'clasificar'){ sortTapCell(p.id); return; }
@@ -4185,6 +4202,38 @@ function renderGridCells(photos){
     grid.appendChild(cell);
   });
 }
+/* buscar la imagen: manteniendo pulsada una tarjeta se ve su reverso (sin contar como jugada) */
+function attachBackPeek(cell, p){
+  let t = 0, sx = 0, sy = 0, n = 0;
+  const cancel = ()=>{ clearTimeout(t); t = 0; };
+  cell.addEventListener('pointerdown', e=>{
+    n++; if(n > 1){ cancel(); return; } // dos dedos: es un pellizco
+    sx = e.clientX; sy = e.clientY; cancel();
+    t = setTimeout(()=>{ t = 0; cell._peek = Date.now(); openBackPeek(p, cell); }, 450);
+  });
+  cell.addEventListener('pointermove', e=>{ if(t && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) cancel(); });
+  const up = ()=>{ n = Math.max(0, n - 1); cancel(); };
+  cell.addEventListener('pointerup', up); cell.addEventListener('pointercancel', up); cell.addEventListener('pointerleave', up);
+  cell.addEventListener('contextmenu', e=> e.preventDefault());
+}
+function openBackPeek(p, cell){
+  closeBackPeek();
+  const st = game && game.stateOf ? game.stateOf[p.id] : null;
+  const known = st === 'correct' || st === 'wrong';
+  const el = document.createElement('div'); el.id = 'back-peek';
+  el.innerHTML = `<div class="bp-dim"></div><div class="bp-card"><button class="bp-x" aria-label="Cerrar">×</button>
+    <div class="bp-img"><img alt=""></div>
+    ${known ? `<div class="bp-name">${escapeHtml(p.label || '')}</div>` : `<div class="bp-hint">reverso</div>`}
+    <div class="bp-text">${escapeHtml((p.back || '').trim())}</div>
+    <div class="bp-foot">toca fuera para seguir jugando</div></div>`;
+  el.querySelector('img').src = gameImg(p);
+  document.getElementById('win-game').appendChild(el);
+  try{ if(navigator.vibrate) navigator.vibrate(12); }catch(e){}
+  const close = e=>{ e.stopPropagation(); e.preventDefault(); closeBackPeek(); };
+  // se cierra al tocar, pero no con el mismo dedo que la ha abierto
+  setTimeout(()=>{ el.addEventListener('pointerup', close); el.addEventListener('click', e=> e.stopPropagation()); }, 250);
+}
+function closeBackPeek(){ const el = document.getElementById('back-peek'); if(el) el.remove(); }
 let roundBannerOpen = false;
 function showRoundBanner(title, sub, then){
   const b = document.getElementById('round-banner');
@@ -4657,7 +4706,7 @@ function historyKey(mode, rounds){
 }
 function endGame(){
   hideOccPanel();
-  hideMissName(); hideRoundBanner(); hidePickZoom(); endSortDrag(); closeSortView();
+  hideMissName(); hideRoundBanner(); hidePickZoom(); endSortDrag(); closeSortView(); closeBackPeek();
   document.body.classList.remove('playing');
   const secs = Math.round((Date.now()-game.startTime)/1000);
   const mm = String(Math.floor(secs/60)).padStart(2,'0');
