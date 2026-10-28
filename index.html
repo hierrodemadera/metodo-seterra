@@ -1502,6 +1502,12 @@ body.vz-main #vz-toggle{display:none;}
 #back-peek .bp-foot{font-size:12px;opacity:.45;text-align:center;margin-top:12px;}
 @keyframes bpflip{from{transform:rotateY(-90deg);opacity:.3;}to{transform:none;opacity:1;}}
 @keyframes bpfade{from{opacity:0;}to{opacity:1;}}
+/* sin la selección azul del iPad/iPhone al mantener pulsado, solo mientras se juega */
+body.playing,body.playing *{-webkit-user-select:none !important;user-select:none !important;-webkit-touch-callout:none !important;-webkit-tap-highlight-color:transparent;}
+body.playing input,body.playing textarea{-webkit-user-select:text !important;user-select:text !important;-webkit-touch-callout:default !important;}
+body.playing img{-webkit-user-drag:none;}
+/* textos que se pueden seleccionar y copiar (descripciones, notas, fichas) */
+#vz .vz-note-t,#vz .vz-cvn,#vz .vz-cvb,#vz .vz-cvd,#vz .vz-tagnote,#vz .vz-cpside,#vz .vz-cpside *,#vz .vz-cpt p,#vz .vz-fht,#vz .vz-fhs,#vz .vz-fhp,#vz .vz-lh,#back-peek .bp-text,#back-peek .bp-name{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default;}
 
 </style>
 </head>
@@ -7603,6 +7609,9 @@ Object.assign(window.seterraApi, {
   }
   return r;
 }; }
+
+/* por si el navegador intenta seleccionar algo igualmente al mantener pulsado */
+document.addEventListener('selectstart', e=>{ if(!document.body.classList.contains('playing')) return; const t = e.target && e.target.nodeType === 1 ? e.target : e.target && e.target.parentElement; if(t && t.closest && t.closest('input,textarea,select,[contenteditable]')) return; e.preventDefault(); });
 
 boot();
 
