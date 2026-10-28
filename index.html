@@ -6460,10 +6460,9 @@ function vzCrumb(){
     }
     else if(node){
       vzPath(node.id).forEach(p=> parts.push(`<a data-open="${p.id}">${escapeHtml(p.name)}</a>`));
-      if(s.t === 'folder' || s.t === 'deck') parts.push(escapeHtml(node.name));
+      if(s.t === 'folder' || s.t === 'deck' || s.t === 'all') parts.push(escapeHtml(node.name));
       else {
         parts.push(`<a data-open="${node.id}">${escapeHtml(node.name)}</a>`);
-        if(s.t === 'all') parts.push('Todos los grupos');
         if(s.t === 'edit') parts.push('Editar');
         if(s.t === 'group') parts.push(escapeHtml(vzGroupName(node, s.v)));
         if(s.t === 'card'){ const p = (node.photos || []).find(x=> x.id === s.cid); if(s.v !== undefined) parts.push(`<a data-grp="${node.id}|${encodeURIComponent(s.v == null ? '' : s.v)}">${escapeHtml(vzGroupName(node, s.v))}</a>`); parts.push(escapeHtml(p ? vzLabel(p) : '')); }
@@ -6489,7 +6488,7 @@ function vzRender(anim){
   else if(s.t === 'notes') vzNotes(node);
   else if(s.t === 'folder') vzLibrary(node);
   else if(s.t === 'deck') node.mode === 'barajado' ? vzDeckHome(node) : vzMap(node);
-  else if(s.t === 'all') vzDeck(node);
+  else if(s.t === 'all') vzDeck(node, true);
   else if(s.t === 'group') vzGroupScreen(node, s.v);
   else if(s.t === 'card') vzCard(node, s.cid, s.v);
   else if(s.t === 'schemes') vzSchemes(node);
@@ -6660,11 +6659,11 @@ function vzSplit(node, cards, cat){
   if(none.length) out.push({ v: TAG_NONE, name: 'Sin ' + cat.name.toLowerCase(), color: '#8e8e93', cards: none });
   return out;
 }
-function vzDeckView(node){ return ['mosaic', 'list'].includes(node.vzView) ? node.vzView : 'mosaic'; }
+function vzDeckView(node){ return 'mosaic'; }
 /* la página del mazo: esquema, mosaico o lista de sus grupos (solo aquí se cambia la vista) */
 function vzDeckHome(node){
+  return vzDeck(node, true);
   const cat = vzCat(node), groups = vzGroups(node).filter(g=> g.cards.length);
-  if(!cat || groups.length < 2) return vzDeck(node, true);
   const view = vzDeckView(node), enc = g=> encodeURIComponent(vzGKey(g));
   let body = '';
   if(view === 'scheme') body = `<div class="vz-radw" id="vz-radw"></div>`;
@@ -6808,7 +6807,7 @@ function vzFollow(l){
   if(vzTab !== 'mazos') vzSwitchTab('mazos');
   const n = findNode(l.deck || l.id); if(!n) return toast('Ya no existe');
   if(l.k === 'deck'){ vzGo({ t: n.type === 'folder' ? 'folder' : 'deck', id: n.id }); return; }
-  if(l.k === 'all'){ vzGo({ t: 'all', id: n.id }); return; }
+  if(l.k === 'all'){ vzGo({ t: 'deck', id: n.id }); return; }
   if(l.k === 'card'){ if(!(n.photos || []).some(p=> p.id === l.cid)) return toast('Esa tarjeta ya no existe'); vzGo({ t: 'card', id: n.id, cid: l.cid }); return; }
   if(l.k === 'group'){
     if(l.cat && tagCat(n, l.cat) && (vzCat(n) || {}).id !== l.cat){ n.vzCat = l.cat; saveLocal(); }
@@ -6839,14 +6838,14 @@ function vzFolder(node){
 function vzDeckActions(node, home){
   const cats = tagCats(node).filter(c=> valuesOf(node, c.id, node.photos || []).length), cur = vzCat(node), sub = vzSubCat(node), view = vzDeckView(node);
   const hasGroups = cur && vzGroups(node).filter(g=> g.cards.length).length > 1;
-  const seg = home && (node.photos || []).length ? `<span class="vz-fsp"></span><span class="vz-seg big">${[['mosaic', VZICO.mosaic, 'Módulos'], ['list', VZICO.list, 'Lista']].map(([v, ic, t])=> `<button data-dview="${v}" class="${view === v ? 'on' : ''}" title="${t}">${ic}</button>`).join('')}</span>` : '';
+  const seg = false ? `<span class="vz-fsp"></span><span class="vz-seg big">${[['mosaic', VZICO.mosaic, 'Módulos'], ['list', VZICO.list, 'Lista']].map(([v, ic, t])=> `<button data-dview="${v}" class="${view === v ? 'on' : ''}" title="${t}">${ic}</button>`).join('')}</span>` : '';
   const subs = cur ? cats.filter(c=> c.id !== cur.id) : [];
   return `<div class="vz-chips">
     <button class="vz-chip vz-play" data-play="${node.id}">${VZICO.play}Jugar</button>
     <button class="vz-chip" data-edit="${node.id}">${VZICO.edit}Editar</button>
     ${home && hasGroups && view === 'scheme' ? `<button class="vz-chip" data-scheme="${node.id}">${VZICO.tree}Editar esquema</button>` : ''}
     <button class="vz-chip" data-pzdeck="${node.id}">${VZICO.pz}A una pizarra</button>
-    ${home && hasGroups ? `<button class="vz-chip" data-all="${node.id}">${VZICO.list}Todas las tarjetas</button>` : ''}
+
     ${seg}
   </div>
 `;
@@ -7024,7 +7023,7 @@ function vzClick(e){
     return; }
   const vm = t.closest('[data-vm]'); if(vm){ vzSetMode(vm.dataset.vm); vzRender(); return; }
   let y0;
-  if(y0 = t.closest('[data-all]')){ vzGo({ t: 'all', id: y0.dataset.all }); return; }
+  if(y0 = t.closest('[data-all]')){ vzGo({ t: 'deck', id: y0.dataset.all }); return; }
   if(y0 = t.closest('[data-newfolder]')){ const pn = y0.dataset.newfolder ? findNode(y0.dataset.newfolder) : null; promptNewFolder(pn); return; }
   if(y0 = t.closest('[data-newdeck]')){ const pn = y0.dataset.newdeck ? findNode(y0.dataset.newdeck) : null; promptNewTema(pn); return; }
   let x;
