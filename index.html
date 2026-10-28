@@ -1508,6 +1508,7 @@ body.playing input,body.playing textarea{-webkit-user-select:text !important;use
 body.playing img{-webkit-user-drag:none;}
 /* textos que se pueden seleccionar y copiar (descripciones, notas, fichas) */
 #vz .vz-note-t,#vz .vz-cvn,#vz .vz-cvb,#vz .vz-cvd,#vz .vz-tagnote,#vz .vz-cpside,#vz .vz-cpside *,#vz .vz-cpt p,#vz .vz-fht,#vz .vz-fhs,#vz .vz-fhp,#vz .vz-lh,#back-peek .bp-text,#back-peek .bp-name{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default;}
+.back-peek-shield{position:fixed;inset:0;z-index:60;background:transparent;}
 
 </style>
 </head>
@@ -4197,6 +4198,7 @@ function renderGridCells(photos){
     if(game.playMode === 'buscar' && !game.anki && hasBack(p)) attachBackPeek(cell, p);
     cell.addEventListener('click', ()=>{
       if(cell._peek && Date.now() - cell._peek < 900) return; // venía de mantener pulsado: solo se mira el reverso
+      if(document.getElementById('back-peek') || Date.now() - peekClosedAt < 700) return; // el toque que cierra el reverso no cuenta como jugada
       if(Date.now() - gridZoomEndedAt < 350) return; // el dedo que queda tras pellizcar no cuenta como toque
       if(roundBannerOpen) return;
       if(game.playMode === 'clasificar'){ sortTapCell(p.id); return; }
@@ -4236,10 +4238,20 @@ function openBackPeek(p, cell){
   document.getElementById('win-game').appendChild(el);
   try{ if(navigator.vibrate) navigator.vibrate(12); }catch(e){}
   const close = e=>{ e.stopPropagation(); e.preventDefault(); closeBackPeek(); };
+  el.addEventListener('pointerdown', e=> e.stopPropagation());
   // se cierra al tocar, pero no con el mismo dedo que la ha abierto
   setTimeout(()=>{ el.addEventListener('pointerup', close); el.addEventListener('click', e=> e.stopPropagation()); }, 250);
 }
-function closeBackPeek(){ const el = document.getElementById('back-peek'); if(el) el.remove(); }
+let peekClosedAt = 0;
+/* al cerrar, la ventana se queda un momento invisible encima: así el toque no llega a la tarjeta de debajo */
+function closeBackPeek(){
+  const el = document.getElementById('back-peek'); if(!el) return;
+  peekClosedAt = Date.now();
+  el.id = ''; el.className = 'back-peek-shield';
+  el.innerHTML = '';
+  ['click', 'pointerdown', 'pointerup', 'touchend'].forEach(t=> el.addEventListener(t, e=>{ e.stopPropagation(); if(t !== 'pointerdown') e.preventDefault(); }, true));
+  setTimeout(()=> el.remove(), 600);
+}
 let roundBannerOpen = false;
 function showRoundBanner(title, sub, then){
   const b = document.getElementById('round-banner');
