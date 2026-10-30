@@ -1522,6 +1522,75 @@ body.playing img{-webkit-user-drag:none;}
 #vz .vz-subh > i,#vz .vz-subh > small{opacity:.75;}
 #vz .vz-folds .vz-fcount{min-width:2.4em;text-align:right;flex-shrink:0;}
 
+/* ===== MAZOS DE IDIOMA ===== */
+/* tarjetas de texto en la lista del mazo */
+#vz .vz-cm.lg-tile{min-height:96px;justify-content:center;gap:6px;padding:14px 10px 12px !important;border-top:4px solid var(--gc);}
+.lg-tile .lg-tw{font-size:19px;font-weight:800;line-height:1.15;word-break:break-word;}
+.lg-tile .lg-tt{font-size:14px;opacity:.6;line-height:1.25;}
+#vz .vz-cgrid:has(.lg-tile){grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+/* lotes */
+.lg-help{font-size:13px;line-height:1.45;opacity:.6;margin:4px 2px 10px;max-width:720px;}
+.lg-bar{display:flex;width:clamp(80px,22vw,220px);height:8px;border-radius:4px;overflow:hidden;background:#e3e3e8;flex-shrink:0;}
+.lg-bar i{display:block;height:100%;}
+.lg-best{font-size:13px;font-weight:700;opacity:.65;font-variant-numeric:tabular-nums;}
+.lg-words{display:flex;flex-wrap:wrap;gap:8px;padding:6px 16px 16px 50px;}
+.lg-w{display:inline-flex;flex-direction:column;gap:1px;padding:6px 10px;border-radius:10px;background:#f6f6f8;border-left:4px solid var(--wc);font-size:12.5px;line-height:1.25;color:#555;}
+.lg-w b{font-size:14px;color:#1c1c1e;}
+@media (max-width:600px){ .lg-words{padding-left:14px;} .lg-bar{width:60px;} }
+/* elegir modo */
+#lg-choose{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:16px;}
+#lg-choose .lg-dim{position:absolute;inset:0;background:rgba(0,0,0,.35);}
+#lg-choose .lg-box{position:relative;background:#fff;border-radius:20px;width:min(400px,100%);padding:20px 16px 14px;box-shadow:0 20px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;gap:8px;color:#1c1c1e;}
+.lg-bt{font-size:20px;font-weight:800;text-align:center;}
+.lg-bs{font-size:13px;opacity:.55;text-align:center;margin-bottom:6px;}
+#lg-choose button{font:inherit;border:0;cursor:pointer;color:inherit;}
+.lg-opt{display:flex;flex-direction:column;gap:2px;text-align:left;padding:12px 14px;border-radius:14px;background:#f4f4f6;}
+.lg-opt b{font-size:16px;}
+.lg-opt span{font-size:13px;opacity:.6;}
+.lg-opt.last{box-shadow:inset 0 0 0 2px #1c1c1e;}
+.lg-opt:disabled{opacity:.4;cursor:default;}
+.lg-cancel{padding:10px;background:none;opacity:.6;}
+/* partida */
+#lg{position:fixed;inset:0;z-index:80;background:#fff;display:flex;flex-direction:column;color:#1c1c1e;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+#lg button{font:inherit;border:0;cursor:pointer;color:inherit;}
+.lg-top{display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;}
+.lg-x{width:34px;height:34px;border-radius:50%;background:#1c1c1e !important;color:#fff !important;font-size:16px;flex-shrink:0;}
+.lg-prog{flex:1;height:8px;border-radius:4px;overflow:hidden;background:linear-gradient(90deg,#3b5bdb,#1c9bd6,#14b8a6,#4cc36a,#e9c42b,#f2902e,#e5484d);position:relative;}
+.lg-prog i{display:block;height:100%;position:relative;transition:width .35s ease;}
+.lg-prog i::after{content:'';position:absolute;left:100%;top:0;bottom:0;width:200vw;background:#e6e6ea;}
+.lg-cnt{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;}
+.lg-stage{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:4vh 16px 30px;}
+.lg-card{width:min(560px,100%);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
+.lg-sub{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.45;}
+.lg-ask{font-size:clamp(30px,7vw,48px);font-weight:800;line-height:1.15;word-break:break-word;}
+.lg-ask.sent{font-size:clamp(20px,4.6vw,28px);font-weight:600;line-height:1.4;}
+.lg-ask.listen{font-size:64px;cursor:pointer;}
+.lg-dots{display:flex;gap:6px;}
+.lg-dots i{width:9px;height:9px;border-radius:50%;background:#d8d8de;}
+.lg-dots i.x{background:#e5484d;}
+.lg-row{display:flex;gap:8px;width:100%;}
+.lg-in{flex:1;min-width:0;font:inherit;font-size:20px;padding:12px 14px;border-radius:14px;border:2px solid #e3e3e8;outline:none;background:#fafafa;}
+.lg-in:focus{border-color:#1c1c1e;background:#fff;}
+.lg-in.shake{animation:lgshake .3s;border-color:#e5484d;}
+@keyframes lgshake{25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+.lg-go{padding:0 18px;border-radius:14px;background:#1c1c1e !important;color:#fff !important;font-weight:700;min-height:50px;}
+.lg-go.next{width:100%;}
+.lg-msg{min-height:20px;font-size:15px;color:#c0392b;}
+.lg-acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.lg-acts.end{flex-direction:column;align-items:stretch;width:100%;}
+.lg-mini{padding:8px 14px;border-radius:16px;background:#f2f2f4 !important;font-size:14px;font-weight:600;}
+.lg-ans{width:100%;display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:16px;background:#f7f7f9;border-left:6px solid var(--rc,#e5484d);text-align:left;}
+.lg-card.r1{--rc:#0a8a3f;}.lg-card.r2{--rc:#e0b400;}.lg-card.r3{--rc:#f28a2e;}.lg-card.r0{--rc:#e5484d;}
+.lg-aw{display:flex;align-items:center;gap:10px;font-size:24px;}
+.lg-at{font-size:18px;opacity:.75;}
+.lg-ex{font-size:15px;line-height:1.45;font-style:italic;opacity:.8;}
+.lg-hint{font-size:14px;opacity:.7;}
+.lg-casi{font-size:14px;color:#a06b00;}
+.lg-score{font-size:56px;font-weight:800;}
+.lg-legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;font-size:14px;}
+.lg-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;}
+.lg-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+
 </style>
 </head>
 <body>
@@ -2423,6 +2492,7 @@ function promptNewTema(parentNode){
     <div class="new-deck-types">
       <label class="on"><input type="radio" name="nd-type" value="cards" checked><div><b>tarjetas</b><span>una imagen y un nombre por tarjeta</span></div></label>
       <label><input type="radio" name="nd-type" value="occ"><div><b>oclusión</b><span>una imagen con zonas tapadas: recuerdas qué hay debajo</span></div></label>
+      <label><input type="radio" name="nd-type" value="lang"><div><b>vocabulario (idioma)</b><span>palabra y traducción, sin imágenes: se juega escribiendo</span></div></label>
       <label><input type="radio" name="nd-type" value="map"><div><b>mapa</b><span>una sola imagen con puntos que hay que localizar</span></div></label>
     </div>
     <div class="td-btns"><button class="btn" id="nd-cancel">cancelar</button><button class="btn btn-primary" id="nd-ok">crear</button></div>`;
@@ -2434,7 +2504,8 @@ function promptNewTema(parentNode){
     const name = dlg.querySelector('#nd-name').value.trim();
     if(!name){ dlg.querySelector('#nd-name').focus(); return; }
     const kind = dlg.querySelector('input[name=nd-type]:checked').value;
-    const node = kind === 'map' ? {id:uid(), type:'tema', name, image:null, points:[], tolerance:8}
+    const node = kind === 'lang' ? {id:uid(), type:'tema', mode:'barajado', lang:{learn:'en', base:'es'}, name, cols:3, photos:[], tagCats:[{id:'cat_tema', name:'Tema'},{id:'cat_lote', name:'Lote'}], vzCat:'cat_tema'}
+               : kind === 'map' ? {id:uid(), type:'tema', name, image:null, points:[], tolerance:8}
                : kind === 'occ' ? {id:uid(), type:'tema', mode:'oclusion', name, image:null, masks:[]}
                : {id:uid(), type:'tema', mode:'barajado', name, cols:3, photos:[]};
     (parentNode ? parentNode.children : tree).push(node);
@@ -6543,6 +6614,7 @@ function vzCrumb(){
       else {
         parts.push(`<a data-open="${node.id}">${escapeHtml(node.name)}</a>`);
         if(s.t === 'edit') parts.push('Editar');
+        if(s.t === 'lots') parts.push('Lotes');
         if(s.t === 'group') parts.push(escapeHtml(vzGroupName(node, s.v)));
         if(s.t === 'card'){ const p = (node.photos || []).find(x=> x.id === s.cid); if(s.v !== undefined) parts.push(`<a data-grp="${node.id}|${encodeURIComponent(s.v == null ? '' : s.v)}">${escapeHtml(vzGroupName(node, s.v))}</a>`); parts.push(escapeHtml(p ? vzLabel(p) : '')); }
       }
@@ -6572,6 +6644,7 @@ function vzRender(anim){
   else if(s.t === 'card') vzCard(node, s.cid, s.v);
   else if(s.t === 'schemes') vzSchemes(node);
   else if(s.t === 'scheme') vzScheme(node);
+  else if(s.t === 'lots') vzLots(node);
   else vzSearch();
   vzBody.scrollTop = y;
   vzLoadImgs();
@@ -7095,6 +7168,7 @@ function vzClick(e){
   const t = e.target;
   if(t.closest('#vz > .view')) return; // dentro de los editores mandan sus propios botones
   if(esqClick(e, t)) return;
+  if(langClickVz(e, t)) return;
   if(t.closest('#vz-pop')) return;
   const v = t.closest('[data-v]');
   if(v){ const a = v.dataset.v;
@@ -7220,6 +7294,7 @@ function vzMoreMenu(anchor, n){
   if(i > 0) items.push(['Mover antes', ()=>{ if(vzReorder(arr, n, -1)) saveLocal(); }]);
   if(i < arr.length - 1) items.push(['Mover después', ()=>{ if(vzReorder(arr, n, 1)) saveLocal(); }]);
   if(deck) items.push(['Exportar mazo', ()=> exportDeck(n)]);
+  if(deck && n.mode === 'barajado') items.push([n.lang ? 'Quitar modo idioma' : 'Usar como mazo de idioma', ()=>{ if(n.lang){ delete n.lang; } else { n.lang = { learn: 'en', base: 'es' }; n.tagCats = n.tagCats || []; if(!n.tagCats.some(c=> c.id === LANG_LOTE)) n.tagCats.push({ id: LANG_LOTE, name: 'Lote' }); } saveLocal(); vzRender(); }]);
   items.push(['__sep__']);
   items.push([deck ? 'Eliminar mazo' : 'Eliminar carpeta', ()=> deleteNode(n), true]);
   openMenuAt(anchor, items);
@@ -7643,6 +7718,317 @@ Object.assign(window.seterraApi, {
 
 /* por si el navegador intenta seleccionar algo igualmente al mantener pulsado */
 document.addEventListener('selectstart', e=>{ if(!document.body.classList.contains('playing')) return; const t = e.target && e.target.nodeType === 1 ? e.target : e.target && e.target.parentElement; if(t && t.closest && t.closest('input,textarea,select,[contenteditable]')) return; e.preventDefault(); });
+
+
+/* ================= MAZOS DE IDIOMA (vocabulario) =================
+   Tarjeta: nombre = palabra en el idioma que aprendes (inglés); reverso:
+     1.ª línea      → traducción (varias válidas separadas por «/»)
+     «Ej: …»        → frase de ejemplo; la palabra entre *asteriscos* es el hueco
+     «Pista: …»     → truco para recordarla (opcional)
+   Los temas ordenan el mazo para consultarlo; los lotes («Lote 1», «Lote 2»…) lo reparten para jugar. */
+const LANG_LOTE = 'cat_lote', LANG_TEMA = 'cat_tema', LOTE_SIZE = 20;
+const isLang = n=> !!(n && n.lang);
+function langParse(p){
+  const lines = String(p.back || '').split('\n').map(s=> s.trim()).filter(Boolean);
+  let tr = '', ex = '', hint = '';
+  lines.forEach(l=>{
+    if(/^ej(emplo)?\s*[:.]/i.test(l)) ex = l.replace(/^ej(emplo)?\s*[:.]\s*/i, '');
+    else if(/^pista\s*:/i.test(l)) hint = l.replace(/^pista\s*:\s*/i, '');
+    else if(!tr) tr = l;
+  });
+  return { word: (p.label || '').trim(), tr, ex, hint };
+}
+/* respuestas válidas: «big / large», «fall (fell, fallen)», «to go» … */
+function langAnswers(s){
+  return String(s || '').replace(/\([^)]*\)/g, '').split(/[\/;,]| o /).map(x=> x.trim()).filter(Boolean);
+}
+function langNorm(s){
+  return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[’']/g, "'").replace(/[^a-z0-9ñ' ]+/g, ' ').replace(/\s+/g, ' ').trim()
+    .replace(/^(to|the|a|an|el|la|los|las|un|una|unos|unas) /, '');
+}
+function langLev(a, b){
+  if(Math.abs(a.length - b.length) > 2) return 9;
+  const d = Array.from({ length: a.length + 1 }, (_, i)=> [i]);
+  for(let j = 1; j <= b.length; j++) d[0][j] = j;
+  for(let i = 1; i <= a.length; i++) for(let j = 1; j <= b.length; j++)
+    d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+/* 'ok' · 'casi' (una letra de diferencia) · 'no' */
+function langCheck(input, expected){
+  const v = langNorm(input); if(!v) return { r: 'no' };
+  const opts = langAnswers(expected).map(x=> ({ raw: x, n: langNorm(x) }));
+  if(opts.some(o=> o.n === v)) return { r: 'ok' };
+  const near = opts.find(o=> o.n.length >= 4 && langLev(o.n, v) <= (o.n.length >= 9 ? 2 : 1));
+  return near ? { r: 'casi', fix: near.raw } : { r: 'no' };
+}
+/* frase con hueco: la palabra marcada con *asteriscos*, o la primera que coincida */
+function langCloze(p){
+  const { word, ex } = langParse(p); if(!ex) return null;
+  const m = ex.match(/\*([^*]+)\*/);
+  if(m) return { text: ex.replace(m[0], '____'), answer: m[1].trim(), full: ex.replace(/\*/g, '') };
+  const w = langAnswers(word)[0]; if(!w) return null;
+  const re = new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+  return re.test(ex) ? { text: ex.replace(re, '____'), answer: w, full: ex } : null;
+}
+/* ---------- voz (la del propio dispositivo) ---------- */
+function langSpeak(text, lang){
+  try{
+    if(!('speechSynthesis' in window) || !text) return false;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(langAnswers(text)[0] || text);
+    u.lang = lang || 'en-GB'; u.rate = .9;
+    const v = speechSynthesis.getVoices().find(x=> x.lang && x.lang.toLowerCase().startsWith((lang || 'en').slice(0, 2)));
+    if(v) u.voice = v;
+    speechSynthesis.speak(u); return true;
+  }catch(e){ return false; }
+}
+/* ---------- lotes ---------- */
+function langLotes(node){
+  const vals = valuesOf(node, LANG_LOTE, node.photos || []);
+  return vals.sort((a, b)=> (parseInt(a.replace(/\D/g, '')) || 0) - (parseInt(b.replace(/\D/g, '')) || 0) || a.localeCompare(b, 'es'));
+}
+function langCards(node){ return (node.photos || []).filter(p=> (p.label || '').trim()); }
+/* reparto automático: se van cogiendo palabras de cada tema por turnos, así cada lote queda variado
+   y las palabras de un mismo tema (las que más se confunden) quedan separadas */
+function langAutoLotes(node){
+  const cards = langCards(node); if(!cards.length) return 0;
+  node.tagCats = node.tagCats || [];
+  if(!node.tagCats.some(c=> c.id === LANG_LOTE)) node.tagCats.push({ id: LANG_LOTE, name: 'Lote' });
+  const tema = node.tagCats.find(c=> c.id === LANG_TEMA) || vzCat(node);
+  const by = new Map();
+  cards.forEach(p=>{ const k = tema ? (tagVals(p, tema.id)[0] || '') : ''; if(!by.has(k)) by.set(k, []); by.get(k).push(p); });
+  const piles = [...by.values()].map(a=> shuffle(a)).sort((a, b)=> b.length - a.length);
+  const seq = []; let left = true;
+  while(left){ left = false; piles.forEach(a=>{ if(a.length){ seq.push(a.shift()); left = true; } }); }
+  const n = Math.max(1, Math.ceil(seq.length / LOTE_SIZE));
+  seq.forEach((p, i)=> setTagVals(p, LANG_LOTE, ['Lote ' + (1 + (i % n))]));
+  saveLocal(); return n;
+}
+/* resultado de cada palabra (la última vez): 1, 2, 3 = acertada a la 1.ª, 2.ª, 3.ª; 0 = fallada */
+function langStat(node, cid){ return (node.langStats || {})[cid]; }
+function langLoteSummary(node, lote){
+  const cards = langCards(node).filter(p=> tagVals(p, LANG_LOTE).includes(lote));
+  const c = { 1: 0, 2: 0, 3: 0, 0: 0, n: 0 };
+  cards.forEach(p=>{ const s = langStat(node, p.id); if(s == null) c.n++; else c[s.r]++; });
+  return { cards, c, best: ((node.langBest || {})[lote]) };
+}
+const LANG_COL = { 1: '#0a8a3f', 2: '#e0b400', 3: '#f28a2e', 0: '#e5484d', n: '#e3e3e8' };
+function langBar(c, total){
+  if(!total) return '';
+  return `<span class="lg-bar">${[1, 2, 3, 0, 'n'].map(k=> c[k] ? `<i style="flex:${c[k]};background:${LANG_COL[k]}"></i>` : '').join('')}</span>`;
+}
+/* ---------- pantalla de lotes (dentro del mazo) ---------- */
+function vzLots(node){
+  const lotes = langLotes(node), total = langCards(node).length;
+  let rows = lotes.map(l=>{
+    const s = langLoteSummary(node, l), enc = encodeURIComponent(l), open = (vzOpenG['lot:' + node.id] || new Set()).has(l);
+    return `<section class="vz-gsec"><div class="vz-fold lg-lot${open ? ' open' : ''}" data-lotfold="${node.id}|${enc}">
+        <span class="vz-fchev">${VZICO.fwd}</span><span class="vz-fname">${escapeHtml(l)}</span>
+        ${langBar(s.c, s.cards.length)}<span class="vz-fsp"></span>
+        ${s.best != null ? `<span class="lg-best" title="Mejor resultado">${s.best}%</span>` : ''}
+        <span class="vz-fcount">${s.cards.length}</span>
+        <button class="vz-fplay" data-lotplay="${node.id}|${enc}" title="Jugar este lote" aria-label="Jugar este lote">${VZICO.play}</button>
+      </div>${open ? `<div class="lg-words">${s.cards.map(p=>{ const st = langStat(node, p.id); const q = langParse(p); return `<span class="lg-w" style="--wc:${LANG_COL[st == null ? 'n' : st.r]}"><b>${escapeHtml(q.word)}</b>${escapeHtml(q.tr)}</span>`; }).join('')}</div>` : ''}</section>`;
+  }).join('');
+  const none = lotes.length ? '' : `<div class="vz-empty">Este mazo aún no está repartido en lotes. «Repartir automáticamente» lo hace en lotes de ${LOTE_SIZE} palabras, mezclando temas.</div>`;
+  const sinLote = langCards(node).filter(p=> !tagVals(p, LANG_LOTE).length).length;
+  vzBody.innerHTML = `<div class="vz-fam">${vzHeader(node, `<div class="vz-chips">
+      <button class="vz-chip" data-lotauto="${node.id}">${VZICO.tree}Repartir automáticamente</button>
+      <span class="vz-chl">${lotes.length} lotes · ${total} palabras${sinLote && lotes.length ? ' · ' + sinLote + ' sin lote' : ''}</span></div>
+      <p class="lg-help">Los lotes son para jugar por partes: unas ${LOTE_SIZE} palabras de temas variados. Puedes moverlas a mano cambiando su etiqueta «Lote» en Editar. El color de cada barra es tu último resultado en cada palabra.</p>`)}
+    ${none}${rows ? `<div class="vz-folds">${rows}</div>` : ''}</div>`;
+}
+/* ---------- partida ---------- */
+const LANG_MODES = [
+  { k: 'en-es', t: 'Del inglés al español', s: 'ves la palabra en inglés y escribes qué significa' },
+  { k: 'es-en', t: 'Del español al inglés', s: 'ves la palabra en español y la escribes en inglés' },
+  { k: 'cloze', t: 'Frase con hueco', s: 'escribes la palabra que falta en la frase' },
+  { k: 'listen', t: 'Escuchar y escribir', s: 'oyes la palabra en inglés y la escribes' }
+];
+let LG = null;
+function langChooser(node, cards, label){
+  if(!cards.length) return toast('No hay palabras que jugar');
+  const el = document.createElement('div'); el.id = 'lg-choose';
+  const nCloze = cards.filter(langCloze).length;
+  el.innerHTML = `<div class="lg-dim"></div><div class="lg-box"><div class="lg-bt">¿Cómo quieres jugar?</div><div class="lg-bs">${escapeHtml(label)} · ${cards.length} palabras</div>
+    ${LANG_MODES.map(m=>{ const off = m.k === 'cloze' && !nCloze; return `<button class="lg-opt${node.langLastMode === m.k ? ' last' : ''}" data-lmode="${m.k}"${off ? ' disabled' : ''}><b>${m.t}</b><span>${off ? 'estas palabras aún no tienen frase de ejemplo' : m.s + (m.k === 'cloze' && nCloze < cards.length ? ` (${nCloze} con frase)` : '')}</span></button>`; }).join('')}
+    <button class="lg-cancel" data-lmode="">Cancelar</button></div>`;
+  document.body.appendChild(el);
+  el.addEventListener('click', e=>{
+    if(e.target.closest('.lg-dim')) return el.remove();
+    const b = e.target.closest('[data-lmode]'); if(!b || b.disabled) return;
+    el.remove(); if(!b.dataset.lmode) return;
+    node.langLastMode = b.dataset.lmode; saveLocal();
+    langStart(node, cards, b.dataset.lmode, label);
+  });
+}
+function langStart(node, cards, mode, label, lote){
+  let list = cards.slice();
+  if(mode === 'cloze') list = list.filter(langCloze);
+  LG = { node, mode, label, lote, all: cards, order: shuffle(list), i: 0, tries: 0, res: {}, done: false };
+  if(vzEl) vzEl.classList.add('away');
+  document.body.classList.add('playing');
+  let el = document.getElementById('lg'); if(!el){ el = document.createElement('div'); el.id = 'lg'; document.body.appendChild(el); }
+  el.innerHTML = `<div class="lg-top"><button class="lg-x" data-lg="quit" aria-label="Salir">←</button><div class="lg-prog"><i></i></div><span class="lg-cnt"></span></div><div class="lg-stage"></div>`;
+  el.onclick = langClick;
+  el.onkeydown = e=>{ if(e.key === 'Enter'){ e.preventDefault(); const nx = el.querySelector('[data-lg=next]'); if(nx) nx.click(); else { const ck = el.querySelector('[data-lg=check]'); if(ck) ck.click(); } } };
+  langCard();
+}
+function langPrompt(p){
+  const q = langParse(p), m = LG.mode;
+  if(m === 'en-es') return { ask: q.word, sub: 'Escribe en español', expect: q.tr, speak: q.word };
+  if(m === 'es-en') return { ask: q.tr, sub: 'Escribe en inglés', expect: q.word };
+  if(m === 'cloze'){ const c = langCloze(p); return { ask: c.text, sub: 'Escribe la palabra que falta' + (q.tr ? ` · «${q.tr}»` : ''), expect: c.answer, sentence: true }; }
+  return { ask: '🔊', sub: 'Escucha y escríbela en inglés', expect: q.word, listen: true, speak: q.word };
+}
+function langCard(){
+  const el = document.getElementById('lg'), st = el.querySelector('.lg-stage');
+  const n = LG.order.length;
+  el.querySelector('.lg-prog i').style.width = (LG.i / n * 100) + '%';
+  el.querySelector('.lg-cnt').textContent = Math.min(LG.i + 1, n) + '/' + n;
+  if(LG.i >= n) return langEnd();
+  const p = LG.order[LG.i], pr = langPrompt(p), q = langParse(p);
+  LG.tries = 0; LG.cur = { p, pr };
+  st.innerHTML = `<div class="lg-card">
+      <div class="lg-sub">${escapeHtml(pr.sub)}</div>
+      <div class="lg-ask${pr.sentence ? ' sent' : ''}${pr.listen ? ' listen' : ''}"${pr.listen ? ' data-lg="say"' : ''}>${escapeHtml(pr.ask)}</div>
+      ${pr.listen ? `<button class="lg-mini" data-lg="say">🔊 Repetir</button>` : ''}
+      <div class="lg-dots">${[0, 1, 2].map(()=> '<i></i>').join('')}</div>
+      <div class="lg-row"><input class="lg-in" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="tu respuesta"><button class="lg-go" data-lg="check">Comprobar</button></div>
+      <div class="lg-msg"></div>
+      <div class="lg-acts">${q.hint ? `<button class="lg-mini" data-lg="hint">💡 Pista</button>` : ''}<button class="lg-mini" data-lg="first">Primera letra</button><button class="lg-mini" data-lg="give">No lo sé →</button></div>
+    </div>`;
+  const inp = st.querySelector('.lg-in'); setTimeout(()=> inp.focus(), 60);
+  if(pr.listen) setTimeout(()=>{ if(!langSpeak(pr.speak)) { st.querySelector('.lg-ask').textContent = pr.speak.replace(/./g, '•'); st.querySelector('.lg-msg').textContent = 'Este dispositivo no puede leer en voz alta.'; } }, 250);
+}
+function langReveal(result){
+  const { p } = LG.cur, q = langParse(p), node = LG.node;
+  LG.res[p.id] = result;
+  node.langStats = node.langStats || {}; node.langStats[p.id] = { r: result, t: Date.now() };
+  saveLocal();
+  const st = document.querySelector('#lg .lg-stage'), card = st.querySelector('.lg-card');
+  card.classList.add('done', 'r' + result);
+  const mg = card.querySelector('.lg-msg'); if(mg) mg.remove();
+  const cz = langCloze(p);
+  card.querySelector('.lg-row').outerHTML = `<div class="lg-ans">
+      <div class="lg-aw"><b>${escapeHtml(q.word)}</b><button class="lg-mini" data-lg="sayw">🔊</button></div>
+      <div class="lg-at">${escapeHtml(q.tr)}</div>
+      ${q.ex ? `<div class="lg-ex">${escapeHtml(cz ? cz.full : q.ex)}</div>` : ''}
+      ${q.hint ? `<div class="lg-hint">💡 ${escapeHtml(q.hint)}</div>` : ''}
+    </div><button class="lg-go next" data-lg="next">Siguiente →</button>`;
+  const acts = card.querySelector('.lg-acts'); if(acts) acts.remove();
+  setTimeout(()=>{ const b = card.querySelector('[data-lg=next]'); if(b) b.focus(); }, 30);
+  if(LG.mode !== 'en-es') langSpeak(q.word);
+}
+function langClick(e){
+  const b = e.target.closest('[data-lg]'); if(!b || !LG) return;
+  const a = b.dataset.lg, el = document.getElementById('lg');
+  if(a === 'quit'){ if(LG.done || confirm('¿Salir de la partida?')) langClose(); return; }
+  if(a === 'say' || a === 'sayw'){ langSpeak(langParse(LG.cur.p).word); return; }
+  if(a === 'next'){ LG.i++; langCard(); return; }
+  if(a === 'hint'){ el.querySelector('.lg-msg').innerHTML = '💡 ' + escapeHtml(langParse(LG.cur.p).hint); return; }
+  if(a === 'first'){ const ex = langAnswers(LG.cur.pr.expect)[0] || ''; const inp = el.querySelector('.lg-in'); if(inp && ex){ inp.value = ex[0]; inp.focus(); } return; }
+  if(a === 'give'){ langReveal(0); return; }
+  if(a === 'check'){
+    const inp = el.querySelector('.lg-in'); if(!inp || !inp.value.trim()) return;
+    const r = langCheck(inp.value, LG.cur.pr.expect), msg = el.querySelector('.lg-msg');
+    if(r.r === 'ok' || r.r === 'casi'){
+      LG.tries++;
+      if(r.r === 'casi') setTimeout(()=>{ const m = el.querySelector('.lg-card'); if(m) m.insertAdjacentHTML('beforeend', `<div class="lg-casi">Casi: se escribe <b>${escapeHtml(r.fix)}</b></div>`); }, 0);
+      langReveal(LG.tries); return;
+    }
+    LG.tries++;
+    const dots = el.querySelectorAll('.lg-dots i'); if(dots[LG.tries - 1]) dots[LG.tries - 1].className = 'x';
+    if(LG.tries >= 3){ langReveal(0); return; }
+    msg.textContent = LG.tries === 1 ? 'No es eso. Prueba otra vez.' : 'Tampoco. Te queda un intento.';
+    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake'); inp.select();
+    return;
+  }
+  if(a === 'again'){ langStart(LG.node, LG.all, LG.mode, LG.label, LG.lote); return; }
+  if(a === 'fails'){ const f = LG.order.filter(p=> !LG.res[p.id]); langStart(LG.node, f, LG.mode, LG.label + ' · fallos', null); return; }
+  if(a === 'other'){ const n = LG.node, c = LG.all, l = LG.label; langClose(); langChooser(n, c, l); return; }
+  if(a === 'back'){ langClose(); return; }
+}
+function langEnd(){
+  LG.done = true;
+  const el = document.getElementById('lg'), node = LG.node, n = LG.order.length;
+  const c = { 1: 0, 2: 0, 3: 0, 0: 0 }; LG.order.forEach(p=> c[LG.res[p.id] || 0]++);
+  const score = Math.round((c[1] + c[2] * .66 + c[3] * .33) / Math.max(1, n) * 100);
+  if(LG.lote){ node.langBest = node.langBest || {}; if(node.langBest[LG.lote] == null || score > node.langBest[LG.lote]) node.langBest[LG.lote] = score; saveLocal(); }
+  el.querySelector('.lg-prog i').style.width = '100%'; el.querySelector('.lg-cnt').textContent = n + '/' + n;
+  el.querySelector('.lg-stage').innerHTML = `<div class="lg-card lg-end">
+      <div class="lg-sub">${escapeHtml(LG.label)}</div><div class="lg-score">${score}%</div>
+      <div class="lg-legend">${[[1, 'a la 1.ª'], [2, 'a la 2.ª'], [3, 'a la 3.ª'], [0, 'falladas']].map(([k, t])=> `<span><i style="background:${LANG_COL[k]}"></i>${c[k]} ${t}</span>`).join('')}</div>
+      <div class="lg-list">${LG.order.map(p=>{ const q = langParse(p); return `<span class="lg-w" style="--wc:${LANG_COL[LG.res[p.id] || 0]}"><b>${escapeHtml(q.word)}</b>${escapeHtml(q.tr)}</span>`; }).join('')}</div>
+      <div class="lg-acts end">${c[0] + c[2] + c[3] ? `<button class="lg-go" data-lg="fails">Repasar las que no acertaste a la primera</button>` : ''}<button class="lg-mini" data-lg="again">Jugar de nuevo</button><button class="lg-mini" data-lg="other">Otro modo</button><button class="lg-mini" data-lg="back">Volver</button></div>
+    </div>`;
+}
+/* «repasar» también las acertadas a la 2.ª o 3.ª: son las que aún flojean */
+{ const _le = langClick; langClick = function(e){ const b = e.target.closest && e.target.closest('[data-lg=fails]'); if(b && LG){ const f = LG.order.filter(p=> (LG.res[p.id] || 0) !== 1); langStart(LG.node, f, LG.mode, LG.label.replace(/ · repaso$/, '') + ' · repaso', null); return; } return _le.apply(this, arguments); }; }
+function langClose(){
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const el = document.getElementById('lg'); if(el) el.remove();
+  document.body.classList.remove('playing');
+  LG = null;
+  if(vzEl){ vzEl.classList.remove('away'); if(!vzHostKey) vzRender(); }
+}
+/* ---------- enganches con el resto de la app ---------- */
+/* en un mazo de idioma, «Jugar» (y el ▶ de cada grupo) abre los modos de escritura */
+{ const _og = openGamePicker; openGamePicker = function(id){
+  const n = findNode(id);
+  if(isLang(n)){
+    const f = n.playFilter || {}, act = Object.keys(f).some(k=> (f[k] || []).length);
+    const cards = langCards(n).filter(p=> !act || passesFilter(n, p, f));
+    const label = act ? Object.entries(f).filter(([k, v])=> v && v.length).map(([k, v])=> v.join(', ')).join(' · ') : n.name;
+    return langChooser(n, cards, label);
+  }
+  return _og.apply(this, arguments);
+}; }
+/* tarjetas de texto: la palabra grande y su traducción */
+{ const _cm = vzCardMini; vzCardMini = function(node, p, color, v){
+  if(!isLang(node)) return _cm.apply(this, arguments);
+  const q = langParse(p);
+  return `<button class="vz-cm lg-tile" data-card="${node.id}|${p.id}"${v !== undefined ? ` data-gv="${encodeURIComponent(v == null ? '' : v)}"` : ''} style="--gc:${color}"><span class="lg-tw">${escapeHtml(q.word)}</span><span class="lg-tt">${escapeHtml(q.tr)}</span></button>`;
+}; }
+/* botón «Lotes» en la página del mazo */
+{ const _da = vzDeckActions; vzDeckActions = function(node, home){
+  const h = _da.apply(this, arguments);
+  if(!isLang(node) || !home) return h;
+  return h.replace('<div class="vz-chips">', `<div class="vz-chips"><button class="vz-chip vz-play" data-lots="${node.id}">${VZICO.list}Lotes</button>`).replace(`<button class="vz-chip vz-play" data-play="${node.id}">${VZICO.play}Jugar</button>`, `<button class="vz-chip" data-play="${node.id}">${VZICO.play}Jugar todo</button>`);
+}; }
+function langClickVz(e, t){
+  let x;
+  if(x = t.closest('[data-lots]')){ vzGo({ t: 'lots', id: x.dataset.lots }); return true; }
+  if(x = t.closest('[data-lotauto]')){
+    const n = findNode(x.dataset.lotauto); if(!n) return true;
+    if(langLotes(n).length && !confirm('¿Volver a repartir todo el mazo en lotes nuevos? Los lotes actuales se sustituyen.')) return true;
+    const k = langAutoLotes(n); toast(k + (k === 1 ? ' lote creado' : ' lotes creados')); vzRender(); return true;
+  }
+  if(x = t.closest('[data-lotplay]')){
+    const [id, enc] = x.dataset.lotplay.split('|'), n = findNode(id), l = decodeURIComponent(enc);
+    const cards = langCards(n).filter(p=> tagVals(p, LANG_LOTE).includes(l));
+    langChooserLote(n, cards, l); return true;
+  }
+  if(x = t.closest('[data-lotfold]')){
+    const [id, enc] = x.dataset.lotfold.split('|'), l = decodeURIComponent(enc), k = 'lot:' + id, s = vzOpenG[k] = vzOpenG[k] || new Set();
+    if(s.has(l)) s.delete(l); else s.add(l); vzRender(); return true;
+  }
+  return false;
+}
+function langChooserLote(n, cards, l){
+  langChooser(n, cards, l);
+  // la partida de un lote guarda su mejor resultado
+  const box = document.getElementById('lg-choose');
+  if(box) box.addEventListener('click', e=>{ const b = e.target.closest('[data-lmode]'); if(b && b.dataset.lmode && LG) LG.lote = l; });
+}
+/* nuevo tipo de mazo: vocabulario */
+function langNewDeck(name, parent){
+  const node = { id: uid(), type: 'tema', mode: 'barajado', lang: { learn: 'en', base: 'es' }, name, cols: 3, photos: [], tagCats: [{ id: LANG_TEMA, name: 'Tema' }, { id: LANG_LOTE, name: 'Lote' }], vzCat: LANG_TEMA };
+  (parent ? parent.children : tree).push(node); if(parent) parent.expanded = true;
+  saveLocal(); return node;
+}
 
 boot();
 
