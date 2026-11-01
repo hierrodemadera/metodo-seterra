@@ -7767,7 +7767,7 @@ document.addEventListener('selectstart', e=>{ if(!document.body.classList.contai
      «Ej: …»        → frase de ejemplo; la palabra entre *asteriscos* es el hueco
      «Pista: …»     → truco para recordarla (opcional)
    Los temas ordenan el mazo para consultarlo; los lotes («Lote 1», «Lote 2»…) lo reparten para jugar. */
-const LANG_LOTE = 'cat_lote', LANG_TEMA = 'cat_tema', LOTE_SIZE = 20;
+const LANG_LOTE = 'cat_lote', LANG_TEMA = 'cat_tema', LOTE_SIZE = 50;
 const isLang = n=> !!(n && n.lang);
 function langParse(p){
   const lines = String(p.back || '').split('\n').map(s=> s.trim()).filter(Boolean);
@@ -8134,7 +8134,7 @@ function langNewDeck(name, parent){
    y cada mazo vive en su propio archivo (el mismo formato que «Exportar mazo»).
    Al actualizar se eligen los mazos que se quieren en este aparato. */
 const PUB_FORMAT = 'metodo-seterra-indice';
-const PUB_KEEP = ['langStats', 'langMark', 'langBest', 'langLastMode', 'playFilter', 'vzCat', 'vzSub'];
+const PUB_KEEP = ['langStats', 'langMark', 'langLastMode', 'playFilter', 'vzCat', 'vzSub'];
 function pubIsIndex(d){ return !!(d && Array.isArray(d.mazos)); }
 function pubUrl(file){ return String(file).split('/').map(encodeURIComponent).join('/'); }
 async function pubFetchDeck(entry){
