@@ -1629,6 +1629,37 @@ button.lg-w{font:inherit;font-size:12.5px;border:0;cursor:pointer;text-align:lef
 .pub-row input{grid-row:1/3;width:22px;height:22px;accent-color:#1c1c1e;}
 .pub-n{font-weight:700;font-size:16px;}
 .pub-m{font-size:12.5px;opacity:.6;}
+/* nube de GitHub */
+#vz .vz-cloudb .gh-cloud{width:40px;height:40px;display:flex;align-items:center;justify-content:center;}
+#vz .gh-cloud .gh-slash{display:none;}
+#vz .gh-cloud.s-ok{color:#8e8e93;}
+#vz .gh-cloud.s-pending{color:#8e8e93;opacity:.55;}
+#vz .gh-cloud.s-sync{color:#0a84ff;animation:ghpulse 1s ease-in-out infinite;}
+#vz .gh-cloud.s-err{color:#e5484d;}
+#vz .gh-cloud.s-off,#vz .gh-cloud.s-none{color:#8e8e93;opacity:.75;}
+#vz .gh-cloud.s-off .gh-slash,#vz .gh-cloud.s-none .gh-slash{display:inline;}
+@keyframes ghpulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+@media (prefers-reduced-motion:reduce){.gh-cloud.s-sync{animation:none;}}
+@media (max-width:600px){ #vz .vz-cloudb{order:2;} }
+/* ajustes */
+#gh-sheet{position:fixed;inset:0;z-index:96;display:flex;align-items:center;justify-content:center;padding:16px;}
+#gh-sheet .lg-dim{position:absolute;inset:0;background:rgba(0,0,0,.35);}
+#gh-sheet .gh-box{position:relative;background:#fff;border-radius:20px;width:min(460px,100%);max-height:90vh;overflow:auto;padding:20px 18px 12px;box-shadow:0 20px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;gap:8px;color:#1c1c1e;}
+#gh-sheet button{font:inherit;border:0;cursor:pointer;}
+#gh-sheet .lg-go{padding:14px;border-radius:14px;background:#1c1c1e;color:#fff;font-weight:700;margin-top:4px;}
+#gh-sheet .lg-cancel{padding:10px;background:none;opacity:.6;color:#1c1c1e;}
+#gh-sheet .gh-danger{color:#c0392b;opacity:1;}
+.gh-p{font-size:14px;line-height:1.45;margin:0 2px;color:#444;}
+.gh-p b{color:#1c1c1e;}
+.gh-err{color:#c0392b;font-weight:600;}
+.gh-small{font-size:12.5px;opacity:.6;margin:0 2px;}
+.gh-l{font-size:12px;font-weight:700;opacity:.6;margin:6px 2px 0;}
+.gh-in{font:inherit;font-size:16px;padding:11px 12px;border-radius:12px;border:1.5px solid #e3e3e8;background:#fafafa;outline:none;width:100%;box-sizing:border-box;}
+.gh-in:focus{border-color:#1c1c1e;background:#fff;}
+.gh-adv{margin-top:6px;border-top:1px solid #eee;padding-top:8px;display:flex;flex-direction:column;gap:6px;}
+.gh-adv summary{cursor:pointer;font-size:14px;font-weight:600;opacity:.7;padding:4px 2px;}
+.gh-adv[open]{display:flex;flex-direction:column;gap:6px;}
+.gh-list{max-height:40vh;}
 
 </style>
 </head>
@@ -6597,6 +6628,7 @@ function vzBuild(){
       <div class="vz-bar vz-nav"><button class="vz-b" data-v="back" aria-label="Atrás">${VZICO.back}</button><button class="vz-b" data-v="fwd" aria-label="Adelante">${VZICO.fwd}</button><button class="vz-b" data-v="home" aria-label="Inicio">${VZICO.home}</button><div class="vz-crumb"></div></div>
       <div class="vz-bar vz-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px;opacity:.6;flex-shrink:0"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input type="text" inputmode="search" enterkeyhint="search" placeholder="buscar tarjeta, etiqueta…" autocomplete="off" spellcheck="false"></div>
       <div class="vz-bar vz-pzb"><button class="vz-b" data-v="pz" title="Pizarra" aria-label="Pizarra">${VZICO.pz}</button></div>
+      <div class="vz-bar vz-cloudb"><button class="vz-b gh-cloud s-none" data-v="cloud" title="Guardar en GitHub" aria-label="Guardar en GitHub">${GH_CLOUD}</button></div>
     </div>
     <div class="vz-body"></div>`;
   document.body.appendChild(vzEl);
@@ -7363,7 +7395,8 @@ function vzLibMenu(anchor){
     ['Exportar copia completa (un archivo)', ()=> document.getElementById('btn-export').click()],
     ['Importar copia completa…', ()=> document.getElementById('btn-import').click()],
     ['__sep__'],
-    ['⟳ Actualizar desde lo publicado', ()=> document.getElementById('btn-refresh').click()],
+    ghOk() ? ['☁︎ Sincronizar ahora con GitHub', ()=>{ ghDirty = true; ghSync({ push: true }); }] : ['⟳ Actualizar desde lo publicado', ()=> document.getElementById('btn-refresh').click()],
+    ['☁︎ Guardar en GitHub…', ()=> ghOpen()],
   ]);
 }
 /* ---------- la parte clásica queda debajo: todo se hace desde aquí ---------- */
@@ -8247,6 +8280,407 @@ function pubExportIndex(){
   downloadJson(pubIndexFromTree(), 'data.json');
   toast('Índice listo: súbelo al repo junto a los mazos (⋯ del mazo → Exportar mazo).');
 }
+
+
+/* ================= GUARDADO EN GITHUB (se sincroniza solo entre aparatos) =================
+   Mismo repositorio que la web. Lo que se guarda allí:
+     data.json       → índice: lista de mazos (archivo de cada uno), carpetas, notas y esquemas
+     <Mazo>.json     → un archivo por mazo (solo el contenido: tarjetas, etiquetas, imágenes)
+     progreso.json   → palabras quitadas y resultados de los mazos de idioma
+   Cada cambio se sube a los pocos segundos en UN solo commit (API de git de GitHub).
+   Al abrir la app, al volver a ella y cada 15 s se mira si otro aparato ha subido algo.
+   Si dos aparatos cambian a la vez se junta pieza a pieza: cada mazo por separado, las notas,
+   los esquemas, el orden de carpetas y, en el progreso, palabra a palabra.
+   Las pizarras sueltas no se sincronizan (viven solo en cada aparato). */
+const GH_KEY = 'seterra_gh', GH_SKIP = 'seterra_sync_skip', GH_BASE = 'seterra_sync_base';
+const GH_PROG = ['langStats', 'langMark', 'langBest'];
+const GH_LOCALONLY = ['langLastMode', 'playFilter'];
+let gh = null; try{ gh = JSON.parse(localStorage.getItem(GH_KEY) || 'null'); }catch(e){}
+let ghState = 'none', ghMsg = '', ghSyncing = false, ghAgain = false, ghT = 0, ghLast = 0, ghDirty = true, ghApplying = false, ghBaseCache;
+const ghOk = ()=> !!(gh && gh.owner && gh.repo && gh.token && gh.branch);
+const ghDir = ()=> gh && gh.dir ? gh.dir.replace(/^\/+|\/+$/g, '') + '/' : '';
+function ghSkip(){ try{ return new Set(JSON.parse(localStorage.getItem(GH_SKIP) || '[]')); }catch(e){ return new Set(); } }
+function ghSetSkip(s){ try{ localStorage.setItem(GH_SKIP, JSON.stringify([...s])); }catch(e){} }
+async function ghBase(){ if(ghBaseCache !== undefined) return ghBaseCache; try{ ghBaseCache = await idbGet(GH_BASE); }catch(e){ ghBaseCache = null; } return ghBaseCache; }
+async function ghSaveBase(b){ ghBaseCache = b; try{ await idbSet(GH_BASE, b); }catch(e){} }
+/* algo abierto que no conviene tocar desde fuera: partida, editor, pizarra, ventanas de elegir */
+function ghBusy(){ return document.body.classList.contains('playing') || document.body.classList.contains('pz-open') || !!vzHostKey || !!document.querySelector('#lg, #lg-choose, #pub-choose, #gh-sheet .gh-editing'); }
+
+/* ---------- huella git de un texto (la misma que calcula GitHub: así se sabe si algo cambió sin descargarlo) ---------- */
+const ghEnc = new TextEncoder();
+async function ghSha(text){
+  const body = ghEnc.encode(text), head = ghEnc.encode('blob ' + body.length + '\0');
+  const all = new Uint8Array(head.length + body.length); all.set(head); all.set(body, head.length);
+  const h = await crypto.subtle.digest('SHA-1', all);
+  return [...new Uint8Array(h)].map(b=> b.toString(16).padStart(2, '0')).join('');
+}
+function ghB64Text(b64){ const bin = atob(String(b64).replace(/\s/g, '')); const u = new Uint8Array(bin.length); for(let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new TextDecoder().decode(u); }
+
+/* ---------- llamadas a GitHub ---------- */
+async function ghApi(path, opt){
+  opt = opt || {};
+  const r = await fetch(`https://api.github.com/repos/${gh.owner}/${gh.repo}${path}`, { method: opt.method || 'GET', cache: 'no-store',
+    headers: { Authorization: 'Bearer ' + gh.token, Accept: 'application/vnd.github+json', ...(opt.body ? { 'Content-Type': 'application/json' } : {}) },
+    body: opt.body ? JSON.stringify(opt.body) : undefined });
+  if(r.status === 401) throw new Error('llave');
+  return r;
+}
+async function ghJ(path, opt){ const r = await ghApi(path, opt); if(!r.ok){ const e = new Error(String(r.status)); e.status = r.status; throw e; } return r.json(); }
+async function ghBlob(sha){ const j = await ghJ('/git/blobs/' + sha); return j.encoding === 'base64' ? ghB64Text(j.content) : j.content; }
+
+/* ---------- cómo se guarda cada cosa (siempre con las claves en el mismo orden: si no, dos aparatos
+   con lo mismo escribirían textos distintos y se pasarían el día subiéndolo) ---------- */
+function ghSort(v){ if(Array.isArray(v)) return v.map(ghSort); if(v && typeof v === 'object'){ const o = {}; Object.keys(v).sort().forEach(k=>{ if(v[k] !== undefined) o[k] = ghSort(v[k]); }); return o; } return v; }
+const ghStr = (v, sp)=> JSON.stringify(ghSort(v), null, sp);
+function ghDeckClean(d){ const o = {}; Object.keys(d).forEach(k=>{ if(!GH_PROG.includes(k) && !GH_LOCALONLY.includes(k)) o[k] = d[k]; }); return o; }
+const ghDeckText = d=> ghStr({ format: DECK_FORMAT, version: 1, mazo: ghDeckClean(d) });
+function ghNoExpand(arr){ return (arr || []).map(n=>{ const o = Object.assign({}, n); delete o.expanded; if(Array.isArray(o.children)) o.children = ghNoExpand(o.children); return o; }); }
+function ghSkeleton(nodes){ return (nodes || []).map(n=> n.type === 'folder' ? Object.assign({ f: 1, id: n.id, name: n.name }, n.color ? { color: n.color } : {}, { children: ghSkeleton(n.children) }) : { d: n.id }); }
+function ghSkelFromIndex(idx){
+  const out = [];
+  (idx.mazos || []).forEach(e=>{
+    let host = out;
+    (e.carpeta ? String(e.carpeta).split(' / ') : []).forEach(name=>{ let f = host.find(x=> x.f && x.name === name); if(!f){ f = { f: 1, id: 'f-' + name, name, children: [] }; host.push(f); } host = f.children; });
+    host.push({ d: e.id });
+  });
+  return out;
+}
+function ghDecksIn(nodes, out){ out = out || new Map(); (nodes || []).forEach(n=>{ if(n.type === 'folder') ghDecksIn(n.children, out); else if(n.type === 'tema') out.set(n.id, n); }); return out; }
+function ghFoldersIn(nodes, out){ out = out || new Map(); (nodes || []).forEach(n=>{ if(n.type === 'folder'){ out.set(n.id, n); ghFoldersIn(n.children, out); } }); return out; }
+/* vuelve a montar el árbol con el orden de carpetas acordado y los mazos que hay en este aparato */
+function ghBuildTree(skel, decks, oldFolders){
+  const used = new Set();
+  const walk = list=> list.map(x=>{
+    if(x.f){ const old = oldFolders.get(x.id); return Object.assign({ id: x.id, type: 'folder', name: x.name, expanded: old ? !!old.expanded : true, children: walk(x.children || []) }, x.color ? { color: x.color } : {}); }
+    const d = decks.get(x.d); if(!d) return null; used.add(x.d); return d;
+  }).filter(Boolean);
+  const out = walk(skel || []);
+  decks.forEach((d, id)=>{ if(!used.has(id)) out.push(d); });
+  return out;
+}
+/* mete en el esqueleto los mazos que faltan (los desmarcados en este aparato), en la carpeta donde estaban */
+function ghFillSkel(skel, ref, ids){
+  const out = JSON.parse(JSON.stringify(skel || [])), have = new Set();
+  (function w(l){ (l || []).forEach(x=>{ if(x.f) w(x.children); else have.add(x.d); }); })(out);
+  const pathOf = (l, id, p)=>{ for(const x of l || []){ if(x.f){ const r = pathOf(x.children, id, p.concat(x.id)); if(r) return r; } else if(x.d === id) return p; } return null; };
+  ids.forEach(id=>{
+    if(have.has(id)) return;
+    const p = pathOf(ref, id, []) || [];
+    let host = out;
+    for(const fid of p){ const f = host.find(x=> x.f && x.id === fid); if(!f) break; host = f.children = f.children || []; }
+    host.push({ d: id }); have.add(id);
+  });
+  return out;
+}
+function ghCarpetas(skel){ const m = {}; (function w(l, p){ (l || []).forEach(x=>{ if(x.f) w(x.children, p.concat(x.name)); else m[x.d] = p.join(' / '); }); })(skel, []); return m; }
+function ghProgOf(d){ const o = {}; GH_PROG.forEach(k=>{ if(d[k] && Object.keys(d[k]).length) o[k] = d[k]; }); return Object.keys(o).length ? o : null; }
+/* progreso: palabras quitadas a tres bandas (gana el aparato que la cambió); resultados, el más reciente; récords, el mayor */
+function ghMergeProg(b, l, r){
+  b = b || {}; l = l || {}; r = r || {};
+  const out = {};
+  const keys = new Set([...Object.keys(l.langMark || {}), ...Object.keys(r.langMark || {}), ...Object.keys(b.langMark || {})]);
+  const m = {};
+  keys.forEach(k=>{ const bv = (b.langMark || {})[k] || '', lv = (l.langMark || {})[k] || '', rv = (r.langMark || {})[k] || ''; const v = b.langMark ? (lv !== bv ? lv : rv) : (lv || rv); if(v) m[k] = v; });
+  if(Object.keys(m).length) out.langMark = m;
+  const s = Object.assign({}, r.langStats || {}); Object.entries(l.langStats || {}).forEach(([k, v])=>{ if(!s[k] || (v && v.t || 0) >= (s[k].t || 0)) s[k] = v; });
+  if(Object.keys(s).length) out.langStats = s;
+  const best = Object.assign({}, r.langBest || {}); Object.entries(l.langBest || {}).forEach(([k, v])=>{ if(best[k] == null || v > best[k]) best[k] = v; });
+  if(Object.keys(best).length) out.langBest = best;
+  return Object.keys(out).length ? out : null;
+}
+
+/* ---------- la sincronización ---------- */
+function ghSchedule(ms){ if(!ghOk()) return; clearTimeout(ghT); if(ghState !== 'sync') ghSet('pending'); ghT = setTimeout(()=> ghSync(), ms == null ? (document.body.classList.contains('playing') ? 20000 : 1500) : ms); }
+function ghMark(){ if(ghApplying) return; ghDirty = true; ghSchedule(); }
+async function ghSync(opt){
+  opt = opt || {};
+  if(!ghOk()) return;
+  if(ghSyncing){ ghAgain = true; return; }
+  if(!navigator.onLine){ ghSet('off'); return; }
+  const busy = ghBusy();
+  if(busy && !opt.hidden && !opt.push){ if(ghDirty) ghSchedule(4000); return; }
+  ghSyncing = true; ghSet('sync'); clearTimeout(ghT);
+  try{
+    for(let tries = 0; tries < 4; tries++){
+      if(await ghRound(busy)) { ghLast = Date.now(); ghSet('ok'); return; }
+    }
+    throw new Error('conflicto');
+  }catch(e){
+    const m = String(e && e.message || e);
+    ghSet(!navigator.onLine ? 'off' : 'err', m === 'llave' ? 'la llave no es válida o ha caducado' : m === '404' ? 'no encuentro el repositorio' : m === '403' ? 'la llave no tiene permiso para escribir' : m);
+  }finally{
+    ghSyncing = false;
+    if(ghAgain){ ghAgain = false; ghSchedule(300); }
+  }
+}
+/* una vuelta: true si todo quedó al día, false si otro aparato subió algo justo a la vez (se repite) */
+async function ghRound(busy){
+  const base0 = await ghBase();
+  const B = base0 && base0.owner === gh.owner && base0.repo === gh.repo && (base0.dir || '') === (gh.dir || '') && base0.branch === gh.branch ? base0 : null;
+  const ref = await ghJ('/git/ref/heads/' + encodeURIComponent(gh.branch));
+  const head = ref.object.sha;
+  if(B && head === B.head && !ghDirty) return true;
+  ghDirty = false;
+  const skip = ghSkip(), dir = ghDir();
+  /* 1 · lo que hay en este aparato */
+  const localDecks = ghDecksIn(tree), L = {};
+  for(const [id, d] of localDecks){ const text = ghDeckText(d); L[id] = { d, text, sha: await ghSha(text) }; }
+  let lSkel = ghSkeleton(tree);
+  const lNotasT = ghStr(ghNoExpand(notas)), lEsqT = ghStr(ghNoExpand(esquemas));
+  /* 2 · lo que hay en GitHub (solo se descarga lo que cambió desde la última vez) */
+  let files, idx, rProg;
+  if(B && head === B.head){ files = B.files; idx = B.idx; rProg = B.prog; }
+  else{
+    const commit = await ghJ('/git/commits/' + head);
+    const t = await ghJ('/git/trees/' + commit.tree.sha + (dir ? '?recursive=1' : ''));
+    files = {}; (t.tree || []).forEach(e=>{ if(e.type === 'blob' && e.path.startsWith(dir)) files[e.path.slice(dir.length)] = e.sha; });
+    if(files['data.json']){
+      if(B && B.files['data.json'] === files['data.json']) idx = B.idx;
+      else{ try{ idx = JSON.parse(await ghBlob(files['data.json'])); }catch(e){ idx = null; } }
+    }
+    if(!idx || !Array.isArray(idx.mazos)) idx = { mazos: [] };
+    if(files['progreso.json']){
+      if(B && B.files['progreso.json'] === files['progreso.json']) rProg = B.prog;
+      else{ try{ rProg = (JSON.parse(await ghBlob(files['progreso.json'])) || {}).mazos || {}; }catch(e){ rProg = {}; } }
+    } else rProg = {};
+  }
+  /* cada mazo, donde diga el índice o, si no está ahí, por su nombre en la raíz o en «mazos/» */
+  const R = {}; (idx.mazos || []).forEach(e=>{
+    if(!e || !e.id || !e.file) return;
+    const base = String(e.file).split('/').pop(), f = [e.file, base, 'mazos/' + base].find(x=> files[x]);
+    if(f) R[e.id] = { file: f, sha: files[f], name: e.name, tarjetas: e.tarjetas, kb: e.kb };
+  });
+  const Bd = (B && B.decks) || {};
+  /* 3 · mazo a mazo */
+  const ups = [], dels = [], gets = [], dropLocal = [], newBase = {}, entries = {};
+  const taken = new Set(Object.keys(files).map(f=> f.toLowerCase()));
+  const fileFor = (id, d)=>{
+    if(R[id]) return R[id].file; if(Bd[id] && Bd[id].file) return Bd[id].file;
+    let f = deckFileName(d.name), n = 2; while(taken.has(f.toLowerCase()) || /^(data|progreso|index|sw)\.json$/i.test(f)) f = deckFileName(d.name + ' ' + n++); taken.add(f.toLowerCase()); return f;
+  };
+  new Set([...Object.keys(L), ...Object.keys(R), ...Object.keys(Bd)]).forEach(id=>{
+    const l = L[id], r = R[id], b = Bd[id];
+    const lCh = l ? (!b || l.sha !== b.lsha) : (!!b && !skip.has(id));
+    const rCh = r ? (!b || r.sha !== b.rsha) : !!b;
+    if(l && r && l.sha === r.sha){ newBase[id] = { file: r.file, lsha: l.sha, rsha: r.sha }; entries[id] = { file: r.file, d: l.d }; return; }
+    if(l && r){
+      if(!B || (rCh && !lCh)){ // la primera vez en este aparato, o solo cambió fuera: manda GitHub
+        if(busy){ if(b) newBase[id] = b; entries[id] = { file: r.file, d: l.d, keep: r }; return; }
+        gets.push({ id, r }); return;
+      }
+      if(lCh){ const f = r.file; ups.push({ path: f, text: l.text }); newBase[id] = { file: f, lsha: l.sha, rsha: l.sha }; entries[id] = { file: f, d: l.d }; return; }
+      newBase[id] = b; entries[id] = { file: r.file, d: l.d }; return;
+    }
+    if(l && !r){
+      if(b && !lCh && B){ // se borró en otro aparato
+        if(busy){ newBase[id] = b; return; }
+        dropLocal.push(id); return;
+      }
+      const f = fileFor(id, l.d); ups.push({ path: f, text: l.text }); newBase[id] = { file: f, lsha: l.sha, rsha: l.sha }; entries[id] = { file: f, d: l.d }; return;
+    }
+    if(!l && r){
+      if(skip.has(id)){ newBase[id] = { file: r.file, lsha: b && b.lsha, rsha: r.sha }; entries[id] = { file: r.file, keep: r }; return; }
+      if(b && !rCh && B){ dels.push(r.file); return; } // borrado aquí
+      if(busy){ if(b) newBase[id] = b; entries[id] = { file: r.file, keep: r }; return; }
+      gets.push({ id, r }); return;
+    }
+  });
+  /* descargas */
+  const got = {};
+  for(const g of gets){
+    let d = null;
+    try{ const txt = await ghBlob(g.r.sha); const list = decksFromFile(JSON.parse(txt)); d = list[0] || null; }catch(e){}
+    if(!d){ if(Bd[g.id]) newBase[g.id] = Bd[g.id]; continue; }
+    normalizeTree([d]);
+    const old = localDecks.get(g.id); if(old) GH_LOCALONLY.forEach(k=>{ if(old[k] !== undefined) d[k] = old[k]; });
+    GH_PROG.forEach(k=>{ delete d[k]; }); if(old) GH_PROG.forEach(k=>{ if(old[k] !== undefined) d[k] = old[k]; });
+    got[g.id] = d;
+    const lsha = await ghSha(ghDeckText(d));
+    newBase[g.id] = { file: g.r.file, lsha, rsha: g.r.sha }; entries[g.id] = { file: g.r.file, d };
+  }
+  /* 4 · carpetas, notas y esquemas: gana el aparato que los cambió */
+  const pick = (lT, bT, rT, has)=> !B ? (has ? 'r' : 'l') : lT === rT ? 'l' : lT !== bT ? 'l' : 'r';
+  const rSkel = Array.isArray(idx.arbol) ? idx.arbol : ghSkelFromIndex(idx), rSkelT = ghStr(rSkel);
+  lSkel = ghFillSkel(lSkel, (B && B.skelT) ? JSON.parse(B.skelT) : rSkel, Object.keys(R).filter(id=> skip.has(id) && !localDecks.has(id)));
+  const lSkelT = ghStr(lSkel);
+  const skelW = pick(lSkelT, B && B.skelT, rSkelT, (idx.mazos || []).length);
+  const skel = skelW === 'l' ? lSkel : rSkel;
+  const rNotasT = idx.notas !== undefined ? ghStr(ghNoExpand(normalizeRemoteNotas(idx.notas) || [])) : null;
+  let notasW = rNotasT === null ? 'l' : pick(lNotasT, B && B.notasT, rNotasT, true);
+  if(notasW === 'r' && busy) notasW = 'l-keep';
+  const rEsqT = Array.isArray(idx.esquemas) ? ghStr(ghNoExpand(idx.esquemas)) : null;
+  let esqW = rEsqT === null ? 'l' : pick(lEsqT, B && B.esqT, rEsqT, true);
+  if(esqW === 'r' && busy) esqW = 'l-keep';
+  /* 5 · progreso, palabra a palabra */
+  const prog = {}, Bp = (B && B.prog) || null;
+  new Set([...localDecks.keys(), ...Object.keys(rProg || {}), ...Object.keys(got)]).forEach(id=>{
+    if(dropLocal.includes(id)) return;
+    const node = got[id] || localDecks.get(id);
+    const lp = node ? ghProgOf(node) : null, rp = (rProg || {})[id], bp = Bp ? Bp[id] || {} : null;
+    const m = node ? ghMergeProg(bp, lp, rp) : rp;
+    if(m) prog[id] = m;
+  });
+  /* 6 · aplicar en este aparato */
+  ghApplying = true;
+  try{
+    const decks = new Map(localDecks);
+    Object.entries(got).forEach(([id, d])=> decks.set(id, d));
+    dropLocal.forEach(id=> decks.delete(id));
+    let progChanged = false;
+    decks.forEach((d, id)=>{ const p = prog[id] || {}; const before = ghStr(ghProgOf(d)); GH_PROG.forEach(k=>{ if(p[k]) d[k] = p[k]; else delete d[k]; }); if(!got[id] && ghStr(ghProgOf(d)) !== before) progChanged = true; });
+    const newTree = ghBuildTree(skel, decks, ghFoldersIn(tree));
+    const changedTree = JSON.stringify(ghSkeleton(newTree)) !== JSON.stringify(ghSkeleton(tree)) || Object.keys(got).length || dropLocal.length;
+    tree = newTree;
+    saveLocal();
+    if(notasW === 'r'){ const old = new Map(); (function w(a){ (a || []).forEach(n=>{ old.set(n.id, n); w(n.children); }); })(notas);
+      notas = normalizeRemoteNotas(idx.notas) || [];
+      (function w(a){ (a || []).forEach(n=>{ const o = old.get(n.id); if(o && o.expanded !== undefined) n.expanded = o.expanded; w(n.children); }); })(notas);
+      saveLocalNotas(); }
+    if(esqW === 'r'){ esquemas = idx.esquemas; saveEsq(true); }
+    if((changedTree || progChanged || notasW === 'r' || esqW === 'r') && !ghBusy()) pubRerender();
+  }finally{ setTimeout(()=>{ ghApplying = false; }, 50); }
+  /* 7 · subir lo que haga falta, todo en un solo commit */
+  const carp = ghCarpetas(skel);
+  const mazos = [];
+  const order = []; (function w(l){ (l || []).forEach(x=>{ if(x.f) w(x.children); else order.push(x.d); }); })(skel);
+  Object.keys(entries).forEach(id=>{ if(!order.includes(id)) order.push(id); });
+  order.forEach(id=>{
+    const e = entries[id]; if(!e) return;
+    const d = e.d, k = e.keep;
+    const ent = { id, name: d ? d.name : k.name, file: e.file, tarjetas: d ? (d.photos || []).length : k.tarjetas, kb: d ? Math.round(ghEnc.encode(ghDeckText(d)).length / 1024) : k.kb };
+    if(carp[id]) ent.carpeta = carp[id];
+    mazos.push(ent);
+  });
+  const outNotas = notasW === 'r' ? normalizeRemoteNotas(idx.notas) : notas;
+  const outEsq = esqW === 'r' ? idx.esquemas : esquemas;
+  const newIdx = { format: PUB_FORMAT, version: 3, mazos, arbol: skel, notas: ghNoExpand(outNotas), esquemas: ghNoExpand(outEsq) };
+  const idxText = ghStr(newIdx, 1), progText = ghStr({ version: 1, mazos: prog });
+  const idxSha = await ghSha(idxText), progSha = await ghSha(progText);
+  if(files['data.json'] !== idxSha) ups.push({ path: 'data.json', text: idxText });
+  if(files['progreso.json'] !== progSha) ups.push({ path: 'progreso.json', text: progText });
+  let newHead = head;
+  const newFiles = Object.assign({}, files);
+  if(ups.length || dels.length){
+    const treeItems = [];
+    for(const u of ups){ const bl = await ghJ('/git/blobs', { method: 'POST', body: { content: u.text, encoding: 'utf-8' } }); treeItems.push({ path: dir + u.path, mode: '100644', type: 'blob', sha: bl.sha }); newFiles[u.path] = bl.sha; }
+    dels.forEach(p=>{ if(files[p]){ treeItems.push({ path: dir + p, mode: '100644', type: 'blob', sha: null }); delete newFiles[p]; } });
+    const commit = await ghJ('/git/commits/' + head);
+    const nt = await ghJ('/git/trees', { method: 'POST', body: { base_tree: commit.tree.sha, tree: treeItems } });
+    const what = [...ups.map(u=> u.path.replace(/\.json$/, '')), ...dels.map(p=> '−' + p.replace(/\.json$/, ''))].join(', ');
+    const nc = await ghJ('/git/commits', { method: 'POST', body: { message: 'Seterra: ' + what.slice(0, 120), tree: nt.sha, parents: [head] } });
+    const pr = await ghApi('/git/refs/heads/' + encodeURIComponent(gh.branch), { method: 'PATCH', body: { sha: nc.sha, force: false } });
+    if(pr.status === 422 || pr.status === 409){ ghDirty = true; return false; } // otro aparato subió justo antes: se repite
+    if(!pr.ok){ const e = new Error(String(pr.status)); throw e; }
+    newHead = nc.sha;
+  }
+  await ghSaveBase({ owner: gh.owner, repo: gh.repo, dir: gh.dir || '', branch: gh.branch, head: newHead, files: newFiles, idx: newIdx, prog,
+    decks: newBase, skelT: ghStr(skel), notasT: ghStr(ghNoExpand(outNotas)), esqT: ghStr(ghNoExpand(outEsq)) });
+  return true;
+}
+
+/* ---------- la nube de la barra ---------- */
+const GH_CLOUD = '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.6 9.1 4.75 4.75 0 0 0 7 18.5z"/><path class="gh-slash" d="M4 4l16 16"/></svg>';
+const GH_TITLES = { ok: 'Guardado en GitHub', sync: 'Guardando…', pending: 'Cambios por guardar', off: 'Sin conexión: se guardará al volver', err: 'No se pudo guardar', none: 'Sin conectar: toca para guardar en GitHub' };
+function ghSet(s, msg){
+  ghState = s; ghMsg = msg || '';
+  const v = ghOk() ? s : 'none';
+  document.querySelectorAll('[data-v="cloud"]').forEach(b=>{ b.className = 'vz-b gh-cloud s-' + v; b.title = GH_TITLES[v] + (v === 'err' && ghMsg ? ': ' + ghMsg : ''); b.setAttribute('aria-label', b.title); });
+  const st = document.getElementById('gh-state'); if(st) st.textContent = GH_TITLES[v] + (v === 'err' && ghMsg ? ': ' + ghMsg : '') + (v === 'ok' && ghLast ? ' · ' + new Date(ghLast).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }) : '');
+}
+function ghGuess(){
+  const h = location.hostname.match(/^([^.]+)\.github\.io$/i); if(!h) return {};
+  const parts = location.pathname.split('/').filter(Boolean); if(parts.length && /\.html?$/i.test(parts[parts.length - 1])) parts.pop();
+  if(!parts.length) return { owner: h[1], repo: h[1] + '.github.io', dir: '' };
+  return { owner: h[1], repo: parts[0], dir: parts.slice(1).join('/') };
+}
+/* ---------- ajustes: conectar, sincronizar, qué mazos tener aquí ---------- */
+async function ghOpen(msg){
+  const g = Object.assign(ghGuess(), gh || {});
+  const base = ghOk() ? await ghBase() : null, skip = ghSkip(), here = ghDecksIn(tree);
+  const list = base && base.idx ? base.idx.mazos || [] : [];
+  let el = document.getElementById('gh-sheet'); if(el) el.remove();
+  el = document.createElement('div'); el.id = 'gh-sheet';
+  const fmt = kb=> kb >= 1024 ? (kb / 1024).toFixed(1).replace('.', ',') + ' MB' : kb + ' KB';
+  el.innerHTML = `<div class="lg-dim" data-g="close"></div><div class="lg-box gh-box">
+    <div class="lg-bt">Guardar en GitHub</div>
+    ${ghOk() ? `<p class="gh-p"><b id="gh-state"></b><br>Los cambios de este aparato se suben solos y los de tus otros aparatos aparecen aquí al momento.</p>
+      <button class="lg-go" data-g="now">Sincronizar ahora</button>
+      ${list.length ? `<div class="pub-g">Mazos en este aparato</div><div class="pub-list gh-list">${list.map(e=>{ const on = here.has(e.id) || !skip.has(e.id); return `<label class="pub-row"><input type="checkbox" data-gdeck="${escapeHtml(e.id)}"${on ? ' checked' : ''}><span class="pub-n">${escapeHtml(e.name)}</span><span class="pub-m">${e.tarjetas != null ? e.tarjetas + ' tarjetas' : ''}${e.kb ? ' · ' + fmt(e.kb) : ''}${e.carpeta ? ' · ' + escapeHtml(e.carpeta) : ''}</span></label>`; }).join('')}</div>
+        <p class="gh-small">Desmarcar un mazo lo quita solo de este aparato para ahorrar espacio. Sigue en GitHub y en tus otros aparatos.</p>` : ''}
+      <details class="gh-adv"><summary>Llave y repositorio</summary>` : `<p class="gh-p">Pega tu llave de GitHub y pulsa Conectar. El usuario y el repositorio ya vienen puestos si abres la app desde tu web.</p>`}
+      <label class="gh-l" for="g-token">Llave (token)</label>
+      <input class="gh-in" id="g-token" type="password" value="${escapeHtml(g.token || '')}" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+      <label class="gh-l" for="g-owner">Usuario de GitHub</label>
+      <input class="gh-in" id="g-owner" value="${escapeHtml(g.owner || '')}" placeholder="tu-usuario" autocomplete="off" spellcheck="false" autocapitalize="off">
+      <label class="gh-l" for="g-repo">Repositorio</label>
+      <input class="gh-in" id="g-repo" value="${escapeHtml(g.repo || '')}" placeholder="metodo-seterra" autocomplete="off" spellcheck="false" autocapitalize="off">
+      <label class="gh-l" for="g-dir">Carpeta dentro del repositorio (si está en la raíz, vacío)</label>
+      <input class="gh-in" id="g-dir" value="${escapeHtml(g.dir || '')}" placeholder="vacío" autocomplete="off" spellcheck="false" autocapitalize="off">
+      ${msg ? `<p class="gh-p gh-err">${escapeHtml(msg)}</p>` : ''}
+      <button class="lg-go" data-g="connect">${ghOk() ? 'Guardar cambios' : 'Conectar'}</button>
+      ${ghOk() ? `<button class="lg-cancel gh-danger" data-g="off">Desconectar este aparato</button></details>` : ''}
+    <button class="lg-cancel" data-g="close">Cerrar</button></div>`;
+  document.body.appendChild(el);
+  ghSet(ghState, ghMsg);
+  el.addEventListener('focusin', e=>{ if(e.target.matches('input')) el.querySelector('.gh-box').classList.add('gh-editing'); });
+  el.addEventListener('change', e=>{
+    const c = e.target.closest('[data-gdeck]'); if(!c) return;
+    const id = c.dataset.gdeck, s = ghSkip();
+    if(c.checked){ s.delete(id); ghSetSkip(s); toast('Se descargará en este aparato'); ghDirty = true; ghSync({ push: true }); }
+    else{
+      const n = findNode(id);
+      if(n && !confirm(`¿Quitar «${n.name}» de este aparato?\n\nSigue guardado en GitHub y en tus otros aparatos. Si vuelves a marcarlo, se descarga otra vez con tu progreso.`)){ c.checked = true; return; }
+      s.add(id); ghSetSkip(s);
+      if(n){ ghApplying = true; pubRemove(tree, id); saveLocal(); setTimeout(()=> ghApplying = false, 50); pubRerender(); }
+      toast('Quitado de este aparato');
+    }
+  });
+  el.addEventListener('click', async e=>{
+    const t = e.target.closest('[data-g]'); if(!t) return;
+    const a = t.dataset.g;
+    if(a === 'close'){ el.remove(); if(ghOk()) ghSchedule(300); return; }
+    if(a === 'now'){ ghDirty = true; ghSync({ push: true }); return; }
+    if(a === 'off'){ if(!confirm('¿Desconectar este aparato de GitHub? Tus datos se quedan aquí, pero dejarán de sincronizarse.')) return; gh = null; localStorage.removeItem(GH_KEY); ghSaveBase(null); ghSet('none'); el.remove(); toast('Este aparato ya no se guarda en GitHub'); return; }
+    if(a === 'connect'){
+      const v = id=> el.querySelector(id).value.trim();
+      const cand = { token: v('#g-token'), owner: v('#g-owner'), repo: v('#g-repo').replace(/\.git$/, ''), dir: v('#g-dir').replace(/^\/+|\/+$/g, '') };
+      if(!cand.token || !cand.owner || !cand.repo) return ghOpen('Faltan la llave, el usuario o el repositorio.');
+      t.textContent = 'Comprobando…'; t.disabled = true;
+      try{
+        const r = await fetch(`https://api.github.com/repos/${cand.owner}/${cand.repo}`, { headers: { Authorization: 'Bearer ' + cand.token, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+        if(r.status === 401) return ghOpen('La llave no es válida. Cópiala otra vez entera (empieza por github_pat_).');
+        if(r.status === 404) return ghOpen('No encuentro ese repositorio, o la llave no tiene acceso a él. En GitHub, en la llave, añade este repositorio en «Repository access».');
+        if(!r.ok) return ghOpen('GitHub ha respondido con un error (' + r.status + '). Prueba otra vez en un momento.');
+        const j = await r.json();
+        if(j.permissions && !j.permissions.push) return ghOpen('La llave puede leer pero no escribir. En la llave, el permiso «Contents» tiene que estar en «Read and write».');
+        gh = Object.assign(cand, { branch: j.default_branch || 'main' });
+        localStorage.setItem(GH_KEY, JSON.stringify(gh));
+        el.remove(); toast('Conectado con GitHub'); ghDirty = true; ghSync({ push: true });
+      }catch(err){ ghOpen('No hay conexión con GitHub. Comprueba internet y vuelve a probar.'); }
+    }
+  });
+}
+
+/* ---------- enganches con el resto de la app ---------- */
+{ const _s = saveLocal; saveLocal = function(){ const r = _s.apply(this, arguments); ghMark(); return r; }; }
+{ const _n = saveLocalNotas; saveLocalNotas = function(){ const r = _n.apply(this, arguments); ghMark(); return r; }; }
+{ const _e = saveEsq; saveEsq = function(){ const r = _e.apply(this, arguments); ghMark(); return r; }; }
+/* «Actualizar desde lo publicado»: con GitHub conectado ya no hace falta, sincroniza */
+{ const _p = pubRefresh; pubRefresh = async function(){ if(ghOk()){ ghDirty = true; ghSync({ push: true }); toast('Sincronizando con GitHub…'); return true; } return _p.apply(this, arguments); }; }
+document.addEventListener('click', e=>{ if(e.target.closest('[data-v="cloud"]')){ e.stopPropagation(); ghOpen(); } }, true);
+addEventListener('online', ()=> ghSchedule(300));
+addEventListener('offline', ()=> ghSet('off'));
+document.addEventListener('visibilitychange', ()=>{
+  if(!ghOk()) return;
+  if(document.visibilityState === 'visible'){ if(Date.now() - ghLast > 5000) ghSync(); }
+  else if(ghDirty || ghState === 'pending'){ clearTimeout(ghT); ghSync({ hidden: true }); }
+});
+addEventListener('pagehide', ()=>{ if(ghOk() && (ghDirty || ghState === 'pending')){ clearTimeout(ghT); ghSync({ hidden: true }); } });
+/* mientras la app está abierta, cada 15 s se mira si otro aparato ha subido algo (es una sola consulta pequeña) */
+setInterval(()=>{ if(ghOk() && document.visibilityState === 'visible' && !ghSyncing && ghState !== 'pending' && Date.now() - ghLast > 15000) ghSync(); }, 5000);
+/* al terminar una partida o cerrar un editor: subir lo pendiente */
+{ const _c = langClose; langClose = function(){ const r = _c.apply(this, arguments); if(ghOk() && ghDirty) ghSchedule(800); return r; }; }
+{ const _b = boot; boot = async function(){ const r = await _b.apply(this, arguments); ghSet(ghOk() ? 'pending' : 'none'); if(ghOk()){ ghDirty = true; ghSync(); } return r; }; }
 
 boot();
 
