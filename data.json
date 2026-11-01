@@ -1,94 +1,1302 @@
 {
+ "arbol": [
+  {
+   "d": "idilzyzjhmueb01e6"
+  },
+  {
+   "d": "id12xiq13mukxf4xm"
+  },
+  {
+   "children": [
+    {
+     "d": "ingles-b1"
+    },
+    {
+     "d": "ingles-b2"
+    },
+    {
+     "d": "ingles-c1"
+    },
+    {
+     "d": "ingles-c2"
+    }
+   ],
+   "f": 1,
+   "id": "f-Inglés",
+   "name": "Inglés"
+  }
+ ],
+ "esquemas": [
+  {
+   "assets": {},
+   "board": {
+    "items": [
+     {
+      "bold": true,
+      "color": "#1c1c1e",
+      "fs": 54,
+      "h": 80,
+      "id": "iidbo6jcvcmvydcs3k",
+      "t": "text",
+      "text": "Razas de perros",
+      "w": 1390,
+      "x": 0,
+      "y": 4
+     },
+     {
+      "h": 92,
+      "id": "iidxolc2fimvydcs3k",
+      "ref": {
+       "deck": "idilzyzjhmueb01e6"
+      },
+      "t": "block",
+      "w": 380,
+      "x": 1430,
+      "y": 0
+     },
+     {
+      "align": "left",
+      "fill": "#fff3c4",
+      "fs": 20,
+      "h": 130,
+      "id": "iidtqjtcmtmvydcs3k",
+      "t": "note",
+      "text": "Las razas se ordenan como lo hace la FCI (Federación Cinológica Internacional): en grupos según el trabajo para el que se criaron y, dentro de cada grupo, en secciones.\nToca un bloque para desplegar sus tarjetas, toca una tarjeta para verla entera y usa ▶ para jugar solo ese grupo o sección.",
+      "w": 1810,
+      "x": 0,
+      "y": 116
+     },
+     {
+      "h": 92,
+      "id": "iidh4vzegqmvydcs3k",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Cobradores, levantadores y de agua"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 0,
+      "y": 306
+     },
+     {
+      "align": "left",
+      "fill": "#fad7da",
+      "fs": 16,
+      "h": 191,
+      "id": "iid5ys69tnmvydcs3k",
+      "t": "note",
+      "text": "Ayudan en la caza de aves, con tres trabajos:\n· Levantadores (spaniels): hacen volar al ave de entre la maleza.\n· Cobradores (retrievers): traen la pieza abatida sin dañarla.\n· De agua: nadan para cobrar en lagos y marismas.",
+      "w": 400,
+      "x": 0,
+      "y": 412
+     },
+     {
+      "h": 66,
+      "id": "iidg5kofjgmvydcs3r",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Cobradores (retrievers)",
+       "v": "Cobradores, levantadores y de agua"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 619
+     },
+     {
+      "h": 66,
+      "id": "iid7olne4vmvydcs3r",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Levantadores (spaniels)",
+       "v": "Cobradores, levantadores y de agua"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 697
+     },
+     {
+      "h": 66,
+      "id": "iidohd805hmvydcs3r",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Perros de agua",
+       "v": "Cobradores, levantadores y de agua"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 775
+     },
+     {
+      "fill": "#e63946",
+      "fs": 10,
+      "h": 222,
+      "id": "iid6o6ca6umvydcs3r",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 10,
+      "y": 619
+     },
+     {
+      "h": 92,
+      "id": "iidyger99zmvydcs3r",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 470,
+      "y": 306
+     },
+     {
+      "align": "left",
+      "fill": "#fce8d5",
+      "fs": 16,
+      "h": 191,
+      "id": "iid0p91q0kmvydcs3r",
+      "t": "note",
+      "text": "Razas criadas sobre todo para acompañar a las personas, muchas en cortes y palacios.\nAlgunas vienen de perros de trabajo que se hicieron pequeños o dejaron de trabajar: el caniche cobraba patos y el Boston terrier viene de perros de pelea.",
+      "w": 400,
+      "x": 470,
+      "y": 412
+     },
+     {
+      "h": 66,
+      "id": "iidu2ccuu1mvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Belgas pequeños",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 619
+     },
+     {
+      "h": 66,
+      "id": "iidmkxy6zbmvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Bichones y similares",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 697
+     },
+     {
+      "h": 66,
+      "id": "iidq0sdu08mvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Caniches",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 775
+     },
+     {
+      "h": 66,
+      "id": "iidr6fed21mvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Molosos pequeños",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 853
+     },
+     {
+      "h": 66,
+      "id": "iidjrlh2qtmvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Sin pelo",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 931
+     },
+     {
+      "h": 66,
+      "id": "iidla7y020mvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Spaniels de compañía",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 1009
+     },
+     {
+      "h": 66,
+      "id": "iidpr0jcgemvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Tibetanos",
+       "v": "Compañía"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 1087
+     },
+     {
+      "fill": "#f08c2e",
+      "fs": 10,
+      "h": 534,
+      "id": "iid3ae3e78mvydcs45",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 480,
+      "y": 619
+     },
+     {
+      "h": 92,
+      "id": "iid3bglvz3mvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Cruce (sin grupo)"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 940,
+      "y": 306
+     },
+     {
+      "align": "left",
+      "fill": "#f6edd5",
+      "fs": 16,
+      "h": 99,
+      "id": "iidtkn8nwamvydcs45",
+      "t": "note",
+      "text": "Mezcla de dos razas que no está reconocida oficialmente, así que no tiene grupo.",
+      "w": 400,
+      "x": 940,
+      "y": 412
+     },
+     {
+      "h": 92,
+      "id": "iidq03028mmvydcs45",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Lebreles"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 1410,
+      "y": 306
+     },
+     {
+      "align": "left",
+      "fill": "#d4ebe9",
+      "fs": 16,
+      "h": 145,
+      "id": "iidrilm6ntmvydcs45",
+      "t": "note",
+      "text": "Cazan con la vista y la velocidad, no con el olfato.\nCuerpo alto y fino, pecho profundo y cintura muy estrecha.\n«Lebrel» viene de «liebre», su presa típica.",
+      "w": 400,
+      "x": 1410,
+      "y": 412
+     },
+     {
+      "h": 66,
+      "id": "iid8e6oj3amvydcs4b",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Lebreles de pelo corto",
+       "v": "Lebreles"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 573
+     },
+     {
+      "h": 66,
+      "id": "iidjjhzvgdmvydcs4b",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Lebreles de pelo duro",
+       "v": "Lebreles"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 651
+     },
+     {
+      "h": 66,
+      "id": "iidzb7jwngmvydcs4b",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Lebreles de pelo largo",
+       "v": "Lebreles"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 729
+     },
+     {
+      "fill": "#2a9d8f",
+      "fs": 10,
+      "h": 222,
+      "id": "iidn463rvomvydcs4b",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 1420,
+      "y": 573
+     },
+     {
+      "h": 92,
+      "id": "iidr755gvymvydcs4b",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Pastor y boyeros"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 0,
+      "y": 1235
+     },
+     {
+      "align": "left",
+      "fill": "#d8e5f7",
+      "fs": 16,
+      "h": 214,
+      "id": "iid8ffmnt9mvydcs4b",
+      "t": "note",
+      "text": "Perros que manejan ganado.\n· Pastor: reúne y guía rebaños, sobre todo de ovejas.\n· Boyero (de «buey»): conduce vacas y bueyes.\nOjo: los boyeros suizos, como el de Berna, no están aquí sino en molosos.\nAquí también está el Schipperke: parece un spitz, pero es un perrito de pastor.",
+      "w": 400,
+      "x": 0,
+      "y": 1341
+     },
+     {
+      "h": 66,
+      "id": "iidl2qlt7hmvydcs4e",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Boyeros",
+       "v": "Pastor y boyeros"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 1571
+     },
+     {
+      "h": 66,
+      "id": "iid1bh4893mvydcs4e",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Perros pastores",
+       "v": "Pastor y boyeros"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 1649
+     },
+     {
+      "fill": "#3a7bd5",
+      "fs": 10,
+      "h": 144,
+      "id": "iid6dyfgk7mvydcs4e",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 10,
+      "y": 1571
+     },
+     {
+      "h": 92,
+      "id": "iidtuw2lgwmvydcs4e",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Perros de muestra"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 470,
+      "y": 1235
+     },
+     {
+      "align": "left",
+      "fill": "#e8e1f6",
+      "fs": 16,
+      "h": 145,
+      "id": "iidawn82qemvydcs4e",
+      "t": "note",
+      "text": "Cuando huelen un ave se quedan quietos «mostrando» dónde está, a veces con una pata levantada, para que el cazador se acerque.\nBraco: perro de muestra de pelo corto.",
+      "w": 400,
+      "x": 470,
+      "y": 1341
+     },
+     {
+      "h": 66,
+      "id": "iidjj0tdt2mvydcs4n",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Continentales tipo braco",
+       "v": "Perros de muestra"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 1502
+     },
+     {
+      "h": 66,
+      "id": "iid3v4ywjcmvydcs4o",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Continentales tipo grifón",
+       "v": "Perros de muestra"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 1580
+     },
+     {
+      "h": 66,
+      "id": "iidl1tyozbmvydcs4o",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Continentales tipo spaniel",
+       "v": "Perros de muestra"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 1658
+     },
+     {
+      "h": 66,
+      "id": "iid7gm75h0mvydcs4o",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Pointer",
+       "v": "Perros de muestra"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 1736
+     },
+     {
+      "h": 66,
+      "id": "iidddy746smvydcs4o",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Setters",
+       "v": "Perros de muestra"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 1814
+     },
+     {
+      "fill": "#8e6bd1",
+      "fs": 10,
+      "h": 378,
+      "id": "iido2l3c1wmvydcs4o",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 480,
+      "y": 1502
+     },
+     {
+      "h": 92,
+      "id": "iidgyfs43qmvydcs4o",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Pinscher, schnauzer y molosos"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 940,
+      "y": 1235
+     },
+     {
+      "align": "left",
+      "fill": "#f7dfef",
+      "fs": 16,
+      "h": 467,
+      "id": "iid11o4dqcmvydcs4o",
+      "t": "note",
+      "text": "Perros de guarda y defensa, de tres familias:\n· Pinscher: perro ágil de pelo corto, cazador de ratas y guardián.\n· Schnauzer: significa «hocico» en alemán, por su barba y bigotes.\n· Molosos: por los molosos, un pueblo de la antigua Grecia famoso por sus perros de guerra. Grandes, fuertes y de cabeza ancha (dogos, mastines, bulldog, bóxer).\nAquí también van los boyeros suizos.\nOjo con los grandes guardianes de montaña (Pastor de Anatolia, del Cáucaso, Serra da Estrela, Montaña de los Pirineos): aunque se llamen «pastor», no mueven el rebaño, lo defienden, y por eso están aquí. Algunos guardianes, como el Kuvasz o el Maremma, sí van en pastores.",
+      "w": 400,
+      "x": 940,
+      "y": 1341
+     },
+     {
+      "h": 66,
+      "id": "iidpyo8fdxmvydcs4v",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Boyeros suizos",
+       "v": "Pinscher, schnauzer y molosos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 1824
+     },
+     {
+      "h": 66,
+      "id": "iid0swcvkemvydcs4v",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Molosos de montaña",
+       "v": "Pinscher, schnauzer y molosos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 1902
+     },
+     {
+      "h": 66,
+      "id": "iidd3zlarlmvydcs4v",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Molosos tipo dogo",
+       "v": "Pinscher, schnauzer y molosos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 1980
+     },
+     {
+      "h": 66,
+      "id": "iidjr5mtzgmvydcs4v",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Pinscher y schnauzer",
+       "v": "Pinscher, schnauzer y molosos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 2058
+     },
+     {
+      "fill": "#d65db1",
+      "fs": 10,
+      "h": 300,
+      "id": "iidqwm7ss8mvydcs4v",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 950,
+      "y": 1824
+     },
+     {
+      "h": 92,
+      "id": "iidtd14dawmvydcs4v",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Sabuesos"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 1410,
+      "y": 1235
+     },
+     {
+      "align": "left",
+      "fill": "#deebd8",
+      "fs": 16,
+      "h": 168,
+      "id": "iid3pu4zx6mvydcs4v",
+      "t": "note",
+      "text": "Cazan con el olfato: siguen el rastro, a menudo en jauría, y ladran para guiar al cazador.\nSuelen tener orejas largas y caídas.\nAquí también van el Dálmata y el Crestado Rodesiano, como «razas afines».",
+      "w": 400,
+      "x": 1410,
+      "y": 1341
+     },
+     {
+      "h": 66,
+      "id": "iidwijzed7mvydcs54",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Razas semejantes",
+       "v": "Sabuesos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 1525
+     },
+     {
+      "h": 66,
+      "id": "iid2dgch64mvydcs54",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Sabuesos de rastro",
+       "v": "Sabuesos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 1603
+     },
+     {
+      "h": 66,
+      "id": "iidyk3pgklmvydcs54",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Sabuesos grandes",
+       "v": "Sabuesos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 1681
+     },
+     {
+      "h": 66,
+      "id": "iidli641tsmvydcs54",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Sabuesos medianos",
+       "v": "Sabuesos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 1759
+     },
+     {
+      "h": 66,
+      "id": "iidlre2tgsmvydcs54",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Sabuesos pequeños (bassets y beagle)",
+       "v": "Sabuesos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 1440,
+      "y": 1837
+     },
+     {
+      "fill": "#5b9a3c",
+      "fs": 10,
+      "h": 378,
+      "id": "iid4rz2gfrmvydcs54",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 1420,
+      "y": 1525
+     },
+     {
+      "h": 92,
+      "id": "iidp3l1j3gmvydcs54",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 0,
+      "y": 2206
+     },
+     {
+      "align": "left",
+      "fill": "#ece0d8",
+      "fs": 16,
+      "h": 283,
+      "id": "iid8guvhu1mvydcs54",
+      "t": "note",
+      "text": "· Spitz: significa «puntiagudo» en alemán, por su hocico y sus orejas. Pelo muy denso y cola enroscada sobre el lomo; casi todos vienen del frío del norte (Siberia, Escandinavia, Japón).\n· Primitivos: razas muy antiguas, parecidas a los primeros perros, como el Basenji.\nLos podencos también son primitivos: cazan conejos usando la vista, el oído y el olfato a la vez.",
+      "w": 400,
+      "x": 0,
+      "y": 2312
+     },
+     {
+      "h": 66,
+      "id": "iiduhvj3nlmvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Nórdicos de caza",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 2611
+     },
+     {
+      "h": 66,
+      "id": "iidzo3r2rpmvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Nórdicos de guarda y pastoreo",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 2689
+     },
+     {
+      "h": 66,
+      "id": "iidcla8m73mvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Nórdicos de trineo",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 2767
+     },
+     {
+      "h": 66,
+      "id": "iidb3iicsimvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Primitivos de caza (podencos)",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 2845
+     },
+     {
+      "h": 66,
+      "id": "iid548b57zmvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Spitz asiáticos",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 2923
+     },
+     {
+      "h": 66,
+      "id": "iidphcm6l9mvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Spitz europeos",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 3001
+     },
+     {
+      "h": 66,
+      "id": "iid9gm6b2lmvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Tipo primitivo",
+       "v": "Spitz y primitivos"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 30,
+      "y": 3079
+     },
+     {
+      "fill": "#a0643b",
+      "fs": 10,
+      "h": 534,
+      "id": "iid3fwjlivmvydcs5f",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 10,
+      "y": 2611
+     },
+     {
+      "h": 92,
+      "id": "iidoeztobamvydcs5f",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Teckels"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 470,
+      "y": 2206
+     },
+     {
+      "align": "left",
+      "fill": "#dce2e8",
+      "fs": 16,
+      "h": 191,
+      "id": "iidzbm25wzmvydcs5f",
+      "t": "note",
+      "text": "«Teckel» y «dachshund» son lo mismo: en alemán, «perro tejonero».\nCazadores de madriguera de patas cortas: se meten bajo tierra para sacar tejones, zorros y conejos.\nHay tres tallas (estándar, miniatura y kaninchen) y tres pelos (liso, duro y largo).",
+      "w": 400,
+      "x": 470,
+      "y": 2312
+     },
+     {
+      "h": 66,
+      "id": "iidxheafwvmvydcs5j",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Teckel estándar",
+       "v": "Teckels"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 2519
+     },
+     {
+      "h": 66,
+      "id": "iidm5pn3kcmvydcs5j",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Teckel miniatura",
+       "v": "Teckels"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 500,
+      "y": 2597
+     },
+     {
+      "fill": "#4f6d8a",
+      "fs": 10,
+      "h": 144,
+      "id": "iid0p3vve0mvydcs5j",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 480,
+      "y": 2519
+     },
+     {
+      "h": 92,
+      "id": "iid8foczximvydcs5j",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "v": "Terriers"
+      },
+      "t": "block",
+      "w": 400,
+      "x": 940,
+      "y": 2206
+     },
+     {
+      "align": "left",
+      "fill": "#d1ecf1",
+      "fs": 16,
+      "h": 191,
+      "id": "iid3gnhfeemvydcs5j",
+      "t": "note",
+      "text": "Viene del latín «terra», tierra: se metían en las madrigueras para sacar zorros, tejones y ratas.\nPequeños o medianos, valientes y cabezotas. Casi todos de las islas británicas.\nLos «bull terrier» mezclan bulldog y terrier.",
+      "w": 400,
+      "x": 940,
+      "y": 2312
+     },
+     {
+      "h": 66,
+      "id": "iiduguhl3zmvydcs5p",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Terriers de compañía",
+       "v": "Terriers"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 2519
+     },
+     {
+      "h": 66,
+      "id": "iidbdbm45xmvydcs5p",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Terriers grandes y medianos",
+       "v": "Terriers"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 2597
+     },
+     {
+      "h": 66,
+      "id": "iidxm20ixomvydcs5p",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Terriers pequeños",
+       "v": "Terriers"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 2675
+     },
+     {
+      "h": 66,
+      "id": "iidlocwig5mvydcs5p",
+      "ref": {
+       "cat": "cat_grupo",
+       "deck": "idilzyzjhmueb01e6",
+       "scat": "cat_seccion",
+       "sv": "Terriers tipo bull",
+       "v": "Terriers"
+      },
+      "t": "block",
+      "w": 370,
+      "x": 970,
+      "y": 2753
+     },
+     {
+      "fill": "#17a2b8",
+      "fs": 10,
+      "h": 300,
+      "id": "iidgrcwbkamvydcs5p",
+      "kind": "rrect",
+      "stroke": "#1c1c1e",
+      "sw": 0,
+      "t": "shape",
+      "text": "",
+      "w": 7,
+      "x": 950,
+      "y": 2519
+     }
+    ],
+    "opts": {
+     "grid": true
+    },
+    "scenes": [
+     {
+      "h": 3237,
+      "name": "Todo",
+      "w": 1890,
+      "x": -40,
+      "y": -40
+     },
+     {
+      "h": 607,
+      "name": "Cobradores, levantadores y de agua",
+      "w": 460,
+      "x": -30,
+      "y": 276
+     },
+     {
+      "h": 919,
+      "name": "Compañía",
+      "w": 460,
+      "x": 440,
+      "y": 276
+     },
+     {
+      "h": 281,
+      "name": "Cruce (sin grupo)",
+      "w": 460,
+      "x": 910,
+      "y": 276
+     },
+     {
+      "h": 561,
+      "name": "Lebreles",
+      "w": 460,
+      "x": 1380,
+      "y": 276
+     },
+     {
+      "h": 552,
+      "name": "Pastor y boyeros",
+      "w": 460,
+      "x": -30,
+      "y": 1205
+     },
+     {
+      "h": 717,
+      "name": "Perros de muestra",
+      "w": 460,
+      "x": 440,
+      "y": 1205
+     },
+     {
+      "h": 961,
+      "name": "Pinscher, schnauzer y molosos",
+      "w": 460,
+      "x": 910,
+      "y": 1205
+     },
+     {
+      "h": 740,
+      "name": "Sabuesos",
+      "w": 460,
+      "x": 1380,
+      "y": 1205
+     },
+     {
+      "h": 1011,
+      "name": "Spitz y primitivos",
+      "w": 460,
+      "x": -30,
+      "y": 2176
+     },
+     {
+      "h": 529,
+      "name": "Teckels",
+      "w": 460,
+      "x": 440,
+      "y": 2176
+     },
+     {
+      "h": 685,
+      "name": "Terriers",
+      "w": 460,
+      "x": 910,
+      "y": 2176
+     }
+    ]
+   },
+   "color": "#2979ff",
+   "created": 1793570143886,
+   "id": "eid4g5qdiwmvydcs5q",
+   "name": "Razas de perros (grupos FCI)",
+   "type": "scheme",
+   "updated": 1793570143886
+  }
+ ],
  "format": "metodo-seterra-indice",
- "version": 2,
  "mazos": [
   {
-   "id": "idilzyzjhmueb01e6",
-   "name": "Razas de perros",
    "file": "Razas de perros.json",
-   "tarjetas": 196,
-   "kb": 5380
+   "id": "idilzyzjhmueb01e6",
+   "kb": 5378,
+   "name": "Razas de perros",
+   "tarjetas": 196
   },
   {
-   "id": "id12xiq13mukxf4xm",
-   "name": "Razas de gatos",
    "file": "Razas de gatos.json",
-   "tarjetas": 62,
-   "kb": 1743
+   "id": "id12xiq13mukxf4xm",
+   "kb": 1742,
+   "name": "Razas de gatos",
+   "tarjetas": 62
   },
   {
-   "id": "ingles-b1",
-   "name": "Inglés B1",
+   "carpeta": "Inglés",
    "file": "Ingles B1.json",
-   "tarjetas": 2354,
-   "kb": 459,
-   "carpeta": "Inglés"
+   "id": "ingles-b1",
+   "kb": 429,
+   "name": "Inglés B1",
+   "tarjetas": 2354
   },
   {
-   "id": "ingles-b2",
-   "name": "Inglés B2",
+   "carpeta": "Inglés",
    "file": "Ingles B2.json",
-   "tarjetas": 2691,
-   "kb": 527,
-   "carpeta": "Inglés"
+   "id": "ingles-b2",
+   "kb": 493,
+   "name": "Inglés B2",
+   "tarjetas": 2691
   },
   {
-   "id": "ingles-c1",
-   "name": "Inglés C1",
+   "carpeta": "Inglés",
    "file": "Ingles C1.json",
-   "tarjetas": 1009,
-   "kb": 200,
-   "carpeta": "Inglés"
+   "id": "ingles-c1",
+   "kb": 187,
+   "name": "Inglés C1",
+   "tarjetas": 1009
   },
   {
-   "id": "ingles-c2",
-   "name": "Inglés C2",
+   "carpeta": "Inglés",
    "file": "Ingles C2.json",
-   "tarjetas": 972,
-   "kb": 191,
-   "carpeta": "Inglés"
+   "id": "ingles-c2",
+   "kb": 179,
+   "name": "Inglés C2",
+   "tarjetas": 972
   }
  ],
  "notas": [
   {
-   "id": "idfwnijf9mue6ww50",
-   "type": "folder",
-   "name": "Ideas de listas",
-   "expanded": true,
    "children": [
     {
+     "content": "<h4 dir=\"ltr\">I. Naturaleza — Tierra y Fenómenos</h4><ul dir=\"ltr\"><li>Volcanes</li><li>Tipos de eclipses</li><li>Fenómenos naturales</li><li>Tipos de nubes</li></ul>\n<h4 dir=\"ltr\">II. Reino Animal</h4><p dir=\"ltr\"><strong>Mamíferos domesticados/criados</strong></p><ul dir=\"ltr\"><li>Razas de perros</li><li>Razas de gatos</li><li>Razas de caballos</li><li>Razas de ganado</li></ul>\n<p dir=\"ltr\"><strong>Mamíferos salvajes</strong></p><ul dir=\"ltr\"><li>Felinos salvajes</li><li>Primates</li><li>Marsupiales</li></ul>\n<p dir=\"ltr\"><strong>Aves</strong></p><ul dir=\"ltr\"><li>Aves rapaces</li><li>Aves migratorias</li><li>Pájaros cantores</li></ul>\n<p dir=\"ltr\"><strong>Reptiles y anfibios</strong></p><ul dir=\"ltr\"><li>Reptiles</li><li>Anfibios</li></ul>\n<p dir=\"ltr\"><strong>Peces</strong></p><ul dir=\"ltr\"><li>Peces</li></ul>\n<p dir=\"ltr\"><strong>Invertebrados</strong></p><ul dir=\"ltr\"><li>Insectos</li><li>Mariposas</li><li>Escarabajos</li><li>Arañas</li></ul>\n<p dir=\"ltr\"><strong>Paleontología</strong></p><ul dir=\"ltr\"><li>Dinosaurios</li></ul>\n<h4 dir=\"ltr\">III. Reino Vegetal y Fungi</h4><ul dir=\"ltr\"><li>Árboles</li><li>Flores</li><li>Plantas medicinales</li><li>Hongos</li><li>Setas comestibles</li></ul>\n<h4 dir=\"ltr\">IV. Cuerpo Humano y Medicina</h4><p dir=\"ltr\"><strong>Anatomía</strong></p><ul dir=\"ltr\"><li>Huesos del cuerpo humano</li><li>Músculos del cuerpo humano</li><li>Órganos del cuerpo humano</li><li>Partes del ojo</li><li>Partes del cerebro</li>\n</ul>\n<p dir=\"ltr\"><strong>Salud</strong></p><ul dir=\"ltr\"><li>Enfermedades históricamente famosas</li><li>Medicamentos conocidos</li></ul>\n<h4 dir=\"ltr\">V. Cultura y Sociedad</h4><p dir=\"ltr\"><strong>Cine</strong></p><ul dir=\"ltr\"><li>Directores de cine</li><li>Actores y actrices</li></ul>\n<p dir=\"ltr\"><strong>Festividades</strong></p><ul dir=\"ltr\"><li>Festividades tradicionales de Valencia</li><li>Festividades tradicionales de España</li><li>Festividades tradicionales del mundo</li></ul>\n<h4 dir=\"ltr\">VI. Transporte y Tecnología</h4><ul dir=\"ltr\"><li>Compañías aéreas</li><li>Marcas de coches</li><li>Tipos de barcos</li><li>Aviones famosos</li></ul>\n<h4 dir=\"ltr\">VII. Economía</h4><ul dir=\"ltr\"><li>Monedas mundo</li></ul>",
      "id": "id29dhdxomue6rzi1",
-     "type": "nota",
      "name": "Conocimiento general",
-     "content": "<h4 dir=\"ltr\">I. Naturaleza — Tierra y Fenómenos</h4><ul dir=\"ltr\"><li>Volcanes</li><li>Tipos de eclipses</li><li>Fenómenos naturales</li><li>Tipos de nubes</li></ul>\n<h4 dir=\"ltr\">II. Reino Animal</h4><p dir=\"ltr\"><strong>Mamíferos domesticados/criados</strong></p><ul dir=\"ltr\"><li>Razas de perros</li><li>Razas de gatos</li><li>Razas de caballos</li><li>Razas de ganado</li></ul>\n<p dir=\"ltr\"><strong>Mamíferos salvajes</strong></p><ul dir=\"ltr\"><li>Felinos salvajes</li><li>Primates</li><li>Marsupiales</li></ul>\n<p dir=\"ltr\"><strong>Aves</strong></p><ul dir=\"ltr\"><li>Aves rapaces</li><li>Aves migratorias</li><li>Pájaros cantores</li></ul>\n<p dir=\"ltr\"><strong>Reptiles y anfibios</strong></p><ul dir=\"ltr\"><li>Reptiles</li><li>Anfibios</li></ul>\n<p dir=\"ltr\"><strong>Peces</strong></p><ul dir=\"ltr\"><li>Peces</li></ul>\n<p dir=\"ltr\"><strong>Invertebrados</strong></p><ul dir=\"ltr\"><li>Insectos</li><li>Mariposas</li><li>Escarabajos</li><li>Arañas</li></ul>\n<p dir=\"ltr\"><strong>Paleontología</strong></p><ul dir=\"ltr\"><li>Dinosaurios</li></ul>\n<h4 dir=\"ltr\">III. Reino Vegetal y Fungi</h4><ul dir=\"ltr\"><li>Árboles</li><li>Flores</li><li>Plantas medicinales</li><li>Hongos</li><li>Setas comestibles</li></ul>\n<h4 dir=\"ltr\">IV. Cuerpo Humano y Medicina</h4><p dir=\"ltr\"><strong>Anatomía</strong></p><ul dir=\"ltr\"><li>Huesos del cuerpo humano</li><li>Músculos del cuerpo humano</li><li>Órganos del cuerpo humano</li><li>Partes del ojo</li><li>Partes del cerebro</li>\n</ul>\n<p dir=\"ltr\"><strong>Salud</strong></p><ul dir=\"ltr\"><li>Enfermedades históricamente famosas</li><li>Medicamentos conocidos</li></ul>\n<h4 dir=\"ltr\">V. Cultura y Sociedad</h4><p dir=\"ltr\"><strong>Cine</strong></p><ul dir=\"ltr\"><li>Directores de cine</li><li>Actores y actrices</li></ul>\n<p dir=\"ltr\"><strong>Festividades</strong></p><ul dir=\"ltr\"><li>Festividades tradicionales de Valencia</li><li>Festividades tradicionales de España</li><li>Festividades tradicionales del mundo</li></ul>\n<h4 dir=\"ltr\">VI. Transporte y Tecnología</h4><ul dir=\"ltr\"><li>Compañías aéreas</li><li>Marcas de coches</li><li>Tipos de barcos</li><li>Aviones famosos</li></ul>\n<h4 dir=\"ltr\">VII. Economía</h4><ul dir=\"ltr\"><li>Monedas mundo</li></ul>"
+     "type": "nota"
     },
     {
+     "content": "<h4 dir=\"ltr\">1. Simbología Religiosa</h4><ul dir=\"ltr\"><li>Cristiana (cruz, pez, alfa-omega)</li><li>Islámica (media luna, estrella)</li><li>Judía (estrella de David, menorá)</li><li>Budista (rueda del dharma, loto)</li><li>Hinduista (om, swástika original)</li><li>Pagana/Neopagana (pentagrama, triqueta)</li></ul>\n<h4 dir=\"ltr\">2. Simbología Política e Ideológica</h4><ul dir=\"ltr\"><li>Nacionalsocialista/Nazi (esvástica, águila imperial, runas SS)</li><li>Comunista (hoz y martillo, estrella roja)</li><li>Anarquista (círculo-A)</li><li>Fascista (fascio)</li><li>Nacionalista (banderas, escudos de estado)</li></ul>\n<h4 dir=\"ltr\">3. Simbología Comercial y Corporativa</h4><ul dir=\"ltr\"><li>Logotipos</li><li>Marcas registradas</li></ul>\n<h4 dir=\"ltr\">4. Simbología Cultural/Subcultural</h4><ul dir=\"ltr\"><li>Tribus urbanas (punk, gótico)</li><li>Bandas/pandillas</li></ul>",
      "id": "idmq6amm1mue6vi9e",
-     "type": "nota",
      "name": "Simbología",
-     "content": "<h4 dir=\"ltr\">1. Simbología Religiosa</h4><ul dir=\"ltr\"><li>Cristiana (cruz, pez, alfa-omega)</li><li>Islámica (media luna, estrella)</li><li>Judía (estrella de David, menorá)</li><li>Budista (rueda del dharma, loto)</li><li>Hinduista (om, swástika original)</li><li>Pagana/Neopagana (pentagrama, triqueta)</li></ul>\n<h4 dir=\"ltr\">2. Simbología Política e Ideológica</h4><ul dir=\"ltr\"><li>Nacionalsocialista/Nazi (esvástica, águila imperial, runas SS)</li><li>Comunista (hoz y martillo, estrella roja)</li><li>Anarquista (círculo-A)</li><li>Fascista (fascio)</li><li>Nacionalista (banderas, escudos de estado)</li></ul>\n<h4 dir=\"ltr\">3. Simbología Comercial y Corporativa</h4><ul dir=\"ltr\"><li>Logotipos</li><li>Marcas registradas</li></ul>\n<h4 dir=\"ltr\">4. Simbología Cultural/Subcultural</h4><ul dir=\"ltr\"><li>Tribus urbanas (punk, gótico)</li><li>Bandas/pandillas</li></ul>"
+     "type": "nota"
     }
-   ]
+   ],
+   "id": "idfwnijf9mue6ww50",
+   "name": "Ideas de listas",
+   "type": "folder"
   },
   {
+   "content": "<p dir=\"ltr\">En España el ganado se divide tradicionalmente en dos grupos.</p>\n<p dir=\"ltr\"><strong>Ganado mayor</strong> (animales grandes):</p><ul dir=\"ltr\"><li><strong>Vacuno o bovino:</strong> vacas, toros y bueyes.</li><li><strong>Equino o caballar:</strong> caballos.</li><li><strong>Asnal:</strong> burros.</li><li><strong>Mular:</strong> mulas, que son el cruce de burro y yegua.</li><li><strong>Camélido:</strong> camellos, dromedarios, llamas y alpacas.</li><li><strong>Bufalino:</strong> búfalos.</li></ul>\n<p dir=\"ltr\"><strong>Ganado menor</strong> (animales pequeños):</p><ul dir=\"ltr\"><li><strong>Ovino:</strong> ovejas.</li><li><strong>Caprino:</strong> cabras.</li><li><strong>Porcino:</strong> cerdos.</li></ul>\n<p dir=\"ltr\">Además, en ganadería también se suelen incluir:</p><ul dir=\"ltr\"><li><strong>Avícola:</strong> gallinas, pavos, patos y demás aves de corral.</li><li><strong>Cunícola:</strong> conejos.</li><li><strong>Apícola:</strong> abejas.</li></ul>",
    "id": "idkey1nd3mukzmv54",
-   "type": "nota",
    "name": "Ganado",
-   "content": "<p dir=\"ltr\">En España el ganado se divide tradicionalmente en dos grupos.</p>\n<p dir=\"ltr\"><strong>Ganado mayor</strong> (animales grandes):</p><ul dir=\"ltr\"><li><strong>Vacuno o bovino:</strong> vacas, toros y bueyes.</li><li><strong>Equino o caballar:</strong> caballos.</li><li><strong>Asnal:</strong> burros.</li><li><strong>Mular:</strong> mulas, que son el cruce de burro y yegua.</li><li><strong>Camélido:</strong> camellos, dromedarios, llamas y alpacas.</li><li><strong>Bufalino:</strong> búfalos.</li></ul>\n<p dir=\"ltr\"><strong>Ganado menor</strong> (animales pequeños):</p><ul dir=\"ltr\"><li><strong>Ovino:</strong> ovejas.</li><li><strong>Caprino:</strong> cabras.</li><li><strong>Porcino:</strong> cerdos.</li></ul>\n<p dir=\"ltr\">Además, en ganadería también se suelen incluir:</p><ul dir=\"ltr\"><li><strong>Avícola:</strong> gallinas, pavos, patos y demás aves de corral.</li><li><strong>Cunícola:</strong> conejos.</li><li><strong>Apícola:</strong> abejas.</li></ul>"
+   "type": "nota"
   },
   {
+   "content": "<p dir=\"ltr\"><strong>1. Tecnología</strong><br>\nApple, Microsoft, Nvidia, Alphabet (Google), Amazon, Meta, TSMC, Broadcom, Samsung Electronics, Oracle, Tencent, ASML, SAP, Salesforce, AMD, IBM, Cisco, Intel, Qualcomm, Adobe, Texas Instruments, Sony, Alibaba, Palantir, ServiceNow, Micron, SK Hynix, Arm, Applied Materials, Lam Research, Dell, HP, Lenovo, Xiaomi, Huawei, ByteDance, Foxconn, Accenture, Tata Consultancy Services, Infosys, Baidu, Intuit, Shopify, Uber, Booking Holdings, Airbnb, Canon, Snowflake, Atlassian, Dassault Systèmes</p>\n<p dir=\"ltr\"><strong>2. Finanzas y banca</strong><br>\nBerkshire Hathaway, JPMorgan Chase, Visa, Mastercard, Bank of America, ICBC, Wells Fargo, China Construction Bank, Agricultural Bank of China, Bank of China, HSBC, Morgan Stanley, Goldman Sachs, American Express, Royal Bank of Canada, Citigroup, BlackRock, Charles Schwab, Commonwealth Bank of Australia, Mitsubishi UFJ, HDFC Bank, Banco Santander, BBVA, BNP Paribas, UBS, Allianz, AXA, Toronto-Dominion Bank, Sumitomo Mitsui, Mizuho, PayPal, Blackstone, S&amp;P Global, Moody's, CME Group, Deutsche Bank, ING, Intesa Sanpaolo, UniCredit, Barclays, Lloyds, Zurich Insurance, Munich Re, Ping An, Prudential, MetLife, Chubb, Progressive, Nubank, Itaú Unibanco</p>\n<p dir=\"ltr\"><strong>3. Energía</strong><br>\nSaudi Aramco, ExxonMobil, Chevron, Shell, PetroChina, TotalEnergies, BP, Sinopec, ConocoPhillips, Equinor, Petrobras, CNOOC, Gazprom, Rosneft, Lukoil, Eni, Repsol, Iberdrola, Enel, NextEra Energy, Duke Energy, Southern Company, EDF, Engie, E.ON, RWE, Ørsted, National Grid, Reliance Industries, ADNOC, Kuwait Petroleum, QatarEnergy, Pemex, Occidental Petroleum, EOG Resources, SLB (Schlumberger), Halliburton, Baker Hughes, Marathon Petroleum, Valero, Phillips 66, Enbridge, Canadian Natural Resources, Suncor, Woodside, Vestas, First Solar, CATL, Naturgy, Endesa</p>\n<p dir=\"ltr\"><strong>4. Automoción y transporte</strong><br>\nToyota, Tesla, Volkswagen, BYD, Mercedes-Benz, BMW, Stellantis, Ferrari, Honda, Hyundai, General Motors, Ford, Nissan, Kia, Geely, Porsche, Renault, Tata Motors, Suzuki, SAIC Motor, Mahindra, Volvo Cars, Li Auto, NIO, Rivian, Great Wall Motors, Subaru, Mazda, Denso, Bosch, Continental, Michelin, Bridgestone, Magna, ZF, Harley-Davidson, Yamaha Motor, CRRC, Maersk, UPS, FedEx, DHL, Union Pacific, Delta Air Lines, United Airlines, Emirates, Lufthansa, IAG, Ryanair, Air France-KLM</p>\n<p dir=\"ltr\"><strong>5. Salud y farmacia</strong><br>\nEli Lilly, Novo Nordisk, Johnson &amp; Johnson, UnitedHealth, AbbVie, Merck &amp; Co. (MSD), Roche, AstraZeneca, Novartis, Pfizer, Abbott, Thermo Fisher, Amgen, Sanofi, Danaher, Intuitive Surgical, Stryker, Medtronic, Gilead, Bristol-Myers Squibb, Vertex, Regeneron, GSK, Boston Scientific, Zoetis, Bayer, Siemens Healthineers, Takeda, Daiichi Sankyo, CSL, Moderna, BioNTech, Becton Dickinson, EssilorLuxottica, Lonza, Fresenius, Cigna, CVS Health, Elevance Health, HCA Healthcare, McKesson, Cencora, Cardinal Health, Merck KGaA, Teva, Sun Pharma, Chugai, Astellas, Grifols, Philips</p>\n<p dir=\"ltr\"><strong>6. Alimentación, bebidas y consumo</strong><br>\nNestlé, Procter &amp; Gamble, Coca-Cola, PepsiCo, Unilever, L'Oréal, Philip Morris, AB InBev, Kweichow Moutai, Mondelez, Diageo, Colgate-Palmolive, Heineken, Danone, Kraft Heinz, General Mills, Hormel, Hershey, Kimberly-Clark, Estée Lauder, Reckitt, Haleon, British American Tobacco, Altria, Pernod Ricard, Constellation Brands, Tyson Foods, JBS, Archer-Daniels-Midland, Cargill, Mars, Ferrero, Red Bull, Monster Beverage, Keurig Dr Pepper, Starbucks, McDonald's, Yum! Brands, Chipotle, Restaurant Brands International, Beiersdorf, Shiseido, Kao, Henkel, Mowi, Lactalis, Grupo Bimbo, FEMSA, Ajinomoto, Asahi</p>\n<p dir=\"ltr\"><strong>7. Comercio y distribución</strong><br>\nWalmart, Costco, Home Depot, Lowe's, Target, Inditex, TJX, JD.com, PDD (Temu), Mercado Libre, Schwarz Group (Lidl), Aldi, Carrefour, Tesco, Ahold Delhaize, Kroger, Walgreens, Seven &amp; i, Aeon, Fast Retailing (Uniqlo), H&amp;M, Best Buy, IKEA, Mercadona, El Corte Inglés, eBay, Etsy, Zalando, Coupang, Shein, Rakuten, Otto Group, Dollar General, Dollar Tree, Ross Stores, O'Reilly Automotive, AutoZone, Tractor Supply, Metro AG, Rewe, Edeka, Woolworths, Loblaw, Walmex, Magazine Luiza, Reliance Retail, DMart, Sephora, Decathlon, Leroy Merlin</p>\n<p dir=\"ltr\"><strong>8. Industria, materiales y aeroespacial</strong><br>\nSiemens, General Electric, Caterpillar, Boeing, Airbus, RTX (Raytheon), Lockheed Martin, Honeywell, Schneider Electric, ABB, Deere &amp; Company, 3M, Hitachi, Mitsubishi Heavy Industries, Safran, Rolls-Royce, Northrop Grumman, General Dynamics, BAE Systems, Thales, Rheinmetall, Eaton, Emerson, Parker Hannifin, Illinois Tool Works, Atlas Copco, Komatsu, Fanuc, Keyence, Daikin, Carrier, Trane, Otis, Kone, Schindler, Vinci, ACS, Ferrovial, Holcim, Saint-Gobain, ArcelorMittal, BHP, Rio Tinto, Glencore, Vale, BASF, Dow, Linde, Air Liquide, Nippon Steel</p>\n<p dir=\"ltr\"><strong>9. Telecomunicaciones, medios y ocio</strong><br>\nNetflix, Walt Disney, Comcast, T-Mobile US, Verizon, AT&amp;T, China Mobile, Deutsche Telekom, NTT, SoftBank, Bharti Airtel, Reliance Jio, América Móvil, Vodafone, Orange, Telefónica, KDDI, Saudi Telecom (stc), Charter Communications, Spotify, Nintendo, Warner Bros. Discovery, Paramount, Sony Music, Universal Music Group, Warner Music Group, Live Nation, Electronic Arts, Capcom, Take-Two Interactive, Ubisoft, Roblox, NetEase, Bandai Namco, Bertelsmann, Vivendi, Thomson Reuters, RELX, News Corp, The New York Times, Snap, Pinterest, Reddit, X (Twitter), Telstra, Singtel, Swisscom, Telenor, Ericsson, Nokia</p>\n<p dir=\"ltr\"><strong>10. Moda y lujo</strong> (mezcla grupos y sus marcas más conocidas)<br>\nLVMH, Hermès, Christian Dior, Richemont, Kering, Chanel, Nike, Adidas, Puma, Prada, Moncler, Burberry, Tapestry, Capri Holdings, Ralph Lauren, PVH (Calvin Klein y Tommy Hilfiger), Levi Strauss, VF Corporation, Lululemon, Deckers, Skechers, On, Anta Sports, Li Ning, Swatch Group, Rolex, Patek Philippe, Audemars Piguet, Chow Tai Fook, Pandora, Tiffany &amp; Co., Cartier, Louis Vuitton, Gucci, Balenciaga, Saint Laurent, Bottega Veneta, Valentino, Versace, Armani, Dolce &amp; Gabbana, Hugo Boss, Zegna, Brunello Cucinelli, Salvatore Ferragamo, Tod's, Mango, Tendam, Primark, Gap</p>",
    "id": "idb7flbk5mukzof82",
-   "type": "nota",
    "name": "Empresas",
-   "content": "<p dir=\"ltr\"><strong>1. Tecnología</strong><br>\nApple, Microsoft, Nvidia, Alphabet (Google), Amazon, Meta, TSMC, Broadcom, Samsung Electronics, Oracle, Tencent, ASML, SAP, Salesforce, AMD, IBM, Cisco, Intel, Qualcomm, Adobe, Texas Instruments, Sony, Alibaba, Palantir, ServiceNow, Micron, SK Hynix, Arm, Applied Materials, Lam Research, Dell, HP, Lenovo, Xiaomi, Huawei, ByteDance, Foxconn, Accenture, Tata Consultancy Services, Infosys, Baidu, Intuit, Shopify, Uber, Booking Holdings, Airbnb, Canon, Snowflake, Atlassian, Dassault Systèmes</p>\n<p dir=\"ltr\"><strong>2. Finanzas y banca</strong><br>\nBerkshire Hathaway, JPMorgan Chase, Visa, Mastercard, Bank of America, ICBC, Wells Fargo, China Construction Bank, Agricultural Bank of China, Bank of China, HSBC, Morgan Stanley, Goldman Sachs, American Express, Royal Bank of Canada, Citigroup, BlackRock, Charles Schwab, Commonwealth Bank of Australia, Mitsubishi UFJ, HDFC Bank, Banco Santander, BBVA, BNP Paribas, UBS, Allianz, AXA, Toronto-Dominion Bank, Sumitomo Mitsui, Mizuho, PayPal, Blackstone, S&amp;P Global, Moody's, CME Group, Deutsche Bank, ING, Intesa Sanpaolo, UniCredit, Barclays, Lloyds, Zurich Insurance, Munich Re, Ping An, Prudential, MetLife, Chubb, Progressive, Nubank, Itaú Unibanco</p>\n<p dir=\"ltr\"><strong>3. Energía</strong><br>\nSaudi Aramco, ExxonMobil, Chevron, Shell, PetroChina, TotalEnergies, BP, Sinopec, ConocoPhillips, Equinor, Petrobras, CNOOC, Gazprom, Rosneft, Lukoil, Eni, Repsol, Iberdrola, Enel, NextEra Energy, Duke Energy, Southern Company, EDF, Engie, E.ON, RWE, Ørsted, National Grid, Reliance Industries, ADNOC, Kuwait Petroleum, QatarEnergy, Pemex, Occidental Petroleum, EOG Resources, SLB (Schlumberger), Halliburton, Baker Hughes, Marathon Petroleum, Valero, Phillips 66, Enbridge, Canadian Natural Resources, Suncor, Woodside, Vestas, First Solar, CATL, Naturgy, Endesa</p>\n<p dir=\"ltr\"><strong>4. Automoción y transporte</strong><br>\nToyota, Tesla, Volkswagen, BYD, Mercedes-Benz, BMW, Stellantis, Ferrari, Honda, Hyundai, General Motors, Ford, Nissan, Kia, Geely, Porsche, Renault, Tata Motors, Suzuki, SAIC Motor, Mahindra, Volvo Cars, Li Auto, NIO, Rivian, Great Wall Motors, Subaru, Mazda, Denso, Bosch, Continental, Michelin, Bridgestone, Magna, ZF, Harley-Davidson, Yamaha Motor, CRRC, Maersk, UPS, FedEx, DHL, Union Pacific, Delta Air Lines, United Airlines, Emirates, Lufthansa, IAG, Ryanair, Air France-KLM</p>\n<p dir=\"ltr\"><strong>5. Salud y farmacia</strong><br>\nEli Lilly, Novo Nordisk, Johnson &amp; Johnson, UnitedHealth, AbbVie, Merck &amp; Co. (MSD), Roche, AstraZeneca, Novartis, Pfizer, Abbott, Thermo Fisher, Amgen, Sanofi, Danaher, Intuitive Surgical, Stryker, Medtronic, Gilead, Bristol-Myers Squibb, Vertex, Regeneron, GSK, Boston Scientific, Zoetis, Bayer, Siemens Healthineers, Takeda, Daiichi Sankyo, CSL, Moderna, BioNTech, Becton Dickinson, EssilorLuxottica, Lonza, Fresenius, Cigna, CVS Health, Elevance Health, HCA Healthcare, McKesson, Cencora, Cardinal Health, Merck KGaA, Teva, Sun Pharma, Chugai, Astellas, Grifols, Philips</p>\n<p dir=\"ltr\"><strong>6. Alimentación, bebidas y consumo</strong><br>\nNestlé, Procter &amp; Gamble, Coca-Cola, PepsiCo, Unilever, L'Oréal, Philip Morris, AB InBev, Kweichow Moutai, Mondelez, Diageo, Colgate-Palmolive, Heineken, Danone, Kraft Heinz, General Mills, Hormel, Hershey, Kimberly-Clark, Estée Lauder, Reckitt, Haleon, British American Tobacco, Altria, Pernod Ricard, Constellation Brands, Tyson Foods, JBS, Archer-Daniels-Midland, Cargill, Mars, Ferrero, Red Bull, Monster Beverage, Keurig Dr Pepper, Starbucks, McDonald's, Yum! Brands, Chipotle, Restaurant Brands International, Beiersdorf, Shiseido, Kao, Henkel, Mowi, Lactalis, Grupo Bimbo, FEMSA, Ajinomoto, Asahi</p>\n<p dir=\"ltr\"><strong>7. Comercio y distribución</strong><br>\nWalmart, Costco, Home Depot, Lowe's, Target, Inditex, TJX, JD.com, PDD (Temu), Mercado Libre, Schwarz Group (Lidl), Aldi, Carrefour, Tesco, Ahold Delhaize, Kroger, Walgreens, Seven &amp; i, Aeon, Fast Retailing (Uniqlo), H&amp;M, Best Buy, IKEA, Mercadona, El Corte Inglés, eBay, Etsy, Zalando, Coupang, Shein, Rakuten, Otto Group, Dollar General, Dollar Tree, Ross Stores, O'Reilly Automotive, AutoZone, Tractor Supply, Metro AG, Rewe, Edeka, Woolworths, Loblaw, Walmex, Magazine Luiza, Reliance Retail, DMart, Sephora, Decathlon, Leroy Merlin</p>\n<p dir=\"ltr\"><strong>8. Industria, materiales y aeroespacial</strong><br>\nSiemens, General Electric, Caterpillar, Boeing, Airbus, RTX (Raytheon), Lockheed Martin, Honeywell, Schneider Electric, ABB, Deere &amp; Company, 3M, Hitachi, Mitsubishi Heavy Industries, Safran, Rolls-Royce, Northrop Grumman, General Dynamics, BAE Systems, Thales, Rheinmetall, Eaton, Emerson, Parker Hannifin, Illinois Tool Works, Atlas Copco, Komatsu, Fanuc, Keyence, Daikin, Carrier, Trane, Otis, Kone, Schindler, Vinci, ACS, Ferrovial, Holcim, Saint-Gobain, ArcelorMittal, BHP, Rio Tinto, Glencore, Vale, BASF, Dow, Linde, Air Liquide, Nippon Steel</p>\n<p dir=\"ltr\"><strong>9. Telecomunicaciones, medios y ocio</strong><br>\nNetflix, Walt Disney, Comcast, T-Mobile US, Verizon, AT&amp;T, China Mobile, Deutsche Telekom, NTT, SoftBank, Bharti Airtel, Reliance Jio, América Móvil, Vodafone, Orange, Telefónica, KDDI, Saudi Telecom (stc), Charter Communications, Spotify, Nintendo, Warner Bros. Discovery, Paramount, Sony Music, Universal Music Group, Warner Music Group, Live Nation, Electronic Arts, Capcom, Take-Two Interactive, Ubisoft, Roblox, NetEase, Bandai Namco, Bertelsmann, Vivendi, Thomson Reuters, RELX, News Corp, The New York Times, Snap, Pinterest, Reddit, X (Twitter), Telstra, Singtel, Swisscom, Telenor, Ericsson, Nokia</p>\n<p dir=\"ltr\"><strong>10. Moda y lujo</strong> (mezcla grupos y sus marcas más conocidas)<br>\nLVMH, Hermès, Christian Dior, Richemont, Kering, Chanel, Nike, Adidas, Puma, Prada, Moncler, Burberry, Tapestry, Capri Holdings, Ralph Lauren, PVH (Calvin Klein y Tommy Hilfiger), Levi Strauss, VF Corporation, Lululemon, Deckers, Skechers, On, Anta Sports, Li Ning, Swatch Group, Rolex, Patek Philippe, Audemars Piguet, Chow Tai Fook, Pandora, Tiffany &amp; Co., Cartier, Louis Vuitton, Gucci, Balenciaga, Saint Laurent, Bottega Veneta, Valentino, Versace, Armani, Dolce &amp; Gabbana, Hugo Boss, Zegna, Brunello Cucinelli, Salvatore Ferragamo, Tod's, Mango, Tendam, Primark, Gap</p>"
+   "type": "nota"
   },
   {
+   "children": [],
    "id": "idtngrjynmukzvu3s",
-   "type": "folder",
    "name": "Griegos",
-   "expanded": true,
-   "children": []
+   "type": "folder"
   }
  ],
- "exportedAt": 1793403826943
+ "version": 3
 }
