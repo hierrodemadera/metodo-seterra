@@ -7767,7 +7767,7 @@ document.addEventListener('selectstart', e=>{ if(!document.body.classList.contai
      «Ej: …»        → frase de ejemplo; la palabra entre *asteriscos* es el hueco
      «Pista: …»     → truco para recordarla (opcional)
    Los temas ordenan el mazo para consultarlo; los lotes («Lote 1», «Lote 2»…) lo reparten para jugar. */
-const LANG_LOTE = 'cat_lote', LANG_TEMA = 'cat_tema', LOTE_SIZE = 50;
+const LANG_LOTE = 'cat_lote', LANG_TEMA = 'cat_tema', LOTE_SIZE = 100;
 const isLang = n=> !!(n && n.lang);
 function langParse(p){
   const lines = String(p.back || '').split('\n').map(s=> s.trim()).filter(Boolean);
@@ -8138,8 +8138,13 @@ const PUB_KEEP = ['langStats', 'langMark', 'langLastMode', 'playFilter', 'vzCat'
 function pubIsIndex(d){ return !!(d && Array.isArray(d.mazos)); }
 function pubUrl(file){ return String(file).split('/').map(encodeURIComponent).join('/'); }
 async function pubFetchDeck(entry){
-  const res = await fetch(pubUrl(entry.file), { cache: 'no-store' });
-  if(!res.ok) throw new Error(res.status);
+  // se busca donde diga el índice y, si no está, en la raíz del repo o en la carpeta «mazos»
+  const base = String(entry.file).split('/').pop();
+  let res = null;
+  for(const f of [...new Set([entry.file, base, 'mazos/' + base])]){
+    try{ const r = await fetch(pubUrl(f), { cache: 'no-store' }); if(r.ok){ res = r; break; } }catch(e){}
+  }
+  if(!res) throw new Error('no encontrado');
   const d = await res.json(), list = decksFromFile(d);
   if(!list.length) throw new Error('vacío');
   return list[0];
@@ -8234,13 +8239,13 @@ function pubIndexFromTree(){
   const mazos = [];
   (function walk(nodes, path){ (nodes || []).forEach(n=>{
     if(n.type === 'folder') walk(n.children, path.concat(n.name));
-    else if(n.type === 'tema') mazos.push({ id: n.id, name: n.name, file: 'mazos/' + deckFileName(n.name), carpeta: path.join(' / ') || undefined, tarjetas: (n.photos || []).length, kb: Math.round(JSON.stringify(n).length / 1024) });
+    else if(n.type === 'tema') mazos.push({ id: n.id, name: n.name, file: deckFileName(n.name), carpeta: path.join(' / ') || undefined, tarjetas: (n.photos || []).length, kb: Math.round(JSON.stringify(n).length / 1024) });
   }); })(tree, []);
   return { format: PUB_FORMAT, version: 2, mazos, notas, esquemas, exportedAt: Date.now() };
 }
 function pubExportIndex(){
   downloadJson(pubIndexFromTree(), 'data.json');
-  toast('Índice listo: súbelo al repo. Cada mazo va en la carpeta «mazos» (⋯ del mazo → Exportar).');
+  toast('Índice listo: súbelo al repo junto a los mazos (⋯ del mazo → Exportar mazo).');
 }
 
 boot();

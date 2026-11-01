@@ -5,47 +5,47 @@
   {
    "id": "idilzyzjhmueb01e6",
    "name": "Razas de perros",
-   "file": "mazos/Razas de perros.json",
+   "file": "Razas de perros.json",
    "tarjetas": 196,
    "kb": 5380
   },
   {
    "id": "id12xiq13mukxf4xm",
    "name": "Razas de gatos",
-   "file": "mazos/Razas de gatos.json",
+   "file": "Razas de gatos.json",
    "tarjetas": 62,
    "kb": 1743
   },
   {
    "id": "ingles-b1",
    "name": "Inglés B1",
-   "file": "mazos/Ingles B1.json",
+   "file": "Ingles B1.json",
    "tarjetas": 2354,
-   "kb": 460,
+   "kb": 459,
    "carpeta": "Inglés"
   },
   {
    "id": "ingles-b2",
    "name": "Inglés B2",
-   "file": "mazos/Ingles B2.json",
+   "file": "Ingles B2.json",
    "tarjetas": 2691,
-   "kb": 528,
+   "kb": 527,
    "carpeta": "Inglés"
   },
   {
    "id": "ingles-c1",
    "name": "Inglés C1",
-   "file": "mazos/Ingles C1.json",
+   "file": "Ingles C1.json",
    "tarjetas": 1009,
-   "kb": 201,
+   "kb": 200,
    "carpeta": "Inglés"
   },
   {
    "id": "ingles-c2",
    "name": "Inglés C2",
-   "file": "mazos/Ingles C2.json",
+   "file": "Ingles C2.json",
    "tarjetas": 972,
-   "kb": 192,
+   "kb": 191,
    "carpeta": "Inglés"
   }
  ],
