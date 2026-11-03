@@ -8687,7 +8687,9 @@ async function ghOpen(msg){
     el.innerHTML = `<div class="lg-dim" data-g="close"></div><div class="lg-box gh-box"><div class="lg-bt">Sin internet</div>${offBlock}
       <p class="gh-p">Mientras esté activado no se sincroniza nada: ni subidas ni bajadas, ni la consulta de cada 15 s.</p>
       <button class="lg-cancel" data-g="close">Cerrar</button></div>`;
-    document.body.appendChild(el); ghOffWire(el); return;
+    document.body.appendChild(el); ghOffWire(el);
+    el.addEventListener('click', e=>{ if(e.target.closest('[data-g="close"]')) el.remove(); });
+    return;
   }
   el.innerHTML = `<div class="lg-dim" data-g="close"></div><div class="lg-box gh-box">
     ${offBlock}
