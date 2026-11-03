@@ -1616,6 +1616,10 @@ button.lg-w{font:inherit;font-size:12.5px;border:0;cursor:pointer;text-align:lef
 .lg-kh{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#145c34;margin:0 12px 2px;}
 .lg-knownbox .lg-words{padding:6px 10px 10px;}
 #vz .vz-chips .vz-chip[data-lotknown].on{background:#145c34 !important;color:#fff !important;}
+
+#lg .lg-mute{width:34px;height:34px;border-radius:50%;flex-shrink:0;padding:0;display:flex;align-items:center;justify-content:center;background:transparent !important;color:#1c1c1e !important;border:1.5px solid #d0d0d6 !important;}
+#lg .lg-mute svg{width:19px;height:19px;display:block;}
+#lg .lg-mute.on{background:#1c1c1e !important;color:#fff !important;border-color:#1c1c1e !important;}
 /* elegir qué mazos bajar */
 #pub-choose{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;padding:16px;}
 #pub-choose .lg-dim{position:absolute;inset:0;background:rgba(0,0,0,.35);}
@@ -7847,7 +7851,22 @@ function langCloze(p){
   return re.test(ex) ? { text: ex.replace(re, '____'), answer: w, full: ex } : null;
 }
 /* ---------- voz (la del propio dispositivo) ---------- */
+/* silencio general de las partidas (se recuerda en este aparato) */
+let langMuted = false; try{ langMuted = localStorage.getItem('seterra_mute') === '1'; }catch(e){}
+const LG_SPK_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+const LG_SPK_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
+function langMuteBtn(){ return `<button class="lg-mute${langMuted ? ' on' : ''}" data-lg="mute" aria-label="${langMuted ? 'Activar sonido' : 'Silenciar'}" title="${langMuted ? 'Sin sonido: toca para activarlo' : 'Con sonido: toca para silenciar'}">${langMuted ? LG_SPK_OFF : LG_SPK_ON}</button>`; }
+function langToggleMute(){
+  langMuted = !langMuted;
+  try{ localStorage.setItem('seterra_mute', langMuted ? '1' : '0'); }catch(e){}
+  if(langMuted){ try{ speechSynthesis.cancel(); }catch(e){} }
+  const b = document.querySelector('#lg .lg-mute'); if(b) b.outerHTML = langMuteBtn();
+  if(typeof toast === 'function') toast(langMuted ? 'Partida en silencio' : 'Sonido activado');
+  /* en «escuchar», al volver el sonido se oye la palabra de nuevo */
+  if(!langMuted && LG && LG.cur && LG.cur.pr.listen && !document.querySelector('#lg .lg-ans')){ const m = document.querySelector('#lg .lg-msg'); if(m) m.textContent = ''; langSpeak(LG.cur.pr.speak); }
+}
 function langSpeak(text, lang){
+  if(langMuted) return 'muted';
   try{
     if(!('speechSynthesis' in window) || !text) return false;
     speechSynthesis.cancel();
@@ -7985,7 +8004,7 @@ function langStart(node, cards, mode, label, lote){
   if(vzEl) vzEl.classList.add('away');
   document.body.classList.add('playing');
   let el = document.getElementById('lg'); if(!el){ el = document.createElement('div'); el.id = 'lg'; document.body.appendChild(el); }
-  el.innerHTML = `<div class="lg-top"><button class="lg-x" data-lg="quit" aria-label="Salir">←</button><div class="lg-prog"><i></i></div><span class="lg-cnt"></span></div><div class="lg-stage"></div>`;
+  el.innerHTML = `<div class="lg-top"><button class="lg-x" data-lg="quit" aria-label="Salir">←</button><div class="lg-prog"><i></i></div><span class="lg-cnt"></span>${langMuteBtn()}</div><div class="lg-stage"></div>`;
   el.onclick = langClick;
   el.onkeydown = e=>{ if(e.key === 'Enter'){ e.preventDefault(); const nx = el.querySelector('[data-lg=next]'); if(nx) nx.click(); else { const ck = el.querySelector('[data-lg=check]'); if(ck) ck.click(); } } };
   langCard();
@@ -8015,7 +8034,7 @@ function langCard(){
       <div class="lg-acts">${q.hint ? `<button class="lg-mini" data-lg="hint">💡 Pista</button>` : ''}<button class="lg-mini" data-lg="first">Primera letra</button><button class="lg-mini" data-lg="give">Ver respuesta →</button></div>
     </div>`;
   const inp = st.querySelector('.lg-in'); setTimeout(()=> inp.focus(), 60);
-  if(pr.listen) setTimeout(()=>{ if(!langSpeak(pr.speak)) { st.querySelector('.lg-ask').textContent = pr.speak.replace(/./g, '•'); st.querySelector('.lg-msg').textContent = 'Este dispositivo no puede leer en voz alta.'; } }, 250);
+  if(pr.listen) setTimeout(()=>{ const sp = langSpeak(pr.speak); if(sp === 'muted'){ st.querySelector('.lg-msg').textContent = 'Estás en silencio: toca el altavoz de arriba para oír la palabra.'; } else if(!sp) { st.querySelector('.lg-ask').textContent = pr.speak.replace(/./g, '•'); st.querySelector('.lg-msg').textContent = 'Este dispositivo no puede leer en voz alta.'; } }, 250);
 }
 function langReveal(result){
   const { p } = LG.cur, q = langParse(p), node = LG.node;
@@ -8050,8 +8069,9 @@ function langClick(e){
     const box = b.closest('.lg-marks'); if(box) box.innerHTML = langMarkBtns();
     return;
   }
+  if(a === 'mute'){ langToggleMute(); return; }
   if(a === 'quit'){ if(LG.done || confirm('¿Salir de la partida?')) langClose(); return; }
-  if(a === 'say' || a === 'sayw'){ langSpeak(langParse(LG.cur.p).word); return; }
+  if(a === 'say' || a === 'sayw'){ if(langSpeak(langParse(LG.cur.p).word) === 'muted' && typeof toast === 'function') toast('Estás en silencio (altavoz de arriba)'); return; }
   if(a === 'next'){ LG.i++; langCard(); return; }
   if(a === 'hint'){ el.querySelector('.lg-msg').innerHTML = '💡 ' + escapeHtml(langParse(LG.cur.p).hint); return; }
   if(a === 'first'){ const ex = langAnswers(LG.cur.pr.expect)[0] || ''; const inp = el.querySelector('.lg-in'); if(inp && ex){ inp.value = ex[0]; inp.focus(); } return; }
