@@ -1665,6 +1665,22 @@ button.lg-w{font:inherit;font-size:12.5px;border:0;cursor:pointer;text-align:lef
 .gh-adv[open]{display:flex;flex-direction:column;gap:6px;}
 .gh-list{max-height:40vh;}
 
+/* modo sin internet */
+#vz .gh-cloud .gh-plane{display:none;}
+#vz .gh-cloud.s-plane .gh-plane{display:inline;}
+#vz .gh-cloud.s-plane .gh-cp,#vz .gh-cloud.s-plane .gh-slash{display:none;}
+#vz .gh-cloud.s-plane{color:#f28a2e;}
+#gh-sheet .off-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#f4f4f6;cursor:pointer;}
+#gh-sheet .off-t{flex:1;display:flex;flex-direction:column;gap:3px;}
+#gh-sheet .off-t b{font-size:15px;}
+#gh-sheet .off-t small{font-size:12.5px;line-height:1.35;opacity:.65;}
+#gh-sheet .off-sw{appearance:none;-webkit-appearance:none;width:50px;height:30px;border-radius:15px;background:#d0d0d6;position:relative;flex-shrink:0;cursor:pointer;transition:background .2s;margin:0;}
+#gh-sheet .off-sw::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s;}
+#gh-sheet .off-sw:checked{background:#f28a2e;}
+#gh-sheet .off-sw:checked::after{transform:translateX(20px);}
+#gh-sheet .off-ready{margin-bottom:6px;}
+#gh-sheet .off-ready.ok{color:#0a8a3f;opacity:1;}
+
 </style>
 </head>
 <body>
@@ -7872,7 +7888,9 @@ function langSpeak(text, lang){
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(langAnswers(text)[0] || text);
     u.lang = lang || 'en-GB'; u.rate = .9;
-    const v = speechSynthesis.getVoices().find(x=> x.lang && x.lang.toLowerCase().startsWith((lang || 'en').slice(0, 2)));
+    const vs = speechSynthesis.getVoices().filter(x=> x.lang && x.lang.toLowerCase().startsWith((lang || 'en').slice(0, 2)));
+    /* en modo sin internet, solo voces del propio aparato (las «online» gastan datos) */
+    const v = (typeof offMode !== 'undefined' && offMode) ? vs.find(x=> x.localService) : vs[0];
     if(v) u.voice = v;
     speechSynthesis.speak(u); return true;
   }catch(e){ return false; }
@@ -8312,6 +8330,47 @@ function pubExportIndex(){
    Si dos aparatos cambian a la vez se junta pieza a pieza: cada mazo por separado, las notas,
    los esquemas, el orden de carpetas y, en el progreso, palabra a palabra.
    Las pizarras sueltas no se sincronizan (viven solo en cada aparato). */
+/* ---------- modo sin internet ----------
+   Con el interruptor puesto la app no usa la red para nada: no sincroniza, no consulta GitHub y
+   cualquier petición desde la página se corta aquí mismo. sw.js abre la copia guardada sin preguntar a internet. */
+const OFF_KEY = 'seterra_offline', SW_CACHE = 'seterra-app-v1', OFF_FLAG = '__sin_internet__';
+let offMode = false; try{ offMode = localStorage.getItem(OFF_KEY) === '1'; }catch(e){}
+const netFetch = window.fetch.bind(window);
+window.fetch = function(input, init){
+  if(offMode && !/^(data|blob):/i.test(String(input && input.url || input))) return Promise.reject(new TypeError('Modo sin internet'));
+  return netFetch(input, init);
+};
+const appUrl = ()=> new URL('./', location.href).href;
+async function offReady(){
+  try{
+    if(!('serviceWorker' in navigator) || !navigator.serviceWorker.controller) return false;
+    const c = await caches.open(SW_CACHE);
+    return !!((await c.match(appUrl())) || (await c.match(new URL('./index.html', location.href).href)));
+  }catch(e){ return false; }
+}
+async function offFlag(on){
+  try{ const c = await caches.open(SW_CACHE), u = new URL(OFF_FLAG, location.href).href; if(on) await c.put(u, new Response('1')); else await c.delete(u); }catch(e){}
+  try{ const sw = navigator.serviceWorker && navigator.serviceWorker.controller; if(sw) sw.postMessage({ offline: on }); }catch(e){}
+}
+async function offSet(on){
+  if(on){
+    /* antes de cortar: copia fresca de la app y subir lo que quede pendiente */
+    try{ const r = await netFetch(appUrl(), { cache: 'no-store' }); if(r.ok){ const c = await caches.open(SW_CACHE); await c.put(appUrl(), r); } }catch(e){}
+    if(ghOk() && (ghDirty || ghState === 'pending') && navigator.onLine){ toast('Subiendo lo pendiente…'); clearTimeout(ghT); await ghSync({ push: true }); }
+  }
+  offMode = on; try{ localStorage.setItem(OFF_KEY, on ? '1' : '0'); }catch(e){}
+  clearTimeout(ghT); await offFlag(on);
+  ghSet(ghState, ghMsg);
+  toast(on ? 'Modo sin internet: la app ya no usa datos' : 'Conectado otra vez');
+  if(!on && ghOk()){ ghDirty = true; ghSync({ push: true }); }
+}
+function ghOffWire(el){
+  el.addEventListener('change', async e=>{
+    const c = e.target.closest('[data-off]'); if(!c) return;
+    c.disabled = true; await offSet(c.checked); ghOpen();
+  });
+}
+if(offMode) offFlag(true);
 const GH_KEY = 'seterra_gh', GH_SKIP = 'seterra_sync_skip', GH_BASE = 'seterra_sync_base';
 const GH_PROG = ['langStats', 'langMark', 'langBest'];
 const GH_LOCALONLY = ['langLastMode', 'playFilter'];
@@ -8410,11 +8469,11 @@ function ghMergeProg(b, l, r){
 }
 
 /* ---------- la sincronización ---------- */
-function ghSchedule(ms){ if(!ghOk()) return; clearTimeout(ghT); if(ghState !== 'sync') ghSet('pending'); ghT = setTimeout(()=> ghSync(), ms == null ? (document.body.classList.contains('playing') ? 20000 : 1500) : ms); }
+function ghSchedule(ms){ if(!ghOk() || offMode) return; clearTimeout(ghT); if(ghState !== 'sync') ghSet('pending'); ghT = setTimeout(()=> ghSync(), ms == null ? (document.body.classList.contains('playing') ? 20000 : 1500) : ms); }
 function ghMark(){ if(ghApplying) return; ghDirty = true; ghSchedule(); }
 async function ghSync(opt){
   opt = opt || {};
-  if(!ghOk()) return;
+  if(!ghOk() || offMode) return;
   if(ghSyncing){ ghAgain = true; return; }
   if(!navigator.onLine){ ghSet('off'); return; }
   const busy = ghBusy();
@@ -8599,11 +8658,11 @@ async function ghRound(busy){
 }
 
 /* ---------- la nube de la barra ---------- */
-const GH_CLOUD = '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.6 9.1 4.75 4.75 0 0 0 7 18.5z"/><path class="gh-slash" d="M4 4l16 16"/></svg>';
-const GH_TITLES = { ok: 'Guardado en GitHub', sync: 'Guardando…', pending: 'Cambios por guardar', off: 'Sin conexión: se guardará al volver', err: 'No se pudo guardar', none: 'Sin conectar: toca para guardar en GitHub' };
+const GH_CLOUD = '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="gh-cp" d="M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.6 9.1 4.75 4.75 0 0 0 7 18.5z"/><path class="gh-slash" d="M4 4l16 16"/><path class="gh-plane" d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>';
+const GH_TITLES = { ok: 'Guardado en GitHub', sync: 'Guardando…', pending: 'Cambios por guardar', off: 'Sin conexión: se guardará al volver', err: 'No se pudo guardar', none: 'Sin conectar: toca para guardar en GitHub', plane: 'Modo sin internet: la app no usa datos' };
 function ghSet(s, msg){
   ghState = s; ghMsg = msg || '';
-  const v = ghOk() ? s : 'none';
+  const v = offMode ? 'plane' : ghOk() ? s : 'none';
   document.querySelectorAll('[data-v="cloud"]').forEach(b=>{ b.className = 'vz-b gh-cloud s-' + v; b.title = GH_TITLES[v] + (v === 'err' && ghMsg ? ': ' + ghMsg : ''); b.setAttribute('aria-label', b.title); });
   const st = document.getElementById('gh-state'); if(st) st.textContent = GH_TITLES[v] + (v === 'err' && ghMsg ? ': ' + ghMsg : '') + (v === 'ok' && ghLast ? ' · ' + new Date(ghLast).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }) : '');
 }
@@ -8621,7 +8680,17 @@ async function ghOpen(msg){
   let el = document.getElementById('gh-sheet'); if(el) el.remove();
   el = document.createElement('div'); el.id = 'gh-sheet';
   const fmt = kb=> kb >= 1024 ? (kb / 1024).toFixed(1).replace('.', ',') + ' MB' : kb + ' KB';
+  const ready = await offReady();
+  const offBlock = `<label class="off-row"><span class="off-t"><b>Modo sin internet</b><small>La app deja de usar datos: juegas con lo guardado en este aparato. Tu progreso se sube a GitHub cuando lo quites.</small></span><input type="checkbox" class="off-sw" data-off${offMode ? ' checked' : ''}></label>
+    <p class="gh-small off-ready${ready ? ' ok' : ''}">${ready ? '✓ La app está guardada en este aparato: se abre aunque no haya internet.' : '⚠︎ Todavía no hay copia de la app guardada. Recarga la página una vez con internet antes de activarlo.'}</p>`;
+  if(offMode){
+    el.innerHTML = `<div class="lg-dim" data-g="close"></div><div class="lg-box gh-box"><div class="lg-bt">Sin internet</div>${offBlock}
+      <p class="gh-p">Mientras esté activado no se sincroniza nada: ni subidas ni bajadas, ni la consulta de cada 15 s.</p>
+      <button class="lg-cancel" data-g="close">Cerrar</button></div>`;
+    document.body.appendChild(el); ghOffWire(el); return;
+  }
   el.innerHTML = `<div class="lg-dim" data-g="close"></div><div class="lg-box gh-box">
+    ${offBlock}
     <div class="lg-bt">Guardar en GitHub</div>
     ${ghOk() ? `<p class="gh-p"><b id="gh-state"></b><br>Los cambios de este aparato se suben solos y los de tus otros aparatos aparecen aquí al momento.</p>
       <button class="lg-go" data-g="now">Sincronizar ahora</button>
@@ -8640,7 +8709,7 @@ async function ghOpen(msg){
       <button class="lg-go" data-g="connect">${ghOk() ? 'Guardar cambios' : 'Conectar'}</button>
       ${ghOk() ? `<button class="lg-cancel gh-danger" data-g="off">Desconectar este aparato</button></details>` : ''}
     <button class="lg-cancel" data-g="close">Cerrar</button></div>`;
-  document.body.appendChild(el);
+  document.body.appendChild(el); ghOffWire(el);
   ghSet(ghState, ghMsg);
   el.addEventListener('focusin', e=>{ if(e.target.matches('input')) el.querySelector('.gh-box').classList.add('gh-editing'); });
   el.addEventListener('change', e=>{
@@ -8686,7 +8755,7 @@ async function ghOpen(msg){
 { const _n = saveLocalNotas; saveLocalNotas = function(){ const r = _n.apply(this, arguments); ghMark(); return r; }; }
 { const _e = saveEsq; saveEsq = function(){ const r = _e.apply(this, arguments); ghMark(); return r; }; }
 /* «Actualizar desde lo publicado»: con GitHub conectado ya no hace falta, sincroniza */
-{ const _p = pubRefresh; pubRefresh = async function(){ if(ghOk()){ ghDirty = true; ghSync({ push: true }); toast('Sincronizando con GitHub…'); return true; } return _p.apply(this, arguments); }; }
+{ const _p = pubRefresh; pubRefresh = async function(){ if(offMode){ toast('Estás en modo sin internet (toca el avión para quitarlo)'); return true; } if(ghOk()){ ghDirty = true; ghSync({ push: true }); toast('Sincronizando con GitHub…'); return true; } return _p.apply(this, arguments); }; }
 document.addEventListener('click', e=>{ if(e.target.closest('[data-v="cloud"]')){ e.stopPropagation(); ghOpen(); } }, true);
 addEventListener('online', ()=> ghSchedule(300));
 addEventListener('offline', ()=> ghSet('off'));
@@ -8706,7 +8775,7 @@ boot();
 
 /* sin conexión: guarda una copia de la app para poder abrirla sin internet (solo en la web publicada) */
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  if(localStorage.getItem('seterra_offline') !== '1') navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 })();
 </script>
