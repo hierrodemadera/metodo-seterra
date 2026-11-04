@@ -1620,6 +1620,12 @@ button.lg-w{font:inherit;font-size:12.5px;border:0;cursor:pointer;text-align:lef
 #lg .lg-mute{width:34px;height:34px;border-radius:50%;flex-shrink:0;padding:0;display:flex;align-items:center;justify-content:center;background:transparent !important;color:#1c1c1e !important;border:1.5px solid #d0d0d6 !important;}
 #lg .lg-mute svg{width:19px;height:19px;display:block;}
 #lg .lg-mute.on{background:#1c1c1e !important;color:#fff !important;border-color:#1c1c1e !important;}
+
+#game-mute-slot{display:flex;flex-shrink:0;}
+#game-mute-slot:empty{display:none;}
+#game-mute-slot .lg-mute{width:30px;height:30px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;background:#fff;color:#1c1c1e;border:1.5px solid #d0d0d6;cursor:pointer;}
+#game-mute-slot .lg-mute svg{width:17px;height:17px;display:block;}
+#game-mute-slot .lg-mute.on{background:#1c1c1e;color:#fff;border-color:#1c1c1e;}
 /* elegir qué mazos bajar */
 #pub-choose{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;padding:16px;}
 #pub-choose .lg-dim{position:absolute;inset:0;background:rgba(0,0,0,.35);}
@@ -1840,7 +1846,7 @@ button.lg-w{font:inherit;font-size:12.5px;border:0;cursor:pointer;text-align:lef
       <div class="game-overlay-top">
         <button class="back" id="back-game">←</button>
         <div class="progressbar"><div class="fill" id="game-progress"></div></div>
-        <span id="game-stats">0/0</span>
+        <span id="game-stats">0/0</span><span id="game-mute-slot"></span>
       </div>
       <div class="game-tagline" id="game-tagline"></div>
       <div class="round-banner" id="round-banner"><div class="rb-card"><div class="rb-title" id="rb-title"></div><div class="rb-sub" id="rb-sub"></div></div></div>
@@ -7876,10 +7882,11 @@ function langToggleMute(){
   langMuted = !langMuted;
   try{ localStorage.setItem('seterra_mute', langMuted ? '1' : '0'); }catch(e){}
   if(langMuted){ try{ speechSynthesis.cancel(); }catch(e){} }
-  const b = document.querySelector('#lg .lg-mute'); if(b) b.outerHTML = langMuteBtn();
+  document.querySelectorAll('.lg-mute').forEach(b=> b.outerHTML = langMuteBtn());
+  if(!langMuted && !document.getElementById('lg') && gameSayOn()) gameSay();
   if(typeof toast === 'function') toast(langMuted ? 'Partida en silencio' : 'Sonido activado');
   /* en «escuchar», al volver el sonido se oye la palabra de nuevo */
-  if(!langMuted && LG && LG.cur && LG.cur.pr.listen && !document.querySelector('#lg .lg-ans')){ const m = document.querySelector('#lg .lg-msg'); if(m) m.textContent = ''; langSpeak(LG.cur.pr.speak); }
+  if(!langMuted && LG && LG.cur && document.getElementById('lg') && LG.cur.pr.listen && !document.querySelector('#lg .lg-ans')){ const m = document.querySelector('#lg .lg-msg'); if(m) m.textContent = ''; langSpeak(LG.cur.pr.speak); }
 }
 function langSpeak(text, lang){
   if(langMuted) return 'muted';
@@ -8197,6 +8204,26 @@ function langNewDeck(name, parent){
   (parent ? parent.children : tree).push(node); if(parent) parent.expanded = true;
   saveLocal(); return node;
 }
+
+/* ================= JUEGO DE IMÁGENES · modo «buscar»: se anuncia en voz alta el nombre que hay que encontrar =================
+   Usa el mismo silencio general que el vocabulario (el altavoz de arriba, junto al contador). */
+function gameSayOn(){ return !!(game && game.playMode === 'buscar' && !game.anki && document.body.classList.contains('playing')); }
+function gameSayLang(){ const n = game && (game.temaNode || game.node); return n && n.lang && n.lang.base === 'en' ? 'en-GB' : 'es-ES'; }
+function gameMuteSlot(){
+  const slot = document.getElementById('game-mute-slot'); if(!slot) return;
+  const on = !!(game && game.playMode === 'buscar' && !game.anki);
+  slot.innerHTML = on ? langMuteBtn() : '';
+}
+function gameSay(){
+  if(!gameSayOn()) return;
+  const t = currentTarget(); if(!t || !t.label) return;
+  langSpeak(t.label, gameSayLang());
+}
+{ const _nt = nextTarget; nextTarget = function(){ const r = _nt.apply(this, arguments); gameMuteSlot(); setTimeout(gameSay, 120); return r; }; }
+document.addEventListener('click', e=>{
+  if(e.target.closest('#game-mute-slot .lg-mute')){ e.stopPropagation(); langToggleMute(); return; }
+  if(e.target.closest('#back-game')){ try{ speechSynthesis.cancel(); }catch(err){} }
+}, true);
 
 
 /* ================= PUBLICACIÓN EN GITHUB CON MAZOS SEPARADOS =================
