@@ -1687,6 +1687,67 @@ button.lg-w{font:inherit;font-size:12.5px;border:0;cursor:pointer;text-align:lef
 #gh-sheet .off-ready{margin-bottom:6px;}
 #gh-sheet .off-ready.ok{color:#0a8a3f;opacity:1;}
 
+/* ===== puzle del esquema ===== */
+body.pzl-open{overflow:hidden;}
+#pzl{position:fixed;inset:0;z-index:85;background:#f6f6f8;display:flex;flex-direction:column;color:#1c1c1e;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none;}
+#pzl button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+#pzl .pzl-top{display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 12px 8px;background:#fff;border-bottom:1px solid #e6e6ea;flex-shrink:0;}
+#pzl .pzl-x{width:32px;height:32px;border-radius:50%;border:none;background:#1c1c1e;color:#fff;font-size:15px;flex-shrink:0;}
+#pzl .pzl-bar{flex:1;height:8px;border-radius:4px;background:#e6e6ea;overflow:hidden;}
+#pzl .pzl-bar i{display:block;height:100%;width:0;background:#0a8a3f;transition:width .3s;}
+#pzl .pzl-cnt{font-size:12px;font-weight:600;flex-shrink:0;}
+#pzl .pzl-z{width:32px;height:32px;border-radius:50%;border:1.5px solid #d0d0d6;background:#fff;font-size:18px;line-height:1;flex-shrink:0;}
+#pzl .pzl-board{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;}
+#pzl .pzl-canvas{display:inline-block;padding:20px 24px 40px;min-width:100%;box-sizing:border-box;}
+#pzl .pzl-node{display:flex;align-items:center;}
+#pzl .pzl-kids{display:flex;flex-direction:column;gap:12px;}
+#pzl .pzl-brace{align-self:stretch;width:18px;flex-shrink:0;margin:0 6px;color:#8e8e93;display:flex;align-items:center;}
+#pzl .pzl-brace svg{display:block;}
+#pzl .pzl-title{font-size:20px;font-weight:800;max-width:150px;line-height:1.15;flex-shrink:0;}
+#pzl .pzl-key{min-width:130px;max-width:170px;min-height:44px;padding:8px 10px;box-sizing:border-box;border-radius:12px;border:2px dashed #b9b9c2;background:#fff;font-size:14px;font-weight:700;line-height:1.2;display:flex;align-items:center;flex-shrink:0;transition:background .2s,border-color .2s;}
+#pzl .pzl-key.lv1{min-width:120px;font-size:13px;font-weight:600;}
+#pzl .pzl-key.ok{border:2px solid #1c1c1e;background:#fff;}
+#pzl .pzl-key.lv1.ok{border-color:#8e8e93;}
+#pzl .pzl-box{display:grid;grid-template-columns:repeat(3,84px);gap:8px;padding:10px;border-radius:14px;background:#fff;border:1.5px solid #d0d0d6;}
+#pzl .pzl-cell{display:flex;flex-direction:column;gap:4px;}
+#pzl .pzl-img{width:84px;height:84px;border-radius:10px;border:2px dashed #c8c8d0;box-sizing:border-box;background:#fafafa;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+#pzl .pzl-img.on{border:2px solid #e6e6ea;background:#fff;}
+#pzl .pzl-img img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;}
+#pzl .pzl-name{min-height:30px;border-radius:8px;border:2px dashed #c8c8d0;box-sizing:border-box;font-size:11px;font-weight:600;line-height:1.15;padding:3px 4px;text-align:center;display:flex;align-items:center;justify-content:center;word-break:break-word;}
+#pzl .pzl-name.on{border:none;background:#f0f0f3;}
+#pzl .pzl-cell.ok .pzl-img{border-color:#0a8a3f;}
+#pzl [data-slot].hover{border-color:#1c9bd6 !important;background:#e7f4fb !important;}
+#pzl [data-slot].bad{animation:pzlBad .45s;}
+@keyframes pzlBad{0%,100%{transform:none;}20%{transform:translateX(-5px);border-color:#e5484d;background:#fdecec;}40%{transform:translateX(5px);border-color:#e5484d;background:#fdecec;}60%{transform:translateX(-3px);}80%{transform:translateX(3px);}}
+#pzl .pop{animation:pzlPop .35s;}
+@keyframes pzlPop{0%{transform:scale(.85);}60%{transform:scale(1.06);}100%{transform:none;}}
+#pzl .pzl-tray{flex-shrink:0;background:#fff;border-top:1px solid #e6e6ea;padding:8px 0 calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 16px rgba(0,0,0,.05);}
+#pzl .pzl-tabs{display:flex;gap:6px;padding:0 12px 8px;}
+#pzl .pzl-tab{flex:1;border:none;border-radius:10px;background:#f0f0f3;padding:8px 4px;font-size:13px;font-weight:600;}
+#pzl .pzl-tab small{opacity:.6;font-weight:600;}
+#pzl .pzl-tab.on{background:#1c1c1e;color:#fff;}
+#pzl .pzl-tab.empty:not(.on){opacity:.45;}
+#pzl .pzl-pieces{display:flex;gap:8px;overflow-x:auto;padding:4px 12px 6px;min-height:76px;align-items:center;-webkit-overflow-scrolling:touch;touch-action:pan-x;}
+#pzl .pzl-pc{flex-shrink:0;border:2px solid #d0d0d6;background:#fff;border-radius:12px;touch-action:pan-x;}
+#pzl .pzl-pi{width:70px;height:70px;padding:3px;}
+#pzl .pzl-pi img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;}
+#pzl .pzl-pt{padding:8px 12px;font-size:13px;font-weight:600;max-width:200px;line-height:1.2;min-height:44px;}
+#pzl .pzl-pt.base{font-weight:700;}
+#pzl .pzl-pc.sel{border-color:#1c9bd6;background:#e7f4fb;box-shadow:0 0 0 3px rgba(28,155,214,.25);}
+#pzl .pzl-empty{font-size:14px;opacity:.6;padding:20px 4px;}
+#pzl .pzl-hint{font-size:11.5px;opacity:.55;text-align:center;padding:2px 12px 0;}
+#pzl .pzl-ghost{position:fixed;z-index:100;pointer-events:none;transform:translate(-50%,-115%) scale(1.05);box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:.95;}
+#pzl .pzl-end,#pzl .pzl-info{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:5;}
+#pzl .pzl-end-box,#pzl .pzl-info-box{background:#fff;border-radius:20px;padding:22px 20px;width:100%;max-width:360px;box-sizing:border-box;text-align:center;display:flex;flex-direction:column;gap:10px;max-height:85vh;overflow:auto;}
+#pzl .pzl-end-t{font-size:22px;font-weight:800;}
+#pzl .pzl-end-s{font-size:15px;opacity:.75;}
+#pzl .pzl-end-r{font-size:13px;color:#0a8a3f;font-weight:600;}
+#pzl .pzl-btn{border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:600;background:#f0f0f3;}
+#pzl .pzl-btn.pri{background:#1c1c1e;color:#fff;}
+#pzl .pzl-info-box img{width:100%;max-height:240px;object-fit:contain;}
+#pzl .pzl-info-box b{font-size:18px;}
+#pzl .pzl-info-box p{font-size:14px;line-height:1.45;text-align:left;margin:0;white-space:normal;}
+
 </style>
 </head>
 <body>
@@ -8799,6 +8860,268 @@ setInterval(()=>{ if(ghOk() && document.visibilityState === 'visible' && !ghSync
 /* al terminar una partida o cerrar un editor: subir lo pendiente */
 { const _c = langClose; langClose = function(){ const r = _c.apply(this, arguments); if(ghOk() && ghDirty) ghSchedule(800); return r; }; }
 { const _b = boot; boot = async function(){ const r = await _b.apply(this, arguments); ghSet(ghOk() ? 'pending' : 'none'); if(ghOk()){ ghDirty = true; ghSync(); } return r; }; }
+
+
+/* ================= PUZLE DE ESQUEMA =================
+   El mazo se convierte en un esquema de llaves que montas pieza a pieza:
+     · base: los rótulos de cada rama (p. ej. grupo FCI → sección)
+     · imágenes: cada foto en la caja de su rama
+     · nombres: cada nombre debajo de su foto
+   Las tres capas a la vez y en el orden que quieras. Se toca una pieza y luego su hueco
+   (o se arrastra hacia arriba hasta el hueco). La información de cada tarjeta se ve al tocarla ya colocada. */
+const PZL_NONE = '(sin clasificar)';
+let PZL = null;
+
+function pzlLevels(node, photos){
+  /* las dos primeras categorías del mazo que de verdad clasifican estas tarjetas */
+  const cats = (node.tagCats || []).filter(c=> photos.some(p=> ((p.tags || {})[c.id] || []).length));
+  return cats.slice(0, 2);
+}
+function pzlTree(node, photos){
+  let levels = pzlLevels(node, photos);
+  const val = (p, c)=> (((p.tags || {})[c.id] || [])[0]) || PZL_NONE;
+  /* si en la partida todas comparten el primer nivel (has jugado solo un grupo), ese nivel pasa a ser el título */
+  let title = node.name;
+  while(levels.length && new Set(photos.map(p=> val(p, levels[0]))).size === 1){ title = val(photos[0], levels[0]); levels = levels.slice(1); }
+  function build(list, lv){
+    if(lv >= levels.length) return { cards: list };
+    const groups = new Map();
+    list.forEach(p=>{ const v = val(p, levels[lv]); if(!groups.has(v)) groups.set(v, []); groups.get(v).push(p); });
+    return { kids: [...groups.entries()].map(([v, l])=> Object.assign({ label: v, lv }, build(l, lv + 1))) };
+  }
+  return Object.assign({ title, levels }, build(photos, 0));
+}
+
+function puzStart(node, onlyIds){
+  let photos = (node.photos || []).filter(p=> p.image);
+  if(onlyIds) photos = photos.filter(p=> onlyIds.has(p.id));
+  if(photos.length < 2){ toast('Hacen falta al menos 2 tarjetas con imagen'); return; }
+  const tree = pzlTree(node, photos);
+  /* huecos */
+  const keys = [], boxes = [];
+  let kn = 0, bn = 0;
+  (function walk(t){
+    (t.kids || []).forEach(k=>{ k.slot = 'k' + (kn++); keys.push({ id: k.slot, text: k.label, lv: k.lv, done: false }); walk(k); });
+    if(t.cards){ t.box = 'b' + (bn++); boxes.push({ id: t.box, cards: t.cards.map(p=> p.id), cells: t.cards.map(()=> ({ img: null, name: null })) }); }
+  })(tree);
+  const byId = Object.fromEntries(photos.map(p=> [p.id, p]));
+  const pieces = [];
+  keys.forEach(k=> pieces.push({ pid: 'K' + k.id, kind: 'base', text: k.text }));
+  photos.forEach(p=>{ pieces.push({ pid: 'I' + p.id, kind: 'img', card: p.id }); pieces.push({ pid: 'N' + p.id, kind: 'name', card: p.id, text: p.label || '' }); });
+  PZL = { node, tree, keys, boxes, byId, pieces: shuffle(pieces), placed: new Set(), sel: null, tab: keys.length ? 'base' : 'img',
+          mistakes: 0, start: Date.now(), total: pieces.length, zoom: 1, done: false };
+  pzlOpen();
+}
+
+function pzlBoxOf(cardId){ return PZL.boxes.find(b=> b.cards.includes(cardId)); }
+function pzlRemaining(kind){ return PZL.pieces.filter(p=> !PZL.placed.has(p.pid) && (!kind || p.kind === kind)); }
+
+/* ---------- pintar ---------- */
+function pzlNodeHtml(t){
+  if(t.cards){
+    const b = PZL.boxes.find(x=> x.id === t.box);
+    return `<div class="pzl-box" data-box="${b.id}">${b.cells.map((c, i)=> pzlCellHtml(b, i)).join('')}</div>`;
+  }
+  return `<div class="pzl-kids">${t.kids.map(k=> `<div class="pzl-node">${pzlKeyHtml(k)}<div class="pzl-brace"></div>${pzlNodeHtml(k)}</div>`).join('')}</div>`;
+}
+function pzlKeyHtml(k){
+  const s = PZL.keys.find(x=> x.id === k.slot);
+  return `<div class="pzl-key lv${s.lv}${s.done ? ' ok' : ''}" data-slot="${s.id}">${s.done ? escapeHtml(s.text) : ''}</div>`;
+}
+function pzlCellHtml(b, i){
+  const c = b.cells[i], p = c.img && PZL.byId[c.img], n = c.name && PZL.byId[c.name];
+  return `<div class="pzl-cell${c.img && c.name ? ' ok' : ''}" data-cell="${b.id}|${i}">
+    <div class="pzl-img${p ? ' on' : ''}" data-slot="${b.id}|${i}|img">${p ? `<img src="${p.image}" alt="">` : ''}</div>
+    <div class="pzl-name${n ? ' on' : ''}" data-slot="${b.id}|${i}|name">${n ? escapeHtml(n.label || '') : ''}</div></div>`;
+}
+function pzlPieceHtml(p){
+  const sel = PZL.sel === p.pid ? ' sel' : '';
+  if(p.kind === 'img') return `<button class="pzl-pc pzl-pi${sel}" data-pc="${p.pid}"><img src="${PZL.byId[p.card].image}" alt="" draggable="false"></button>`;
+  return `<button class="pzl-pc pzl-pt ${p.kind}${sel}" data-pc="${p.pid}">${escapeHtml(p.text)}</button>`;
+}
+function pzlTrayHtml(){
+  const tabs = [['base', 'Base'], ['img', 'Imágenes'], ['name', 'Nombres']].filter(([k])=> k !== 'base' || PZL.keys.length);
+  const list = pzlRemaining(PZL.tab);
+  return `<div class="pzl-tabs">${tabs.map(([k, t])=>{ const n = pzlRemaining(k).length; return `<button class="pzl-tab${PZL.tab === k ? ' on' : ''}${n ? '' : ' empty'}" data-tab="${k}">${t} <small>${n}</small></button>`; }).join('')}</div>
+    <div class="pzl-pieces">${list.length ? list.map(pzlPieceHtml).join('') : `<div class="pzl-empty">${PZL.done ? '¡Esquema completo!' : 'Ya has colocado todas estas ✓'}</div>`}</div>
+    <div class="pzl-hint">${PZL.sel ? 'Ahora toca su hueco en el esquema' : 'Toca una pieza y luego su hueco · o arrástrala hacia arriba'}</div>`;
+}
+function pzlOpen(){
+  document.getElementById('pzl')?.remove();
+  const el = document.createElement('div'); el.id = 'pzl';
+  const t = PZL.tree;
+  el.innerHTML = `<div class="pzl-top"><button class="pzl-x" data-pzl="quit" aria-label="Salir">✕</button>
+      <div class="pzl-bar"><i></i></div><span class="pzl-cnt"></span>
+      <button class="pzl-z" data-pzl="zout" aria-label="Alejar">−</button><button class="pzl-z" data-pzl="zin" aria-label="Acercar">+</button></div>
+    <div class="pzl-board"><div class="pzl-canvas">
+      <div class="pzl-node pzl-root"><div class="pzl-title">${escapeHtml(t.title)}</div>${t.cards ? '' : '<div class="pzl-brace"></div>'}${pzlNodeHtml(t)}</div>
+    </div></div>
+    <div class="pzl-tray"></div>`;
+  document.body.appendChild(el); document.body.classList.add('pzl-open');
+  el.addEventListener('click', pzlClick);
+  el.querySelector('.pzl-tray').addEventListener('pointerdown', pzlDragStart);
+  pzlTray(); pzlStats();
+  /* que quepa a lo ancho en el móvil (sin hacerlo diminuto) */
+  const cv = el.querySelector('.pzl-canvas'), bw = el.querySelector('.pzl-board').clientWidth;
+  PZL.zoom = Math.max(.55, Math.min(1, Math.floor(100 * bw / cv.scrollWidth) / 100)); cv.style.zoom = PZL.zoom;
+  pzlBraces();
+  if(window.ResizeObserver){ PZL.ro = new ResizeObserver(()=> pzlBraces()); PZL.ro.observe(el.querySelector('.pzl-canvas')); }
+}
+function pzlTray(){ const tr = document.querySelector('#pzl .pzl-tray'); if(tr) tr.innerHTML = pzlTrayHtml(); }
+function pzlStats(){
+  const n = PZL.placed.size, el = document.getElementById('pzl'); if(!el) return;
+  el.querySelector('.pzl-bar i').style.width = (100 * n / PZL.total) + '%';
+  el.querySelector('.pzl-cnt').textContent = `${n}/${PZL.total}${PZL.mistakes ? ' · ' + PZL.mistakes + ' ✗' : ''}`;
+}
+/* llaves «{» a la medida de lo que abarcan */
+function pzlBraces(){
+  document.querySelectorAll('#pzl .pzl-brace').forEach(b=>{
+    const h = Math.max(24, b.offsetHeight), m = h / 2, w = 18, r = Math.min(10, h / 6);
+    b.innerHTML = `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="M${w - 2} 1 Q${w / 2} 1 ${w / 2} ${r + 1} L${w / 2} ${m - r} Q${w / 2} ${m} 2 ${m} Q${w / 2} ${m} ${w / 2} ${m + r} L${w / 2} ${h - r - 1} Q${w / 2} ${h - 1} ${w - 2} ${h - 1}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+  });
+}
+
+/* ---------- colocar ---------- */
+function pzlFits(piece, slot){
+  const parts = slot.split('|');
+  if(parts.length === 1){                                   // rótulo de la base
+    const k = PZL.keys.find(x=> x.id === slot);
+    return piece.kind === 'base' && k && !k.done && k.text === piece.text;
+  }
+  const b = PZL.boxes.find(x=> x.id === parts[0]), c = b && b.cells[+parts[1]], what = parts[2];
+  if(!c || piece.kind !== what) return false;
+  if(!b.cards.includes(piece.card)) return false;          // no es de esta caja
+  if(c[what]) return false;                                 // hueco ocupado
+  const other = what === 'img' ? c.name : c.img;            // si ya hay foto (o nombre), tiene que ser la misma tarjeta
+  return !other || other === piece.card;
+}
+function pzlPlace(pid, slot){
+  const piece = PZL.pieces.find(p=> p.pid === pid); if(!piece) return;
+  const el = document.querySelector(`#pzl [data-slot="${slot}"]`);
+  if(!pzlFits(piece, slot)){
+    /* un hueco libre de la caja correcta pero emparejado con otra tarjeta, o una caja equivocada: fallo */
+    PZL.mistakes++; pzlStats();
+    if(el){ el.classList.remove('bad'); void el.offsetWidth; el.classList.add('bad'); }
+    try{ navigator.vibrate && navigator.vibrate(40); }catch(e){}
+    return;
+  }
+  const parts = slot.split('|');
+  if(parts.length === 1){ PZL.keys.find(x=> x.id === slot).done = true; el.outerHTML = pzlKeyHtml({ slot }); }
+  else {
+    const b = PZL.boxes.find(x=> x.id === parts[0]), i = +parts[1];
+    b.cells[i][parts[2]] = piece.card;
+    const cell = document.querySelector(`#pzl [data-cell="${b.id}|${i}"]`); if(cell) cell.outerHTML = pzlCellHtml(b, i);
+  }
+  PZL.placed.add(pid); PZL.sel = null;
+  const now = document.querySelector(`#pzl [data-slot="${slot}"]`) || document.querySelector(`#pzl [data-cell="${parts[0]}|${parts[1]}"]`);
+  if(now){ now.classList.add('pop'); }
+  if(!pzlRemaining(PZL.tab).length){ const next = ['base', 'img', 'name'].find(k=> pzlRemaining(k).length); if(next) PZL.tab = next; }
+  pzlStats(); pzlTray(); pzlBraces();
+  if(PZL.placed.size === PZL.total) pzlFinish();
+}
+function pzlFinish(){
+  PZL.done = true; pzlTray();
+  const secs = Math.round((Date.now() - PZL.start) / 1000), mm = Math.floor(secs / 60), ss = String(secs % 60).padStart(2, '0');
+  const node = PZL.node, key = PZL.tree.title;
+  node.puzBest = node.puzBest || {};
+  const prev = node.puzBest[key], better = !prev || PZL.mistakes < prev.m || (PZL.mistakes === prev.m && secs < prev.s);
+  if(better){ node.puzBest[key] = { m: PZL.mistakes, s: secs, t: Date.now() }; try{ saveLocal(); }catch(e){} }
+  const el = document.createElement('div'); el.className = 'pzl-end';
+  el.innerHTML = `<div class="pzl-end-box"><div class="pzl-end-t">¡Esquema montado!</div>
+    <div class="pzl-end-s">${PZL.total} piezas · ${PZL.mistakes} ${PZL.mistakes === 1 ? 'fallo' : 'fallos'} · ${mm}:${ss}</div>
+    ${prev && !better ? `<div class="pzl-end-r">Tu mejor marca: ${prev.m} fallos · ${Math.floor(prev.s / 60)}:${String(prev.s % 60).padStart(2, '0')}</div>` : prev ? '<div class="pzl-end-r">¡Nueva mejor marca!</div>' : ''}
+    <button class="pzl-btn pri" data-pzl="again">Otra vez</button><button class="pzl-btn" data-pzl="look">Ver el esquema</button><button class="pzl-btn" data-pzl="quit">Salir</button></div>`;
+  document.getElementById('pzl').appendChild(el);
+}
+function pzlInfo(cardId){
+  const p = PZL.byId[cardId]; if(!p) return;
+  const el = document.createElement('div'); el.className = 'pzl-info';
+  el.innerHTML = `<div class="pzl-info-box"><img src="${p.image}" alt=""><b>${escapeHtml(p.label || '')}</b>${p.back ? `<p>${escapeHtml(p.back).replace(/\n/g, '<br>')}</p>` : ''}<button class="pzl-btn" data-pzl="info-x">Cerrar</button></div>`;
+  document.getElementById('pzl').appendChild(el);
+}
+
+/* ---------- toques ---------- */
+function pzlClick(e){
+  const t = e.target; let x;
+  if(x = t.closest('[data-pzl]')){
+    const a = x.dataset.pzl;
+    if(a === 'quit'){ if(!PZL.done && PZL.placed.size && !confirm('¿Salir del puzle? Se pierde lo montado.')) return; pzlClose(); return; }
+    if(a === 'again'){ const n = PZL.node, ids = new Set(Object.keys(PZL.byId)); pzlClose(); puzStart(n, ids); return; }
+    if(a === 'look'){ x.closest('.pzl-end').remove(); return; }
+    if(a === 'info-x'){ x.closest('.pzl-info').remove(); return; }
+    if(a === 'zin' || a === 'zout'){ PZL.zoom = Math.max(.4, Math.min(1.6, PZL.zoom + (a === 'zin' ? .15 : -.15))); document.querySelector('#pzl .pzl-canvas').style.zoom = PZL.zoom; pzlBraces(); return; }
+    return;
+  }
+  if(t.closest('.pzl-info')){ if(t.classList.contains('pzl-info')) t.remove(); return; }
+  if(x = t.closest('[data-tab]')){ PZL.tab = x.dataset.tab; PZL.sel = null; pzlTray(); return; }
+  if(x = t.closest('[data-pc]')){ PZL.sel = PZL.sel === x.dataset.pc ? null : x.dataset.pc; pzlTray(); return; }
+  if(x = t.closest('[data-slot]')){
+    if(PZL.sel){ pzlPlace(PZL.sel, x.dataset.slot); return; }
+    const parts = x.dataset.slot.split('|');
+    if(parts.length === 3){ const c = PZL.boxes.find(b=> b.id === parts[0]).cells[+parts[1]]; if(c.img && c.name){ pzlInfo(c.img); return; } }
+    if(!x.classList.contains('on') && !x.classList.contains('ok')) toast('Primero elige una pieza de abajo');
+  }
+}
+function pzlClose(){
+  try{ PZL && PZL.ro && PZL.ro.disconnect(); }catch(e){}
+  document.getElementById('pzl')?.remove(); document.body.classList.remove('pzl-open'); PZL = null;
+}
+
+/* ---------- arrastrar desde la bandeja (hacia arriba; de lado sigue siendo deslizar la bandeja) ---------- */
+function pzlDragStart(e){
+  const pc = e.target.closest('[data-pc]'); if(!pc || !PZL) return;
+  const x0 = e.clientX, y0 = e.clientY; let ghost = null, over = null;
+  const move = ev=>{
+    const dx = ev.clientX - x0, dy = ev.clientY - y0;
+    if(!ghost){
+      if(Math.abs(dy) < 10 || Math.abs(dy) < Math.abs(dx) || dy > 0) { if(Math.abs(dx) > 12) end(); return; }
+      ghost = pc.cloneNode(true); ghost.classList.add('pzl-ghost'); document.getElementById('pzl').appendChild(ghost);
+      PZL.sel = pc.dataset.pc;
+    }
+    ev.preventDefault();
+    ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+    ghost.style.visibility = 'hidden';
+    const tgt = document.elementFromPoint(ev.clientX, ev.clientY);
+    ghost.style.visibility = '';
+    const s = tgt && tgt.closest('#pzl [data-slot]');
+    if(over && over !== s) over.classList.remove('hover');
+    over = s; if(s) s.classList.add('hover');
+    /* cerca de los bordes, el esquema se desplaza solo */
+    const bd = document.querySelector('#pzl .pzl-board'), r = bd.getBoundingClientRect();
+    if(ev.clientY < r.top + 40) bd.scrollTop -= 12; else if(ev.clientY > r.bottom - 30 && ev.clientY < r.bottom) bd.scrollTop += 12;
+    if(ev.clientX < r.left + 30) bd.scrollLeft -= 12; else if(ev.clientX > r.right - 30) bd.scrollLeft += 12;
+  };
+  const end = ()=>{
+    removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', end);
+    if(ghost) ghost.remove(); if(over) over.classList.remove('hover');
+  };
+  const up = ev=>{
+    const was = !!ghost, s = over, pid = pc.dataset.pc; end();
+    if(was){ pzlClick.skip = true; setTimeout(()=> pzlClick.skip = false, 50); if(s) pzlPlace(pid, s.dataset.slot); else { PZL.sel = null; pzlTray(); } }
+  };
+  addEventListener('pointermove', move, { passive: false }); addEventListener('pointerup', up); addEventListener('pointercancel', end);
+}
+{ const _c = pzlClick; pzlClick = function(e){ if(pzlClick.skip) return; return _c.apply(this, arguments); }; }
+
+/* ---------- en el selector de modos ---------- */
+{ const _pt = playTema; playTema = function(node, ids, mode){ if(mode === 'puzle') return puzStart(node, ids); return _pt.apply(this, arguments); }; }
+{ const _mu = modeUnavailable; modeUnavailable = function(node, mode){
+    if(mode === 'puzle'){ const ph = filteredPhotos(node).filter(p=> p.image); return ph.length < 2 ? 'hacen falta al menos 2 tarjetas con imagen' : null; }
+    return _mu.apply(this, arguments);
+  }; }
+(function(){
+  const box = document.getElementById('mode-box'), before = document.getElementById('mode-cancel'); if(!box || !before) return;
+  const g = document.createElement('div'); g.className = 'mode-group bj-only'; g.textContent = 'esquema';
+  const b = document.createElement('button'); b.className = 'mode-opt bj-only'; b.dataset.mode = 'puzle';
+  b.innerHTML = '<b>puzle del esquema</b><span data-sub>montas el esquema de llaves: rótulos, imágenes y nombres</span>';
+  box.insertBefore(g, before); box.insertBefore(b, before);
+  b.addEventListener('click', ()=>{
+    const node = modeChooserNode; closeModeChooser(); if(!node) return;
+    node.lastPlayMode = 'puzle'; saveLocal();
+    const filtered = filterActive(node);
+    puzStart(node, filtered ? new Set(filteredPhotos(node).map(p=> p.id)) : null);
+  });
+})();
 
 boot();
 
