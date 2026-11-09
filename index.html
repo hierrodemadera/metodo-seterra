@@ -1687,66 +1687,121 @@ button.lg-w{font:inherit;font-size:12.5px;border:0;cursor:pointer;text-align:lef
 #gh-sheet .off-ready{margin-bottom:6px;}
 #gh-sheet .off-ready.ok{color:#0a8a3f;opacity:1;}
 
-/* ===== puzle del esquema ===== */
-body.pzl-open{overflow:hidden;}
-#pzl{position:fixed;inset:0;z-index:85;background:#f6f6f8;display:flex;flex-direction:column;color:#1c1c1e;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none;}
-#pzl button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-#pzl .pzl-top{display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 12px 8px;background:#fff;border-bottom:1px solid #e6e6ea;flex-shrink:0;}
-#pzl .pzl-x{width:32px;height:32px;border-radius:50%;border:none;background:#1c1c1e;color:#fff;font-size:15px;flex-shrink:0;}
-#pzl .pzl-bar{flex:1;height:8px;border-radius:4px;background:#e6e6ea;overflow:hidden;}
-#pzl .pzl-bar i{display:block;height:100%;width:0;background:#0a8a3f;transition:width .3s;}
-#pzl .pzl-cnt{font-size:12px;font-weight:600;flex-shrink:0;}
-#pzl .pzl-z{width:32px;height:32px;border-radius:50%;border:1.5px solid #d0d0d6;background:#fff;font-size:18px;line-height:1;flex-shrink:0;}
-#pzl .pzl-board{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;}
-#pzl .pzl-canvas{display:inline-block;padding:20px 24px 40px;min-width:100%;box-sizing:border-box;}
-#pzl .pzl-node{display:flex;align-items:center;}
-#pzl .pzl-kids{display:flex;flex-direction:column;gap:12px;}
-#pzl .pzl-brace{align-self:stretch;width:18px;flex-shrink:0;margin:0 6px;color:#8e8e93;display:flex;align-items:center;}
-#pzl .pzl-brace svg{display:block;}
-#pzl .pzl-title{font-size:20px;font-weight:800;max-width:150px;line-height:1.15;flex-shrink:0;}
-#pzl .pzl-key{min-width:130px;max-width:170px;min-height:44px;padding:8px 10px;box-sizing:border-box;border-radius:12px;border:2px dashed #b9b9c2;background:#fff;font-size:14px;font-weight:700;line-height:1.2;display:flex;align-items:center;flex-shrink:0;transition:background .2s,border-color .2s;}
-#pzl .pzl-key.lv1{min-width:120px;font-size:13px;font-weight:600;}
-#pzl .pzl-key.ok{border:2px solid #1c1c1e;background:#fff;}
-#pzl .pzl-key.lv1.ok{border-color:#8e8e93;}
-#pzl .pzl-box{display:grid;grid-template-columns:repeat(3,84px);gap:8px;padding:10px;border-radius:14px;background:#fff;border:1.5px solid #d0d0d6;}
-#pzl .pzl-cell{display:flex;flex-direction:column;gap:4px;}
-#pzl .pzl-img{width:84px;height:84px;border-radius:10px;border:2px dashed #c8c8d0;box-sizing:border-box;background:#fafafa;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-#pzl .pzl-img.on{border:2px solid #e6e6ea;background:#fff;}
-#pzl .pzl-img img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;}
-#pzl .pzl-name{min-height:30px;border-radius:8px;border:2px dashed #c8c8d0;box-sizing:border-box;font-size:11px;font-weight:600;line-height:1.15;padding:3px 4px;text-align:center;display:flex;align-items:center;justify-content:center;word-break:break-word;}
-#pzl .pzl-name.on{border:none;background:#f0f0f3;}
-#pzl .pzl-cell.ok .pzl-img{border-color:#0a8a3f;}
-#pzl [data-slot].hover{border-color:#1c9bd6 !important;background:#e7f4fb !important;}
-#pzl [data-slot].bad{animation:pzlBad .45s;}
-@keyframes pzlBad{0%,100%{transform:none;}20%{transform:translateX(-5px);border-color:#e5484d;background:#fdecec;}40%{transform:translateX(5px);border-color:#e5484d;background:#fdecec;}60%{transform:translateX(-3px);}80%{transform:translateX(3px);}}
-#pzl .pop{animation:pzlPop .35s;}
-@keyframes pzlPop{0%{transform:scale(.85);}60%{transform:scale(1.06);}100%{transform:none;}}
-#pzl .pzl-tray{flex-shrink:0;background:#fff;border-top:1px solid #e6e6ea;padding:8px 0 calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 16px rgba(0,0,0,.05);}
-#pzl .pzl-tabs{display:flex;gap:6px;padding:0 12px 8px;}
-#pzl .pzl-tab{flex:1;border:none;border-radius:10px;background:#f0f0f3;padding:8px 4px;font-size:13px;font-weight:600;}
-#pzl .pzl-tab small{opacity:.6;font-weight:600;}
-#pzl .pzl-tab.on{background:#1c1c1e;color:#fff;}
-#pzl .pzl-tab.empty:not(.on){opacity:.45;}
-#pzl .pzl-pieces{display:flex;gap:8px;overflow-x:auto;padding:4px 12px 6px;min-height:76px;align-items:center;-webkit-overflow-scrolling:touch;touch-action:pan-x;}
-#pzl .pzl-pc{flex-shrink:0;border:2px solid #d0d0d6;background:#fff;border-radius:12px;touch-action:pan-x;}
-#pzl .pzl-pi{width:70px;height:70px;padding:3px;}
-#pzl .pzl-pi img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;}
-#pzl .pzl-pt{padding:8px 12px;font-size:13px;font-weight:600;max-width:200px;line-height:1.2;min-height:44px;}
-#pzl .pzl-pt.base{font-weight:700;}
-#pzl .pzl-pc.sel{border-color:#1c9bd6;background:#e7f4fb;box-shadow:0 0 0 3px rgba(28,155,214,.25);}
-#pzl .pzl-empty{font-size:14px;opacity:.6;padding:20px 4px;}
-#pzl .pzl-hint{font-size:11.5px;opacity:.55;text-align:center;padding:2px 12px 0;}
-#pzl .pzl-ghost{position:fixed;z-index:100;pointer-events:none;transform:translate(-50%,-115%) scale(1.05);box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:.95;}
-#pzl .pzl-end,#pzl .pzl-info{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:5;}
-#pzl .pzl-end-box,#pzl .pzl-info-box{background:#fff;border-radius:20px;padding:22px 20px;width:100%;max-width:360px;box-sizing:border-box;text-align:center;display:flex;flex-direction:column;gap:10px;max-height:85vh;overflow:auto;}
-#pzl .pzl-end-t{font-size:22px;font-weight:800;}
-#pzl .pzl-end-s{font-size:15px;opacity:.75;}
-#pzl .pzl-end-r{font-size:13px;color:#0a8a3f;font-weight:600;}
-#pzl .pzl-btn{border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:600;background:#f0f0f3;}
-#pzl .pzl-btn.pri{background:#1c1c1e;color:#fff;}
-#pzl .pzl-info-box img{width:100%;max-height:240px;object-fit:contain;}
-#pzl .pzl-info-box b{font-size:18px;}
-#pzl .pzl-info-box p{font-size:14px;line-height:1.45;text-align:left;margin:0;white-space:normal;}
+/* ===== esquemas v2 ===== */
+body.mp-open{overflow:hidden;}
+.mp-host{position:relative;}
+.mp-tip{font-size:12px;color:#8e8e93;text-align:center;padding:8px 12px 0;}
+.mp-cv,.mp-host{position:relative;overflow:hidden;touch-action:none;background:#fbfbfc;background-image:radial-gradient(#dcdce2 1px,transparent 1px);background-size:22px 22px;}
+.mp-svg{display:block;width:100%;height:100%;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab;}
+.mp-svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none;}
+.mp-zoom{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px;z-index:2;}
+.mp-zoom button{width:38px;height:38px;border-radius:50%;border:1px solid #e0e0e6;background:#fff;font-size:19px;line-height:1;color:#1c1c1e;box-shadow:0 1px 4px rgba(0,0,0,.12);cursor:pointer;padding:0;}
+.mp-ln{fill:none;stroke:#a1a1aa;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.mp-brace{stroke:#8e8e93;}
+.mp-dash{stroke-dasharray:6 5;}
+.mp-nd rect{fill:#fff;stroke:#c7c7cf;stroke-width:1.5;}
+.mp-nd text{font-size:15px;font-weight:600;fill:#1c1c1e;}
+.mp-nd.root rect{stroke:none;fill:#1c1c1e;}
+.mp-nd.root text{font-size:19px;font-weight:800;fill:#fff;}
+.mp-nd .mp-dot{fill:#f2b705;stroke:#fff;stroke-width:1.5;}
+.mp-nd.sel rect{stroke:#1c9bd6 !important;stroke-width:3;}
+.mp-nd.slot rect{fill:#fff;stroke:#b4b4bd;stroke-width:2;stroke-dasharray:7 5;}
+.mp-nd.slot.hover rect,.mp-lb.slot.hover rect{fill:#e7f4fb;stroke:#1c9bd6;stroke-dasharray:none;}
+.mp-nd.slot.typing rect,.mp-lb.slot.typing rect{fill:#e7f4fb;stroke:#1c9bd6;stroke-width:3;stroke-dasharray:none;}
+.mp-nd.r0 rect{fill:#e3f4ea;stroke:#0a8a3f;stroke-width:2;}
+.mp-nd.r1 rect{fill:#fdf3c7;stroke:#e0b100;stroke-width:2;}
+.mp-nd.r2 rect{fill:#fde3cc;stroke:#f28a2e;stroke-width:2;}
+.mp-nd.r3 rect{fill:#fbdcdc;stroke:#e5484d;stroke-width:2;}
+.mp-nd.root.r0 text,.mp-nd.root.r1 text,.mp-nd.root.r2 text,.mp-nd.root.r3 text{fill:#1c1c1e;}
+.mp-lb rect{fill:#fff;stroke:#d6d6dc;stroke-width:1;}
+.mp-lb text{font-size:12.5px;font-weight:600;fill:#6e6e73;font-style:italic;}
+.mp-lb.slot rect{fill:#fff;stroke:#b4b4bd;stroke-width:1.5;stroke-dasharray:5 4;}
+.mp-lb.r0 rect{fill:#e3f4ea;stroke:#0a8a3f;}.mp-lb.r1 rect{fill:#fdf3c7;stroke:#e0b100;}.mp-lb.r2 rect{fill:#fde3cc;stroke:#f28a2e;}.mp-lb.r3 rect{fill:#fbdcdc;stroke:#e5484d;}
+.mp-fold rect{fill:#1c1c1e;}.mp-fold text{fill:#fff;font-size:12px;font-weight:700;}
+.mp-nd.hl,.mp-lb.hl{animation:mpPop .5s;transform-box:fill-box;transform-origin:center;}
+@keyframes mpPop{0%{opacity:.4;}100%{opacity:1;}}
+.mp-nd.bad rect,.mp-lb.bad rect{animation:mpBad .6s;}
+@keyframes mpBad{0%,60%{fill:#fbdcdc;stroke:#e5484d;stroke-dasharray:none;}100%{}}
+/* pantalla de juego y de edición */
+#mp,#mpe{position:fixed;inset:0;z-index:85;background:#fbfbfc;display:flex;flex-direction:column;color:#1c1c1e;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+#mp button,#mpe button,#mp-pop button,#mp-choose button,#mp-tx button,#mp-lp button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+#mp .mp-cv,#mpe .mp-cv{flex:1;min-height:0;}
+.mp-top,.mpe-top{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 12px 10px;background:#fff;border-bottom:1px solid #e6e6ea;flex-shrink:0;}
+.mp-x{width:34px;height:34px;border-radius:50%;border:none;background:#1c1c1e;color:#fff !important;font-size:15px;flex-shrink:0;}
+.mp-bar{flex:1;height:8px;border-radius:4px;background:#e6e6ea;overflow:hidden;}
+.mp-bar i{display:block;height:100%;width:0;background:#0a8a3f;transition:width .3s;}
+.mp-cnt{font-size:13px;font-weight:700;flex-shrink:0;}
+.mp-tray{flex-shrink:0;background:#fff;border-top:1px solid #e6e6ea;padding:8px 0 calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 16px rgba(0,0,0,.05);}
+.mp-tabs{display:flex;gap:6px;padding:0 12px 8px;}
+.mp-tab{flex:1;border:none;border-radius:10px;background:#f0f0f3;padding:8px 4px;font-size:13px;font-weight:600;}
+.mp-tab small{opacity:.6;}
+.mp-tab.on{background:#1c1c1e;color:#fff !important;}
+.mp-pieces{display:flex;gap:8px;overflow-x:auto;padding:4px 12px 6px;min-height:64px;align-items:center;touch-action:pan-x;-webkit-overflow-scrolling:touch;}
+.mp-pc{flex-shrink:0;border:2px solid #d0d0d6;background:#fff;border-radius:12px;padding:8px 12px;font-size:14px;font-weight:600;max-width:210px;line-height:1.2;min-height:46px;display:flex;flex-direction:column;align-items:center;gap:4px;touch-action:pan-x;-webkit-user-select:none;user-select:none;}
+.mp-pc.lab{font-style:italic;font-weight:600;color:#6e6e73 !important;border-radius:23px;}
+.mp-pc img{width:64px;height:52px;object-fit:contain;pointer-events:none;}
+.mp-pc span{pointer-events:none;}
+.mp-pc.sel{border-color:#1c9bd6;background:#e7f4fb;box-shadow:0 0 0 3px rgba(28,155,214,.25);}
+.mp-ghost{position:fixed;z-index:100;pointer-events:none;transform:translate(-50%,-120%) scale(1.05);box-shadow:0 8px 24px rgba(0,0,0,.25);}
+.mp-hint{font-size:11.5px;opacity:.55;text-align:center;padding:2px 12px 0;}
+.mp-hint.big{font-size:14px;opacity:.7;padding:16px 12px;}
+.mp-type{padding:2px 12px 0;}
+.mp-tf{display:flex;gap:8px;margin:6px 0;}
+.mp-tf input{flex:1;min-width:0;font-size:17px;padding:11px 12px;border-radius:12px;border:1.5px solid #d0d0d6;outline:none;}
+.mp-tf input:focus{border-color:#1c9bd6;}
+.mp-tf button,.mp-trow button{border:none;border-radius:12px;padding:0 16px;font-size:15px;font-weight:600;background:#f0f0f3;}
+.mp-tf button.pri{background:#1c1c1e;color:#fff !important;}
+.mp-trow{display:flex;gap:8px;}
+.mp-trow button{flex:1;padding:10px;}
+.mp-end{position:absolute;inset:0;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;padding:16px;z-index:5;}
+.mp-ebox{background:#fff;border-radius:20px;padding:22px 20px;width:100%;max-width:360px;box-sizing:border-box;text-align:center;display:flex;flex-direction:column;gap:9px;}
+.mp-ebox button{border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:600;background:#f0f0f3;}
+.mp-ebox button.pri{background:#1c1c1e;color:#fff !important;}
+.mp-et{font-size:23px;font-weight:800;}
+.mp-es{font-size:14.5px;opacity:.75;}
+.mp-er{font-size:13px;color:#0a8a3f;font-weight:600;}
+.mp-leg{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;font-size:12px;opacity:.8;margin:2px 0 4px;}
+.mp-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px;}
+/* ventanitas */
+#mp-pop,#mp-choose,#mp-tx,#mp-lp{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1c1c1e;}
+.mp-dim{position:absolute;inset:0;background:rgba(0,0,0,.35);}
+.mp-pbox,.mp-cbox{position:relative;background:#fff;border-radius:20px;padding:20px;width:100%;max-width:380px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;max-height:86vh;overflow:auto;}
+.mp-pbox img{width:100%;max-height:220px;object-fit:contain;}
+.mp-pp{font-size:12.5px;color:#8e8e93;}
+.mp-pt{font-size:20px;font-weight:800;line-height:1.2;}
+.mp-pn{font-size:14.5px;line-height:1.45;}
+.mp-pbtns{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+.mp-pbtns button{border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:600;background:#f0f0f3;}
+.mp-pbtns button.pri{background:#1c1c1e;color:#fff !important;}
+.mp-ct{font-size:19px;font-weight:800;}
+.mp-cs{font-size:13px;color:#6e6e73;line-height:1.4;}
+.mp-cs code{background:#f0f0f3;border-radius:4px;padding:0 4px;font-size:12px;}
+.mp-opt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px 14px;border-radius:14px;border:1.5px solid #e0e0e6;background:#fff;}
+.mp-opt b{font-size:15px;}.mp-opt span{font-size:12.5px;color:#6e6e73;}
+.mp-opt.on{border-color:#1c1c1e;}
+.mp-chk{display:flex;align-items:center;gap:8px;font-size:14px;padding:4px 2px;}
+.mp-chk input{width:20px;height:20px;}
+.mp-cancel{border:none;background:none;font-size:15px;color:#8e8e93 !important;padding:8px;}
+.mp-txbox{max-width:560px;}
+.mp-txbox textarea,#mp-lp textarea{width:100%;box-sizing:border-box;min-height:46vh;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;padding:10px;border-radius:12px;border:1.5px solid #d0d0d6;resize:vertical;white-space:pre;overflow:auto;}
+#mp-lp textarea{min-height:140px;white-space:pre-wrap;font-family:inherit;font-size:15px;}
+/* editor */
+.mpe-done{border:none;border-radius:10px;background:#1c1c1e;color:#fff !important;font-weight:700;padding:8px 14px;font-size:14px;flex-shrink:0;}
+.mpe-name{flex:1;min-width:0;font-weight:800;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.mpe-ic{width:36px;height:36px;border-radius:50%;border:1px solid #e0e0e6;background:#fff;font-size:18px;flex-shrink:0;padding:0;}
+.mpe-lay{display:flex;gap:6px;padding:8px 12px;background:#fff;border-bottom:1px solid #eee;flex-shrink:0;}
+.mpe-lay button{flex:1;border:none;border-radius:10px;background:#f0f0f3;padding:7px 4px;font-size:12.5px;font-weight:600;}
+.mpe-lay button.on{background:#1c1c1e;color:#fff !important;}
+.mpe-bar{flex-shrink:0;background:#fff;border-top:1px solid #e6e6ea;padding:8px 10px calc(8px + env(safe-area-inset-bottom));}
+.mpe-msg{font-size:13px;color:#6e6e73;padding:0 4px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mpe-msg b{color:#1c1c1e;}
+.mpe-btns{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;}
+.mpe-btns button{flex-shrink:0;border:none;border-radius:10px;background:#f0f0f3;padding:9px 12px;font-size:13.5px;font-weight:600;white-space:nowrap;}
+.mpe-btns button.pri{background:#1c1c1e;color:#fff !important;}
+.mpe-btns button.dng{color:#e5484d !important;}
+
+.mpe-cols button[data-c]:not([data-c=""]){width:36px;height:36px;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #d0d0d6;}
+body.mp-open .ctx-backdrop{z-index:88;}
 
 </style>
 </head>
@@ -7590,6 +7645,7 @@ const VZ_SCH = '#5e5ce6', VZ_SFOLD = '#8e8e93';
 function esqColor(n){ return n.color || (n.type === 'folder' ? VZ_SFOLD : VZ_SCH); }
 function esqNew(name, board, assets){ return { id: 'e' + uid(), type: 'scheme', name: name || 'Esquema', created: Date.now(), updated: Date.now(), board: board || { items: [], scenes: [] }, assets: assets || {} }; }
 function esqSub(sc){
+  if(mpIsNew(sc)){ const k = sc.nodes.length; return `${MP_LAYOUTS[sc.layout || 'llaves']} · ${k} ${k === 1 ? 'idea' : 'ideas'}`; }
   const its = (sc.board && sc.board.items) || [];
   const nb = its.filter(i=> i.t === 'block').length, nc = its.filter(i=> i.t === 'card').length, ns = ((sc.board && sc.board.scenes) || []).length;
   const out = [];
@@ -7610,11 +7666,12 @@ function esqItem(n){
   return { id: n.id, name: n.name, sub: f ? c + (c === 1 ? ' esquema' : ' esquemas') : esqSub(n), color: esqColor(n), folder: f, swatch: `data-scolor="${n.id}"`, open: `data-sopen="${n.id}"`, more: `data-smore="${n.id}"`, toggle: `data-sltoggle="${n.id}"`, expanded: !!n.expanded, kids: f ? ()=> (n.children || []).map(esqItem) : null };
 }
 function vzSchemes(folder){
+  mpPurgeOld();
   const kids = folder ? (folder.children || []) : esquemas, pid = folder ? folder.id : '';
   const n = folder ? esqCount(folder) : esquemas.reduce((a, k)=> a + esqCount(k), 0);
   const head = `<div class="vz-lh">${escapeHtml(folder ? folder.name : 'Esquemas')}<small>${n} ${n === 1 ? 'esquema' : 'esquemas'}</small><button class="vz-hmore" data-smenu="${pid}" title="Opciones">⋯</button></div>`;
   const add = `<div class="vz-chips"><button class="vz-chip" data-snewfolder="${pid}">${VZICO.folder}Nueva carpeta</button><button class="vz-chip" data-snew="${pid}">${VZICO.plus}Nuevo esquema</button></div>`;
-  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? `<div class="vz-ll">${vzListRows(kids.map(esqItem), 0)}</div>` : `<div class="vz-empty">${folder ? 'Carpeta vacía.' : 'Aún no hay esquemas. Crea uno en blanco o a partir de un mazo.'}</div>`}</div>`;
+  vzBody.innerHTML = `<div class="vz-fam">${head}${add}${kids.length ? `<div class="vz-ll">${vzListRows(kids.map(esqItem), 0)}</div>` : `<div class="vz-empty">${folder ? 'Carpeta vacía.' : 'Aún no hay esquemas. Crea uno nuevo o añade los de ejemplo desde «Nuevo esquema».'}</div>`}</div>`;
 }
 /* ---------- un esquema: se ve fijo, solo para navegar y estudiar ---------- */
 let esqCtl = null;
@@ -7623,18 +7680,13 @@ function vzScheme(sc){
   vzBody.innerHTML = `<div class="vz-fam vz-schpage">
     <div class="vz-fh" style="background:${col};color:${dk ? '#fff' : '#1c1c1e'}"><div class="vz-fhp">${path.length ? path.map(p=> escapeHtml(p.name)).join(' · ') : 'Esquema'}</div><div class="vz-fht">${escapeHtml(sc.name)}</div><div class="vz-fhs">${escapeHtml(esqSub(sc))}</div>
       <button class="vz-hmore" data-smore="${sc.id}" title="Opciones">⋯</button><button class="vz-colorbtn" data-scolor="${sc.id}" title="Cambiar color" style="background:${col}"></button></div>
-    <div class="vz-chips"><button class="vz-chip vz-play" data-splay="${sc.id}">${VZICO.play}Jugar todo el esquema</button><button class="vz-chip" data-sedit="${sc.id}">${VZICO.edit}Editar</button></div>
-    <div class="vz-radw vz-schv" id="vz-schv"></div></div>`;
+    <div class="vz-chips"><button class="vz-chip vz-play" data-splay="${sc.id}">${VZICO.play}Montar el esquema</button><button class="vz-chip" data-sedit="${sc.id}">${VZICO.edit}Editar</button></div>
+    <div class="vz-schv mp-host" id="vz-schv"></div>
+    <div class="mp-tip">Toca una idea para ver su nota o jugar solo esa rama · pellizca para ampliar</div></div>`;
   const el = document.getElementById('vz-schv');
-  el.style.height = Math.max(420, vzBody.clientHeight - (el.getBoundingClientRect().top - vzBody.getBoundingClientRect().top) - 12) + 'px';
-  esqCtl = null;
-  if(!window.pizarra || !window.pizarra.viewData){ el.innerHTML = '<div class="vz-empty">No se pudo abrir el visor.</div>'; return; }
-  if(!((sc.board && sc.board.items) || []).length){ el.innerHTML = `<div class="vz-empty" style="padding:40px 20px">Este esquema está vacío. Toca «Editar» para dibujarlo en la pizarra.</div>`; return; }
-  window.pizarra.viewData({ items: sc.board.items || [], scenes: sc.board.scenes || [], assets: sc.assets || {} }, el, {
-    key: 'esq:' + sc.id,
-    onCard: (deck, cid, order)=> vzCardPop(deck, cid, order),
-    onPlay: ref=> esqPlayRef(ref)
-  }).then(c=>{ esqCtl = c; }).catch(()=>{});
+  el.style.height = Math.max(380, vzBody.clientHeight - (el.getBoundingClientRect().top - vzBody.getBoundingClientRect().top) - 40) + 'px';
+  if(!mpIsNew(sc)){ el.innerHTML = '<div class="vz-empty">Este esquema es de la versión anterior.</div>'; return; }
+  mpView(sc, el);
 }
 /* ---------- bloques vivos: un mazo, un grupo o un subgrupo, siempre al día ---------- */
 function esqMatch(p, cat, v){ const vals = tagVals(p, cat); return v === TAG_NONE ? !vals.length : vals.includes(v); }
@@ -7678,82 +7730,6 @@ function esqPlayRef(ref){
   if(ref.scat && ref.sv != null) n.playFilter[ref.scat] = [ref.sv];
   saveLocal(); openGamePicker(n.id);
 }
-const esqPlayNodes = {};
-function esqPlayAll(sc){
-  const by = new Map(), add = (d, c)=>{ if(!by.has(d)) by.set(d, new Set()); by.get(d).add(c); };
-  ((sc.board && sc.board.items) || []).forEach(it=>{
-    if(it.t === 'card' && it.deck) add(it.deck, it.cid);
-    if(it.t === 'block' && it.ref){ esqBlock(it.ref).cards.forEach(c=> add(it.ref.deck, c.cid)); }
-  });
-  const photos = [], cats = [], notes = {}, cols = {};
-  by.forEach((ids, d)=>{
-    const n = findNode(d); if(!n) return;
-    (n.photos || []).forEach(p=>{ if(ids.has(p.id) && !photos.includes(p)) photos.push(p); });
-    tagCats(n).forEach(c=>{ if(!cats.some(x=> x.id === c.id)) cats.push(c); });
-    Object.entries(n.tagNotes || {}).forEach(([k, v])=> notes[k] = Object.assign({}, v, notes[k] || {}));
-    Object.entries(n.tagValColors || {}).forEach(([k, v])=> cols[k] = Object.assign({}, v, cols[k] || {}));
-  });
-  if(!photos.some(p=> p.image)) return toast('Este esquema no tiene tarjetas ni bloques de mazos');
-  // un «mazo» de paso con todas las tarjetas que salen en el esquema (aunque sean de mazos distintos)
-  const node = esqPlayNodes[sc.id] = Object.assign(esqPlayNodes[sc.id] || { id: 'esq-' + sc.id, type: 'tema', mode: 'barajado', cols: 3 }, { name: sc.name, photos, tagCats: cats, tagNotes: notes, tagValColors: cols, playFilter: {} });
-  openModeChooser(node);
-}
-/* ---------- crear un esquema automáticamente a partir de un mazo ---------- */
-function esqFromDeck(deckId){
-  const n = findNode(deckId); if(!n) return null;
-  const cat = vzCat(n), sc = vzSubCat(n), groups = cat ? vzGroups(n).filter(g=> g.cards.length) : [];
-  const id = ()=> 'i' + uid(), items = [], scenes = [];
-  const fci = /razas de perros/i.test(n.name) && sc && sc.id === 'cat_seccion';
-  const CW = 400, GAP = 70, COLS = Math.max(1, Math.min(4, groups.length || 1));
-  const totalW = COLS * CW + (COLS - 1) * GAP;
-  const col = vzColor(n);
-  items.push({ id: id(), t: 'text', x: 0, y: 4, w: totalW - 420, h: 80, fs: 54, bold: true, color: '#1c1c1e', text: n.name });
-  items.push({ id: id(), t: 'block', ref: { deck: n.id }, x: totalW - 380, y: 0, w: 380, h: 92 });
-  const intro = fci
-    ? 'Las razas se ordenan como lo hace la FCI (Federación Cinológica Internacional): en grupos según el trabajo para el que se criaron y, dentro de cada grupo, en secciones.\nToca un bloque para desplegar sus tarjetas, toca una tarjeta para verla entera y usa ▶ para jugar solo ese grupo o sección.'
-    : 'Toca un bloque para desplegar sus tarjetas, toca una tarjeta para verla entera y usa ▶ para jugar solo ese grupo' + (sc ? ' o subgrupo.' : '.');
-  const introH = 46 + Math.ceil(intro.length / (totalW / 11)) * 28 + (intro.split('\n').length - 1) * 28;
-  items.push({ id: id(), t: 'note', x: 0, y: 116, w: totalW, h: introH, fs: 20, align: 'left', fill: '#fff3c4', text: intro });
-  let y = 116 + introH + 60, x = 0, rowH = 0, colI = 0;
-  if(!groups.length){
-    items.push({ id: id(), t: 'note', x: 0, y, w: CW, h: 120, fs: 18, fill: '#e4e4e6', text: 'Este mazo aún no tiene grupos: añade etiquetas en Editar → etiquetas y vuelve a crear el esquema.' });
-  }
-  groups.forEach(g=>{
-    if(colI === COLS){ colI = 0; x = 0; y += rowH + GAP; rowH = 0; }
-    let yy = y;
-    items.push({ id: id(), t: 'block', ref: { deck: n.id, cat: cat.id, v: g.v }, x, y: yy, w: CW, h: 92 }); yy += 92 + 14;
-    if(g.note){ const h = 30 + Math.ceil(g.note.length / 36) * 23; items.push({ id: id(), t: 'note', x, y: yy, w: CW, h, fs: 16, align: 'left', fill: vzMix(g.color, .2), text: g.note }); yy += h + 16; }
-    const subs = sc ? vzSplit(n, g.cards, sc).filter(s=> s.v !== TAG_NONE) : [];
-    if(subs.length){
-      const top = yy;
-      subs.forEach(s=>{
-        items.push({ id: id(), t: 'block', ref: { deck: n.id, cat: cat.id, v: g.v, scat: sc.id, sv: s.v }, x: x + 30, y: yy, w: CW - 30, h: 66 }); yy += 66;
-        const sn = ((n.tagNotes || {})[sc.id] || {})[s.v];
-        if(sn){ const h = 18 + Math.ceil(sn.length / 34) * 20; items.push({ id: id(), t: 'text', x: x + 36, y: yy + 4, w: CW - 40, h, fs: 14, color: '#6e6e73', text: sn }); yy += h + 6; }
-        yy += 12;
-      });
-      items.push({ id: id(), t: 'shape', kind: 'rrect', x: x + 10, y: top, w: 7, h: yy - top - 12, fill: g.color, stroke: '#1c1c1e', sw: 0, fs: 10, text: '' });
-    }
-    const h = yy - y;
-    scenes.push({ name: g.name, x: x - 30, y: y - 30, w: CW + 60, h: h + 60 });
-    rowH = Math.max(rowH, h); x += CW + GAP; colI++;
-  });
-  const H = y + rowH;
-  scenes.unshift({ name: 'Todo', x: -40, y: -40, w: totalW + 80, h: H + 80 });
-  return { items, scenes, opts: { grid: true } };
-}
-/* el primer esquema de ejemplo: los perros por grupos y secciones de la FCI */
-function esqSeed(){
-  let made = 0;
-  (function walk(ns){ ns.forEach(d=>{
-    if(d.type === 'folder') return walk(d.children || []);
-    if(d.mode === 'barajado' && /razas de perros/i.test(d.name || '') && !made){
-      const b = esqFromDeck(d.id); if(!b) return;
-      const sc = esqNew('Razas de perros (grupos FCI)', b, {}); sc.color = vzColor(d); esquemas.push(sc); made++;
-    }
-  }); })(tree);
-  return made;
-}
 /* ---------- menús ---------- */
 function esqFolders(nodes, depth, out){ (nodes || esquemas).forEach(n=>{ if(n.type === 'folder'){ out.push([n, depth]); esqFolders(n.children || [], depth + 1, out); } }); return out; }
 function esqMove(n, folder){
@@ -7776,7 +7752,7 @@ function esqColorPop(anchor, n){ vzColorPop(anchor, esqColor(n), c=>{ n.color = 
 function esqMenu(anchor, n){
   const arr = esqParentArr(n.id) || esquemas, i = arr.indexOf(n), items = [];
   if(n.type === 'folder'){ items.push(['Nuevo esquema aquí', ()=> esqNewMenu(anchor, n)]); items.push(['Nueva subcarpeta', ()=> esqNewFolder(n)]); }
-  else { items.push(['Abrir', ()=> vzGo({ t: 'scheme', id: n.id })]); items.push(['Editar en la pizarra', ()=> esqEdit(n)]); items.push(['▶ Jugar todo el esquema', ()=> esqPlayAll(n)]); }
+  else { items.push(['Abrir', ()=> vzGo({ t: 'scheme', id: n.id })]); items.push(['▶ Montar el esquema', ()=> mpPlayOpen(n)]); items.push(['Editar', ()=> esqEdit(n)]); if(n.stats && Object.keys(n.stats).length) items.push(['Borrar mis resultados', ()=>{ delete n.stats; delete n.best; saveEsq(); toast('Resultados borrados'); }]); }
   items.push(['__sep__']);
   items.push(['Renombrar', ()=> esqRename(n)]);
   items.push(['Color…', ()=> esqColorPop(anchor, n)]);
@@ -7800,13 +7776,14 @@ function esqNewFolder(parent){
 }
 function esqAdd(parent, sc){ (parent ? (parent.children = parent.children || []) : esquemas).push(sc); if(parent) parent.expanded = true; saveEsq(true); }
 function esqNewMenu(anchor, parent){
+  const make = (layout, text)=> openPrompt('nombre del esquema', '', v=>{ if(!v || !v.trim()) return; const sc = mpNew(v.trim(), layout, text); esqAdd(parent, sc); vzGo({ t: 'scheme', id: sc.id }); mpEdit(sc); });
+  const missing = MP_EJ.filter(ex=> !esqFind(ex.id));
   setTimeout(()=> openMenuAt(anchor, [
-    ['En blanco (lo dibujas en la pizarra)', ()=> openPrompt('nombre del esquema', '', v=>{ if(!v) return; const sc = esqNew(v, { items: [{ id: 'i' + uid(), t: 'text', x: 0, y: 0, w: 600, h: 70, fs: 48, bold: true, color: '#1c1c1e', text: v }], scenes: [] }); esqAdd(parent, sc); vzGo({ t: 'scheme', id: sc.id }); esqEdit(sc); })],
-    ['A partir de un mazo (automático)…', ()=>{
-      const ds = []; (function walk(ns, d){ ns.forEach(n=>{ if(n.type === 'folder') walk(n.children || [], d + 1); else if(n.mode === 'barajado') ds.push(n); }); })(tree, 0);
-      if(!ds.length) return toast('No hay mazos de tarjetas');
-      setTimeout(()=> openMenuAt(anchor, ds.map(d=> [d.name, ()=>{ const b = esqFromDeck(d.id); const sc = esqNew('Esquema · ' + d.name, b, {}); sc.color = vzColor(d); esqAdd(parent, sc); vzGo({ t: 'scheme', id: sc.id }); }])), 0);
-    }],
+    ['De llaves (de izquierda a derecha)', ()=> make('llaves')],
+    ['De árbol (de arriba abajo)', ()=> make('arbol')],
+    ['Mapa conceptual (libre, con flechas)', ()=> make('mapa')],
+    ...(missing.length ? [['__sep__'], ['Añadir los de ejemplo (' + missing.length + ')', ()=>{ missing.forEach(ex=> esqAdd(parent, mpExample(ex))); toast('Añadidos'); vzRender(); }]] : []),
+    ['__sep__'],
     ['Importar esquema…', ()=> esqImportPick(parent)]
   ]), 0);
 }
@@ -7819,7 +7796,7 @@ function esqImportPick(parent){
       try{
         const d = JSON.parse(await f.text());
         const list = d && d.esquema ? [d.esquema] : Array.isArray(d && d.esquemas) ? d.esquemas : (d && d.type === 'scheme') ? [d] : [];
-        list.forEach(sc=>{ if(!sc || (sc.type !== 'scheme' && sc.type !== 'folder')) return; const c = JSON.parse(JSON.stringify(sc)); if(esqFind(c.id)) c.id = 'e' + uid(); esqAdd(parent, c); n++; });
+        list.forEach(sc=>{ if(!sc || (sc.type !== 'scheme' && sc.type !== 'folder') || (sc.type === 'scheme' && !mpIsNew(sc))) return; const c = JSON.parse(JSON.stringify(sc)); if(esqFind(c.id)) c.id = 'e' + uid(); esqAdd(parent, c); n++; });
       }catch(e){}
     }
     inp.value = '';
@@ -7829,7 +7806,7 @@ function esqImportPick(parent){
   inp.click();
 }
 /* ---------- editar en la pizarra ---------- */
-function esqEdit(sc){ if(!window.pizarra || !window.pizarra.editData) return toast('No se pudo abrir la pizarra'); window.pizarra.editData({ id: sc.id, name: sc.name, board: sc.board || { items: [], scenes: [] }, assets: sc.assets || {} }); }
+function esqEdit(sc){ mpEdit(sc); }
 /* la pizarra devuelve los cambios mientras editas */
 function esqSaveFromBoard(id, board, assets, name){
   const sc = esqFind(id); if(!sc) return false;
@@ -7846,7 +7823,7 @@ function esqClick(e, t){
   if(x = t.closest('[data-snewfolder]')){ esqNewFolder(x.dataset.snewfolder ? esqFind(x.dataset.snewfolder) : null); return true; }
   if(x = t.closest('[data-snew]')){ esqNewMenu(x, x.dataset.snew ? esqFind(x.dataset.snew) : null); return true; }
   if(x = t.closest('[data-sedit]')){ const n = esqFind(x.dataset.sedit); if(n) esqEdit(n); return true; }
-  if(x = t.closest('[data-splay]')){ const n = esqFind(x.dataset.splay); if(n) esqPlayAll(n); return true; }
+  if(x = t.closest('[data-splay]')){ const n = esqFind(x.dataset.splay); if(n) mpPlayOpen(n); return true; }
   if(x = t.closest('[data-sopen]')){ const n = esqFind(x.dataset.sopen); if(n) vzGo({ t: n.type === 'folder' ? 'schemes' : 'scheme', id: n.id }); return true; }
   return false;
 }
@@ -7870,10 +7847,10 @@ Object.assign(window.seterraApi, {
   const r = await _b.apply(this, arguments);
   if(!had){
     try{ const res = await fetch('data.json', { cache: 'no-store' }); if(res.ok){ const d = await res.json(); if(Array.isArray(d.esquemas)) esquemas = d.esquemas; } }catch(e){}
-    if(!esquemas.length) esqSeed();
     saveEsq(true);
-    if(!vzHostKey) vzRender();
   }
+  const purged = mpPurgeOld(), seeded = mpSeedExamples();
+  if((purged || seeded || !had) && !vzHostKey) vzRender();
   return r;
 }; }
 
@@ -8862,266 +8839,886 @@ setInterval(()=>{ if(ghOk() && document.visibilityState === 'visible' && !ghSync
 { const _b = boot; boot = async function(){ const r = await _b.apply(this, arguments); ghSet(ghOk() ? 'pending' : 'none'); if(ghOk()){ ghDirty = true; ghSync(); } return r; }; }
 
 
-/* ================= PUZLE DE ESQUEMA =================
-   El mazo se convierte en un esquema de llaves que montas pieza a pieza:
-     · base: los rótulos de cada rama (p. ej. grupo FCI → sección)
-     · imágenes: cada foto en la caja de su rama
-     · nombres: cada nombre debajo de su foto
-   Las tres capas a la vez y en el orden que quieras. Se toca una pieza y luego su hueco
-   (o se arrastra hacia arriba hasta el hueco). La información de cada tarjeta se ve al tocarla ya colocada. */
-const PZL_NONE = '(sin clasificar)';
-let PZL = null;
+/* ================= ESQUEMAS (versión 2): esqueletos fijos que se montan pieza a pieza =================
+   Un esquema tiene su forma fija (como un mapa de Seterra) y se juega colocando sus piezas en los huecos.
+   esquema = { id, type:'scheme', v:2, name, color?, layout:'llaves'|'arbol'|'mapa',
+               nodes:[{ id, t:texto, p:padre|null, e?:frase de la unión con el padre, n?:nota, img?:dataURL, c?:color, x?, y? }],
+               links:[{ id, a, b, t?:frase }],   ← uniones extra (sobre todo en mapas conceptuales)
+               stats:{ clave: { r:0..3, t } }, best?:{ m, s } }
+   Formas:  llaves → de izquierda a derecha con llaves «{»   ·  árbol → de arriba abajo  ·  mapa → libre, con flechas y frases
+   Ideas tomadas de: Seterra (forma fija + colores por intentos), los mapas conceptuales «rellena el mapa»
+   (estructura dada, pones los conceptos) y las apps de mapas mentales (plegar ramas, encajar, pellizcar para ampliar). */
 
-function pzlLevels(node, photos){
-  /* las dos primeras categorías del mazo que de verdad clasifican estas tarjetas */
-  const cats = (node.tagCats || []).filter(c=> photos.some(p=> ((p.tags || {})[c.id] || []).length));
-  return cats.slice(0, 2);
+const MP_FONT = '600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+const MP_FONT_ROOT = '800 19px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+const MP_FONT_L = '600 12.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+const MP_RES = ['#0a8a3f', '#e0b100', '#f28a2e', '#e5484d'];          // a la primera · 2º intento · 3º · fallada
+const MP_RES_BG = ['#e3f4ea', '#fdf3c7', '#fde3cc', '#fbdcdc'];
+const MP_LAYOUTS = { llaves: 'Llaves', arbol: 'Árbol', mapa: 'Mapa conceptual' };
+
+/* ---------- utilidades ---------- */
+const mpCtx = document.createElement('canvas').getContext('2d');
+function mpWrap(text, font, maxW){
+  mpCtx.font = font;
+  const out = [];
+  String(text || '').split('\n').forEach(par=>{
+    const words = par.split(/\s+/).filter(Boolean); let line = '';
+    if(!words.length){ out.push(''); return; }
+    words.forEach(w=>{
+      const tryL = line ? line + ' ' + w : w;
+      if(mpCtx.measureText(tryL).width <= maxW || !line) line = tryL; else { out.push(line); line = w; }
+    });
+    out.push(line);
+  });
+  const w = Math.max(...out.map(l=> mpCtx.measureText(l).width), 0);
+  return { lines: out, w };
 }
-function pzlTree(node, photos){
-  let levels = pzlLevels(node, photos);
-  const val = (p, c)=> (((p.tags || {})[c.id] || [])[0]) || PZL_NONE;
-  /* si en la partida todas comparten el primer nivel (has jugado solo un grupo), ese nivel pasa a ser el título */
-  let title = node.name;
-  while(levels.length && new Set(photos.map(p=> val(p, levels[0]))).size === 1){ title = val(photos[0], levels[0]); levels = levels.slice(1); }
-  function build(list, lv){
-    if(lv >= levels.length) return { cards: list };
-    const groups = new Map();
-    list.forEach(p=>{ const v = val(p, levels[lv]); if(!groups.has(v)) groups.set(v, []); groups.get(v).push(p); });
-    return { kids: [...groups.entries()].map(([v, l])=> Object.assign({ label: v, lv }, build(l, lv + 1))) };
+function mpNorm(s){ return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9ñ]+/g, ' ').trim(); }
+function mpLev(a, b){
+  if(Math.abs(a.length - b.length) > 1) return 2;
+  const d = Array.from({ length: a.length + 1 }, (_, i)=> [i]);
+  for(let j = 1; j <= b.length; j++) d[0][j] = j;
+  for(let i = 1; i <= a.length; i++) for(let j = 1; j <= b.length; j++)
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+const mpEsc = s=> escapeHtml(String(s == null ? '' : s));
+const mpUid = ()=> 'n' + Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-3);
+function mpKids(sc, id){ return sc.nodes.filter(n=> n.p === id); }
+function mpRoots(sc){ const ids = new Set(sc.nodes.map(n=> n.id)); return sc.nodes.filter(n=> !n.p || !ids.has(n.p)); }
+function mpDesc(sc, id){ const out = []; (function w(i){ mpKids(sc, i).forEach(k=>{ out.push(k.id); w(k.id); }); })(id); return out; }
+function mpDepth(sc, n){ let d = 0, p = n.p, guard = 0; const by = Object.fromEntries(sc.nodes.map(x=> [x.id, x])); while(p && by[p] && guard++ < 99){ d++; p = by[p].p; } return d; }
+function mpIsNew(sc){ return sc && Array.isArray(sc.nodes); }
+
+/* ---------- medir y colocar ---------- */
+function mpMeasure(sc, n, root){
+  const lay = sc.layout || 'llaves', maxW = lay === 'mapa' ? 170 : lay === 'arbol' ? 150 : 190;
+  const font = root ? MP_FONT_ROOT : MP_FONT;
+  const wr = mpWrap(n.t, font, maxW);
+  const lh = root ? 23 : 19, pad = root ? 14 : 10, imgH = n.img ? 86 : 0;
+  const w = Math.max(n.img ? 104 : 54, Math.ceil(wr.w) + pad * 2);
+  const h = Math.max(40, wr.lines.length * lh + pad * 2 - 4) + (imgH ? imgH + 6 : 0);
+  return { w, h, lines: wr.lines, lh, pad, imgH, font, root };
+}
+/* devuelve { boxes:{id:{x,y,w,h,...}}, edges:[...], braces:[...], labels:[...], bbox } */
+function mpLayout(sc, fold){
+  fold = fold || new Set();
+  const lay = sc.layout || 'llaves', B = {}, edges = [], braces = [], labels = [];
+  const roots = mpRoots(sc), vis = n=> { let p = n.p, by = sc._by; while(p && by[p]){ if(fold.has(p)) return false; p = by[p].p; } return true; };
+  sc._by = Object.fromEntries(sc.nodes.map(x=> [x.id, x]));
+  sc.nodes.forEach(n=>{ if(vis(n)) B[n.id] = Object.assign({ id: n.id }, mpMeasure(sc, n, !n.p || !sc._by[n.p])); });
+  const kidsV = id=> fold.has(id) ? [] : mpKids(sc, id).filter(k=> B[k.id]);
+  if(lay === 'llaves'){
+    const GAPY = 10, COLGAP = 46;
+    const colW = [];
+    (function cw(list, d){ list.forEach(n=>{ colW[d] = Math.max(colW[d] || 0, B[n.id].w); cw(kidsV(n.id), d + 1); }); })(roots, 0);
+    const colX = [0]; for(let d = 1; d < colW.length; d++) colX[d] = colX[d - 1] + colW[d - 1] + COLGAP;
+    let y = 0;
+    function place(n, d, top){
+      const b = B[n.id], ks = kidsV(n.id);
+      b.x = colX[d] + (d === 0 ? 0 : 0);
+      if(!ks.length){ b.y = top; return b.h; }
+      let yy = top, tot = 0;
+      ks.forEach((k, i)=>{ const h = place(k, d + 1, yy); yy += h + GAPY; tot += h + (i ? GAPY : 0); });
+      const span = Math.max(tot, b.h);
+      if(tot < b.h){ const off = (b.h - tot) / 2; ks.forEach(k=> mpShift(sc, B, k.id, off, fold)); }
+      b.y = top + (span - b.h) / 2;
+      const first = B[ks[0].id], last = B[ks[ks.length - 1].id];
+      braces.push({ x: b.x + b.w + 8, y1: first.y + first.h / 2, y2: last.y + last.h / 2, ym: b.y + b.h / 2, single: ks.length === 1, x2: colX[d + 1] - 6 });
+      return span;
+    }
+    roots.forEach(r=>{ const h = place(r, 0, y); y += h + 40; });
+  } else {
+    /* árbol de arriba abajo (también sirve de punto de partida para los mapas) */
+    const GAPX = 18, ROWGAP = lay === 'mapa' ? 70 : 46;
+    const rowH = [];
+    (function rh(list, d){ list.forEach(n=>{ rowH[d] = Math.max(rowH[d] || 0, B[n.id].h); rh(kidsV(n.id), d + 1); }); })(roots, 0);
+    const rowY = [0]; for(let d = 1; d < rowH.length; d++) rowY[d] = rowY[d - 1] + rowH[d - 1] + ROWGAP;
+    /* si todo lo que cuelga son hojas, van en columna debajo (no se hace eterno a lo ancho) */
+    const stack = n=>{ const ks = kidsV(n.id); return lay === 'arbol' && ks.length > 1 && ks.every(k=> !kidsV(k.id).length); };
+    function width(n){
+      const ks = kidsV(n.id);
+      if(stack(n)) return (B[n.id]._sw = Math.max(B[n.id].w, 18 + Math.max(...ks.map(k=> B[k.id].w))));
+      const kw = ks.reduce((a, k, i)=> a + width(k) + (i ? GAPX : 0), 0); return (B[n.id]._sw = Math.max(B[n.id].w, kw));
+    }
+    function place(n, d, left){
+      const b = B[n.id], ks = kidsV(n.id);
+      b.y = rowY[d];
+      if(stack(n)){
+        b.x = left + (b._sw - b.w) / 2;
+        const lx = Math.min(b.x + 12, left + 2); let y = b.y + b.h + 16;
+        ks.forEach(k=>{ const kb = B[k.id]; kb.x = lx + 16; kb.y = y; kb._stack = lx; y += kb.h + 8; });
+        return;
+      }
+      const kw = ks.reduce((a, k, i)=> a + B[k.id]._sw + (i ? GAPX : 0), 0);
+      let x = left + (b._sw - kw) / 2;
+      ks.forEach(k=>{ place(k, d + 1, x); x += B[k.id]._sw + GAPX; });
+      b.x = left + (b._sw - b.w) / 2;
+    }
+    let x = 0; roots.forEach(r=>{ width(r); place(r, 0, x); x += B[r.id]._sw + 40; });
+    if(lay === 'mapa') sc.nodes.forEach(n=>{ const b = B[n.id]; if(b && n.x != null && n.y != null){ b.x = n.x; b.y = n.y; } });
+    sc.nodes.forEach(n=>{
+      const b = B[n.id], pb = n.p && B[n.p]; if(!b || !pb) return;
+      if(lay === 'arbol' && b._stack != null) edges.push({ k: 'tick', x1: b._stack, y1: pb.y + pb.h, x2: b.x, y2: b.y + b.h / 2 });
+      else if(lay === 'arbol') edges.push({ k: 'elbow', x1: pb.x + pb.w / 2, y1: pb.y + pb.h, x2: b.x + b.w / 2, y2: b.y, my: pb.y + pb.h + (b.y - pb.y - pb.h) / 2 });
+      else { const e = mpArrow(pb, b); edges.push(Object.assign({ k: 'arrow' }, e)); if(n.e) labels.push({ key: 'e:' + n.id, t: n.e, x: (e.x1 + e.x2) / 2, y: (e.y1 + e.y2) / 2 }); }
+    });
+    if(lay === 'mapa') (sc.links || []).forEach(l=>{
+      const a = B[l.a], b = B[l.b]; if(!a || !b) return;
+      const e = mpArrow(a, b); edges.push(Object.assign({ k: 'arrow', dash: true }, e));
+      if(l.t) labels.push({ key: 'l:' + l.id, t: l.t, x: (e.x1 + e.x2) / 2, y: (e.y1 + e.y2) / 2 });
+    });
   }
-  return Object.assign({ title, levels }, build(photos, 0));
+  labels.forEach(L=>{ const wr = mpWrap(L.t, MP_FONT_L, 130); L.lines = wr.lines; L.w = Math.ceil(wr.w) + 14; L.h = wr.lines.length * 15 + 8; });
+  let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
+  Object.values(B).forEach(b=>{ x1 = Math.min(x1, b.x); y1 = Math.min(y1, b.y); x2 = Math.max(x2, b.x + b.w); y2 = Math.max(y2, b.y + b.h); });
+  labels.forEach(L=>{ x1 = Math.min(x1, L.x - L.w / 2); x2 = Math.max(x2, L.x + L.w / 2); });
+  if(x1 === Infinity){ x1 = y1 = 0; x2 = y2 = 100; }
+  return { B, edges, braces, labels, bbox: { x: x1, y: y1, w: x2 - x1, h: y2 - y1 } };
+}
+function mpShift(sc, B, id, dy, fold){ const b = B[id]; if(!b) return; b.y += dy; if(!fold.has(id)) mpKids(sc, id).forEach(k=> mpShift(sc, B, k.id, dy, fold)); }
+function mpArrow(a, b){
+  const ax = a.x + a.w / 2, ay = a.y + a.h / 2, bx = b.x + b.w / 2, by = b.y + b.h / 2;
+  const clip = (cx, cy, w, h, dx, dy)=>{ const tx = dx ? (w / 2 + 3) / Math.abs(dx) : Infinity, ty = dy ? (h / 2 + 3) / Math.abs(dy) : Infinity, t = Math.min(tx, ty); return [cx + dx * t, cy + dy * t]; };
+  const dx = bx - ax, dy = by - ay;
+  const [x1, y1] = clip(ax, ay, a.w, a.h, dx, dy), [x2, y2] = clip(bx, by, b.w, b.h, -dx, -dy);
+  return { x1, y1, x2, y2 };
 }
 
-function puzStart(node, onlyIds){
-  let photos = (node.photos || []).filter(p=> p.image);
-  if(onlyIds) photos = photos.filter(p=> onlyIds.has(p.id));
-  if(photos.length < 2){ toast('Hacen falta al menos 2 tarjetas con imagen'); return; }
-  const tree = pzlTree(node, photos);
-  /* huecos */
-  const keys = [], boxes = [];
-  let kn = 0, bn = 0;
-  (function walk(t){
-    (t.kids || []).forEach(k=>{ k.slot = 'k' + (kn++); keys.push({ id: k.slot, text: k.label, lv: k.lv, done: false }); walk(k); });
-    if(t.cards){ t.box = 'b' + (bn++); boxes.push({ id: t.box, cards: t.cards.map(p=> p.id), cells: t.cards.map(()=> ({ img: null, name: null })) }); }
-  })(tree);
-  const byId = Object.fromEntries(photos.map(p=> [p.id, p]));
-  const pieces = [];
-  keys.forEach(k=> pieces.push({ pid: 'K' + k.id, kind: 'base', text: k.text }));
-  photos.forEach(p=>{ pieces.push({ pid: 'I' + p.id, kind: 'img', card: p.id }); pieces.push({ pid: 'N' + p.id, kind: 'name', card: p.id, text: p.label || '' }); });
-  PZL = { node, tree, keys, boxes, byId, pieces: shuffle(pieces), placed: new Set(), sel: null, tab: keys.length ? 'base' : 'img',
-          mistakes: 0, start: Date.now(), total: pieces.length, zoom: 1, done: false };
-  pzlOpen();
+/* ---------- dibujar (SVG) ---------- */
+/* st (opcional, al jugar): { hide:Set de claves vacías, res:{clave: 0..3}, hl:clave resaltada } */
+function mpSvg(sc, L, st, fold){
+  st = st || {}; fold = fold || new Set();
+  const lay = sc.layout || 'llaves', col = esqColor(sc), out = [];
+  out.push(`<defs><marker id="mp-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8e8e93"/></marker></defs>`);
+  L.braces.forEach(b=>{
+    if(b.single){ out.push(`<path d="M${b.x - 4} ${b.ym}H${b.x2}" class="mp-ln"/>`); return; }
+    const x = b.x + 10, r = Math.min(10, (b.y2 - b.y1) / 4), top = Math.min(b.y1, b.ym - 6), bot = Math.max(b.y2, b.ym + 6);
+    out.push(`<path d="M${x + 10} ${top} Q${x} ${top} ${x} ${top + r} L${x} ${b.ym - r} Q${x} ${b.ym} ${x - 10} ${b.ym} Q${x} ${b.ym} ${x} ${b.ym + r} L${x} ${bot - r} Q${x} ${bot} ${x + 10} ${bot}" class="mp-ln mp-brace"/>`);
+  });
+  L.edges.forEach(e=>{
+    if(e.k === 'tick') out.push(`<path d="M${e.x1} ${e.y1}V${e.y2}H${e.x2}" class="mp-ln"/>`);
+    else if(e.k === 'elbow') out.push(`<path d="M${e.x1} ${e.y1}V${e.my}H${e.x2}V${e.y2}" class="mp-ln"/>`);
+    else out.push(`<path d="M${e.x1} ${e.y1}L${e.x2} ${e.y2}" class="mp-ln${e.dash ? ' mp-dash' : ''}" marker-end="url(#mp-ah)"/>`);
+  });
+  L.labels.forEach(l=>{
+    const hidden = st.hide && st.hide.has(l.key), r = st.res && st.res[l.key];
+    const cls = hidden ? 'mp-lb slot' : 'mp-lb' + (r != null ? ' r' + r : '') + (st.hl === l.key ? ' hl' : '');
+    out.push(`<g class="${cls}" data-k="${l.key}" transform="translate(${l.x - l.w / 2} ${l.y - l.h / 2})"><rect width="${l.w}" height="${l.h}" rx="${l.h / 2}"/>${hidden ? '' : l.lines.map((t, i)=> `<text x="${l.w / 2}" y="${15 + i * 15}" text-anchor="middle">${mpEsc(t)}</text>`).join('')}</g>`);
+  });
+  sc.nodes.forEach(n=>{
+    const b = L.B[n.id]; if(!b) return;
+    const key = 'n:' + n.id, hidden = st.hide && st.hide.has(key), r = st.res && st.res[key];
+    const ncol = n.c || (b.root ? col : null);
+    let cls = 'mp-nd' + (b.root ? ' root' : '') + (hidden ? ' slot' : '') + (r != null ? ' r' + r : '') + (st.hl === key ? ' hl' : '') + (st.sel === n.id ? ' sel' : '');
+    const fill = hidden ? '' : r != null ? '' : ncol ? (b.root ? ncol : vzMix(ncol, .22)) : '';
+    const tcol = !hidden && r == null && b.root && ncol && vzIsDark(ncol) ? '#fff' : '';
+    const kids = mpKids(sc, n.id).length, folded = fold.has(n.id) && kids;
+    out.push(`<g class="${cls}" data-k="${key}" data-n="${n.id}" transform="translate(${b.x} ${b.y})">
+      <rect width="${b.w}" height="${b.h}" rx="${b.root ? 14 : 11}"${fill ? ` style="fill:${fill}${ncol && !b.root ? ';stroke:' + ncol : ''}"` : ''}/>
+      ${hidden ? '' : `${n.img ? `<image href="${n.img}" x="${(b.w - 86) / 2}" y="8" width="86" height="${b.imgH}" preserveAspectRatio="xMidYMid meet"/>` : ''}
+      <text${tcol ? ` style="fill:${tcol}"` : ''}>${b.lines.map((t, i)=> `<tspan x="${b.w / 2}" y="${b.pad + (b.imgH ? b.imgH + 6 : 0) + (b.root ? 17 : 14) + i * b.lh}" text-anchor="middle">${mpEsc(t)}</tspan>`).join('')}</text>
+      ${n.n && !st.hide ? `<circle cx="${b.w - 4}" cy="4" r="4" class="mp-dot"/>` : ''}`}
+      ${folded ? `<g class="mp-fold" data-fold="${n.id}" transform="translate(${lay === 'arbol' ? b.w / 2 - 13 : b.w - 6} ${lay === 'arbol' ? b.h - 6 : b.h / 2 - 11})"><rect width="26" height="22" rx="11"/><text x="13" y="15" text-anchor="middle">+${mpDesc(sc, n.id).length}</text></g>` : ''}
+    </g>`);
+  });
+  return out.join('');
 }
 
-function pzlBoxOf(cardId){ return PZL.boxes.find(b=> b.cards.includes(cardId)); }
-function pzlRemaining(kind){ return PZL.pieces.filter(p=> !PZL.placed.has(p.pid) && (!kind || p.kind === kind)); }
+/* ---------- lienzo con arrastrar y pellizcar ---------- */
+/* el «click» que el navegador manda justo después de tocar el lienzo no debe caer en la ventanita que se acaba de abrir */
+let mpLastTap = 0;
+document.addEventListener('click', e=>{ if(Date.now() - mpLastTap < 250 && e.target.closest && e.target.closest('#mp-pop,.mp-end,#mp-choose')){ e.stopPropagation(); e.preventDefault(); } }, true);
+function mpCanvas(host, opts){
+  host.innerHTML = `<svg class="mp-svg" xmlns="http://www.w3.org/2000/svg"><g class="mp-world"></g></svg>
+    <div class="mp-zoom"><button data-z="in" aria-label="Acercar">+</button><button data-z="out" aria-label="Alejar">−</button><button data-z="fit" aria-label="Encajar">⤢</button></div>`;
+  const svg = host.querySelector('svg'), world = svg.querySelector('.mp-world');
+  const C = { host, svg, world, k: 1, tx: 0, ty: 0, L: null, opts };
+  const apply = ()=> world.setAttribute('transform', `translate(${C.tx} ${C.ty}) scale(${C.k})`);
+  C.toWorld = (sx, sy)=>{ const r = svg.getBoundingClientRect(); return [(sx - r.left - C.tx) / C.k, (sy - r.top - C.ty) / C.k]; };
+  C.zoomAt = (k, sx, sy)=>{ const r = svg.getBoundingClientRect(); const px = sx - r.left, py = sy - r.top; k = Math.max(.15, Math.min(3, k)); C.tx = px - (px - C.tx) * k / C.k; C.ty = py - (py - C.ty) * k / C.k; C.k = k; apply(); };
+  C.fit = (box, maxK)=>{
+    box = box || (C.L && C.L.bbox); if(!box) return;
+    const r = svg.getBoundingClientRect(), pad = 24;
+    const k = Math.max(.15, Math.min(maxK || 1.1, (r.width - pad * 2) / Math.max(1, box.w), (r.height - pad * 2) / Math.max(1, box.h)));
+    C.k = k; C.tx = (r.width - box.w * k) / 2 - box.x * k; C.ty = (r.height - box.h * k) / 2 - box.y * k; apply();
+  };
+  C.center = (x, y)=>{ const r = svg.getBoundingClientRect(); C.tx = r.width / 2 - x * C.k; C.ty = r.height / 2 - y * C.k; apply(); };
+  C.draw = (html, L)=>{ world.innerHTML = html; C.L = L; };
+  /* si una idea queda fuera de la vista, se lleva al centro */
+  C.show = id=>{
+    const b = C.L && C.L.B[id]; if(!b) return;
+    const r = svg.getBoundingClientRect(), x1 = b.x * C.k + C.tx, y1 = b.y * C.k + C.ty, x2 = x1 + b.w * C.k, y2 = y1 + b.h * C.k, m = 20;
+    if(x1 < m || y1 < m || x2 > r.width - m - 50 || y2 > r.height - m){ C.center(b.x + b.w / 2, b.y + b.h / 2); }
+  };
+  C.apply = apply;
+  host.querySelector('.mp-zoom').addEventListener('click', e=>{
+    const b = e.target.closest('[data-z]'); if(!b) return; e.stopPropagation();
+    const r = svg.getBoundingClientRect();
+    if(b.dataset.z === 'fit') C.fit(); else C.zoomAt(C.k * (b.dataset.z === 'in' ? 1.3 : 1 / 1.3), r.left + r.width / 2, r.top + r.height / 2);
+  });
+  svg.addEventListener('wheel', e=>{ e.preventDefault(); C.zoomAt(C.k * Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .0025)), e.clientX, e.clientY); }, { passive: false });
+  const P = new Map(); let g = null;
+  svg.addEventListener('pointerdown', e=>{
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    try{ svg.setPointerCapture(e.pointerId); }catch(err){}
+    if(P.size === 1){
+      const nd = e.target.closest && e.target.closest('[data-n]');
+      g = { sx: e.clientX, sy: e.clientY, tx: C.tx, ty: C.ty, moved: false, target: e.target, node: nd && nd.dataset.n, drag: null };
+      if(opts.canDrag && g.node && opts.canDrag(g.node)){ const [wx, wy] = C.toWorld(e.clientX, e.clientY); g.drag = { id: g.node, wx, wy }; }
+    } else if(P.size === 2){
+      const [a, b] = [...P.values()];
+      g = { pinch: true, d0: Math.hypot(a.x - b.x, a.y - b.y), k0: C.k, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2, tx: C.tx, ty: C.ty };
+    }
+  });
+  svg.addEventListener('pointermove', e=>{
+    if(!P.has(e.pointerId) || !g) return;
+    P.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if(g.pinch && P.size >= 2){
+      const [a, b] = [...P.values()], d = Math.hypot(a.x - b.x, a.y - b.y), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      const r = svg.getBoundingClientRect(), k = Math.max(.15, Math.min(3, g.k0 * d / Math.max(1, g.d0)));
+      const wx = (g.mx - r.left - g.tx) / g.k0, wy = (g.my - r.top - g.ty) / g.k0;
+      C.k = k; C.tx = mx - r.left - wx * k; C.ty = my - r.top - wy * k; apply(); return;
+    }
+    if(g.pinch) return;
+    const dx = e.clientX - g.sx, dy = e.clientY - g.sy;
+    if(!g.moved && Math.hypot(dx, dy) < 7) return;
+    g.moved = true;
+    if(g.drag){ const [wx, wy] = C.toWorld(e.clientX, e.clientY); opts.onDrag && opts.onDrag(g.drag.id, wx - g.drag.wx, wy - g.drag.wy); g.drag.wx = wx; g.drag.wy = wy; return; }
+    C.tx = g.tx + dx; C.ty = g.ty + dy; apply();
+  });
+  const up = e=>{
+    if(!P.has(e.pointerId)) return;
+    P.delete(e.pointerId);
+    if(g && !g.pinch && !g.moved && P.size === 0 && e.type === 'pointerup'){ mpLastTap = Date.now(); opts.onTap && opts.onTap(g.target, e); }
+    if(g && g.drag && g.moved && opts.onDragEnd) opts.onDragEnd(g.drag.id);
+    if(P.size === 0) g = null;
+    else if(g && g.pinch && P.size === 1){ const [a] = [...P.values()]; g = { sx: a.x, sy: a.y, tx: C.tx, ty: C.ty, moved: true }; }
+  };
+  svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
+  return C;
+}
 
-/* ---------- pintar ---------- */
-function pzlNodeHtml(t){
-  if(t.cards){
-    const b = PZL.boxes.find(x=> x.id === t.box);
-    return `<div class="pzl-box" data-box="${b.id}">${b.cells.map((c, i)=> pzlCellHtml(b, i)).join('')}</div>`;
-  }
-  return `<div class="pzl-kids">${t.kids.map(k=> `<div class="pzl-node">${pzlKeyHtml(k)}<div class="pzl-brace"></div>${pzlNodeHtml(k)}</div>`).join('')}</div>`;
+/* ================= VER (dentro de la pestaña Esquemas) ================= */
+let MPV = null;
+function mpView(sc, host){
+  const fold = (MPV && MPV.id === sc.id) ? MPV.fold : new Set();
+  const C = mpCanvas(host, { onTap: (t)=> mpViewTap(t) });
+  MPV = { id: sc.id, sc, C, fold };
+  mpViewDraw(true);
 }
-function pzlKeyHtml(k){
-  const s = PZL.keys.find(x=> x.id === k.slot);
-  return `<div class="pzl-key lv${s.lv}${s.done ? ' ok' : ''}" data-slot="${s.id}">${s.done ? escapeHtml(s.text) : ''}</div>`;
+function mpViewDraw(fit){
+  if(!MPV) return;
+  const L = mpLayout(MPV.sc, MPV.fold);
+  MPV.C.draw(mpSvg(MPV.sc, L, null, MPV.fold), L);
+  if(fit) MPV.C.fit(null, 1);
 }
-function pzlCellHtml(b, i){
-  const c = b.cells[i], p = c.img && PZL.byId[c.img], n = c.name && PZL.byId[c.name];
-  return `<div class="pzl-cell${c.img && c.name ? ' ok' : ''}" data-cell="${b.id}|${i}">
-    <div class="pzl-img${p ? ' on' : ''}" data-slot="${b.id}|${i}|img">${p ? `<img src="${p.image}" alt="">` : ''}</div>
-    <div class="pzl-name${n ? ' on' : ''}" data-slot="${b.id}|${i}|name">${n ? escapeHtml(n.label || '') : ''}</div></div>`;
+function mpViewTap(t){
+  if(!MPV) return;
+  const f = t.closest && t.closest('[data-fold]');
+  if(f){ MPV.fold.delete(f.dataset.fold); mpViewDraw(); return; }
+  const nd = t.closest && t.closest('[data-n]'); if(!nd) return;
+  mpNodePop(MPV.sc, nd.dataset.n, {
+    fold: mpKids(MPV.sc, nd.dataset.n).length && MPV.sc.layout !== 'mapa' ? (MPV.fold.has(nd.dataset.n) ? 'Desplegar rama' : 'Plegar rama') : null,
+    onFold: ()=>{ const id = nd.dataset.n; MPV.fold.has(id) ? MPV.fold.delete(id) : MPV.fold.add(id); mpViewDraw(); },
+    onPlay: mpDesc(MPV.sc, nd.dataset.n).length ? ()=> mpPlayOpen(MPV.sc, { branch: nd.dataset.n }) : null
+  });
 }
-function pzlPieceHtml(p){
-  const sel = PZL.sel === p.pid ? ' sel' : '';
-  if(p.kind === 'img') return `<button class="pzl-pc pzl-pi${sel}" data-pc="${p.pid}"><img src="${PZL.byId[p.card].image}" alt="" draggable="false"></button>`;
-  return `<button class="pzl-pc pzl-pt ${p.kind}${sel}" data-pc="${p.pid}">${escapeHtml(p.text)}</button>`;
-}
-function pzlTrayHtml(){
-  const tabs = [['base', 'Base'], ['img', 'Imágenes'], ['name', 'Nombres']].filter(([k])=> k !== 'base' || PZL.keys.length);
-  const list = pzlRemaining(PZL.tab);
-  return `<div class="pzl-tabs">${tabs.map(([k, t])=>{ const n = pzlRemaining(k).length; return `<button class="pzl-tab${PZL.tab === k ? ' on' : ''}${n ? '' : ' empty'}" data-tab="${k}">${t} <small>${n}</small></button>`; }).join('')}</div>
-    <div class="pzl-pieces">${list.length ? list.map(pzlPieceHtml).join('') : `<div class="pzl-empty">${PZL.done ? '¡Esquema completo!' : 'Ya has colocado todas estas ✓'}</div>`}</div>
-    <div class="pzl-hint">${PZL.sel ? 'Ahora toca su hueco en el esquema' : 'Toca una pieza y luego su hueco · o arrástrala hacia arriba'}</div>`;
-}
-function pzlOpen(){
-  document.getElementById('pzl')?.remove();
-  const el = document.createElement('div'); el.id = 'pzl';
-  const t = PZL.tree;
-  el.innerHTML = `<div class="pzl-top"><button class="pzl-x" data-pzl="quit" aria-label="Salir">✕</button>
-      <div class="pzl-bar"><i></i></div><span class="pzl-cnt"></span>
-      <button class="pzl-z" data-pzl="zout" aria-label="Alejar">−</button><button class="pzl-z" data-pzl="zin" aria-label="Acercar">+</button></div>
-    <div class="pzl-board"><div class="pzl-canvas">
-      <div class="pzl-node pzl-root"><div class="pzl-title">${escapeHtml(t.title)}</div>${t.cards ? '' : '<div class="pzl-brace"></div>'}${pzlNodeHtml(t)}</div>
-    </div></div>
-    <div class="pzl-tray"></div>`;
-  document.body.appendChild(el); document.body.classList.add('pzl-open');
-  el.addEventListener('click', pzlClick);
-  el.querySelector('.pzl-tray').addEventListener('pointerdown', pzlDragStart);
-  pzlTray(); pzlStats();
-  /* que quepa a lo ancho en el móvil (sin hacerlo diminuto) */
-  const cv = el.querySelector('.pzl-canvas'), bw = el.querySelector('.pzl-board').clientWidth;
-  PZL.zoom = Math.max(.55, Math.min(1, Math.floor(100 * bw / cv.scrollWidth) / 100)); cv.style.zoom = PZL.zoom;
-  pzlBraces();
-  if(window.ResizeObserver){ PZL.ro = new ResizeObserver(()=> pzlBraces()); PZL.ro.observe(el.querySelector('.pzl-canvas')); }
-}
-function pzlTray(){ const tr = document.querySelector('#pzl .pzl-tray'); if(tr) tr.innerHTML = pzlTrayHtml(); }
-function pzlStats(){
-  const n = PZL.placed.size, el = document.getElementById('pzl'); if(!el) return;
-  el.querySelector('.pzl-bar i').style.width = (100 * n / PZL.total) + '%';
-  el.querySelector('.pzl-cnt').textContent = `${n}/${PZL.total}${PZL.mistakes ? ' · ' + PZL.mistakes + ' ✗' : ''}`;
-}
-/* llaves «{» a la medida de lo que abarcan */
-function pzlBraces(){
-  document.querySelectorAll('#pzl .pzl-brace').forEach(b=>{
-    const h = Math.max(24, b.offsetHeight), m = h / 2, w = 18, r = Math.min(10, h / 6);
-    b.innerHTML = `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="M${w - 2} 1 Q${w / 2} 1 ${w / 2} ${r + 1} L${w / 2} ${m - r} Q${w / 2} ${m} 2 ${m} Q${w / 2} ${m} ${w / 2} ${m + r} L${w / 2} ${h - r - 1} Q${w / 2} ${h - 1} ${w - 2} ${h - 1}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+function mpNodePop(sc, id, o){
+  const n = sc.nodes.find(x=> x.id === id); if(!n) return;
+  document.getElementById('mp-pop')?.remove();
+  const el = document.createElement('div'); el.id = 'mp-pop';
+  const by = Object.fromEntries(sc.nodes.map(x=> [x.id, x])), par = n.p && by[n.p];
+  el.innerHTML = `<div class="mp-dim"></div><div class="mp-pbox">
+    ${n.img ? `<img src="${n.img}" alt="">` : ''}
+    ${par ? `<div class="mp-pp">${mpEsc(par.t)}${n.e ? ' · <i>' + mpEsc(n.e) + '</i>' : ''}</div>` : ''}
+    <div class="mp-pt">${mpEsc(n.t)}</div>
+    ${n.n ? `<div class="mp-pn">${mpEsc(n.n).replace(/\n/g, '<br>')}</div>` : ''}
+    <div class="mp-pbtns">${o.onPlay ? '<button class="pri" data-pp="play">▶ Jugar esta rama</button>' : ''}${o.fold ? `<button data-pp="fold">${o.fold}</button>` : ''}<button data-pp="x">Cerrar</button></div></div>`;
+  document.body.appendChild(el);
+  el.addEventListener('click', e=>{
+    const b = e.target.closest('[data-pp]');
+    if(e.target.classList.contains('mp-dim') || (b && b.dataset.pp === 'x')){ el.remove(); return; }
+    if(!b) return;
+    el.remove();
+    if(b.dataset.pp === 'play') o.onPlay(); else if(b.dataset.pp === 'fold') o.onFold();
   });
 }
 
-/* ---------- colocar ---------- */
-function pzlFits(piece, slot){
-  const parts = slot.split('|');
-  if(parts.length === 1){                                   // rótulo de la base
-    const k = PZL.keys.find(x=> x.id === slot);
-    return piece.kind === 'base' && k && !k.done && k.text === piece.text;
+/* ================= JUGAR ================= */
+function mpItems(sc, scope){
+  /* claves que se juegan: nodos y frases de las uniones */
+  const keys = [];
+  let ids;
+  if(scope.branch) ids = mpDesc(sc, scope.branch);
+  else { const roots = new Set(mpRoots(sc).map(r=> r.id)); ids = sc.nodes.filter(n=> !roots.has(n.id)).map(n=> n.id); }
+  ids.forEach(id=> keys.push('n:' + id));
+  if(scope.links && (sc.layout || 'llaves') === 'mapa'){
+    const inScope = new Set(scope.branch ? [scope.branch, ...ids] : sc.nodes.map(n=> n.id));
+    sc.nodes.forEach(n=>{ if(n.e && inScope.has(n.id) && (!scope.branch || n.id !== scope.branch)) keys.push('e:' + n.id); });
+    (sc.links || []).forEach(l=>{ if(l.t && inScope.has(l.a) && inScope.has(l.b)) keys.push('l:' + l.id); });
   }
-  const b = PZL.boxes.find(x=> x.id === parts[0]), c = b && b.cells[+parts[1]], what = parts[2];
-  if(!c || piece.kind !== what) return false;
-  if(!b.cards.includes(piece.card)) return false;          // no es de esta caja
-  if(c[what]) return false;                                 // hueco ocupado
-  const other = what === 'img' ? c.name : c.img;            // si ya hay foto (o nombre), tiene que ser la misma tarjeta
-  return !other || other === piece.card;
+  if(scope.onlyFails){ const s = sc.stats || {}; return keys.filter(k=> s[k] && s[k].r > 0); }
+  return keys;
 }
-function pzlPlace(pid, slot){
-  const piece = PZL.pieces.find(p=> p.pid === pid); if(!piece) return;
-  const el = document.querySelector(`#pzl [data-slot="${slot}"]`);
-  if(!pzlFits(piece, slot)){
-    /* un hueco libre de la caja correcta pero emparejado con otra tarjeta, o una caja equivocada: fallo */
-    PZL.mistakes++; pzlStats();
-    if(el){ el.classList.remove('bad'); void el.offsetWidth; el.classList.add('bad'); }
+function mpKeyText(sc, k){
+  const [t, id] = [k.slice(0, 1), k.slice(2)];
+  if(t === 'n'){ const n = sc.nodes.find(x=> x.id === id); return n ? n.t : ''; }
+  if(t === 'e'){ const n = sc.nodes.find(x=> x.id === id); return n ? n.e : ''; }
+  const l = (sc.links || []).find(x=> x.id === id); return l ? l.t : '';
+}
+function mpKeyImg(sc, k){ if(k[0] !== 'n') return ''; const n = sc.nodes.find(x=> x.id === k.slice(2)); return (n && n.img) || ''; }
+
+/* elegir cómo jugar */
+function mpPlayOpen(sc, pre){
+  pre = pre || {};
+  const isMap = (sc.layout || 'llaves') === 'mapa', hasLab = isMap && (sc.nodes.some(n=> n.e) || (sc.links || []).some(l=> l.t));
+  const fails = mpItems(sc, { links: true, onlyFails: true }).length;
+  const br = pre.branch && sc.nodes.find(n=> n.id === pre.branch);
+  const last = sc.playOpts || {};
+  document.getElementById('mp-choose')?.remove();
+  const el = document.createElement('div'); el.id = 'mp-choose';
+  el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox">
+    <div class="mp-ct">${br ? 'Rama «' + mpEsc(br.t) + '»' : mpEsc(sc.name)}</div>
+    <div class="mp-cs">Elige cómo quieres montarlo</div>
+    <button class="mp-opt${last.mode !== 'escribir' ? ' on' : ''}" data-mode="piezas"><b>Colocar piezas</b><span>te doy las piezas sueltas y las pones en su hueco</span></button>
+    <button class="mp-opt${last.mode === 'escribir' ? ' on' : ''}" data-mode="escribir"><b>De memoria</b><span>tocas un hueco y escribes lo que va (más difícil)</span></button>
+    ${hasLab ? `<label class="mp-chk"><input type="checkbox" id="mp-links"${last.links !== false ? ' checked' : ''}> también las frases de las flechas</label>` : ''}
+    ${fails && !br ? `<label class="mp-chk"><input type="checkbox" id="mp-fails"> solo lo que fallé (${fails})</label>` : ''}
+    <button class="mp-cancel" data-mode="">Cancelar</button></div>`;
+  document.body.appendChild(el);
+  el.addEventListener('click', e=>{
+    if(e.target.classList.contains('mp-dim')){ el.remove(); return; }
+    const b = e.target.closest('[data-mode]'); if(!b) return;
+    if(!b.dataset.mode){ el.remove(); return; }
+    const links = el.querySelector('#mp-links') ? el.querySelector('#mp-links').checked : false;
+    const onlyFails = el.querySelector('#mp-fails') ? el.querySelector('#mp-fails').checked : false;
+    sc.playOpts = { mode: b.dataset.mode, links }; saveEsq();
+    el.remove();
+    mpPlay(sc, { mode: b.dataset.mode, links, onlyFails, branch: pre.branch || null });
+  });
+}
+
+let MPG = null;
+function mpPlay(sc, scope){
+  const keys = mpItems(sc, scope);
+  if(!keys.length){ toast(scope.branch ? 'Esta rama no tiene nada debajo' : 'No hay nada que montar todavía'); return; }
+  MPG = { sc, scope, keys, hide: new Set(keys), res: {}, fails: {}, sel: null, mistakes: 0, start: Date.now(), done: false, tab: 'n', fold: new Set() };
+  const pieces = keys.map(k=> ({ k, t: mpKeyText(sc, k), img: mpKeyImg(sc, k) }));
+  MPG.pieces = shuffle(pieces);
+  const el = document.createElement('div'); el.id = 'mp';
+  el.innerHTML = `<div class="mp-top"><button class="mp-x" data-g="quit" aria-label="Salir">✕</button><div class="mp-bar"><i></i></div><span class="mp-cnt"></span></div>
+    <div class="mp-cv"></div><div class="mp-tray"></div>`;
+  document.body.appendChild(el); document.body.classList.add('mp-open');
+  MPG.C = mpCanvas(el.querySelector('.mp-cv'), { onTap: t=> mpPlayTap(t) });
+  el.addEventListener('click', mpPlayClick);
+  el.querySelector('.mp-tray').addEventListener('pointerdown', mpDragStart);
+  mpPlayDraw();
+  if(scope.branch){ const L = MPG.C.L, ids = [scope.branch, ...mpDesc(sc, scope.branch)]; let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity; ids.forEach(id=>{ const b = L.B[id]; if(b){ x1 = Math.min(x1, b.x); y1 = Math.min(y1, b.y); x2 = Math.max(x2, b.x + b.w); y2 = Math.max(y2, b.y + b.h); } }); MPG.C.fit({ x: x1, y: y1, w: x2 - x1, h: y2 - y1 }, 1.1); }
+  else MPG.C.fit(null, 1.1);
+  mpTray(); mpStats();
+}
+function mpPlayDraw(){
+  const L = mpLayout(MPG.sc, MPG.fold);
+  MPG.C.draw(mpSvg(MPG.sc, L, { hide: MPG.hide, res: MPG.res, hl: MPG.hl }, MPG.fold), L);
+}
+function mpStats(){
+  const el = document.getElementById('mp'); if(!el) return;
+  const n = MPG.keys.length - MPG.hide.size;
+  el.querySelector('.mp-bar i').style.width = (100 * n / MPG.keys.length) + '%';
+  el.querySelector('.mp-cnt').textContent = `${n}/${MPG.keys.length}${MPG.mistakes ? ' · ' + MPG.mistakes + ' ✗' : ''}`;
+}
+function mpTray(){
+  const tr = document.querySelector('#mp .mp-tray'); if(!tr) return;
+  if(MPG.scope.mode === 'escribir'){
+    tr.innerHTML = MPG.done ? `<div class="mp-hint big">¡Esquema completo!</div>` : MPG.typing ? mpTypeHtml() : `<div class="mp-hint big">Toca un hueco y escribe lo que va ahí</div>`;
+    if(MPG.typing){ const i = tr.querySelector('input'); setTimeout(()=> i && i.focus(), 30); }
+    return;
+  }
+  const left = MPG.pieces.filter(p=> MPG.hide.has(p.k));
+  const nN = left.filter(p=> p.k[0] === 'n').length, nL = left.length - nN;
+  if(MPG.tab === 'l' && !nL) MPG.tab = 'n'; if(MPG.tab === 'n' && !nN && nL) MPG.tab = 'l';
+  const list = left.filter(p=> (MPG.tab === 'n') === (p.k[0] === 'n'));
+  tr.innerHTML = `${nL || MPG.tab === 'l' ? `<div class="mp-tabs"><button class="mp-tab${MPG.tab === 'n' ? ' on' : ''}" data-tab="n">Ideas <small>${nN}</small></button><button class="mp-tab${MPG.tab === 'l' ? ' on' : ''}" data-tab="l">Uniones <small>${nL}</small></button></div>` : ''}
+    <div class="mp-pieces">${list.length ? list.map(p=> `<button class="mp-pc${p.img ? ' img' : ''}${p.k[0] !== 'n' ? ' lab' : ''}${MPG.sel === p.k ? ' sel' : ''}" data-pc="${p.k}">${p.img ? `<img src="${p.img}" alt="" draggable="false">` : ''}<span>${mpEsc(p.t)}</span></button>`).join('') : `<div class="mp-hint big">${MPG.done ? '¡Esquema completo!' : '—'}</div>`}</div>
+    <div class="mp-hint">${MPG.sel ? 'Ahora toca su hueco' : 'Toca una pieza y luego su hueco · o arrástrala hacia arriba'}</div>`;
+}
+function mpTypeHtml(){
+  const k = MPG.typing, lab = k[0] !== 'n';
+  return `<div class="mp-type"><div class="mp-hint">${lab ? '¿Qué frase une estas dos ideas?' : '¿Qué va en este hueco?'}${MPG.fails[k] ? ` · intento ${MPG.fails[k] + 1} de 3` : ''}</div>
+    <form class="mp-tf"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe…"><button class="pri" type="submit">OK</button></form>
+    <div class="mp-trow"><button data-g="giveup">No lo sé</button><button data-g="untype">Otro hueco</button></div></div>`;
+}
+/* poner una pieza (o una respuesta escrita) en un hueco */
+function mpTry(pieceKey, slotKey, typed){
+  if(!MPG.hide.has(slotKey)) return;
+  const want = mpNorm(mpKeyText(MPG.sc, slotKey));
+  let ok, casi = false;
+  if(typed != null){ const got = mpNorm(typed); ok = got === want; if(!ok && want.length >= 4 && mpLev(got, want) <= 1){ ok = true; casi = true; } }
+  else ok = mpNorm(mpKeyText(MPG.sc, pieceKey)) === want && pieceKey[0] === slotKey[0];
+  const failKey = typed != null ? slotKey : pieceKey;
+  if(!ok){
+    MPG.mistakes++; MPG.fails[failKey] = (MPG.fails[failKey] || 0) + 1; mpStats();
+    const g = MPG.C.world.querySelector(`[data-k="${slotKey}"]`); if(g){ g.classList.remove('bad'); void g.getBoundingClientRect(); g.classList.add('bad'); }
     try{ navigator.vibrate && navigator.vibrate(40); }catch(e){}
+    if(MPG.fails[failKey] >= 3){
+      /* a la tercera, se coloca sola (en rojo) y se te enseña dónde iba */
+      const target = typed != null ? slotKey : MPG.keys.find(k=> MPG.hide.has(k) && mpNorm(mpKeyText(MPG.sc, k)) === mpNorm(mpKeyText(MPG.sc, pieceKey)) && k[0] === pieceKey[0]);
+      if(target){ mpFill(target, 3, typed != null ? null : pieceKey); toast('Iba aquí'); const b = MPG.C.L.B[target.slice(2)]; if(b && target[0] === 'n') MPG.C.center(b.x + b.w / 2, b.y + b.h / 2); }
+    } else if(typed != null) mpTray();
     return;
   }
-  const parts = slot.split('|');
-  if(parts.length === 1){ PZL.keys.find(x=> x.id === slot).done = true; el.outerHTML = pzlKeyHtml({ slot }); }
-  else {
-    const b = PZL.boxes.find(x=> x.id === parts[0]), i = +parts[1];
-    b.cells[i][parts[2]] = piece.card;
-    const cell = document.querySelector(`#pzl [data-cell="${b.id}|${i}"]`); if(cell) cell.outerHTML = pzlCellHtml(b, i);
+  const f = MPG.fails[failKey] || 0;
+  mpFill(slotKey, casi ? Math.max(2, f) : Math.min(f, 3), typed != null ? null : pieceKey);
+}
+function mpFill(slotKey, r, pieceKey){
+  MPG.hide.delete(slotKey); MPG.res[slotKey] = r; MPG.sel = null; MPG.typing = null;
+  /* si la pieza era intercambiable con otra igual, la que sobra es la de este hueco */
+  if(pieceKey && pieceKey !== slotKey){ const p = MPG.pieces.find(x=> x.k === pieceKey), q = MPG.pieces.find(x=> x.k === slotKey); if(p && q){ p.k = slotKey; q.k = pieceKey; } }
+  MPG.hl = slotKey; mpPlayDraw(); mpStats(); mpTray();
+  setTimeout(()=>{ if(MPG && MPG.hl === slotKey){ MPG.hl = null; const g = MPG.C.world.querySelector(`[data-k="${slotKey}"]`); g && g.classList.remove('hl'); } }, 900);
+  if(!MPG.hide.size) mpFinish();
+}
+function mpFinish(){
+  MPG.done = true; mpTray();
+  const sc = MPG.sc, secs = Math.round((Date.now() - MPG.start) / 1000), first = Object.values(MPG.res).filter(r=> r === 0).length;
+  sc.stats = sc.stats || {};
+  Object.entries(MPG.res).forEach(([k, r])=> sc.stats[k] = { r, t: Date.now() });
+  let rec = '';
+  if(!MPG.scope.branch && !MPG.scope.onlyFails){
+    const key = MPG.scope.mode + (MPG.scope.links ? '+l' : '');
+    sc.best = sc.best || {}; const prev = sc.best[key];
+    if(!prev || MPG.mistakes < prev.m || (MPG.mistakes === prev.m && secs < prev.s)){ sc.best[key] = { m: MPG.mistakes, s: secs, t: Date.now() }; rec = prev ? '¡Nueva mejor marca!' : ''; }
+    else rec = `Tu mejor marca: ${prev.m} ${prev.m === 1 ? 'fallo' : 'fallos'} · ${Math.floor(prev.s / 60)}:${String(prev.s % 60).padStart(2, '0')}`;
   }
-  PZL.placed.add(pid); PZL.sel = null;
-  const now = document.querySelector(`#pzl [data-slot="${slot}"]`) || document.querySelector(`#pzl [data-cell="${parts[0]}|${parts[1]}"]`);
-  if(now){ now.classList.add('pop'); }
-  if(!pzlRemaining(PZL.tab).length){ const next = ['base', 'img', 'name'].find(k=> pzlRemaining(k).length); if(next) PZL.tab = next; }
-  pzlStats(); pzlTray(); pzlBraces();
-  if(PZL.placed.size === PZL.total) pzlFinish();
+  saveEsq();
+  const failed = Object.values(MPG.res).filter(r=> r > 0).length;
+  const el = document.createElement('div'); el.className = 'mp-end';
+  el.innerHTML = `<div class="mp-ebox"><div class="mp-et">¡Montado!</div>
+    <div class="mp-es">${first} de ${MPG.keys.length} a la primera · ${MPG.mistakes} ${MPG.mistakes === 1 ? 'fallo' : 'fallos'} · ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}</div>
+    <div class="mp-leg">${[0, 1, 2, 3].map(r=> `<span><i style="background:${MP_RES[r]}"></i>${['a la primera', '2º intento', '3º intento', 'fallada'][r]}</span>`).join('')}</div>
+    ${rec ? `<div class="mp-er">${rec}</div>` : ''}
+    ${failed ? `<button class="pri" data-g="fails">Repasar lo fallado (${failed})</button>` : ''}
+    <button class="${failed ? '' : 'pri'}" data-g="again">Otra vez</button><button data-g="look">Ver cómo ha quedado</button><button data-g="quit">Salir</button></div>`;
+  document.getElementById('mp').appendChild(el);
 }
-function pzlFinish(){
-  PZL.done = true; pzlTray();
-  const secs = Math.round((Date.now() - PZL.start) / 1000), mm = Math.floor(secs / 60), ss = String(secs % 60).padStart(2, '0');
-  const node = PZL.node, key = PZL.tree.title;
-  node.puzBest = node.puzBest || {};
-  const prev = node.puzBest[key], better = !prev || PZL.mistakes < prev.m || (PZL.mistakes === prev.m && secs < prev.s);
-  if(better){ node.puzBest[key] = { m: PZL.mistakes, s: secs, t: Date.now() }; try{ saveLocal(); }catch(e){} }
-  const el = document.createElement('div'); el.className = 'pzl-end';
-  el.innerHTML = `<div class="pzl-end-box"><div class="pzl-end-t">¡Esquema montado!</div>
-    <div class="pzl-end-s">${PZL.total} piezas · ${PZL.mistakes} ${PZL.mistakes === 1 ? 'fallo' : 'fallos'} · ${mm}:${ss}</div>
-    ${prev && !better ? `<div class="pzl-end-r">Tu mejor marca: ${prev.m} fallos · ${Math.floor(prev.s / 60)}:${String(prev.s % 60).padStart(2, '0')}</div>` : prev ? '<div class="pzl-end-r">¡Nueva mejor marca!</div>' : ''}
-    <button class="pzl-btn pri" data-pzl="again">Otra vez</button><button class="pzl-btn" data-pzl="look">Ver el esquema</button><button class="pzl-btn" data-pzl="quit">Salir</button></div>`;
-  document.getElementById('pzl').appendChild(el);
+function mpPlayTap(t){
+  if(!MPG || MPG.done){ const nd = t.closest && t.closest('[data-n]'); if(MPG && nd) mpNodePop(MPG.sc, nd.dataset.n, {}); return; }
+  const g = t.closest && t.closest('[data-k]'); if(!g) return;
+  const k = g.dataset.k;
+  if(!MPG.hide.has(k)){ if(k[0] === 'n' && MPG.res[k] != null) mpNodePop(MPG.sc, k.slice(2), {}); return; }
+  if(MPG.scope.mode === 'escribir'){ MPG.typing = k; mpTray(); mpMark(k); return; }
+  if(MPG.sel) mpTry(MPG.sel, k); else toast('Primero elige una pieza de abajo');
 }
-function pzlInfo(cardId){
-  const p = PZL.byId[cardId]; if(!p) return;
-  const el = document.createElement('div'); el.className = 'pzl-info';
-  el.innerHTML = `<div class="pzl-info-box"><img src="${p.image}" alt=""><b>${escapeHtml(p.label || '')}</b>${p.back ? `<p>${escapeHtml(p.back).replace(/\n/g, '<br>')}</p>` : ''}<button class="pzl-btn" data-pzl="info-x">Cerrar</button></div>`;
-  document.getElementById('pzl').appendChild(el);
-}
-
-/* ---------- toques ---------- */
-function pzlClick(e){
+function mpMark(k){ MPG.C.world.querySelectorAll('.typing').forEach(x=> x.classList.remove('typing')); const g = MPG.C.world.querySelector(`[data-k="${k}"]`); g && g.classList.add('typing'); }
+function mpPlayClick(e){
+  if(mpPlayClick.skip) return;
   const t = e.target; let x;
-  if(x = t.closest('[data-pzl]')){
-    const a = x.dataset.pzl;
-    if(a === 'quit'){ if(!PZL.done && PZL.placed.size && !confirm('¿Salir del puzle? Se pierde lo montado.')) return; pzlClose(); return; }
-    if(a === 'again'){ const n = PZL.node, ids = new Set(Object.keys(PZL.byId)); pzlClose(); puzStart(n, ids); return; }
-    if(a === 'look'){ x.closest('.pzl-end').remove(); return; }
-    if(a === 'info-x'){ x.closest('.pzl-info').remove(); return; }
-    if(a === 'zin' || a === 'zout'){ PZL.zoom = Math.max(.4, Math.min(1.6, PZL.zoom + (a === 'zin' ? .15 : -.15))); document.querySelector('#pzl .pzl-canvas').style.zoom = PZL.zoom; pzlBraces(); return; }
+  if(x = t.closest('[data-g]')){
+    const a = x.dataset.g;
+    if(a === 'quit'){ if(!MPG.done && MPG.keys.length - MPG.hide.size > 0 && !confirm('¿Salir? Se pierde lo montado.')) return; mpPlayClose(); return; }
+    if(a === 'again' || a === 'fails'){ const sc = MPG.sc, scope = Object.assign({}, MPG.scope, a === 'fails' ? { onlyFails: true, branch: null } : {}); if(a === 'fails'){ /* solo las de esta partida */ const keys = Object.entries(MPG.res).filter(([, r])=> r > 0).map(([k])=> k); mpPlayClose(); mpPlayKeys(sc, scope, keys); return; } mpPlayClose(); mpPlay(sc, scope); return; }
+    if(a === 'look'){ x.closest('.mp-end').remove(); return; }
+    if(a === 'giveup' && MPG.typing){ const k = MPG.typing; MPG.mistakes++; mpStats(); mpFill(k, 3); return; }
+    if(a === 'untype'){ MPG.typing = null; mpMark(''); mpTray(); return; }
     return;
   }
-  if(t.closest('.pzl-info')){ if(t.classList.contains('pzl-info')) t.remove(); return; }
-  if(x = t.closest('[data-tab]')){ PZL.tab = x.dataset.tab; PZL.sel = null; pzlTray(); return; }
-  if(x = t.closest('[data-pc]')){ PZL.sel = PZL.sel === x.dataset.pc ? null : x.dataset.pc; pzlTray(); return; }
-  if(x = t.closest('[data-slot]')){
-    if(PZL.sel){ pzlPlace(PZL.sel, x.dataset.slot); return; }
-    const parts = x.dataset.slot.split('|');
-    if(parts.length === 3){ const c = PZL.boxes.find(b=> b.id === parts[0]).cells[+parts[1]]; if(c.img && c.name){ pzlInfo(c.img); return; } }
-    if(!x.classList.contains('on') && !x.classList.contains('ok')) toast('Primero elige una pieza de abajo');
-  }
+  if(x = t.closest('[data-tab]')){ MPG.tab = x.dataset.tab; MPG.sel = null; mpTray(); return; }
+  if(x = t.closest('[data-pc]')){ MPG.sel = MPG.sel === x.dataset.pc ? null : x.dataset.pc; mpTray(); return; }
 }
-function pzlClose(){
-  try{ PZL && PZL.ro && PZL.ro.disconnect(); }catch(e){}
-  document.getElementById('pzl')?.remove(); document.body.classList.remove('pzl-open'); PZL = null;
+function mpPlayKeys(sc, scope, keys){
+  mpPlay(sc, scope);                       // monta la partida normal…
+  if(!MPG) return;
+  MPG.keys = keys; MPG.hide = new Set(keys); MPG.pieces = MPG.pieces.filter(p=> keys.includes(p.k));   // …y deja vacío solo lo fallado
+  mpPlayDraw(); mpTray(); mpStats();
 }
+document.addEventListener('submit', e=>{
+  const f = e.target.closest && e.target.closest('#mp .mp-tf'); if(!f) return;
+  e.preventDefault();
+  const v = f.querySelector('input').value; if(!v.trim() || !MPG || !MPG.typing) return;
+  mpTry(null, MPG.typing, v);
+});
+function mpPlayClose(){ document.getElementById('mp')?.remove(); document.body.classList.remove('mp-open'); MPG = null; try{ if(MPV) mpViewDraw(); }catch(e){} }
 
-/* ---------- arrastrar desde la bandeja (hacia arriba; de lado sigue siendo deslizar la bandeja) ---------- */
-function pzlDragStart(e){
-  const pc = e.target.closest('[data-pc]'); if(!pc || !PZL) return;
+/* arrastrar una pieza desde la bandeja (hacia arriba; de lado se desliza la bandeja) */
+function mpDragStart(e){
+  const pc = e.target.closest('[data-pc]'); if(!pc || !MPG) return;
   const x0 = e.clientX, y0 = e.clientY; let ghost = null, over = null;
   const move = ev=>{
     const dx = ev.clientX - x0, dy = ev.clientY - y0;
     if(!ghost){
-      if(Math.abs(dy) < 10 || Math.abs(dy) < Math.abs(dx) || dy > 0) { if(Math.abs(dx) > 12) end(); return; }
-      ghost = pc.cloneNode(true); ghost.classList.add('pzl-ghost'); document.getElementById('pzl').appendChild(ghost);
-      PZL.sel = pc.dataset.pc;
+      if(Math.abs(dy) < 10 || Math.abs(dy) < Math.abs(dx) || dy > 0){ if(Math.abs(dx) > 12) end(); return; }
+      ghost = pc.cloneNode(true); ghost.classList.add('mp-ghost'); document.getElementById('mp').appendChild(ghost);
     }
     ev.preventDefault();
     ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
-    ghost.style.visibility = 'hidden';
-    const tgt = document.elementFromPoint(ev.clientX, ev.clientY);
-    ghost.style.visibility = '';
-    const s = tgt && tgt.closest('#pzl [data-slot]');
-    if(over && over !== s) over.classList.remove('hover');
-    over = s; if(s) s.classList.add('hover');
-    /* cerca de los bordes, el esquema se desplaza solo */
-    const bd = document.querySelector('#pzl .pzl-board'), r = bd.getBoundingClientRect();
-    if(ev.clientY < r.top + 40) bd.scrollTop -= 12; else if(ev.clientY > r.bottom - 30 && ev.clientY < r.bottom) bd.scrollTop += 12;
-    if(ev.clientX < r.left + 30) bd.scrollLeft -= 12; else if(ev.clientX > r.right - 30) bd.scrollLeft += 12;
+    ghost.style.visibility = 'hidden'; const tgt = document.elementFromPoint(ev.clientX, ev.clientY); ghost.style.visibility = '';
+    const s = tgt && tgt.closest && tgt.closest('#mp [data-k]');
+    const ok = s && MPG.hide.has(s.dataset.k) ? s : null;
+    if(over && over !== ok) over.classList.remove('hover');
+    over = ok; if(ok) ok.classList.add('hover');
+    const r = MPG.C.svg.getBoundingClientRect();     // en los bordes, el esquema se mueve solo
+    let mx = 0, my = 0; if(ev.clientY < r.top + 36) my = 10; else if(ev.clientY > r.bottom - 24 && ev.clientY < r.bottom) my = -10; if(ev.clientX < r.left + 24) mx = 10; else if(ev.clientX > r.right - 24) mx = -10;
+    if(mx || my){ MPG.C.tx += mx; MPG.C.ty += my; MPG.C.apply(); }
   };
-  const end = ()=>{
-    removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', end);
-    if(ghost) ghost.remove(); if(over) over.classList.remove('hover');
-  };
-  const up = ev=>{
-    const was = !!ghost, s = over, pid = pc.dataset.pc; end();
-    if(was){ pzlClick.skip = true; setTimeout(()=> pzlClick.skip = false, 50); if(s) pzlPlace(pid, s.dataset.slot); else { PZL.sel = null; pzlTray(); } }
+  const end = ()=>{ removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', end); if(ghost) ghost.remove(); if(over) over.classList.remove('hover'); };
+  const up = ()=>{
+    const was = !!ghost, s = over, k = pc.dataset.pc; end();
+    if(was){ mpPlayClick.skip = true; setTimeout(()=> mpPlayClick.skip = false, 60); if(s) mpTry(k, s.dataset.k); }
   };
   addEventListener('pointermove', move, { passive: false }); addEventListener('pointerup', up); addEventListener('pointercancel', end);
 }
-{ const _c = pzlClick; pzlClick = function(e){ if(pzlClick.skip) return; return _c.apply(this, arguments); }; }
 
-/* ---------- en el selector de modos ---------- */
-{ const _pt = playTema; playTema = function(node, ids, mode){ if(mode === 'puzle') return puzStart(node, ids); return _pt.apply(this, arguments); }; }
-{ const _mu = modeUnavailable; modeUnavailable = function(node, mode){
-    if(mode === 'puzle'){ const ph = filteredPhotos(node).filter(p=> p.image); return ph.length < 2 ? 'hacen falta al menos 2 tarjetas con imagen' : null; }
-    return _mu.apply(this, arguments);
-  }; }
-(function(){
-  const box = document.getElementById('mode-box'), before = document.getElementById('mode-cancel'); if(!box || !before) return;
-  const g = document.createElement('div'); g.className = 'mode-group bj-only'; g.textContent = 'esquema';
-  const b = document.createElement('button'); b.className = 'mode-opt bj-only'; b.dataset.mode = 'puzle';
-  b.innerHTML = '<b>puzle del esquema</b><span data-sub>montas el esquema de llaves: rótulos, imágenes y nombres</span>';
-  box.insertBefore(g, before); box.insertBefore(b, before);
-  b.addEventListener('click', ()=>{
-    const node = modeChooserNode; closeModeChooser(); if(!node) return;
-    node.lastPlayMode = 'puzle'; saveLocal();
-    const filtered = filterActive(node);
-    puzStart(node, filtered ? new Set(filteredPhotos(node).map(p=> p.id)) : null);
+/* ================= EDITAR ================= */
+let MPE = null;
+function mpEdit(sc){
+  if(!mpIsNew(sc)){ sc.v = 2; sc.layout = 'llaves'; sc.nodes = [{ id: mpUid(), t: sc.name, p: null }]; sc.links = []; delete sc.board; delete sc.assets; }
+  MPE = { sc, sel: null, link: null, undo: [] };
+  const el = document.createElement('div'); el.id = 'mpe';
+  el.innerHTML = `<div class="mpe-top"><button class="mpe-done" data-e="done">Listo</button>
+      <div class="mpe-name" data-e="rename">${mpEsc(sc.name)}</div>
+      <button class="mpe-ic" data-e="undo" aria-label="Deshacer">↶</button><button class="mpe-ic" data-e="text" aria-label="Editar como texto">≡</button></div>
+    <div class="mpe-lay">${Object.entries(MP_LAYOUTS).map(([k, v])=> `<button data-lay="${k}"${(sc.layout || 'llaves') === k ? ' class="on"' : ''}>${v}</button>`).join('')}</div>
+    <div class="mp-cv"></div><div class="mpe-bar"></div>`;
+  document.body.appendChild(el); document.body.classList.add('mp-open');
+  MPE.C = mpCanvas(el.querySelector('.mp-cv'), {
+    onTap: t=> mpEditTap(t),
+    canDrag: id=> (MPE.sc.layout || 'llaves') === 'mapa',
+    onDrag: (id, dx, dy)=>{ const n = MPE.sc.nodes.find(x=> x.id === id); if(!n) return; if(!MPE.dragging){ mpSnap(); mpFreeze(); MPE.dragging = true; } n.x += dx; n.y += dy; mpEditDraw(); },
+    onDragEnd: ()=>{ MPE.dragging = false; mpEditSave(); }
   });
-})();
+  el.addEventListener('click', mpEditClick);
+  mpEditDraw(); MPE.C.fit(null, 1); mpEditBar();
+}
+function mpSnap(){ MPE.undo.push(JSON.stringify({ nodes: MPE.sc.nodes, links: MPE.sc.links, layout: MPE.sc.layout })); if(MPE.undo.length > 40) MPE.undo.shift(); }
+function mpFreeze(){ /* al pasar a mapa libre, cada idea se queda donde estaba */ const L = mpLayout(MPE.sc); MPE.sc.nodes.forEach(n=>{ const b = L.B[n.id]; if(b && (n.x == null || n.y == null)){ n.x = Math.round(b.x); n.y = Math.round(b.y); } }); }
+function mpEditSave(){ MPE.sc.updated = Date.now(); delete MPE.sc._by; saveEsq(); }
+function mpEditDraw(){
+  const L = mpLayout(MPE.sc);
+  MPE.C.draw(mpSvg(MPE.sc, L, { sel: MPE.sel, hl: MPE.link ? 'n:' + MPE.link : null }), L);
+}
+function mpEditBar(){
+  const bar = document.querySelector('#mpe .mpe-bar'); if(!bar) return;
+  const sc = MPE.sc, n = MPE.sel && sc.nodes.find(x=> x.id === MPE.sel), isMap = (sc.layout || 'llaves') === 'mapa';
+  if(MPE.link){ bar.innerHTML = `<div class="mpe-msg">Toca la idea a la que apunta la flecha</div><div class="mpe-btns"><button data-e="unlink">Cancelar</button></div>`; return; }
+  if(!n){ bar.innerHTML = `<div class="mpe-msg">${sc.nodes.length > 1 ? 'Toca una idea para cambiarla' : 'Toca la idea principal para empezar'}${isMap ? ' · arrastra las ideas para colocarlas' : ''}</div>
+      <div class="mpe-btns"><button data-e="addroot">+ Idea suelta</button><button data-e="text">Escribir como texto</button>${isMap ? '<button data-e="radial">Colocar en círculo</button>' : ''}</div>`; return; }
+  const kids = mpKids(sc, n.id).length;
+  bar.innerHTML = `<div class="mpe-msg"><b>${mpEsc(n.t)}</b>${kids ? ` · ${kids} debajo` : ''}</div>
+    <div class="mpe-btns">
+      <button class="pri" data-e="child">+ Debajo</button>${n.p ? '<button data-e="sib">+ Al lado</button>' : ''}
+      <button data-e="txt">Texto</button><button data-e="note">Nota${n.n ? ' ✓' : ''}</button><button data-e="img">Imagen${n.img ? ' ✓' : ''}</button><button data-e="color">Color</button>
+      ${n.p && isMap ? `<button data-e="edge">Frase de la flecha${n.e ? ' ✓' : ''}</button>` : ''}
+      ${isMap ? '<button data-e="link">Flecha a…</button>' : ''}
+      ${n.p ? '<button data-e="up">↑</button><button data-e="down">↓</button><button data-e="move">Cambiar de rama</button>' : ''}
+      <button class="dng" data-e="del">Borrar</button></div>`;
+}
+function mpEditTap(t){
+  const lb = t.closest && t.closest('[data-k^="l:"]');
+  if(lb && !MPE.link){ mpLinkMenu(lb.dataset.k.slice(2)); return; }
+  const nd = t.closest && t.closest('[data-n]');
+  if(MPE.link){
+    if(nd && nd.dataset.n !== MPE.link){ const a = MPE.link, b = nd.dataset.n; MPE.link = null; openPrompt('frase de la flecha (puede ir vacía)', '', v=>{ mpSnap(); MPE.sc.links = MPE.sc.links || []; MPE.sc.links.push({ id: mpUid(), a, b, t: (v || '').trim() }); mpEditSave(); mpEditDraw(); mpEditBar(); }); }
+    return;
+  }
+  if(MPE.moving){
+    const target = nd && nd.dataset.n, n = MPE.sc.nodes.find(x=> x.id === MPE.moving); MPE.moving = null;
+    if(target && n && target !== n.id && !mpDesc(MPE.sc, n.id).includes(target)){ mpSnap(); n.p = target; mpEditSave(); toast('Movido'); } else if(target) toast('Ahí no se puede');
+    mpEditDraw(); mpEditBar(); return;
+  }
+  MPE.sel = nd ? nd.dataset.n : null; mpEditDraw(); mpEditBar();
+  if(nd && MPE.lastTap && MPE.lastTap.id === nd.dataset.n && Date.now() - MPE.lastTap.t < 350) mpEditText(nd.dataset.n);
+  MPE.lastTap = nd ? { id: nd.dataset.n, t: Date.now() } : null;
+}
+function mpEditText(id){ const n = MPE.sc.nodes.find(x=> x.id === id); if(!n) return; openPrompt('texto', n.t, v=>{ if(v == null || !v.trim()) return; mpSnap(); n.t = v.trim(); mpEditSave(); mpEditDraw(); mpEditBar(); }); }
+function mpLinkMenu(id){
+  const l = (MPE.sc.links || []).find(x=> x.id === id); if(!l) return;
+  const g = MPE.C.world.querySelector(`[data-k="l:${id}"]`);
+  openMenuAt(g || document.body, [
+    ['Cambiar la frase', ()=> openPrompt('frase de la flecha', l.t || '', v=>{ if(v == null) return; mpSnap(); l.t = v.trim(); mpEditSave(); mpEditDraw(); })],
+    ['Darle la vuelta', ()=>{ mpSnap(); [l.a, l.b] = [l.b, l.a]; mpEditSave(); mpEditDraw(); }],
+    ['Borrar flecha', ()=>{ mpSnap(); MPE.sc.links = MPE.sc.links.filter(x=> x !== l); mpEditSave(); mpEditDraw(); }, true]
+  ]);
+}
+async function mpPickImage(){
+  return new Promise(res=>{
+    const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
+    inp.onchange = ()=>{
+      const f = inp.files[0]; if(!f) return res(null);
+      const img = new Image(), url = URL.createObjectURL(f);
+      img.onload = ()=>{ const m = 360, s = Math.min(1, m / Math.max(img.width, img.height)); const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s); const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', .82)); };
+      img.onerror = ()=> res(null); img.src = url;
+    };
+    inp.click();
+  });
+}
+async function mpEditClick(e){
+  const t = e.target; let x;
+  if(x = t.closest('[data-lay]')){
+    const lay = x.dataset.lay; if(lay === (MPE.sc.layout || 'llaves')) return;
+    mpSnap(); if(lay === 'mapa'){ MPE.sc.layout = 'mapa'; mpFreeze(); } else MPE.sc.layout = lay;
+    document.querySelectorAll('#mpe [data-lay]').forEach(b=> b.classList.toggle('on', b.dataset.lay === lay));
+    mpEditSave(); mpEditDraw(); MPE.C.fit(null, 1); mpEditBar(); return;
+  }
+  if(!(x = t.closest('[data-e]'))) return;
+  const a = x.dataset.e, sc = MPE.sc, n = MPE.sel && sc.nodes.find(q=> q.id === MPE.sel), isMap = (sc.layout || 'llaves') === 'mapa';
+  const near = (p)=>{ if(!isMap || !p) return {}; const pb = mpLayout(sc).B[p.id]; return pb ? { x: Math.round(pb.x + 30 * (mpKids(sc, p.id).length)), y: Math.round(pb.y + pb.h + 70) } : {}; };
+  if(a === 'done'){ mpEditClose(); return; }
+  if(a === 'rename'){ openPrompt('nombre del esquema', sc.name, v=>{ if(!v) return; sc.name = v.trim(); x.textContent = sc.name; mpEditSave(); }); return; }
+  if(a === 'undo'){ const u = MPE.undo.pop(); if(!u) return toast('Nada que deshacer'); Object.assign(sc, JSON.parse(u)); document.querySelectorAll('#mpe [data-lay]').forEach(b=> b.classList.toggle('on', b.dataset.lay === (sc.layout || 'llaves'))); MPE.sel = null; mpEditSave(); mpEditDraw(); mpEditBar(); return; }
+  if(a === 'text'){ mpTextEditor(); return; }
+  if(a === 'addroot'){ openPrompt('nueva idea', '', v=>{ if(!v || !v.trim()) return; mpSnap(); const m = { id: mpUid(), t: v.trim(), p: null }; if(isMap){ const bb = mpLayout(sc).bbox; m.x = Math.round(bb.x + bb.w + 40); m.y = Math.round(bb.y); } sc.nodes.push(m); MPE.sel = m.id; mpEditSave(); mpEditDraw(); mpEditBar(); MPE.C.show(m.id); }); return; }
+  if(a === 'radial'){ mpSnap(); mpRadial(sc); mpEditSave(); mpEditDraw(); MPE.C.fit(null, 1); return; }
+  if(a === 'unlink'){ MPE.link = null; mpEditDraw(); mpEditBar(); return; }
+  if(!n) return;
+  if(a === 'child' || a === 'sib'){
+    const parent = a === 'child' ? n : sc.nodes.find(q=> q.id === n.p);
+    openPrompt(a === 'child' ? 'idea debajo de «' + n.t + '»' : 'idea al lado de «' + n.t + '»', '', v=>{
+      if(!v || !v.trim()) return; mpSnap();
+      const m = Object.assign({ id: mpUid(), t: v.trim(), p: parent ? parent.id : null }, near(parent));
+      const i = a === 'sib' ? sc.nodes.indexOf(n) + 1 : sc.nodes.length; sc.nodes.splice(i, 0, m);
+      MPE.sel = m.id; mpEditSave(); mpEditDraw(); mpEditBar(); MPE.C.show(m.id);
+    }); return;
+  }
+  if(a === 'txt'){ mpEditText(n.id); return; }
+  if(a === 'note'){ mpLongPrompt('nota (se ve al tocar la idea; no se juega)', n.n || '', v=>{ mpSnap(); if(v.trim()) n.n = v.trim(); else delete n.n; mpEditSave(); mpEditDraw(); mpEditBar(); }); return; }
+  if(a === 'edge'){ openPrompt(isMap ? 'frase de la flecha que llega aquí' : 'frase de unión con la idea de arriba', n.e || '', v=>{ if(v == null) return; mpSnap(); if(v.trim()) n.e = v.trim(); else delete n.e; mpEditSave(); mpEditDraw(); mpEditBar(); }); return; }
+  if(a === 'img'){
+    if(n.img){ openMenuAt(x, [['Cambiar imagen', async ()=>{ const d = await mpPickImage(); if(d){ mpSnap(); n.img = d; mpEditSave(); mpEditDraw(); mpEditBar(); } }], ['Quitar imagen', ()=>{ mpSnap(); delete n.img; mpEditSave(); mpEditDraw(); mpEditBar(); }, true]]); return; }
+    const d = await mpPickImage(); if(d){ mpSnap(); n.img = d; mpEditSave(); mpEditDraw(); mpEditBar(); } return;
+  }
+  if(a === 'color'){
+    const bar = document.querySelector('#mpe .mpe-bar');
+    bar.innerHTML = `<div class="mpe-msg">Color de <b>${mpEsc(n.t)}</b></div><div class="mpe-btns mpe-cols">${VZ_COLORS.concat(['#1c1c1e', '#8e8e93']).map(c=> `<button data-e="setc" data-c="${c}" style="background:${c}" aria-label="${c}"></button>`).join('')}<button data-e="setc" data-c="">Sin color</button><button data-e="back">Volver</button></div>`;
+    return;
+  }
+  if(a === 'setc'){ mpSnap(); if(x.dataset.c) n.c = x.dataset.c; else delete n.c; mpEditSave(); mpEditDraw(); mpEditBar(); return; }
+  if(a === 'back'){ mpEditBar(); return; }
+  if(a === 'link'){ MPE.link = n.id; mpEditDraw(); mpEditBar(); return; }
+  if(a === 'move'){ MPE.moving = n.id; toast('Toca la idea de la que debe colgar'); return; }
+  if(a === 'up' || a === 'down'){
+    const sibs = sc.nodes.filter(q=> q.p === n.p), i = sibs.indexOf(n), j = i + (a === 'up' ? -1 : 1); if(j < 0 || j >= sibs.length) return;
+    mpSnap(); const o = sibs[j], ia = sc.nodes.indexOf(n), ib = sc.nodes.indexOf(o); sc.nodes[ia] = o; sc.nodes[ib] = n; mpEditSave(); mpEditDraw(); return;
+  }
+  if(a === 'del'){
+    const d = mpDesc(sc, n.id);
+    if(d.length && !confirm(`Se borra «${n.t}» y las ${d.length} ideas que cuelgan de ella. ¿Seguir?`)) return;
+    mpSnap(); const gone = new Set([n.id, ...d]);
+    sc.nodes = sc.nodes.filter(q=> !gone.has(q.id)); sc.links = (sc.links || []).filter(l=> !gone.has(l.a) && !gone.has(l.b));
+    MPE.sel = null; mpEditSave(); mpEditDraw(); mpEditBar(); return;
+  }
+}
+function mpLongPrompt(title, val, cb){
+  const el = document.createElement('div'); el.id = 'mp-lp';
+  el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox"><div class="mp-ct">${mpEsc(title)}</div><textarea rows="6">${mpEsc(val)}</textarea><div class="mp-pbtns"><button class="pri" data-lp="ok">Guardar</button><button data-lp="x">Cancelar</button></div></div>`;
+  document.body.appendChild(el); setTimeout(()=> el.querySelector('textarea').focus(), 30);
+  el.addEventListener('click', e=>{ const b = e.target.closest('[data-lp]'); if(e.target.classList.contains('mp-dim') || (b && b.dataset.lp === 'x')){ el.remove(); return; } if(b){ const v = el.querySelector('textarea').value; el.remove(); cb(v); } });
+}
+function mpEditClose(){ document.getElementById('mpe')?.remove(); document.body.classList.remove('mp-open'); const sc = MPE && MPE.sc; MPE = null; if(sc){ delete sc._by; saveEsq(true); } try{ vzRender(); }catch(e){} }
+
+/* ---------- escribir el esquema como texto con sangrías ----------
+   Idea principal
+     [frase de unión] Idea de debajo
+       Otra más abajo
+       > nota de esa idea
+   A -> B : frase de una flecha extra */
+function mpToText(sc){
+  const out = [];
+  (function w(list, d){ list.forEach(n=>{ out.push('  '.repeat(d) + (n.e ? '[' + n.e + '] ' : '') + n.t.replace(/\n/g, ' ')); if(n.n) n.n.split('\n').forEach(l=> out.push('  '.repeat(d + 1) + '> ' + l)); w(mpKids(sc, n.id), d + 1); }); })(mpRoots(sc), 0);
+  const by = Object.fromEntries(sc.nodes.map(n=> [n.id, n]));
+  (sc.links || []).forEach(l=>{ if(by[l.a] && by[l.b]) out.push(by[l.a].t + ' -> ' + by[l.b].t + (l.t ? ' : ' + l.t : '')); });
+  return out.join('\n');
+}
+function mpFromText(sc, txt){
+  const old = sc.nodes || [], byPath = {};
+  const pathOf = (n, by)=>{ const ps = []; let c = n, g = 0; while(c && g++ < 99){ ps.unshift(mpNorm(c.t)); c = c.p && by[c.p]; } return ps.join('/'); };
+  const oby = Object.fromEntries(old.map(n=> [n.id, n]));
+  old.forEach(n=> byPath[pathOf(n, oby)] = n);
+  const byText = {}; old.forEach(n=> (byText[mpNorm(n.t)] = byText[mpNorm(n.t)] || []).push(n));
+  const nodes = [], stack = [], linkLines = [], used = new Set();
+  txt.split('\n').forEach(raw=>{
+    if(!raw.trim()) return;
+    if(/\s(->|→)\s/.test(raw)){ linkLines.push(raw.trim()); return; }
+    const ind = raw.match(/^[\t ]*/)[0].replace(/\t/g, '    ').length;
+    let s = raw.trim();
+    if(s.startsWith('>')){ const last = stack.length && stack[stack.length - 1].n; if(last) last.n = (last.n ? last.n + '\n' : '') + s.replace(/^>\s?/, ''); return; }
+    s = s.replace(/^([-*•·]|\d+[.)])\s+/, '');
+    let e = null; const m = s.match(/^\[([^\]]*)\]\s*(.+)$/); if(m){ e = m[1].trim(); s = m[2].trim(); }
+    while(stack.length && stack[stack.length - 1].ind >= ind) stack.pop();
+    const parent = stack.length ? stack[stack.length - 1].n : null;
+    const n = { t: s, p: parent ? parent.id : null };
+    if(e) n.e = e;
+    /* conserva la misma idea (y sus estadísticas, imagen, color, posición) si ya existía */
+    const pth = (parent ? parent._path + '/' : '') + mpNorm(s);
+    let prev = byPath[pth]; if(!prev || used.has(prev.id)) prev = (byText[mpNorm(s)] || []).find(q=> !used.has(q.id));
+    if(prev){ used.add(prev.id); n.id = prev.id; ['img', 'c', 'x', 'y'].forEach(k=>{ if(prev[k] != null) n[k] = prev[k]; }); } else n.id = mpUid();
+    Object.defineProperty(n, '_path', { value: pth, enumerable: false });
+    nodes.push(n); stack.push({ ind, n });
+  });
+  const find = t=> nodes.find(n=> mpNorm(n.t) === mpNorm(t));
+  const links = [];
+  linkLines.forEach(l=>{ const m = l.match(/^(.+?)\s*(?:->|→)\s*(.+?)(?:\s+:\s+(.+))?$/); if(!m) return; const a = find(m[1]), b = find(m[2]); if(a && b){ const prev = (sc.links || []).find(x=> x.a === a.id && x.b === b.id); links.push({ id: prev ? prev.id : mpUid(), a: a.id, b: b.id, t: (m[3] || '').trim() }); } });
+  return { nodes, links };
+}
+function mpTextEditor(){
+  const sc = MPE.sc;
+  const el = document.createElement('div'); el.id = 'mp-tx';
+  el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox mp-txbox"><div class="mp-ct">Escribir como texto</div>
+    <div class="mp-cs">Una idea por línea. Lo que cuelga de otra, con 2 espacios más. <code>[frase] Idea</code> pone la frase de unión · <code>&gt; texto</code> es una nota · <code>A -&gt; B : frase</code> añade una flecha extra.</div>
+    <textarea spellcheck="false" autocapitalize="off">${mpEsc(mpToText(sc))}</textarea>
+    <div class="mp-pbtns"><button class="pri" data-tx="ok">Aplicar</button><button data-tx="x">Cancelar</button></div></div>`;
+  document.body.appendChild(el);
+  const ta = el.querySelector('textarea');
+  ta.addEventListener('keydown', e=>{ if(e.key === 'Tab'){ e.preventDefault(); const s = ta.selectionStart; ta.setRangeText('  ', s, s, 'end'); } });
+  el.addEventListener('click', e=>{
+    const b = e.target.closest('[data-tx]');
+    if(e.target.classList.contains('mp-dim') || (b && b.dataset.tx === 'x')){ el.remove(); return; }
+    if(!b) return;
+    const r = mpFromText(sc, ta.value);
+    if(!r.nodes.length) return toast('Escribe al menos una idea');
+    mpSnap(); sc.nodes = r.nodes; sc.links = r.links; MPE.sel = null;
+    if((sc.layout || 'llaves') === 'mapa') mpFreeze();
+    el.remove(); mpEditSave(); mpEditDraw(); MPE.C.fit(null, 1); mpEditBar();
+  });
+}
+
+/* ---------- esquemas nuevos ---------- */
+function mpNew(name, layout, text){
+  const sc = { id: 'e' + uid(), type: 'scheme', v: 2, name: name || 'Esquema', layout: layout || 'llaves', nodes: [], links: [], created: Date.now(), updated: Date.now() };
+  if(text){ const r = mpFromText(sc, text); sc.nodes = r.nodes; sc.links = r.links; }
+  if(!sc.nodes.length) sc.nodes = [{ id: mpUid(), t: sc.name, p: null }];
+  return sc;
+}
+
+/* colocar un mapa conceptual en círculo alrededor de la idea principal */
+function mpRadial(sc){
+  const L = mpLayout(Object.assign({}, sc, { layout: 'arbol' })), roots = mpRoots(sc);
+  const leaves = n=>{ const ks = mpKids(sc, n.id); return ks.length ? ks.reduce((a, k)=> a + leaves(k), 0) : 1; };
+  const total = roots.reduce((a, r)=> a + leaves(r), 0) || 1;
+  let a0 = -Math.PI / 2;
+  const put = (n, d, from, to)=>{
+    const b = L.B[n.id], ang = (from + to) / 2, R = d === 0 ? 0 : 150 + (d - 1) * 210 + (d > 1 ? 40 : 0);
+    n.x = Math.round(Math.cos(ang) * R * 1.25 - b.w / 2); n.y = Math.round(Math.sin(ang) * R - b.h / 2);
+    let f = from; mpKids(sc, n.id).forEach(k=>{ const span = (to - from) * leaves(k) / leaves(n); put(k, d + 1, f, f + span); f += span; });
+  };
+  roots.forEach(r=>{ const span = 2 * Math.PI * leaves(r) / total; put(r, 0, a0, a0 + span); a0 += span; });
+}
+
+/* ---------- esquemas de ejemplo (se añaden una vez; se pueden borrar o cambiar) ---------- */
+const MP_EJ = [
+  { id: 'ej-tatuaje', name: 'Estilos de tatuaje', layout: 'llaves', color: '#1c1c1e', text: `Estilos de tatuaje
+  Occidentales
+    Tradicional americano
+      > Líneas negras gruesas, pocos colores (rojo, verde, amarillo y negro) y motivos marineros: golondrinas, anclas, rosas, dagas. Sailor Jerry es su gran referente.
+    Neotradicional
+      > Parte del tradicional, pero con más colores, degradados y detalle: retratos de mujeres, animales y flores muy ornamentados.
+    Realismo
+      > Imita una fotografía (retratos, paisajes), en negro y grises o en color, sin contornos marcados.
+  Trabajo en negro
+    Blackwork
+      > Grandes superficies de negro sólido con formas geométricas, florales o tribales.
+    Dotwork
+      > Las sombras se construyen solo con puntos; muy usado en mandalas y geometría.
+    Fine line
+      > Líneas muy finas hechas con una sola aguja: diseños pequeños y delicados.
+  Japonés (irezumi)
+    > Piezas grandes que cubren la espalda o los brazos enteros, con fondos de olas, viento y nubes que lo unen todo.
+    Carpa koi
+      Perseverancia
+    Dragón
+      Sabiduría y fuerza
+    Tigre
+      Valor y protección
+    Peonía
+      Riqueza y buena fortuna
+    Flor de cerezo
+      Lo efímero de la vida
+    Máscara hannya
+      Celos convertidos en demonio
+  Tribal
+    Polinesio
+      > Patrones negros que cuentan el linaje y la posición de quien los lleva (samoano, marquesano…).
+    Maorí (tā moko)
+      > Tradicionalmente tallado en la cara: cada línea habla de la familia y la historia de la persona.` },
+  { id: 'ej-fermentos', name: 'Fermentaciones', layout: 'mapa', color: '#c2410c', radial: true, text: `Fermentación
+  > Microorganismos que transforman los azúcares en otras sustancias sin necesitar oxígeno. Así se conservan los alimentos y cambian de sabor.
+  [puede ser] Láctica
+    [la hacen] Bacterias lácticas
+    [produce] Ácido láctico
+    [ejemplos] Chucrut, kimchi, yogur
+  [puede ser] Alcohólica
+    [la hacen] Levaduras
+    [produce] Alcohol y CO₂
+    [ejemplos] Vino, cerveza, pan
+  [puede ser] Acética
+    [la hacen] Acetobacterias
+    [produce] Ácido acético
+    [ejemplos] Vinagre, kombucha
+  [puede ser] Con mohos
+    [la hace] Koji (moho Aspergillus)
+    [produce] Umami (aminoácidos)
+    [ejemplos] Miso, salsa de soja, sake
+Alcohol y CO₂ -> Acética : es la materia prima de la` },
+  { id: 'ej-skate', name: 'Familias de trucos de skate', layout: 'arbol', color: '#1c9bd6', text: `Trucos de skate
+  En el suelo
+    Ollie
+      > La base de casi todo: golpe de tail y arrastrar el pie delantero hacia el nose.
+    Flips
+      Kickflip
+      Heelflip
+      Varial flip
+      Hardflip
+      Tre flip
+    Shove-its
+      Pop shove-it
+      Frontside shove-it
+      360 shove-it
+  Grinds (sobre los ejes)
+    50-50
+    5-0
+    Nosegrind
+    Crooked grind
+    Smith grind
+    Feeble grind
+  Slides (sobre la tabla)
+    Boardslide
+    Lipslide
+    Noseslide
+    Tailslide
+  Manuals
+    Manual
+    Nose manual
+  En rampa
+    Drop in
+    Rock to fakie
+    Axle stall
+    Frontside air` }
+];
+function mpExample(ex){
+  const sc = mpNew(ex.name, ex.layout, ex.text); sc.id = ex.id; sc.color = ex.color;
+  if(ex.radial) mpRadial(sc);
+  return sc;
+}
+function mpSeedExamples(force){
+  let seeded = false; try{ seeded = localStorage.getItem('esq2_seed') === '1'; }catch(e){}
+  if(seeded && !force) return 0;
+  if(!force && esquemas.some(x=> x && x.type === 'scheme')){ try{ localStorage.setItem('esq2_seed', '1'); }catch(e){} return 0; }
+  let n = 0;
+  MP_EJ.forEach(ex=>{ if(!esqFind(ex.id)){ esquemas.push(mpExample(ex)); n++; } });
+  try{ localStorage.setItem('esq2_seed', '1'); }catch(e){}
+  if(n) saveEsq(true);
+  return n;
+}
+/* fuera los esquemas de la versión anterior (los de la pizarra). Al quitarlos se ponen los de ejemplo. */
+function mpPurgeOldRaw(){
+  let n = 0;
+  (function w(arr){ for(let i = arr.length - 1; i >= 0; i--){ const x = arr[i]; if(!x) continue; if(x.type === 'folder') w(x.children || []); else if(!mpIsNew(x)){ arr.splice(i, 1); n++; } } })(esquemas);
+  if(n) MP_EJ.forEach(ex=>{ if(!esqFind(ex.id)) esquemas.push(mpExample(ex)); });
+  return n;
+}
+function mpPurgeOld(){ const n = mpPurgeOldRaw(); if(n) saveEsq(true); return n; }
+/* también cuando llegan de GitHub */
+{ const _s = saveEsq; saveEsq = function(){ mpPurgeOldRaw(); return _s.apply(this, arguments); }; }
 
 boot();
 
