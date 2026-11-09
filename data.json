@@ -28,6 +28,142 @@
  ],
  "esquemas": [
   {
+   "_by": {
+    "n03yhnp019": {
+     "id": "n03yhnp019",
+     "n": "Líneas muy finas hechas con una sola aguja: diseños pequeños y delicados.",
+     "p": "nnzbm88019",
+     "t": "Fine line"
+    },
+    "n1hihn4019": {
+     "id": "n1hihn4019",
+     "p": "niz96lm019",
+     "t": "Perseverancia"
+    },
+    "n217c41019": {
+     "id": "n217c41019",
+     "p": "nkr75fd019",
+     "t": "Lo efímero de la vida"
+    },
+    "n2gdhn5019": {
+     "id": "n2gdhn5019",
+     "p": "nlq49jd019",
+     "t": "Celos convertidos en demonio"
+    },
+    "n2t3twa019": {
+     "id": "n2t3twa019",
+     "n": "Líneas negras gruesas, pocos colores (rojo, verde, amarillo y negro) y motivos marineros: golondrinas, anclas, rosas, dagas. Sailor Jerry es su gran referente.",
+     "p": "nskj7nw019",
+     "t": "Tradicional americano"
+    },
+    "n3zu46i019": {
+     "id": "n3zu46i019",
+     "p": "n5hjttz019",
+     "t": "Dragón"
+    },
+    "n5hjttz019": {
+     "id": "n5hjttz019",
+     "n": "Piezas grandes que cubren la espalda o los brazos enteros, con fondos de olas, viento y nubes que lo unen todo.",
+     "p": "nammu9w019",
+     "t": "Japonés (irezumi)"
+    },
+    "n63ieob019": {
+     "id": "n63ieob019",
+     "n": "Parte del tradicional, pero con más colores, degradados y detalle: retratos de mujeres, animales y flores muy ornamentados.",
+     "p": "nskj7nw019",
+     "t": "Neotradicional"
+    },
+    "nammu9w019": {
+     "id": "nammu9w019",
+     "p": null,
+     "t": "Estilos de tatuaje"
+    },
+    "nb9yqdz019": {
+     "id": "nb9yqdz019",
+     "p": "nhic1cf019",
+     "t": "Valor y protección"
+    },
+    "nfmik4l019": {
+     "id": "nfmik4l019",
+     "n": "Las sombras se construyen solo con puntos; muy usado en mandalas y geometría.",
+     "p": "nnzbm88019",
+     "t": "Dotwork"
+    },
+    "nhic1cf019": {
+     "id": "nhic1cf019",
+     "p": "n5hjttz019",
+     "t": "Tigre"
+    },
+    "nimb2el019": {
+     "id": "nimb2el019",
+     "p": "nqtqj2t019",
+     "t": "Riqueza y buena fortuna"
+    },
+    "niz96lm019": {
+     "id": "niz96lm019",
+     "p": "n5hjttz019",
+     "t": "Carpa koi"
+    },
+    "njtyd0c019": {
+     "id": "njtyd0c019",
+     "n": "Grandes superficies de negro sólido con formas geométricas, florales o tribales.",
+     "p": "nnzbm88019",
+     "t": "Blackwork"
+    },
+    "nkr75fd019": {
+     "id": "nkr75fd019",
+     "p": "n5hjttz019",
+     "t": "Flor de cerezo"
+    },
+    "nlq49jd019": {
+     "id": "nlq49jd019",
+     "p": "n5hjttz019",
+     "t": "Máscara hannya"
+    },
+    "nmujmmx019": {
+     "id": "nmujmmx019",
+     "n": "Imita una fotografía (retratos, paisajes), en negro y grises o en color, sin contornos marcados.",
+     "p": "nskj7nw019",
+     "t": "Realismo"
+    },
+    "nnzbm88019": {
+     "id": "nnzbm88019",
+     "p": "nammu9w019",
+     "t": "Trabajo en negro"
+    },
+    "nqtqj2t019": {
+     "id": "nqtqj2t019",
+     "p": "n5hjttz019",
+     "t": "Peonía"
+    },
+    "nr3v0ie019": {
+     "id": "nr3v0ie019",
+     "p": "n3zu46i019",
+     "t": "Sabiduría y fuerza"
+    },
+    "nrekipy019": {
+     "id": "nrekipy019",
+     "n": "Patrones negros que cuentan el linaje y la posición de quien los lleva (samoano, marquesano…).",
+     "p": "nvpkny6019",
+     "t": "Polinesio"
+    },
+    "nskj7nw019": {
+     "id": "nskj7nw019",
+     "p": "nammu9w019",
+     "t": "Occidentales"
+    },
+    "nvpkny6019": {
+     "id": "nvpkny6019",
+     "p": "nammu9w019",
+     "t": "Tribal"
+    },
+    "nzgnh6q019": {
+     "id": "nzgnh6q019",
+     "n": "Tradicionalmente tallado en la cara: cada línea habla de la familia y la historia de la persona.",
+     "p": "nvpkny6019",
+     "t": "Maorí (tā moko)"
+    }
+   },
    "color": "#1c1c1e",
    "created": 1794240087597,
    "id": "ej-tatuaje",
@@ -175,6 +311,144 @@
    "v": 2
   },
   {
+   "_by": {
+    "n2o9fsf019": {
+     "e": "puede ser",
+     "id": "n2o9fsf019",
+     "p": "njb3xor019",
+     "t": "Acética",
+     "x": -170,
+     "y": 86
+    },
+    "n4vdsz0019": {
+     "e": "la hacen",
+     "id": "n4vdsz0019",
+     "p": "n2o9fsf019",
+     "t": "Acetobacterias",
+     "x": -194,
+     "y": 366
+    },
+    "n52lf4c019": {
+     "e": "ejemplos",
+     "id": "n52lf4c019",
+     "p": "nzuhmyj019",
+     "t": "Chucrut, kimchi, yogur",
+     "x": 413,
+     "y": -131
+    },
+    "n5gduti019": {
+     "e": "puede ser",
+     "id": "n5gduti019",
+     "p": "njb3xor019",
+     "t": "Con mohos",
+     "x": -183,
+     "y": -126
+    },
+    "n5tic39019": {
+     "e": "ejemplos",
+     "id": "n5tic39019",
+     "p": "nifiml9019",
+     "t": "Vino, cerveza, pan",
+     "x": 53,
+     "y": 366
+    },
+    "n80jpyi019": {
+     "e": "ejemplos",
+     "id": "n80jpyi019",
+     "p": "n2o9fsf019",
+     "t": "Vinagre, kombucha",
+     "x": -562,
+     "y": 84
+    },
+    "nc6ls2z019": {
+     "e": "la hacen",
+     "id": "nc6ls2z019",
+     "p": "nzuhmyj019",
+     "t": "Bacterias lácticas",
+     "x": 56,
+     "y": -406
+    },
+    "ncfl4ia019": {
+     "e": "produce",
+     "id": "ncfl4ia019",
+     "p": "nifiml9019",
+     "t": "Alcohol y CO₂",
+     "x": 295,
+     "y": 263
+    },
+    "ne1ibsq019": {
+     "e": "produce",
+     "id": "ne1ibsq019",
+     "p": "n5gduti019",
+     "t": "Umami (aminoácidos)",
+     "x": -415,
+     "y": -310
+    },
+    "neviodz019": {
+     "e": "produce",
+     "id": "neviodz019",
+     "p": "nzuhmyj019",
+     "t": "Ácido láctico",
+     "x": 297,
+     "y": -303
+    },
+    "ng5h2hd019": {
+     "e": "produce",
+     "id": "ng5h2hd019",
+     "p": "n2o9fsf019",
+     "t": "Ácido acético",
+     "x": -412,
+     "y": 263
+    },
+    "ng619v0019": {
+     "e": "la hacen",
+     "id": "ng619v0019",
+     "p": "nifiml9019",
+     "t": "Levaduras",
+     "x": 436,
+     "y": 84
+    },
+    "nifiml9019": {
+     "e": "puede ser",
+     "id": "nifiml9019",
+     "p": "njb3xor019",
+     "t": "Alcohólica",
+     "x": 85,
+     "y": 86
+    },
+    "njb3xor019": {
+     "id": "njb3xor019",
+     "n": "Microorganismos que transforman los azúcares en otras sustancias sin necesitar oxígeno. Así se conservan los alimentos y cambian de sabor.",
+     "p": null,
+     "t": "Fermentación",
+     "x": -78,
+     "y": -23
+    },
+    "nl3i8yc019": {
+     "e": "ejemplos",
+     "id": "nl3i8yc019",
+     "p": "n5gduti019",
+     "t": "Miso, salsa de soja, sake",
+     "x": -209,
+     "y": -413
+    },
+    "nrwpe0u019": {
+     "e": "la hace",
+     "id": "nrwpe0u019",
+     "p": "n5gduti019",
+     "t": "Koji (moho Aspergillus)",
+     "x": -536,
+     "y": -131
+    },
+    "nzuhmyj019": {
+     "e": "puede ser",
+     "id": "nzuhmyj019",
+     "p": "njb3xor019",
+     "t": "Láctica",
+     "x": 97,
+     "y": -126
+    }
+   },
    "color": "#c2410c",
    "created": 1794240087597,
    "id": "ej-fermentos",
@@ -326,6 +600,10 @@
      "y": -413
     }
    ],
+   "playOpts": {
+    "links": true,
+    "mode": "escribir"
+   },
    "type": "scheme",
    "updated": 1794240087597,
    "v": 2
