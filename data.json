@@ -609,6 +609,174 @@
    "v": 2
   },
   {
+   "_by": {
+    "n1qxanq01c": {
+     "id": "n1qxanq01c",
+     "p": "npezwh801c",
+     "t": "Frontside shove-it"
+    },
+    "n2q9r0101c": {
+     "id": "n2q9r0101c",
+     "n": "La base de casi todo: golpe de tail y arrastrar el pie delantero hacia el nose.",
+     "p": "nfha0ho01c",
+     "t": "Ollie"
+    },
+    "n35dbxy01c": {
+     "id": "n35dbxy01c",
+     "p": "n4l2xkf01c",
+     "t": "Drop in"
+    },
+    "n36ov5j01c": {
+     "id": "n36ov5j01c",
+     "p": "n5c1vel01c",
+     "t": "Heelflip"
+    },
+    "n49vkvu01c": {
+     "id": "n49vkvu01c",
+     "p": "ngeth9n01c",
+     "t": "Boardslide"
+    },
+    "n4l2xkf01c": {
+     "id": "n4l2xkf01c",
+     "p": "nbpuwn201c",
+     "t": "En rampa"
+    },
+    "n5c1vel01c": {
+     "id": "n5c1vel01c",
+     "p": "nfha0ho01c",
+     "t": "Flips"
+    },
+    "n85v37901c": {
+     "id": "n85v37901c",
+     "p": "ncbd9mr01c",
+     "t": "Manual"
+    },
+    "nam3irj01c": {
+     "id": "nam3irj01c",
+     "p": "ndv1sy601c",
+     "t": "Crooked grind"
+    },
+    "nbpuwn201c": {
+     "id": "nbpuwn201c",
+     "p": null,
+     "t": "Trucos de skate"
+    },
+    "ncbd9mr01c": {
+     "id": "ncbd9mr01c",
+     "p": "nbpuwn201c",
+     "t": "Manuals"
+    },
+    "ndv1sy601c": {
+     "id": "ndv1sy601c",
+     "p": "nbpuwn201c",
+     "t": "Grinds (sobre los ejes)"
+    },
+    "ndw7oxg01c": {
+     "id": "ndw7oxg01c",
+     "p": "ngeth9n01c",
+     "t": "Lipslide"
+    },
+    "nf756nx01c": {
+     "id": "nf756nx01c",
+     "p": "n5c1vel01c",
+     "t": "Tre flip"
+    },
+    "nfha0ho01c": {
+     "id": "nfha0ho01c",
+     "p": "nbpuwn201c",
+     "t": "En el suelo"
+    },
+    "ngeth9n01c": {
+     "id": "ngeth9n01c",
+     "p": "nbpuwn201c",
+     "t": "Slides (sobre la tabla)"
+    },
+    "njrpva801c": {
+     "id": "njrpva801c",
+     "p": "n4l2xkf01c",
+     "t": "Frontside air"
+    },
+    "nkw7y6901c": {
+     "id": "nkw7y6901c",
+     "p": "npezwh801c",
+     "t": "360 shove-it"
+    },
+    "nmxlyqv01c": {
+     "id": "nmxlyqv01c",
+     "p": "ncbd9mr01c",
+     "t": "Nose manual"
+    },
+    "nob4ssj01c": {
+     "id": "nob4ssj01c",
+     "p": "ndv1sy601c",
+     "t": "Nosegrind"
+    },
+    "nofthdf01c": {
+     "id": "nofthdf01c",
+     "p": "ndv1sy601c",
+     "t": "Feeble grind"
+    },
+    "noica0v01c": {
+     "id": "noica0v01c",
+     "p": "ndv1sy601c",
+     "t": "Smith grind"
+    },
+    "npezwh801c": {
+     "id": "npezwh801c",
+     "p": "nfha0ho01c",
+     "t": "Shove-its"
+    },
+    "nqs2jre01c": {
+     "id": "nqs2jre01c",
+     "p": "npezwh801c",
+     "t": "Pop shove-it"
+    },
+    "ns48go201c": {
+     "id": "ns48go201c",
+     "p": "ngeth9n01c",
+     "t": "Tailslide"
+    },
+    "ntq40vs01c": {
+     "id": "ntq40vs01c",
+     "p": "n5c1vel01c",
+     "t": "Varial flip"
+    },
+    "ntyg7pz01c": {
+     "id": "ntyg7pz01c",
+     "p": "n5c1vel01c",
+     "t": "Hardflip"
+    },
+    "nurenul01c": {
+     "id": "nurenul01c",
+     "p": "n5c1vel01c",
+     "t": "Kickflip"
+    },
+    "nvotxwp01c": {
+     "id": "nvotxwp01c",
+     "p": "n4l2xkf01c",
+     "t": "Rock to fakie"
+    },
+    "nvv27sg01c": {
+     "id": "nvv27sg01c",
+     "p": "ndv1sy601c",
+     "t": "5-0"
+    },
+    "nwla2bu01c": {
+     "id": "nwla2bu01c",
+     "p": "ndv1sy601c",
+     "t": "50-50"
+    },
+    "nx9cnqh01c": {
+     "id": "nx9cnqh01c",
+     "p": "n4l2xkf01c",
+     "t": "Axle stall"
+    },
+    "nxlze6001c": {
+     "id": "nxlze6001c",
+     "p": "ngeth9n01c",
+     "t": "Noseslide"
+    }
+   },
    "color": "#1c9bd6",
    "created": 1794240087600,
    "id": "ej-skate",
@@ -783,6 +951,10 @@
      "t": "Frontside air"
     }
    ],
+   "playOpts": {
+    "links": false,
+    "mode": "piezas"
+   },
    "type": "scheme",
    "updated": 1794240087600,
    "v": 2
