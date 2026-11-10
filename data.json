@@ -1315,22 +1315,14 @@
     }
    ],
    "run": {
-    "cur": {
-     "a": "nyfvuo95g0",
-     "b": "ns9crqh5g0",
-     "cands": [
-      "npaks7a5g1"
-     ],
-     "lid": "npaks7a5g1",
-     "r": 3,
-     "stage": "info"
-    },
+    "cur": null,
     "f": {},
     "hd": {},
     "linksDone": {
      "n4o0ydg5g1": true,
      "nho4swp5g1": true,
-     "nkl68l45g1": true
+     "nkl68l45g1": true,
+     "npaks7a5g1": true
     },
     "pd": {},
     "pdone": {},
@@ -1343,6 +1335,7 @@
      "li:n4o0ydg5g1": 3,
      "li:nho4swp5g1": 3,
      "li:nkl68l45g1": 3,
+     "li:npaks7a5g1": 3,
      "lt:n4o0ydg5g1": 0,
      "lt:nho4swp5g1": 1,
      "lt:nkl68l45g1": 3,
