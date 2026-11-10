@@ -1315,21 +1315,13 @@
     }
    ],
    "run": {
-    "cur": {
-     "a": "n76s2nh5g0",
-     "b": "ni28n6a5g0",
-     "cands": [
-      "n4o0ydg5g1"
-     ],
-     "lid": "n4o0ydg5g1",
-     "r": 3,
-     "stage": "info"
-    },
+    "cur": null,
     "f": {
-     "li": 2
+     "o:n76s2nh5g0": 1
     },
     "hd": {},
     "linksDone": {
+     "n4o0ydg5g1": true,
      "nkl68l45g1": true
     },
     "pd": {},
@@ -1338,6 +1330,7 @@
     "res": {
      "l:n4o0ydg5g1": 3,
      "l:nkl68l45g1": 1,
+     "li:n4o0ydg5g1": 3,
      "li:nkl68l45g1": 3,
      "lt:n4o0ydg5g1": 0,
      "lt:nkl68l45g1": 3,
