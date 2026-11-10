@@ -1321,8 +1321,9 @@
      "cands": [
       "nre6r515g1"
      ],
+     "lid": "nre6r515g1",
      "r": 0,
-     "stage": "tipo"
+     "stage": "info"
     },
     "f": {},
     "hd": {},
@@ -1356,6 +1357,8 @@
     "pdone": {},
     "phase": 2,
     "res": {
+     "l:nre6r515g1": 0,
+     "lt:nre6r515g1": 3,
      "n:n027sc05g0": 1,
      "n:n0qhuru5g0": 3,
      "n:n1iqsgl5g0": 0,
