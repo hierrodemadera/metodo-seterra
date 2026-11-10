@@ -320,7 +320,9 @@
      "k": "hecho",
      "n": "Plan de 20 puntos (septiembre). Alto el fuego desde el 10 de octubre de 2025: salen los 20 rehenes vivos y cientos de presos palestinos. Israel se repliega tras la «línea amarilla» y controla algo más de la mitad de Gaza (más del 60 % en 2026). Desde la tregua han muerto más de 1.500 palestinos (noviembre de 2026).",
      "p": null,
-     "t": "2025 · Alto el fuego del plan Trump"
+     "t": "2025 · Alto el fuego del plan Trump",
+     "x": 6200,
+     "y": 0
     },
     "n59lqepmmx": {
      "id": "n59lqepmmx",
@@ -336,14 +338,18 @@
      "k": "hecho",
      "n": "Ofensiva israelí por aire y tierra. Más de 74.000 palestinos muertos según el Ministerio de Sanidad de Gaza (septiembre de 2026), que no distingue civiles de combatientes; la ONU lo considera en general fiable. Hambruna declarada en la ciudad de Gaza (agosto de 2025). Treguas cortas en noviembre de 2023 y de enero a marzo de 2025.",
      "p": null,
-     "t": "2023 · Empieza la guerra en Gaza"
+     "t": "2023 · Empieza la guerra en Gaza",
+     "x": 5969,
+     "y": 0
     },
     "n6ol7m0mmx": {
      "id": "n6ol7m0mmx",
      "k": "hecho",
      "n": "Levantamiento palestino contra la ocupación. En diciembre nace Hamás, rama palestina de los Hermanos Musulmanes.",
      "p": null,
-     "t": "1987 · Primera Intifada; nace Hamás"
+     "t": "1987 · Primera Intifada; nace Hamás",
+     "x": 4908,
+     "y": 0
     },
     "n6x97nfmmx": {
      "id": "n6x97nfmmx",
@@ -368,7 +374,9 @@
      "k": "hecho",
      "n": "Israel y la OLP se reconocen mutuamente y nace la Autoridad Palestina con un autogobierno limitado. El Estado palestino previsto nunca llegó.",
      "p": null,
-     "t": "1993 · Acuerdos de Oslo"
+     "t": "1993 · Acuerdos de Oslo",
+     "x": 5111,
+     "y": 0
     },
     "nbtkvq5mmx": {
      "id": "nbtkvq5mmx",
@@ -393,7 +401,9 @@
      "k": "hecho",
      "n": "Israel retira a sus soldados y a unos 8.000 colonos de Gaza, pero sigue controlando sus fronteras, su espacio aéreo y su mar.",
      "p": null,
-     "t": "2005 · Israel sale de Gaza"
+     "t": "2005 · Israel sale de Gaza",
+     "x": 5330,
+     "y": 0
     },
     "nh0vol7mmx": {
      "id": "nh0vol7mmx",
@@ -418,7 +428,9 @@
      "k": "hecho",
      "n": "Guerra de los Seis Días: Israel ocupa Gaza, Cisjordania, Jerusalén Este, los Altos del Golán y el Sinaí (devuelto a Egipto en 1982).",
      "p": null,
-     "t": "1967 · Israel ocupa Gaza y Cisjordania"
+     "t": "1967 · Israel ocupa Gaza y Cisjordania",
+     "x": 4717,
+     "y": 0
     },
     "nkjqsnwmmx": {
      "id": "nkjqsnwmmx",
@@ -461,7 +473,9 @@
      "k": "hecho",
      "n": "Hamás gana las elecciones de 2006 y, tras enfrentarse a Fatah, toma Gaza por la fuerza en junio de 2007. Israel y Egipto imponen un bloqueo que dura desde entonces.",
      "p": null,
-     "t": "2007 · Hamás toma Gaza; bloqueo"
+     "t": "2007 · Hamás toma Gaza; bloqueo",
+     "x": 5557,
+     "y": 0
     },
     "nqaorazmmx": {
      "id": "nqaorazmmx",
@@ -504,7 +518,9 @@
      "k": "hecho",
      "n": "Hamás y otros grupos atacan el sur de Israel: unas 1.200 personas muertas, la mayoría civiles, y 251 secuestradas.",
      "p": null,
-     "t": "2023 · 7 de octubre: ataque de Hamás"
+     "t": "2023 · 7 de octubre: ataque de Hamás",
+     "x": 5753,
+     "y": 0
     },
     "nuwhci7mmx": {
      "id": "nuwhci7mmx",
@@ -520,7 +536,9 @@
      "k": "hecho",
      "n": "Tras el plan de partición de la ONU (1947), Israel declara su independencia el 14 de mayo de 1948. En la guerra, unos 700.000 palestinos huyen o son expulsados: la Nakba («catástrofe»). Gaza queda bajo Egipto y Cisjordania bajo Jordania.",
      "p": null,
-     "t": "1948 · Nace Israel; la Nakba"
+     "t": "1948 · Nace Israel; la Nakba",
+     "x": 4507,
+     "y": 0
     },
     "nwnlbi9mmx": {
      "id": "nwnlbi9mmx",
@@ -563,14 +581,18 @@
      "k": "hecho",
      "n": "28 de febrero: EE. UU. e Israel atacan Irán y matan al líder supremo, Alí Jamenei. Irán responde contra Israel y bases de EE. UU.; Hezbolá reabre el frente del Líbano el 2 de marzo. Tregua frágil desde abril, con nuevos choques.",
      "p": null,
-     "t": "2026 · Guerra contra Irán"
+     "t": "2026 · Guerra contra Irán",
+     "x": 6399,
+     "y": 0
     },
     "nyz9a0hmmx": {
      "id": "nyz9a0hmmx",
      "k": "hecho",
      "n": "El Reino Unido apoya un «hogar nacional para el pueblo judío» en Palestina, entonces otomana y después bajo mandato británico (1920–1948).",
      "p": null,
-     "t": "1917 · Declaración Balfour"
+     "t": "1917 · Declaración Balfour",
+     "x": 4271,
+     "y": 0
     },
     "nzhx6fmmmx": {
      "id": "nzhx6fmmmx",
@@ -585,7 +607,7 @@
    "color": "#1c1c1e",
    "created": 1794309867608,
    "id": "ej-gaza",
-   "layout": "arbol",
+   "layout": "llaves",
    "links": [
     {
      "a": "n6x97nfmmx",
@@ -1107,77 +1129,99 @@
      "k": "hecho",
      "n": "El Reino Unido apoya un «hogar nacional para el pueblo judío» en Palestina, entonces otomana y después bajo mandato británico (1920–1948).",
      "p": null,
-     "t": "1917 · Declaración Balfour"
+     "t": "1917 · Declaración Balfour",
+     "x": 4271,
+     "y": 0
     },
     {
      "id": "nv5ybo5mmx",
      "k": "hecho",
      "n": "Tras el plan de partición de la ONU (1947), Israel declara su independencia el 14 de mayo de 1948. En la guerra, unos 700.000 palestinos huyen o son expulsados: la Nakba («catástrofe»). Gaza queda bajo Egipto y Cisjordania bajo Jordania.",
      "p": null,
-     "t": "1948 · Nace Israel; la Nakba"
+     "t": "1948 · Nace Israel; la Nakba",
+     "x": 4507,
+     "y": 0
     },
     {
      "id": "nivoim9mmx",
      "k": "hecho",
      "n": "Guerra de los Seis Días: Israel ocupa Gaza, Cisjordania, Jerusalén Este, los Altos del Golán y el Sinaí (devuelto a Egipto en 1982).",
      "p": null,
-     "t": "1967 · Israel ocupa Gaza y Cisjordania"
+     "t": "1967 · Israel ocupa Gaza y Cisjordania",
+     "x": 4717,
+     "y": 0
     },
     {
      "id": "n6ol7m0mmx",
      "k": "hecho",
      "n": "Levantamiento palestino contra la ocupación. En diciembre nace Hamás, rama palestina de los Hermanos Musulmanes.",
      "p": null,
-     "t": "1987 · Primera Intifada; nace Hamás"
+     "t": "1987 · Primera Intifada; nace Hamás",
+     "x": 4908,
+     "y": 0
     },
     {
      "id": "n88jcsammx",
      "k": "hecho",
      "n": "Israel y la OLP se reconocen mutuamente y nace la Autoridad Palestina con un autogobierno limitado. El Estado palestino previsto nunca llegó.",
      "p": null,
-     "t": "1993 · Acuerdos de Oslo"
+     "t": "1993 · Acuerdos de Oslo",
+     "x": 5111,
+     "y": 0
     },
     {
      "id": "nc88yttmmx",
      "k": "hecho",
      "n": "Israel retira a sus soldados y a unos 8.000 colonos de Gaza, pero sigue controlando sus fronteras, su espacio aéreo y su mar.",
      "p": null,
-     "t": "2005 · Israel sale de Gaza"
+     "t": "2005 · Israel sale de Gaza",
+     "x": 5330,
+     "y": 0
     },
     {
      "id": "nnmtz2wmmx",
      "k": "hecho",
      "n": "Hamás gana las elecciones de 2006 y, tras enfrentarse a Fatah, toma Gaza por la fuerza en junio de 2007. Israel y Egipto imponen un bloqueo que dura desde entonces.",
      "p": null,
-     "t": "2007 · Hamás toma Gaza; bloqueo"
+     "t": "2007 · Hamás toma Gaza; bloqueo",
+     "x": 5557,
+     "y": 0
     },
     {
      "id": "nunacrmmmx",
      "k": "hecho",
      "n": "Hamás y otros grupos atacan el sur de Israel: unas 1.200 personas muertas, la mayoría civiles, y 251 secuestradas.",
      "p": null,
-     "t": "2023 · 7 de octubre: ataque de Hamás"
+     "t": "2023 · 7 de octubre: ataque de Hamás",
+     "x": 5753,
+     "y": 0
     },
     {
      "id": "n5sma5ammx",
      "k": "hecho",
      "n": "Ofensiva israelí por aire y tierra. Más de 74.000 palestinos muertos según el Ministerio de Sanidad de Gaza (septiembre de 2026), que no distingue civiles de combatientes; la ONU lo considera en general fiable. Hambruna declarada en la ciudad de Gaza (agosto de 2025). Treguas cortas en noviembre de 2023 y de enero a marzo de 2025.",
      "p": null,
-     "t": "2023 · Empieza la guerra en Gaza"
+     "t": "2023 · Empieza la guerra en Gaza",
+     "x": 5969,
+     "y": 0
     },
     {
      "id": "n3uckrommx",
      "k": "hecho",
      "n": "Plan de 20 puntos (septiembre). Alto el fuego desde el 10 de octubre de 2025: salen los 20 rehenes vivos y cientos de presos palestinos. Israel se repliega tras la «línea amarilla» y controla algo más de la mitad de Gaza (más del 60 % en 2026). Desde la tregua han muerto más de 1.500 palestinos (noviembre de 2026).",
      "p": null,
-     "t": "2025 · Alto el fuego del plan Trump"
+     "t": "2025 · Alto el fuego del plan Trump",
+     "x": 6200,
+     "y": 0
     },
     {
      "id": "nyety5smmx",
      "k": "hecho",
      "n": "28 de febrero: EE. UU. e Israel atacan Irán y matan al líder supremo, Alí Jamenei. Irán responde contra Israel y bases de EE. UU.; Hezbolá reabre el frente del Líbano el 2 de marzo. Tregua frágil desde abril, con nuevos choques.",
      "p": null,
-     "t": "2026 · Guerra contra Irán"
+     "t": "2026 · Guerra contra Irán",
+     "x": 6399,
+     "y": 0
     }
    ],
    "paths": [
@@ -1268,7 +1312,7 @@
     "mode": "piezas"
    },
    "type": "scheme",
-   "updated": 1794314966415,
+   "updated": 1794314972381,
    "v": 2
   }
  ],
