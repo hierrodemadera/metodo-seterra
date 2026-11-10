@@ -28,982 +28,271 @@
  ],
  "esquemas": [
   {
-   "_by": {
-    "n0gcosmfaa": {
-     "id": "n0gcosmfaa",
-     "n": "Crece bajo tierra, unida a las raíces de encinas y robles. Se busca con perros.",
-     "p": "nmqxl2vfaa",
-     "t": "Trufa negra (Tuber melanosporum)"
-    },
-    "n0wwgzhfaa": {
-     "id": "n0wwgzhfaa",
-     "p": "nvib5p9faa",
-     "t": "Esporas asexuales (conidios)"
-    },
-    "n1g98ttfaa": {
-     "id": "n1g98ttfaa",
-     "n": "No son plantas: no tienen clorofila. Por su ADN están más emparentados con los animales que con las plantas.",
-     "p": "n8cd74zfaa",
-     "t": "Un reino propio (Fungi)"
-    },
-    "n1gd2u0faa": {
-     "id": "n1gd2u0faa",
-     "p": "nfiava7faa",
-     "t": "Pie (estípite)"
-    },
-    "n207xdjfaa": {
-     "c": "#e0b100",
-     "id": "n207xdjfaa",
-     "n": "Siempre con esporas: semillas microscópicas que viajan por el aire, el agua o los animales.",
-     "p": "nyzewysfaa",
-     "t": "Cómo se reproducen"
-    },
-    "n2dvsr0faa": {
-     "id": "n2dvsr0faa",
-     "n": "Amarillo, con pliegues en vez de láminas; huele a albaricoque.",
-     "p": "nmqxl2vfaa",
-     "t": "Rebozuelo (Cantharellus cibarius)"
-    },
-    "n2zcnjdfaa": {
-     "id": "n2zcnjdfaa",
-     "n": "La primera se aisló de hongos (Penicillium y Aspergillus).",
-     "p": "nf90caufaa",
-     "t": "Estatinas (colesterol)"
-    },
-    "n38tnnxfaa": {
-     "id": "n38tnnxfaa",
-     "n": "Mortal. Causa la mayoría de muertes por setas: los síntomas tardan horas en aparecer y destruye el hígado.",
-     "p": "nooyutafaa",
-     "t": "Oronja verde (Amanita phalloides)"
-    },
-    "n4cnt5kfaa": {
-     "id": "n4cnt5kfaa",
-     "p": "nbq86zffaa",
-     "t": "Parásitos"
-    },
-    "n4df875faa": {
-     "id": "n4df875faa",
-     "p": "nohuzfyfaa",
-     "t": "Setas comestibles"
-    },
-    "n4vpie8faa": {
-     "c": "#6b4f2a",
-     "id": "n4vpie8faa",
-     "n": "Nunca comas una seta sin que la identifique alguien experto: hay venenosas casi idénticas a las comestibles.",
-     "p": "nyzewysfaa",
-     "t": "Setas que conviene conocer"
-    },
-    "n5ftyljfaa": {
-     "id": "n5ftyljfaa",
-     "p": "n5rulndfaa",
-     "t": "En la naturaleza"
-    },
-    "n5m0rh8faa": {
-     "id": "n5m0rh8faa",
-     "n": "Evita que el cuerpo rechace el órgano trasplantado.",
-     "p": "nf90caufaa",
-     "t": "Ciclosporina (trasplantes)"
-    },
-    "n5rulndfaa": {
-     "c": "#e5484d",
-     "id": "n5rulndfaa",
-     "p": "nyzewysfaa",
-     "t": "Para qué importan"
-    },
-    "n64i0s9faa": {
-     "id": "n64i0s9faa",
-     "n": "Junto con las bacterias, devuelven al suelo los nutrientes de hojas, troncos y cadáveres. Sin ellos, el bosque se llenaría de restos.",
-     "p": "n5ftyljfaa",
-     "t": "Reciclan la materia muerta"
-    },
-    "n66rbdjfaa": {
-     "id": "n66rbdjfaa",
-     "p": "n207xdjfaa",
-     "t": "Sexual"
-    },
-    "n6xkdaafaa": {
-     "id": "n6xkdaafaa",
-     "n": "Sus células tienen núcleo, como las nuestras. Los hay unicelulares (levaduras) y pluricelulares (mohos y setas).",
-     "p": "n8cd74zfaa",
-     "t": "Eucariotas"
-    },
-    "n8cd74zfaa": {
-     "c": "#8b5cf6",
-     "id": "n8cd74zfaa",
-     "p": "nyzewysfaa",
-     "t": "Qué son"
-    },
-    "n8ptn7lfaa": {
-     "id": "n8ptn7lfaa",
-     "p": "n5ftyljfaa",
-     "t": "Ayudan a las plantas (micorrizas)"
-    },
-    "n98p4refaa": {
-     "id": "n98p4refaa",
-     "p": "nusjztlfaa",
-     "t": "Mohos del pan (Rhizopus)"
-    },
-    "n9xqzw8faa": {
-     "id": "n9xqzw8faa",
-     "p": "nqgng8ufaa",
-     "t": "Quitridiomicetos"
-    },
-    "nad1pm2faa": {
-     "id": "nad1pm2faa",
-     "n": "Sombrero rojo con motas blancas: la seta de los cuentos.",
-     "p": "nooyutafaa",
-     "t": "Matamoscas (Amanita muscaria)"
-    },
-    "nb3rk9ufaa": {
-     "id": "nb3rk9ufaa",
-     "p": "n5rulndfaa",
-     "t": "Daños"
-    },
-    "nb5wyj3faa": {
-     "id": "nb5wyj3faa",
-     "n": "Viven unidos a otro ser vivo y los dos salen ganando.",
-     "p": "nbq86zffaa",
-     "t": "Simbiontes"
-    },
-    "nb7kktnfaa": {
-     "id": "nb7kktnfaa",
-     "n": "No fabrican su alimento: lo toman de otros seres vivos o de sus restos.",
-     "p": "n8cd74zfaa",
-     "t": "Heterótrofos"
-    },
-    "nbf9c6rfaa": {
-     "id": "nbf9c6rfaa",
-     "p": "nc31mrzfaa",
-     "t": "Levaduras, Penicillium, trufas, colmenillas"
-    },
-    "nbq86zffaa": {
-     "c": "#0a8a3f",
-     "id": "nbq86zffaa",
-     "p": "nyzewysfaa",
-     "t": "Cómo se alimentan"
-    },
-    "nbqpic9faa": {
-     "id": "nbqpic9faa",
-     "p": "nc31mrzfaa",
-     "t": "Esporas dentro de ascas (saquitos)"
-    },
-    "nc31mrzfaa": {
-     "id": "nc31mrzfaa",
-     "n": "El grupo más numeroso.",
-     "p": "nqgng8ufaa",
-     "t": "Ascomicetos"
-    },
-    "ncazt0efaa": {
-     "id": "ncazt0efaa",
-     "p": "npjnj74faa",
-     "t": "Champiñón, moho del pan"
-    },
-    "ncfh11nfaa": {
-     "id": "ncfh11nfaa",
-     "p": "nqgng8ufaa",
-     "t": "Basidiomicetos"
-    },
-    "ndk8hp7faa": {
-     "id": "ndk8hp7faa",
-     "p": "npjnj74faa",
-     "t": "Descomponen materia muerta"
-    },
-    "ndp6x53faa": {
-     "id": "ndp6x53faa",
-     "p": "nb3rk9ufaa",
-     "t": "Micosis: pie de atleta, candidiasis"
-    },
-    "nehf482faa": {
-     "id": "nehf482faa",
-     "p": "nvib5p9faa",
-     "t": "Fragmentación del micelio"
-    },
-    "nemiszhfaa": {
-     "id": "nemiszhfaa",
-     "n": "Resto del velo que protegía las láminas cuando la seta era joven.",
-     "p": "nfiava7faa",
-     "t": "Anillo"
-    },
-    "nf2blvwfaa": {
-     "id": "nf2blvwfaa",
-     "n": "Hongos con cuerpo fructífero grande y visible.",
-     "p": "ni6xxmlfaa",
-     "t": "Setas"
-    },
-    "nf90caufaa": {
-     "id": "nf90caufaa",
-     "p": "n5rulndfaa",
-     "t": "En medicina"
-    },
-    "nfd41kkfaa": {
-     "id": "nfd41kkfaa",
-     "p": "nb3rk9ufaa",
-     "t": "Setas venenosas"
-    },
-    "nfiava7faa": {
-     "id": "nfiava7faa",
-     "n": "Aparece solo para soltar esporas, como el fruto de un árbol.",
-     "p": "nzv8na8faa",
-     "t": "Cuerpo fructífero (la seta)"
-    },
-    "nfnmt5zfaa": {
-     "id": "nfnmt5zfaa",
-     "n": "La levadura Saccharomyces cerevisiae convierte el azúcar en alcohol y CO₂: el gas hincha el pan y el alcohol queda en la cerveza y el vino.",
-     "p": "nohuzfyfaa",
-     "t": "Pan, cerveza y vino (levadura)"
-    },
-    "nglwsshfaa": {
-     "id": "nglwsshfaa",
-     "n": "Venenos de mohos que crecen en cereales y frutos secos mal guardados.",
-     "p": "nb3rk9ufaa",
-     "t": "Micotoxinas (aflatoxinas)"
-    },
-    "ngr28shfaa": {
-     "id": "ngr28shfaa",
-     "n": "Naranja; al cortarlo suelta un jugo naranja. Típico de pinares.",
-     "p": "nmqxl2vfaa",
-     "t": "Níscalo (Lactarius deliciosus)"
-    },
-    "nh980gxfaa": {
-     "id": "nh980gxfaa",
-     "p": "ncfh11nfaa",
-     "t": "Esporas sobre basidios (mazas)"
-    },
-    "nhb00r3faa": {
-     "id": "nhb00r3faa",
-     "n": "La capa de debajo del sombrero donde se forman las esporas.",
-     "p": "nfiava7faa",
-     "t": "Himenio"
-    },
-    "ni6xxmlfaa": {
-     "c": "#14b8a6",
-     "id": "ni6xxmlfaa",
-     "p": "nyzewysfaa",
-     "t": "Por su forma"
-    },
-    "nicdd90faa": {
-     "id": "nicdd90faa",
-     "n": "La red de hifas, casi siempre escondida bajo tierra o dentro de lo que come. Es el hongo de verdad y puede vivir muchos años.",
-     "p": "nzv8na8faa",
-     "t": "Micelio"
-    },
-    "niqt63wfaa": {
-     "id": "niqt63wfaa",
-     "p": "n66rbdjfaa",
-     "t": "Unión de dos hifas compatibles"
-    },
-    "njb1comfaa": {
-     "id": "njb1comfaa",
-     "p": "nqgng8ufaa",
-     "t": "Glomeromicetos"
-    },
-    "nkivgrafaa": {
-     "id": "nkivgrafaa",
-     "n": "Sueltan enzimas sobre el alimento, lo deshacen fuera de su cuerpo y luego absorben lo digerido.",
-     "p": "n8cd74zfaa",
-     "t": "Digieren por fuera y absorben"
-    },
-    "nkzin9dfaa": {
-     "id": "nkzin9dfaa",
-     "n": "El primer antibiótico, descubierto por Alexander Fleming en 1928 en un moho que contaminó sus placas.",
-     "p": "nf90caufaa",
-     "t": "Penicilina (Penicillium)"
-    },
-    "nl735wzfaa": {
-     "id": "nl735wzfaa",
-     "p": "nt9ozldfaa",
-     "t": "Con tabiques (septadas)"
-    },
-    "nmqxl2vfaa": {
-     "id": "nmqxl2vfaa",
-     "p": "n4vpie8faa",
-     "t": "Comestibles"
-    },
-    "nnjn2a5faa": {
-     "id": "nnjn2a5faa",
-     "p": "n66rbdjfaa",
-     "t": "Esporas sexuales (ascosporas, basidiosporas…)"
-    },
-    "nnjvryufaa": {
-     "id": "nnjvryufaa",
-     "p": "n4cnt5kfaa",
-     "t": "Viven a costa de otro ser vivo"
-    },
-    "noe5ng5faa": {
-     "id": "noe5ng5faa",
-     "p": "nt9ozldfaa",
-     "t": "Sin tabiques (cenocíticas)"
-    },
-    "nohuzfyfaa": {
-     "id": "nohuzfyfaa",
-     "p": "n5rulndfaa",
-     "t": "En la cocina"
-    },
-    "nooyutafaa": {
-     "id": "nooyutafaa",
-     "p": "n4vpie8faa",
-     "t": "Venenosas"
-    },
-    "np782ttfaa": {
-     "id": "np782ttfaa",
-     "n": "Se parece a la colmenilla comestible, pero es tóxica.",
-     "p": "nooyutafaa",
-     "t": "Falsa colmenilla (Gyromitra esculenta)"
-    },
-    "npdawbkfaa": {
-     "id": "npdawbkfaa",
-     "p": "nb3rk9ufaa",
-     "t": "Plagas en cultivos: royas, oídio"
-    },
-    "npjnj74faa": {
-     "id": "npjnj74faa",
-     "p": "nbq86zffaa",
-     "t": "Saprófitos"
-    },
-    "nppb6v5faa": {
-     "id": "nppb6v5faa",
-     "n": "Poros en vez de láminas; pie grueso. Muy buscado en otoño.",
-     "p": "nmqxl2vfaa",
-     "t": "Boletus (Boletus edulis)"
-    },
-    "nq31b6tfaa": {
-     "id": "nq31b6tfaa",
-     "n": "Hongo + raíces de una planta. El hongo le da agua y minerales; la planta le da azúcares. La gran mayoría de las plantas las tienen.",
-     "p": "nb5wyj3faa",
-     "t": "Micorrizas"
-    },
-    "nqgng8ufaa": {
-     "c": "#f28a2e",
-     "id": "nqgng8ufaa",
-     "n": "Clasificación clásica, la de los libros de texto. Hoy los científicos reparten algunos de estos grupos (sobre todo los zigomicetos) en varios.",
-     "p": "nyzewysfaa",
-     "t": "Grupos principales"
-    },
-    "nrc2q6vfaa": {
-     "id": "nrc2q6vfaa",
-     "n": "Roquefort (Penicillium roqueforti), camembert y brie (Penicillium camemberti).",
-     "p": "nohuzfyfaa",
-     "t": "Quesos azules y de corteza blanca (Penicillium)"
-    },
-    "nsdfnzcfaa": {
-     "id": "nsdfnzcfaa",
-     "n": "Filamentosos: forman la «pelusa» que sale en el pan o la fruta.",
-     "p": "ni6xxmlfaa",
-     "t": "Mohos"
-    },
-    "nsx4pwmfaa": {
-     "id": "nsx4pwmfaa",
-     "p": "njb1comfaa",
-     "t": "Micorrizas con la mayoría de plantas"
-    },
-    "nt9ozldfaa": {
-     "id": "nt9ozldfaa",
-     "n": "Filamentos microscópicos: la unidad básica del cuerpo del hongo.",
-     "p": "nzv8na8faa",
-     "t": "Hifas"
-    },
-    "nttw4cmfaa": {
-     "id": "nttw4cmfaa",
-     "n": "La misma sustancia dura del caparazón de los insectos. Las plantas la tienen de celulosa.",
-     "p": "n8cd74zfaa",
-     "t": "Pared celular de quitina"
-    },
-    "nttx3vofaa": {
-     "id": "nttx3vofaa",
-     "p": "nmqxl2vfaa",
-     "t": "Seta de cardo (Pleurotus eryngii)"
-    },
-    "ntye3gzfaa": {
-     "id": "ntye3gzfaa",
-     "n": "Saco en la base del pie, resto del velo que envolvía toda la seta. Típica de las amanitas: ¡ojo!",
-     "p": "nfiava7faa",
-     "t": "Volva"
-    },
-    "nusjztlfaa": {
-     "id": "nusjztlfaa",
-     "p": "nqgng8ufaa",
-     "t": "Zigomicetos"
-    },
-    "nvib5p9faa": {
-     "id": "nvib5p9faa",
-     "p": "n207xdjfaa",
-     "t": "Asexual"
-    },
-    "nvipl8tfaa": {
-     "id": "nvipl8tfaa",
-     "n": "El koji es el moho Aspergillus oryzae.",
-     "p": "nohuzfyfaa",
-     "t": "Miso, salsa de soja y sake (koji)"
-    },
-    "nvokqerfaa": {
-     "id": "nvokqerfaa",
-     "p": "nhb00r3faa",
-     "t": "Poros (tubos)"
-    },
-    "nvs4kgnfaa": {
-     "id": "nvs4kgnfaa",
-     "n": "Como los animales. Las plantas guardan almidón.",
-     "p": "n8cd74zfaa",
-     "t": "Guardan reservas de glucógeno"
-    },
-    "nw5m588faa": {
-     "id": "nw5m588faa",
-     "n": "Una sola célula. Se multiplican por gemación (les sale una yema que se separa).",
-     "p": "ni6xxmlfaa",
-     "t": "Levaduras"
-    },
-    "nwcomuxfaa": {
-     "id": "nwcomuxfaa",
-     "p": "nhb00r3faa",
-     "t": "Láminas"
-    },
-    "nwcq9mefaa": {
-     "id": "nwcq9mefaa",
-     "p": "nvib5p9faa",
-     "t": "Gemación (levaduras)"
-    },
-    "nwehqxdfaa": {
-     "id": "nwehqxdfaa",
-     "n": "Hongo + alga (o cianobacteria). El alga hace la fotosíntesis; el hongo la protege y le da agua.",
-     "p": "nb5wyj3faa",
-     "t": "Líquenes"
-    },
-    "nx7rptzfaa": {
-     "id": "nx7rptzfaa",
-     "p": "nhb00r3faa",
-     "t": "Aguijones"
-    },
-    "nxoiuxrfaa": {
-     "id": "nxoiuxrfaa",
-     "p": "n9xqzw8faa",
-     "t": "Acuáticos, con esporas que nadan (flagelo)"
-    },
-    "ny3x6vefaa": {
-     "id": "ny3x6vefaa",
-     "p": "ncfh11nfaa",
-     "t": "Casi todas las setas, royas y carbones"
-    },
-    "nyim448faa": {
-     "id": "nyim448faa",
-     "n": "El más cultivado del mundo.",
-     "p": "nmqxl2vfaa",
-     "t": "Champiñón (Agaricus bisporus)"
-    },
-    "nywhe5wfaa": {
-     "id": "nywhe5wfaa",
-     "p": "nfiava7faa",
-     "t": "Sombrero (píleo)"
-    },
-    "nyzewysfaa": {
-     "id": "nyzewysfaa",
-     "n": "Seres vivos que no son ni plantas ni animales: forman su propio reino. La mayor parte del hongo vive escondida (bajo tierra, dentro de la madera o de un alimento); lo que vemos como «seta» es solo su fruto.",
-     "p": null,
-     "t": "Los hongos"
-    },
-    "nzi9n40faa": {
-     "id": "nzi9n40faa",
-     "p": "n4cnt5kfaa",
-     "t": "Royas, oídio, pie de atleta"
-    },
-    "nzv8na8faa": {
-     "c": "#1c9bd6",
-     "id": "nzv8na8faa",
-     "p": "nyzewysfaa",
-     "t": "Su cuerpo"
-    }
-   },
-   "color": "#6b4f2a",
-   "created": 1794306592161,
-   "id": "ej-hongos",
+   "color": "#1c1c1e",
+   "created": 1794306997436,
+   "id": "ej-dhondt",
    "layout": "llaves",
    "links": [],
-   "name": "Los hongos",
+   "name": "La ley D’Hondt",
    "nodes": [
     {
-     "id": "nyzewysfaa",
-     "n": "Seres vivos que no son ni plantas ni animales: forman su propio reino. La mayor parte del hongo vive escondida (bajo tierra, dentro de la madera o de un alimento); lo que vemos como «seta» es solo su fruto.",
+     "id": "n8kpcnn3zw",
+     "n": "Fórmula matemática para repartir los escaños entre los partidos según los votos que ha sacado cada uno. No es una ley en sí: es el método que manda usar la ley electoral.",
      "p": null,
-     "t": "Los hongos"
+     "t": "Ley D’Hondt"
     },
     {
      "c": "#8b5cf6",
-     "id": "n8cd74zfaa",
-     "p": "nyzewysfaa",
-     "t": "Qué son"
+     "id": "njlsnwh3zw",
+     "p": "n8kpcnn3zw",
+     "t": "Qué es"
     },
     {
-     "id": "n1g98ttfaa",
-     "n": "No son plantas: no tienen clorofila. Por su ADN están más emparentados con los animales que con las plantas.",
-     "p": "n8cd74zfaa",
-     "t": "Un reino propio (Fungi)"
+     "id": "n4nhur23zw",
+     "n": "Cuantos más votos, más escaños, aunque no en la proporción exacta: redondea a favor de los grandes.",
+     "p": "njlsnwh3zw",
+     "t": "Un método de reparto proporcional"
     },
     {
-     "id": "n6xkdaafaa",
-     "n": "Sus células tienen núcleo, como las nuestras. Los hay unicelulares (levaduras) y pluricelulares (mohos y setas).",
-     "p": "n8cd74zfaa",
-     "t": "Eucariotas"
+     "id": "nq7p5pg3zw",
+     "p": "njlsnwh3zw",
+     "t": "Ideado por Victor D’Hondt (Bélgica, 1878)"
     },
     {
-     "id": "nb7kktnfaa",
-     "n": "No fabrican su alimento: lo toman de otros seres vivos o de sus restos.",
-     "p": "n8cd74zfaa",
-     "t": "Heterótrofos"
+     "id": "n2c93zs3zw",
+     "n": "En España, en cada provincia. Por eso el resultado depende tanto de cuántos escaños reparte cada una.",
+     "p": "njlsnwh3zw",
+     "t": "Se aplica en cada circunscripción por separado"
     },
     {
-     "id": "nkivgrafaa",
-     "n": "Sueltan enzimas sobre el alimento, lo deshacen fuera de su cuerpo y luego absorben lo digerido.",
-     "p": "n8cd74zfaa",
-     "t": "Digieren por fuera y absorben"
-    },
-    {
-     "id": "nttw4cmfaa",
-     "n": "La misma sustancia dura del caparazón de los insectos. Las plantas la tienen de celulosa.",
-     "p": "n8cd74zfaa",
-     "t": "Pared celular de quitina"
-    },
-    {
-     "id": "nvs4kgnfaa",
-     "n": "Como los animales. Las plantas guardan almidón.",
-     "p": "n8cd74zfaa",
-     "t": "Guardan reservas de glucógeno"
+     "id": "nplrdu93zw",
+     "p": "njlsnwh3zw",
+     "t": "Lo manda la ley electoral (LOREG, 1985)"
     },
     {
      "c": "#1c9bd6",
-     "id": "nzv8na8faa",
-     "p": "nyzewysfaa",
-     "t": "Su cuerpo"
+     "id": "nu7xtbp3zw",
+     "p": "n8kpcnn3zw",
+     "t": "Paso a paso"
     },
     {
-     "id": "nt9ozldfaa",
-     "n": "Filamentos microscópicos: la unidad básica del cuerpo del hongo.",
-     "p": "nzv8na8faa",
-     "t": "Hifas"
+     "id": "nzyb2gf3zw",
+     "n": "Para el Congreso, el 3 % de los votos válidos de la provincia (los votos en blanco cuentan como válidos; los nulos, no).",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 1: quitar a los que no llegan al umbral"
     },
     {
-     "id": "nl735wzfaa",
-     "p": "nt9ozldfaa",
-     "t": "Con tabiques (septadas)"
+     "id": "nvs76c33zw",
+     "n": "Se divide hasta llegar al número de escaños que se reparten en esa provincia.",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 2: dividir los votos de cada partido entre 1, 2, 3…"
     },
     {
-     "id": "noe5ng5faa",
-     "p": "nt9ozldfaa",
-     "t": "Sin tabiques (cenocíticas)"
+     "id": "nhaknnu3zw",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 3: ordenar todos los resultados de mayor a menor"
     },
     {
-     "id": "nicdd90faa",
-     "n": "La red de hifas, casi siempre escondida bajo tierra o dentro de lo que come. Es el hongo de verdad y puede vivir muchos años.",
-     "p": "nzv8na8faa",
-     "t": "Micelio"
+     "id": "nhousxe3zw",
+     "n": "Si hay 5 escaños, se dan a los 5 resultados más altos, sean del partido que sean.",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 4: un escaño para cada uno de los más altos"
     },
     {
-     "id": "nfiava7faa",
-     "n": "Aparece solo para soltar esporas, como el fruto de un árbol.",
-     "p": "nzv8na8faa",
-     "t": "Cuerpo fructífero (la seta)"
-    },
-    {
-     "id": "nywhe5wfaa",
-     "p": "nfiava7faa",
-     "t": "Sombrero (píleo)"
-    },
-    {
-     "id": "nhb00r3faa",
-     "n": "La capa de debajo del sombrero donde se forman las esporas.",
-     "p": "nfiava7faa",
-     "t": "Himenio"
-    },
-    {
-     "id": "nwcomuxfaa",
-     "p": "nhb00r3faa",
-     "t": "Láminas"
-    },
-    {
-     "id": "nvokqerfaa",
-     "p": "nhb00r3faa",
-     "t": "Poros (tubos)"
-    },
-    {
-     "id": "nx7rptzfaa",
-     "p": "nhb00r3faa",
-     "t": "Aguijones"
-    },
-    {
-     "id": "n1gd2u0faa",
-     "p": "nfiava7faa",
-     "t": "Pie (estípite)"
-    },
-    {
-     "id": "nemiszhfaa",
-     "n": "Resto del velo que protegía las láminas cuando la seta era joven.",
-     "p": "nfiava7faa",
-     "t": "Anillo"
-    },
-    {
-     "id": "ntye3gzfaa",
-     "n": "Saco en la base del pie, resto del velo que envolvía toda la seta. Típica de las amanitas: ¡ojo!",
-     "p": "nfiava7faa",
-     "t": "Volva"
+     "id": "nvxaz6w3zw",
+     "n": "Si también empatan en votos, se sortea.",
+     "p": "nu7xtbp3zw",
+     "t": "Empate: gana el partido con más votos"
     },
     {
      "c": "#14b8a6",
-     "id": "ni6xxmlfaa",
-     "p": "nyzewysfaa",
-     "t": "Por su forma"
+     "id": "ncfwr9i3zw",
+     "n": "Votos: A 100.000 · B 80.000 · C 30.000. Divisiones de A: 100.000 / 50.000 / 33.333… · de B: 80.000 / 40.000 / 26.667… · de C: 30.000 / 15.000…",
+     "p": "n8kpcnn3zw",
+     "t": "Ejemplo con 5 escaños"
     },
     {
-     "id": "nw5m588faa",
-     "n": "Una sola célula. Se multiplican por gemación (les sale una yema que se separa).",
-     "p": "ni6xxmlfaa",
-     "t": "Levaduras"
+     "id": "nfezhhk3zw",
+     "p": "ncfwr9i3zw",
+     "t": "Los 5 más altos"
     },
     {
-     "id": "nsdfnzcfaa",
-     "n": "Filamentosos: forman la «pelusa» que sale en el pan o la fruta.",
-     "p": "ni6xxmlfaa",
-     "t": "Mohos"
+     "id": "nhvkfov3zw",
+     "p": "nfezhhk3zw",
+     "t": "1º 100.000 (A)"
     },
     {
-     "id": "nf2blvwfaa",
-     "n": "Hongos con cuerpo fructífero grande y visible.",
-     "p": "ni6xxmlfaa",
-     "t": "Setas"
+     "id": "ntbffyg3zw",
+     "p": "nfezhhk3zw",
+     "t": "2º 80.000 (B)"
     },
     {
-     "c": "#0a8a3f",
-     "id": "nbq86zffaa",
-     "p": "nyzewysfaa",
-     "t": "Cómo se alimentan"
+     "id": "nyc576c3zw",
+     "p": "nfezhhk3zw",
+     "t": "3º 50.000 (A)"
     },
     {
-     "id": "npjnj74faa",
-     "p": "nbq86zffaa",
-     "t": "Saprófitos"
+     "id": "n5vo9s83zw",
+     "p": "nfezhhk3zw",
+     "t": "4º 40.000 (B)"
     },
     {
-     "id": "ndk8hp7faa",
-     "p": "npjnj74faa",
-     "t": "Descomponen materia muerta"
+     "id": "nlhtrr23zw",
+     "p": "nfezhhk3zw",
+     "t": "5º 33.333 (A)"
     },
     {
-     "id": "ncazt0efaa",
-     "p": "npjnj74faa",
-     "t": "Champiñón, moho del pan"
+     "id": "naouvkj3zw",
+     "p": "ncfwr9i3zw",
+     "t": "Resultado"
     },
     {
-     "id": "n4cnt5kfaa",
-     "p": "nbq86zffaa",
-     "t": "Parásitos"
+     "id": "n9tbp3k3zw",
+     "p": "naouvkj3zw",
+     "t": "A: 3 escaños con el 43 % de los votos"
     },
     {
-     "id": "nnjvryufaa",
-     "p": "n4cnt5kfaa",
-     "t": "Viven a costa de otro ser vivo"
+     "id": "njknntl3zw",
+     "p": "naouvkj3zw",
+     "t": "B: 2 escaños con el 35 %"
     },
     {
-     "id": "nzi9n40faa",
-     "p": "n4cnt5kfaa",
-     "t": "Royas, oídio, pie de atleta"
-    },
-    {
-     "id": "nb5wyj3faa",
-     "n": "Viven unidos a otro ser vivo y los dos salen ganando.",
-     "p": "nbq86zffaa",
-     "t": "Simbiontes"
-    },
-    {
-     "id": "nq31b6tfaa",
-     "n": "Hongo + raíces de una planta. El hongo le da agua y minerales; la planta le da azúcares. La gran mayoría de las plantas las tienen.",
-     "p": "nb5wyj3faa",
-     "t": "Micorrizas"
-    },
-    {
-     "id": "nwehqxdfaa",
-     "n": "Hongo + alga (o cianobacteria). El alga hace la fotosíntesis; el hongo la protege y le da agua.",
-     "p": "nb5wyj3faa",
-     "t": "Líquenes"
+     "id": "ng43bun3zw",
+     "n": "Con 30.000 votos se queda fuera: le faltaron unos 3.300 para superar el 33.333 de A.",
+     "p": "naouvkj3zw",
+     "t": "C: ninguno con el 13 %"
     },
     {
      "c": "#e0b100",
-     "id": "n207xdjfaa",
-     "n": "Siempre con esporas: semillas microscópicas que viajan por el aire, el agua o los animales.",
-     "p": "nyzewysfaa",
-     "t": "Cómo se reproducen"
+     "id": "no12dtm3zw",
+     "p": "n8kpcnn3zw",
+     "t": "Cómo se usa en España"
     },
     {
-     "id": "nvib5p9faa",
-     "p": "n207xdjfaa",
-     "t": "Asexual"
+     "id": "nix3chf3zw",
+     "p": "no12dtm3zw",
+     "t": "Congreso de los Diputados"
     },
     {
-     "id": "n0wwgzhfaa",
-     "p": "nvib5p9faa",
-     "t": "Esporas asexuales (conidios)"
+     "id": "niqzynz3zw",
+     "p": "nix3chf3zw",
+     "t": "350 diputados"
     },
     {
-     "id": "nwcq9mefaa",
-     "p": "nvib5p9faa",
-     "t": "Gemación (levaduras)"
+     "id": "nfjd6ql3zx",
+     "p": "nix3chf3zw",
+     "t": "52 circunscripciones (50 provincias, Ceuta y Melilla)"
     },
     {
-     "id": "nehf482faa",
-     "p": "nvib5p9faa",
-     "t": "Fragmentación del micelio"
+     "id": "nwlmun53zx",
+     "n": "Los otros 248 se reparten según la población. Ceuta y Melilla eligen 1 cada una.",
+     "p": "nix3chf3zw",
+     "t": "2 diputados fijos por provincia"
     },
     {
-     "id": "n66rbdjfaa",
-     "p": "n207xdjfaa",
-     "t": "Sexual"
+     "id": "n04gh1f3zx",
+     "p": "nix3chf3zw",
+     "t": "Umbral del 3 % en cada provincia"
     },
     {
-     "id": "niqt63wfaa",
-     "p": "n66rbdjfaa",
-     "t": "Unión de dos hifas compatibles"
+     "id": "nk4os4u3zx",
+     "n": "Votas una lista de un partido entera, sin poder cambiar el orden ni tachar nombres.",
+     "p": "nix3chf3zw",
+     "t": "Listas cerradas y bloqueadas"
     },
     {
-     "id": "nnjn2a5faa",
-     "p": "n66rbdjfaa",
-     "t": "Esporas sexuales (ascosporas, basidiosporas…)"
+     "id": "n6jhpox3zx",
+     "p": "no12dtm3zw",
+     "t": "También en"
     },
     {
-     "c": "#f28a2e",
-     "id": "nqgng8ufaa",
-     "n": "Clasificación clásica, la de los libros de texto. Hoy los científicos reparten algunos de estos grupos (sobre todo los zigomicetos) en varios.",
-     "p": "nyzewysfaa",
-     "t": "Grupos principales"
+     "id": "ntc0b7e3zx",
+     "p": "n6jhpox3zx",
+     "t": "Elecciones municipales (umbral del 5 %)"
     },
     {
-     "id": "n9xqzw8faa",
-     "p": "nqgng8ufaa",
-     "t": "Quitridiomicetos"
+     "id": "nxiv1wg3zx",
+     "p": "n6jhpox3zx",
+     "t": "Elecciones autonómicas (umbral según la comunidad)"
     },
     {
-     "id": "nxoiuxrfaa",
-     "p": "n9xqzw8faa",
-     "t": "Acuáticos, con esporas que nadan (flagelo)"
+     "id": "n349sv93zx",
+     "p": "n6jhpox3zx",
+     "t": "Elecciones europeas (toda España, una sola circunscripción)"
     },
     {
-     "id": "nusjztlfaa",
-     "p": "nqgng8ufaa",
-     "t": "Zigomicetos"
-    },
-    {
-     "id": "n98p4refaa",
-     "p": "nusjztlfaa",
-     "t": "Mohos del pan (Rhizopus)"
-    },
-    {
-     "id": "nc31mrzfaa",
-     "n": "El grupo más numeroso.",
-     "p": "nqgng8ufaa",
-     "t": "Ascomicetos"
-    },
-    {
-     "id": "nbqpic9faa",
-     "p": "nc31mrzfaa",
-     "t": "Esporas dentro de ascas (saquitos)"
-    },
-    {
-     "id": "nbf9c6rfaa",
-     "p": "nc31mrzfaa",
-     "t": "Levaduras, Penicillium, trufas, colmenillas"
-    },
-    {
-     "id": "ncfh11nfaa",
-     "p": "nqgng8ufaa",
-     "t": "Basidiomicetos"
-    },
-    {
-     "id": "nh980gxfaa",
-     "p": "ncfh11nfaa",
-     "t": "Esporas sobre basidios (mazas)"
-    },
-    {
-     "id": "ny3x6vefaa",
-     "p": "ncfh11nfaa",
-     "t": "Casi todas las setas, royas y carbones"
-    },
-    {
-     "id": "njb1comfaa",
-     "p": "nqgng8ufaa",
-     "t": "Glomeromicetos"
-    },
-    {
-     "id": "nsx4pwmfaa",
-     "p": "njb1comfaa",
-     "t": "Micorrizas con la mayoría de plantas"
+     "id": "nz6p28x3zx",
+     "n": "Sistema mayoritario de voto limitado: en cada provincia se eligen 4 senadores y cada votante marca hasta 3 nombres. Salen los más votados.",
+     "p": "no12dtm3zw",
+     "t": "El Senado no usa D’Hondt"
     },
     {
      "c": "#e5484d",
-     "id": "n5rulndfaa",
-     "p": "nyzewysfaa",
-     "t": "Para qué importan"
+     "id": "n443m603zx",
+     "p": "n8kpcnn3zw",
+     "t": "Efectos"
     },
     {
-     "id": "n5ftyljfaa",
-     "p": "n5rulndfaa",
-     "t": "En la naturaleza"
+     "id": "ngll4ml3zx",
+     "p": "n443m603zx",
+     "t": "Premia a los partidos grandes"
     },
     {
-     "id": "n64i0s9faa",
-     "n": "Junto con las bacterias, devuelven al suelo los nutrientes de hojas, troncos y cadáveres. Sin ellos, el bosque se llenaría de restos.",
-     "p": "n5ftyljfaa",
-     "t": "Reciclan la materia muerta"
+     "id": "nwmwjw03zx",
+     "n": "Sus votos están repartidos por todo el país y en muchas provincias no llegan a ningún escaño: esos votos no sirven para nada.",
+     "p": "n443m603zx",
+     "t": "Castiga a los pequeños de ámbito nacional"
     },
     {
-     "id": "n8ptn7lfaa",
-     "p": "n5ftyljfaa",
-     "t": "Ayudan a las plantas (micorrizas)"
+     "id": "nschjxj3zx",
+     "n": "Al sacar muchos votos en pocas provincias, consiguen escaños con menos votos totales.",
+     "p": "n443m603zx",
+     "t": "Favorece a los regionales con voto concentrado"
     },
     {
-     "id": "nohuzfyfaa",
-     "p": "n5rulndfaa",
-     "t": "En la cocina"
+     "id": "nbttdyw3zx",
+     "p": "n443m603zx",
+     "t": "Facilita mayorías y gobiernos más estables"
     },
     {
-     "id": "n4df875faa",
-     "p": "nohuzfyfaa",
-     "t": "Setas comestibles"
+     "id": "np0huk43zx",
+     "n": "Donde se reparten 3 escaños, para sacar uno hace falta en torno al 20 % de los votos. Ojo: en España la desproporción viene sobre todo de lo pequeñas que son muchas provincias, más que de la fórmula en sí.",
+     "p": "n443m603zx",
+     "t": "Provincias pequeñas: hace falta mucho porcentaje"
     },
     {
-     "id": "nfnmt5zfaa",
-     "n": "La levadura Saccharomyces cerevisiae convierte el azúcar en alcohol y CO₂: el gas hincha el pan y el alcohol queda en la cerveza y el vino.",
-     "p": "nohuzfyfaa",
-     "t": "Pan, cerveza y vino (levadura)"
+     "id": "n2yvbdl3zx",
+     "n": "Por los 2 diputados fijos, un escaño en Soria o Teruel cuesta muchos menos votos que uno en Madrid o Barcelona.",
+     "p": "n443m603zx",
+     "t": "Un voto rural pesa más que uno urbano"
     },
     {
-     "id": "nrc2q6vfaa",
-     "n": "Roquefort (Penicillium roqueforti), camembert y brie (Penicillium camemberti).",
-     "p": "nohuzfyfaa",
-     "t": "Quesos azules y de corteza blanca (Penicillium)"
+     "c": "#f28a2e",
+     "id": "nwthmut3zx",
+     "p": "n8kpcnn3zw",
+     "t": "Otros métodos"
     },
     {
-     "id": "nvipl8tfaa",
-     "n": "El koji es el moho Aspergillus oryzae.",
-     "p": "nohuzfyfaa",
-     "t": "Miso, salsa de soja y sake (koji)"
+     "id": "nnn8aq93zx",
+     "n": "Divide entre 1, 3, 5, 7… Es más proporcional y trata mejor a los partidos medianos. Se usa, por ejemplo, en Suecia y en Noruega (con un ajuste) y en Alemania.",
+     "p": "nwthmut3zx",
+     "t": "Sainte-Laguë"
     },
     {
-     "id": "nf90caufaa",
-     "p": "n5rulndfaa",
-     "t": "En medicina"
+     "id": "nz9nr2s3zx",
+     "n": "Se calcula cuántos votos «cuesta» un escaño (votos ÷ escaños); cada partido se lleva los escaños enteros que le tocan y los que sobran van a los restos más grandes.",
+     "p": "nwthmut3zx",
+     "t": "Resto mayor (Hare)"
     },
     {
-     "id": "nkzin9dfaa",
-     "n": "El primer antibiótico, descubierto por Alexander Fleming en 1928 en un moho que contaminó sus placas.",
-     "p": "nf90caufaa",
-     "t": "Penicilina (Penicillium)"
-    },
-    {
-     "id": "n5m0rh8faa",
-     "n": "Evita que el cuerpo rechace el órgano trasplantado.",
-     "p": "nf90caufaa",
-     "t": "Ciclosporina (trasplantes)"
-    },
-    {
-     "id": "n2zcnjdfaa",
-     "n": "La primera se aisló de hongos (Penicillium y Aspergillus).",
-     "p": "nf90caufaa",
-     "t": "Estatinas (colesterol)"
-    },
-    {
-     "id": "nb3rk9ufaa",
-     "p": "n5rulndfaa",
-     "t": "Daños"
-    },
-    {
-     "id": "ndp6x53faa",
-     "p": "nb3rk9ufaa",
-     "t": "Micosis: pie de atleta, candidiasis"
-    },
-    {
-     "id": "npdawbkfaa",
-     "p": "nb3rk9ufaa",
-     "t": "Plagas en cultivos: royas, oídio"
-    },
-    {
-     "id": "nglwsshfaa",
-     "n": "Venenos de mohos que crecen en cereales y frutos secos mal guardados.",
-     "p": "nb3rk9ufaa",
-     "t": "Micotoxinas (aflatoxinas)"
-    },
-    {
-     "id": "nfd41kkfaa",
-     "p": "nb3rk9ufaa",
-     "t": "Setas venenosas"
-    },
-    {
-     "c": "#6b4f2a",
-     "id": "n4vpie8faa",
-     "n": "Nunca comas una seta sin que la identifique alguien experto: hay venenosas casi idénticas a las comestibles.",
-     "p": "nyzewysfaa",
-     "t": "Setas que conviene conocer"
-    },
-    {
-     "id": "nmqxl2vfaa",
-     "p": "n4vpie8faa",
-     "t": "Comestibles"
-    },
-    {
-     "id": "nppb6v5faa",
-     "n": "Poros en vez de láminas; pie grueso. Muy buscado en otoño.",
-     "p": "nmqxl2vfaa",
-     "t": "Boletus (Boletus edulis)"
-    },
-    {
-     "id": "ngr28shfaa",
-     "n": "Naranja; al cortarlo suelta un jugo naranja. Típico de pinares.",
-     "p": "nmqxl2vfaa",
-     "t": "Níscalo (Lactarius deliciosus)"
-    },
-    {
-     "id": "n2dvsr0faa",
-     "n": "Amarillo, con pliegues en vez de láminas; huele a albaricoque.",
-     "p": "nmqxl2vfaa",
-     "t": "Rebozuelo (Cantharellus cibarius)"
-    },
-    {
-     "id": "nyim448faa",
-     "n": "El más cultivado del mundo.",
-     "p": "nmqxl2vfaa",
-     "t": "Champiñón (Agaricus bisporus)"
-    },
-    {
-     "id": "nttx3vofaa",
-     "p": "nmqxl2vfaa",
-     "t": "Seta de cardo (Pleurotus eryngii)"
-    },
-    {
-     "id": "n0gcosmfaa",
-     "n": "Crece bajo tierra, unida a las raíces de encinas y robles. Se busca con perros.",
-     "p": "nmqxl2vfaa",
-     "t": "Trufa negra (Tuber melanosporum)"
-    },
-    {
-     "id": "nooyutafaa",
-     "p": "n4vpie8faa",
-     "t": "Venenosas"
-    },
-    {
-     "id": "n38tnnxfaa",
-     "n": "Mortal. Causa la mayoría de muertes por setas: los síntomas tardan horas en aparecer y destruye el hígado.",
-     "p": "nooyutafaa",
-     "t": "Oronja verde (Amanita phalloides)"
-    },
-    {
-     "id": "nad1pm2faa",
-     "n": "Sombrero rojo con motas blancas: la seta de los cuentos.",
-     "p": "nooyutafaa",
-     "t": "Matamoscas (Amanita muscaria)"
-    },
-    {
-     "id": "np782ttfaa",
-     "n": "Se parece a la colmenilla comestible, pero es tóxica.",
-     "p": "nooyutafaa",
-     "t": "Falsa colmenilla (Gyromitra esculenta)"
+     "id": "n071nb33zx",
+     "n": "En cada distrito gana un solo candidato, el más votado, y el resto de votos no cuenta. Reino Unido y Estados Unidos.",
+     "p": "nwthmut3zx",
+     "t": "Mayoritario"
     }
    ],
    "type": "scheme",
-   "updated": 1794306592161,
+   "updated": 1794306997436,
    "v": 2
   }
  ],
