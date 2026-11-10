@@ -1314,6 +1314,19 @@
      "t": "2026 · Guerra contra Irán"
     }
    ],
+   "run": {
+    "cur": null,
+    "f": {},
+    "hd": {},
+    "linksDone": {},
+    "pd": {},
+    "pdone": {},
+    "phase": 1,
+    "res": {},
+    "start": 1794327211972,
+    "tl": {},
+    "v": 1
+   },
    "type": "scheme",
    "updated": 1794327201359,
    "v": 2
