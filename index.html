@@ -9606,134 +9606,73 @@ function mpRadial(sc){
 
 /* ---------- esquemas de ejemplo (se añaden una vez; se pueden borrar o cambiar) ---------- */
 const MP_EJ = [
-  { id: 'ej-hongos', name: 'Los hongos', layout: 'llaves', color: '#6b4f2a',
-    colors: { 'Qué son': '#8b5cf6', 'Su cuerpo': '#1c9bd6', 'Por su forma': '#14b8a6', 'Cómo se alimentan': '#0a8a3f', 'Cómo se reproducen': '#e0b100', 'Grupos principales': '#f28a2e', 'Para qué importan': '#e5484d', 'Setas que conviene conocer': '#6b4f2a' },
-    text: `Los hongos
-  > Seres vivos que no son ni plantas ni animales: forman su propio reino. La mayor parte del hongo vive escondida (bajo tierra, dentro de la madera o de un alimento); lo que vemos como «seta» es solo su fruto.
-  Qué son
-    Un reino propio (Fungi)
-      > No son plantas: no tienen clorofila. Por su ADN están más emparentados con los animales que con las plantas.
-    Eucariotas
-      > Sus células tienen núcleo, como las nuestras. Los hay unicelulares (levaduras) y pluricelulares (mohos y setas).
-    Heterótrofos
-      > No fabrican su alimento: lo toman de otros seres vivos o de sus restos.
-    Digieren por fuera y absorben
-      > Sueltan enzimas sobre el alimento, lo deshacen fuera de su cuerpo y luego absorben lo digerido.
-    Pared celular de quitina
-      > La misma sustancia dura del caparazón de los insectos. Las plantas la tienen de celulosa.
-    Guardan reservas de glucógeno
-      > Como los animales. Las plantas guardan almidón.
-  Su cuerpo
-    Hifas
-      > Filamentos microscópicos: la unidad básica del cuerpo del hongo.
-      Con tabiques (septadas)
-      Sin tabiques (cenocíticas)
-    Micelio
-      > La red de hifas, casi siempre escondida bajo tierra o dentro de lo que come. Es el hongo de verdad y puede vivir muchos años.
-    Cuerpo fructífero (la seta)
-      > Aparece solo para soltar esporas, como el fruto de un árbol.
-      Sombrero (píleo)
-      Himenio
-        > La capa de debajo del sombrero donde se forman las esporas.
-        Láminas
-        Poros (tubos)
-        Aguijones
-      Pie (estípite)
-      Anillo
-        > Resto del velo que protegía las láminas cuando la seta era joven.
-      Volva
-        > Saco en la base del pie, resto del velo que envolvía toda la seta. Típica de las amanitas: ¡ojo!
-  Por su forma
-    Levaduras
-      > Una sola célula. Se multiplican por gemación (les sale una yema que se separa).
-    Mohos
-      > Filamentosos: forman la «pelusa» que sale en el pan o la fruta.
-    Setas
-      > Hongos con cuerpo fructífero grande y visible.
-  Cómo se alimentan
-    Saprófitos
-      Descomponen materia muerta
-      Champiñón, moho del pan
-    Parásitos
-      Viven a costa de otro ser vivo
-      Royas, oídio, pie de atleta
-    Simbiontes
-      > Viven unidos a otro ser vivo y los dos salen ganando.
-      Micorrizas
-        > Hongo + raíces de una planta. El hongo le da agua y minerales; la planta le da azúcares. La gran mayoría de las plantas las tienen.
-      Líquenes
-        > Hongo + alga (o cianobacteria). El alga hace la fotosíntesis; el hongo la protege y le da agua.
-  Cómo se reproducen
-    > Siempre con esporas: semillas microscópicas que viajan por el aire, el agua o los animales.
-    Asexual
-      Esporas asexuales (conidios)
-      Gemación (levaduras)
-      Fragmentación del micelio
-    Sexual
-      Unión de dos hifas compatibles
-      Esporas sexuales (ascosporas, basidiosporas…)
-  Grupos principales
-    > Clasificación clásica, la de los libros de texto. Hoy los científicos reparten algunos de estos grupos (sobre todo los zigomicetos) en varios.
-    Quitridiomicetos
-      Acuáticos, con esporas que nadan (flagelo)
-    Zigomicetos
-      Mohos del pan (Rhizopus)
-    Ascomicetos
-      > El grupo más numeroso.
-      Esporas dentro de ascas (saquitos)
-      Levaduras, Penicillium, trufas, colmenillas
-    Basidiomicetos
-      Esporas sobre basidios (mazas)
-      Casi todas las setas, royas y carbones
-    Glomeromicetos
-      Micorrizas con la mayoría de plantas
-  Para qué importan
-    En la naturaleza
-      Reciclan la materia muerta
-        > Junto con las bacterias, devuelven al suelo los nutrientes de hojas, troncos y cadáveres. Sin ellos, el bosque se llenaría de restos.
-      Ayudan a las plantas (micorrizas)
-    En la cocina
-      Setas comestibles
-      Pan, cerveza y vino (levadura)
-        > La levadura Saccharomyces cerevisiae convierte el azúcar en alcohol y CO₂: el gas hincha el pan y el alcohol queda en la cerveza y el vino.
-      Quesos azules y de corteza blanca (Penicillium)
-        > Roquefort (Penicillium roqueforti), camembert y brie (Penicillium camemberti).
-      Miso, salsa de soja y sake (koji)
-        > El koji es el moho Aspergillus oryzae.
-    En medicina
-      Penicilina (Penicillium)
-        > El primer antibiótico, descubierto por Alexander Fleming en 1928 en un moho que contaminó sus placas.
-      Ciclosporina (trasplantes)
-        > Evita que el cuerpo rechace el órgano trasplantado.
-      Estatinas (colesterol)
-        > La primera se aisló de hongos (Penicillium y Aspergillus).
-    Daños
-      Micosis: pie de atleta, candidiasis
-      Plagas en cultivos: royas, oídio
-      Micotoxinas (aflatoxinas)
-        > Venenos de mohos que crecen en cereales y frutos secos mal guardados.
-      Setas venenosas
-  Setas que conviene conocer
-    > Nunca comas una seta sin que la identifique alguien experto: hay venenosas casi idénticas a las comestibles.
-    Comestibles
-      Boletus (Boletus edulis)
-        > Poros en vez de láminas; pie grueso. Muy buscado en otoño.
-      Níscalo (Lactarius deliciosus)
-        > Naranja; al cortarlo suelta un jugo naranja. Típico de pinares.
-      Rebozuelo (Cantharellus cibarius)
-        > Amarillo, con pliegues en vez de láminas; huele a albaricoque.
-      Champiñón (Agaricus bisporus)
-        > El más cultivado del mundo.
-      Seta de cardo (Pleurotus eryngii)
-      Trufa negra (Tuber melanosporum)
-        > Crece bajo tierra, unida a las raíces de encinas y robles. Se busca con perros.
-    Venenosas
-      Oronja verde (Amanita phalloides)
-        > Mortal. Causa la mayoría de muertes por setas: los síntomas tardan horas en aparecer y destruye el hígado.
-      Matamoscas (Amanita muscaria)
-        > Sombrero rojo con motas blancas: la seta de los cuentos.
-      Falsa colmenilla (Gyromitra esculenta)
-        > Se parece a la colmenilla comestible, pero es tóxica.` }
+  { id: 'ej-dhondt', name: 'La ley D’Hondt', layout: 'llaves', color: '#1c1c1e',
+    colors: { 'Qué es': '#8b5cf6', 'Paso a paso': '#1c9bd6', 'Ejemplo con 5 escaños': '#14b8a6', 'Cómo se usa en España': '#e0b100', 'Efectos': '#e5484d', 'Otros métodos': '#f28a2e' },
+    text: `Ley D’Hondt
+  > Fórmula matemática para repartir los escaños entre los partidos según los votos que ha sacado cada uno. No es una ley en sí: es el método que manda usar la ley electoral.
+  Qué es
+    Un método de reparto proporcional
+      > Cuantos más votos, más escaños, aunque no en la proporción exacta: redondea a favor de los grandes.
+    Ideado por Victor D’Hondt (Bélgica, 1878)
+    Se aplica en cada circunscripción por separado
+      > En España, en cada provincia. Por eso el resultado depende tanto de cuántos escaños reparte cada una.
+    Lo manda la ley electoral (LOREG, 1985)
+  Paso a paso
+    Paso 1: quitar a los que no llegan al umbral
+      > Para el Congreso, el 3 % de los votos válidos de la provincia (los votos en blanco cuentan como válidos; los nulos, no).
+    Paso 2: dividir los votos de cada partido entre 1, 2, 3…
+      > Se divide hasta llegar al número de escaños que se reparten en esa provincia.
+    Paso 3: ordenar todos los resultados de mayor a menor
+    Paso 4: un escaño para cada uno de los más altos
+      > Si hay 5 escaños, se dan a los 5 resultados más altos, sean del partido que sean.
+    Empate: gana el partido con más votos
+      > Si también empatan en votos, se sortea.
+  Ejemplo con 5 escaños
+    > Votos: A 100.000 · B 80.000 · C 30.000. Divisiones de A: 100.000 / 50.000 / 33.333… · de B: 80.000 / 40.000 / 26.667… · de C: 30.000 / 15.000…
+    Los 5 más altos
+      1º 100.000 (A)
+      2º 80.000 (B)
+      3º 50.000 (A)
+      4º 40.000 (B)
+      5º 33.333 (A)
+    Resultado
+      A: 3 escaños con el 43 % de los votos
+      B: 2 escaños con el 35 %
+      C: ninguno con el 13 %
+        > Con 30.000 votos se queda fuera: le faltaron unos 3.300 para superar el 33.333 de A.
+  Cómo se usa en España
+    Congreso de los Diputados
+      350 diputados
+      52 circunscripciones (50 provincias, Ceuta y Melilla)
+      2 diputados fijos por provincia
+        > Los otros 248 se reparten según la población. Ceuta y Melilla eligen 1 cada una.
+      Umbral del 3 % en cada provincia
+      Listas cerradas y bloqueadas
+        > Votas una lista de un partido entera, sin poder cambiar el orden ni tachar nombres.
+    También en
+      Elecciones municipales (umbral del 5 %)
+      Elecciones autonómicas (umbral según la comunidad)
+      Elecciones europeas (toda España, una sola circunscripción)
+    El Senado no usa D’Hondt
+      > Sistema mayoritario de voto limitado: en cada provincia se eligen 4 senadores y cada votante marca hasta 3 nombres. Salen los más votados.
+  Efectos
+    Premia a los partidos grandes
+    Castiga a los pequeños de ámbito nacional
+      > Sus votos están repartidos por todo el país y en muchas provincias no llegan a ningún escaño: esos votos no sirven para nada.
+    Favorece a los regionales con voto concentrado
+      > Al sacar muchos votos en pocas provincias, consiguen escaños con menos votos totales.
+    Facilita mayorías y gobiernos más estables
+    Provincias pequeñas: hace falta mucho porcentaje
+      > Donde se reparten 3 escaños, para sacar uno hace falta en torno al 20 % de los votos. Ojo: en España la desproporción viene sobre todo de lo pequeñas que son muchas provincias, más que de la fórmula en sí.
+    Un voto rural pesa más que uno urbano
+      > Por los 2 diputados fijos, un escaño en Soria o Teruel cuesta muchos menos votos que uno en Madrid o Barcelona.
+  Otros métodos
+    Sainte-Laguë
+      > Divide entre 1, 3, 5, 7… Es más proporcional y trata mejor a los partidos medianos. Se usa, por ejemplo, en Suecia y en Noruega (con un ajuste) y en Alemania.
+    Resto mayor (Hare)
+      > Se calcula cuántos votos «cuesta» un escaño (votos ÷ escaños); cada partido se lleva los escaños enteros que le tocan y los que sobran van a los restos más grandes.
+    Mayoritario
+      > En cada distrito gana un solo candidato, el más votado, y el resto de votos no cuenta. Reino Unido y Estados Unidos.` }
 ];
 function mpExample(ex){
   const sc = mpNew(ex.name, ex.layout, ex.text); sc.id = ex.id; sc.color = ex.color;
@@ -9751,14 +9690,15 @@ function mpSeedExamples(force){
   if(n) saveEsq(true);
   return n;
 }
-/* noviembre 2026: fuera los tres ejemplos del principio y dentro el de los hongos (una sola vez por aparato) */
+/* cambios de ejemplos: fuera los retirados y dentro los actuales (una sola vez por aparato) */
+const MP_EJ_GONE = ['ej-tatuaje', 'ej-fermentos', 'ej-skate', 'ej-hongos'];
 function mpMigrate3(){
-  let done = false; try{ done = localStorage.getItem('esq2_v3') === '1'; }catch(e){}
+  let done = false; try{ done = localStorage.getItem('esq2_v4') === '1'; }catch(e){}
   if(done) return 0;
   let n = 0;
-  (function w(arr){ for(let i = arr.length - 1; i >= 0; i--){ const x = arr[i]; if(!x) continue; if(x.type === 'folder') w(x.children || []); else if(['ej-tatuaje', 'ej-fermentos', 'ej-skate'].includes(x.id)){ arr.splice(i, 1); n++; } } })(esquemas);
-  if(!esqFind('ej-hongos')){ esquemas.push(mpExample(MP_EJ[0])); n++; }
-  try{ localStorage.setItem('esq2_v3', '1'); localStorage.setItem('esq2_seed', '1'); }catch(e){}
+  (function w(arr){ for(let i = arr.length - 1; i >= 0; i--){ const x = arr[i]; if(!x) continue; if(x.type === 'folder') w(x.children || []); else if(MP_EJ_GONE.includes(x.id)){ arr.splice(i, 1); n++; } } })(esquemas);
+  MP_EJ.forEach(ex=>{ if(!esqFind(ex.id)){ esquemas.push(mpExample(ex)); n++; } });
+  try{ localStorage.setItem('esq2_v4', '1'); localStorage.setItem('esq2_seed', '1'); }catch(e){}
   if(n) saveEsq(true);
   return n;
 }
