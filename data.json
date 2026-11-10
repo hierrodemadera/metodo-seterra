@@ -28,6 +28,263 @@
  ],
  "esquemas": [
   {
+   "_by": {
+    "n04gh1f3zx": {
+     "id": "n04gh1f3zx",
+     "p": "nix3chf3zw",
+     "t": "Umbral del 3 % en cada provincia"
+    },
+    "n071nb33zx": {
+     "id": "n071nb33zx",
+     "n": "En cada distrito gana un solo candidato, el más votado, y el resto de votos no cuenta. Reino Unido y Estados Unidos.",
+     "p": "nwthmut3zx",
+     "t": "Mayoritario"
+    },
+    "n2c93zs3zw": {
+     "id": "n2c93zs3zw",
+     "n": "En España, en cada provincia. Por eso el resultado depende tanto de cuántos escaños reparte cada una.",
+     "p": "njlsnwh3zw",
+     "t": "Se aplica en cada circunscripción por separado"
+    },
+    "n2yvbdl3zx": {
+     "id": "n2yvbdl3zx",
+     "n": "Por los 2 diputados fijos, un escaño en Soria o Teruel cuesta muchos menos votos que uno en Madrid o Barcelona.",
+     "p": "n443m603zx",
+     "t": "Un voto rural pesa más que uno urbano"
+    },
+    "n349sv93zx": {
+     "id": "n349sv93zx",
+     "p": "n6jhpox3zx",
+     "t": "Elecciones europeas (toda España, una sola circunscripción)"
+    },
+    "n443m603zx": {
+     "c": "#e5484d",
+     "id": "n443m603zx",
+     "p": "n8kpcnn3zw",
+     "t": "Efectos"
+    },
+    "n4nhur23zw": {
+     "id": "n4nhur23zw",
+     "n": "Cuantos más votos, más escaños, aunque no en la proporción exacta: redondea a favor de los grandes.",
+     "p": "njlsnwh3zw",
+     "t": "Un método de reparto proporcional"
+    },
+    "n5vo9s83zw": {
+     "id": "n5vo9s83zw",
+     "p": "nfezhhk3zw",
+     "t": "4º 40.000 (B)"
+    },
+    "n6jhpox3zx": {
+     "id": "n6jhpox3zx",
+     "p": "no12dtm3zw",
+     "t": "También en"
+    },
+    "n8kpcnn3zw": {
+     "id": "n8kpcnn3zw",
+     "n": "Fórmula matemática para repartir los escaños entre los partidos según los votos que ha sacado cada uno. No es una ley en sí: es el método que manda usar la ley electoral.",
+     "p": null,
+     "t": "Ley D’Hondt"
+    },
+    "n9tbp3k3zw": {
+     "id": "n9tbp3k3zw",
+     "p": "naouvkj3zw",
+     "t": "A: 3 escaños con el 43 % de los votos"
+    },
+    "naouvkj3zw": {
+     "id": "naouvkj3zw",
+     "p": "ncfwr9i3zw",
+     "t": "Resultado"
+    },
+    "nbttdyw3zx": {
+     "id": "nbttdyw3zx",
+     "p": "n443m603zx",
+     "t": "Facilita mayorías y gobiernos más estables"
+    },
+    "ncfwr9i3zw": {
+     "c": "#14b8a6",
+     "id": "ncfwr9i3zw",
+     "n": "Votos: A 100.000 · B 80.000 · C 30.000. Divisiones de A: 100.000 / 50.000 / 33.333… · de B: 80.000 / 40.000 / 26.667… · de C: 30.000 / 15.000…",
+     "p": "n8kpcnn3zw",
+     "t": "Ejemplo con 5 escaños"
+    },
+    "nfezhhk3zw": {
+     "id": "nfezhhk3zw",
+     "p": "ncfwr9i3zw",
+     "t": "Los 5 más altos"
+    },
+    "nfjd6ql3zx": {
+     "id": "nfjd6ql3zx",
+     "p": "nix3chf3zw",
+     "t": "52 circunscripciones (50 provincias, Ceuta y Melilla)"
+    },
+    "ng43bun3zw": {
+     "id": "ng43bun3zw",
+     "n": "Con 30.000 votos se queda fuera: le faltaron unos 3.300 para superar el 33.333 de A.",
+     "p": "naouvkj3zw",
+     "t": "C: ninguno con el 13 %"
+    },
+    "ngll4ml3zx": {
+     "id": "ngll4ml3zx",
+     "p": "n443m603zx",
+     "t": "Premia a los partidos grandes"
+    },
+    "nhaknnu3zw": {
+     "id": "nhaknnu3zw",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 3: ordenar todos los resultados de mayor a menor"
+    },
+    "nhousxe3zw": {
+     "id": "nhousxe3zw",
+     "n": "Si hay 5 escaños, se dan a los 5 resultados más altos, sean del partido que sean.",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 4: un escaño para cada uno de los más altos"
+    },
+    "nhvkfov3zw": {
+     "id": "nhvkfov3zw",
+     "p": "nfezhhk3zw",
+     "t": "1º 100.000 (A)"
+    },
+    "niqzynz3zw": {
+     "id": "niqzynz3zw",
+     "p": "nix3chf3zw",
+     "t": "350 diputados"
+    },
+    "nix3chf3zw": {
+     "id": "nix3chf3zw",
+     "p": "no12dtm3zw",
+     "t": "Congreso de los Diputados"
+    },
+    "njknntl3zw": {
+     "id": "njknntl3zw",
+     "p": "naouvkj3zw",
+     "t": "B: 2 escaños con el 35 %"
+    },
+    "njlsnwh3zw": {
+     "c": "#8b5cf6",
+     "id": "njlsnwh3zw",
+     "p": "n8kpcnn3zw",
+     "t": "Qué es"
+    },
+    "nk4os4u3zx": {
+     "id": "nk4os4u3zx",
+     "n": "Votas una lista de un partido entera, sin poder cambiar el orden ni tachar nombres.",
+     "p": "nix3chf3zw",
+     "t": "Listas cerradas y bloqueadas"
+    },
+    "nlhtrr23zw": {
+     "id": "nlhtrr23zw",
+     "p": "nfezhhk3zw",
+     "t": "5º 33.333 (A)"
+    },
+    "nnn8aq93zx": {
+     "id": "nnn8aq93zx",
+     "n": "Divide entre 1, 3, 5, 7… Es más proporcional y trata mejor a los partidos medianos. Se usa, por ejemplo, en Suecia y en Noruega (con un ajuste) y en Alemania.",
+     "p": "nwthmut3zx",
+     "t": "Sainte-Laguë"
+    },
+    "no12dtm3zw": {
+     "c": "#e0b100",
+     "id": "no12dtm3zw",
+     "p": "n8kpcnn3zw",
+     "t": "Cómo se usa en España"
+    },
+    "np0huk43zx": {
+     "id": "np0huk43zx",
+     "n": "Donde se reparten 3 escaños, para sacar uno hace falta en torno al 20 % de los votos. Ojo: en España la desproporción viene sobre todo de lo pequeñas que son muchas provincias, más que de la fórmula en sí.",
+     "p": "n443m603zx",
+     "t": "Provincias pequeñas: hace falta mucho porcentaje"
+    },
+    "nplrdu93zw": {
+     "id": "nplrdu93zw",
+     "p": "njlsnwh3zw",
+     "t": "Lo manda la ley electoral (LOREG, 1985)"
+    },
+    "nq7p5pg3zw": {
+     "id": "nq7p5pg3zw",
+     "p": "njlsnwh3zw",
+     "t": "Ideado por Victor D’Hondt (Bélgica, 1878)"
+    },
+    "nschjxj3zx": {
+     "id": "nschjxj3zx",
+     "n": "Al sacar muchos votos en pocas provincias, consiguen escaños con menos votos totales.",
+     "p": "n443m603zx",
+     "t": "Favorece a los regionales con voto concentrado"
+    },
+    "ntbffyg3zw": {
+     "id": "ntbffyg3zw",
+     "p": "nfezhhk3zw",
+     "t": "2º 80.000 (B)"
+    },
+    "ntc0b7e3zx": {
+     "id": "ntc0b7e3zx",
+     "p": "n6jhpox3zx",
+     "t": "Elecciones municipales (umbral del 5 %)"
+    },
+    "nu7xtbp3zw": {
+     "c": "#1c9bd6",
+     "id": "nu7xtbp3zw",
+     "p": "n8kpcnn3zw",
+     "t": "Paso a paso"
+    },
+    "nvs76c33zw": {
+     "id": "nvs76c33zw",
+     "n": "Se divide hasta llegar al número de escaños que se reparten en esa provincia.",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 2: dividir los votos de cada partido entre 1, 2, 3…"
+    },
+    "nvxaz6w3zw": {
+     "id": "nvxaz6w3zw",
+     "n": "Si también empatan en votos, se sortea.",
+     "p": "nu7xtbp3zw",
+     "t": "Empate: gana el partido con más votos"
+    },
+    "nwlmun53zx": {
+     "id": "nwlmun53zx",
+     "n": "Los otros 248 se reparten según la población. Ceuta y Melilla eligen 1 cada una.",
+     "p": "nix3chf3zw",
+     "t": "2 diputados fijos por provincia"
+    },
+    "nwmwjw03zx": {
+     "id": "nwmwjw03zx",
+     "n": "Sus votos están repartidos por todo el país y en muchas provincias no llegan a ningún escaño: esos votos no sirven para nada.",
+     "p": "n443m603zx",
+     "t": "Castiga a los pequeños de ámbito nacional"
+    },
+    "nwthmut3zx": {
+     "c": "#f28a2e",
+     "id": "nwthmut3zx",
+     "p": "n8kpcnn3zw",
+     "t": "Otros métodos"
+    },
+    "nxiv1wg3zx": {
+     "id": "nxiv1wg3zx",
+     "p": "n6jhpox3zx",
+     "t": "Elecciones autonómicas (umbral según la comunidad)"
+    },
+    "nyc576c3zw": {
+     "id": "nyc576c3zw",
+     "p": "nfezhhk3zw",
+     "t": "3º 50.000 (A)"
+    },
+    "nz6p28x3zx": {
+     "id": "nz6p28x3zx",
+     "n": "Sistema mayoritario de voto limitado: en cada provincia se eligen 4 senadores y cada votante marca hasta 3 nombres. Salen los más votados.",
+     "p": "no12dtm3zw",
+     "t": "El Senado no usa D’Hondt"
+    },
+    "nz9nr2s3zx": {
+     "id": "nz9nr2s3zx",
+     "n": "Se calcula cuántos votos «cuesta» un escaño (votos ÷ escaños); cada partido se lleva los escaños enteros que le tocan y los que sobran van a los restos más grandes.",
+     "p": "nwthmut3zx",
+     "t": "Resto mayor (Hare)"
+    },
+    "nzyb2gf3zw": {
+     "id": "nzyb2gf3zw",
+     "n": "Para el Congreso, el 3 % de los votos válidos de la provincia (los votos en blanco cuentan como válidos; los nulos, no).",
+     "p": "nu7xtbp3zw",
+     "t": "Paso 1: quitar a los que no llegan al umbral"
+    }
+   },
    "color": "#1c1c1e",
    "created": 1794306997436,
    "id": "ej-dhondt",
@@ -291,6 +548,10 @@
      "t": "Mayoritario"
     }
    ],
+   "playOpts": {
+    "links": false,
+    "mode": "piezas"
+   },
    "type": "scheme",
    "updated": 1794306997436,
    "v": 2
