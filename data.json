@@ -977,6 +977,10 @@
      "q": "¿Cómo llegaba dinero de Catar a Gaza antes del 7 de octubre?"
     }
    ],
+   "playOpts": {
+    "links": true,
+    "mode": "piezas"
+   },
    "type": "scheme",
    "updated": 1794309867608,
    "v": 2
