@@ -1308,7 +1308,7 @@
     }
    ],
    "playOpts": {
-    "links": true,
+    "links": false,
     "mode": "piezas"
    },
    "type": "scheme",
