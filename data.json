@@ -1315,7 +1315,15 @@
     }
    ],
    "run": {
-    "cur": null,
+    "cur": {
+     "a": "nyjt4z05g0",
+     "b": "ni28n6a5g0",
+     "cands": [
+      "nre6r515g1"
+     ],
+     "r": 0,
+     "stage": "tipo"
+    },
     "f": {},
     "hd": {},
     "linksDone": {},
