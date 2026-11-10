@@ -1810,7 +1810,8 @@ body.mp-open .ctx-backdrop{z-index:88;}
 .rd-e.dim,.rd-n.dim,.rd-lb.dim{opacity:.16;}
 .rd-n .rd-box{fill:transparent;stroke:none;}
 .rd-n .rd-t{font-size:13.5px;font-weight:600;fill:#1c1c1e;paint-order:stroke;stroke:#fbfbfc;stroke-width:4px;stroke-linejoin:round;}
-.rd-n circle{stroke-width:2.2;}
+.rd-n circle{stroke-width:2.6;}
+.rd-n circle.rd-hitc{fill:transparent!important;stroke:none!important;}
 .rd-n.t-hecho .rd-t{font-size:12.5px;font-weight:600;fill:#3a3a3c;}
 .rd-n.sel .rd-box{fill:#e7f4fb;stroke:#1c9bd6;stroke-width:2;}
 .rd-n.slot .rd-box{fill:#fff;stroke:#b4b4bd;stroke-width:1.8;stroke-dasharray:6 4;}
@@ -9763,14 +9764,17 @@ const RED_FONT = '600 13.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
 const redType = n=> RED_N[n.k] ? n.k : 'estado';
 const redLType = l=> RED_L[l.k] ? l.k : 'apoya';
 
+/* tamaño de los puntos: grandes y con zona de toque amplia (invisible) */
+const RED_HIT = 21;
+const redR = n=> n.k === 'hecho' ? 7 : (n.k === 'pueblo' || n.k === 'estado' ? 10.5 : 9.5);
 function mpRedLayout(sc){
   const B = {}, edges = [], labels = [];
   const isH = n=> n.k === 'hecho';
   sc.nodes.forEach(n=>{
     const h = isH(n), wr = mpWrap(n.t, RED_FONT, h ? 116 : 150);
     const tw = Math.ceil(wr.w);
-    B[n.id] = h ? { id: n.id, red: 1, hecho: 1, lines: wr.lines, w: Math.max(tw, 24) + 6, h: 22 + wr.lines.length * 16, lh: 16 }
-               : { id: n.id, red: 1, lines: wr.lines, w: tw + 26, h: Math.max(24, wr.lines.length * 16 + 8), lh: 16 };
+    B[n.id] = h ? { id: n.id, red: 1, hecho: 1, lines: wr.lines, w: Math.max(tw, 28) + 6, h: 26 + wr.lines.length * 16, lh: 16 }
+               : { id: n.id, red: 1, lines: wr.lines, w: tw + 34, h: Math.max(28, wr.lines.length * 16 + 8), lh: 16 };
   });
   /* actores: donde los hayas puesto (o en círculo si no tienen sitio) */
   const actors = sc.nodes.filter(n=> !isH(n));
@@ -9779,7 +9783,7 @@ function mpRedLayout(sc){
     actors.forEach((n, i)=>{ if(n.x == null || n.y == null){ const a = -Math.PI / 2 + 2 * Math.PI * i / actors.length; n.x = Math.round(R + Math.cos(a) * R * 1.4); n.y = Math.round(R + Math.sin(a) * R); } });
   }
   let x1 = Infinity, x2 = -Infinity, y2 = -Infinity;
-  actors.forEach(n=>{ const b = B[n.id]; b.x = n.x; b.y = n.y; b.cx = b.x + 9; b.cy = b.y + b.h / 2; x1 = Math.min(x1, b.x); x2 = Math.max(x2, b.x + b.w); y2 = Math.max(y2, b.y + b.h); });
+  actors.forEach(n=>{ const b = B[n.id]; b.x = n.x; b.y = n.y; b.cx = b.x + 12; b.cy = b.y + b.h / 2; x1 = Math.min(x1, b.x); x2 = Math.max(x2, b.x + b.w); y2 = Math.max(y2, b.y + b.h); });
   if(x1 === Infinity){ x1 = 0; x2 = 600; y2 = 0; }
   /* línea del tiempo: ordenada por el año con que empieza el texto */
   const hs = sc.nodes.filter(isH).map((n, i)=> ({ n, i, yr: parseInt((n.t.match(/^\s*(\d{3,4})/) || [])[1] || '9999', 10) })).sort((a, b)=> a.yr - b.yr || a.i - b.i);
@@ -9788,8 +9792,8 @@ function mpRedLayout(sc){
     const ty = y2 + 150, need = hs.reduce((a, h)=> a + B[h.n.id].w + 24, 0), span = Math.max(x2 - x1, need);
     const gap = (span - hs.reduce((a, h)=> a + B[h.n.id].w, 0)) / Math.max(1, hs.length - 1);
     let x = x1;
-    hs.forEach(h=>{ const b = B[h.n.id]; b.x = x; b.y = ty; b.cx = x + b.w / 2; b.cy = ty + 6; x += b.w + (hs.length > 1 ? gap : 0); });
-    axis = { x1: x1 - 20, x2: Math.max(x1 + span, x) + 20, y: ty + 6 };
+    hs.forEach(h=>{ const b = B[h.n.id]; b.x = x; b.y = ty; b.cx = x + b.w / 2; b.cy = ty + 8; x += b.w + (hs.length > 1 ? gap : 0); });
+    axis = { x1: x1 - 20, x2: Math.max(x1 + span, x) + 20, y: ty + 8 };
   }
   /* uniones en arco; si dos actores tienen varias, se separan */
   const pairN = {};
@@ -9801,7 +9805,7 @@ function mpRedLayout(sc){
     const k = orient * (i % 2 ? 1 : -1) * (0.13 + 0.12 * Math.floor((i - 1) / 2));
     const cx = (a.cx + b.cx) / 2 - dy * k, cy = (a.cy + b.cy) / 2 + dx * k;
     const trim = (px, py, qx, qy, r)=>{ const vx = qx - px, vy = qy - py, d = Math.hypot(vx, vy) || 1; return [px + vx / d * r, py + vy / d * r]; };
-    const [sx, sy] = trim(a.cx, a.cy, cx, cy, 8), [ex, ey] = trim(b.cx, b.cy, cx, cy, 9);
+    const [sx, sy] = trim(a.cx, a.cy, cx, cy, 12), [ex, ey] = trim(b.cx, b.cy, cx, cy, 13);
     edges.push({ k: 'arc', id: l.id, t: redLType(l), bi: !!l.bi, x1: sx, y1: sy, cx, cy, x2: ex, y2: ey });
     if(l.t) labels.push({ key: 'l:' + l.id, t: l.t, x: (sx + 2 * cx + ex) / 4, y: (sy + 2 * cy + ey) / 4, red: 1, q: [sx, sy, cx, cy, ex, ey] });
   });
@@ -9842,11 +9846,12 @@ function mpRedSvg(sc, L, st){
     const key = 'n:' + n.id, hidden = st.hide && st.hide.has(key), r = st.res && st.res[key], T = RED_N[redType(n)];
     const lit = on && on.has(key);
     const cls = 'rd-n t-' + redType(n) + (hidden ? ' slot' : '') + (r != null ? ' r' + r : '') + (st.hl === key ? ' hl' : '') + (st.sel === n.id ? ' sel' : '') + (dimAll && !lit ? ' dim' : '') + (lit ? ' lit' : '') + (st.start === n.id ? ' start' : '');
-    const dotX = b.hecho ? b.w / 2 : 9, dotY = b.hecho ? 6 : b.h / 2, rr = b.hecho ? 5 : (n.k === 'pueblo' || n.k === 'estado' ? 7.5 : 6.5);
-    const tx = b.hecho ? b.w / 2 : 22, anchor = b.hecho ? 'middle' : 'start', ty0 = b.hecho ? 28 : (b.h - b.lines.length * b.lh) / 2 + 12;
-    const tw = b.hecho ? b.w : b.w - 20;
+    const dotX = b.hecho ? b.w / 2 : 12, dotY = b.hecho ? 8 : b.h / 2, rr = redR(n);
+    const tx = b.hecho ? b.w / 2 : 30, anchor = b.hecho ? 'middle' : 'start', ty0 = b.hecho ? 32 : (b.h - b.lines.length * b.lh) / 2 + 12;
+    const tw = b.hecho ? b.w : b.w - 22;
     out.push(`<g class="${cls}" data-k="${key}" data-n="${n.id}" transform="translate(${b.x} ${b.y})">
-      <rect class="rd-box" x="${b.hecho ? 0 : 16}" y="${b.hecho ? 14 : 0}" width="${tw}" height="${b.hecho ? b.h - 14 : b.h}" rx="7"/>
+      <circle class="rd-hitc" cx="${dotX}" cy="${dotY}" r="${RED_HIT}"/>
+      <rect class="rd-box" x="${b.hecho ? 0 : 22}" y="${b.hecho ? 18 : 0}" width="${tw}" height="${b.hecho ? b.h - 18 : b.h}" rx="7"/>
       <circle cx="${dotX}" cy="${dotY}" r="${rr}" style="fill:${n.k === 'hecho' ? '#fff' : T.c};stroke:${T.c}"/>
       ${hidden ? '' : `<text class="rd-t">${b.lines.map((t, i)=> `<tspan x="${tx}" y="${ty0 + i * b.lh}" text-anchor="${anchor}">${mpEsc(t)}</tspan>`).join('')}</text>`}
     </g>`);
@@ -9942,12 +9947,12 @@ function mpRedLinkMenu(id, anchor){
 
 /* ================= JUEGO DE LAS REDES (un solo modo, por fases y en orden) =================
    1 Puntos: sale un nombre y tocas su punto (3 intentos, «Ver»; el punto que tocas por error enseña su nombre en rojo).
-   2 Líneas: unes de origen a destino (el sentido cuenta) → eliges el tipo de línea → eliges su frase
-     entre las que quedan (la bolsa se va vaciando).
-   3 Línea del tiempo: los años están puestos; colocas cada hecho en su año y luego los datos de cada hecho.
-   4 Datos: en cada punto colocas sus datos con fecha en sus años; al acabar se abre su ficha para leer.
+   2 Línea del tiempo: los años están puestos; colocas cada hecho en su año y luego los datos de cada hecho.
+   3 Datos: en cada punto colocas sus datos con fecha en sus años; al acabar se abre su ficha para leer.
+   4 Líneas (lo último, lo que lo une todo): unes de origen a destino (el sentido cuenta) → eliges el tipo
+     de línea → eliges su frase entre las que quedan (la bolsa se va vaciando).
    La partida se guarda (sc.run) y se puede seguir otro día. Colores: 0 a la primera · 1 · 2 · 3 fallada/vista. */
-const NET_PH = ['Puntos', 'Líneas', 'Línea del tiempo', 'Datos'];
+const NET_PH = ['Puntos', 'Línea del tiempo', 'Datos', 'Líneas'];
 let NG = null;
 
 /* ---------- corrección laxa ---------- */
@@ -9984,7 +9989,7 @@ const netHText = n=> n.t.replace(/^\s*\d{3,4}\s*[·:\-–]?\s*/, '') || n.t;
 const netDated = n=> (n.d || []).filter(d=> d.y);
 const netIsH = (sc, id)=>{ const n = sc.nodes.find(x=> x.id === id); return !!n && n.k === 'hecho'; };
 const netLinks = sc=> (sc.links || []).filter(l=> !netIsH(sc, l.a) && !netIsH(sc, l.b));
-function netNewRun(sc){ return { v: 1, phase: 1, res: {}, f: {}, linksDone: {}, tl: {}, hd: {}, pd: {}, pdone: {}, cur: null, start: Date.now() }; }
+function netNewRun(sc){ return { v: 2, phase: 1, res: {}, f: {}, linksDone: {}, tl: {}, hd: {}, pd: {}, pdone: {}, cur: null, start: Date.now() }; }
 /* fase 1: el nombre que toca buscar (orden barajado y guardado) */
 function netTarget(){
   const sc = NG.sc, R = NG.run;
@@ -9995,17 +10000,23 @@ function netSave(){ if(!NG) return; NG.sc.run = NG.run; clearTimeout(netSave.t);
 function netPhaseDone(ph){
   const sc = NG.sc, R = NG.run;
   if(ph === 1) return netActors(sc).every(n=> R.res['n:' + n.id] != null);
-  if(ph === 2) return netLinks(sc).every(l=> R.linksDone[l.id]);
-  if(ph === 3){ const hs = netHechos(sc); return hs.every(h=> Object.values(R.tl).includes(h.id)) && hs.every(h=> (h.d || []).every((x, i)=> R.hd[h.id + ':' + i])); }
-  if(ph === 4) return netActors(sc).every(n=> !netDated(n).length || R.pdone[n.id]);
+  if(ph === 4) return netLinks(sc).every(l=> R.linksDone[l.id]);
+  if(ph === 2){ const hs = netHechos(sc); return hs.every(h=> Object.values(R.tl).includes(h.id)) && hs.every(h=> (h.d || []).every((x, i)=> R.hd[h.id + ':' + i])); }
+  if(ph === 3) return netActors(sc).every(n=> !netDated(n).length || R.pdone[n.id]);
   return true;
 }
 function netSkipEmpty(){ /* fases sin nada que hacer se saltan solas */ while(NG.run.phase <= 4 && netPhaseDone(NG.run.phase) && netPhaseEmpty(NG.run.phase)) NG.run.phase++; }
-function netPhaseEmpty(ph){ const sc = NG.sc; if(ph === 1) return !netActors(sc).length; if(ph === 2) return !netLinks(sc).length; if(ph === 3) return !netHechos(sc).length; if(ph === 4) return !netActors(sc).some(n=> netDated(n).length); return true; }
+function netPhaseEmpty(ph){ const sc = NG.sc; if(ph === 1) return !netActors(sc).length; if(ph === 4) return !netLinks(sc).length; if(ph === 2) return !netHechos(sc).length; if(ph === 3) return !netActors(sc).some(n=> netDated(n).length); return true; }
 
 /* ---------- abrir ---------- */
+/* partidas guardadas con el orden antiguo (Puntos, Líneas, Tiempo, Datos): se pasan al nuevo sin perder lo hecho */
+function netMigrate(run){
+  if(run && run.v === 1){ run.phase = ({ 1: 1, 2: 2, 3: 2, 4: 3 })[run.phase] || run.phase; run.cur = null; run.v = 2; }
+  return run;
+}
 function mpNetOpen(sc){
-  if(sc.run && !sc.run.done && sc.run.v === 1){
+  netMigrate(sc.run);
+  if(sc.run && !sc.run.done && sc.run.v === 2){
     document.getElementById('mp-choose')?.remove();
     const el = document.createElement('div'); el.id = 'mp-choose';
     el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox"><div class="mp-ct">${mpEsc(sc.name)}</div>
@@ -10049,7 +10060,7 @@ function netDraw(){
   L.edges.forEach(e=>{
     const toH = netIsH(sc, (sc.links.find(l=> l.id === e.id) || {}).a) || netIsH(sc, (sc.links.find(l=> l.id === e.id) || {}).b);
     const lk = sc.links.find(l=> l.id === e.id), hId = toH ? (netIsH(sc, lk.a) ? lk.a : lk.b) : null;
-    const done = R.linksDone[e.id] || (toH && (ph >= 4 || Object.values(R.tl).includes(hId))), isCur = cur && (cur.cands || []).includes(e.id) && (cur.lid ? cur.lid === e.id : cur.cands[0] === e.id);
+    const done = R.linksDone[e.id] || (toH && (ph >= 3 || Object.values(R.tl).includes(hId))), isCur = cur && (cur.cands || []).includes(e.id) && (cur.lid ? cur.lid === e.id : cur.cands[0] === e.id);
     if(!done && !isCur && ph < 5) return;
     const typeKnown = done || (cur && cur.stage === 'info' && cur.lid === e.id);
     const t = typeKnown ? e.t : 'nada', S = RED_L[e.t];
@@ -10058,7 +10069,7 @@ function netDraw(){
     out.push(`<path d="${d}" fill="none" stroke="${st.c}" stroke-width="${isCur ? st.w + 1.2 : st.w}"${st.d ? ` stroke-dasharray="${st.d}"` : ''} stroke-linecap="round" marker-end="url(#nm-${t})"${e.bi ? ` marker-start="url(#nm-${t})"` : ''} class="${isCur ? 'net-cur' : ''}"/>`);
   });
   /* puntos */
-  const remain = {}; if(ph === 2) netLinks(sc).forEach(l=>{ if(!R.linksDone[l.id]){ remain[l.a] = (remain[l.a] || 0) + 1; remain[l.b] = (remain[l.b] || 0) + 1; } });
+  const remain = {}; if(ph === 4) netLinks(sc).forEach(l=>{ if(!R.linksDone[l.id]){ remain[l.a] = (remain[l.a] || 0) + 1; remain[l.b] = (remain[l.b] || 0) + 1; } });
   const placedAt = {}; Object.entries(R.tl).forEach(([slot, ev])=> placedAt[slot] = ev);
   sc.nodes.forEach(n=>{
     const b = L.B[n.id]; if(!b) return;
@@ -10067,31 +10078,32 @@ function netDraw(){
     if(!isH){
       r = R.res['n:' + n.id];
       if(ph === 1 && r == null){ if(NG.flash === n.id){ cls += ' flash'; } else { shown = false; cls += ' hidden'; } }
-      if(ph === 2 && NG.sel === n.id) cls += ' origin';
-      if(ph === 4 && netDated(n).length && !R.pdone[n.id]) cls += ' pending';
+      if(ph === 4 && NG.sel === n.id) cls += ' origin';
+      if(ph === 3 && netDated(n).length && !R.pdone[n.id]) cls += ' pending';
       if(ph === 1 && r != null) cls += ' r' + r;
     } else {
       const ev = placedAt[n.id];
-      if(ph < 3){ label = netYear(n); cls += ' yearonly'; }
+      if(ph < 2){ label = netYear(n); cls += ' yearonly'; }
       else if(!ev){ label = netYear(n); cls += ' slot yearslot'; }
-      else { const E = sc.nodes.find(x=> x.id === ev); label = E ? E.t : n.t; r = R.res['h:' + ev]; if(ph === 3 && r != null) cls += ' r' + r; }
+      else { const E = sc.nodes.find(x=> x.id === ev); label = E ? E.t : n.t; r = R.res['h:' + ev]; if(ph === 2 && r != null) cls += ' r' + r; }
     }
     const lines = mpWrap(label, RED_FONT, isH ? 116 : 150).lines;
-    const dotX = isH ? b.w / 2 : 9, dotY = isH ? 6 : b.h / 2, rr = isH ? 5 : (n.k === 'pueblo' || n.k === 'estado' ? 7.5 : 6.5);
-    const tx = isH ? b.w / 2 : 22, anchor = isH ? 'middle' : 'start', ty0 = isH ? 28 : (b.h - lines.length * 16) / 2 + 12;
+    const dotX = isH ? b.w / 2 : 12, dotY = isH ? 8 : b.h / 2, rr = redR(n);
+    const tx = isH ? b.w / 2 : 30, anchor = isH ? 'middle' : 'start', ty0 = isH ? 32 : (b.h - lines.length * 16) / 2 + 12;
     out.push(`<g class="${cls}" data-n="${n.id}" transform="translate(${b.x} ${b.y})">
-      <rect class="rd-box" x="${isH ? 0 : 16}" y="${isH ? 14 : 0}" width="${isH ? b.w : b.w - 20}" height="${isH ? b.h - 14 : b.h}" rx="7"/>
+      <circle class="rd-hitc" cx="${dotX}" cy="${dotY}" r="${RED_HIT}"/>
+      <rect class="rd-box" x="${isH ? 0 : 22}" y="${isH ? 18 : 0}" width="${isH ? b.w : b.w - 22}" height="${isH ? b.h - 18 : b.h}" rx="7"/>
       <circle cx="${dotX}" cy="${dotY}" r="${rr}" style="fill:${isH ? '#fff' : Tn.c};stroke:${Tn.c}"/>
       ${shown ? `<text class="rd-t">${lines.map((t, i)=> `<tspan x="${tx}" y="${ty0 + i * 16}" text-anchor="${anchor}">${mpEsc(t)}</tspan>`).join('')}</text>` : ''}
-      ${ph === 2 && remain[n.id] ? `<g class="net-badge"><circle cx="${dotX - 8}" cy="${dotY - 9}" r="8"/><text x="${dotX - 8}" y="${dotY - 5.5}" text-anchor="middle">${remain[n.id]}</text></g>` : ''}
-      ${ph === 4 && netDated(n).length && !R.pdone[n.id] ? `<g class="net-badge cal"><circle cx="${dotX - 8}" cy="${dotY - 9}" r="8"/><text x="${dotX - 8}" y="${dotY - 5.5}" text-anchor="middle">${netDated(n).length}</text></g>` : ''}
+      ${ph === 4 && remain[n.id] ? `<g class="net-badge"><circle cx="${dotX - 10}" cy="${dotY - 11}" r="8"/><text x="${dotX - 10}" y="${dotY - 7.5}" text-anchor="middle">${remain[n.id]}</text></g>` : ''}
+      ${ph === 3 && netDated(n).length && !R.pdone[n.id] ? `<g class="net-badge cal"><circle cx="${dotX - 10}" cy="${dotY - 11}" r="8"/><text x="${dotX - 10}" y="${dotY - 7.5}" text-anchor="middle">${netDated(n).length}</text></g>` : ''}
     </g>`);
   });
   /* frases de las líneas hechas */
   L.labels.forEach(l=>{
     const id = l.key.slice(2), lk = sc.links.find(q=> q.id === id); if(!lk) return;
     const toH = netIsH(sc, lk.a) || netIsH(sc, lk.b), hId = toH ? (netIsH(sc, lk.a) ? lk.a : lk.b) : null;
-    if(!R.linksDone[id] && !(toH && (ph >= 4 || Object.values(R.tl).includes(hId)))) return;
+    if(!R.linksDone[id] && !(toH && (ph >= 3 || Object.values(R.tl).includes(hId)))) return;
     const ri = R.res['li:' + id];
     out.push(`<g class="mp-lb rd-lb${ri != null ? ' r' + ri : ''}" transform="translate(${l.x - l.w / 2} ${l.y - l.h / 2})"><rect width="${l.w}" height="${l.h}" rx="${Math.min(9, l.h / 2)}"/>${l.lines.map((t, i)=> `<text x="${l.w / 2}" y="${13 + i * 14}" text-anchor="middle">${mpEsc(t)}</text>`).join('')}</g>`);
   });
@@ -10105,9 +10117,9 @@ function netSteps(){
   const sc = NG.sc, cnt = document.querySelector('#mp .mp-cnt');
   let a = 0, b = 0;
   if(R.phase === 1){ const xs = netActors(sc); b = xs.length; a = xs.filter(n=> R.res['n:' + n.id] != null).length; }
-  else if(R.phase === 2){ b = netLinks(sc).length; a = netLinks(sc).filter(l=> R.linksDone[l.id]).length; }
-  else if(R.phase === 3){ const hs = netHechos(sc); b = hs.length + hs.reduce((s, h)=> s + (h.d || []).length, 0); a = Object.keys(R.tl).length + Object.keys(R.hd).length; }
-  else if(R.phase === 4){ const xs = netActors(sc).filter(n=> netDated(n).length); b = xs.length; a = xs.filter(n=> R.pdone[n.id]).length; }
+  else if(R.phase === 4){ b = netLinks(sc).length; a = netLinks(sc).filter(l=> R.linksDone[l.id]).length; }
+  else if(R.phase === 2){ const hs = netHechos(sc); b = hs.length + hs.reduce((s, h)=> s + (h.d || []).length, 0); a = Object.keys(R.tl).length + Object.keys(R.hd).length; }
+  else if(R.phase === 3){ const xs = netActors(sc).filter(n=> netDated(n).length); b = xs.length; a = xs.filter(n=> R.pdone[n.id]).length; }
   cnt.textContent = R.phase <= 4 ? `${a}/${b}` : '✓';
 }
 
@@ -10124,7 +10136,7 @@ function netTray(){
       <div class="mp-trow"><button data-nt="ver">Ver dónde está</button></div></div>`;
     return;
   }
-  if(ph === 2){
+  if(ph === 4){
     const c = R.cur, by = Object.fromEntries(sc.nodes.map(n=> [n.id, n]));
     if(c && c.stage === 'tipo'){
       const f = R.f['lt'] || 0;
@@ -10146,7 +10158,7 @@ function netTray(){
       : `<div class="mp-hint big">Toca el punto de <b>origen</b> y luego el de <b>destino</b>. El número dice cuántas líneas le faltan a cada punto.</div>`;
     return;
   }
-  if(ph === 3){
+  if(ph === 2){
     const hs = netHechos(sc), placed = new Set(Object.values(R.tl));
     const stepA = hs.some(h=> !placed.has(h.id));
     if(stepA){
@@ -10162,7 +10174,7 @@ function netTray(){
       ${NG.piece ? '<div class="mp-trow"><button data-nt="verhd">Ver dónde va</button></div>' : ''}`;
     return;
   }
-  if(ph === 4){ tr.innerHTML = `<div class="mp-hint big">Toca un punto con calendario: coloca sus datos en sus años. Al terminarlo se abre su ficha.</div>`; return; }
+  if(ph === 3){ tr.innerHTML = `<div class="mp-hint big">Toca un punto con calendario: coloca sus datos en sus años. Al terminarlo se abre su ficha.</div>`; return; }
   tr.innerHTML = `<div class="mp-hint big">¡Red completa!</div>`;
 }
 function shuffleSeed(arr, seed){ /* barajado estable durante la partida (no baila cada vez que tocas) */
@@ -10172,10 +10184,10 @@ function shuffleSeed(arr, seed){ /* barajado estable durante la partida (no bail
   return a;
 }
 function netPhaseSummary(ph){
-  const R = NG.run, pre = { 1: 'n:', 2: 'l', 3: 'h', 4: 'd:' }[ph];
-  let vals = Object.entries(R.res).filter(([k])=> ph === 3 ? /^h[d]?:/.test(k) : k.startsWith(pre)).map(([, v])=> v);
+  const R = NG.run, pre = { 1: 'n:', 2: 'h', 3: 'd:', 4: 'l' }[ph];
+  let vals = Object.entries(R.res).filter(([k])=> ph === 2 ? /^h[d]?:/.test(k) : k.startsWith(pre)).map(([, v])=> v);
   /* en las líneas, cada línea cuenta una vez: con su peor resultado de los tres pasos */
-  if(ph === 2) vals = netLinks(NG.sc).map(l=> Math.max(R.res['l:' + l.id] || 0, R.res['lt:' + l.id] || 0, R.res['li:' + l.id] || 0));
+  if(ph === 4) vals = netLinks(NG.sc).map(l=> Math.max(R.res['l:' + l.id] || 0, R.res['lt:' + l.id] || 0, R.res['li:' + l.id] || 0));
   const c = [0, 1, 2, 3].map(r=> vals.filter(v=> v === r).length);
   const last = ph === 4 || [2, 3, 4].slice(ph - 1).every(p=> netPhaseEmpty(p));
   return `<div class="net-sum"><div class="net-st">Fase ${ph} completa: ${NET_PH[ph - 1]}</div>
@@ -10203,7 +10215,7 @@ function netTap(t){
     if(R.f[k] >= 3) netFindReveal(want); else netSave();
     return;
   }
-  if(ph === 2){
+  if(ph === 4){
     if(n.k === 'hecho') return;
     if(R.cur) return toast(R.cur.stage === 'tipo' ? 'Primero elige el tipo de línea' : 'Primero elige su información');
     if(!NG.sel){
@@ -10213,16 +10225,16 @@ function netTap(t){
     if(id === NG.sel){ NG.sel = null; netDraw(); return; }
     netConnect(NG.sel, id); return;
   }
-  if(ph === 3){
+  if(ph === 2){
     if(n.k !== 'hecho') return;
     const placed = new Set(Object.values(R.tl)), stepA = netHechos(sc).some(h=> !placed.has(h.id));
     if(stepA){ if(R.tl[id]) return; if(!NG.piece) return toast('Primero elige un hecho de abajo'); netPlaceH(NG.piece.slice(2), id); return; }
     if(!NG.piece) return toast('Primero elige un dato de abajo');
     netPlaceHD(NG.piece.slice(2), R.tl[id]); return;
   }
-  if(ph === 4){ if(n.k === 'hecho') return; if(!netDated(n).length || R.pdone[id]){ netFicha(n); return; } netDatos(n); return; }
+  if(ph === 3){ if(n.k === 'hecho') return; if(!netDated(n).length || R.pdone[id]){ netFicha(n); return; } netDatos(n); return; }
 }
-/* fase 2: unir */
+/* fase 4: unir */
 function netConnect(a, b){
   const sc = NG.sc, R = NG.run, left = netLinks(sc).filter(l=> !R.linksDone[l.id]);
   const fwd = left.filter(l=> (l.a === a && l.b === b) || (l.bi && l.a === b && l.b === a));
@@ -10268,7 +10280,7 @@ function netLineDone(){
   if(!l.t) netMark('li:' + l.id, R.res['lt:' + l.id]);
   R.linksDone[c.lid] = true; R.cur = null; netSave(); netDraw();
 }
-/* fase 3 */
+/* fase 2 */
 function netPlaceH(evId, slotId){
   const sc = NG.sc, R = NG.run, ev = sc.nodes.find(x=> x.id === evId), slot = sc.nodes.find(x=> x.id === slotId);
   const k = 'h:' + evId;
@@ -10288,7 +10300,7 @@ function netPlaceHD(cardKey, evId){
   if(R.f[k] >= 3){ delete R.f[k]; netMark(k, 3); R.hd[cardKey] = true; NG.piece = null; const ev = NG.sc.nodes.find(x=> x.id === owner); toast('Era de: ' + (ev ? netHText(ev) : '')); netSave(); netDraw(); }
   else { netSave(); netTray(); }
 }
-/* fase 4: los datos con fecha de un punto */
+/* fase 3: los datos con fecha de un punto */
 function netDatos(n){
   const R = NG.run, ds = netDated(n);
   const years = ds.map(d=> d.y).sort((a, b)=> a - b);
