@@ -1893,6 +1893,16 @@ body.mp-open .ctx-backdrop{z-index:88;}
 .net-fl b{margin-right:4px;}
 .net-close{border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:700;background:#1c1c1e;color:#fff !important;margin-top:4px;}
 
+/* fase 1 de las redes: buscar el punto */
+.rd-n.hidden .rd-box{fill:transparent;}
+.rd-n.hidden circle{stroke:#fff;stroke-width:2.5;}
+.rd-n.flash .rd-box{fill:#fbdcdc;stroke:#e5484d;stroke-width:1.6;}
+.rd-n.flash .rd-t{stroke:none;fill:#b42318;}
+.rd-n.blink .rd-box{animation:netBlink .5s ease-in-out 4;}
+@keyframes netBlink{50%{fill:#fff;}}
+.net-find{padding:2px 14px 0;text-align:center;}
+.net-name{font-size:21px;font-weight:800;line-height:1.2;margin:2px 0 8px;}
+
 </style>
 </head>
 <body>
@@ -9931,7 +9941,7 @@ function mpRedLinkMenu(id, anchor){
 { const _d = mpEditDraw; mpEditDraw = function(){ const r = _d.apply(this, arguments); if(MPE){ MPE.C.legend(MPE.sc); } return r; }; }
 
 /* ================= JUEGO DE LAS REDES (un solo modo, por fases y en orden) =================
-   1 Puntos: tocas un punto y escribes quién es (corrección laxa, 3 intentos, «Ver»).
+   1 Puntos: sale un nombre y tocas su punto (3 intentos, «Ver»; el punto que tocas por error enseña su nombre en rojo).
    2 Líneas: unes de origen a destino (el sentido cuenta) → eliges el tipo de línea → eliges su frase
      entre las que quedan (la bolsa se va vaciando).
    3 Línea del tiempo: los años están puestos; colocas cada hecho en su año y luego los datos de cada hecho.
@@ -9975,6 +9985,12 @@ const netDated = n=> (n.d || []).filter(d=> d.y);
 const netIsH = (sc, id)=>{ const n = sc.nodes.find(x=> x.id === id); return !!n && n.k === 'hecho'; };
 const netLinks = sc=> (sc.links || []).filter(l=> !netIsH(sc, l.a) && !netIsH(sc, l.b));
 function netNewRun(sc){ return { v: 1, phase: 1, res: {}, f: {}, linksDone: {}, tl: {}, hd: {}, pd: {}, pdone: {}, cur: null, start: Date.now() }; }
+/* fase 1: el nombre que toca buscar (orden barajado y guardado) */
+function netTarget(){
+  const sc = NG.sc, R = NG.run;
+  if(!R.order || R.order.length !== netActors(sc).length) R.order = shuffleSeed(netActors(sc), R.start).map(n=> n.id);
+  return R.order.find(id=> R.res['n:' + id] == null && sc.nodes.some(n=> n.id === id)) || null;
+}
 function netSave(){ if(!NG) return; NG.sc.run = NG.run; clearTimeout(netSave.t); netSave.t = setTimeout(()=> saveEsq(), 500); }
 function netPhaseDone(ph){
   const sc = NG.sc, R = NG.run;
@@ -10008,7 +10024,7 @@ function mpNetOpen(sc){
   mpNetStart(sc, null);
 }
 function mpNetStart(sc, run){
-  NG = { sc, run: run || netNewRun(sc), sel: null, typing: null, piece: null, open: null };
+  NG = { sc, run: run || netNewRun(sc), sel: null, piece: null, open: null, flash: null };
   const el = document.createElement('div'); el.id = 'mp'; el.className = 'net';
   el.innerHTML = `<div class="mp-top"><button class="mp-x" data-nt="quit" aria-label="Salir">✕</button><div class="net-steps"></div><span class="mp-cnt"></span></div>
     <div class="mp-cv"></div><div class="mp-tray net-tray"></div>`;
@@ -10050,8 +10066,7 @@ function netDraw(){
     let label = n.t, cls = 'rd-n t-' + redType(n), r = null, shown = true;
     if(!isH){
       r = R.res['n:' + n.id];
-      if(ph === 1 && r == null){ shown = false; cls += ' slot'; }
-      if(ph === 1 && NG.typing === n.id) cls += ' typing';
+      if(ph === 1 && r == null){ if(NG.flash === n.id){ cls += ' flash'; } else { shown = false; cls += ' hidden'; } }
       if(ph === 2 && NG.sel === n.id) cls += ' origin';
       if(ph === 4 && netDated(n).length && !R.pdone[n.id]) cls += ' pending';
       if(ph === 1 && r != null) cls += ' r' + r;
@@ -10102,12 +10117,11 @@ function netTray(){
   const sc = NG.sc, R = NG.run, ph = R.phase;
   if(ph <= 4 && netPhaseDone(ph)){ tr.innerHTML = netPhaseSummary(ph); return; }
   if(ph === 1){
-    if(!NG.typing){ tr.innerHTML = `<div class="mp-hint big">Toca un punto vacío y escribe quién es</div>`; return; }
-    const f = R.f['n:' + NG.typing] || 0;
-    tr.innerHTML = `<div class="mp-type"><div class="mp-hint">¿Quién es este punto?${f ? ` · intento ${f + 1} de 3` : ''}</div>
-      <form class="mp-tf net-tf"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe el nombre…"><button class="pri" type="submit">OK</button></form>
-      <div class="mp-trow"><button data-nt="ver">Ver</button><button data-nt="untype">Otro punto</button></div></div>`;
-    setTimeout(()=>{ const i = tr.querySelector('input'); i && i.focus({ preventScroll: true }); }, 30);
+    const id = netTarget(), n = id && sc.nodes.find(x=> x.id === id); if(!n){ tr.innerHTML = ''; return; }
+    const f = R.f['n:' + id] || 0;
+    tr.innerHTML = `<div class="net-find"><div class="mp-hint">¿Dónde está…?${f ? ` · intento ${f + 1} de 3` : ''}</div>
+      <div class="net-name">${mpEsc(n.t)}</div>
+      <div class="mp-trow"><button data-nt="ver">Ver dónde está</button></div></div>`;
     return;
   }
   if(ph === 2){
@@ -10179,9 +10193,15 @@ function netTap(t){
   const id = nd.dataset.n, sc = NG.sc, R = NG.run, ph = R.phase, n = sc.nodes.find(x=> x.id === id);
   if(ph > 4 || netPhaseDone(ph)){ if(n && n.k !== 'hecho') netFicha(n); return; }
   if(ph === 1){
-    if(n.k === 'hecho') return;
-    if(R.res['n:' + id] != null){ return; }
-    NG.typing = id; netDraw(); netCenter(id); return;
+    if(n.k === 'hecho' || R.res['n:' + id] != null) return;
+    const want = netTarget(); if(!want) return;
+    const k = 'n:' + want;
+    if(id === want){ netMark(k, R.f[k] || 0); delete R.f[k]; NG.flash = null; netSave(); netDraw(); return; }
+    /* fallo: el punto tocado enseña un momento quién es, en rojo */
+    R.f[k] = (R.f[k] || 0) + 1; NG.flash = id; netDraw(); netShake(id);
+    clearTimeout(NG.flashT); NG.flashT = setTimeout(()=>{ if(NG && NG.flash === id){ NG.flash = null; netDraw(); } }, 1300);
+    if(R.f[k] >= 3) netFindReveal(want); else netSave();
+    return;
   }
   if(ph === 2){
     if(n.k === 'hecho') return;
@@ -10316,13 +10336,17 @@ function netFicha(n, fresh){
   el.addEventListener('click', e=>{ if((e.target === el && downBg) || e.target.closest('[data-np="x"]')) el.remove(); });
   document.getElementById('mp').appendChild(el);
 }
+function netFindReveal(id){
+  const R = NG.run, k = 'n:' + id; delete R.f[k]; netMark(k, 3); netSave(); netDraw();
+  const b = NG.C.L.B[id]; if(b) NG.C.center(b.x + b.w / 2, b.y + b.h / 2);
+  NG.blink = id; const g = NG.C.world.querySelector(`[data-n="${id}"]`); if(g) g.classList.add('blink');
+}
 function netClick(e){
   const t = e.target; let x;
   if(x = t.closest('[data-nt]')){
     const a = x.dataset.nt, R = NG.run;
     if(a === 'quit'){ netClose(); return; }
-    if(a === 'untype'){ NG.typing = null; netDraw(); return; }
-    if(a === 'ver' && NG.typing){ const k = 'n:' + NG.typing; delete R.f[k]; netMark(k, 3); const n = NG.sc.nodes.find(q=> q.id === NG.typing); toast(n.t); NG.typing = null; netSave(); netDraw(); return; }
+    if(a === 'ver' && R.phase === 1){ const id = netTarget(); if(id) netFindReveal(id); return; }
     if(a === 'unsel'){ NG.sel = null; netDraw(); return; }
     if(a === 'verline' && NG.sel){ netRevealFrom(NG.sel); return; }
     if(a === 'verlt'){ netTypeReveal(); return; }
@@ -10333,7 +10357,7 @@ function netClick(e){
       if(R.phase >= 4){ netFinish(); return; }
       R.phase++; netSkipEmpty();
       if(R.phase > 4){ netFinish(); return; }
-      NG.sel = null; NG.typing = null; NG.piece = null; netSave(); netDraw(); return;
+      NG.sel = null; NG.piece = null; netSave(); netDraw(); return;
     }
     if(a === 'again'){ const sc = NG.sc; delete sc.run; netClose(); mpNetStart(sc, null); return; }
     if(a === 'look'){ x.closest('.mp-end').remove(); return; }
@@ -10344,16 +10368,6 @@ function netClick(e){
   if(x = t.closest('[data-hp]')){ NG.piece = NG.piece === 'h:' + x.dataset.hp ? null : 'h:' + x.dataset.hp; netTray(); return; }
   if(x = t.closest('[data-hdp]')){ NG.piece = NG.piece === 'd:' + x.dataset.hdp ? null : 'd:' + x.dataset.hdp; netTray(); return; }
 }
-document.addEventListener('submit', e=>{
-  const f = e.target.closest && e.target.closest('#mp .net-tf'); if(!f || !NG) return;
-  e.preventDefault();
-  const v = f.querySelector('input').value; if(!v.trim() || !NG.typing) return;
-  const R = NG.run, id = NG.typing, n = NG.sc.nodes.find(q=> q.id === id), k = 'n:' + id;
-  if(netMatch(v, n)){ netMark(k, R.f[k] || 0); delete R.f[k]; NG.typing = null; netSave(); netDraw(); return; }
-  R.f[k] = (R.f[k] || 0) + 1; netShake(id);
-  if(R.f[k] >= 3){ delete R.f[k]; netMark(k, 3); toast('Era: ' + n.t); NG.typing = null; netSave(); netDraw(); return; }
-  netSave(); netTray();
-}, true);
 function netFinish(){
   const sc = NG.sc, R = NG.run; R.done = true; R.phase = 5;
   const vals = Object.values(R.res), first = vals.filter(v=> v === 0).length, secs = Math.round((Date.now() - R.start) / 1000);
