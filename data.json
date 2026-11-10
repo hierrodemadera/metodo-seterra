@@ -607,7 +607,7 @@
    "color": "#1c1c1e",
    "created": 1794309867608,
    "id": "ej-gaza",
-   "layout": "llaves",
+   "layout": "mapa",
    "links": [
     {
      "a": "n6x97nfmmx",
@@ -1312,7 +1312,7 @@
     "mode": "piezas"
    },
    "type": "scheme",
-   "updated": 1794314972381,
+   "updated": 1794314998222,
    "v": 2
   }
  ],
