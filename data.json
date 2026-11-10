@@ -1321,8 +1321,9 @@
      "cands": [
       "n4o0ydg5g1"
      ],
+     "lid": "n4o0ydg5g1",
      "r": 3,
-     "stage": "tipo"
+     "stage": "info"
     },
     "f": {},
     "hd": {},
@@ -1333,8 +1334,10 @@
     "pdone": {},
     "phase": 2,
     "res": {
+     "l:n4o0ydg5g1": 3,
      "l:nkl68l45g1": 1,
      "li:nkl68l45g1": 3,
+     "lt:n4o0ydg5g1": 0,
      "lt:nkl68l45g1": 3,
      "n:n027sc05g0": 3,
      "n:n0qhuru5g0": 3,
