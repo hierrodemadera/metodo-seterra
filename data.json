@@ -1321,8 +1321,9 @@
      "cands": [
       "nkl68l45g1"
      ],
+     "lid": "nkl68l45g1",
      "r": 1,
-     "stage": "tipo"
+     "stage": "info"
     },
     "f": {},
     "hd": {},
@@ -1331,6 +1332,8 @@
     "pdone": {},
     "phase": 2,
     "res": {
+     "l:nkl68l45g1": 1,
+     "lt:nkl68l45g1": 3,
      "n:n027sc05g0": 3,
      "n:n0qhuru5g0": 3,
      "n:n1iqsgl5g0": 3,
