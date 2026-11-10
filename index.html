@@ -1846,6 +1846,53 @@ body.mp-open .ctx-backdrop{z-index:88;}
 /* de lejos, las frases de las uniones estorban: se ven al acercarse (los huecos del juego siempre) */
 .zfar .rd-lb:not(.slot):not(.r0):not(.r1):not(.r2):not(.r3){display:none;}
 
+/* ===== juego de las redes ===== */
+#mp.net .mp-top{gap:8px;}
+.net-steps{flex:1;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;}
+.net-steps::-webkit-scrollbar{display:none;}
+.net-steps span{flex-shrink:0;font-size:11.5px;font-weight:700;padding:5px 9px;border-radius:999px;background:#f0f0f3;color:#8e8e93;white-space:nowrap;}
+.net-steps span.on{background:#1c1c1e;color:#fff;}
+.net-steps span.ok{background:#e3f4ea;color:#0a8a3f;}
+.rd-n.origin .rd-box{fill:#1c1c1e;}
+.rd-n.origin .rd-t{fill:#fff;stroke:none;}
+.rd-n.origin circle{stroke-width:4;}
+.rd-n.pending .rd-box{fill:#fff7e0;stroke:#e0b100;stroke-width:1.4;}
+.rd-n.yearonly .rd-t,.rd-n.yearslot .rd-t{font-size:14px;font-weight:800;fill:#3a3a3c;}
+.rd-n.yearslot .rd-box{fill:#fff;stroke:#b4b4bd;stroke-dasharray:5 4;stroke-width:1.6;}
+.net-badge circle{fill:#1c9bd6;stroke:#fff;stroke-width:1.5;}
+.net-badge text{font-size:10.5px;font-weight:800;fill:#fff;stroke:none;}
+.net-badge.cal circle{fill:#e0b100;}
+.net-cur{animation:netPulse 1.2s ease-in-out infinite;}
+@keyframes netPulse{50%{opacity:.45;}}
+.net-tray{max-height:46vh;overflow:auto;}
+.net-q{padding:2px 14px 8px;display:flex;flex-direction:column;gap:2px;}
+.net-q b{font-size:15px;}
+.net-q span{font-size:12.5px;color:#6e6e73;}
+.net-types{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 12px 8px;}
+.net-types button{display:flex;align-items:center;gap:6px;text-align:left;border:1.5px solid #e0e0e6;background:#fff;border-radius:11px;padding:8px;font-size:12.5px;font-weight:600;line-height:1.2;}
+.net-types svg{flex-shrink:0;}
+.net-pool{flex-wrap:wrap;overflow:visible;max-height:none;}
+.net-sum{padding:4px 14px;display:flex;flex-direction:column;gap:8px;text-align:center;}
+.net-st{font-size:16px;font-weight:800;}
+.net-sum button{border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:700;background:#1c1c1e;color:#fff !important;}
+.net-panel{position:absolute;inset:0;z-index:6;background:rgba(0,0,0,.3);display:flex;align-items:flex-end;justify-content:center;}
+.net-pbox{background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:560px;max-height:82vh;overflow:auto;padding:14px 14px calc(14px + env(safe-area-inset-bottom));box-sizing:border-box;display:flex;flex-direction:column;gap:8px;}
+.net-ph{display:flex;align-items:center;gap:8px;}
+.net-ph b{flex:1;font-size:18px;font-weight:800;}
+.net-ph button{width:32px;height:32px;border-radius:50%;border:none;background:#f0f0f3;font-size:14px;}
+.net-yrs{display:flex;flex-direction:column;gap:6px;}
+.net-yr{display:flex;gap:10px;align-items:center;text-align:left;border:1.5px dashed #b4b4bd;background:#fff;border-radius:11px;padding:9px 10px;min-height:42px;}
+.net-yr b{font-size:14px;min-width:38px;}
+.net-yr span{font-size:13.5px;font-weight:600;}
+.net-yr.on{border-style:solid;}
+.net-yr.r0{background:#e3f4ea;border-color:#0a8a3f;}.net-yr.r1{background:#fdf3c7;border-color:#e0b100;}.net-yr.r2{background:#fde3cc;border-color:#f28a2e;}.net-yr.r3{background:#fbdcdc;border-color:#e5484d;}
+.net-cards{flex-wrap:wrap;overflow:visible;}
+.net-ft{font-size:12.5px;color:#8e8e93;}
+.net-ok{font-size:13px;font-weight:700;color:#0a8a3f;}
+.net-fl{margin:0;padding-left:18px;font-size:14px;line-height:1.45;}
+.net-fl b{margin-right:4px;}
+.net-close{border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:700;background:#1c1c1e;color:#fff !important;margin-top:4px;}
+
 </style>
 </head>
 <body>
@@ -9569,7 +9616,7 @@ function mpEditClose(){ document.getElementById('mpe')?.remove(); document.body.
    A -> B : frase de una flecha extra */
 function mpToText(sc){
   const out = [];
-  (function w(list, d){ list.forEach(n=>{ out.push('  '.repeat(d) + (n.e ? '[' + n.e + '] ' : '') + n.t.replace(/\n/g, ' ') + (n.k ? ' #' + n.k : '') + (n.fix ? ' #fija' : '')); if(n.n) n.n.split('\n').forEach(l=> out.push('  '.repeat(d + 1) + '> ' + l)); w(mpKids(sc, n.id), d + 1); }); })(mpRoots(sc), 0);
+  (function w(list, d){ list.forEach(n=>{ out.push('  '.repeat(d) + (n.e ? '[' + n.e + '] ' : '') + n.t.replace(/\n/g, ' ') + (n.k ? ' #' + n.k : '') + (n.fix ? ' #fija' : '') + (n.al || []).map(a=> ' ~' + a).join('')); (n.d || []).forEach(x=> out.push('  '.repeat(d + 1) + '* ' + (x.y ? x.y + ' · ' : '') + x.t)); if(n.n) n.n.split('\n').forEach(l=> out.push('  '.repeat(d + 1) + '> ' + l)); w(mpKids(sc, n.id), d + 1); }); })(mpRoots(sc), 0);
   const by = Object.fromEntries(sc.nodes.map(n=> [n.id, n]));
   (sc.links || []).forEach(l=>{ if(by[l.a] && by[l.b]) out.push(by[l.a].t + (l.bi ? ' <-> ' : ' -> ') + by[l.b].t + (l.t ? ' : ' + l.t : '') + (l.k ? ' #' + l.k : '')); });
   (sc.paths || []).forEach(p=>{ const ids = p.ids.map(i=> by[i]).filter(Boolean); if(ids.length) out.push('? ' + p.q + ' = ' + ids.map(n=> n.t).join(' > ') + (p.a ? ' | ' + p.a : '')); });
@@ -9589,14 +9636,16 @@ function mpFromText(sc, txt){
     const ind = raw.match(/^[\t ]*/)[0].replace(/\t/g, '    ').length;
     let s = raw.trim();
     if(s.startsWith('>')){ const last = stack.length && stack[stack.length - 1].n; if(last) last.n = (last.n ? last.n + '\n' : '') + s.replace(/^>\s?/, ''); return; }
+    if(/^\*\s/.test(s)){ const last = stack.length && stack[stack.length - 1].n; if(last){ const x = s.replace(/^\*\s+/, ''), dm = x.match(/^(\d{3,4})\s*[·:\-–]\s*(.+)$/); (last.d = last.d || []).push(dm ? { y: dm[1], t: dm[2].trim() } : { t: x }); } return; }
     s = s.replace(/^([-*•·]|\d+[.)])\s+/, '');
     let e = null; const m = s.match(/^\[([^\]]*)\]\s*(.+)$/); if(m){ e = m[1].trim(); s = m[2].trim(); }
-    let k = null, fix = false;
+    let k = null, fix = false, al = [];
+    { const parts = s.split(/\s+~/); s = parts[0]; parts.slice(1).forEach(x=>{ const tg = x.match(/\s+#[a-záéíóúñ]+/gi) || []; s += tg.join(''); x = x.replace(/\s+#[a-záéíóúñ]+/gi, '').trim(); if(x) al.push(x); }); }
     s = s.replace(/\s+#([a-záéíóúñ]+)\b/gi, (all, t)=>{ t = t.toLowerCase(); if(t === 'fija') fix = true; else k = t; return ''; }).trim();
     while(stack.length && stack[stack.length - 1].ind >= ind) stack.pop();
     const parent = stack.length ? stack[stack.length - 1].n : null;
     const n = { t: s, p: parent ? parent.id : null };
-    if(e) n.e = e; if(k) n.k = k; if(fix) n.fix = true;
+    if(e) n.e = e; if(k) n.k = k; if(fix) n.fix = true; if(al.length) n.al = al;
     /* conserva la misma idea (y sus estadísticas, imagen, color, posición) si ya existía */
     const pth = (parent ? parent._path + '/' : '') + mpNorm(s);
     let prev = byPath[pth]; if(!prev || used.has(prev.id)) prev = (byText[mpNorm(s)] || []).find(q=> !used.has(q.id));
@@ -9681,7 +9730,7 @@ function mpRadial(sc){
 /* ================= RED (estilo Mark Lombardi) =================
    Actores unidos por relaciones: cada actor es un punto con su nombre; cada unión es un arco con el estilo de su tipo
    (armas, dinero, ataque, tribunales…). Los hechos con fecha van solos en una línea del tiempo de izquierda a derecha.
-   Juegos: ¿Quién es? (nombres de los actores), ¿Qué les une? (frases de las uniones), Sigue el hilo (cadenas de actores). */
+   Se juega con un único modo por fases (map_net.js): puntos → líneas → línea del tiempo → datos. */
 const RED_N = {
   estado:  { name: 'Estado o gobierno',     c: '#1c1c1e' },
   grupo:   { name: 'Grupo armado o político', c: '#b45309' },
@@ -9822,101 +9871,6 @@ function mpRedLegend(sc){
 /* ver: en la red no hay ramas que plegar ni jugar */
 { const _t = mpViewTap; mpViewTap = function(t){ if(MPV && MPV.sc.layout === 'red'){ const nd = t.closest && t.closest('[data-n]'); if(nd) mpNodePop(MPV.sc, nd.dataset.n, {}); return; } return _t.apply(this, arguments); }; }
 
-/* elegir partida en una red */
-{ const _o = mpPlayOpen; mpPlayOpen = function(sc, pre){
-    if(sc.layout !== 'red') return _o.apply(this, arguments);
-    const nP = (sc.paths || []).length, nL = (sc.links || []).filter(l=> l.t).length, nN = sc.nodes.filter(n=> !n.fix).length;
-    const last = sc.playOpts || {};
-    document.getElementById('mp-choose')?.remove();
-    const el = document.createElement('div'); el.id = 'mp-choose';
-    el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox">
-      <div class="mp-ct">${mpEsc(sc.name)}</div><div class="mp-cs">¿A qué juegas?</div>
-      <button class="mp-opt" data-rg="quien"><b>¿Quién es?</b><span>colocas los nombres de los ${nN} actores y hechos</span></button>
-      ${nL ? `<button class="mp-opt" data-rg="une"><b>¿Qué les une?</b><span>colocas las ${nL} relaciones entre ellos</span></button>` : ''}
-      ${nP ? `<button class="mp-opt" data-rg="hilo"><b>Sigue el hilo</b><span>${nP} preguntas: tocas la cadena de actores que las explica</span></button>` : ''}
-      <button class="mp-opt" data-rg="todo"><b>Todo</b><span>actores y relaciones a la vez</span></button>
-      <label class="mp-chk"><input type="checkbox" id="mp-mem"${last.mode === 'escribir' ? ' checked' : ''}> de memoria (escribiendo, sin piezas)</label>
-      <button class="mp-cancel" data-rg="">Cancelar</button></div>`;
-    document.body.appendChild(el);
-    el.addEventListener('click', e=>{
-      if(e.target.classList.contains('mp-dim')){ el.remove(); return; }
-      const b = e.target.closest('[data-rg]'); if(!b) return;
-      const g = b.dataset.rg; if(!g){ el.remove(); return; }
-      const mode = el.querySelector('#mp-mem').checked ? 'escribir' : 'piezas';
-      sc.playOpts = { mode, links: true }; saveEsq(); el.remove();
-      if(g === 'hilo') return mpHilo(sc);
-      mpPlay(sc, { mode, nodes: g !== 'une', links: g !== 'quien' });
-    });
-  }; }
-{ const _p = mpPlay; mpPlay = function(sc){ const r = _p.apply(this, arguments); if(MPG && MPG.C) MPG.C.legend(sc); return r; }; }
-
-/* ---------- Sigue el hilo ---------- */
-function mpHilo(sc){
-  const paths = shuffle((sc.paths || []).slice());
-  if(!paths.length) return toast('Este esquema no tiene preguntas');
-  MPG = { sc, scope: { mode: 'hilo' }, keys: [], hide: new Set(), res: {}, fails: {}, mistakes: 0, start: Date.now(), done: false, fold: new Set(),
-          hilo: { paths, i: 0, step: 1, fails: 0, ok: 0, firstTry: 0 } };
-  const el = document.createElement('div'); el.id = 'mp';
-  el.innerHTML = `<div class="mp-top"><button class="mp-x" data-g="quit" aria-label="Salir">✕</button><div class="mp-bar"><i></i></div><span class="mp-cnt"></span></div><div class="mp-cv"></div><div class="mp-tray"></div>`;
-  document.body.appendChild(el); document.body.classList.add('mp-open');
-  MPG.C = mpCanvas(el.querySelector('.mp-cv'), { onTap: t=> mpHiloTap(t) });
-  MPG.C.legend(sc);
-  el.addEventListener('click', mpPlayClick);
-  mpHiloDraw(true);
-}
-function mpHiloCur(){ const H = MPG.hilo; return H.paths[H.i]; }
-function mpHiloDraw(fit){
-  const H = MPG.hilo, p = mpHiloCur(), on = new Set();
-  const chain = p.ids.slice(0, H.step);
-  chain.forEach(id=> on.add('n:' + id));
-  for(let i = 1; i < chain.length; i++){ (MPG.sc.links || []).forEach(l=>{ if((l.a === chain[i - 1] && l.b === chain[i]) || (l.b === chain[i - 1] && l.a === chain[i])){ on.add('l:' + l.id); if(l.t) on.add('l:' + l.id); } }); }
-  const res = {}; chain.forEach((id, i)=>{ if(i) res['n:' + id] = H.rs && H.rs[i] != null ? H.rs[i] : 0; });
-  const L = mpLayout(MPG.sc);
-  MPG.C.draw(mpSvg(MPG.sc, L, { on: H.reveal ? null : on, res, start: p.ids[0], hl: MPG.hl }), L);
-  if(fit) MPG.C.fit(null, 1.1);
-  const tr = document.querySelector('#mp .mp-tray'), by = Object.fromEntries(MPG.sc.nodes.map(n=> [n.id, n]));
-  const done = H.step >= p.ids.length;
-  tr.innerHTML = `<div class="rd-q"><div class="rd-qn">Pregunta ${H.i + 1} de ${H.paths.length}</div><div class="rd-qt">${mpEsc(p.q)}</div>
-    <div class="rd-chain">${p.ids.map((id, i)=> i < H.step ? `<span class="on r${i ? (H.rs && H.rs[i]) || 0 : 'x'}">${mpEsc(by[id] ? by[id].t : '?')}</span>` : '<span class="q">?</span>').join('<i>→</i>')}</div>
-    ${done ? `${p.a ? `<div class="rd-qa">${mpEsc(p.a)}</div>` : ''}<button class="pri rd-next" data-g="hnext">${H.i + 1 < H.paths.length ? 'Siguiente pregunta' : 'Terminar'}</button>` : `<div class="mp-hint">Empieza en <b>${mpEsc(by[p.ids[0]] ? by[p.ids[0]].t : '')}</b>: toca el siguiente actor de la cadena</div>`}</div>`;
-  const n = H.paths.length, el = document.getElementById('mp');
-  el.querySelector('.mp-bar i').style.width = (100 * (H.i + (done ? 1 : 0)) / n) + '%';
-  el.querySelector('.mp-cnt').textContent = `${H.i + (done ? 1 : 0)}/${n}${MPG.mistakes ? ' · ' + MPG.mistakes + ' ✗' : ''}`;
-}
-function mpHiloTap(t){
-  if(!MPG || !MPG.hilo || MPG.done) return;
-  const H = MPG.hilo, p = mpHiloCur(); if(H.step >= p.ids.length) return;
-  const nd = t.closest && t.closest('[data-n]'); if(!nd) return;
-  const want = p.ids[H.step];
-  H.rs = H.rs || {};
-  if(nd.dataset.n === want){
-    H.rs[H.step] = Math.min(3, H.fails); if(!H.fails) H.firstTry++;
-    H.fails = 0; H.step++; MPG.hl = 'n:' + want; mpHiloDraw();
-    return;
-  }
-  if(p.ids.slice(0, H.step).includes(nd.dataset.n)) return;
-  MPG.mistakes++; H.fails++;
-  const g = MPG.C.world.querySelector(`[data-n="${nd.dataset.n}"]`); if(g){ g.classList.remove('bad'); void g.getBoundingClientRect(); g.classList.add('bad'); }
-  try{ navigator.vibrate && navigator.vibrate(40); }catch(e){}
-  if(H.fails >= 3){ H.rs[H.step] = 3; H.fails = 0; H.step++; MPG.hl = 'n:' + want; toast('Era este'); mpHiloDraw(); const b = MPG.C.L.B[want]; if(b) MPG.C.center(b.x + b.w / 2, b.y + b.h / 2); }
-  else mpHiloDraw();
-}
-document.addEventListener('click', e=>{
-  const b = e.target.closest && e.target.closest('#mp [data-g="hnext"]'); if(!b || !MPG || !MPG.hilo) return;
-  e.stopPropagation();
-  const H = MPG.hilo;
-  if(H.i + 1 < H.paths.length){ H.i++; H.step = 1; H.fails = 0; H.rs = {}; MPG.hl = null; mpHiloDraw(true); return; }
-  MPG.done = true;
-  const secs = Math.round((Date.now() - MPG.start) / 1000), el = document.createElement('div'); el.className = 'mp-end';
-  el.innerHTML = `<div class="mp-ebox"><div class="mp-et">¡Hilos seguidos!</div><div class="mp-es">${H.paths.length} preguntas · ${MPG.mistakes} ${MPG.mistakes === 1 ? 'fallo' : 'fallos'} · ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}</div>
-    <button class="pri" data-g="hagain">Otra vez</button><button data-g="look">Ver la red</button><button data-g="quit">Salir</button></div>`;
-  document.getElementById('mp').appendChild(el);
-}, true);
-document.addEventListener('click', e=>{
-  const b = e.target.closest && e.target.closest('#mp [data-g="hagain"]'); if(!b || !MPG) return;
-  e.stopPropagation(); const sc = MPG.sc; mpPlayClose(); mpHilo(sc);
-}, true);
-
 /* ---------- editar una red ---------- */
 { const _b = mpEditBar; mpEditBar = function(){
     if(!MPE || MPE.sc.layout !== 'red') return _b.apply(this, arguments);
@@ -9924,18 +9878,18 @@ document.addEventListener('click', e=>{
     const sc = MPE.sc, n = MPE.sel && sc.nodes.find(x=> x.id === MPE.sel);
     if(MPE.link){ bar.innerHTML = `<div class="mpe-msg">Toca el actor al que llega la unión</div><div class="mpe-btns"><button data-e="unlink">Cancelar</button></div>`; return; }
     if(!n){ bar.innerHTML = `<div class="mpe-msg">Toca un actor o una unión para cambiarlos · arrastra los actores para colocarlos</div>
-      <div class="mpe-btns"><button class="pri" data-e="addroot">+ Actor o hecho</button><button data-e="text">Escribir como texto</button><button data-e="paths">Preguntas (${(sc.paths || []).length})</button></div>`; return; }
+      <div class="mpe-btns"><button class="pri" data-e="addroot">+ Actor o hecho</button><button data-e="text">Escribir como texto</button></div>`; return; }
     bar.innerHTML = `<div class="mpe-msg"><b>${mpEsc(n.t)}</b> · ${RED_N[redType(n)].name}</div>
       <div class="mpe-btns"><button class="pri" data-e="link">Unión a…</button><button data-e="rtype">Tipo</button><button data-e="txt">Texto</button><button data-e="note">Nota${n.n ? ' ✓' : ''}</button>
-      <button data-e="rfix">${n.fix ? 'Se juega: no' : 'Se juega: sí'}</button><button class="dng" data-e="del">Borrar</button></div>`;
+      <button data-e="ralias">Otros nombres${(n.al || []).length ? ' (' + n.al.length + ')' : ''}</button><button data-e="rdata">Datos${(n.d || []).length ? ' (' + n.d.length + ')' : ''}</button><button class="dng" data-e="del">Borrar</button></div>`;
   }; }
 { const _c = mpEditClick; mpEditClick = async function(e){
     const x = e.target.closest && e.target.closest('[data-e]');
     if(!MPE || MPE.sc.layout !== 'red' || !x) return _c.apply(this, arguments);
     const a = x.dataset.e, sc = MPE.sc, n = MPE.sel && sc.nodes.find(q=> q.id === MPE.sel);
     if(a === 'rtype' && n){ openMenuAt(x, Object.entries(RED_N).map(([k, v])=> [(redType(n) === k ? '✓ ' : '') + v.name, ()=>{ mpSnap(); n.k = k; mpEditSave(); mpEditDraw(); mpEditBar(); }])); return; }
-    if(a === 'rfix' && n){ mpSnap(); if(n.fix) delete n.fix; else n.fix = true; mpEditSave(); mpEditBar(); return; }
-    if(a === 'paths'){ mpTextEditor(); return; }
+    if(a === 'ralias' && n){ openPrompt('otros nombres que también valen, separados por comas (p. ej. «EE. UU., EEUU»)', (n.al || []).join(', '), v=>{ if(v == null) return; mpSnap(); const al = v.split(',').map(x=> x.trim()).filter(Boolean); if(al.length) n.al = al; else delete n.al; mpEditSave(); mpEditBar(); }); return; }
+    if(a === 'rdata' && n){ mpLongPrompt(n.k === 'hecho' ? 'datos de este hecho, uno por línea (se juegan colocándolos en el hecho)' : 'datos con fecha, uno por línea: «2012 · lo que pasó» (se juegan colocándolos en su año; sin año, solo se leen)', (n.d || []).map(d=> (d.y ? d.y + ' · ' : '') + d.t).join('\n'), v=>{ mpSnap(); const d = v.split('\n').map(x=> x.trim()).filter(Boolean).map(x=>{ const m = x.match(/^(\d{3,4})\s*[·:\-–]\s*(.+)$/); return m ? { y: m[1], t: m[2].trim() } : { t: x }; }); if(d.length) n.d = d; else delete n.d; mpEditSave(); mpEditBar(); }); return; }
     if(a === 'addroot'){ openPrompt('nuevo actor o hecho (un hecho empieza por su año: «1948 · …»)', '', v=>{ if(!v || !v.trim()) return; mpSnap(); const L = mpLayout(sc), bb = L.bbox; const m = { id: mpUid(), t: v.trim(), p: null, k: /^\s*\d{3,4}\b/.test(v) ? 'hecho' : 'estado', x: Math.round(bb.x + bb.w / 2), y: Math.round(bb.y + 40) }; sc.nodes.push(m); MPE.sel = m.id; mpEditSave(); mpEditDraw(); mpEditBar(); MPE.C.show(m.id); }); return; }
     if(a === 'del' && n){ mpSnap(); sc.nodes = sc.nodes.filter(q=> q !== n); sc.links = (sc.links || []).filter(l=> l.a !== n.id && l.b !== n.id); sc.paths = (sc.paths || []).filter(p=> !p.ids.includes(n.id)); MPE.sel = null; mpEditSave(); mpEditDraw(); mpEditBar(); return; }
     return _c.apply(this, arguments);
@@ -9975,6 +9929,448 @@ function mpRedLinkMenu(id, anchor){
     return r;
   }; }
 { const _d = mpEditDraw; mpEditDraw = function(){ const r = _d.apply(this, arguments); if(MPE){ MPE.C.legend(MPE.sc); } return r; }; }
+
+/* ================= JUEGO DE LAS REDES (un solo modo, por fases y en orden) =================
+   1 Puntos: tocas un punto y escribes quién es (corrección laxa, 3 intentos, «Ver»).
+   2 Líneas: unes de origen a destino (el sentido cuenta) → eliges el tipo de línea → eliges su frase
+     entre las que quedan (la bolsa se va vaciando).
+   3 Línea del tiempo: los años están puestos; colocas cada hecho en su año y luego los datos de cada hecho.
+   4 Datos: en cada punto colocas sus datos con fecha en sus años; al acabar se abre su ficha para leer.
+   La partida se guarda (sc.run) y se puede seguir otro día. Colores: 0 a la primera · 1 · 2 · 3 fallada/vista. */
+const NET_PH = ['Puntos', 'Líneas', 'Línea del tiempo', 'Datos'];
+let NG = null;
+
+/* ---------- corrección laxa ---------- */
+const NET_STOP = new Set(['de', 'del', 'la', 'el', 'los', 'las', 'y', 'e', 'en', 'a', 'al', 'un', 'una', 'the', 'of']);
+function netTok(s){ return mpNorm(s).split(' ').filter(w=> w && !NET_STOP.has(w)); }
+function netTolOk(a, b){ const tol = b.length >= 7 ? 2 : b.length >= 4 ? 1 : 0; return a === b || (tol && mpLev2(a, b) <= tol); }
+function mpLev2(a, b){
+  if(Math.abs(a.length - b.length) > 2) return 3;
+  const d = Array.from({ length: a.length + 1 }, (_, i)=> [i]);
+  for(let j = 1; j <= b.length; j++) d[0][j] = j;
+  for(let i = 1; i <= a.length; i++) for(let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+function netMatch(typed, n){
+  const got = netTok(typed); if(!got.length) return false;
+  const full = n.t, main = full.replace(/\([^)]*\)/g, ' ');
+  const cands = [full, main, ...(n.al || [])];
+  for(const c of cands){
+    const want = netTok(c); if(!want.length) continue;
+    if(mpNorm(typed).replace(/\s/g, '') === mpNorm(c).replace(/\s/g, '')) return true;
+    /* todas las palabras escritas están en el nombre (con algún error de letra) y cubren al menos la mitad */
+    const used = new Set(); let ok = true;
+    for(const g of got){ const i = want.findIndex((w, k)=> !used.has(k) && netTolOk(g, w)); if(i < 0){ ok = false; break; } used.add(i); }
+    if(ok && used.size >= Math.ceil(want.length / 2)) return true;
+  }
+  return false;
+}
+
+/* ---------- datos de la partida ---------- */
+const netActors = sc=> sc.nodes.filter(n=> n.k !== 'hecho');
+const netHechos = sc=> sc.nodes.filter(n=> n.k === 'hecho');
+const netYear = n=> ((n.t.match(/^\s*(\d{3,4})/) || [])[1]) || '';
+const netHText = n=> n.t.replace(/^\s*\d{3,4}\s*[·:\-–]?\s*/, '') || n.t;
+const netDated = n=> (n.d || []).filter(d=> d.y);
+const netIsH = (sc, id)=>{ const n = sc.nodes.find(x=> x.id === id); return !!n && n.k === 'hecho'; };
+const netLinks = sc=> (sc.links || []).filter(l=> !netIsH(sc, l.a) && !netIsH(sc, l.b));
+function netNewRun(sc){ return { v: 1, phase: 1, res: {}, f: {}, linksDone: {}, tl: {}, hd: {}, pd: {}, pdone: {}, cur: null, start: Date.now() }; }
+function netSave(){ if(!NG) return; NG.sc.run = NG.run; clearTimeout(netSave.t); netSave.t = setTimeout(()=> saveEsq(), 500); }
+function netPhaseDone(ph){
+  const sc = NG.sc, R = NG.run;
+  if(ph === 1) return netActors(sc).every(n=> R.res['n:' + n.id] != null);
+  if(ph === 2) return netLinks(sc).every(l=> R.linksDone[l.id]);
+  if(ph === 3){ const hs = netHechos(sc); return hs.every(h=> Object.values(R.tl).includes(h.id)) && hs.every(h=> (h.d || []).every((x, i)=> R.hd[h.id + ':' + i])); }
+  if(ph === 4) return netActors(sc).every(n=> !netDated(n).length || R.pdone[n.id]);
+  return true;
+}
+function netSkipEmpty(){ /* fases sin nada que hacer se saltan solas */ while(NG.run.phase <= 4 && netPhaseDone(NG.run.phase) && netPhaseEmpty(NG.run.phase)) NG.run.phase++; }
+function netPhaseEmpty(ph){ const sc = NG.sc; if(ph === 1) return !netActors(sc).length; if(ph === 2) return !netLinks(sc).length; if(ph === 3) return !netHechos(sc).length; if(ph === 4) return !netActors(sc).some(n=> netDated(n).length); return true; }
+
+/* ---------- abrir ---------- */
+function mpNetOpen(sc){
+  if(sc.run && !sc.run.done && sc.run.v === 1){
+    document.getElementById('mp-choose')?.remove();
+    const el = document.createElement('div'); el.id = 'mp-choose';
+    el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox"><div class="mp-ct">${mpEsc(sc.name)}</div>
+      <div class="mp-cs">Tienes una partida a medias: fase ${sc.run.phase} de 4 (${NET_PH[sc.run.phase - 1] || ''}).</div>
+      <button class="mp-opt on" data-nc="go"><b>Seguir donde lo dejé</b></button>
+      <button class="mp-opt" data-nc="new"><b>Empezar de nuevo</b><span>se borra la partida a medias</span></button>
+      <button class="mp-cancel" data-nc="">Cancelar</button></div>`;
+    document.body.appendChild(el);
+    el.addEventListener('click', e=>{
+      if(e.target.classList.contains('mp-dim')){ el.remove(); return; }
+      const b = e.target.closest('[data-nc]'); if(!b) return; el.remove();
+      if(b.dataset.nc === 'go') mpNetStart(sc, sc.run); else if(b.dataset.nc === 'new') mpNetStart(sc, null);
+    });
+    return;
+  }
+  mpNetStart(sc, null);
+}
+function mpNetStart(sc, run){
+  NG = { sc, run: run || netNewRun(sc), sel: null, typing: null, piece: null, open: null };
+  const el = document.createElement('div'); el.id = 'mp'; el.className = 'net';
+  el.innerHTML = `<div class="mp-top"><button class="mp-x" data-nt="quit" aria-label="Salir">✕</button><div class="net-steps"></div><span class="mp-cnt"></span></div>
+    <div class="mp-cv"></div><div class="mp-tray net-tray"></div>`;
+  document.body.appendChild(el); document.body.classList.add('mp-open');
+  NG.C = mpCanvas(el.querySelector('.mp-cv'), { onTap: t=> netTap(t) });
+  el.addEventListener('click', netClick);
+  netSkipEmpty(); netSave();
+  netDraw(); NG.C.fit(null, 1.1);
+  if(NG.C.k < .7){ const bb = NG.C.L.bbox; NG.C.k = .7; NG.C.center(bb.x + bb.w / 2, bb.y + bb.h / 2); }
+  NG.C.legend(sc);
+}
+function netClose(){ clearTimeout(netSave.t); if(NG){ NG.sc.run = NG.run; saveEsq(); } document.getElementById('mp')?.remove(); document.body.classList.remove('mp-open'); NG = null; try{ if(MPV) mpViewDraw(); }catch(e){} }
+
+/* ---------- dibujar ---------- */
+function netDraw(){
+  const sc = NG.sc, R = NG.run, ph = R.phase, L = mpLayout(sc), out = [];
+  const T = (k, c)=> `<marker id="nm-${k}" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`;
+  out.push('<defs>' + Object.entries(RED_L).map(([k, v])=> T(k, v.c)).join('') + T('nada', '#8e8e93') + '</defs>');
+  if(L.axis) out.push(`<path d="M${L.axis.x1} ${L.axis.y}H${L.axis.x2}" class="rd-axis"/><text x="${L.axis.x1}" y="${L.axis.y - 14}" class="rd-axt">LÍNEA DEL TIEMPO →</text>`);
+  /* líneas: solo las hechas (y la que estás haciendo) */
+  const cur = R.cur, curL = cur && cur.lid ? sc.links.find(l=> l.id === cur.lid) : null;
+  L.edges.forEach(e=>{
+    const toH = netIsH(sc, (sc.links.find(l=> l.id === e.id) || {}).a) || netIsH(sc, (sc.links.find(l=> l.id === e.id) || {}).b);
+    const lk = sc.links.find(l=> l.id === e.id), hId = toH ? (netIsH(sc, lk.a) ? lk.a : lk.b) : null;
+    const done = R.linksDone[e.id] || (toH && (ph >= 4 || Object.values(R.tl).includes(hId))), isCur = cur && (cur.cands || []).includes(e.id) && (cur.lid ? cur.lid === e.id : cur.cands[0] === e.id);
+    if(!done && !isCur && ph < 5) return;
+    const typeKnown = done || (cur && cur.stage === 'info' && cur.lid === e.id);
+    const t = typeKnown ? e.t : 'nada', S = RED_L[e.t];
+    const st = typeKnown ? { c: S.c, w: S.w, d: S.d } : { c: '#8e8e93', w: 2, d: '4 4' };
+    const d = `M${e.x1} ${e.y1}Q${e.cx} ${e.cy} ${e.x2} ${e.y2}`;
+    out.push(`<path d="${d}" fill="none" stroke="${st.c}" stroke-width="${isCur ? st.w + 1.2 : st.w}"${st.d ? ` stroke-dasharray="${st.d}"` : ''} stroke-linecap="round" marker-end="url(#nm-${t})"${e.bi ? ` marker-start="url(#nm-${t})"` : ''} class="${isCur ? 'net-cur' : ''}"/>`);
+  });
+  /* puntos */
+  const remain = {}; if(ph === 2) netLinks(sc).forEach(l=>{ if(!R.linksDone[l.id]){ remain[l.a] = (remain[l.a] || 0) + 1; remain[l.b] = (remain[l.b] || 0) + 1; } });
+  const placedAt = {}; Object.entries(R.tl).forEach(([slot, ev])=> placedAt[slot] = ev);
+  sc.nodes.forEach(n=>{
+    const b = L.B[n.id]; if(!b) return;
+    const isH = n.k === 'hecho', Tn = RED_N[redType(n)];
+    let label = n.t, cls = 'rd-n t-' + redType(n), r = null, shown = true;
+    if(!isH){
+      r = R.res['n:' + n.id];
+      if(ph === 1 && r == null){ shown = false; cls += ' slot'; }
+      if(ph === 1 && NG.typing === n.id) cls += ' typing';
+      if(ph === 2 && NG.sel === n.id) cls += ' origin';
+      if(ph === 4 && netDated(n).length && !R.pdone[n.id]) cls += ' pending';
+      if(ph === 1 && r != null) cls += ' r' + r;
+    } else {
+      const ev = placedAt[n.id];
+      if(ph < 3){ label = netYear(n); cls += ' yearonly'; }
+      else if(!ev){ label = netYear(n); cls += ' slot yearslot'; }
+      else { const E = sc.nodes.find(x=> x.id === ev); label = E ? E.t : n.t; r = R.res['h:' + ev]; if(ph === 3 && r != null) cls += ' r' + r; }
+    }
+    const lines = mpWrap(label, RED_FONT, isH ? 116 : 150).lines;
+    const dotX = isH ? b.w / 2 : 9, dotY = isH ? 6 : b.h / 2, rr = isH ? 5 : (n.k === 'pueblo' || n.k === 'estado' ? 7.5 : 6.5);
+    const tx = isH ? b.w / 2 : 22, anchor = isH ? 'middle' : 'start', ty0 = isH ? 28 : (b.h - lines.length * 16) / 2 + 12;
+    out.push(`<g class="${cls}" data-n="${n.id}" transform="translate(${b.x} ${b.y})">
+      <rect class="rd-box" x="${isH ? 0 : 16}" y="${isH ? 14 : 0}" width="${isH ? b.w : b.w - 20}" height="${isH ? b.h - 14 : b.h}" rx="7"/>
+      <circle cx="${dotX}" cy="${dotY}" r="${rr}" style="fill:${isH ? '#fff' : Tn.c};stroke:${Tn.c}"/>
+      ${shown ? `<text class="rd-t">${lines.map((t, i)=> `<tspan x="${tx}" y="${ty0 + i * 16}" text-anchor="${anchor}">${mpEsc(t)}</tspan>`).join('')}</text>` : ''}
+      ${ph === 2 && remain[n.id] ? `<g class="net-badge"><circle cx="${dotX - 8}" cy="${dotY - 9}" r="8"/><text x="${dotX - 8}" y="${dotY - 5.5}" text-anchor="middle">${remain[n.id]}</text></g>` : ''}
+      ${ph === 4 && netDated(n).length && !R.pdone[n.id] ? `<g class="net-badge cal"><circle cx="${dotX - 8}" cy="${dotY - 9}" r="8"/><text x="${dotX - 8}" y="${dotY - 5.5}" text-anchor="middle">${netDated(n).length}</text></g>` : ''}
+    </g>`);
+  });
+  /* frases de las líneas hechas */
+  L.labels.forEach(l=>{
+    const id = l.key.slice(2), lk = sc.links.find(q=> q.id === id); if(!lk) return;
+    const toH = netIsH(sc, lk.a) || netIsH(sc, lk.b), hId = toH ? (netIsH(sc, lk.a) ? lk.a : lk.b) : null;
+    if(!R.linksDone[id] && !(toH && (ph >= 4 || Object.values(R.tl).includes(hId)))) return;
+    const ri = R.res['li:' + id];
+    out.push(`<g class="mp-lb rd-lb${ri != null ? ' r' + ri : ''}" transform="translate(${l.x - l.w / 2} ${l.y - l.h / 2})"><rect width="${l.w}" height="${l.h}" rx="${Math.min(9, l.h / 2)}"/>${l.lines.map((t, i)=> `<text x="${l.w / 2}" y="${13 + i * 14}" text-anchor="middle">${mpEsc(t)}</text>`).join('')}</g>`);
+  });
+  NG.C.draw(out.join(''), L);
+  netSteps(); netTray();
+}
+function netSteps(){
+  const el = document.querySelector('#mp .net-steps'); if(!el) return;
+  const R = NG.run;
+  el.innerHTML = NET_PH.map((p, i)=> `<span class="${R.phase === i + 1 ? 'on' : R.phase > i + 1 ? 'ok' : ''}" title="${p}">${R.phase > i + 1 ? '✓' : i + 1}${R.phase === i + 1 ? ' ' + p : ''}</span>`).join('');
+  const sc = NG.sc, cnt = document.querySelector('#mp .mp-cnt');
+  let a = 0, b = 0;
+  if(R.phase === 1){ const xs = netActors(sc); b = xs.length; a = xs.filter(n=> R.res['n:' + n.id] != null).length; }
+  else if(R.phase === 2){ b = netLinks(sc).length; a = netLinks(sc).filter(l=> R.linksDone[l.id]).length; }
+  else if(R.phase === 3){ const hs = netHechos(sc); b = hs.length + hs.reduce((s, h)=> s + (h.d || []).length, 0); a = Object.keys(R.tl).length + Object.keys(R.hd).length; }
+  else if(R.phase === 4){ const xs = netActors(sc).filter(n=> netDated(n).length); b = xs.length; a = xs.filter(n=> R.pdone[n.id]).length; }
+  cnt.textContent = R.phase <= 4 ? `${a}/${b}` : '✓';
+}
+
+/* ---------- bandeja de abajo, según la fase ---------- */
+function netTray(){
+  const tr = document.querySelector('#mp .net-tray'); if(!tr) return;
+  const sc = NG.sc, R = NG.run, ph = R.phase;
+  if(ph <= 4 && netPhaseDone(ph)){ tr.innerHTML = netPhaseSummary(ph); return; }
+  if(ph === 1){
+    if(!NG.typing){ tr.innerHTML = `<div class="mp-hint big">Toca un punto vacío y escribe quién es</div>`; return; }
+    const f = R.f['n:' + NG.typing] || 0;
+    tr.innerHTML = `<div class="mp-type"><div class="mp-hint">¿Quién es este punto?${f ? ` · intento ${f + 1} de 3` : ''}</div>
+      <form class="mp-tf net-tf"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe el nombre…"><button class="pri" type="submit">OK</button></form>
+      <div class="mp-trow"><button data-nt="ver">Ver</button><button data-nt="untype">Otro punto</button></div></div>`;
+    setTimeout(()=>{ const i = tr.querySelector('input'); i && i.focus({ preventScroll: true }); }, 30);
+    return;
+  }
+  if(ph === 2){
+    const c = R.cur, by = Object.fromEntries(sc.nodes.map(n=> [n.id, n]));
+    if(c && c.stage === 'tipo'){
+      const f = R.f['lt'] || 0;
+      tr.innerHTML = `<div class="net-q"><b>${mpEsc(by[c.a].t)} → ${mpEsc(by[c.b].t)}</b><span>¿Qué tipo de línea es?${f ? ` · intento ${f + 1} de 3` : ''}</span></div>
+        <div class="net-types">${Object.entries(RED_L).map(([k, T])=> `<button data-ty="${k}"><svg width="30" height="12"><path d="M2 6H28" stroke="${T.c}" stroke-width="${T.w + .6}"${T.d ? ` stroke-dasharray="${T.d.split(' ').map(x=> x * .6).join(' ')}"` : ''}/></svg>${T.name}</button>`).join('')}</div>
+        <div class="mp-trow"><button data-nt="verlt">Ver</button></div>`;
+      return;
+    }
+    if(c && c.stage === 'info'){
+      const f = R.f['li'] || 0;
+      const pool = shuffleSeed(netLinks(sc).filter(l=> !R.linksDone[l.id] && l.t).map(l=> ({ id: l.id, t: l.t })), R.start);
+      tr.innerHTML = `<div class="net-q"><b>${mpEsc(by[c.a].t)} → ${mpEsc(by[c.b].t)}</b><span>¿Qué información lleva esta línea?${f ? ` · intento ${f + 1} de 3` : ''}</span></div>
+        <div class="mp-pieces net-pool">${pool.map(p=> `<button class="mp-pc lab" data-li="${p.id}"><span>${mpEsc(p.t)}</span></button>`).join('')}</div>
+        <div class="mp-trow"><button data-nt="verli">Ver</button></div>`;
+      return;
+    }
+    const o = NG.sel && by[NG.sel];
+    tr.innerHTML = o ? `<div class="mp-hint big">Desde <b>${mpEsc(o.t)}</b>: toca hacia dónde va la línea</div><div class="mp-trow"><button data-nt="verline">Ver una línea suya</button><button data-nt="unsel">Cambiar de origen</button></div>`
+      : `<div class="mp-hint big">Toca el punto de <b>origen</b> y luego el de <b>destino</b>. El número dice cuántas líneas le faltan a cada punto.</div>`;
+    return;
+  }
+  if(ph === 3){
+    const hs = netHechos(sc), placed = new Set(Object.values(R.tl));
+    const stepA = hs.some(h=> !placed.has(h.id));
+    if(stepA){
+      const left = shuffleSeed(hs.filter(h=> !placed.has(h.id)), R.start);
+      tr.innerHTML = `<div class="mp-hint">Coloca cada hecho en su año: toca el hecho y luego el año</div>
+        <div class="mp-pieces">${left.map(h=> `<button class="mp-pc${NG.piece === 'h:' + h.id ? ' sel' : ''}" data-hp="${h.id}"><span>${mpEsc(netHText(h))}</span></button>`).join('')}</div>
+        ${NG.piece ? '<div class="mp-trow"><button data-nt="verh">Ver dónde va</button></div>' : ''}`;
+      return;
+    }
+    const cards = []; hs.forEach(h=> (h.d || []).forEach((x, i)=>{ if(!R.hd[h.id + ':' + i]) cards.push({ k: h.id + ':' + i, t: x.t }); }));
+    tr.innerHTML = `<div class="mp-hint">Ahora los datos: toca un dato y luego el hecho al que pertenece</div>
+      <div class="mp-pieces">${shuffleSeed(cards, R.start).map(c=> `<button class="mp-pc lab${NG.piece === 'd:' + c.k ? ' sel' : ''}" data-hdp="${c.k}"><span>${mpEsc(c.t)}</span></button>`).join('')}</div>
+      ${NG.piece ? '<div class="mp-trow"><button data-nt="verhd">Ver dónde va</button></div>' : ''}`;
+    return;
+  }
+  if(ph === 4){ tr.innerHTML = `<div class="mp-hint big">Toca un punto con calendario: coloca sus datos en sus años. Al terminarlo se abre su ficha.</div>`; return; }
+  tr.innerHTML = `<div class="mp-hint big">¡Red completa!</div>`;
+}
+function shuffleSeed(arr, seed){ /* barajado estable durante la partida (no baila cada vez que tocas) */
+  let s = (seed || 1) % 2147483647; const rnd = ()=> (s = s * 16807 % 2147483647) / 2147483647;
+  const a = arr.slice().sort((x, y)=> String(x.id || x.k).localeCompare(String(y.id || y.k)));
+  for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function netPhaseSummary(ph){
+  const R = NG.run, pre = { 1: 'n:', 2: 'l', 3: 'h', 4: 'd:' }[ph];
+  let vals = Object.entries(R.res).filter(([k])=> ph === 3 ? /^h[d]?:/.test(k) : k.startsWith(pre)).map(([, v])=> v);
+  /* en las líneas, cada línea cuenta una vez: con su peor resultado de los tres pasos */
+  if(ph === 2) vals = netLinks(NG.sc).map(l=> Math.max(R.res['l:' + l.id] || 0, R.res['lt:' + l.id] || 0, R.res['li:' + l.id] || 0));
+  const c = [0, 1, 2, 3].map(r=> vals.filter(v=> v === r).length);
+  const last = ph === 4 || [2, 3, 4].slice(ph - 1).every(p=> netPhaseEmpty(p));
+  return `<div class="net-sum"><div class="net-st">Fase ${ph} completa: ${NET_PH[ph - 1]}</div>
+    <div class="mp-leg">${[0, 1, 2, 3].map(r=> `<span><i style="background:${MP_RES[r]}"></i>${c[r]} ${['a la primera', 'al 2º', 'al 3º', 'falladas o vistas'][r]}</span>`).join('')}</div>
+    <button class="pri" data-nt="next">${last ? 'Terminar' : 'Siguiente fase: ' + NET_PH[ph]} →</button></div>`;
+}
+
+/* ---------- acciones ---------- */
+function netMark(key, r){ NG.run.res[key] = Math.min(3, r); }
+function netShake(id){ const g = NG.C.world.querySelector(`[data-n="${id}"]`); if(g){ g.classList.remove('bad'); void g.getBoundingClientRect(); g.classList.add('bad'); } try{ navigator.vibrate && navigator.vibrate(40); }catch(e){} }
+function netCenter(id){ const b = NG.C.L && NG.C.L.B[id]; if(!b) return; const r = NG.C.svg.getBoundingClientRect(), x = b.x * NG.C.k + NG.C.tx, y = b.y * NG.C.k + NG.C.ty; if(x < 10 || y < 10 || x > r.width - 60 || y > r.height * .6){ NG.C.center(b.x + b.w / 2, b.y + b.h / 2 - r.height * .15 / NG.C.k); } }
+function netTap(t){
+  if(!NG) return;
+  const nd = t.closest && t.closest('[data-n]'); if(!nd) return;
+  const id = nd.dataset.n, sc = NG.sc, R = NG.run, ph = R.phase, n = sc.nodes.find(x=> x.id === id);
+  if(ph > 4 || netPhaseDone(ph)){ if(n && n.k !== 'hecho') netFicha(n); return; }
+  if(ph === 1){
+    if(n.k === 'hecho') return;
+    if(R.res['n:' + id] != null){ return; }
+    NG.typing = id; netDraw(); netCenter(id); return;
+  }
+  if(ph === 2){
+    if(n.k === 'hecho') return;
+    if(R.cur) return toast(R.cur.stage === 'tipo' ? 'Primero elige el tipo de línea' : 'Primero elige su información');
+    if(!NG.sel){
+      if(!netLinks(sc).some(l=> !R.linksDone[l.id] && (l.a === id || l.b === id))) return toast('Este punto ya tiene todas sus líneas');
+      NG.sel = id; netDraw(); return;
+    }
+    if(id === NG.sel){ NG.sel = null; netDraw(); return; }
+    netConnect(NG.sel, id); return;
+  }
+  if(ph === 3){
+    if(n.k !== 'hecho') return;
+    const placed = new Set(Object.values(R.tl)), stepA = netHechos(sc).some(h=> !placed.has(h.id));
+    if(stepA){ if(R.tl[id]) return; if(!NG.piece) return toast('Primero elige un hecho de abajo'); netPlaceH(NG.piece.slice(2), id); return; }
+    if(!NG.piece) return toast('Primero elige un dato de abajo');
+    netPlaceHD(NG.piece.slice(2), R.tl[id]); return;
+  }
+  if(ph === 4){ if(n.k === 'hecho') return; if(!netDated(n).length || R.pdone[id]){ netFicha(n); return; } netDatos(n); return; }
+}
+/* fase 2: unir */
+function netConnect(a, b){
+  const sc = NG.sc, R = NG.run, left = netLinks(sc).filter(l=> !R.linksDone[l.id]);
+  const fwd = left.filter(l=> (l.a === a && l.b === b) || (l.bi && l.a === b && l.b === a));
+  const fk = 'o:' + a;
+  if(fwd.length){
+    const r = R.f[fk] || 0; delete R.f[fk];
+    R.cur = { a, b, cands: fwd.map(l=> l.id), stage: 'tipo', r };
+    NG.sel = null; netSave(); netDraw(); return;
+  }
+  const rev = left.some(l=> l.a === b && l.b === a);
+  R.f[fk] = (R.f[fk] || 0) + 1;
+  toast(rev ? 'Esa línea existe, pero va al revés' : 'Esos dos no están unidos'); netShake(b);
+  if(R.f[fk] >= 3){ netRevealFrom(a); return; }
+  netSave(); netDraw();
+}
+function netRevealFrom(a){
+  const sc = NG.sc, R = NG.run, left = netLinks(sc).filter(l=> !R.linksDone[l.id]);
+  const l = left.find(x=> x.a === a) || left.find(x=> x.b === a && x.bi) || left.find(x=> x.b === a);
+  delete R.f['o:' + a]; if(!l){ NG.sel = null; netDraw(); return; }
+  R.cur = { a: l.a, b: l.b, cands: [l.id], stage: 'tipo', r: 3 }; NG.sel = null;
+  toast('Esta era una de sus líneas'); netSave(); netDraw();
+  const B = NG.C.L.B[l.b]; if(B) NG.C.center(B.x + B.w / 2, B.y + B.h / 2);
+}
+function netPickType(k){
+  const sc = NG.sc, R = NG.run, c = R.cur; if(!c) return;
+  const hit = c.cands.map(id=> sc.links.find(l=> l.id === id)).find(l=> redLType(l) === k);
+  if(hit){ const f = R.f['lt'] || 0; delete R.f['lt']; netMark('l:' + hit.id, c.r); netMark('lt:' + hit.id, f); c.lid = hit.id; c.stage = 'info'; netSave(); netDraw(); return; }
+  R.f['lt'] = (R.f['lt'] || 0) + 1; toast('No es ese tipo');
+  if(R.f['lt'] >= 3){ netTypeReveal(); return; }
+  netSave(); netTray();
+}
+function netTypeReveal(){ const R = NG.run, c = R.cur, l = NG.sc.links.find(x=> x.id === c.cands[0]); delete R.f['lt']; netMark('l:' + l.id, c.r); netMark('lt:' + l.id, 3); c.lid = l.id; c.stage = 'info'; toast('Era: ' + RED_L[redLType(l)].name); netSave(); netDraw(); }
+function netPickInfo(lidPicked){
+  const sc = NG.sc, R = NG.run, c = R.cur; if(!c || !c.lid) return;
+  const want = sc.links.find(l=> l.id === c.lid), got = sc.links.find(l=> l.id === lidPicked);
+  if(got && mpNorm(got.t) === mpNorm(want.t)){ const f = R.f['li'] || 0; delete R.f['li']; netMark('li:' + want.id, f); netLineDone(); return; }
+  R.f['li'] = (R.f['li'] || 0) + 1; toast('Esa no es');
+  if(R.f['li'] >= 3){ delete R.f['li']; netMark('li:' + want.id, 3); toast('Era: «' + want.t + '»'); netLineDone(); return; }
+  netSave(); netTray();
+}
+function netLineDone(){
+  const R = NG.run, c = R.cur, l = NG.sc.links.find(x=> x.id === c.lid);
+  if(!l.t) netMark('li:' + l.id, R.res['lt:' + l.id]);
+  R.linksDone[c.lid] = true; R.cur = null; netSave(); netDraw();
+}
+/* fase 3 */
+function netPlaceH(evId, slotId){
+  const sc = NG.sc, R = NG.run, ev = sc.nodes.find(x=> x.id === evId), slot = sc.nodes.find(x=> x.id === slotId);
+  const k = 'h:' + evId;
+  if(netYear(ev) === netYear(slot)){ netMark(k, R.f[k] || 0); delete R.f[k]; R.tl[slotId] = evId; NG.piece = null; netSave(); netDraw(); return; }
+  R.f[k] = (R.f[k] || 0) + 1; netShake(slotId); toast('No es ese año');
+  if(R.f[k] >= 3) netShowH(evId); else { netSave(); netTray(); }
+}
+function netShowH(evId){
+  const sc = NG.sc, R = NG.run, ev = sc.nodes.find(x=> x.id === evId), y = netYear(ev);
+  const slot = netHechos(sc).find(h=> !R.tl[h.id] && netYear(h) === y) || netHechos(sc).find(h=> !R.tl[h.id]);
+  if(!slot) return; const k = 'h:' + evId; delete R.f[k]; netMark(k, 3); R.tl[slot.id] = evId; NG.piece = null; toast('Iba en ' + y); netSave(); netDraw();
+}
+function netPlaceHD(cardKey, evId){
+  const R = NG.run, owner = cardKey.split(':')[0], k = 'hd:' + cardKey;
+  if(owner === evId){ netMark(k, R.f[k] || 0); delete R.f[k]; R.hd[cardKey] = true; NG.piece = null; netSave(); netDraw(); return; }
+  R.f[k] = (R.f[k] || 0) + 1; const slot = Object.keys(R.tl).find(s=> R.tl[s] === evId); if(slot) netShake(slot); toast('No es de ese hecho');
+  if(R.f[k] >= 3){ delete R.f[k]; netMark(k, 3); R.hd[cardKey] = true; NG.piece = null; const ev = NG.sc.nodes.find(x=> x.id === owner); toast('Era de: ' + (ev ? netHText(ev) : '')); netSave(); netDraw(); }
+  else { netSave(); netTray(); }
+}
+/* fase 4: los datos con fecha de un punto */
+function netDatos(n){
+  const R = NG.run, ds = netDated(n);
+  const years = ds.map(d=> d.y).sort((a, b)=> a - b);
+  NG.open = { id: n.id, piece: null };
+  const el = document.createElement('div'); el.className = 'net-panel'; el.id = 'net-panel';
+  const draw = ()=>{
+    const filled = ds.map((d, i)=> R.pd[n.id + ':' + i]);
+    const slots = years.map((y, si)=>{ const i = ds.findIndex((d, j)=> R.pd[n.id + ':' + j] && R.pd[n.id + ':' + j].s === si); const r = i >= 0 ? R.res['d:' + n.id + ':' + i] : null; return `<button class="net-yr${i >= 0 ? ' on r' + r : ''}" data-ys="${si}"><b>${y}</b><span>${i >= 0 ? mpEsc(ds[i].t) : ''}</span></button>`; }).join('');
+    const left = shuffleSeed(ds.map((d, i)=> ({ k: String(i), t: d.t })).filter(c=> !R.pd[n.id + ':' + c.k]), R.start);
+    el.innerHTML = `<div class="net-pbox"><div class="net-ph"><b>${mpEsc(n.t)}</b><button data-np="x" aria-label="Cerrar">✕</button></div>
+      <div class="mp-hint">Toca un dato y luego su año</div><div class="net-yrs">${slots}</div>
+      <div class="mp-pieces net-cards">${left.map(c=> `<button class="mp-pc lab${NG.open.piece === c.k ? ' sel' : ''}" data-dc="${c.k}"><span>${mpEsc(c.t)}</span></button>`).join('')}</div>
+      ${NG.open.piece != null ? '<div class="mp-trow"><button data-np="ver">Ver dónde va</button></div>' : ''}</div>`;
+  };
+  const place = (ci, si, forced)=>{
+    const k = 'd:' + n.id + ':' + ci, d = ds[ci];
+    const taken = ds.some((x, j)=> R.pd[n.id + ':' + j] && R.pd[n.id + ':' + j].s === si);
+    if(!forced && (taken || years[si] !== d.y)){ R.f[k] = (R.f[k] || 0) + 1; toast(taken ? 'Ese año ya está puesto' : 'No es ese año'); if(R.f[k] >= 3) return place(ci, null, true); netSave(); draw(); return; }
+    if(si == null) si = years.findIndex((y, s)=> y === d.y && !ds.some((x, j)=> R.pd[n.id + ':' + j] && R.pd[n.id + ':' + j].s === s));
+    netMark(k, forced ? 3 : (R.f[k] || 0)); delete R.f[k]; R.pd[n.id + ':' + ci] = { s: si }; NG.open.piece = null;
+    if(ds.every((x, j)=> R.pd[n.id + ':' + j])){ R.pdone[n.id] = true; netSave(); el.remove(); NG.open = null; netDraw(); netFicha(n, true); return; }
+    netSave(); draw();
+  };
+  let downBg = false; el.addEventListener('pointerdown', e=>{ downBg = e.target === el; });
+  el.addEventListener('click', e=>{
+    const x = e.target.closest('[data-np],[data-dc],[data-ys]'); if(!x) { if(e.target === el && downBg){ el.remove(); NG.open = null; } return; }
+    if(x.dataset.np === 'x'){ el.remove(); NG.open = null; return; }
+    if(x.dataset.np === 'ver' && NG.open.piece != null){ place(+NG.open.piece, null, true); return; }
+    if(x.dataset.dc != null){ NG.open.piece = NG.open.piece === x.dataset.dc ? null : x.dataset.dc; draw(); return; }
+    if(x.dataset.ys != null){ if(NG.open.piece == null) return toast('Primero elige un dato'); place(+NG.open.piece, +x.dataset.ys); }
+  });
+  draw(); document.getElementById('mp').appendChild(el);
+}
+/* la ficha para leer */
+function netFicha(n, fresh){
+  const el = document.createElement('div'); el.className = 'net-panel'; el.id = 'net-ficha';
+  const ds = (n.d || []).slice().sort((a, b)=> (a.y || 9999) - (b.y || 9999));
+  el.innerHTML = `<div class="net-pbox"><div class="net-ph"><b>${mpEsc(n.t)}</b><button data-np="x" aria-label="Cerrar">✕</button></div>
+    <div class="net-ft">${RED_N[redType(n)].name}${(n.al || []).length ? ' · también: ' + n.al.map(mpEsc).join(', ') : ''}</div>
+    ${fresh ? '<div class="net-ok">✓ Completado</div>' : ''}
+    ${n.n ? `<div class="mp-pn">${mpEsc(n.n).replace(/\n/g, '<br>')}</div>` : ''}
+    ${ds.length ? `<ul class="net-fl">${ds.map(d=> `<li>${d.y ? `<b>${d.y}</b> ` : ''}${mpEsc(d.t)}</li>`).join('')}</ul>` : ''}
+    <button class="pri net-close" data-np="x">Cerrar</button></div>`;
+  let downBg = false; el.addEventListener('pointerdown', e=>{ downBg = e.target === el; });
+  el.addEventListener('click', e=>{ if((e.target === el && downBg) || e.target.closest('[data-np="x"]')) el.remove(); });
+  document.getElementById('mp').appendChild(el);
+}
+function netClick(e){
+  const t = e.target; let x;
+  if(x = t.closest('[data-nt]')){
+    const a = x.dataset.nt, R = NG.run;
+    if(a === 'quit'){ netClose(); return; }
+    if(a === 'untype'){ NG.typing = null; netDraw(); return; }
+    if(a === 'ver' && NG.typing){ const k = 'n:' + NG.typing; delete R.f[k]; netMark(k, 3); const n = NG.sc.nodes.find(q=> q.id === NG.typing); toast(n.t); NG.typing = null; netSave(); netDraw(); return; }
+    if(a === 'unsel'){ NG.sel = null; netDraw(); return; }
+    if(a === 'verline' && NG.sel){ netRevealFrom(NG.sel); return; }
+    if(a === 'verlt'){ netTypeReveal(); return; }
+    if(a === 'verli' && R.cur && R.cur.lid){ delete R.f['li']; netMark('li:' + R.cur.lid, 3); const l = NG.sc.links.find(q=> q.id === R.cur.lid); toast('Era: «' + (l.t || '') + '»'); netLineDone(); return; }
+    if(a === 'verh' && NG.piece){ netShowH(NG.piece.slice(2)); return; }
+    if(a === 'verhd' && NG.piece){ const ck = NG.piece.slice(2), k = 'hd:' + ck; delete R.f[k]; netMark(k, 3); R.hd[ck] = true; NG.piece = null; const ev = NG.sc.nodes.find(q=> q.id === ck.split(':')[0]); toast('Era de: ' + (ev ? netHText(ev) : '')); netSave(); netDraw(); return; }
+    if(a === 'next'){
+      if(R.phase >= 4){ netFinish(); return; }
+      R.phase++; netSkipEmpty();
+      if(R.phase > 4){ netFinish(); return; }
+      NG.sel = null; NG.typing = null; NG.piece = null; netSave(); netDraw(); return;
+    }
+    if(a === 'again'){ const sc = NG.sc; delete sc.run; netClose(); mpNetStart(sc, null); return; }
+    if(a === 'look'){ x.closest('.mp-end').remove(); return; }
+    return;
+  }
+  if(x = t.closest('[data-ty]')){ netPickType(x.dataset.ty); return; }
+  if(x = t.closest('[data-li]')){ netPickInfo(x.dataset.li); return; }
+  if(x = t.closest('[data-hp]')){ NG.piece = NG.piece === 'h:' + x.dataset.hp ? null : 'h:' + x.dataset.hp; netTray(); return; }
+  if(x = t.closest('[data-hdp]')){ NG.piece = NG.piece === 'd:' + x.dataset.hdp ? null : 'd:' + x.dataset.hdp; netTray(); return; }
+}
+document.addEventListener('submit', e=>{
+  const f = e.target.closest && e.target.closest('#mp .net-tf'); if(!f || !NG) return;
+  e.preventDefault();
+  const v = f.querySelector('input').value; if(!v.trim() || !NG.typing) return;
+  const R = NG.run, id = NG.typing, n = NG.sc.nodes.find(q=> q.id === id), k = 'n:' + id;
+  if(netMatch(v, n)){ netMark(k, R.f[k] || 0); delete R.f[k]; NG.typing = null; netSave(); netDraw(); return; }
+  R.f[k] = (R.f[k] || 0) + 1; netShake(id);
+  if(R.f[k] >= 3){ delete R.f[k]; netMark(k, 3); toast('Era: ' + n.t); NG.typing = null; netSave(); netDraw(); return; }
+  netSave(); netTray();
+}, true);
+function netFinish(){
+  const sc = NG.sc, R = NG.run; R.done = true; R.phase = 5;
+  const vals = Object.values(R.res), first = vals.filter(v=> v === 0).length, secs = Math.round((Date.now() - R.start) / 1000);
+  sc.stats = sc.stats || {}; Object.entries(R.res).forEach(([k, r])=> sc.stats[k] = { r, t: Date.now() });
+  delete sc.run; clearTimeout(netSave.t); saveEsq();
+  netDraw();
+  const el = document.createElement('div'); el.className = 'mp-end';
+  el.innerHTML = `<div class="mp-ebox"><div class="mp-et">¡Red montada!</div>
+    <div class="mp-es">${first} de ${vals.length} a la primera</div>
+    <div class="mp-leg">${[0, 1, 2, 3].map(r=> `<span><i style="background:${MP_RES[r]}"></i>${vals.filter(v=> v === r).length} ${['a la primera', 'al 2º', 'al 3º', 'falladas o vistas'][r]}</span>`).join('')}</div>
+    <div class="mp-cs">Tiempo total de juego entre sesiones: ${secs > 3600 ? Math.round(secs / 3600) + ' h' : Math.round(secs / 60) + ' min'}</div>
+    <button class="pri" data-nt="again">Otra vez</button><button data-nt="look">Ver la red</button><button data-nt="quit">Salir</button></div>`;
+  document.getElementById('mp').appendChild(el);
+}
+
+/* en las redes, «Montar el esquema» abre este juego */
+{ const _o = mpPlayOpen; mpPlayOpen = function(sc, pre){ if(sc.layout === 'red') return mpNetOpen(sc); return _o.apply(this, arguments); }; }
 
 /* ---------- esquemas de ejemplo (se añaden una vez; se pueden borrar o cambiar) ---------- */
 const MP_EJ = [
@@ -10045,80 +10441,138 @@ const MP_EJ = [
       > Se calcula cuántos votos «cuesta» un escaño (votos ÷ escaños); cada partido se lleva los escaños enteros que le tocan y los que sobran van a los restos más grandes.
     Mayoritario
       > En cada distrito gana un solo candidato, el más votado, y el resto de votos no cuenta. Reino Unido y Estados Unidos.` },
-  { id: 'ej-gaza', v: 5, name: 'El conflicto de Gaza', layout: 'red', color: '#1c1c1e',
+  { id: 'ej-gaza', v: 6, replace: true, name: 'El conflicto de Gaza', layout: 'red', color: '#1c1c1e',
     pos: { 'Estados Unidos (Trump)': [40, 360], 'Unión Europea': [40, 150], 'España': [300, 60], 'Sudáfrica': [40, 620], 'Corte Internacional de Justicia': [60, 800],
       'Corte Penal Internacional': [330, 900], 'Junta de Paz': [300, 560], 'Fuerza Internacional de Estabilización': [540, 770], 'Comité tecnocrático palestino': [560, 610],
       'Israel (Gobierno de Netanyahu)': [520, 340], 'Colonos israelíes': [640, 130], 'Población de Cisjordania': [930, 40], 'Autoridad Palestina (Fatah)': [1180, 170],
       'Hamás': [1000, 330], 'Yihad Islámica Palestina': [1180, 430], 'Población de Gaza': [840, 540], 'ONU y UNRWA': [820, 850], 'Egipto': [1060, 720],
       'Catar': [1260, 620], 'Turquía': [1420, 790], 'Irán': [1560, 320], 'Hezbolá (Líbano)': [1440, 110], 'Hutíes (Yemen)': [1600, 530] },
-    text: `Israel (Gobierno de Netanyahu) #estado
-  > Gobierno de coalición de Benjamín Netanyahu con partidos de derecha y de ultraderecha religiosa (desde diciembre de 2022). Desde 1967 ocupa Cisjordania y controla las fronteras de Gaza. Elecciones del 27 de octubre de 2026: el bloque de Netanyahu saca 53 de 120 escaños y nadie llega a la mayoría de 61; las negociaciones para formar gobierno siguen abiertas.
-Hamás #grupo
-  > Movimiento islamista y armado palestino, fundado en 1987. Gobierna Gaza desde 2007. EE. UU., la UE y otros países lo consideran organización terrorista. Israel mató a sus líderes Ismail Haniyeh (julio de 2024, en Teherán) y Yahya Sinwar (octubre de 2024, en Gaza). En julio de 2026 dijo aceptar un desarme por fases ligado a la retirada israelí; Israel no lo ha aceptado públicamente.
-Yihad Islámica Palestina #grupo
-  > Grupo armado islamista palestino, más pequeño que Hamás y muy ligado a Irán. Participó en el ataque del 7 de octubre.
-Población de Gaza #pueblo
-  > Unos 2,1 millones de personas en 365 km², casi la mitad menores de edad. La mayoría ha tenido que huir varias veces y vive entre ruinas y tiendas de campaña. Depende de la ayuda que entra por pasos que controla Israel.
-Autoridad Palestina (Fatah) #estado
-  > Nació con los Acuerdos de Oslo. La preside Mahmud Abbas, del partido Fatah. Gobierna partes de Cisjordania; perdió Gaza frente a Hamás en 2007. Ha aplazado las elecciones legislativas a septiembre de 2027.
-Población de Cisjordania #pueblo
-  > Unos 3 millones de palestinos bajo ocupación militar israelí, repartidos en zonas con distinto grado de control de la Autoridad Palestina.
-Colonos israelíes #pueblo
-  > Más de 700.000 israelíes viven en asentamientos en Cisjordania y Jerusalén Este, ilegales según el derecho internacional (opinión de la Corte Internacional de Justicia, julio de 2024). En 2026 Israel ha aprobado decenas de asentamientos nuevos.
-Estados Unidos (Trump) #estado
-  > Principal aliado de Israel. Acuerdo de 2016: 3.800 millones de dólares al año en ayuda militar (2019–2028), más de 8.800 millones extra desde octubre de 2023. Ha vetado varias resoluciones de alto el fuego en la ONU. Autor del plan de paz de 20 puntos. El 3 de noviembre de 2026 Trump anunció que dejará de dar ayuda militar a Israel a final de año.
-Irán #estado
-  > República Islámica, enemiga declarada de Israel. Financia y arma al llamado «eje de la resistencia»: Hamás, Yihad Islámica, Hezbolá y los hutíes. Según EE. UU., unos 100 millones de dólares al año a grupos palestinos (dato de 2020). La inteligencia de EE. UU. concluyó que Irán no organizó el 7 de octubre ni lo sabía de antemano.
-Hezbolá (Líbano) #grupo
-  > Milicia y partido chií libanés, el aliado más fuerte de Irán. Disparó contra Israel desde el 8 de octubre de 2023 en apoyo a Gaza; guerra abierta en 2024 y otra vez desde marzo de 2026. No se ha desarmado.
-Hutíes (Yemen) #grupo
-  > Movimiento armado que controla el norte de Yemen. En apoyo a Gaza atacó barcos en el mar Rojo y lanzó misiles y drones contra Israel.
-Catar #estado
-  > Mediador clave. Acoge la oficina política de Hamás desde 2012. Durante años pagó salarios, combustible y ayuda en Gaza con el visto bueno de Israel: más de 1.000 millones de dólares entre 2012 y 2018, según el New York Times. Israel bombardeó a líderes de Hamás en Doha en septiembre de 2025.
+
+    text: `Israel (Gobierno de Netanyahu) #estado ~Israel ~Gobierno israelí ~Netanyahu
+  * 1948 · Declara su independencia
+  * 1967 · Ocupa Gaza, Cisjordania y Jerusalén Este
+  * 2022 · Netanyahu forma gobierno con la ultraderecha
+  * 2026 · Elecciones en las que nadie logra mayoría
+  > Gobierno de coalición de Benjamín Netanyahu con partidos de derecha y ultraderecha religiosa. Controla las fronteras, el mar y el espacio aéreo de Gaza. En las elecciones del 27 de octubre de 2026 su bloque sacó 53 de 120 escaños, lejos de los 61 de la mayoría.
+Hamás #grupo ~Hamas
+  * 1987 · Nace durante la Primera Intifada
+  * 2006 · Gana las elecciones palestinas
+  * 2007 · Toma Gaza por la fuerza
+  * 2024 · Israel mata a sus líderes Haniyeh y Sinwar
+  * 2026 · Dice aceptar un desarme por fases
+  > Movimiento islamista y armado palestino, rama de los Hermanos Musulmanes. EE. UU., la UE y otros países lo consideran organización terrorista. Su desarme está ligado a la retirada israelí; Israel no ha aceptado públicamente ese acuerdo.
+Yihad Islámica Palestina #grupo ~Yihad Islamica ~Yihad
+  * 1981 · Se funda en Gaza
+  * 2023 · Participa en el ataque del 7 de octubre
+  > Grupo armado islamista palestino, más pequeño que Hamás y muy ligado a Irán.
+Población de Gaza #pueblo ~Gaza ~gazatíes ~palestinos de Gaza ~Franja de Gaza
+  * 2007 · Empieza el bloqueo de Israel y Egipto
+  * 2025 · Se declara la hambruna en la ciudad de Gaza
+  * 2026 · Pasa de 74.000 muertos según su Ministerio de Sanidad
+  > Unos 2,1 millones de personas en 365 km², casi la mitad menores de edad. La mayoría ha tenido que huir varias veces y vive entre ruinas y tiendas. La cifra de muertos del Ministerio de Sanidad de Gaza no distingue civiles de combatientes; la ONU la considera en general fiable.
+Autoridad Palestina (Fatah) #estado ~Autoridad Palestina ~ANP ~AP ~Fatah ~Abbas
+  * 1994 · Nace tras los Acuerdos de Oslo
+  * 2007 · Pierde Gaza frente a Hamás
+  * 2027 · Fecha prevista de sus elecciones legislativas
+  > La preside Mahmud Abbas, del partido Fatah. Gobierna partes de Cisjordania con un autogobierno limitado.
+Población de Cisjordania #pueblo ~Cisjordania ~palestinos de Cisjordania
+  * 1967 · Queda bajo ocupación israelí
+  * 1995 · Se divide en zonas A, B y C
+  > Unos 3 millones de palestinos. En la zona A manda la Autoridad Palestina, en la B se comparte y en la C (la mayor) manda Israel.
+Colonos israelíes #pueblo ~colonos ~asentamientos ~colonias
+  * 2005 · Unos 8.000 tienen que dejar Gaza
+  * 2024 · La Corte Internacional declara ilegales los asentamientos
+  * 2026 · Israel aprueba decenas de asentamientos nuevos
+  > Más de 700.000 israelíes viven en asentamientos de Cisjordania y Jerusalén Este, ilegales según el derecho internacional.
+Estados Unidos (Trump) #estado ~Estados Unidos ~EE. UU. ~EEUU ~USA ~Trump
+  * 2016 · Firma 3.800 millones al año en ayuda militar a Israel
+  * 2025 · Presenta el plan de paz de 20 puntos
+  * 2026 · Ataca Irán junto a Israel
+  * 2026 · Trump anuncia el fin de la ayuda militar a Israel
+  > Principal aliado de Israel: además del acuerdo de 2016 (2019–2028), ha dado más de 8.800 millones extra desde octubre de 2023 y ha vetado varias resoluciones de alto el fuego en la ONU.
+Irán #estado ~Iran
+  * 1979 · Revolución islámica
+  * 2020 · Según EE. UU., da unos 100 millones al año a grupos palestinos
+  * 2026 · Muere su líder supremo, Alí Jamenei, en el ataque de EE. UU. e Israel
+  > Enemigo declarado de Israel. Financia y arma al llamado «eje de la resistencia»: Hamás, Yihad Islámica, Hezbolá y los hutíes. La inteligencia de EE. UU. concluyó que no organizó el 7 de octubre ni lo sabía de antemano.
+Hezbolá (Líbano) #grupo ~Hezbolá ~Hezbola ~Hizbulá ~Hezbollah
+  * 1982 · Nace durante la invasión israelí del Líbano
+  * 2023 · Empieza a disparar contra Israel en apoyo a Gaza
+  * 2024 · Guerra abierta con Israel, con tregua en noviembre
+  * 2026 · Vuelve la guerra con Israel en marzo
+  > Milicia y partido chií libanés, el aliado más fuerte de Irán. No se ha desarmado.
+Hutíes (Yemen) #grupo ~Hutíes ~huties ~Ansarolá ~Ansar Allah
+  * 2014 · Toman Saná, la capital de Yemen
+  * 2023 · Empiezan a atacar barcos en el mar Rojo
+  > Movimiento armado que controla el norte de Yemen. También lanza misiles y drones contra Israel.
+Catar #estado ~Qatar
+  * 2012 · Acoge la oficina política de Hamás
+  * 2025 · Israel bombardea a líderes de Hamás en Doha
+  > Mediador clave. Durante años pagó salarios, combustible y ayuda en Gaza con el visto bueno de Israel: más de 1.000 millones de dólares entre 2012 y 2018, según el New York Times.
 Egipto #estado
-  > Vecino de Gaza: controla el paso de Rafah. Mantiene el bloqueo junto a Israel desde 2007 y media entre las partes junto a Catar.
-Turquía #estado
-  > Apoya políticamente a Hamás y es uno de los países mediadores del alto el fuego de 2025 y del plan de desarme de 2026.
-Junta de Paz #org
-  > Organismo creado por el plan de Trump y presidido por él (carta firmada en Davos, enero de 2026). Respaldado por el Consejo de Seguridad de la ONU (resolución 2803, noviembre de 2025). Dirige la reconstrucción, el comité palestino y la fuerza internacional.
-Fuerza Internacional de Estabilización #org
-  > Fuerza multinacional aprobada por la ONU por dos años, con mando de EE. UU. Debe vigilar el alto el fuego, formar a una nueva policía palestina y supervisar el desarme. Comprometidos: Indonesia, Marruecos, Kazajistán, Albania, Kosovo… Su despliegue empezó a prepararse en agosto de 2026.
-Comité tecnocrático palestino #org
-  > Comité de expertos palestinos, sin Hamás, que gestiona la vida diaria de Gaza bajo la Junta de Paz (creado en enero de 2026).
-ONU y UNRWA #org
-  > La UNRWA es la agencia de la ONU para los refugiados palestinos (desde 1949): escuelas, sanidad y comida. Israel la acusó de tener empleados implicados en el 7 de octubre y le prohibió operar en su territorio (ley de octubre de 2024).
-Corte Internacional de Justicia #org
-  > Tribunal de la ONU que juzga a Estados. En el caso de Sudáfrica contra Israel por genocidio ordenó medidas para proteger a la población (2024); el juicio de fondo sigue abierto. En julio de 2024 dictaminó que la ocupación de los territorios palestinos es ilegal.
-Corte Penal Internacional #org
-  > Juzga a personas. En noviembre de 2024 emitió órdenes de arresto contra Netanyahu y su exministro de Defensa Yoav Gallant, y contra el jefe militar de Hamás Mohamed Deif (ya muerto), por crímenes de guerra y contra la humanidad.
-Sudáfrica #estado
-  > Llevó a Israel ante la Corte Internacional de Justicia acusándolo de genocidio (diciembre de 2023).
-España #estado
-  > Reconoció el Estado de Palestina el 28 de mayo de 2024, junto a Irlanda y Noruega. En octubre de 2025 el Congreso aprobó un embargo total de armas a Israel (178 votos a favor y 169 en contra).
-Unión Europea #org
+  * 1948 · Pasa a administrar Gaza hasta 1967
+  * 1979 · Primer país árabe en firmar la paz con Israel
+  * 2007 · Cierra Rafah y se suma al bloqueo
+  > Vecino de Gaza: controla el paso de Rafah y media entre las partes junto a Catar.
+Turquía #estado ~Turquia ~Türkiye
+  * 2025 · Firma como garante del alto el fuego
+  * 2026 · Media en el acuerdo de desarme de Hamás
+  > Apoya políticamente a Hamás.
+Junta de Paz #org ~Board of Peace ~Consejo de Paz
+  * 2025 · La ONU la respalda (resolución 2803)
+  * 2026 · Trump firma su carta en Davos
+  > Organismo creado por el plan de Trump y presidido por él. Dirige la reconstrucción, el comité palestino y la fuerza internacional.
+Fuerza Internacional de Estabilización #org ~ISF ~Fuerza Internacional ~Fuerza de Estabilización ~fuerza multinacional
+  * 2025 · La ONU la aprueba por dos años
+  * 2026 · Empieza a preparar su despliegue en Gaza
+  > Mando de EE. UU. (general Jasper Jeffers). Debe vigilar el alto el fuego, formar a una nueva policía palestina y supervisar el desarme. Comprometidos: Indonesia, Marruecos, Kazajistán, Albania, Kosovo…
+Comité tecnocrático palestino #org ~comité tecnocrático ~comité palestino ~NCAG
+  * 2026 · Se crea para gestionar Gaza
+  > Comité de expertos palestinos, sin Hamás, que gestiona la vida diaria de Gaza bajo la Junta de Paz.
+ONU y UNRWA #org ~ONU ~UNRWA ~Naciones Unidas
+  * 1949 · Se crea la UNRWA
+  * 2024 · Israel le prohíbe operar en su territorio
+  > La UNRWA es la agencia de la ONU para los refugiados palestinos: escuelas, sanidad y comida. Israel la acusó de tener empleados implicados en el 7 de octubre.
+Corte Internacional de Justicia #org ~CIJ ~Tribunal Internacional de Justicia ~TIJ ~Corte Internacional
+  * 2024 · Ordena medidas para proteger a la población de Gaza
+  * 2024 · Declara ilegal la ocupación de los territorios palestinos
+  > Tribunal de la ONU que juzga a Estados. El juicio de fondo por genocidio sigue abierto.
+Corte Penal Internacional #org ~CPI ~TPI ~Corte Penal
+  * 2024 · Ordena arrestar a Netanyahu, a Gallant y a Deif
+  > Juzga a personas. Las órdenes son por crímenes de guerra y contra la humanidad; Mohamed Deif, jefe militar de Hamás, ya ha muerto.
+Sudáfrica #estado ~Sudafrica
+  * 2023 · Denuncia a Israel por genocidio
+España #estado ~Espana
+  * 2024 · Reconoce el Estado de Palestina
+  * 2025 · Aprueba un embargo total de armas a Israel
+  > Reconoció Palestina el 28 de mayo de 2024, junto a Irlanda y Noruega. El embargo se aprobó en el Congreso por 178 votos a favor y 169 en contra.
+Unión Europea #org ~UE ~Union Europea
   > Principal donante de ayuda a los palestinos y principal socio comercial de Israel. Sus países están divididos sobre cómo actuar.
 1917 · Declaración Balfour #hecho
-  > El Reino Unido apoya un «hogar nacional para el pueblo judío» en Palestina, entonces otomana y después bajo mandato británico (1920–1948).
+  * El Reino Unido apoya un «hogar nacional judío» en Palestina
 1948 · Nace Israel; la Nakba #hecho
-  > Tras el plan de partición de la ONU (1947), Israel declara su independencia el 14 de mayo de 1948. En la guerra, unos 700.000 palestinos huyen o son expulsados: la Nakba («catástrofe»). Gaza queda bajo Egipto y Cisjordania bajo Jordania.
+  * Unos 700.000 palestinos huyen o son expulsados
+  * Gaza queda bajo Egipto y Cisjordania bajo Jordania
 1967 · Israel ocupa Gaza y Cisjordania #hecho
-  > Guerra de los Seis Días: Israel ocupa Gaza, Cisjordania, Jerusalén Este, los Altos del Golán y el Sinaí (devuelto a Egipto en 1982).
+  * Guerra de los Seis Días
+  * También ocupa el Golán y el Sinaí
 1987 · Primera Intifada; nace Hamás #hecho
-  > Levantamiento palestino contra la ocupación. En diciembre nace Hamás, rama palestina de los Hermanos Musulmanes.
+  * Levantamiento palestino contra la ocupación
 1993 · Acuerdos de Oslo #hecho
-  > Israel y la OLP se reconocen mutuamente y nace la Autoridad Palestina con un autogobierno limitado. El Estado palestino previsto nunca llegó.
+  * Israel y la OLP se reconocen mutuamente
 2005 · Israel sale de Gaza #hecho
-  > Israel retira a sus soldados y a unos 8.000 colonos de Gaza, pero sigue controlando sus fronteras, su espacio aéreo y su mar.
+  * Retira soldados y colonos, pero controla las fronteras
 2007 · Hamás toma Gaza; bloqueo #hecho
-  > Hamás gana las elecciones de 2006 y, tras enfrentarse a Fatah, toma Gaza por la fuerza en junio de 2007. Israel y Egipto imponen un bloqueo que dura desde entonces.
+  * Hamás expulsa a Fatah de la Franja tras ganar las elecciones
 2023 · 7 de octubre: ataque de Hamás #hecho
-  > Hamás y otros grupos atacan el sur de Israel: unas 1.200 personas muertas, la mayoría civiles, y 251 secuestradas.
+  * Unas 1.200 personas muertas y 251 secuestradas en Israel
 2023 · Empieza la guerra en Gaza #hecho
-  > Ofensiva israelí por aire y tierra. Más de 74.000 palestinos muertos según el Ministerio de Sanidad de Gaza (septiembre de 2026), que no distingue civiles de combatientes; la ONU lo considera en general fiable. Hambruna declarada en la ciudad de Gaza (agosto de 2025). Treguas cortas en noviembre de 2023 y de enero a marzo de 2025.
+  * Ofensiva israelí por aire y tierra sobre toda la Franja
 2025 · Alto el fuego del plan Trump #hecho
-  > Plan de 20 puntos (septiembre). Alto el fuego desde el 10 de octubre de 2025: salen los 20 rehenes vivos y cientos de presos palestinos. Israel se repliega tras la «línea amarilla» y controla algo más de la mitad de Gaza (más del 60 % en 2026). Desde la tregua han muerto más de 1.500 palestinos (noviembre de 2026).
+  * Salen los 20 rehenes vivos y cientos de presos palestinos
+  * Israel se queda detrás de la «línea amarilla»
 2026 · Guerra contra Irán #hecho
-  > 28 de febrero: EE. UU. e Israel atacan Irán y matan al líder supremo, Alí Jamenei. Irán responde contra Israel y bases de EE. UU.; Hezbolá reabre el frente del Líbano el 2 de marzo. Tregua frágil desde abril, con nuevos choques.
+  * EE. UU. e Israel atacan Irán el 28 de febrero
 Estados Unidos (Trump) -> Israel (Gobierno de Netanyahu) : armas y dinero #arma
 Estados Unidos (Trump) -> Israel (Gobierno de Netanyahu) : le protege con su veto en la ONU #apoya
 Irán -> Hamás : financia y arma #arma
@@ -10161,15 +10615,7 @@ Corte Penal Internacional -> Israel (Gobierno de Netanyahu) : orden de arresto a
 Corte Penal Internacional -> Hamás : orden de arresto a Deif #juzga
 España -> Israel (Gobierno de Netanyahu) : embargo de armas #juzga
 España -> Autoridad Palestina (Fatah) : reconoce el Estado palestino #apoya
-Unión Europea -> Autoridad Palestina (Fatah) : principal donante #dinero
-? ¿Qué une a Irán con el ataque del 7 de octubre? = Irán > Hamás > Israel (Gobierno de Netanyahu) | Irán financia y arma a Hamás desde los años 90, y Hamás lanzó el ataque. Según la inteligencia de EE. UU., Irán no lo organizó ni lo sabía de antemano.
-? ¿Cómo se extendió la guerra al Líbano? = Irán > Hezbolá (Líbano) > Israel (Gobierno de Netanyahu) | Hezbolá, armado por Irán, empezó a disparar contra Israel el 8 de octubre de 2023 en apoyo a Gaza. Hubo guerra abierta en 2024 y de nuevo en 2026, tras el ataque a Irán.
-? ¿Cómo llegó la guerra al mar Rojo? = Irán > Hutíes (Yemen) > Israel (Gobierno de Netanyahu) | Los hutíes, armados por Irán, atacaron barcos y lanzaron misiles contra Israel en apoyo a Gaza.
-? ¿Cómo gestiona el plan de paz la vida diaria en Gaza? = Estados Unidos (Trump) > Junta de Paz > Comité tecnocrático palestino > Población de Gaza | Trump preside la Junta de Paz, que supervisa a un comité de expertos palestinos que administra Gaza.
-? ¿Quién vigilará el desarme de Hamás? = Estados Unidos (Trump) > Junta de Paz > Fuerza Internacional de Estabilización > Hamás | La Junta de Paz dirige una fuerza multinacional con mando de EE. UU. que debe supervisar el desarme, por fases y ligado a la retirada israelí.
-? ¿Cómo llegó la acusación de genocidio a un tribunal? = Sudáfrica > Corte Internacional de Justicia > Israel (Gobierno de Netanyahu) | Sudáfrica demandó a Israel en diciembre de 2023; la Corte ordenó medidas para proteger a la población y el juicio de fondo sigue abierto.
-? ¿Por qué hay violencia en Cisjordania si allí no gobierna Hamás? = Israel (Gobierno de Netanyahu) > Colonos israelíes > Población de Cisjordania | El Gobierno israelí protege y amplía los asentamientos; parte de los colonos ataca a palestinos y les quita tierras, además de las operaciones del ejército.
-? ¿Cómo llegaba dinero de Catar a Gaza antes del 7 de octubre? = Catar > Población de Gaza | Catar pagó durante años salarios, combustible y ayuda en Gaza con el visto bueno del Gobierno israelí, que buscaba mantener la calma.` }
+Unión Europea -> Autoridad Palestina (Fatah) : principal donante #dinero` }
 ];
 function mpExample(ex){
   const sc = mpNew(ex.name, ex.layout, ex.text); sc.id = ex.id; sc.color = ex.color;
@@ -10190,13 +10636,17 @@ function mpSeedExamples(force){
 }
 /* cambios de ejemplos: fuera los retirados y dentro los actuales (una sola vez por aparato) */
 const MP_EJ_GONE = ['ej-tatuaje', 'ej-fermentos', 'ej-skate', 'ej-hongos'];
-const MP_EJ_VER = 5;
+const MP_EJ_VER = 6;
 function mpMigrate3(){
   let ver = 0; try{ ver = parseInt(localStorage.getItem('esq2_ver') || '0', 10) || (localStorage.getItem('esq2_v4') === '1' ? 4 : 0); }catch(e){}
   if(ver >= MP_EJ_VER) return 0;
   let n = 0;
   (function w(arr){ for(let i = arr.length - 1; i >= 0; i--){ const x = arr[i]; if(!x) continue; if(x.type === 'folder') w(x.children || []); else if(MP_EJ_GONE.includes(x.id)){ arr.splice(i, 1); n++; } } })(esquemas);
-  MP_EJ.forEach(ex=>{ if(ex.v > ver && !esqFind(ex.id)){ esquemas.push(mpExample(ex)); n++; } });
+  MP_EJ.forEach(ex=>{
+    if(ex.v <= ver) return;
+    if(ex.replace){ (function w(arr){ for(let i = arr.length - 1; i >= 0; i--){ const x = arr[i]; if(!x) continue; if(x.type === 'folder') w(x.children || []); else if(x.id === ex.id){ arr.splice(i, 1); } } })(esquemas); }
+    if(!esqFind(ex.id)){ esquemas.push(mpExample(ex)); n++; }
+  });
   try{ localStorage.setItem('esq2_ver', String(MP_EJ_VER)); localStorage.setItem('esq2_seed', '1'); }catch(e){}
   if(n) saveEsq(true);
   return n;
