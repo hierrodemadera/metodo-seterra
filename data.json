@@ -294,6 +294,692 @@
    "type": "scheme",
    "updated": 1794306997436,
    "v": 2
+  },
+  {
+   "color": "#1c1c1e",
+   "created": 1794309867608,
+   "id": "ej-gaza",
+   "layout": "red",
+   "links": [
+    {
+     "a": "n6x97nfmmx",
+     "b": "nnjmzuummw",
+     "id": "naww2c5mmx",
+     "k": "arma",
+     "t": "armas y dinero"
+    },
+    {
+     "a": "n6x97nfmmx",
+     "b": "nnjmzuummw",
+     "id": "n88oldjmmx",
+     "k": "apoya",
+     "t": "le protege con su veto en la ONU"
+    },
+    {
+     "a": "nuwhci7mmx",
+     "b": "nhxtbghmmx",
+     "id": "nm8wyhqmmx",
+     "k": "arma",
+     "t": "financia y arma"
+    },
+    {
+     "a": "nuwhci7mmx",
+     "b": "nne7oepmmx",
+     "id": "n4amhz6mmx",
+     "k": "arma",
+     "t": "financia y arma"
+    },
+    {
+     "a": "nuwhci7mmx",
+     "b": "n77jhpymmx",
+     "id": "nv2ice1mmx",
+     "k": "arma",
+     "t": "financia y arma"
+    },
+    {
+     "a": "nuwhci7mmx",
+     "b": "nyba8i0mmx",
+     "id": "nglhcbwmmx",
+     "k": "arma",
+     "t": "arma"
+    },
+    {
+     "a": "nhxtbghmmx",
+     "b": "nnjmzuummw",
+     "id": "nikyqmmmmx",
+     "k": "ataca",
+     "t": "ataque del 7-O y rehenes"
+    },
+    {
+     "a": "nne7oepmmx",
+     "b": "nnjmzuummw",
+     "id": "n6hb6hcmmx",
+     "k": "ataca",
+     "t": "participa en el 7-O"
+    },
+    {
+     "a": "nnjmzuummw",
+     "b": "nhxtbghmmx",
+     "bi": true,
+     "id": "nphyc8rmmx",
+     "k": "ataca",
+     "t": "guerra"
+    },
+    {
+     "a": "nnjmzuummw",
+     "b": "nbyf9dfmmx",
+     "id": "nbf1u29mmx",
+     "k": "ataca",
+     "t": "ofensiva y bloqueo"
+    },
+    {
+     "a": "nhxtbghmmx",
+     "b": "nbyf9dfmmx",
+     "id": "nw2tly3mmx",
+     "k": "controla",
+     "t": "la gobierna desde 2007"
+    },
+    {
+     "a": "n77jhpymmx",
+     "b": "nnjmzuummw",
+     "bi": true,
+     "id": "no3o65cmmx",
+     "k": "ataca",
+     "t": "guerra en el Líbano"
+    },
+    {
+     "a": "nyba8i0mmx",
+     "b": "nnjmzuummw",
+     "id": "nbov46zmmx",
+     "k": "ataca",
+     "t": "misiles y ataques en el mar Rojo"
+    },
+    {
+     "a": "nnjmzuummw",
+     "b": "nuwhci7mmx",
+     "bi": true,
+     "id": "nwbdztzmmx",
+     "k": "ataca",
+     "t": "guerra de 2026"
+    },
+    {
+     "a": "n6x97nfmmx",
+     "b": "nuwhci7mmx",
+     "id": "nljzrk8mmx",
+     "k": "ataca",
+     "t": "lo bombardea (2026)"
+    },
+    {
+     "a": "nnjmzuummw",
+     "b": "nwx9badmmx",
+     "id": "nkwah76mmx",
+     "k": "apoya",
+     "t": "protege y amplía los asentamientos"
+    },
+    {
+     "a": "nwx9badmmx",
+     "b": "n1gyax1mmx",
+     "id": "nrj9q9ommx",
+     "k": "ataca",
+     "t": "ataques y toma de tierras"
+    },
+    {
+     "a": "nnjmzuummw",
+     "b": "n1gyax1mmx",
+     "id": "nxvk4j8mmx",
+     "k": "controla",
+     "t": "ocupación militar"
+    },
+    {
+     "a": "nsbiqlemmx",
+     "b": "n1gyax1mmx",
+     "id": "nohgijvmmx",
+     "k": "controla",
+     "t": "la gobierna en parte"
+    },
+    {
+     "a": "nhxtbghmmx",
+     "b": "nsbiqlemmx",
+     "bi": true,
+     "id": "n09op3immx",
+     "k": "ataca",
+     "t": "rivales desde 2007"
+    },
+    {
+     "a": "nyc98pcmmx",
+     "b": "nhxtbghmmx",
+     "id": "n1y1f32mmx",
+     "k": "apoya",
+     "t": "acoge a sus líderes"
+    },
+    {
+     "a": "nyc98pcmmx",
+     "b": "nbyf9dfmmx",
+     "id": "nhggsyjmmx",
+     "k": "dinero",
+     "t": "salarios y combustible"
+    },
+    {
+     "a": "nnjmzuummw",
+     "b": "nyc98pcmmx",
+     "id": "ny3nj1immx",
+     "k": "ataca",
+     "t": "bombardea Doha (2025)"
+    },
+    {
+     "a": "nrad66emmx",
+     "b": "nbyf9dfmmx",
+     "id": "n103f3cmmx",
+     "k": "controla",
+     "t": "controla el paso de Rafah"
+    },
+    {
+     "a": "nml5r8hmmx",
+     "b": "nhxtbghmmx",
+     "id": "ncee5kgmmx",
+     "k": "apoya",
+     "t": "apoyo político"
+    },
+    {
+     "a": "n6x97nfmmx",
+     "b": "n3uckrommx",
+     "id": "n3i4uy5mmx",
+     "k": "media",
+     "t": "lo impulsa con su plan"
+    },
+    {
+     "a": "nyc98pcmmx",
+     "b": "n3uckrommx",
+     "id": "np9wgtjmmx",
+     "k": "media",
+     "t": "media"
+    },
+    {
+     "a": "nrad66emmx",
+     "b": "n3uckrommx",
+     "id": "nzajtqqmmx",
+     "k": "media",
+     "t": "media"
+    },
+    {
+     "a": "nml5r8hmmx",
+     "b": "n3uckrommx",
+     "id": "n7m96yymmx",
+     "k": "media",
+     "t": "media"
+    },
+    {
+     "a": "n6x97nfmmx",
+     "b": "nzhx6fmmmx",
+     "id": "nyikfh3mmx",
+     "k": "controla",
+     "t": "Trump la preside"
+    },
+    {
+     "a": "nzhx6fmmmx",
+     "b": "nkjqsnwmmx",
+     "id": "n6851qgmmx",
+     "k": "controla",
+     "t": "lo supervisa"
+    },
+    {
+     "a": "nkjqsnwmmx",
+     "b": "nbyf9dfmmx",
+     "id": "no49pr6mmx",
+     "k": "controla",
+     "t": "la administra"
+    },
+    {
+     "a": "nzhx6fmmmx",
+     "b": "nbtkvq5mmx",
+     "id": "n30t1yzmmx",
+     "k": "controla",
+     "t": "la dirige"
+    },
+    {
+     "a": "nbtkvq5mmx",
+     "b": "nhxtbghmmx",
+     "id": "nk9yyflmmx",
+     "k": "controla",
+     "t": "supervisará su desarme"
+    },
+    {
+     "a": "n59lqepmmx",
+     "b": "nbyf9dfmmx",
+     "id": "nuhhomnmmx",
+     "k": "ayuda",
+     "t": "ayuda humanitaria"
+    },
+    {
+     "a": "nnjmzuummw",
+     "b": "n59lqepmmx",
+     "id": "nh9oivummx",
+     "k": "juzga",
+     "t": "le prohíbe operar"
+    },
+    {
+     "a": "nqaorazmmx",
+     "b": "nwnlbi9mmx",
+     "id": "nldg4l0mmy",
+     "k": "juzga",
+     "t": "denuncia a Israel por genocidio"
+    },
+    {
+     "a": "nwnlbi9mmx",
+     "b": "nnjmzuummw",
+     "id": "nrwxgirmmy",
+     "k": "juzga",
+     "t": "medidas cautelares; ocupación ilegal"
+    },
+    {
+     "a": "n3clu40mmx",
+     "b": "nnjmzuummw",
+     "id": "n0a0qv7mmy",
+     "k": "juzga",
+     "t": "orden de arresto a Netanyahu"
+    },
+    {
+     "a": "n3clu40mmx",
+     "b": "nhxtbghmmx",
+     "id": "nai2b6gmmy",
+     "k": "juzga",
+     "t": "orden de arresto a Deif"
+    },
+    {
+     "a": "nqeusftmmx",
+     "b": "nnjmzuummw",
+     "id": "n4hohs5mmy",
+     "k": "juzga",
+     "t": "embargo de armas"
+    },
+    {
+     "a": "nqeusftmmx",
+     "b": "nsbiqlemmx",
+     "id": "ntks89jmmy",
+     "k": "apoya",
+     "t": "reconoce el Estado palestino"
+    },
+    {
+     "a": "nh0vol7mmx",
+     "b": "nsbiqlemmx",
+     "id": "nxtmw7qmmy",
+     "k": "dinero",
+     "t": "principal donante"
+    }
+   ],
+   "name": "El conflicto de Gaza",
+   "nodes": [
+    {
+     "id": "nnjmzuummw",
+     "k": "estado",
+     "n": "Gobierno de coalición de Benjamín Netanyahu con partidos de derecha y de ultraderecha religiosa (desde diciembre de 2022). Desde 1967 ocupa Cisjordania y controla las fronteras de Gaza. Elecciones del 27 de octubre de 2026: el bloque de Netanyahu saca 53 de 120 escaños y nadie llega a la mayoría de 61; las negociaciones para formar gobierno siguen abiertas.",
+     "p": null,
+     "t": "Israel (Gobierno de Netanyahu)",
+     "x": 520,
+     "y": 340
+    },
+    {
+     "id": "nhxtbghmmx",
+     "k": "grupo",
+     "n": "Movimiento islamista y armado palestino, fundado en 1987. Gobierna Gaza desde 2007. EE. UU., la UE y otros países lo consideran organización terrorista. Israel mató a sus líderes Ismail Haniyeh (julio de 2024, en Teherán) y Yahya Sinwar (octubre de 2024, en Gaza). En julio de 2026 dijo aceptar un desarme por fases ligado a la retirada israelí; Israel no lo ha aceptado públicamente.",
+     "p": null,
+     "t": "Hamás",
+     "x": 1000,
+     "y": 330
+    },
+    {
+     "id": "nne7oepmmx",
+     "k": "grupo",
+     "n": "Grupo armado islamista palestino, más pequeño que Hamás y muy ligado a Irán. Participó en el ataque del 7 de octubre.",
+     "p": null,
+     "t": "Yihad Islámica Palestina",
+     "x": 1180,
+     "y": 430
+    },
+    {
+     "id": "nbyf9dfmmx",
+     "k": "pueblo",
+     "n": "Unos 2,1 millones de personas en 365 km², casi la mitad menores de edad. La mayoría ha tenido que huir varias veces y vive entre ruinas y tiendas de campaña. Depende de la ayuda que entra por pasos que controla Israel.",
+     "p": null,
+     "t": "Población de Gaza",
+     "x": 840,
+     "y": 540
+    },
+    {
+     "id": "nsbiqlemmx",
+     "k": "estado",
+     "n": "Nació con los Acuerdos de Oslo. La preside Mahmud Abbas, del partido Fatah. Gobierna partes de Cisjordania; perdió Gaza frente a Hamás en 2007. Ha aplazado las elecciones legislativas a septiembre de 2027.",
+     "p": null,
+     "t": "Autoridad Palestina (Fatah)",
+     "x": 1180,
+     "y": 170
+    },
+    {
+     "id": "n1gyax1mmx",
+     "k": "pueblo",
+     "n": "Unos 3 millones de palestinos bajo ocupación militar israelí, repartidos en zonas con distinto grado de control de la Autoridad Palestina.",
+     "p": null,
+     "t": "Población de Cisjordania",
+     "x": 930,
+     "y": 40
+    },
+    {
+     "id": "nwx9badmmx",
+     "k": "pueblo",
+     "n": "Más de 700.000 israelíes viven en asentamientos en Cisjordania y Jerusalén Este, ilegales según el derecho internacional (opinión de la Corte Internacional de Justicia, julio de 2024). En 2026 Israel ha aprobado decenas de asentamientos nuevos.",
+     "p": null,
+     "t": "Colonos israelíes",
+     "x": 640,
+     "y": 130
+    },
+    {
+     "id": "n6x97nfmmx",
+     "k": "estado",
+     "n": "Principal aliado de Israel. Acuerdo de 2016: 3.800 millones de dólares al año en ayuda militar (2019–2028), más de 8.800 millones extra desde octubre de 2023. Ha vetado varias resoluciones de alto el fuego en la ONU. Autor del plan de paz de 20 puntos. El 3 de noviembre de 2026 Trump anunció que dejará de dar ayuda militar a Israel a final de año.",
+     "p": null,
+     "t": "Estados Unidos (Trump)",
+     "x": 40,
+     "y": 360
+    },
+    {
+     "id": "nuwhci7mmx",
+     "k": "estado",
+     "n": "República Islámica, enemiga declarada de Israel. Financia y arma al llamado «eje de la resistencia»: Hamás, Yihad Islámica, Hezbolá y los hutíes. Según EE. UU., unos 100 millones de dólares al año a grupos palestinos (dato de 2020). La inteligencia de EE. UU. concluyó que Irán no organizó el 7 de octubre ni lo sabía de antemano.",
+     "p": null,
+     "t": "Irán",
+     "x": 1560,
+     "y": 320
+    },
+    {
+     "id": "n77jhpymmx",
+     "k": "grupo",
+     "n": "Milicia y partido chií libanés, el aliado más fuerte de Irán. Disparó contra Israel desde el 8 de octubre de 2023 en apoyo a Gaza; guerra abierta en 2024 y otra vez desde marzo de 2026. No se ha desarmado.",
+     "p": null,
+     "t": "Hezbolá (Líbano)",
+     "x": 1440,
+     "y": 110
+    },
+    {
+     "id": "nyba8i0mmx",
+     "k": "grupo",
+     "n": "Movimiento armado que controla el norte de Yemen. En apoyo a Gaza atacó barcos en el mar Rojo y lanzó misiles y drones contra Israel.",
+     "p": null,
+     "t": "Hutíes (Yemen)",
+     "x": 1600,
+     "y": 530
+    },
+    {
+     "id": "nyc98pcmmx",
+     "k": "estado",
+     "n": "Mediador clave. Acoge la oficina política de Hamás desde 2012. Durante años pagó salarios, combustible y ayuda en Gaza con el visto bueno de Israel: más de 1.000 millones de dólares entre 2012 y 2018, según el New York Times. Israel bombardeó a líderes de Hamás en Doha en septiembre de 2025.",
+     "p": null,
+     "t": "Catar",
+     "x": 1260,
+     "y": 620
+    },
+    {
+     "id": "nrad66emmx",
+     "k": "estado",
+     "n": "Vecino de Gaza: controla el paso de Rafah. Mantiene el bloqueo junto a Israel desde 2007 y media entre las partes junto a Catar.",
+     "p": null,
+     "t": "Egipto",
+     "x": 1060,
+     "y": 720
+    },
+    {
+     "id": "nml5r8hmmx",
+     "k": "estado",
+     "n": "Apoya políticamente a Hamás y es uno de los países mediadores del alto el fuego de 2025 y del plan de desarme de 2026.",
+     "p": null,
+     "t": "Turquía",
+     "x": 1420,
+     "y": 790
+    },
+    {
+     "id": "nzhx6fmmmx",
+     "k": "org",
+     "n": "Organismo creado por el plan de Trump y presidido por él (carta firmada en Davos, enero de 2026). Respaldado por el Consejo de Seguridad de la ONU (resolución 2803, noviembre de 2025). Dirige la reconstrucción, el comité palestino y la fuerza internacional.",
+     "p": null,
+     "t": "Junta de Paz",
+     "x": 300,
+     "y": 560
+    },
+    {
+     "id": "nbtkvq5mmx",
+     "k": "org",
+     "n": "Fuerza multinacional aprobada por la ONU por dos años, con mando de EE. UU. Debe vigilar el alto el fuego, formar a una nueva policía palestina y supervisar el desarme. Comprometidos: Indonesia, Marruecos, Kazajistán, Albania, Kosovo… Su despliegue empezó a prepararse en agosto de 2026.",
+     "p": null,
+     "t": "Fuerza Internacional de Estabilización",
+     "x": 540,
+     "y": 770
+    },
+    {
+     "id": "nkjqsnwmmx",
+     "k": "org",
+     "n": "Comité de expertos palestinos, sin Hamás, que gestiona la vida diaria de Gaza bajo la Junta de Paz (creado en enero de 2026).",
+     "p": null,
+     "t": "Comité tecnocrático palestino",
+     "x": 560,
+     "y": 610
+    },
+    {
+     "id": "n59lqepmmx",
+     "k": "org",
+     "n": "La UNRWA es la agencia de la ONU para los refugiados palestinos (desde 1949): escuelas, sanidad y comida. Israel la acusó de tener empleados implicados en el 7 de octubre y le prohibió operar en su territorio (ley de octubre de 2024).",
+     "p": null,
+     "t": "ONU y UNRWA",
+     "x": 820,
+     "y": 850
+    },
+    {
+     "id": "nwnlbi9mmx",
+     "k": "org",
+     "n": "Tribunal de la ONU que juzga a Estados. En el caso de Sudáfrica contra Israel por genocidio ordenó medidas para proteger a la población (2024); el juicio de fondo sigue abierto. En julio de 2024 dictaminó que la ocupación de los territorios palestinos es ilegal.",
+     "p": null,
+     "t": "Corte Internacional de Justicia",
+     "x": 60,
+     "y": 800
+    },
+    {
+     "id": "n3clu40mmx",
+     "k": "org",
+     "n": "Juzga a personas. En noviembre de 2024 emitió órdenes de arresto contra Netanyahu y su exministro de Defensa Yoav Gallant, y contra el jefe militar de Hamás Mohamed Deif (ya muerto), por crímenes de guerra y contra la humanidad.",
+     "p": null,
+     "t": "Corte Penal Internacional",
+     "x": 330,
+     "y": 900
+    },
+    {
+     "id": "nqaorazmmx",
+     "k": "estado",
+     "n": "Llevó a Israel ante la Corte Internacional de Justicia acusándolo de genocidio (diciembre de 2023).",
+     "p": null,
+     "t": "Sudáfrica",
+     "x": 40,
+     "y": 620
+    },
+    {
+     "id": "nqeusftmmx",
+     "k": "estado",
+     "n": "Reconoció el Estado de Palestina el 28 de mayo de 2024, junto a Irlanda y Noruega. En octubre de 2025 el Congreso aprobó un embargo total de armas a Israel (178 votos a favor y 169 en contra).",
+     "p": null,
+     "t": "España",
+     "x": 300,
+     "y": 60
+    },
+    {
+     "id": "nh0vol7mmx",
+     "k": "org",
+     "n": "Principal donante de ayuda a los palestinos y principal socio comercial de Israel. Sus países están divididos sobre cómo actuar.",
+     "p": null,
+     "t": "Unión Europea",
+     "x": 40,
+     "y": 150
+    },
+    {
+     "id": "nyz9a0hmmx",
+     "k": "hecho",
+     "n": "El Reino Unido apoya un «hogar nacional para el pueblo judío» en Palestina, entonces otomana y después bajo mandato británico (1920–1948).",
+     "p": null,
+     "t": "1917 · Declaración Balfour"
+    },
+    {
+     "id": "nv5ybo5mmx",
+     "k": "hecho",
+     "n": "Tras el plan de partición de la ONU (1947), Israel declara su independencia el 14 de mayo de 1948. En la guerra, unos 700.000 palestinos huyen o son expulsados: la Nakba («catástrofe»). Gaza queda bajo Egipto y Cisjordania bajo Jordania.",
+     "p": null,
+     "t": "1948 · Nace Israel; la Nakba"
+    },
+    {
+     "id": "nivoim9mmx",
+     "k": "hecho",
+     "n": "Guerra de los Seis Días: Israel ocupa Gaza, Cisjordania, Jerusalén Este, los Altos del Golán y el Sinaí (devuelto a Egipto en 1982).",
+     "p": null,
+     "t": "1967 · Israel ocupa Gaza y Cisjordania"
+    },
+    {
+     "id": "n6ol7m0mmx",
+     "k": "hecho",
+     "n": "Levantamiento palestino contra la ocupación. En diciembre nace Hamás, rama palestina de los Hermanos Musulmanes.",
+     "p": null,
+     "t": "1987 · Primera Intifada; nace Hamás"
+    },
+    {
+     "id": "n88jcsammx",
+     "k": "hecho",
+     "n": "Israel y la OLP se reconocen mutuamente y nace la Autoridad Palestina con un autogobierno limitado. El Estado palestino previsto nunca llegó.",
+     "p": null,
+     "t": "1993 · Acuerdos de Oslo"
+    },
+    {
+     "id": "nc88yttmmx",
+     "k": "hecho",
+     "n": "Israel retira a sus soldados y a unos 8.000 colonos de Gaza, pero sigue controlando sus fronteras, su espacio aéreo y su mar.",
+     "p": null,
+     "t": "2005 · Israel sale de Gaza"
+    },
+    {
+     "id": "nnmtz2wmmx",
+     "k": "hecho",
+     "n": "Hamás gana las elecciones de 2006 y, tras enfrentarse a Fatah, toma Gaza por la fuerza en junio de 2007. Israel y Egipto imponen un bloqueo que dura desde entonces.",
+     "p": null,
+     "t": "2007 · Hamás toma Gaza; bloqueo"
+    },
+    {
+     "id": "nunacrmmmx",
+     "k": "hecho",
+     "n": "Hamás y otros grupos atacan el sur de Israel: unas 1.200 personas muertas, la mayoría civiles, y 251 secuestradas.",
+     "p": null,
+     "t": "2023 · 7 de octubre: ataque de Hamás"
+    },
+    {
+     "id": "n5sma5ammx",
+     "k": "hecho",
+     "n": "Ofensiva israelí por aire y tierra. Más de 74.000 palestinos muertos según el Ministerio de Sanidad de Gaza (septiembre de 2026), que no distingue civiles de combatientes; la ONU lo considera en general fiable. Hambruna declarada en la ciudad de Gaza (agosto de 2025). Treguas cortas en noviembre de 2023 y de enero a marzo de 2025.",
+     "p": null,
+     "t": "2023 · Empieza la guerra en Gaza"
+    },
+    {
+     "id": "n3uckrommx",
+     "k": "hecho",
+     "n": "Plan de 20 puntos (septiembre). Alto el fuego desde el 10 de octubre de 2025: salen los 20 rehenes vivos y cientos de presos palestinos. Israel se repliega tras la «línea amarilla» y controla algo más de la mitad de Gaza (más del 60 % en 2026). Desde la tregua han muerto más de 1.500 palestinos (noviembre de 2026).",
+     "p": null,
+     "t": "2025 · Alto el fuego del plan Trump"
+    },
+    {
+     "id": "nyety5smmx",
+     "k": "hecho",
+     "n": "28 de febrero: EE. UU. e Israel atacan Irán y matan al líder supremo, Alí Jamenei. Irán responde contra Israel y bases de EE. UU.; Hezbolá reabre el frente del Líbano el 2 de marzo. Tregua frágil desde abril, con nuevos choques.",
+     "p": null,
+     "t": "2026 · Guerra contra Irán"
+    }
+   ],
+   "paths": [
+    {
+     "a": "Irán financia y arma a Hamás desde los años 90, y Hamás lanzó el ataque. Según la inteligencia de EE. UU., Irán no lo organizó ni lo sabía de antemano.",
+     "id": "nap3f6jmmy",
+     "ids": [
+      "nuwhci7mmx",
+      "nhxtbghmmx",
+      "nnjmzuummw"
+     ],
+     "q": "¿Qué une a Irán con el ataque del 7 de octubre?"
+    },
+    {
+     "a": "Hezbolá, armado por Irán, empezó a disparar contra Israel el 8 de octubre de 2023 en apoyo a Gaza. Hubo guerra abierta en 2024 y de nuevo en 2026, tras el ataque a Irán.",
+     "id": "n6lfro0mmy",
+     "ids": [
+      "nuwhci7mmx",
+      "n77jhpymmx",
+      "nnjmzuummw"
+     ],
+     "q": "¿Cómo se extendió la guerra al Líbano?"
+    },
+    {
+     "a": "Los hutíes, armados por Irán, atacaron barcos y lanzaron misiles contra Israel en apoyo a Gaza.",
+     "id": "n7qgadommy",
+     "ids": [
+      "nuwhci7mmx",
+      "nyba8i0mmx",
+      "nnjmzuummw"
+     ],
+     "q": "¿Cómo llegó la guerra al mar Rojo?"
+    },
+    {
+     "a": "Trump preside la Junta de Paz, que supervisa a un comité de expertos palestinos que administra Gaza.",
+     "id": "n0zwat6mmy",
+     "ids": [
+      "n6x97nfmmx",
+      "nzhx6fmmmx",
+      "nkjqsnwmmx",
+      "nbyf9dfmmx"
+     ],
+     "q": "¿Cómo gestiona el plan de paz la vida diaria en Gaza?"
+    },
+    {
+     "a": "La Junta de Paz dirige una fuerza multinacional con mando de EE. UU. que debe supervisar el desarme, por fases y ligado a la retirada israelí.",
+     "id": "n3lumt1mmy",
+     "ids": [
+      "n6x97nfmmx",
+      "nzhx6fmmmx",
+      "nbtkvq5mmx",
+      "nhxtbghmmx"
+     ],
+     "q": "¿Quién vigilará el desarme de Hamás?"
+    },
+    {
+     "a": "Sudáfrica demandó a Israel en diciembre de 2023; la Corte ordenó medidas para proteger a la población y el juicio de fondo sigue abierto.",
+     "id": "nn6l80ammy",
+     "ids": [
+      "nqaorazmmx",
+      "nwnlbi9mmx",
+      "nnjmzuummw"
+     ],
+     "q": "¿Cómo llegó la acusación de genocidio a un tribunal?"
+    },
+    {
+     "a": "El Gobierno israelí protege y amplía los asentamientos; parte de los colonos ataca a palestinos y les quita tierras, además de las operaciones del ejército.",
+     "id": "njx7ku1mmy",
+     "ids": [
+      "nnjmzuummw",
+      "nwx9badmmx",
+      "n1gyax1mmx"
+     ],
+     "q": "¿Por qué hay violencia en Cisjordania si allí no gobierna Hamás?"
+    },
+    {
+     "a": "Catar pagó durante años salarios, combustible y ayuda en Gaza con el visto bueno del Gobierno israelí, que buscaba mantener la calma.",
+     "id": "nm8sv1smmy",
+     "ids": [
+      "nyc98pcmmx",
+      "nbyf9dfmmx"
+     ],
+     "q": "¿Cómo llegaba dinero de Catar a Gaza antes del 7 de octubre?"
+    }
+   ],
+   "type": "scheme",
+   "updated": 1794309867608,
+   "v": 2
   }
  ],
  "format": "metodo-seterra-indice",
