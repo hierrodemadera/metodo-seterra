@@ -1315,10 +1315,16 @@
     }
    ],
    "run": {
-    "cur": null,
-    "f": {
-     "o:n76s2nh5g0": 1
+    "cur": {
+     "a": "n76s2nh5g0",
+     "b": "ns9crqh5g0",
+     "cands": [
+      "nho4swp5g1"
+     ],
+     "r": 3,
+     "stage": "tipo"
     },
+    "f": {},
     "hd": {},
     "linksDone": {
      "n4o0ydg5g1": true,
