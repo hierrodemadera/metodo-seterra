@@ -296,10 +296,296 @@
    "v": 2
   },
   {
+   "_by": {
+    "n1gyax1mmx": {
+     "id": "n1gyax1mmx",
+     "k": "pueblo",
+     "n": "Unos 3 millones de palestinos bajo ocupación militar israelí, repartidos en zonas con distinto grado de control de la Autoridad Palestina.",
+     "p": null,
+     "t": "Población de Cisjordania",
+     "x": 930,
+     "y": 40
+    },
+    "n3clu40mmx": {
+     "id": "n3clu40mmx",
+     "k": "org",
+     "n": "Juzga a personas. En noviembre de 2024 emitió órdenes de arresto contra Netanyahu y su exministro de Defensa Yoav Gallant, y contra el jefe militar de Hamás Mohamed Deif (ya muerto), por crímenes de guerra y contra la humanidad.",
+     "p": null,
+     "t": "Corte Penal Internacional",
+     "x": 330,
+     "y": 900
+    },
+    "n3uckrommx": {
+     "id": "n3uckrommx",
+     "k": "hecho",
+     "n": "Plan de 20 puntos (septiembre). Alto el fuego desde el 10 de octubre de 2025: salen los 20 rehenes vivos y cientos de presos palestinos. Israel se repliega tras la «línea amarilla» y controla algo más de la mitad de Gaza (más del 60 % en 2026). Desde la tregua han muerto más de 1.500 palestinos (noviembre de 2026).",
+     "p": null,
+     "t": "2025 · Alto el fuego del plan Trump"
+    },
+    "n59lqepmmx": {
+     "id": "n59lqepmmx",
+     "k": "org",
+     "n": "La UNRWA es la agencia de la ONU para los refugiados palestinos (desde 1949): escuelas, sanidad y comida. Israel la acusó de tener empleados implicados en el 7 de octubre y le prohibió operar en su territorio (ley de octubre de 2024).",
+     "p": null,
+     "t": "ONU y UNRWA",
+     "x": 820,
+     "y": 850
+    },
+    "n5sma5ammx": {
+     "id": "n5sma5ammx",
+     "k": "hecho",
+     "n": "Ofensiva israelí por aire y tierra. Más de 74.000 palestinos muertos según el Ministerio de Sanidad de Gaza (septiembre de 2026), que no distingue civiles de combatientes; la ONU lo considera en general fiable. Hambruna declarada en la ciudad de Gaza (agosto de 2025). Treguas cortas en noviembre de 2023 y de enero a marzo de 2025.",
+     "p": null,
+     "t": "2023 · Empieza la guerra en Gaza"
+    },
+    "n6ol7m0mmx": {
+     "id": "n6ol7m0mmx",
+     "k": "hecho",
+     "n": "Levantamiento palestino contra la ocupación. En diciembre nace Hamás, rama palestina de los Hermanos Musulmanes.",
+     "p": null,
+     "t": "1987 · Primera Intifada; nace Hamás"
+    },
+    "n6x97nfmmx": {
+     "id": "n6x97nfmmx",
+     "k": "estado",
+     "n": "Principal aliado de Israel. Acuerdo de 2016: 3.800 millones de dólares al año en ayuda militar (2019–2028), más de 8.800 millones extra desde octubre de 2023. Ha vetado varias resoluciones de alto el fuego en la ONU. Autor del plan de paz de 20 puntos. El 3 de noviembre de 2026 Trump anunció que dejará de dar ayuda militar a Israel a final de año.",
+     "p": null,
+     "t": "Estados Unidos (Trump)",
+     "x": 40,
+     "y": 360
+    },
+    "n77jhpymmx": {
+     "id": "n77jhpymmx",
+     "k": "grupo",
+     "n": "Milicia y partido chií libanés, el aliado más fuerte de Irán. Disparó contra Israel desde el 8 de octubre de 2023 en apoyo a Gaza; guerra abierta en 2024 y otra vez desde marzo de 2026. No se ha desarmado.",
+     "p": null,
+     "t": "Hezbolá (Líbano)",
+     "x": 1440,
+     "y": 110
+    },
+    "n88jcsammx": {
+     "id": "n88jcsammx",
+     "k": "hecho",
+     "n": "Israel y la OLP se reconocen mutuamente y nace la Autoridad Palestina con un autogobierno limitado. El Estado palestino previsto nunca llegó.",
+     "p": null,
+     "t": "1993 · Acuerdos de Oslo"
+    },
+    "nbtkvq5mmx": {
+     "id": "nbtkvq5mmx",
+     "k": "org",
+     "n": "Fuerza multinacional aprobada por la ONU por dos años, con mando de EE. UU. Debe vigilar el alto el fuego, formar a una nueva policía palestina y supervisar el desarme. Comprometidos: Indonesia, Marruecos, Kazajistán, Albania, Kosovo… Su despliegue empezó a prepararse en agosto de 2026.",
+     "p": null,
+     "t": "Fuerza Internacional de Estabilización",
+     "x": 540,
+     "y": 770
+    },
+    "nbyf9dfmmx": {
+     "id": "nbyf9dfmmx",
+     "k": "pueblo",
+     "n": "Unos 2,1 millones de personas en 365 km², casi la mitad menores de edad. La mayoría ha tenido que huir varias veces y vive entre ruinas y tiendas de campaña. Depende de la ayuda que entra por pasos que controla Israel.",
+     "p": null,
+     "t": "Población de Gaza",
+     "x": 840,
+     "y": 540
+    },
+    "nc88yttmmx": {
+     "id": "nc88yttmmx",
+     "k": "hecho",
+     "n": "Israel retira a sus soldados y a unos 8.000 colonos de Gaza, pero sigue controlando sus fronteras, su espacio aéreo y su mar.",
+     "p": null,
+     "t": "2005 · Israel sale de Gaza"
+    },
+    "nh0vol7mmx": {
+     "id": "nh0vol7mmx",
+     "k": "org",
+     "n": "Principal donante de ayuda a los palestinos y principal socio comercial de Israel. Sus países están divididos sobre cómo actuar.",
+     "p": null,
+     "t": "Unión Europea",
+     "x": 40,
+     "y": 150
+    },
+    "nhxtbghmmx": {
+     "id": "nhxtbghmmx",
+     "k": "grupo",
+     "n": "Movimiento islamista y armado palestino, fundado en 1987. Gobierna Gaza desde 2007. EE. UU., la UE y otros países lo consideran organización terrorista. Israel mató a sus líderes Ismail Haniyeh (julio de 2024, en Teherán) y Yahya Sinwar (octubre de 2024, en Gaza). En julio de 2026 dijo aceptar un desarme por fases ligado a la retirada israelí; Israel no lo ha aceptado públicamente.",
+     "p": null,
+     "t": "Hamás",
+     "x": 1000,
+     "y": 330
+    },
+    "nivoim9mmx": {
+     "id": "nivoim9mmx",
+     "k": "hecho",
+     "n": "Guerra de los Seis Días: Israel ocupa Gaza, Cisjordania, Jerusalén Este, los Altos del Golán y el Sinaí (devuelto a Egipto en 1982).",
+     "p": null,
+     "t": "1967 · Israel ocupa Gaza y Cisjordania"
+    },
+    "nkjqsnwmmx": {
+     "id": "nkjqsnwmmx",
+     "k": "org",
+     "n": "Comité de expertos palestinos, sin Hamás, que gestiona la vida diaria de Gaza bajo la Junta de Paz (creado en enero de 2026).",
+     "p": null,
+     "t": "Comité tecnocrático palestino",
+     "x": 560,
+     "y": 610
+    },
+    "nml5r8hmmx": {
+     "id": "nml5r8hmmx",
+     "k": "estado",
+     "n": "Apoya políticamente a Hamás y es uno de los países mediadores del alto el fuego de 2025 y del plan de desarme de 2026.",
+     "p": null,
+     "t": "Turquía",
+     "x": 1420,
+     "y": 790
+    },
+    "nne7oepmmx": {
+     "id": "nne7oepmmx",
+     "k": "grupo",
+     "n": "Grupo armado islamista palestino, más pequeño que Hamás y muy ligado a Irán. Participó en el ataque del 7 de octubre.",
+     "p": null,
+     "t": "Yihad Islámica Palestina",
+     "x": 1180,
+     "y": 430
+    },
+    "nnjmzuummw": {
+     "id": "nnjmzuummw",
+     "k": "estado",
+     "n": "Gobierno de coalición de Benjamín Netanyahu con partidos de derecha y de ultraderecha religiosa (desde diciembre de 2022). Desde 1967 ocupa Cisjordania y controla las fronteras de Gaza. Elecciones del 27 de octubre de 2026: el bloque de Netanyahu saca 53 de 120 escaños y nadie llega a la mayoría de 61; las negociaciones para formar gobierno siguen abiertas.",
+     "p": null,
+     "t": "Israel (Gobierno de Netanyahu)",
+     "x": 520,
+     "y": 340
+    },
+    "nnmtz2wmmx": {
+     "id": "nnmtz2wmmx",
+     "k": "hecho",
+     "n": "Hamás gana las elecciones de 2006 y, tras enfrentarse a Fatah, toma Gaza por la fuerza en junio de 2007. Israel y Egipto imponen un bloqueo que dura desde entonces.",
+     "p": null,
+     "t": "2007 · Hamás toma Gaza; bloqueo"
+    },
+    "nqaorazmmx": {
+     "id": "nqaorazmmx",
+     "k": "estado",
+     "n": "Llevó a Israel ante la Corte Internacional de Justicia acusándolo de genocidio (diciembre de 2023).",
+     "p": null,
+     "t": "Sudáfrica",
+     "x": 40,
+     "y": 620
+    },
+    "nqeusftmmx": {
+     "id": "nqeusftmmx",
+     "k": "estado",
+     "n": "Reconoció el Estado de Palestina el 28 de mayo de 2024, junto a Irlanda y Noruega. En octubre de 2025 el Congreso aprobó un embargo total de armas a Israel (178 votos a favor y 169 en contra).",
+     "p": null,
+     "t": "España",
+     "x": 300,
+     "y": 60
+    },
+    "nrad66emmx": {
+     "id": "nrad66emmx",
+     "k": "estado",
+     "n": "Vecino de Gaza: controla el paso de Rafah. Mantiene el bloqueo junto a Israel desde 2007 y media entre las partes junto a Catar.",
+     "p": null,
+     "t": "Egipto",
+     "x": 1060,
+     "y": 720
+    },
+    "nsbiqlemmx": {
+     "id": "nsbiqlemmx",
+     "k": "estado",
+     "n": "Nació con los Acuerdos de Oslo. La preside Mahmud Abbas, del partido Fatah. Gobierna partes de Cisjordania; perdió Gaza frente a Hamás en 2007. Ha aplazado las elecciones legislativas a septiembre de 2027.",
+     "p": null,
+     "t": "Autoridad Palestina (Fatah)",
+     "x": 1180,
+     "y": 170
+    },
+    "nunacrmmmx": {
+     "id": "nunacrmmmx",
+     "k": "hecho",
+     "n": "Hamás y otros grupos atacan el sur de Israel: unas 1.200 personas muertas, la mayoría civiles, y 251 secuestradas.",
+     "p": null,
+     "t": "2023 · 7 de octubre: ataque de Hamás"
+    },
+    "nuwhci7mmx": {
+     "id": "nuwhci7mmx",
+     "k": "estado",
+     "n": "República Islámica, enemiga declarada de Israel. Financia y arma al llamado «eje de la resistencia»: Hamás, Yihad Islámica, Hezbolá y los hutíes. Según EE. UU., unos 100 millones de dólares al año a grupos palestinos (dato de 2020). La inteligencia de EE. UU. concluyó que Irán no organizó el 7 de octubre ni lo sabía de antemano.",
+     "p": null,
+     "t": "Irán",
+     "x": 1560,
+     "y": 320
+    },
+    "nv5ybo5mmx": {
+     "id": "nv5ybo5mmx",
+     "k": "hecho",
+     "n": "Tras el plan de partición de la ONU (1947), Israel declara su independencia el 14 de mayo de 1948. En la guerra, unos 700.000 palestinos huyen o son expulsados: la Nakba («catástrofe»). Gaza queda bajo Egipto y Cisjordania bajo Jordania.",
+     "p": null,
+     "t": "1948 · Nace Israel; la Nakba"
+    },
+    "nwnlbi9mmx": {
+     "id": "nwnlbi9mmx",
+     "k": "org",
+     "n": "Tribunal de la ONU que juzga a Estados. En el caso de Sudáfrica contra Israel por genocidio ordenó medidas para proteger a la población (2024); el juicio de fondo sigue abierto. En julio de 2024 dictaminó que la ocupación de los territorios palestinos es ilegal.",
+     "p": null,
+     "t": "Corte Internacional de Justicia",
+     "x": 60,
+     "y": 800
+    },
+    "nwx9badmmx": {
+     "id": "nwx9badmmx",
+     "k": "pueblo",
+     "n": "Más de 700.000 israelíes viven en asentamientos en Cisjordania y Jerusalén Este, ilegales según el derecho internacional (opinión de la Corte Internacional de Justicia, julio de 2024). En 2026 Israel ha aprobado decenas de asentamientos nuevos.",
+     "p": null,
+     "t": "Colonos israelíes",
+     "x": 640,
+     "y": 130
+    },
+    "nyba8i0mmx": {
+     "id": "nyba8i0mmx",
+     "k": "grupo",
+     "n": "Movimiento armado que controla el norte de Yemen. En apoyo a Gaza atacó barcos en el mar Rojo y lanzó misiles y drones contra Israel.",
+     "p": null,
+     "t": "Hutíes (Yemen)",
+     "x": 1600,
+     "y": 530
+    },
+    "nyc98pcmmx": {
+     "id": "nyc98pcmmx",
+     "k": "estado",
+     "n": "Mediador clave. Acoge la oficina política de Hamás desde 2012. Durante años pagó salarios, combustible y ayuda en Gaza con el visto bueno de Israel: más de 1.000 millones de dólares entre 2012 y 2018, según el New York Times. Israel bombardeó a líderes de Hamás en Doha en septiembre de 2025.",
+     "p": null,
+     "t": "Catar",
+     "x": 1260,
+     "y": 620
+    },
+    "nyety5smmx": {
+     "id": "nyety5smmx",
+     "k": "hecho",
+     "n": "28 de febrero: EE. UU. e Israel atacan Irán y matan al líder supremo, Alí Jamenei. Irán responde contra Israel y bases de EE. UU.; Hezbolá reabre el frente del Líbano el 2 de marzo. Tregua frágil desde abril, con nuevos choques.",
+     "p": null,
+     "t": "2026 · Guerra contra Irán"
+    },
+    "nyz9a0hmmx": {
+     "id": "nyz9a0hmmx",
+     "k": "hecho",
+     "n": "El Reino Unido apoya un «hogar nacional para el pueblo judío» en Palestina, entonces otomana y después bajo mandato británico (1920–1948).",
+     "p": null,
+     "t": "1917 · Declaración Balfour"
+    },
+    "nzhx6fmmmx": {
+     "id": "nzhx6fmmmx",
+     "k": "org",
+     "n": "Organismo creado por el plan de Trump y presidido por él (carta firmada en Davos, enero de 2026). Respaldado por el Consejo de Seguridad de la ONU (resolución 2803, noviembre de 2025). Dirige la reconstrucción, el comité palestino y la fuerza internacional.",
+     "p": null,
+     "t": "Junta de Paz",
+     "x": 300,
+     "y": 560
+    }
+   },
    "color": "#1c1c1e",
    "created": 1794309867608,
    "id": "ej-gaza",
-   "layout": "red",
+   "layout": "arbol",
    "links": [
     {
      "a": "n6x97nfmmx",
@@ -982,7 +1268,7 @@
     "mode": "piezas"
    },
    "type": "scheme",
-   "updated": 1794309867608,
+   "updated": 1794314966415,
    "v": 2
   }
  ],
