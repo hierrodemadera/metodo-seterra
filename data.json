@@ -33,6 +33,9 @@
   },
   {
    "d": "esqimg-ej-brexit"
+  },
+  {
+   "d": "esqimg-ej-gaza"
   }
  ],
  "esquemas": [
@@ -2806,6 +2809,13 @@
    "kb": 4,
    "name": "El Brexit: causas, proceso y consecuencias · imágenes",
    "tarjetas": 28
+  },
+  {
+   "file": "El conflicto de Gaza · imagenes.json",
+   "id": "esqimg-ej-gaza",
+   "kb": 0,
+   "name": "El conflicto de Gaza · imágenes",
+   "tarjetas": 0
   }
  ],
  "notas": [
