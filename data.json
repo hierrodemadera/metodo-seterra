@@ -28,842 +28,581 @@
  ],
  "esquemas": [
   {
-   "_by": {
-    "n04gh1f3zx": {
-     "id": "n04gh1f3zx",
-     "p": "nix3chf3zw",
-     "t": "Umbral del 3 % en cada provincia"
-    },
-    "n071nb33zx": {
-     "id": "n071nb33zx",
-     "n": "En cada distrito gana un solo candidato, el más votado, y el resto de votos no cuenta. Reino Unido y Estados Unidos.",
-     "p": "nwthmut3zx",
-     "t": "Mayoritario"
-    },
-    "n2c93zs3zw": {
-     "id": "n2c93zs3zw",
-     "n": "En España, en cada provincia. Por eso el resultado depende tanto de cuántos escaños reparte cada una.",
-     "p": "njlsnwh3zw",
-     "t": "Se aplica en cada circunscripción por separado"
-    },
-    "n2yvbdl3zx": {
-     "id": "n2yvbdl3zx",
-     "n": "Por los 2 diputados fijos, un escaño en Soria o Teruel cuesta muchos menos votos que uno en Madrid o Barcelona.",
-     "p": "n443m603zx",
-     "t": "Un voto rural pesa más que uno urbano"
-    },
-    "n349sv93zx": {
-     "id": "n349sv93zx",
-     "p": "n6jhpox3zx",
-     "t": "Elecciones europeas (toda España, una sola circunscripción)"
-    },
-    "n443m603zx": {
-     "c": "#e5484d",
-     "id": "n443m603zx",
-     "p": "n8kpcnn3zw",
-     "t": "Efectos"
-    },
-    "n4nhur23zw": {
-     "id": "n4nhur23zw",
-     "n": "Cuantos más votos, más escaños, aunque no en la proporción exacta: redondea a favor de los grandes.",
-     "p": "njlsnwh3zw",
-     "t": "Un método de reparto proporcional"
-    },
-    "n5vo9s83zw": {
-     "id": "n5vo9s83zw",
-     "p": "nfezhhk3zw",
-     "t": "4º 40.000 (B)"
-    },
-    "n6jhpox3zx": {
-     "id": "n6jhpox3zx",
-     "p": "no12dtm3zw",
-     "t": "También en"
-    },
-    "n8kpcnn3zw": {
-     "id": "n8kpcnn3zw",
-     "n": "Fórmula matemática para repartir los escaños entre los partidos según los votos que ha sacado cada uno. No es una ley en sí: es el método que manda usar la ley electoral.",
-     "p": null,
-     "t": "Ley D’Hondt"
-    },
-    "n9tbp3k3zw": {
-     "id": "n9tbp3k3zw",
-     "p": "naouvkj3zw",
-     "t": "A: 3 escaños con el 43 % de los votos"
-    },
-    "naouvkj3zw": {
-     "id": "naouvkj3zw",
-     "p": "ncfwr9i3zw",
-     "t": "Resultado"
-    },
-    "nbttdyw3zx": {
-     "id": "nbttdyw3zx",
-     "p": "n443m603zx",
-     "t": "Facilita mayorías y gobiernos más estables"
-    },
-    "ncfwr9i3zw": {
-     "c": "#14b8a6",
-     "id": "ncfwr9i3zw",
-     "n": "Votos: A 100.000 · B 80.000 · C 30.000. Divisiones de A: 100.000 / 50.000 / 33.333… · de B: 80.000 / 40.000 / 26.667… · de C: 30.000 / 15.000…",
-     "p": "n8kpcnn3zw",
-     "t": "Ejemplo con 5 escaños"
-    },
-    "nfezhhk3zw": {
-     "id": "nfezhhk3zw",
-     "p": "ncfwr9i3zw",
-     "t": "Los 5 más altos"
-    },
-    "nfjd6ql3zx": {
-     "id": "nfjd6ql3zx",
-     "p": "nix3chf3zw",
-     "t": "52 circunscripciones (50 provincias, Ceuta y Melilla)"
-    },
-    "ng43bun3zw": {
-     "id": "ng43bun3zw",
-     "n": "Con 30.000 votos se queda fuera: le faltaron unos 3.300 para superar el 33.333 de A.",
-     "p": "naouvkj3zw",
-     "t": "C: ninguno con el 13 %"
-    },
-    "ngll4ml3zx": {
-     "id": "ngll4ml3zx",
-     "p": "n443m603zx",
-     "t": "Premia a los partidos grandes"
-    },
-    "nhaknnu3zw": {
-     "id": "nhaknnu3zw",
-     "p": "nu7xtbp3zw",
-     "t": "Paso 3: ordenar todos los resultados de mayor a menor"
-    },
-    "nhousxe3zw": {
-     "id": "nhousxe3zw",
-     "n": "Si hay 5 escaños, se dan a los 5 resultados más altos, sean del partido que sean.",
-     "p": "nu7xtbp3zw",
-     "t": "Paso 4: un escaño para cada uno de los más altos"
-    },
-    "nhvkfov3zw": {
-     "id": "nhvkfov3zw",
-     "p": "nfezhhk3zw",
-     "t": "1º 100.000 (A)"
-    },
-    "niqzynz3zw": {
-     "id": "niqzynz3zw",
-     "p": "nix3chf3zw",
-     "t": "350 diputados"
-    },
-    "nix3chf3zw": {
-     "id": "nix3chf3zw",
-     "p": "no12dtm3zw",
-     "t": "Congreso de los Diputados"
-    },
-    "njknntl3zw": {
-     "id": "njknntl3zw",
-     "p": "naouvkj3zw",
-     "t": "B: 2 escaños con el 35 %"
-    },
-    "njlsnwh3zw": {
-     "c": "#8b5cf6",
-     "id": "njlsnwh3zw",
-     "p": "n8kpcnn3zw",
-     "t": "Qué es"
-    },
-    "nk4os4u3zx": {
-     "id": "nk4os4u3zx",
-     "n": "Votas una lista de un partido entera, sin poder cambiar el orden ni tachar nombres.",
-     "p": "nix3chf3zw",
-     "t": "Listas cerradas y bloqueadas"
-    },
-    "nlhtrr23zw": {
-     "id": "nlhtrr23zw",
-     "p": "nfezhhk3zw",
-     "t": "5º 33.333 (A)"
-    },
-    "nnn8aq93zx": {
-     "id": "nnn8aq93zx",
-     "n": "Divide entre 1, 3, 5, 7… Es más proporcional y trata mejor a los partidos medianos. Se usa, por ejemplo, en Suecia y en Noruega (con un ajuste) y en Alemania.",
-     "p": "nwthmut3zx",
-     "t": "Sainte-Laguë"
-    },
-    "no12dtm3zw": {
-     "c": "#e0b100",
-     "id": "no12dtm3zw",
-     "p": "n8kpcnn3zw",
-     "t": "Cómo se usa en España"
-    },
-    "np0huk43zx": {
-     "id": "np0huk43zx",
-     "n": "Donde se reparten 3 escaños, para sacar uno hace falta en torno al 20 % de los votos. Ojo: en España la desproporción viene sobre todo de lo pequeñas que son muchas provincias, más que de la fórmula en sí.",
-     "p": "n443m603zx",
-     "t": "Provincias pequeñas: hace falta mucho porcentaje"
-    },
-    "nplrdu93zw": {
-     "id": "nplrdu93zw",
-     "p": "njlsnwh3zw",
-     "t": "Lo manda la ley electoral (LOREG, 1985)"
-    },
-    "nq7p5pg3zw": {
-     "id": "nq7p5pg3zw",
-     "p": "njlsnwh3zw",
-     "t": "Ideado por Victor D’Hondt (Bélgica, 1878)"
-    },
-    "nschjxj3zx": {
-     "id": "nschjxj3zx",
-     "n": "Al sacar muchos votos en pocas provincias, consiguen escaños con menos votos totales.",
-     "p": "n443m603zx",
-     "t": "Favorece a los regionales con voto concentrado"
-    },
-    "ntbffyg3zw": {
-     "id": "ntbffyg3zw",
-     "p": "nfezhhk3zw",
-     "t": "2º 80.000 (B)"
-    },
-    "ntc0b7e3zx": {
-     "id": "ntc0b7e3zx",
-     "p": "n6jhpox3zx",
-     "t": "Elecciones municipales (umbral del 5 %)"
-    },
-    "nu7xtbp3zw": {
-     "c": "#1c9bd6",
-     "id": "nu7xtbp3zw",
-     "p": "n8kpcnn3zw",
-     "t": "Paso a paso"
-    },
-    "nvs76c33zw": {
-     "id": "nvs76c33zw",
-     "n": "Se divide hasta llegar al número de escaños que se reparten en esa provincia.",
-     "p": "nu7xtbp3zw",
-     "t": "Paso 2: dividir los votos de cada partido entre 1, 2, 3…"
-    },
-    "nvxaz6w3zw": {
-     "id": "nvxaz6w3zw",
-     "n": "Si también empatan en votos, se sortea.",
-     "p": "nu7xtbp3zw",
-     "t": "Empate: gana el partido con más votos"
-    },
-    "nwlmun53zx": {
-     "id": "nwlmun53zx",
-     "n": "Los otros 248 se reparten según la población. Ceuta y Melilla eligen 1 cada una.",
-     "p": "nix3chf3zw",
-     "t": "2 diputados fijos por provincia"
-    },
-    "nwmwjw03zx": {
-     "id": "nwmwjw03zx",
-     "n": "Sus votos están repartidos por todo el país y en muchas provincias no llegan a ningún escaño: esos votos no sirven para nada.",
-     "p": "n443m603zx",
-     "t": "Castiga a los pequeños de ámbito nacional"
-    },
-    "nwthmut3zx": {
-     "c": "#f28a2e",
-     "id": "nwthmut3zx",
-     "p": "n8kpcnn3zw",
-     "t": "Otros métodos"
-    },
-    "nxiv1wg3zx": {
-     "id": "nxiv1wg3zx",
-     "p": "n6jhpox3zx",
-     "t": "Elecciones autonómicas (umbral según la comunidad)"
-    },
-    "nyc576c3zw": {
-     "id": "nyc576c3zw",
-     "p": "nfezhhk3zw",
-     "t": "3º 50.000 (A)"
-    },
-    "nz6p28x3zx": {
-     "id": "nz6p28x3zx",
-     "n": "Sistema mayoritario de voto limitado: en cada provincia se eligen 4 senadores y cada votante marca hasta 3 nombres. Salen los más votados.",
-     "p": "no12dtm3zw",
-     "t": "El Senado no usa D’Hondt"
-    },
-    "nz9nr2s3zx": {
-     "id": "nz9nr2s3zx",
-     "n": "Se calcula cuántos votos «cuesta» un escaño (votos ÷ escaños); cada partido se lleva los escaños enteros que le tocan y los que sobran van a los restos más grandes.",
-     "p": "nwthmut3zx",
-     "t": "Resto mayor (Hare)"
-    },
-    "nzyb2gf3zw": {
-     "id": "nzyb2gf3zw",
-     "n": "Para el Congreso, el 3 % de los votos válidos de la provincia (los votos en blanco cuentan como válidos; los nulos, no).",
-     "p": "nu7xtbp3zw",
-     "t": "Paso 1: quitar a los que no llegan al umbral"
-    }
-   },
    "color": "#1c1c1e",
-   "created": 1794306997436,
+   "created": 1794329246634,
    "id": "ej-dhondt",
    "layout": "llaves",
    "links": [],
    "name": "La ley D’Hondt",
    "nodes": [
     {
-     "id": "n8kpcnn3zw",
+     "id": "n3v2eb0zl8",
      "n": "Fórmula matemática para repartir los escaños entre los partidos según los votos que ha sacado cada uno. No es una ley en sí: es el método que manda usar la ley electoral.",
      "p": null,
      "t": "Ley D’Hondt"
     },
     {
      "c": "#8b5cf6",
-     "id": "njlsnwh3zw",
-     "p": "n8kpcnn3zw",
+     "id": "n7liw38zl8",
+     "p": "n3v2eb0zl8",
      "t": "Qué es"
     },
     {
-     "id": "n4nhur23zw",
+     "id": "nywl9a4zl8",
      "n": "Cuantos más votos, más escaños, aunque no en la proporción exacta: redondea a favor de los grandes.",
-     "p": "njlsnwh3zw",
+     "p": "n7liw38zl8",
      "t": "Un método de reparto proporcional"
     },
     {
-     "id": "nq7p5pg3zw",
-     "p": "njlsnwh3zw",
+     "id": "nxech15zl8",
+     "p": "n7liw38zl8",
      "t": "Ideado por Victor D’Hondt (Bélgica, 1878)"
     },
     {
-     "id": "n2c93zs3zw",
+     "id": "nygg25azl8",
      "n": "En España, en cada provincia. Por eso el resultado depende tanto de cuántos escaños reparte cada una.",
-     "p": "njlsnwh3zw",
+     "p": "n7liw38zl8",
      "t": "Se aplica en cada circunscripción por separado"
     },
     {
-     "id": "nplrdu93zw",
-     "p": "njlsnwh3zw",
+     "id": "nd89a0lzl8",
+     "p": "n7liw38zl8",
      "t": "Lo manda la ley electoral (LOREG, 1985)"
     },
     {
      "c": "#1c9bd6",
-     "id": "nu7xtbp3zw",
-     "p": "n8kpcnn3zw",
+     "id": "notxo4czl8",
+     "p": "n3v2eb0zl8",
      "t": "Paso a paso"
     },
     {
-     "id": "nzyb2gf3zw",
+     "id": "ny5esskzl8",
      "n": "Para el Congreso, el 3 % de los votos válidos de la provincia (los votos en blanco cuentan como válidos; los nulos, no).",
-     "p": "nu7xtbp3zw",
+     "p": "notxo4czl8",
      "t": "Paso 1: quitar a los que no llegan al umbral"
     },
     {
-     "id": "nvs76c33zw",
+     "id": "nzn3mzdzl8",
      "n": "Se divide hasta llegar al número de escaños que se reparten en esa provincia.",
-     "p": "nu7xtbp3zw",
+     "p": "notxo4czl8",
      "t": "Paso 2: dividir los votos de cada partido entre 1, 2, 3…"
     },
     {
-     "id": "nhaknnu3zw",
-     "p": "nu7xtbp3zw",
+     "id": "npvkesnzl8",
+     "p": "notxo4czl8",
      "t": "Paso 3: ordenar todos los resultados de mayor a menor"
     },
     {
-     "id": "nhousxe3zw",
+     "id": "nwzgqmkzl8",
      "n": "Si hay 5 escaños, se dan a los 5 resultados más altos, sean del partido que sean.",
-     "p": "nu7xtbp3zw",
+     "p": "notxo4czl8",
      "t": "Paso 4: un escaño para cada uno de los más altos"
     },
     {
-     "id": "nvxaz6w3zw",
+     "id": "npoh2sxzl8",
      "n": "Si también empatan en votos, se sortea.",
-     "p": "nu7xtbp3zw",
+     "p": "notxo4czl8",
      "t": "Empate: gana el partido con más votos"
     },
     {
      "c": "#14b8a6",
-     "id": "ncfwr9i3zw",
+     "id": "nu8ur2ozl8",
      "n": "Votos: A 100.000 · B 80.000 · C 30.000. Divisiones de A: 100.000 / 50.000 / 33.333… · de B: 80.000 / 40.000 / 26.667… · de C: 30.000 / 15.000…",
-     "p": "n8kpcnn3zw",
+     "p": "n3v2eb0zl8",
      "t": "Ejemplo con 5 escaños"
     },
     {
-     "id": "nfezhhk3zw",
-     "p": "ncfwr9i3zw",
+     "id": "nzshyf8zl8",
+     "p": "nu8ur2ozl8",
      "t": "Los 5 más altos"
     },
     {
-     "id": "nhvkfov3zw",
-     "p": "nfezhhk3zw",
+     "id": "nzvqcsbzl8",
+     "p": "nzshyf8zl8",
      "t": "1º 100.000 (A)"
     },
     {
-     "id": "ntbffyg3zw",
-     "p": "nfezhhk3zw",
+     "id": "n88sta1zl8",
+     "p": "nzshyf8zl8",
      "t": "2º 80.000 (B)"
     },
     {
-     "id": "nyc576c3zw",
-     "p": "nfezhhk3zw",
+     "id": "nlrvvzezl8",
+     "p": "nzshyf8zl8",
      "t": "3º 50.000 (A)"
     },
     {
-     "id": "n5vo9s83zw",
-     "p": "nfezhhk3zw",
+     "id": "nq8zz5nzl8",
+     "p": "nzshyf8zl8",
      "t": "4º 40.000 (B)"
     },
     {
-     "id": "nlhtrr23zw",
-     "p": "nfezhhk3zw",
+     "id": "nbxs8pkzl8",
+     "p": "nzshyf8zl8",
      "t": "5º 33.333 (A)"
     },
     {
-     "id": "naouvkj3zw",
-     "p": "ncfwr9i3zw",
+     "id": "n5l7fgqzl9",
+     "p": "nu8ur2ozl8",
      "t": "Resultado"
     },
     {
-     "id": "n9tbp3k3zw",
-     "p": "naouvkj3zw",
+     "id": "n7yxat5zl9",
+     "p": "n5l7fgqzl9",
      "t": "A: 3 escaños con el 43 % de los votos"
     },
     {
-     "id": "njknntl3zw",
-     "p": "naouvkj3zw",
+     "id": "njl3k3wzl9",
+     "p": "n5l7fgqzl9",
      "t": "B: 2 escaños con el 35 %"
     },
     {
-     "id": "ng43bun3zw",
+     "id": "nkzsayhzl9",
      "n": "Con 30.000 votos se queda fuera: le faltaron unos 3.300 para superar el 33.333 de A.",
-     "p": "naouvkj3zw",
+     "p": "n5l7fgqzl9",
      "t": "C: ninguno con el 13 %"
     },
     {
      "c": "#e0b100",
-     "id": "no12dtm3zw",
-     "p": "n8kpcnn3zw",
+     "id": "nr4w8wozla",
+     "p": "n3v2eb0zl8",
      "t": "Cómo se usa en España"
     },
     {
-     "id": "nix3chf3zw",
-     "p": "no12dtm3zw",
+     "id": "n5rl2p0zla",
+     "p": "nr4w8wozla",
      "t": "Congreso de los Diputados"
     },
     {
-     "id": "niqzynz3zw",
-     "p": "nix3chf3zw",
+     "id": "n5hzij3zla",
+     "p": "n5rl2p0zla",
      "t": "350 diputados"
     },
     {
-     "id": "nfjd6ql3zx",
-     "p": "nix3chf3zw",
+     "id": "nucspb8zla",
+     "p": "n5rl2p0zla",
      "t": "52 circunscripciones (50 provincias, Ceuta y Melilla)"
     },
     {
-     "id": "nwlmun53zx",
+     "id": "n0rlpwzzla",
      "n": "Los otros 248 se reparten según la población. Ceuta y Melilla eligen 1 cada una.",
-     "p": "nix3chf3zw",
+     "p": "n5rl2p0zla",
      "t": "2 diputados fijos por provincia"
     },
     {
-     "id": "n04gh1f3zx",
-     "p": "nix3chf3zw",
+     "id": "n24f4r2zla",
+     "p": "n5rl2p0zla",
      "t": "Umbral del 3 % en cada provincia"
     },
     {
-     "id": "nk4os4u3zx",
+     "id": "nt139jqzla",
      "n": "Votas una lista de un partido entera, sin poder cambiar el orden ni tachar nombres.",
-     "p": "nix3chf3zw",
+     "p": "n5rl2p0zla",
      "t": "Listas cerradas y bloqueadas"
     },
     {
-     "id": "n6jhpox3zx",
-     "p": "no12dtm3zw",
+     "id": "ndwx073zla",
+     "p": "nr4w8wozla",
      "t": "También en"
     },
     {
-     "id": "ntc0b7e3zx",
-     "p": "n6jhpox3zx",
+     "id": "nnay3aczla",
+     "p": "ndwx073zla",
      "t": "Elecciones municipales (umbral del 5 %)"
     },
     {
-     "id": "nxiv1wg3zx",
-     "p": "n6jhpox3zx",
+     "id": "nhf9y3fzla",
+     "p": "ndwx073zla",
      "t": "Elecciones autonómicas (umbral según la comunidad)"
     },
     {
-     "id": "n349sv93zx",
-     "p": "n6jhpox3zx",
+     "id": "nymw1ftzla",
+     "p": "ndwx073zla",
      "t": "Elecciones europeas (toda España, una sola circunscripción)"
     },
     {
-     "id": "nz6p28x3zx",
+     "id": "nf02gtszla",
      "n": "Sistema mayoritario de voto limitado: en cada provincia se eligen 4 senadores y cada votante marca hasta 3 nombres. Salen los más votados.",
-     "p": "no12dtm3zw",
+     "p": "nr4w8wozla",
      "t": "El Senado no usa D’Hondt"
     },
     {
      "c": "#e5484d",
-     "id": "n443m603zx",
-     "p": "n8kpcnn3zw",
+     "id": "nktwykbzla",
+     "p": "n3v2eb0zl8",
      "t": "Efectos"
     },
     {
-     "id": "ngll4ml3zx",
-     "p": "n443m603zx",
+     "id": "nm0maayzla",
+     "p": "nktwykbzla",
      "t": "Premia a los partidos grandes"
     },
     {
-     "id": "nwmwjw03zx",
+     "id": "n2tahg8zla",
      "n": "Sus votos están repartidos por todo el país y en muchas provincias no llegan a ningún escaño: esos votos no sirven para nada.",
-     "p": "n443m603zx",
+     "p": "nktwykbzla",
      "t": "Castiga a los pequeños de ámbito nacional"
     },
     {
-     "id": "nschjxj3zx",
+     "id": "nxejil5zla",
      "n": "Al sacar muchos votos en pocas provincias, consiguen escaños con menos votos totales.",
-     "p": "n443m603zx",
+     "p": "nktwykbzla",
      "t": "Favorece a los regionales con voto concentrado"
     },
     {
-     "id": "nbttdyw3zx",
-     "p": "n443m603zx",
+     "id": "n0ojuiqzla",
+     "p": "nktwykbzla",
      "t": "Facilita mayorías y gobiernos más estables"
     },
     {
-     "id": "np0huk43zx",
+     "id": "ntcfbr6zla",
      "n": "Donde se reparten 3 escaños, para sacar uno hace falta en torno al 20 % de los votos. Ojo: en España la desproporción viene sobre todo de lo pequeñas que son muchas provincias, más que de la fórmula en sí.",
-     "p": "n443m603zx",
+     "p": "nktwykbzla",
      "t": "Provincias pequeñas: hace falta mucho porcentaje"
     },
     {
-     "id": "n2yvbdl3zx",
+     "id": "nonndwdzla",
      "n": "Por los 2 diputados fijos, un escaño en Soria o Teruel cuesta muchos menos votos que uno en Madrid o Barcelona.",
-     "p": "n443m603zx",
+     "p": "nktwykbzla",
      "t": "Un voto rural pesa más que uno urbano"
     },
     {
      "c": "#f28a2e",
-     "id": "nwthmut3zx",
-     "p": "n8kpcnn3zw",
+     "id": "nk8ke71zla",
+     "p": "n3v2eb0zl8",
      "t": "Otros métodos"
     },
     {
-     "id": "nnn8aq93zx",
+     "id": "nw61f1uzla",
      "n": "Divide entre 1, 3, 5, 7… Es más proporcional y trata mejor a los partidos medianos. Se usa, por ejemplo, en Suecia y en Noruega (con un ajuste) y en Alemania.",
-     "p": "nwthmut3zx",
+     "p": "nk8ke71zla",
      "t": "Sainte-Laguë"
     },
     {
-     "id": "nz9nr2s3zx",
+     "id": "ngjkgvjzla",
      "n": "Se calcula cuántos votos «cuesta» un escaño (votos ÷ escaños); cada partido se lleva los escaños enteros que le tocan y los que sobran van a los restos más grandes.",
-     "p": "nwthmut3zx",
+     "p": "nk8ke71zla",
      "t": "Resto mayor (Hare)"
     },
     {
-     "id": "n071nb33zx",
+     "id": "ngtmbyizla",
      "n": "En cada distrito gana un solo candidato, el más votado, y el resto de votos no cuenta. Reino Unido y Estados Unidos.",
-     "p": "nwthmut3zx",
+     "p": "nk8ke71zla",
      "t": "Mayoritario"
     }
    ],
-   "playOpts": {
-    "links": false,
-    "mode": "piezas"
-   },
    "type": "scheme",
-   "updated": 1794306997436,
+   "updated": 1794329246634,
    "v": 2
   },
   {
    "color": "#1c1c1e",
-   "created": 1794327201359,
+   "created": 1794329246647,
    "id": "ej-gaza",
    "layout": "red",
    "links": [
     {
-     "a": "n21zr315g0",
-     "b": "n76s2nh5g0",
-     "id": "njqnx815g0",
+     "a": "n2h3kptzlj",
+     "b": "n87wgolzlj",
+     "id": "n5557orzll",
      "k": "arma",
      "t": "armas y dinero"
     },
     {
-     "a": "n21zr315g0",
-     "b": "n76s2nh5g0",
-     "id": "nm8ikfb5g0",
+     "a": "n2h3kptzlj",
+     "b": "n87wgolzlj",
+     "id": "no9f10vzll",
      "k": "apoya",
      "t": "le protege con su veto en la ONU"
     },
     {
-     "a": "ng1lla55g0",
-     "b": "ns9crqh5g0",
-     "id": "n71ua1g5g0",
+     "a": "n5j4k3nzlj",
+     "b": "n4zy97ezlj",
+     "id": "nhwki84zll",
      "k": "arma",
      "t": "financia y arma"
     },
     {
-     "a": "ng1lla55g0",
-     "b": "nibteh75g0",
-     "id": "n06352i5g1",
+     "a": "n5j4k3nzlj",
+     "b": "nu7hnofzlj",
+     "id": "ng4mc7zzll",
      "k": "arma",
      "t": "financia y arma"
     },
     {
-     "a": "ng1lla55g0",
-     "b": "nqnnk1c5g0",
-     "id": "nw40d0c5g1",
+     "a": "n5j4k3nzlj",
+     "b": "nfx8py1zlj",
+     "id": "np032q4zll",
      "k": "arma",
      "t": "financia y arma"
     },
     {
-     "a": "ng1lla55g0",
-     "b": "ncq47rq5g0",
-     "id": "nucu3b55g1",
+     "a": "n5j4k3nzlj",
+     "b": "n8hjfv4zlj",
+     "id": "n57unmfzlm",
      "k": "arma",
      "t": "arma"
     },
     {
-     "a": "ns9crqh5g0",
-     "b": "n76s2nh5g0",
-     "id": "n511lvy5g1",
+     "a": "n4zy97ezlj",
+     "b": "n87wgolzlj",
+     "id": "nmukuc2zlm",
      "k": "ataca",
      "t": "ataque del 7-O y rehenes"
     },
     {
-     "a": "nibteh75g0",
-     "b": "n76s2nh5g0",
-     "id": "nvp9cwp5g1",
+     "a": "nu7hnofzlj",
+     "b": "n87wgolzlj",
+     "id": "nlsupdkzlm",
      "k": "ataca",
      "t": "participa en el 7-O"
     },
     {
-     "a": "n76s2nh5g0",
-     "b": "ns9crqh5g0",
+     "a": "n87wgolzlj",
+     "b": "n4zy97ezlj",
      "bi": true,
-     "id": "nho4swp5g1",
+     "id": "njp70mizlm",
      "k": "ataca",
      "t": "guerra"
     },
     {
-     "a": "n76s2nh5g0",
-     "b": "ni28n6a5g0",
-     "id": "n4o0ydg5g1",
+     "a": "n87wgolzlj",
+     "b": "nwp4bhszlj",
+     "id": "nm1eh83zlm",
      "k": "ataca",
      "t": "ofensiva y bloqueo"
     },
     {
-     "a": "ns9crqh5g0",
-     "b": "ni28n6a5g0",
-     "id": "n386mra5g1",
+     "a": "n4zy97ezlj",
+     "b": "nwp4bhszlj",
+     "id": "nz8zr6wzlm",
      "k": "controla",
      "t": "la gobierna desde 2007"
     },
     {
-     "a": "nqnnk1c5g0",
-     "b": "n76s2nh5g0",
+     "a": "nfx8py1zlj",
+     "b": "n87wgolzlj",
      "bi": true,
-     "id": "n0o2lg35g1",
+     "id": "nszsaynzlm",
      "k": "ataca",
      "t": "guerra en el Líbano"
     },
     {
-     "a": "ncq47rq5g0",
-     "b": "n76s2nh5g0",
-     "id": "nbatwvu5g1",
+     "a": "n8hjfv4zlj",
+     "b": "n87wgolzlj",
+     "id": "nn8mrmdzlm",
      "k": "ataca",
      "t": "misiles y ataques en el mar Rojo"
     },
     {
-     "a": "n76s2nh5g0",
-     "b": "ng1lla55g0",
+     "a": "n87wgolzlj",
+     "b": "n5j4k3nzlj",
      "bi": true,
-     "id": "nmk94tt5g1",
+     "id": "ncvjtn1zln",
      "k": "ataca",
      "t": "guerra de 2026"
     },
     {
-     "a": "n21zr315g0",
-     "b": "ng1lla55g0",
-     "id": "nab0hfi5g1",
+     "a": "n2h3kptzlj",
+     "b": "n5j4k3nzlj",
+     "id": "n9da6vlzln",
      "k": "ataca",
      "t": "lo bombardea (2026)"
     },
     {
-     "a": "n76s2nh5g0",
-     "b": "n80odle5g0",
-     "id": "nhiq8y05g1",
+     "a": "n87wgolzlj",
+     "b": "nkd9eiazlj",
+     "id": "nwrym09zln",
      "k": "apoya",
      "t": "protege y amplía los asentamientos"
     },
     {
-     "a": "n80odle5g0",
-     "b": "nyac3075g0",
-     "id": "nrcwcr05g1",
+     "a": "nkd9eiazlj",
+     "b": "n558i19zlj",
+     "id": "nng4z2uzln",
      "k": "ataca",
      "t": "ataques y toma de tierras"
     },
     {
-     "a": "n76s2nh5g0",
-     "b": "nyac3075g0",
-     "id": "nupq9ar5g1",
+     "a": "n87wgolzlj",
+     "b": "n558i19zlj",
+     "id": "nxn1u10zln",
      "k": "controla",
      "t": "ocupación militar"
     },
     {
-     "a": "nyqyo455g0",
-     "b": "nyac3075g0",
-     "id": "nxpdhg95g1",
+     "a": "nq80km5zlj",
+     "b": "n558i19zlj",
+     "id": "n6a6iuxzln",
      "k": "controla",
      "t": "la gobierna en parte"
     },
     {
-     "a": "ns9crqh5g0",
-     "b": "nyqyo455g0",
+     "a": "n4zy97ezlj",
+     "b": "nq80km5zlj",
      "bi": true,
-     "id": "nyyjdcv5g1",
+     "id": "n8n9hdszln",
      "k": "ataca",
      "t": "rivales desde 2007"
     },
     {
-     "a": "nyfvuo95g0",
-     "b": "ns9crqh5g0",
-     "id": "npaks7a5g1",
+     "a": "nqlzq31zlj",
+     "b": "n4zy97ezlj",
+     "id": "n53au2mzln",
      "k": "apoya",
      "t": "acoge a sus líderes"
     },
     {
-     "a": "nyfvuo95g0",
-     "b": "ni28n6a5g0",
-     "id": "nmein6l5g1",
+     "a": "nqlzq31zlj",
+     "b": "nwp4bhszlj",
+     "id": "nxe5bxezln",
      "k": "dinero",
      "t": "salarios y combustible"
     },
     {
-     "a": "n76s2nh5g0",
-     "b": "nyfvuo95g0",
-     "id": "nr3iq655g1",
+     "a": "n87wgolzlj",
+     "b": "nqlzq31zlj",
+     "id": "nubom7rzln",
      "k": "ataca",
      "t": "bombardea Doha (2025)"
     },
     {
-     "a": "nyjt4z05g0",
-     "b": "ni28n6a5g0",
-     "id": "nre6r515g1",
+     "a": "nbchiubzlj",
+     "b": "nwp4bhszlj",
+     "id": "ncjpv6yzln",
      "k": "controla",
      "t": "controla el paso de Rafah"
     },
     {
-     "a": "nhxcqd85g0",
-     "b": "ns9crqh5g0",
-     "id": "ndnx13d5g1",
+     "a": "n76dfgezlj",
+     "b": "n4zy97ezlj",
+     "id": "no94rbkzln",
      "k": "apoya",
      "t": "apoyo político"
     },
     {
-     "a": "n21zr315g0",
-     "b": "nyesobb5g0",
-     "id": "nn3c50m5g1",
+     "a": "n2h3kptzlj",
+     "b": "n72mupczll",
+     "id": "nvjuxnzzln",
      "k": "media",
      "t": "lo impulsa con su plan"
     },
     {
-     "a": "nyfvuo95g0",
-     "b": "nyesobb5g0",
-     "id": "n1ertkj5g1",
+     "a": "nqlzq31zlj",
+     "b": "n72mupczll",
+     "id": "nw8wf5izln",
      "k": "media",
      "t": "media"
     },
     {
-     "a": "nyjt4z05g0",
-     "b": "nyesobb5g0",
-     "id": "n6rfbes5g1",
+     "a": "nbchiubzlj",
+     "b": "n72mupczll",
+     "id": "n18dy3zzln",
      "k": "media",
      "t": "media"
     },
     {
-     "a": "nhxcqd85g0",
-     "b": "nyesobb5g0",
-     "id": "nzxr0rz5g1",
+     "a": "n76dfgezlj",
+     "b": "n72mupczll",
+     "id": "ne9xurtzln",
      "k": "media",
      "t": "media"
     },
     {
-     "a": "n21zr315g0",
-     "b": "n8l4d145g0",
-     "id": "nuzju7f5g1",
+     "a": "n2h3kptzlj",
+     "b": "n72kzh5zlj",
+     "id": "nftspeezln",
      "k": "controla",
      "t": "Trump la preside"
     },
     {
-     "a": "n8l4d145g0",
-     "b": "npwjosa5g0",
-     "id": "nkl68l45g1",
+     "a": "n72kzh5zlj",
+     "b": "nzz8s4nzlj",
+     "id": "nkkxtmszln",
      "k": "controla",
      "t": "lo supervisa"
     },
     {
-     "a": "npwjosa5g0",
-     "b": "ni28n6a5g0",
-     "id": "nlhie7d5g1",
+     "a": "nzz8s4nzlj",
+     "b": "nwp4bhszlj",
+     "id": "nr39ec7zln",
      "k": "controla",
      "t": "la administra"
     },
     {
-     "a": "n8l4d145g0",
-     "b": "n1iqsgl5g0",
-     "id": "ny22lp35g1",
+     "a": "n72kzh5zlj",
+     "b": "nxgy81dzlj",
+     "id": "nwhzatrzln",
      "k": "controla",
      "t": "la dirige"
     },
     {
-     "a": "n1iqsgl5g0",
-     "b": "ns9crqh5g0",
-     "id": "njzvpn85g1",
+     "a": "nxgy81dzlj",
+     "b": "n4zy97ezlj",
+     "id": "n737j7hzln",
      "k": "controla",
      "t": "supervisará su desarme"
     },
     {
-     "a": "n027sc05g0",
-     "b": "ni28n6a5g0",
-     "id": "nnzid2b5g1",
+     "a": "nt9g1s3zlj",
+     "b": "nwp4bhszlj",
+     "id": "num3qz1zln",
      "k": "ayuda",
      "t": "ayuda humanitaria"
     },
     {
-     "a": "n76s2nh5g0",
-     "b": "n027sc05g0",
-     "id": "n8famls5g1",
+     "a": "n87wgolzlj",
+     "b": "nt9g1s3zlj",
+     "id": "nkscavgzln",
      "k": "juzga",
      "t": "le prohíbe operar"
     },
     {
-     "a": "n9dpeln5g0",
-     "b": "n0qhuru5g0",
-     "id": "nsrhg5h5g1",
+     "a": "npkrswwzlj",
+     "b": "nuxqmtvzlj",
+     "id": "nqvqax2zlo",
      "k": "juzga",
      "t": "denuncia a Israel por genocidio"
     },
     {
-     "a": "n0qhuru5g0",
-     "b": "n76s2nh5g0",
-     "id": "nnie2nv5g1",
+     "a": "nuxqmtvzlj",
+     "b": "n87wgolzlj",
+     "id": "n37rru3zlo",
      "k": "juzga",
      "t": "medidas cautelares; ocupación ilegal"
     },
     {
-     "a": "nhjjhia5g0",
-     "b": "n76s2nh5g0",
-     "id": "nn8frlt5g1",
+     "a": "ngsywzdzlj",
+     "b": "n87wgolzlj",
+     "id": "npf738zzlo",
      "k": "juzga",
      "t": "orden de arresto a Netanyahu"
     },
     {
-     "a": "nhjjhia5g0",
-     "b": "ns9crqh5g0",
-     "id": "nbwvtf95g1",
+     "a": "ngsywzdzlj",
+     "b": "n4zy97ezlj",
+     "id": "nr1jfftzlo",
      "k": "juzga",
      "t": "orden de arresto a Deif"
     },
     {
-     "a": "nfsl1xq5g0",
-     "b": "n76s2nh5g0",
-     "id": "nm57q875g1",
+     "a": "nx62twszlj",
+     "b": "n87wgolzlj",
+     "id": "ny0l2o3zlo",
      "k": "juzga",
      "t": "embargo de armas"
     },
     {
-     "a": "nfsl1xq5g0",
-     "b": "nyqyo455g0",
-     "id": "nz0eq475g1",
+     "a": "nx62twszlj",
+     "b": "nq80km5zlj",
+     "id": "nm3flf1zlo",
      "k": "apoya",
      "t": "reconoce el Estado palestino"
     },
     {
-     "a": "ngqun195g0",
-     "b": "nyqyo455g0",
-     "id": "ne3yohb5g1",
+     "a": "nt1bu6lzlj",
+     "b": "nq80km5zlj",
+     "id": "nyyqxu1zlo",
      "k": "dinero",
      "t": "principal donante"
     }
@@ -894,7 +633,7 @@
        "y": "2026"
       }
      ],
-     "id": "n76s2nh5g0",
+     "id": "n87wgolzlj",
      "k": "estado",
      "n": "Gobierno de coalición de Benjamín Netanyahu con partidos de derecha y ultraderecha religiosa. Controla las fronteras, el mar y el espacio aéreo de Gaza. En las elecciones del 27 de octubre de 2026 su bloque sacó 53 de 120 escaños, lejos de los 61 de la mayoría.",
      "p": null,
@@ -928,7 +667,7 @@
        "y": "2026"
       }
      ],
-     "id": "ns9crqh5g0",
+     "id": "n4zy97ezlj",
      "k": "grupo",
      "n": "Movimiento islamista y armado palestino, rama de los Hermanos Musulmanes. EE. UU., la UE y otros países lo consideran organización terrorista. Su desarme está ligado a la retirada israelí; Israel no ha aceptado públicamente ese acuerdo.",
      "p": null,
@@ -951,7 +690,7 @@
        "y": "2023"
       }
      ],
-     "id": "nibteh75g0",
+     "id": "nu7hnofzlj",
      "k": "grupo",
      "n": "Grupo armado islamista palestino, más pequeño que Hamás y muy ligado a Irán.",
      "p": null,
@@ -980,7 +719,7 @@
        "y": "2026"
       }
      ],
-     "id": "ni28n6a5g0",
+     "id": "nwp4bhszlj",
      "k": "pueblo",
      "n": "Unos 2,1 millones de personas en 365 km², casi la mitad menores de edad. La mayoría ha tenido que huir varias veces y vive entre ruinas y tiendas. La cifra de muertos del Ministerio de Sanidad de Gaza no distingue civiles de combatientes; la ONU la considera en general fiable.",
      "p": null,
@@ -1010,7 +749,7 @@
        "y": "2027"
       }
      ],
-     "id": "nyqyo455g0",
+     "id": "nq80km5zlj",
      "k": "estado",
      "n": "La preside Mahmud Abbas, del partido Fatah. Gobierna partes de Cisjordania con un autogobierno limitado.",
      "p": null,
@@ -1033,7 +772,7 @@
        "y": "1995"
       }
      ],
-     "id": "nyac3075g0",
+     "id": "n558i19zlj",
      "k": "pueblo",
      "n": "Unos 3 millones de palestinos. En la zona A manda la Autoridad Palestina, en la B se comparte y en la C (la mayor) manda Israel.",
      "p": null,
@@ -1061,7 +800,7 @@
        "y": "2026"
       }
      ],
-     "id": "n80odle5g0",
+     "id": "nkd9eiazlj",
      "k": "pueblo",
      "n": "Más de 700.000 israelíes viven en asentamientos de Cisjordania y Jerusalén Este, ilegales según el derecho internacional.",
      "p": null,
@@ -1095,7 +834,7 @@
        "y": "2026"
       }
      ],
-     "id": "n21zr315g0",
+     "id": "n2h3kptzlj",
      "k": "estado",
      "n": "Principal aliado de Israel: además del acuerdo de 2016 (2019–2028), ha dado más de 8.800 millones extra desde octubre de 2023 y ha vetado varias resoluciones de alto el fuego en la ONU.",
      "p": null,
@@ -1121,7 +860,7 @@
        "y": "2026"
       }
      ],
-     "id": "ng1lla55g0",
+     "id": "n5j4k3nzlj",
      "k": "estado",
      "n": "Enemigo declarado de Israel. Financia y arma al llamado «eje de la resistencia»: Hamás, Yihad Islámica, Hezbolá y los hutíes. La inteligencia de EE. UU. concluyó que no organizó el 7 de octubre ni lo sabía de antemano.",
      "p": null,
@@ -1154,7 +893,7 @@
        "y": "2026"
       }
      ],
-     "id": "nqnnk1c5g0",
+     "id": "nfx8py1zlj",
      "k": "grupo",
      "n": "Milicia y partido chií libanés, el aliado más fuerte de Irán. No se ha desarmado.",
      "p": null,
@@ -1179,7 +918,7 @@
        "y": "2023"
       }
      ],
-     "id": "ncq47rq5g0",
+     "id": "n8hjfv4zlj",
      "k": "grupo",
      "n": "Movimiento armado que controla el norte de Yemen. También lanza misiles y drones contra Israel.",
      "p": null,
@@ -1201,7 +940,7 @@
        "y": "2025"
       }
      ],
-     "id": "nyfvuo95g0",
+     "id": "nqlzq31zlj",
      "k": "estado",
      "n": "Mediador clave. Durante años pagó salarios, combustible y ayuda en Gaza con el visto bueno de Israel: más de 1.000 millones de dólares entre 2012 y 2018, según el New York Times.",
      "p": null,
@@ -1224,7 +963,7 @@
        "y": "2007"
       }
      ],
-     "id": "nyjt4z05g0",
+     "id": "nbchiubzlj",
      "k": "estado",
      "n": "Vecino de Gaza: controla el paso de Rafah y media entre las partes junto a Catar.",
      "p": null,
@@ -1247,7 +986,7 @@
        "y": "2026"
       }
      ],
-     "id": "nhxcqd85g0",
+     "id": "n76dfgezlj",
      "k": "estado",
      "n": "Apoya políticamente a Hamás.",
      "p": null,
@@ -1270,7 +1009,7 @@
        "y": "2026"
       }
      ],
-     "id": "n8l4d145g0",
+     "id": "n72kzh5zlj",
      "k": "org",
      "n": "Organismo creado por el plan de Trump y presidido por él. Dirige la reconstrucción, el comité palestino y la fuerza internacional.",
      "p": null,
@@ -1295,7 +1034,7 @@
        "y": "2026"
       }
      ],
-     "id": "n1iqsgl5g0",
+     "id": "nxgy81dzlj",
      "k": "org",
      "n": "Mando de EE. UU. (general Jasper Jeffers). Debe vigilar el alto el fuego, formar a una nueva policía palestina y supervisar el desarme. Comprometidos: Indonesia, Marruecos, Kazajistán, Albania, Kosovo…",
      "p": null,
@@ -1315,7 +1054,7 @@
        "y": "2026"
       }
      ],
-     "id": "npwjosa5g0",
+     "id": "nzz8s4nzlj",
      "k": "org",
      "n": "Comité de expertos palestinos, sin Hamás, que gestiona la vida diaria de Gaza bajo la Junta de Paz.",
      "p": null,
@@ -1339,7 +1078,7 @@
        "y": "2024"
       }
      ],
-     "id": "n027sc05g0",
+     "id": "nt9g1s3zlj",
      "k": "org",
      "n": "La UNRWA es la agencia de la ONU para los refugiados palestinos: escuelas, sanidad y comida. Israel la acusó de tener empleados implicados en el 7 de octubre.",
      "p": null,
@@ -1364,7 +1103,7 @@
        "y": "2024"
       }
      ],
-     "id": "n0qhuru5g0",
+     "id": "nuxqmtvzlj",
      "k": "org",
      "n": "Tribunal de la ONU que juzga a Estados. El juicio de fondo por genocidio sigue abierto.",
      "p": null,
@@ -1384,7 +1123,7 @@
        "y": "2024"
       }
      ],
-     "id": "nhjjhia5g0",
+     "id": "ngsywzdzlj",
      "k": "org",
      "n": "Juzga a personas. Las órdenes son por crímenes de guerra y contra la humanidad; Mohamed Deif, jefe militar de Hamás, ya ha muerto.",
      "p": null,
@@ -1402,7 +1141,7 @@
        "y": "2023"
       }
      ],
-     "id": "n9dpeln5g0",
+     "id": "npkrswwzlj",
      "k": "estado",
      "p": null,
      "t": "Sudáfrica",
@@ -1423,7 +1162,7 @@
        "y": "2025"
       }
      ],
-     "id": "nfsl1xq5g0",
+     "id": "nx62twszlj",
      "k": "estado",
      "n": "Reconoció Palestina el 28 de mayo de 2024, junto a Irlanda y Noruega. El embargo se aprobó en el Congreso por 178 votos a favor y 169 en contra.",
      "p": null,
@@ -1436,7 +1175,7 @@
       "UE",
       "Union Europea"
      ],
-     "id": "ngqun195g0",
+     "id": "nt1bu6lzlj",
      "k": "org",
      "n": "Principal donante de ayuda a los palestinos y principal socio comercial de Israel. Sus países están divididos sobre cómo actuar.",
      "p": null,
@@ -1450,7 +1189,7 @@
        "t": "El Reino Unido apoya un «hogar nacional judío» en Palestina"
       }
      ],
-     "id": "nx7rtc65g0",
+     "id": "nengfkwzlj",
      "k": "hecho",
      "p": null,
      "t": "1917 · Declaración Balfour"
@@ -1464,7 +1203,7 @@
        "t": "Gaza queda bajo Egipto y Cisjordania bajo Jordania"
       }
      ],
-     "id": "ncyyeiq5g0",
+     "id": "njy2jcwzlj",
      "k": "hecho",
      "p": null,
      "t": "1948 · Nace Israel; la Nakba"
@@ -1478,7 +1217,7 @@
        "t": "También ocupa el Golán y el Sinaí"
       }
      ],
-     "id": "n5nrqz15g0",
+     "id": "nr7iff8zlk",
      "k": "hecho",
      "p": null,
      "t": "1967 · Israel ocupa Gaza y Cisjordania"
@@ -1489,7 +1228,7 @@
        "t": "Levantamiento palestino contra la ocupación"
       }
      ],
-     "id": "nkxcakw5g0",
+     "id": "nj7xj9tzlk",
      "k": "hecho",
      "p": null,
      "t": "1987 · Primera Intifada; nace Hamás"
@@ -1500,7 +1239,7 @@
        "t": "Israel y la OLP se reconocen mutuamente"
       }
      ],
-     "id": "n4n5pp75g0",
+     "id": "n29hie6zlk",
      "k": "hecho",
      "p": null,
      "t": "1993 · Acuerdos de Oslo"
@@ -1511,7 +1250,7 @@
        "t": "Retira soldados y colonos, pero controla las fronteras"
       }
      ],
-     "id": "njwcd1l5g0",
+     "id": "nqr0cmlzlk",
      "k": "hecho",
      "p": null,
      "t": "2005 · Israel sale de Gaza"
@@ -1522,7 +1261,7 @@
        "t": "Hamás expulsa a Fatah de la Franja tras ganar las elecciones"
       }
      ],
-     "id": "nlqc3at5g0",
+     "id": "nl521ykzlk",
      "k": "hecho",
      "p": null,
      "t": "2007 · Hamás toma Gaza; bloqueo"
@@ -1533,7 +1272,7 @@
        "t": "Unas 1.200 personas muertas y 251 secuestradas en Israel"
       }
      ],
-     "id": "nba776l5g0",
+     "id": "nhrfk0mzlk",
      "k": "hecho",
      "p": null,
      "t": "2023 · 7 de octubre: ataque de Hamás"
@@ -1544,7 +1283,7 @@
        "t": "Ofensiva israelí por aire y tierra sobre toda la Franja"
       }
      ],
-     "id": "neljeur5g0",
+     "id": "n77ycm8zlk",
      "k": "hecho",
      "p": null,
      "t": "2023 · Empieza la guerra en Gaza"
@@ -1558,7 +1297,7 @@
        "t": "Israel se queda detrás de la «línea amarilla»"
       }
      ],
-     "id": "nyesobb5g0",
+     "id": "n72mupczll",
      "k": "hecho",
      "p": null,
      "t": "2025 · Alto el fuego del plan Trump"
@@ -1569,7 +1308,7 @@
        "t": "EE. UU. e Israel atacan Irán el 28 de febrero"
       }
      ],
-     "id": "n81bld95g0",
+     "id": "n1fyk3xzll",
      "k": "hecho",
      "p": null,
      "t": "2026 · Guerra contra Irán"
@@ -1578,157 +1317,43 @@
    "run": {
     "cur": null,
     "f": {},
-    "hd": {
-     "n4n5pp75g0:0": true,
-     "n5nrqz15g0:0": true,
-     "n5nrqz15g0:1": true,
-     "n81bld95g0:0": true,
-     "nba776l5g0:0": true,
-     "ncyyeiq5g0:0": true,
-     "ncyyeiq5g0:1": true,
-     "neljeur5g0:0": true,
-     "njwcd1l5g0:0": true,
-     "nkxcakw5g0:0": true,
-     "nlqc3at5g0:0": true,
-     "nx7rtc65g0:0": true,
-     "nyesobb5g0:0": true,
-     "nyesobb5g0:1": true
-    },
+    "hd": {},
     "linksDone": {},
     "order": [
-     "nyfvuo95g0",
-     "nhxcqd85g0",
-     "n027sc05g0",
-     "npwjosa5g0",
-     "n8l4d145g0",
-     "ncq47rq5g0",
-     "nyqyo455g0",
-     "nhjjhia5g0",
-     "n1iqsgl5g0",
-     "nfsl1xq5g0",
-     "ni28n6a5g0",
-     "nqnnk1c5g0",
-     "ns9crqh5g0",
-     "nyac3075g0",
-     "n0qhuru5g0",
-     "nibteh75g0",
-     "n80odle5g0",
-     "n9dpeln5g0",
-     "ng1lla55g0",
-     "n21zr315g0",
-     "nyjt4z05g0",
-     "n76s2nh5g0",
-     "ngqun195g0"
+     "n76dfgezlj",
+     "nqlzq31zlj",
+     "ngsywzdzlj",
+     "nbchiubzlj",
+     "nzz8s4nzlj",
+     "n72kzh5zlj",
+     "n87wgolzlj",
+     "n4zy97ezlj",
+     "n5j4k3nzlj",
+     "nfx8py1zlj",
+     "nxgy81dzlj",
+     "nu7hnofzlj",
+     "nwp4bhszlj",
+     "nt1bu6lzlj",
+     "nt9g1s3zlj",
+     "nx62twszlj",
+     "nuxqmtvzlj",
+     "n2h3kptzlj",
+     "nq80km5zlj",
+     "n558i19zlj",
+     "npkrswwzlj",
+     "nkd9eiazlj",
+     "n8hjfv4zlj"
     ],
-    "pd": {
-     "n027sc05g0:0": {
-      "s": 0
-     },
-     "n027sc05g0:1": {
-      "s": 1
-     },
-     "n1iqsgl5g0:0": {
-      "s": 0
-     },
-     "n1iqsgl5g0:1": {
-      "s": 1
-     },
-     "npwjosa5g0:0": {
-      "s": 0
-     },
-     "nyjt4z05g0:0": {
-      "s": 0
-     },
-     "nyjt4z05g0:1": {
-      "s": 1
-     },
-     "nyjt4z05g0:2": {
-      "s": 2
-     }
-    },
-    "pdone": {
-     "n027sc05g0": true,
-     "n1iqsgl5g0": true,
-     "npwjosa5g0": true,
-     "nyjt4z05g0": true
-    },
-    "phase": 3,
-    "res": {
-     "d:n027sc05g0:0": 0,
-     "d:n027sc05g0:1": 0,
-     "d:n1iqsgl5g0:0": 0,
-     "d:n1iqsgl5g0:1": 0,
-     "d:npwjosa5g0:0": 3,
-     "d:nyjt4z05g0:0": 0,
-     "d:nyjt4z05g0:1": 1,
-     "d:nyjt4z05g0:2": 1,
-     "h:n4n5pp75g0": 3,
-     "h:n5nrqz15g0": 3,
-     "h:n81bld95g0": 3,
-     "h:nba776l5g0": 3,
-     "h:ncyyeiq5g0": 3,
-     "h:neljeur5g0": 3,
-     "h:njwcd1l5g0": 3,
-     "h:nkxcakw5g0": 3,
-     "h:nlqc3at5g0": 3,
-     "h:nx7rtc65g0": 3,
-     "h:nyesobb5g0": 3,
-     "hd:n4n5pp75g0:0": 3,
-     "hd:n5nrqz15g0:0": 3,
-     "hd:n5nrqz15g0:1": 3,
-     "hd:n81bld95g0:0": 3,
-     "hd:nba776l5g0:0": 3,
-     "hd:ncyyeiq5g0:0": 3,
-     "hd:ncyyeiq5g0:1": 3,
-     "hd:neljeur5g0:0": 3,
-     "hd:njwcd1l5g0:0": 3,
-     "hd:nkxcakw5g0:0": 3,
-     "hd:nlqc3at5g0:0": 3,
-     "hd:nx7rtc65g0:0": 3,
-     "hd:nyesobb5g0:0": 3,
-     "hd:nyesobb5g0:1": 3,
-     "n:n027sc05g0": 3,
-     "n:n0qhuru5g0": 3,
-     "n:n1iqsgl5g0": 3,
-     "n:n21zr315g0": 3,
-     "n:n76s2nh5g0": 3,
-     "n:n80odle5g0": 3,
-     "n:n8l4d145g0": 3,
-     "n:n9dpeln5g0": 3,
-     "n:ncq47rq5g0": 3,
-     "n:nfsl1xq5g0": 3,
-     "n:ng1lla55g0": 3,
-     "n:ngqun195g0": 3,
-     "n:nhjjhia5g0": 3,
-     "n:nhxcqd85g0": 0,
-     "n:ni28n6a5g0": 3,
-     "n:nibteh75g0": 3,
-     "n:npwjosa5g0": 3,
-     "n:nqnnk1c5g0": 3,
-     "n:ns9crqh5g0": 3,
-     "n:nyac3075g0": 3,
-     "n:nyfvuo95g0": 1,
-     "n:nyjt4z05g0": 3,
-     "n:nyqyo455g0": 3
-    },
-    "start": 1794346652388,
-    "tl": {
-     "n4n5pp75g0": "n4n5pp75g0",
-     "n5nrqz15g0": "n5nrqz15g0",
-     "n81bld95g0": "n81bld95g0",
-     "nba776l5g0": "nba776l5g0",
-     "ncyyeiq5g0": "ncyyeiq5g0",
-     "neljeur5g0": "neljeur5g0",
-     "njwcd1l5g0": "njwcd1l5g0",
-     "nkxcakw5g0": "nkxcakw5g0",
-     "nlqc3at5g0": "nlqc3at5g0",
-     "nx7rtc65g0": "nx7rtc65g0",
-     "nyesobb5g0": "nyesobb5g0"
-    },
+    "pd": {},
+    "pdone": {},
+    "phase": 1,
+    "res": {},
+    "start": 1794329253276,
+    "tl": {},
     "v": 2
    },
    "type": "scheme",
-   "updated": 1794327201359,
+   "updated": 1794329246647,
    "v": 2
   }
  ],
