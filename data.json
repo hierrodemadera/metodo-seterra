@@ -24,6 +24,9 @@
    "f": 1,
    "id": "f-Inglés",
    "name": "Inglés"
+  },
+  {
+   "d": "esqimg-ej-transicion"
   }
  ],
  "esquemas": [
@@ -2776,6 +2779,13 @@
    "kb": 179,
    "name": "Inglés C2",
    "tarjetas": 972
+  },
+  {
+   "file": "La Transicion espanola · imagenes.json",
+   "id": "esqimg-ej-transicion",
+   "kb": 5,
+   "name": "La Transición española · imágenes",
+   "tarjetas": 39
   }
  ],
  "notas": [
