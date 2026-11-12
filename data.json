@@ -30,6 +30,9 @@
   },
   {
    "d": "esqimg-ej-ley-ue"
+  },
+  {
+   "d": "esqimg-ej-brexit"
   }
  ],
  "esquemas": [
@@ -2796,6 +2799,13 @@
    "kb": 2,
    "name": "Cómo se aprueba una ley europea · imágenes",
    "tarjetas": 12
+  },
+  {
+   "file": "El Brexit causas, proceso y consecuencias · imagenes.json",
+   "id": "esqimg-ej-brexit",
+   "kb": 4,
+   "name": "El Brexit: causas, proceso y consecuencias · imágenes",
+   "tarjetas": 28
   }
  ],
  "notas": [
