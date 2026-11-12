@@ -1314,133 +1314,1297 @@
      "t": "2026 · Guerra contra Irán"
     }
    ],
-   "run": {
-    "cur": null,
-    "f": {},
-    "hd": {
-     "n1fyk3xzll:0": true,
-     "n29hie6zlk:0": true,
-     "n72mupczll:0": true,
-     "n72mupczll:1": true,
-     "n77ycm8zlk:0": true,
-     "nengfkwzlj:0": true,
-     "nhrfk0mzlk:0": true,
-     "nj7xj9tzlk:0": true,
-     "njy2jcwzlj:0": true,
-     "njy2jcwzlj:1": true,
-     "nl521ykzlk:0": true,
-     "nqr0cmlzlk:0": true,
-     "nr7iff8zlk:0": true,
-     "nr7iff8zlk:1": true
+   "stats": {
+    "l:nkscavgzln": {
+     "r": 0,
+     "t": 1794486911107
     },
-    "linksDone": {},
-    "order": [
-     "nwp4bhszlj",
-     "nqlzq31zlj",
-     "n72kzh5zlj",
-     "nu7hnofzlj",
-     "nkd9eiazlj",
-     "nbchiubzlj",
-     "n558i19zlj",
-     "nx62twszlj",
-     "nt9g1s3zlj",
-     "n8hjfv4zlj",
-     "nuxqmtvzlj",
-     "n4zy97ezlj",
-     "nt1bu6lzlj",
-     "nxgy81dzlj",
-     "ngsywzdzlj",
-     "nzz8s4nzlj",
-     "n2h3kptzlj",
-     "n76dfgezlj",
-     "n5j4k3nzlj",
-     "nq80km5zlj",
-     "npkrswwzlj",
-     "n87wgolzlj",
-     "nfx8py1zlj"
-    ],
-    "pd": {
-     "nt9g1s3zlj:0": {
-      "s": 0
-     },
-     "nt9g1s3zlj:1": {
-      "s": 1
-     }
+    "l:nwrym09zln": {
+     "r": 0,
+     "t": 1794486911107
     },
-    "pdone": {
-     "nt9g1s3zlj": true
+    "l:nxn1u10zln": {
+     "r": 0,
+     "t": 1794486911107
     },
-    "phase": 3,
-    "res": {
-     "d:nt9g1s3zlj:0": 0,
-     "d:nt9g1s3zlj:1": 1,
-     "h:n1fyk3xzll": 3,
-     "h:n29hie6zlk": 0,
-     "h:n72mupczll": 0,
-     "h:n77ycm8zlk": 0,
-     "h:nengfkwzlj": 3,
-     "h:nhrfk0mzlk": 0,
-     "h:nj7xj9tzlk": 3,
-     "h:njy2jcwzlj": 3,
-     "h:nl521ykzlk": 3,
-     "h:nqr0cmlzlk": 0,
-     "h:nr7iff8zlk": 0,
-     "hd:n1fyk3xzll:0": 3,
-     "hd:n29hie6zlk:0": 3,
-     "hd:n72mupczll:0": 3,
-     "hd:n72mupczll:1": 3,
-     "hd:n77ycm8zlk:0": 3,
-     "hd:nengfkwzlj:0": 3,
-     "hd:nhrfk0mzlk:0": 3,
-     "hd:nj7xj9tzlk:0": 0,
-     "hd:njy2jcwzlj:0": 3,
-     "hd:njy2jcwzlj:1": 3,
-     "hd:nl521ykzlk:0": 3,
-     "hd:nqr0cmlzlk:0": 3,
-     "hd:nr7iff8zlk:0": 3,
-     "hd:nr7iff8zlk:1": 3,
-     "n:n2h3kptzlj": 3,
-     "n:n4zy97ezlj": 3,
-     "n:n558i19zlj": 3,
-     "n:n5j4k3nzlj": 3,
-     "n:n72kzh5zlj": 3,
-     "n:n76dfgezlj": 3,
-     "n:n87wgolzlj": 3,
-     "n:n8hjfv4zlj": 3,
-     "n:nbchiubzlj": 0,
-     "n:nfx8py1zlj": 3,
-     "n:ngsywzdzlj": 3,
-     "n:nkd9eiazlj": 0,
-     "n:npkrswwzlj": 3,
-     "n:nq80km5zlj": 3,
-     "n:nqlzq31zlj": 1,
-     "n:nt1bu6lzlj": 3,
-     "n:nt9g1s3zlj": 3,
-     "n:nu7hnofzlj": 2,
-     "n:nuxqmtvzlj": 3,
-     "n:nwp4bhszlj": 2,
-     "n:nx62twszlj": 0,
-     "n:nxgy81dzlj": 3,
-     "n:nzz8s4nzlj": 3
+    "li:nkscavgzln": {
+     "r": 3,
+     "t": 1794486911107
     },
-    "start": 1794484513130,
-    "tl": {
-     "n1fyk3xzll": "n1fyk3xzll",
-     "n29hie6zlk": "n29hie6zlk",
-     "n72mupczll": "n72mupczll",
-     "n77ycm8zlk": "nhrfk0mzlk",
-     "nengfkwzlj": "nengfkwzlj",
-     "nhrfk0mzlk": "n77ycm8zlk",
-     "nj7xj9tzlk": "nj7xj9tzlk",
-     "njy2jcwzlj": "njy2jcwzlj",
-     "nl521ykzlk": "nl521ykzlk",
-     "nqr0cmlzlk": "nqr0cmlzlk",
-     "nr7iff8zlk": "nr7iff8zlk"
+    "li:nwrym09zln": {
+     "r": 0,
+     "t": 1794486911107
     },
-    "v": 2
+    "li:nxn1u10zln": {
+     "r": 3,
+     "t": 1794486911107
+    },
+    "lt:nkscavgzln": {
+     "r": 0,
+     "t": 1794486911107
+    },
+    "lt:nwrym09zln": {
+     "r": 0,
+     "t": 1794486911107
+    },
+    "lt:nxn1u10zln": {
+     "r": 3,
+     "t": 1794486911107
+    }
    },
    "type": "scheme",
    "updated": 1794329246647,
+   "v": 2
+  },
+  {
+   "color": "#c2410c",
+   "created": 1794493492595,
+   "id": "ej-transicion",
+   "layout": "linea",
+   "links": [],
+   "name": "La Transición española",
+   "nodes": [
+    {
+     "id": "nn81kqmcl0",
+     "n": "Paso de la dictadura de Franco a una democracia parlamentaria. Suele situarse entre la muerte de Franco (1975) y la llegada del PSOE al Gobierno (1982); algunos historiadores la cierran antes, en 1978 o en 1981.",
+     "p": null,
+     "t": "La Transición española"
+    },
+    {
+     "id": "n718f6pcl0",
+     "p": "nn81kqmcl0",
+     "t": "Cronología"
+    },
+    {
+     "d": [
+      {
+       "t": "Era presidente del Gobierno desde junio de ese año"
+      },
+      {
+       "t": "Una bomba voló su coche en una calle de Madrid el 20 de diciembre"
+      },
+      {
+       "t": "Le sustituyó Carlos Arias Navarro"
+      }
+     ],
+     "id": "nnqsdq1cl0",
+     "n": "Luis Carrero Blanco era la mano derecha de Franco y el encargado de asegurar que el régimen siguiera después de él.",
+     "p": "n718f6pcl0",
+     "t": "1973 · ETA asesina a Carrero Blanco"
+    },
+    {
+     "d": [
+      {
+       "t": "Franco murió el 20 de noviembre, tras casi 40 años en el poder"
+      },
+      {
+       "t": "Juan Carlos fue proclamado rey el 22 de noviembre ante las Cortes franquistas"
+      },
+      {
+       "t": "Franco lo había nombrado sucesor «a título de Rey» en 1969"
+      },
+      {
+       "t": "Arias Navarro siguió de presidente: el primer Gobierno apenas cambió nada"
+      }
+     ],
+     "id": "ni16ixpcl0",
+     "p": "n718f6pcl0",
+     "t": "1975 · Muere Franco y Juan Carlos I es proclamado rey"
+    },
+    {
+     "d": [
+      {
+       "t": "Arias Navarro dimitió el 1 de julio, presionado por el rey"
+      },
+      {
+       "t": "Suárez fue nombrado el 3 de julio, para sorpresa de muchos"
+      },
+      {
+       "t": "A finales de julio su Gobierno aprobó una amnistía parcial para presos políticos"
+      }
+     ],
+     "id": "njz9vwhcl0",
+     "p": "n718f6pcl0",
+     "t": "1976 · El rey nombra presidente a Adolfo Suárez"
+    },
+    {
+     "d": [
+      {
+       "t": "Las propias Cortes franquistas la aprobaron el 18 de noviembre: 425 votos a favor, 59 en contra y 13 abstenciones"
+      },
+      {
+       "t": "Por eso se habló del «harakiri» de las Cortes franquistas"
+      },
+      {
+       "t": "En el referéndum del 15 de diciembre votó el 78 % y el 94 % dijo sí"
+      },
+      {
+       "t": "Creaba unas Cortes de dos cámaras elegidas por sufragio universal"
+      }
+     ],
+     "id": "n4usanucl0",
+     "n": "Fue la llave de la Transición: se pasó a la democracia desde la propia legalidad franquista, sin romperla («de la ley a la ley»).",
+     "p": "n718f6pcl0",
+     "t": "1976 · Ley para la Reforma Política"
+    },
+    {
+     "d": [
+      {
+       "t": "El 24 de enero, pistoleros de extrema derecha asaltaron un despacho de abogados laboralistas en Madrid"
+      },
+      {
+       "t": "Hubo cinco muertos y cuatro heridos graves, vinculados a CCOO y al PCE"
+      },
+      {
+       "t": "El entierro reunió a miles de personas en silencio y sin incidentes"
+      }
+     ],
+     "id": "n5vbnelcl0",
+     "p": "n718f6pcl0",
+     "t": "1977 · Matanza de Atocha"
+    },
+    {
+     "d": [
+      {
+       "t": "Suárez lo legalizó el 9 de abril, Sábado Santo"
+      },
+      {
+       "t": "En protesta dimitió el ministro de Marina, el almirante Pita da Veiga"
+      },
+      {
+       "t": "Días después el PCE aceptó la monarquía y la bandera rojigualda"
+      }
+     ],
+     "id": "neox9yrcl0",
+     "p": "n718f6pcl0",
+     "t": "1977 · Se legaliza el Partido Comunista"
+    },
+    {
+     "d": [
+      {
+       "t": "Se celebraron el 15 de junio, con una participación cercana al 79 %"
+      },
+      {
+       "t": "Ganó la UCD de Suárez con 165 escaños; el PSOE obtuvo 118"
+      },
+      {
+       "t": "El PCE logró 20 escaños y Alianza Popular, 16"
+      },
+      {
+       "t": "Las Cortes elegidas se encargaron de redactar la Constitución"
+      }
+     ],
+     "id": "nr9ech2cl0",
+     "p": "n718f6pcl0",
+     "t": "1977 · Primeras elecciones democráticas desde 1936"
+    },
+    {
+     "d": [
+      {
+       "t": "La Generalitat se restableció de forma provisional a finales de septiembre"
+      },
+      {
+       "t": "Al llegar a Barcelona en octubre dijo: «Ciutadans de Catalunya, ja sóc aquí»"
+      }
+     ],
+     "id": "nqmsk2ccl0",
+     "p": "n718f6pcl0",
+     "t": "1977 · Vuelve Tarradellas y se restablece la Generalitat"
+    },
+    {
+     "d": [
+      {
+       "t": "Aprobada en octubre por 296 votos a favor, 2 en contra y 18 abstenciones"
+      },
+      {
+       "t": "Sacó de la cárcel a los presos políticos que quedaban y permitió volver a los exiliados"
+      },
+      {
+       "t": "También impidió juzgar los crímenes cometidos por autoridades de la dictadura"
+      }
+     ],
+     "id": "nui8ck3cl0",
+     "n": "Sigue en vigor y es objeto de debate: para muchos fue la base de la reconciliación; organismos de la ONU han pedido derogarla porque impide investigar los crímenes del franquismo.",
+     "p": "n718f6pcl0",
+     "t": "1977 · Ley de Amnistía"
+    },
+    {
+     "d": [
+      {
+       "t": "Firmados el 25 de octubre por el Gobierno y los principales partidos"
+      },
+      {
+       "t": "La inflación superaba el 20 % anual"
+      },
+      {
+       "t": "Moderación de salarios a cambio de reformas: impuestos, seguridad social, educación"
+      },
+      {
+       "t": "Incluían un acuerdo político sobre libertades y control de los medios públicos"
+      }
+     ],
+     "id": "ntqiuhxcl0",
+     "p": "n718f6pcl0",
+     "t": "1977 · Pactos de la Moncloa"
+    },
+    {
+     "d": [
+      {
+       "t": "Las Cortes la aprobaron el 31 de octubre por amplísima mayoría"
+      },
+      {
+       "t": "En el referéndum del 6 de diciembre votó el 67 % y cerca del 88 % dijo sí"
+      },
+      {
+       "t": "La redactaron siete ponentes: los «padres de la Constitución»"
+      },
+      {
+       "t": "El rey la sancionó el 27 de diciembre y entró en vigor el 29"
+      },
+      {
+       "t": "Define España como monarquía parlamentaria y abre el Estado de las autonomías"
+      }
+     ],
+     "id": "n4cc7bocl0",
+     "n": "En el País Vasco la abstención superó la mitad del censo, en parte porque el PNV pidió abstenerse.",
+     "p": "n718f6pcl0",
+     "t": "1978 · Se aprueba la Constitución"
+    },
+    {
+     "d": [
+      {
+       "t": "En marzo la UCD volvió a ganar (168 escaños) y Suárez siguió de presidente"
+      },
+      {
+       "t": "En abril hubo las primeras elecciones municipales democráticas desde la Segunda República"
+      },
+      {
+       "t": "La izquierda pasó a gobernar muchas grandes ciudades, como Madrid con Tierno Galván"
+      }
+     ],
+     "id": "n50cwkucl0",
+     "p": "n718f6pcl0",
+     "t": "1979 · Primeras elecciones con la Constitución"
+    },
+    {
+     "d": [
+      {
+       "t": "Se votaron en referéndum el 25 de octubre"
+      },
+      {
+       "t": "El vasco es el Estatuto de Gernika y el catalán, el de Sau"
+      },
+      {
+       "t": "Fueron los primeros estatutos del Estado de las autonomías"
+      }
+     ],
+     "id": "n0m8efkcl0",
+     "p": "n718f6pcl0",
+     "t": "1979 · Estatutos de autonomía vasco y catalán"
+    },
+    {
+     "d": [
+      {
+       "t": "Lo anunció por televisión el 29 de enero"
+      },
+      {
+       "t": "Su partido, la UCD, estaba muy dividido"
+      },
+      {
+       "t": "Le debía sustituir Leopoldo Calvo-Sotelo"
+      }
+     ],
+     "id": "n412pk3cl0",
+     "p": "n718f6pcl0",
+     "t": "1981 · Dimite Adolfo Suárez"
+    },
+    {
+     "d": [
+      {
+       "t": "En plena votación de investidura de Calvo-Sotelo, Tejero asaltó el Congreso con unos 200 guardias civiles"
+      },
+      {
+       "t": "En Valencia, Milans del Bosch sacó los tanques a la calle"
+      },
+      {
+       "t": "A la 1:14 de la madrugada el rey defendió la Constitución en televisión"
+      },
+      {
+       "t": "Tejero, Milans del Bosch y Armada fueron condenados a 30 años de cárcel"
+      },
+      {
+       "t": "El Gobierno desclasificó los documentos oficiales del golpe en febrero de 2026"
+      }
+     ],
+     "id": "nw1gp8vcl0",
+     "p": "n718f6pcl0",
+     "t": "1981 · Intento de golpe de Estado del 23-F"
+    },
+    {
+     "d": [
+      {
+       "t": "La entrada se completó el 30 de mayo, con Calvo-Sotelo de presidente"
+      },
+      {
+       "t": "El PSOE se oponía entonces y prometió un referéndum, que se celebró en 1986"
+      }
+     ],
+     "id": "n9ez0nbcl0",
+     "p": "n718f6pcl0",
+     "t": "1982 · España entra en la OTAN"
+    },
+    {
+     "d": [
+      {
+       "t": "Elecciones del 28 de octubre, con una participación cercana al 80 %"
+      },
+      {
+       "t": "El PSOE de Felipe González logró mayoría absoluta: 202 escaños"
+      },
+      {
+       "t": "La UCD se hundió hasta 11 escaños y Alianza Popular pasó a ser la oposición"
+      },
+      {
+       "t": "Muchos historiadores sitúan aquí el final de la Transición"
+      }
+     ],
+     "id": "nystljgcl0",
+     "p": "n718f6pcl0",
+     "t": "1982 · Gana el PSOE: primera alternancia"
+    },
+    {
+     "id": "nynwjgscl0",
+     "k": "grupo",
+     "p": "nn81kqmcl0",
+     "t": "Protagonistas"
+    },
+    {
+     "d": [
+      {
+       "t": "Heredó de Franco la jefatura del Estado"
+      },
+      {
+       "t": "Usó sus poderes para impulsar la reforma y nombrar a Suárez"
+      },
+      {
+       "t": "Abdicó en 2014 en su hijo, Felipe VI"
+      }
+     ],
+     "id": "nqeq411cl0",
+     "p": "nynwjgscl0",
+     "t": "Juan Carlos I"
+    },
+    {
+     "d": [
+      {
+       "t": "Había sido ministro secretario general del Movimiento, el partido único"
+      },
+      {
+       "t": "Fundó la UCD, una coalición de centro"
+      },
+      {
+       "t": "Primer presidente salido de las urnas tras la dictadura"
+      }
+     ],
+     "id": "nfb8oeocl0",
+     "p": "nynwjgscl0",
+     "t": "Adolfo Suárez"
+    },
+    {
+     "d": [
+      {
+       "t": "Presidente de las Cortes y del Consejo del Reino desde 1975"
+      },
+      {
+       "t": "Había sido profesor de Derecho político del rey"
+      },
+      {
+       "t": "Se le atribuye el diseño jurídico de la Ley para la Reforma Política"
+      }
+     ],
+     "id": "nb9ocl7cl0",
+     "p": "nynwjgscl0",
+     "t": "Torcuato Fernández-Miranda"
+    },
+    {
+     "d": [
+      {
+       "t": "Secretario general del PCE"
+      },
+      {
+       "t": "Entró en España clandestinamente y fue detenido en diciembre de 1976"
+      },
+      {
+       "t": "Defendía el eurocomunismo, un comunismo alejado de Moscú"
+      }
+     ],
+     "id": "nt1khafcl0",
+     "p": "nynwjgscl0",
+     "t": "Santiago Carrillo"
+    },
+    {
+     "d": [
+      {
+       "t": "Elegido líder del PSOE en el congreso de Suresnes, en 1974"
+      },
+      {
+       "t": "En 1979 logró que el PSOE dejara de definirse como marxista"
+      },
+      {
+       "t": "Presidente del Gobierno de 1982 a 1996"
+      }
+     ],
+     "id": "nhri84gcl0",
+     "p": "nynwjgscl0",
+     "t": "Felipe González"
+    },
+    {
+     "d": [
+      {
+       "t": "Había sido ministro de Franco"
+      },
+      {
+       "t": "Fundó Alianza Popular, antecesora del PP"
+      },
+      {
+       "t": "Fue uno de los siete ponentes de la Constitución"
+      }
+     ],
+     "id": "nx6z64tcl0",
+     "p": "nynwjgscl0",
+     "t": "Manuel Fraga"
+    },
+    {
+     "d": [
+      {
+       "t": "Vicepresidente del Gobierno para Asuntos de la Defensa con Suárez"
+      },
+      {
+       "t": "Reformó el Ejército para someterlo al poder civil"
+      },
+      {
+       "t": "El 23-F se enfrentó a los guardias civiles que asaltaban el Congreso"
+      }
+     ],
+     "id": "nvbj7ugcl0",
+     "p": "nynwjgscl0",
+     "t": "Manuel Gutiérrez Mellado"
+    },
+    {
+     "d": [
+      {
+       "t": "Presidente de la Generalitat en el exilio"
+      },
+      {
+       "t": "Negoció con Suárez la vuelta de la Generalitat"
+      }
+     ],
+     "id": "nxi4eoicl0",
+     "p": "nynwjgscl0",
+     "t": "Josep Tarradellas"
+    }
+   ],
+   "type": "scheme",
+   "updated": 1794493492595,
+   "v": 2
+  },
+  {
+   "color": "#1d4ed8",
+   "created": 1794493492596,
+   "id": "ej-ley-ue",
+   "layout": "linea",
+   "links": [],
+   "name": "Cómo se aprueba una ley europea",
+   "nodes": [
+    {
+     "id": "nh9r42tcl0",
+     "n": "Casi todas las leyes de la UE siguen el «procedimiento legislativo ordinario» (artículo 294 del Tratado de Funcionamiento de la UE), antes llamado codecisión: la Comisión propone y el Parlamento Europeo y el Consejo de la UE deciden en pie de igualdad.",
+     "p": null,
+     "t": "Cómo se aprueba una ley europea"
+    },
+    {
+     "id": "nco582lcl0",
+     "k": "pasos",
+     "p": "nh9r42tcl0",
+     "t": "Los pasos"
+    },
+    {
+     "d": [
+      {
+       "t": "Solo la Comisión puede proponer leyes: es el «monopolio de iniciativa»"
+      },
+      {
+       "t": "Antes consulta a expertos y ciudadanos y estudia el impacto de la ley"
+      },
+      {
+       "t": "El Parlamento, el Consejo o una iniciativa ciudadana pueden pedirle que proponga una ley"
+      }
+     ],
+     "id": "ncjmv4acl0",
+     "p": "nco582lcl0",
+     "t": "La Comisión Europea prepara y presenta la propuesta"
+    },
+    {
+     "d": [
+      {
+       "t": "Los parlamentos nacionales tienen 8 semanas para avisar si la UE se mete en lo que no le toca (subsidiariedad)"
+      },
+      {
+       "t": "Si protesta al menos un tercio, es «tarjeta amarilla» y la Comisión debe revisar la propuesta"
+      },
+      {
+       "t": "Dan también su opinión el Comité Económico y Social y el Comité de las Regiones"
+      }
+     ],
+     "id": "njqfmiocl0",
+     "p": "nco582lcl0",
+     "t": "Los parlamentos nacionales y los comités consultivos opinan"
+    },
+    {
+     "d": [
+      {
+       "t": "Una comisión parlamentaria la estudia y nombra a un ponente"
+      },
+      {
+       "t": "El pleno aprueba su posición, con o sin enmiendas, por mayoría simple"
+      },
+      {
+       "t": "En primera lectura no hay plazo"
+      }
+     ],
+     "id": "ngw6cp3cl0",
+     "p": "nco582lcl0",
+     "t": "Primera lectura del Parlamento Europeo"
+    },
+    {
+     "d": [
+      {
+       "t": "Si acepta la posición del Parlamento, la ley queda aprobada"
+      },
+      {
+       "t": "Si no, aprueba su propia posición y la devuelve al Parlamento"
+      },
+      {
+       "t": "Más del 85 % de las leyes se cierran en esta lectura o al empezar la segunda"
+      }
+     ],
+     "id": "noqyisqcl0",
+     "p": "nco582lcl0",
+     "t": "Primera lectura del Consejo de la UE"
+    },
+    {
+     "d": [
+      {
+       "t": "Tiene 3 meses, ampliables a 4"
+      },
+      {
+       "t": "Si aprueba la posición del Consejo o no dice nada, la ley queda adoptada"
+      },
+      {
+       "t": "Para rechazarla o enmendarla necesita la mayoría absoluta de sus miembros"
+      }
+     ],
+     "id": "no4ulyscl0",
+     "p": "nco582lcl0",
+     "t": "Segunda lectura del Parlamento"
+    },
+    {
+     "d": [
+      {
+       "t": "También tiene 3 meses, ampliables a 4"
+      },
+      {
+       "t": "Si acepta todas las enmiendas del Parlamento, la ley queda adoptada"
+      },
+      {
+       "t": "Las enmiendas que la Comisión rechaza solo se aprueban por unanimidad"
+      }
+     ],
+     "id": "n7x6n6pcl0",
+     "p": "nco582lcl0",
+     "t": "Segunda lectura del Consejo"
+    },
+    {
+     "d": [
+      {
+       "t": "Lo forman a partes iguales representantes del Consejo y eurodiputados"
+      },
+      {
+       "t": "Tiene 6 semanas, ampliables a 8, para pactar un texto común"
+      },
+      {
+       "t": "Si no hay acuerdo, la ley no se aprueba"
+      }
+     ],
+     "id": "nw387aacl0",
+     "p": "nco582lcl0",
+     "t": "Comité de Conciliación"
+    },
+    {
+     "d": [
+      {
+       "t": "Parlamento y Consejo tienen 6 semanas, ampliables a 8, para aprobar el texto común"
+      },
+      {
+       "t": "Ya no se puede enmendar: solo aprobar o rechazar"
+      },
+      {
+       "t": "Hoy es muy rara: casi todo se pacta antes"
+      }
+     ],
+     "id": "namvwkkcl0",
+     "p": "nco582lcl0",
+     "t": "Tercera lectura"
+    },
+    {
+     "d": [
+      {
+       "t": "La firman los presidentes del Parlamento y del Consejo"
+      },
+      {
+       "t": "Se publica en el Diario Oficial de la Unión Europea"
+      },
+      {
+       "t": "Entra en vigor en la fecha que diga o, si no dice nada, a los 20 días de publicarse"
+      }
+     ],
+     "id": "njw6avjcl0",
+     "p": "nco582lcl0",
+     "t": "Firma y publicación"
+    },
+    {
+     "id": "nrs1i3lcl0",
+     "k": "grupo",
+     "p": "nh9r42tcl0",
+     "t": "Quién es quién"
+    },
+    {
+     "d": [
+      {
+       "t": "Un comisario por país: 27 en total"
+      },
+      {
+       "t": "Propone las leyes y vigila que se cumplan"
+      }
+     ],
+     "id": "nl1u7z2cl0",
+     "p": "nrs1i3lcl0",
+     "t": "Comisión Europea"
+    },
+    {
+     "d": [
+      {
+       "t": "720 eurodiputados elegidos por los ciudadanos cada cinco años"
+      },
+      {
+       "t": "Representa a los ciudadanos y decide las leyes junto al Consejo"
+      }
+     ],
+     "id": "nzk2rjycl0",
+     "p": "nrs1i3lcl0",
+     "t": "Parlamento Europeo"
+    },
+    {
+     "d": [
+      {
+       "t": "Reúne a los ministros de los 27 gobiernos, según el tema"
+      },
+      {
+       "t": "Su presidencia pasa de un país a otro cada seis meses"
+      }
+     ],
+     "id": "nazju35cl0",
+     "p": "nrs1i3lcl0",
+     "t": "Consejo de la Unión Europea"
+    },
+    {
+     "d": [
+      {
+       "t": "Reúne a los jefes de Estado o de Gobierno"
+      },
+      {
+       "t": "Marca la dirección política, pero no aprueba leyes"
+      }
+     ],
+     "id": "no5dd0zcl0",
+     "p": "nrs1i3lcl0",
+     "t": "Consejo Europeo"
+    },
+    {
+     "id": "nv640cwcl0",
+     "k": "grupo",
+     "p": "nh9r42tcl0",
+     "t": "Tipos de normas"
+    },
+    {
+     "d": [
+      {
+       "t": "Se aplica directamente y por igual en todos los países"
+      },
+      {
+       "t": "No hace falta ninguna ley nacional para que valga"
+      }
+     ],
+     "id": "nh9ypuqcl0",
+     "p": "nv640cwcl0",
+     "t": "Reglamento"
+    },
+    {
+     "d": [
+      {
+       "t": "Fija un objetivo que cada país debe alcanzar a su manera"
+      },
+      {
+       "t": "Cada país la incorpora con su propia ley: es la «transposición»"
+      },
+      {
+       "t": "Cada directiva fija su plazo de transposición, a menudo de unos dos años"
+      }
+     ],
+     "id": "n0801wvcl1",
+     "p": "nv640cwcl0",
+     "t": "Directiva"
+    },
+    {
+     "d": [
+      {
+       "t": "Es obligatoria; si tiene destinatarios (un país, una empresa…), solo para ellos"
+      }
+     ],
+     "id": "nzff7mkcl1",
+     "p": "nv640cwcl0",
+     "t": "Decisión"
+    },
+    {
+     "d": [
+      {
+       "t": "No son obligatorios: orientan, pero no obligan"
+      }
+     ],
+     "id": "nxlev9ocl1",
+     "p": "nv640cwcl0",
+     "t": "Recomendación y dictamen"
+    },
+    {
+     "id": "nfe7fv0cl1",
+     "k": "grupo",
+     "p": "nh9r42tcl0",
+     "t": "Claves"
+    },
+    {
+     "d": [
+      {
+       "t": "Hace falta el 55 % de los países: 15 de 27"
+      },
+      {
+       "t": "Que además sumen al menos el 65 % de la población de la UE"
+      },
+      {
+       "t": "Para bloquear hacen falta al menos 4 países con más del 35 % de la población"
+      }
+     ],
+     "id": "n2s340gcl1",
+     "p": "nfe7fv0cl1",
+     "t": "Mayoría cualificada en el Consejo"
+    },
+    {
+     "d": [
+      {
+       "t": "Reuniones informales entre Parlamento, Consejo y Comisión"
+      },
+      {
+       "t": "Sirven para pactar el texto antes de las votaciones formales"
+      },
+      {
+       "t": "Se les critica por su falta de transparencia"
+      }
+     ],
+     "id": "nl1j06dcl1",
+     "p": "nfe7fv0cl1",
+     "t": "Trílogos"
+    },
+    {
+     "d": [
+      {
+       "t": "Un millón de firmas de al menos siete países"
+      },
+      {
+       "t": "Obliga a la Comisión a responder, pero no a proponer la ley"
+      }
+     ],
+     "id": "n2j4sk5cl1",
+     "p": "nfe7fv0cl1",
+     "t": "Iniciativa ciudadana europea"
+    }
+   ],
+   "type": "scheme",
+   "updated": 1794493492596,
+   "v": 2
+  },
+  {
+   "color": "#0f766e",
+   "created": 1794493492597,
+   "id": "ej-brexit",
+   "layout": "linea",
+   "links": [],
+   "name": "El Brexit: causas, proceso y consecuencias",
+   "nodes": [
+    {
+     "id": "nxhn41wcl1",
+     "n": "Salida del Reino Unido de la Unión Europea, decidida en referéndum en 2016 y hecha efectiva en 2020. Las cifras económicas son estimaciones: es difícil separar el efecto del Brexit del de la covid o la crisis energética.",
+     "p": null,
+     "t": "El Brexit: causas, proceso y consecuencias"
+    },
+    {
+     "id": "n29m5g0cl1",
+     "k": "grupo",
+     "p": "nxhn41wcl1",
+     "t": "Causas"
+    },
+    {
+     "d": [
+      {
+       "t": "El Reino Unido entró en la Comunidad Europea en 1973"
+      },
+      {
+       "t": "En 1975 ya votó en referéndum si seguía: el 67 % dijo sí"
+      },
+      {
+       "t": "Se quedó fuera del euro y del espacio Schengen"
+      },
+      {
+       "t": "Thatcher logró en 1984 un descuento en su aportación: el «cheque británico»"
+      }
+     ],
+     "id": "n7l4irncl1",
+     "p": "n29m5g0cl1",
+     "t": "Un euroescepticismo antiguo"
+    },
+    {
+     "d": [
+      {
+       "t": "En 2004 fue uno de los tres países que abrieron su mercado laboral a los nuevos socios del Este sin esperar"
+      },
+      {
+       "t": "La migración neta superaba las 300.000 personas al año hacia 2015"
+      },
+      {
+       "t": "Fue el motivo principal para un tercio de quienes votaron salir (encuesta de Lord Ashcroft, 12.369 personas)"
+      }
+     ],
+     "id": "n0d8i2gcl1",
+     "p": "n29m5g0cl1",
+     "t": "Inmigración y libre circulación"
+    },
+    {
+     "d": [
+      {
+       "t": "«Take back control» fue el lema de la campaña oficial por la salida"
+      },
+      {
+       "t": "Casi la mitad de quienes votaron salir dio como motivo principal que las decisiones sobre el Reino Unido se tomaran en el Reino Unido"
+      },
+      {
+       "t": "Rechazo a que el Tribunal de Justicia de la UE tuviera la última palabra"
+      }
+     ],
+     "id": "n4f7nf1cl1",
+     "p": "n29m5g0cl1",
+     "t": "Soberanía: «recuperar el control»"
+    },
+    {
+     "d": [
+      {
+       "t": "El UKIP, partidario de salir, ganó en el Reino Unido las elecciones europeas de 2014"
+      },
+      {
+       "t": "El Partido Conservador llevaba décadas dividido sobre Europa"
+      },
+      {
+       "t": "Cameron prometió el referéndum también para cerrar esa división"
+      }
+     ],
+     "id": "n93xk58cl1",
+     "p": "n29m5g0cl1",
+     "t": "Presión política interna"
+    },
+    {
+     "d": [
+      {
+       "t": "La salida ganó sobre todo en antiguas zonas industriales y en pueblos de Inglaterra y Gales"
+      },
+      {
+       "t": "Londres y muchas ciudades universitarias votaron quedarse"
+      },
+      {
+       "t": "El 73 % de los jóvenes de 18 a 24 años votó quedarse; el 60 % de los mayores de 65, salir"
+      }
+     ],
+     "id": "nl7b848cl1",
+     "p": "n29m5g0cl1",
+     "t": "Brecha territorial y generacional"
+    },
+    {
+     "d": [
+      {
+       "t": "El autobús que prometía «350 millones de libras a la semana» para la sanidad pública"
+      },
+      {
+       "t": "La Autoridad Estadística británica calificó esa cifra de engañosa"
+      },
+      {
+       "t": "A la campaña por quedarse se la acusó de alarmismo económico: el «Project Fear»"
+      }
+     ],
+     "id": "na9s6pycl1",
+     "p": "n29m5g0cl1",
+     "t": "La campaña"
+    },
+    {
+     "id": "n09f80pcl1",
+     "p": "nxhn41wcl1",
+     "t": "Proceso"
+    },
+    {
+     "d": [
+      {
+       "t": "Lo anunció en enero, en el llamado discurso de Bloomberg"
+      },
+      {
+       "t": "Prometió renegociar la relación con la UE y después votar"
+      }
+     ],
+     "id": "nqhdkcccl1",
+     "p": "n09f80pcl1",
+     "t": "2013 · Cameron promete un referéndum"
+    },
+    {
+     "d": [
+      {
+       "t": "El referéndum iba en su programa electoral"
+      },
+      {
+       "t": "En diciembre se aprobó la ley que lo convocaba"
+      }
+     ],
+     "id": "ng6zjbecl1",
+     "p": "n09f80pcl1",
+     "t": "2015 · Los conservadores ganan con mayoría absoluta"
+    },
+    {
+     "d": [
+      {
+       "t": "En febrero cerró un acuerdo con los demás líderes europeos"
+      },
+      {
+       "t": "Incluía un freno temporal a ayudas sociales para trabajadores recién llegados de la UE"
+      },
+      {
+       "t": "Y una excepción a la «unión cada vez más estrecha»"
+      }
+     ],
+     "id": "njbfeo7cl1",
+     "p": "n09f80pcl1",
+     "t": "2016 · Cameron renegocia con la UE"
+    },
+    {
+     "d": [
+      {
+       "t": "El 23 de junio: 51,9 % por salir y 48,1 % por quedarse"
+      },
+      {
+       "t": "Votó el 72 % del censo"
+      },
+      {
+       "t": "Inglaterra y Gales votaron salir; Escocia e Irlanda del Norte, quedarse"
+      },
+      {
+       "t": "Cameron dimitió y Theresa May fue primera ministra en julio"
+      }
+     ],
+     "id": "nctmylhcl1",
+     "p": "n09f80pcl1",
+     "t": "2016 · Referéndum: gana la salida"
+    },
+    {
+     "d": [
+      {
+       "t": "May envió la carta a Bruselas el 29 de marzo"
+      },
+      {
+       "t": "Se abría un plazo de dos años para negociar la salida"
+      }
+     ],
+     "id": "n35sc1jcl1",
+     "p": "n09f80pcl1",
+     "t": "2017 · Se activa el artículo 50"
+    },
+    {
+     "d": [
+      {
+       "t": "Las convocó para reforzarse y perdió la mayoría absoluta"
+      },
+      {
+       "t": "Pasó a depender de los unionistas norirlandeses del DUP"
+      }
+     ],
+     "id": "ns57s3gcl1",
+     "p": "n09f80pcl1",
+     "t": "2017 · Elecciones anticipadas: May pierde la mayoría"
+    },
+    {
+     "d": [
+      {
+       "t": "Pactado con la UE en noviembre"
+      },
+      {
+       "t": "La salvaguarda evitaba una frontera física en Irlanda: el Reino Unido seguiría en una unión aduanera mientras no hubiera otra solución"
+      },
+      {
+       "t": "Ese año dimitieron varios ministros contrarios al plan de May, entre ellos Boris Johnson"
+      }
+     ],
+     "id": "n1fbzh8cl1",
+     "p": "n09f80pcl1",
+     "t": "2018 · Acuerdo de retirada con la «salvaguarda» irlandesa"
+    },
+    {
+     "d": [
+      {
+       "t": "En enero lo rechazó por 432 votos a 202, la mayor derrota de un gobierno británico en la era moderna"
+      },
+      {
+       "t": "La UE aplazó varias veces la fecha de salida"
+      },
+      {
+       "t": "Theresa May dimitió y Boris Johnson la sustituyó en julio"
+      }
+     ],
+     "id": "n0lqup1cl1",
+     "p": "n09f80pcl1",
+     "t": "2019 · El Parlamento tumba tres veces el acuerdo"
+    },
+    {
+     "d": [
+      {
+       "t": "El Tribunal Supremo declaró ilegal su suspensión del Parlamento"
+      },
+      {
+       "t": "Nuevo acuerdo: el Protocolo de Irlanda del Norte sustituye a la salvaguarda"
+      },
+      {
+       "t": "En diciembre ganó con una mayoría de 80 escaños y el lema «Get Brexit done»"
+      }
+     ],
+     "id": "nxvipt7cl1",
+     "p": "n09f80pcl1",
+     "t": "2019 · Johnson renegocia y gana las elecciones"
+    },
+    {
+     "d": [
+      {
+       "t": "El 31 de enero a las 23:00, hora británica"
+      },
+      {
+       "t": "Empezó un periodo de transición: casi todo siguió igual hasta final de año"
+      }
+     ],
+     "id": "ndlmxbqcl1",
+     "p": "n09f80pcl1",
+     "t": "2020 · El Reino Unido sale de la UE"
+    },
+    {
+     "d": [
+      {
+       "t": "Se cerró el 24 de diciembre, a una semana del límite"
+      },
+      {
+       "t": "Comercio sin aranceles ni cuotas, pero con aduanas y controles"
+      }
+     ],
+     "id": "nemahj0cl1",
+     "p": "n09f80pcl1",
+     "t": "2020 · Acuerdo de Comercio y Cooperación"
+    },
+    {
+     "d": [
+      {
+       "t": "El 1 de enero salió del mercado único y de la unión aduanera"
+      },
+      {
+       "t": "Terminó la libre circulación de personas"
+      }
+     ],
+     "id": "n2x6ktwcl1",
+     "p": "n09f80pcl1",
+     "t": "2021 · Fin del periodo de transición"
+    },
+    {
+     "d": [
+      {
+       "t": "Sunak y von der Leyen lo pactaron en febrero para Irlanda del Norte"
+      },
+      {
+       "t": "Un «carril verde» con menos controles para lo que se queda en Irlanda del Norte"
+      },
+      {
+       "t": "Da a la Asamblea norirlandesa un «freno de Stormont» ante nuevas normas de la UE"
+      }
+     ],
+     "id": "noz5jrdcl1",
+     "p": "n09f80pcl1",
+     "t": "2023 · Marco de Windsor"
+    },
+    {
+     "d": [
+      {
+       "t": "El acuerdo político se anunció en junio de 2025"
+      },
+      {
+       "t": "Firmado en julio de 2026: la Verja deja de ser un control fronterizo"
+      },
+      {
+       "t": "España hace los controles Schengen en el puerto y el aeropuerto de Gibraltar"
+      },
+      {
+       "t": "La soberanía no cambia: España mantiene su reclamación"
+      }
+     ],
+     "id": "nmro8hpcl1",
+     "p": "n09f80pcl1",
+     "t": "2026 · Tratado sobre Gibraltar"
+    },
+    {
+     "id": "n4miw77cl1",
+     "k": "grupo",
+     "p": "nxhn41wcl1",
+     "t": "Consecuencias"
+    },
+    {
+     "d": [
+      {
+       "t": "Sin aranceles, pero con papeleo y controles en la frontera"
+      },
+      {
+       "t": "La OBR, el organismo fiscal independiente británico, calcula que a largo plazo comerciará un 15 % menos que dentro de la UE"
+      },
+      {
+       "t": "La misma OBR estima una productividad un 4 % menor a largo plazo"
+      }
+     ],
+     "id": "ni7nt93cl1",
+     "p": "n4miw77cl1",
+     "t": "Comercio y economía"
+    },
+    {
+     "d": [
+      {
+       "t": "Firma sus propios tratados comerciales: entró en el CPTPP en 2024 y pactó con la India en 2025"
+      },
+      {
+       "t": "Ya no paga al presupuesto de la UE, del que era contribuyente neto"
+      },
+      {
+       "t": "El Tribunal de Justicia de la UE ya no tiene la última palabra sobre sus leyes"
+      }
+     ],
+     "id": "nayrekgcl1",
+     "p": "n4miw77cl1",
+     "t": "Más autonomía"
+    },
+    {
+     "d": [
+      {
+       "t": "Sigue aplicando normas de la UE sobre mercancías para no levantar frontera con Irlanda"
+      },
+      {
+       "t": "El control se trasladó al mar de Irlanda, entre Gran Bretaña e Irlanda del Norte"
+      },
+      {
+       "t": "Los unionistas del DUP bloquearon el Gobierno norirlandés de 2022 a 2024 en protesta"
+      }
+     ],
+     "id": "n0bfztzcl1",
+     "p": "n4miw77cl1",
+     "t": "Irlanda del Norte"
+    },
+    {
+     "d": [
+      {
+       "t": "Desde 2021 rige un sistema de visados por puntos también para los europeos"
+      },
+      {
+       "t": "Bajó la llegada de europeos, pero subió mucho la de fuera de Europa"
+      },
+      {
+       "t": "La migración neta tocó un récord de unas 900.000 personas en el año hasta junio de 2023"
+      }
+     ],
+     "id": "n02t935cl1",
+     "p": "n4miw77cl1",
+     "t": "Inmigración"
+    },
+    {
+     "d": [
+      {
+       "t": "Escocia había votado quedarse, con un 62 %"
+      },
+      {
+       "t": "Su Gobierno pidió un nuevo referéndum de independencia"
+      },
+      {
+       "t": "En 2022 el Tribunal Supremo decidió que no puede convocarlo sin permiso de Londres"
+      }
+     ],
+     "id": "nh8sy85cl1",
+     "p": "n4miw77cl1",
+     "t": "Escocia"
+    },
+    {
+     "d": [
+      {
+       "t": "El acuerdo de retirada protegió a los europeos que ya vivían en el Reino Unido, y a los británicos en la UE"
+      },
+      {
+       "t": "Millones de europeos pidieron el estatus de residente (EU Settlement Scheme)"
+      }
+     ],
+     "id": "nlm84izcl1",
+     "p": "n4miw77cl1",
+     "t": "Ciudadanos"
+    },
+    {
+     "d": [
+      {
+       "t": "Siete primeros ministros en diez años: Cameron, May, Johnson, Truss, Sunak, Starmer y Burnham"
+      },
+      {
+       "t": "En junio de 2026, según YouGov, el 57 % cree que salir fue un error y el 30 %, un acierto"
+      }
+     ],
+     "id": "nzhup0scl1",
+     "p": "n4miw77cl1",
+     "t": "Política británica"
+    },
+    {
+     "d": [
+      {
+       "t": "Primera cumbre UE-Reino Unido en mayo de 2025: pacto de pesca hasta 2038 y de seguridad y defensa"
+      },
+      {
+       "t": "Volverá al programa Erasmus+ en 2027"
+      },
+      {
+       "t": "En noviembre de 2026 se pactó un borrador de acuerdo agroalimentario para reducir controles"
+      }
+     ],
+     "id": "nkiwrj0cl1",
+     "p": "n4miw77cl1",
+     "t": "Relación con la UE hoy"
+    }
+   ],
+   "type": "scheme",
+   "updated": 1794493492597,
    "v": 2
   }
  ],
