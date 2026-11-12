@@ -1918,6 +1918,50 @@ body.mp-open .ctx-backdrop{z-index:88;}
 .net-hd.r3 rect{fill:#fbdcdc;stroke:#e5484d;}
 .net-hdl{stroke:#b4b4bd;stroke-width:1.4;fill:none;}
 
+/* ===== Línea y pasos (vertical, para ordenar) ===== */
+.ln-host{height:auto !important;overflow:visible;touch-action:auto;background:none !important;}
+.ln{display:flex;flex-direction:column;gap:26px;padding:4px 0 24px;color:#1c1c1e;}
+.ln-st{font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#6e6e73;margin:0 0 10px 2px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
+.ln-st small{font-weight:600;letter-spacing:0;text-transform:none;color:#a1a1a8;font-size:12px;}
+.ln-sn{font-size:13.5px;line-height:1.4;color:#3a3a3c;margin:-2px 2px 12px;}
+.ln-list{display:flex;flex-direction:column;gap:10px;position:relative;}
+.m-tiempo .ln-list::before,.m-pasos .ln-list::before{content:'';position:absolute;left:25px;top:16px;bottom:16px;width:2px;background:#dcdce2;}
+.ln-it{display:flex;gap:8px;align-items:flex-start;position:relative;}
+.ln-mk{flex-shrink:0;width:52px;display:flex;justify-content:center;padding-top:9px;position:relative;z-index:1;}
+.m-tiempo .ln-mk span{background:#1c1c1e;color:#fff;font-size:12.5px;font-weight:800;padding:4px 8px;border-radius:999px;font-variant-numeric:tabular-nums;}
+.m-pasos .ln-mk span{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid #1c1c1e;font-size:13.5px;font-weight:800;display:flex;align-items:center;justify-content:center;box-sizing:border-box;margin-top:-3px;}
+.ln-c{flex:1;min-width:0;background:#fff;border:1.5px solid #e2e2e7;border-radius:14px;padding:10px 12px;box-sizing:border-box;}
+.m-grupo .ln-c{border-left:4px solid #1c1c1e;}
+.ln-t{font-size:15px;font-weight:700;line-height:1.3;}
+.ln-t.ph{color:#b4b4bd;font-weight:800;letter-spacing:.1em;}
+.ln-ni{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#e7f4fb;color:#1c9bd6;font-size:11px;font-weight:800;font-style:normal;margin-left:6px;vertical-align:1px;}
+.ln-d{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:5px;}
+.ln-d li{font-size:13.5px;line-height:1.35;padding:6px 9px;background:#f4f4f6;border-radius:9px;border-left:3px solid #c7c7cc;}
+.ln-d li.r0{background:#e3f4ea;border-left-color:#0a8a3f;}
+.ln-d li.r1{background:#fdf3c7;border-left-color:#e0b100;}
+.ln-d li.r2{background:#fde3cc;border-left-color:#f28a2e;}
+.ln-d li.r3{background:#fbdcdc;border-left-color:#e5484d;}
+.ln-it.r0 .ln-c{border-color:#0a8a3f;}
+.ln-it.r1 .ln-c{border-color:#e0b100;}
+.ln-it.r2 .ln-c{border-color:#f28a2e;}
+.ln-it.r3 .ln-c{border-color:#e5484d;}
+.ln-it.empty .ln-c{border-style:dashed;border-color:#b4b4bd;background:#fafafb;min-height:44px;}
+#mp.picking .ln-it.empty .ln-c{border-color:#1c9bd6;background:#f2f9fd;}
+#mp.lng.picking .ln-it[data-it] .ln-c{cursor:pointer;}
+.ln-it.bad .ln-c{animation:lnShake .45s;border-color:#e5484d !important;}
+.ln-it.blink .ln-c{animation:lnBlink .5s ease-in-out 3;}
+@keyframes lnShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@keyframes lnBlink{50%{box-shadow:0 0 0 4px rgba(28,155,214,.45);}}
+#mp.lng .ln-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 24px;}
+.ln-gt{font-size:20px;font-weight:800;margin:0 2px 14px;line-height:1.2;}
+.ln-tray .mp-trow{padding:4px 12px 0;}
+.ln-tray .mp-pc{max-width:240px;}
+.ln-intro{font-size:14px;line-height:1.45;color:#3a3a3c;background:#fff;border:1.5px solid #e2e2e7;border-radius:14px;padding:12px 14px;}
+.ln-tray .mp-pieces{flex-wrap:wrap;overflow-x:visible;overflow-y:auto;max-height:36vh;touch-action:pan-y;align-items:stretch;padding:6px 12px;}
+.ln-tray .mp-pc{max-width:none;flex:1 1 42%;font-size:14px;text-align:left;align-items:flex-start;justify-content:center;touch-action:manipulation;min-height:44px;}
+.ln-tray .mp-pc.lab{font-style:normal;color:#1c1c1e !important;border-radius:12px;font-weight:500;flex-basis:100%;}
+.ln-tray .mp-pc.lab{font-size:13.5px;padding:7px 11px;min-height:40px;line-height:1.3;}
+
 </style>
 </head>
 <body>
@@ -7896,6 +7940,7 @@ function esqNewMenu(anchor, parent){
   setTimeout(()=> openMenuAt(anchor, [
     ['De llaves (de izquierda a derecha)', ()=> make('llaves')],
     ['De árbol (de arriba abajo)', ()=> make('arbol')],
+    ['Línea del tiempo o pasos (para ordenar)', ()=> make('linea')],
     ['Mapa conceptual (libre, con flechas)', ()=> make('mapa')],
     ...(missing.length ? [['__sep__'], ['Añadir los de ejemplo (' + missing.length + ')', ()=>{ missing.forEach(ex=> esqAdd(parent, mpExample(ex))); toast('Añadidos'); vzRender(); }]] : []),
     ['__sep__'],
@@ -10497,6 +10542,312 @@ function netFinish(){
 /* en las redes, «Montar el esquema» abre este juego */
 { const _o = mpPlayOpen; mpPlayOpen = function(sc, pre){ if(sc.layout === 'red') return mpNetOpen(sc); return _o.apply(this, arguments); }; }
 
+/* ================= LÍNEA Y PASOS =================
+   Esquemas verticales pensados para ordenar, sin flechas:
+   · línea del tiempo: cada idea empieza por su año («1977 · Primeras elecciones»)
+   · pasos: un proceso en su orden (sección con #pasos, o cualquier sección sin años)
+   · grupo: ideas sueltas que no se ordenan (causas, consecuencias, protagonistas…) → sección con #grupo
+   Cada idea lleva sus datos («* dato») y puede llevar una nota para leer («> nota»).
+   Juego en 2 fases: 1 Ordenar (cada idea en su año o en su paso) · 2 Datos (cada dato en su idea:
+   va entrando en una lista debajo). Se puede saltar de fase; la partida se guarda (sc.run). */
+MP_LAYOUTS.linea = 'Línea y pasos';
+const LN_TAGS = { tiempo: 1, pasos: 1, grupo: 1 };
+const LN_PH = ['Ordenar', 'Datos'];
+const LN_POOL = 6;                                     // piezas a la vista en la bandeja
+const lnYear = n=> ((String(n.t).match(/^\s*(\d{3,4})(?!\d)/) || [])[1]) || '';
+const lnText = n=> String(n.t).replace(/^\s*\d{3,4}\s*[·:\-–]?\s*/, '') || n.t;
+const lnCard = d=> (d.y ? d.y + ' · ' : '') + d.t;
+const lnNode = (sc, id)=> sc.nodes.find(x=> x.id === id);
+
+/* secciones: si hay una sola idea principal con ramas, esa es el título y sus ramas son las secciones */
+function lnSections(sc){
+  const roots = mpRoots(sc); let secs = roots;
+  if(roots.length === 1 && mpKids(sc, roots[0].id).some(k=> mpKids(sc, k.id).length)) secs = mpKids(sc, roots[0].id);
+  return secs.map(s=>{
+    let items = mpKids(sc, s.id);
+    const mode = LN_TAGS[s.k] ? s.k : (items.length && items.every(i=> lnYear(i)) ? 'tiempo' : 'pasos');
+    if(mode === 'tiempo') items = items.map((n, i)=> ({ n, i })).sort((a, b)=> (+lnYear(a.n) || 9999) - (+lnYear(b.n) || 9999) || a.i - b.i).map(o=> o.n);
+    return { n: s, items, mode };
+  }).filter(x=> x.items.length);
+}
+
+/* ---------- dibujo (sirve para ver y para jugar) ---------- */
+function lnHtml(sc, G){
+  const R = G && G.run, out = [];
+  const roots = mpRoots(sc); if(!G && roots.length === 1 && roots[0].n && mpKids(sc, roots[0].id).some(k=> mpKids(sc, k.id).length)) out.push(`<div class="ln-intro">${mpEsc(roots[0].n).replace(/\n/g, '<br>')}</div>`);
+  lnSections(sc).forEach((S, si)=>{
+    const sub = { tiempo: 'línea del tiempo', pasos: 'en orden', grupo: '' }[S.mode];
+    out.push(`<section class="ln-sec m-${S.mode}" data-sec="${si}"><div class="ln-st">${mpEsc(S.n.t)}${sub ? `<small>${sub}</small>` : ''}</div>`);
+    if(S.n.n && !G) out.push(`<div class="ln-sn">${mpEsc(S.n.n).replace(/\n/g, '<br>')}</div>`);
+    out.push('<div class="ln-list">');
+    S.items.forEach((pos, k)=>{
+      const ordered = S.mode !== 'grupo';
+      let it = pos, empty = false;
+      if(G && ordered){ const x = R.slot[pos.id]; if(x && lnNode(sc, x)) it = lnNode(sc, x); else empty = true; }
+      const mark = S.mode === 'tiempo' ? (lnYear(pos) || '?') : S.mode === 'pasos' ? String(k + 1) : '';
+      const r = G && !empty ? R.res['p:' + it.id] : null;
+      const cards = empty ? [] : (it.d || []).map((d, i)=> ({ d, i })).filter(o=> !G || R.dd[it.id + ':' + o.i]);
+      const title = S.mode === 'tiempo' ? lnText(it) : it.t;
+      out.push(`<div class="ln-it${empty ? ' empty' : ''}${r != null ? ' r' + r : ''}" data-pos="${pos.id}"${empty ? '' : ` data-it="${it.id}"`}>
+        ${mark ? `<div class="ln-mk"><span>${mark}</span></div>` : ''}
+        <div class="ln-c">${empty ? '<div class="ln-t ph">·  ·  ·</div>' : `<div class="ln-t">${mpEsc(title)}${it.n ? '<i class="ln-ni">i</i>' : ''}</div>`}
+        ${cards.length ? `<ul class="ln-d">${cards.map(o=>{ const rr = G ? R.res['d:' + it.id + ':' + o.i] : null; return `<li${rr != null ? ` class="r${rr}"` : ''}>${mpEsc(lnCard(o.d))}</li>`; }).join('')}</ul>` : ''}
+        </div></div>`);
+    });
+    out.push('</div></section>');
+  });
+  return out.join('') || '<div class="vz-empty">Aún no hay ideas.</div>';
+}
+
+/* ---------- ver ---------- */
+function lnView(sc, host){
+  MPV = { id: sc.id, sc, ln: true, host, fold: new Set(), C: { legend(){}, fit(){}, draw(){} } };
+  host.classList.add('ln-host'); host.style.height = 'auto';
+  host.innerHTML = `<div class="ln">${lnHtml(sc)}</div>`;
+  host.onclick = e=>{ const it = e.target.closest('[data-it]'); if(!it) return; const n = lnNode(sc, it.dataset.it); if(n && n.n) mpNodePop(sc, n.id, {}); };
+  const tip = document.querySelector('.vz-schpage .mp-tip'); if(tip) tip.textContent = 'Toca una idea con ⓘ para leer su nota · «Montar el esquema» para jugar a ordenarlo';
+}
+{ const _v = mpView; mpView = function(sc, host){ if(sc.layout === 'linea') return lnView(sc, host); if(host) host.classList.remove('ln-host'); return _v.apply(this, arguments); }; }
+{ const _d = mpViewDraw; mpViewDraw = function(){ if(MPV && MPV.ln){ if(MPV.host && MPV.host.isConnected) lnView(MPV.sc, MPV.host); return; } return _d.apply(this, arguments); }; }
+
+/* ---------- jugar ---------- */
+let LNG = null;
+function lnNewRun(){ return { v: 'ln1', phase: 1, res: {}, f: {}, slot: {}, dd: {}, start: Date.now() }; }
+const lnOrd = ()=> lnSections(LNG.sc).filter(S=> S.mode !== 'grupo');
+const lnPlaced = ()=> new Set(Object.values(LNG.run.slot));
+function lnAllCards(){ const out = []; lnSections(LNG.sc).forEach((S, si)=> S.items.forEach(n=> (n.d || []).forEach((d, i)=> out.push({ k: n.id + ':' + i, t: lnCard(d), si, owner: n.id })))); return out; }
+function lnPhaseDone(ph){
+  const R = LNG.run;
+  if(ph === 1){ const pl = lnPlaced(); return lnOrd().every(S=> S.items.every(n=> pl.has(n.id))); }
+  if(ph === 2) return lnAllCards().every(c=> R.dd[c.k]);
+  return true;
+}
+function lnPhaseEmpty(ph){ if(ph === 1) return !lnOrd().length; if(ph === 2) return !lnAllCards().length; return true; }
+function lnSkipEmpty(){ while(LNG.run.phase <= 2 && lnPhaseEmpty(LNG.run.phase)) LNG.run.phase++; }
+function lnSave(){ if(!LNG) return; LNG.sc.run = LNG.run; clearTimeout(lnSave.t); lnSave.t = setTimeout(()=> saveEsq(), 500); }
+function lnMark(k, r){ LNG.run.res[k] = Math.min(3, r); }
+
+function lnOpen(sc){
+  if(!lnSections(sc).length) return toast('Este esquema aún no tiene ideas');
+  if(sc.run && sc.run.v === 'ln1' && !sc.run.done){
+    document.getElementById('mp-choose')?.remove();
+    const el = document.createElement('div'); el.id = 'mp-choose';
+    el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox"><div class="mp-ct">${mpEsc(sc.name)}</div>
+      <div class="mp-cs">Tienes una partida a medias (${LN_PH[sc.run.phase - 1] || 'casi terminada'}).</div>
+      <button class="mp-opt on" data-nc="go"><b>Seguir donde lo dejé</b></button>
+      <button class="mp-opt" data-nc="new"><b>Empezar de nuevo</b><span>se borra la partida a medias</span></button>
+      <button class="mp-cancel" data-nc="">Cancelar</button></div>`;
+    document.body.appendChild(el);
+    el.addEventListener('click', e=>{
+      if(e.target.classList.contains('mp-dim')){ el.remove(); return; }
+      const b = e.target.closest('[data-nc]'); if(!b) return; el.remove();
+      if(b.dataset.nc === 'go') lnStart(sc, sc.run); else if(b.dataset.nc === 'new') lnStart(sc, null);
+    });
+    return;
+  }
+  lnStart(sc, null);
+}
+function lnStart(sc, run){
+  LNG = { sc, run: run || lnNewRun(), piece: null };
+  const el = document.createElement('div'); el.id = 'mp'; el.className = 'net lng';
+  el.innerHTML = `<div class="mp-top"><button class="mp-x" data-ln="quit" aria-label="Salir">✕</button><div class="net-steps"></div><span class="mp-cnt"></span><button class="net-skip" data-ln="skip">Saltar ›</button></div>
+    <div class="ln-body"><div class="ln-gt">${mpEsc(sc.name)}</div><div class="ln"></div></div><div class="mp-tray ln-tray"></div>`;
+  document.body.appendChild(el); document.body.classList.add('mp-open');
+  el.addEventListener('click', lnClick);
+  lnSkipEmpty(); lnSave(); lnDraw(); lnScrollCur();
+}
+function lnClose(){ clearTimeout(lnSave.t); if(LNG){ if(!LNG.run.done) LNG.sc.run = LNG.run; saveEsq(); } document.getElementById('mp')?.remove(); document.body.classList.remove('mp-open'); LNG = null; try{ if(MPV) mpViewDraw(); }catch(e){} }
+
+/* lo que toca ahora: la primera sección con algo pendiente, y unas pocas piezas a la vista */
+function lnCurrent(){
+  const R = LNG.run, secs = lnSections(LNG.sc);
+  if(R.phase === 1){
+    const pl = lnPlaced();
+    for(let si = 0; si < secs.length; si++){
+      const S = secs[si]; if(S.mode === 'grupo') continue;
+      const left = S.items.filter(n=> !pl.has(n.id)); if(!left.length) continue;
+      const pool = shuffleSeed(left.map(n=> ({ id: n.id, k: n.id, t: S.mode === 'tiempo' ? lnText(n) : n.t })), R.start).slice(0, LN_POOL);
+      return { S, si, left: left.length, pool };
+    }
+  } else if(R.phase === 2){
+    const all = lnAllCards().filter(c=> !R.dd[c.k]); if(!all.length) return null;
+    const si = all[0].si, left = all.filter(c=> c.si === si);
+    return { S: secs[si], si, left: left.length, pool: shuffleSeed(left, R.start).slice(0, 4) };
+  }
+  return null;
+}
+function lnDraw(){
+  if(!LNG) return;
+  const el = document.getElementById('mp'); if(!el) return;
+  el.querySelector('.ln').innerHTML = lnHtml(LNG.sc, LNG);
+  el.classList.toggle('picking', !!LNG.piece);
+  lnSteps(); lnTray();
+}
+function lnScrollCur(){ const c = LNG && lnCurrent(); const b = document.querySelector('#mp .ln-body'); if(!c || !b) return; const s = b.querySelector(`[data-sec="${c.si}"]`); if(s) b.scrollTop = Math.max(0, s.offsetTop - 8); }
+function lnSteps(){
+  const el = document.querySelector('#mp .net-steps'); if(!el) return;
+  const R = LNG.run, vis = [1, 2].filter(p=> !lnPhaseEmpty(p));
+  el.innerHTML = vis.map((p, i)=> `<span class="${R.phase === p ? 'on' : R.phase > p ? 'ok' : ''}"${p > R.phase ? ` data-ln="jump" data-ph="${p}"` : ''}>${R.phase > p ? '✓' : i + 1}${R.phase === p ? ' ' + LN_PH[p - 1] : ''}</span>`).join('');
+  const cnt = document.querySelector('#mp .mp-cnt'); let a = 0, b = 0;
+  if(R.phase === 1){ const pl = lnPlaced(); lnOrd().forEach(S=> S.items.forEach(n=>{ b++; if(pl.has(n.id)) a++; })); }
+  else if(R.phase === 2){ const all = lnAllCards(); b = all.length; a = all.filter(c=> R.dd[c.k]).length; }
+  cnt.textContent = R.phase <= 2 ? `${a}/${b}` : '✓';
+  const sk = document.querySelector('#mp .net-skip'); if(sk) sk.hidden = R.phase > 2 || lnPhaseDone(R.phase);
+}
+function lnTray(){
+  const tr = document.querySelector('#mp .ln-tray'); if(!tr) return;
+  const R = LNG.run, ph = R.phase;
+  if(ph > 2){ tr.innerHTML = '<div class="mp-hint big">¡Completo! Toca una idea con ⓘ para leer su nota.</div>'; return; }
+  if(lnPhaseDone(ph)){ tr.innerHTML = lnSummary(ph); return; }
+  const c = lnCurrent(); if(!c){ tr.innerHTML = ''; return; }
+  if(LNG.piece && !c.pool.some(p=> p.k === LNG.piece)) LNG.piece = null;
+  const how = ph === 1 ? (c.S.mode === 'tiempo' ? 'Toca un hecho y luego su año' : 'Toca un paso y luego su número')
+    : 'Toca un dato y luego la idea a la que pertenece';
+  tr.innerHTML = `<div class="mp-hint">${how} · <b>${mpEsc(c.S.n.t)}</b> · quedan ${c.left}</div>
+    <div class="mp-pieces">${c.pool.map(p=> `<button class="mp-pc${ph === 2 ? ' lab' : ''}${LNG.piece === p.k ? ' sel' : ''}" data-lp="${p.k}"><span>${mpEsc(p.t)}</span></button>`).join('')}</div>
+    ${LNG.piece ? '<div class="mp-trow"><button data-ln="ver">Ver dónde va</button></div>' : ''}`;
+}
+function lnSummary(ph){
+  const R = LNG.run, pre = ph === 1 ? 'p:' : 'd:';
+  const vals = Object.entries(R.res).filter(([k])=> k.startsWith(pre)).map(([, v])=> v);
+  const c = [0, 1, 2, 3].map(r=> vals.filter(v=> v === r).length);
+  const last = ph === 2 || lnPhaseEmpty(2);
+  const num = [1, 2].filter(p=> !lnPhaseEmpty(p)).indexOf(ph) + 1;
+  return `<div class="net-sum"><div class="net-st">Fase ${num} completa: ${LN_PH[ph - 1]}</div>
+    ${vals.length ? `<div class="mp-leg">${[0, 1, 2, 3].map(r=> `<span><i style="background:${MP_RES[r]}"></i>${c[r]} ${['a la primera', 'al 2º', 'al 3º', 'falladas o vistas'][r]}</span>`).join('')}</div>` : ''}
+    <button class="pri" data-ln="next">${last ? 'Terminar' : 'Siguiente fase: ' + LN_PH[ph]} →</button></div>`;
+}
+function lnShake(sel){ const g = document.querySelector('#mp ' + sel); if(g){ g.classList.remove('bad'); void g.offsetWidth; g.classList.add('bad'); } try{ navigator.vibrate && navigator.vibrate(40); }catch(e){} }
+function lnSecOf(id){ return lnSections(LNG.sc).find(S=> S.items.some(n=> n.id === id)); }
+
+/* fase 1: cada idea a su hueco (en la línea del tiempo vale cualquier hueco de su mismo año) */
+function lnPlace(itemId, posId){
+  const sc = LNG.sc, R = LNG.run, S = lnSecOf(posId), X = lnNode(sc, itemId), P = lnNode(sc, posId);
+  if(!S || !X || !P) return;
+  if(R.slot[posId]) return toast('Ese hueco ya está ocupado');
+  const k = 'p:' + itemId;
+  const ok = S.items.some(n=> n.id === itemId) && (S.mode === 'tiempo' ? lnYear(X) === lnYear(P) : itemId === posId);
+  if(ok){ lnMark(k, R.f[k] || 0); delete R.f[k]; R.slot[posId] = itemId; LNG.piece = null; lnSave(); lnDraw(); return; }
+  R.f[k] = (R.f[k] || 0) + 1; lnShake(`[data-pos="${posId}"]`);
+  toast(!S.items.some(n=> n.id === itemId) ? 'Esa pieza es de otra parte' : S.mode === 'tiempo' ? 'No es ese año' : 'No es ese paso');
+  if(R.f[k] >= 3) lnReveal(itemId); else { lnSave(); lnTray(); }
+}
+function lnReveal(itemId){
+  const sc = LNG.sc, R = LNG.run, S = lnSecOf(itemId), X = lnNode(sc, itemId); if(!S || !X) return;
+  const free = S.items.filter(p=> !R.slot[p.id]);
+  const pos = S.mode === 'tiempo' ? (free.find(p=> lnYear(p) === lnYear(X)) || free[0]) : (free.find(p=> p.id === itemId) || free[0]);
+  if(!pos) return;
+  const k = 'p:' + itemId; delete R.f[k]; lnMark(k, 3); R.slot[pos.id] = itemId; LNG.piece = null;
+  toast(S.mode === 'tiempo' ? 'Iba en ' + (lnYear(X) || 'ese año') : 'Era el paso ' + (S.items.indexOf(pos) + 1));
+  lnSave(); lnDraw(); lnFocus(`[data-pos="${pos.id}"]`);
+}
+/* fase 2: cada dato a su idea */
+function lnPlaceCard(ck, itId){
+  const R = LNG.run, owner = ck.slice(0, ck.lastIndexOf(':')), k = 'd:' + ck;
+  if(owner === itId){ lnMark(k, R.f[k] || 0); delete R.f[k]; R.dd[ck] = true; LNG.piece = null; lnSave(); lnDraw(); return; }
+  R.f[k] = (R.f[k] || 0) + 1; lnShake(`[data-it="${itId}"]`); toast('No es de ahí');
+  if(R.f[k] >= 3) lnRevealCard(ck); else { lnSave(); lnTray(); }
+}
+function lnRevealCard(ck){
+  const R = LNG.run, owner = ck.slice(0, ck.lastIndexOf(':')), k = 'd:' + ck, n = lnNode(LNG.sc, owner);
+  delete R.f[k]; lnMark(k, 3); R.dd[ck] = true; LNG.piece = null;
+  toast('Era de: ' + (n ? lnText(n) : '')); lnSave(); lnDraw(); lnFocus(`[data-it="${owner}"]`);
+}
+function lnFocus(sel){ const g = document.querySelector('#mp ' + sel); if(!g) return; g.scrollIntoView({ block: 'center', behavior: 'smooth' }); g.classList.remove('blink'); void g.offsetWidth; g.classList.add('blink'); }
+
+/* saltar: lo que falta se pone solo y no cuenta en los resultados */
+function lnResolve(ph){
+  const R = LNG.run;
+  if(ph === 1) lnOrd().forEach(S=>{
+    const left = S.items.filter(n=> !lnPlaced().has(n.id));
+    left.forEach(X=>{ const free = S.items.filter(p=> !R.slot[p.id]); const pos = S.mode === 'tiempo' ? (free.find(p=> lnYear(p) === lnYear(X)) || free[0]) : (free.find(p=> p.id === X.id) || free[0]); if(pos) R.slot[pos.id] = X.id; });
+  });
+  if(ph === 2) lnAllCards().forEach(c=>{ R.dd[c.k] = true; });
+}
+function lnJump(to){
+  const R = LNG.run; if(to <= R.phase) return;
+  const last = to > 2 || (to === 2 && lnPhaseEmpty(2));
+  if(!confirm(last ? '¿Terminar? Lo que falta se pone solo.' : `¿Pasar a «${LN_PH[to - 1]}»? Lo que falta de esta fase se pone solo.`)) return;
+  for(let p = R.phase; p < to && p <= 2; p++) lnResolve(p);
+  LNG.piece = null; R.phase = Math.min(to, 3); lnSkipEmpty();
+  if(R.phase > 2){ lnFinish(); return; }
+  lnSave(); lnDraw(); lnScrollCur();
+}
+function lnFinish(){
+  const sc = LNG.sc, R = LNG.run; R.done = true; R.phase = 3;
+  const vals = Object.values(R.res), first = vals.filter(v=> v === 0).length, secs = Math.round((Date.now() - R.start) / 1000);
+  sc.stats = sc.stats || {}; Object.entries(R.res).forEach(([k, r])=> sc.stats[k] = { r, t: Date.now() });
+  delete sc.run; clearTimeout(lnSave.t); saveEsq();
+  lnDraw();
+  const el = document.createElement('div'); el.className = 'mp-end';
+  el.innerHTML = `<div class="mp-ebox"><div class="mp-et">¡Esquema montado!</div>
+    <div class="mp-es">${vals.length ? `${first} de ${vals.length} a la primera` : 'Te has saltado las fases: aquí lo tienes completo'}</div>
+    ${vals.length ? `<div class="mp-leg">${[0, 1, 2, 3].map(r=> `<span><i style="background:${MP_RES[r]}"></i>${vals.filter(v=> v === r).length} ${['a la primera', 'al 2º', 'al 3º', 'falladas o vistas'][r]}</span>`).join('')}</div>` : ''}
+    <div class="mp-cs">Tiempo de juego: ${secs > 3600 ? Math.round(secs / 3600) + ' h' : Math.max(1, Math.round(secs / 60)) + ' min'}</div>
+    <button class="pri" data-ln="again">Otra vez</button><button data-ln="look">Verlo entero</button><button data-ln="quit">Salir</button></div>`;
+  document.getElementById('mp').appendChild(el);
+}
+function lnClick(e){
+  if(!LNG) return;
+  const t = e.target, R = LNG.run; let x;
+  if(x = t.closest('[data-ln]')){
+    const a = x.dataset.ln;
+    if(a === 'quit'){ lnClose(); return; }
+    if(a === 'skip'){ lnJump(R.phase + 1); return; }
+    if(a === 'jump'){ lnJump(+x.dataset.ph); return; }
+    if(a === 'ver' && LNG.piece){ if(R.phase === 1) lnReveal(LNG.piece); else lnRevealCard(LNG.piece); return; }
+    if(a === 'next'){ R.phase++; lnSkipEmpty(); if(R.phase > 2){ lnFinish(); return; } LNG.piece = null; lnSave(); lnDraw(); lnScrollCur(); return; }
+    if(a === 'again'){ const sc = LNG.sc; delete sc.run; lnClose(); lnStart(sc, null); return; }
+    if(a === 'look'){ x.closest('.mp-end').remove(); return; }
+    return;
+  }
+  if(x = t.closest('[data-lp]')){ LNG.piece = LNG.piece === x.dataset.lp ? null : x.dataset.lp; document.getElementById('mp').classList.toggle('picking', !!LNG.piece); lnTray(); return; }
+  if(t.closest('.mp-end')) return;
+  if(R.phase === 1 && !lnPhaseDone(1)){
+    const s = t.closest('.ln-it[data-pos]'); if(!s) return;
+    if(!s.classList.contains('empty')){ return; }
+    if(!LNG.piece) return toast('Primero elige una pieza de abajo');
+    lnPlace(LNG.piece, s.dataset.pos); return;
+  }
+  if(R.phase === 2 && !lnPhaseDone(2)){
+    const s = t.closest('[data-it]'); if(!s) return;
+    if(!LNG.piece) return toast('Primero elige un dato de abajo');
+    lnPlaceCard(LNG.piece, s.dataset.it); return;
+  }
+  const s = t.closest('[data-it]'); if(s){ const n = lnNode(LNG.sc, s.dataset.it); if(n && n.n) mpNodePop(LNG.sc, n.id, {}); }
+}
+{ const _o = mpPlayOpen; mpPlayOpen = function(sc, pre){ if(sc.layout === 'linea') return lnOpen(sc); return _o.apply(this, arguments); }; }
+
+/* ---------- editar: se edita como un árbol de llaves (más «Datos» en cada idea) ---------- */
+const lnAsTree = sc=> Object.assign({}, sc, { layout: 'llaves' });
+{ const _l = mpLayout; mpLayout = function(sc, fold){ if(sc && sc.layout === 'linea') return _l.call(this, lnAsTree(sc), fold); return _l.apply(this, arguments); }; }
+{ const _s = mpSvg; mpSvg = function(sc, L, st, fold){ if(sc && sc.layout === 'linea') return _s.call(this, lnAsTree(sc), L, st, fold); return _s.apply(this, arguments); }; }
+{ const _b = mpEditBar; mpEditBar = function(){
+    const r = _b.apply(this, arguments);
+    if(MPE && MPE.sc.layout === 'linea' && MPE.sel && !MPE.link){
+      const n = lnNode(MPE.sc, MPE.sel), btns = document.querySelector('#mpe .mpe-bar .mpe-btns');
+      if(n && btns && !btns.querySelector('[data-e="ldata"]')) btns.insertAdjacentHTML('afterbegin', `<button data-e="ldata">Datos${(n.d || []).length ? ' (' + n.d.length + ')' : ''}</button>`);
+    }
+    return r;
+  }; }
+{ const _c = mpEditClick; mpEditClick = function(e){
+    const x = e.target.closest && e.target.closest('[data-e="ldata"]');
+    if(x && MPE){
+      const n = lnNode(MPE.sc, MPE.sel); if(!n) return;
+      mpLongPrompt('datos de esta idea, uno por línea (en el juego se colocan dentro de ella)', (n.d || []).map(lnCard).join('\n'), v=>{
+        mpSnap(); const d = v.split('\n').map(s=> s.trim()).filter(Boolean).map(s=>{ const m = s.match(/^(\d{3,4})\s*[·:\-–]\s*(.+)$/); return m ? { y: m[1], t: m[2].trim() } : { t: s }; });
+        if(d.length) n.d = d; else delete n.d; mpEditSave(); mpEditBar();
+      });
+      return;
+    }
+    return _c.apply(this, arguments);
+  }; }
+{ const _t = mpTextEditor; mpTextEditor = function(){
+    const r = _t.apply(this, arguments);
+    if(MPE && MPE.sc.layout === 'linea'){ const cs = document.querySelector('#mp-tx .mp-cs'); if(cs) cs.innerHTML = 'Una idea por línea; lo que cuelga, con 2 espacios más. Título → secciones → ideas. En una línea del tiempo cada idea empieza por su año: <code>1977 · Hecho</code>. Una sección con <code>#pasos</code> se ordena por pasos y con <code>#grupo</code> no se ordena. <code>* dato</code> añade un dato a la idea · <code>&gt; texto</code> es una nota.'; }
+    return r;
+  }; }
+
 /* ---------- esquemas de ejemplo (se añaden una vez; se pueden borrar o cambiar) ---------- */
 const MP_EJ = [
   { id: 'ej-dhondt', v: 4, name: 'La ley D’Hondt', layout: 'llaves', color: '#1c1c1e',
@@ -10740,7 +11091,311 @@ Corte Penal Internacional -> Israel (Gobierno de Netanyahu) : orden de arresto a
 Corte Penal Internacional -> Hamás : orden de arresto a Deif #juzga
 España -> Israel (Gobierno de Netanyahu) : embargo de armas #juzga
 España -> Autoridad Palestina (Fatah) : reconoce el Estado palestino #apoya
-Unión Europea -> Autoridad Palestina (Fatah) : principal donante #dinero` }
+Unión Europea -> Autoridad Palestina (Fatah) : principal donante #dinero` },
+  { id: 'ej-transicion', v: 7, name: 'La Transición española', layout: 'linea', color: '#c2410c',
+    text: `La Transición española
+  > Paso de la dictadura de Franco a una democracia parlamentaria. Suele situarse entre la muerte de Franco (1975) y la llegada del PSOE al Gobierno (1982); algunos historiadores la cierran antes, en 1978 o en 1981.
+  Cronología
+    1973 · ETA asesina a Carrero Blanco
+      * Era presidente del Gobierno desde junio de ese año
+      * Una bomba voló su coche en una calle de Madrid el 20 de diciembre
+      * Le sustituyó Carlos Arias Navarro
+      > Luis Carrero Blanco era la mano derecha de Franco y el encargado de asegurar que el régimen siguiera después de él.
+    1975 · Muere Franco y Juan Carlos I es proclamado rey
+      * Franco murió el 20 de noviembre, tras casi 40 años en el poder
+      * Juan Carlos fue proclamado rey el 22 de noviembre ante las Cortes franquistas
+      * Franco lo había nombrado sucesor «a título de Rey» en 1969
+      * Arias Navarro siguió de presidente: el primer Gobierno apenas cambió nada
+    1976 · El rey nombra presidente a Adolfo Suárez
+      * Arias Navarro dimitió el 1 de julio, presionado por el rey
+      * Suárez fue nombrado el 3 de julio, para sorpresa de muchos
+      * A finales de julio su Gobierno aprobó una amnistía parcial para presos políticos
+    1976 · Ley para la Reforma Política
+      * Las propias Cortes franquistas la aprobaron el 18 de noviembre: 425 votos a favor, 59 en contra y 13 abstenciones
+      * Por eso se habló del «harakiri» de las Cortes franquistas
+      * En el referéndum del 15 de diciembre votó el 78 % y el 94 % dijo sí
+      * Creaba unas Cortes de dos cámaras elegidas por sufragio universal
+      > Fue la llave de la Transición: se pasó a la democracia desde la propia legalidad franquista, sin romperla («de la ley a la ley»).
+    1977 · Matanza de Atocha
+      * El 24 de enero, pistoleros de extrema derecha asaltaron un despacho de abogados laboralistas en Madrid
+      * Hubo cinco muertos y cuatro heridos graves, vinculados a CCOO y al PCE
+      * El entierro reunió a miles de personas en silencio y sin incidentes
+    1977 · Se legaliza el Partido Comunista
+      * Suárez lo legalizó el 9 de abril, Sábado Santo
+      * En protesta dimitió el ministro de Marina, el almirante Pita da Veiga
+      * Días después el PCE aceptó la monarquía y la bandera rojigualda
+    1977 · Primeras elecciones democráticas desde 1936
+      * Se celebraron el 15 de junio, con una participación cercana al 79 %
+      * Ganó la UCD de Suárez con 165 escaños; el PSOE obtuvo 118
+      * El PCE logró 20 escaños y Alianza Popular, 16
+      * Las Cortes elegidas se encargaron de redactar la Constitución
+    1977 · Vuelve Tarradellas y se restablece la Generalitat
+      * La Generalitat se restableció de forma provisional a finales de septiembre
+      * Al llegar a Barcelona en octubre dijo: «Ciutadans de Catalunya, ja sóc aquí»
+    1977 · Ley de Amnistía
+      * Aprobada en octubre por 296 votos a favor, 2 en contra y 18 abstenciones
+      * Sacó de la cárcel a los presos políticos que quedaban y permitió volver a los exiliados
+      * También impidió juzgar los crímenes cometidos por autoridades de la dictadura
+      > Sigue en vigor y es objeto de debate: para muchos fue la base de la reconciliación; organismos de la ONU han pedido derogarla porque impide investigar los crímenes del franquismo.
+    1977 · Pactos de la Moncloa
+      * Firmados el 25 de octubre por el Gobierno y los principales partidos
+      * La inflación superaba el 20 % anual
+      * Moderación de salarios a cambio de reformas: impuestos, seguridad social, educación
+      * Incluían un acuerdo político sobre libertades y control de los medios públicos
+    1978 · Se aprueba la Constitución
+      * Las Cortes la aprobaron el 31 de octubre por amplísima mayoría
+      * En el referéndum del 6 de diciembre votó el 67 % y cerca del 88 % dijo sí
+      * La redactaron siete ponentes: los «padres de la Constitución»
+      * El rey la sancionó el 27 de diciembre y entró en vigor el 29
+      * Define España como monarquía parlamentaria y abre el Estado de las autonomías
+      > En el País Vasco la abstención superó la mitad del censo, en parte porque el PNV pidió abstenerse.
+    1979 · Primeras elecciones con la Constitución
+      * En marzo la UCD volvió a ganar (168 escaños) y Suárez siguió de presidente
+      * En abril hubo las primeras elecciones municipales democráticas desde la Segunda República
+      * La izquierda pasó a gobernar muchas grandes ciudades, como Madrid con Tierno Galván
+    1979 · Estatutos de autonomía vasco y catalán
+      * Se votaron en referéndum el 25 de octubre
+      * El vasco es el Estatuto de Gernika y el catalán, el de Sau
+      * Fueron los primeros estatutos del Estado de las autonomías
+    1981 · Dimite Adolfo Suárez
+      * Lo anunció por televisión el 29 de enero
+      * Su partido, la UCD, estaba muy dividido
+      * Le debía sustituir Leopoldo Calvo-Sotelo
+    1981 · Intento de golpe de Estado del 23-F
+      * En plena votación de investidura de Calvo-Sotelo, Tejero asaltó el Congreso con unos 200 guardias civiles
+      * En Valencia, Milans del Bosch sacó los tanques a la calle
+      * A la 1:14 de la madrugada el rey defendió la Constitución en televisión
+      * Tejero, Milans del Bosch y Armada fueron condenados a 30 años de cárcel
+      * El Gobierno desclasificó los documentos oficiales del golpe en febrero de 2026
+    1982 · España entra en la OTAN
+      * La entrada se completó el 30 de mayo, con Calvo-Sotelo de presidente
+      * El PSOE se oponía entonces y prometió un referéndum, que se celebró en 1986
+    1982 · Gana el PSOE: primera alternancia
+      * Elecciones del 28 de octubre, con una participación cercana al 80 %
+      * El PSOE de Felipe González logró mayoría absoluta: 202 escaños
+      * La UCD se hundió hasta 11 escaños y Alianza Popular pasó a ser la oposición
+      * Muchos historiadores sitúan aquí el final de la Transición
+  Protagonistas #grupo
+    Juan Carlos I
+      * Heredó de Franco la jefatura del Estado
+      * Usó sus poderes para impulsar la reforma y nombrar a Suárez
+      * Abdicó en 2014 en su hijo, Felipe VI
+    Adolfo Suárez
+      * Había sido ministro secretario general del Movimiento, el partido único
+      * Fundó la UCD, una coalición de centro
+      * Primer presidente salido de las urnas tras la dictadura
+    Torcuato Fernández-Miranda
+      * Presidente de las Cortes y del Consejo del Reino desde 1975
+      * Había sido profesor de Derecho político del rey
+      * Se le atribuye el diseño jurídico de la Ley para la Reforma Política
+    Santiago Carrillo
+      * Secretario general del PCE
+      * Entró en España clandestinamente y fue detenido en diciembre de 1976
+      * Defendía el eurocomunismo, un comunismo alejado de Moscú
+    Felipe González
+      * Elegido líder del PSOE en el congreso de Suresnes, en 1974
+      * En 1979 logró que el PSOE dejara de definirse como marxista
+      * Presidente del Gobierno de 1982 a 1996
+    Manuel Fraga
+      * Había sido ministro de Franco
+      * Fundó Alianza Popular, antecesora del PP
+      * Fue uno de los siete ponentes de la Constitución
+    Manuel Gutiérrez Mellado
+      * Vicepresidente del Gobierno para Asuntos de la Defensa con Suárez
+      * Reformó el Ejército para someterlo al poder civil
+      * El 23-F se enfrentó a los guardias civiles que asaltaban el Congreso
+    Josep Tarradellas
+      * Presidente de la Generalitat en el exilio
+      * Negoció con Suárez la vuelta de la Generalitat` },
+  { id: 'ej-ley-ue', v: 7, name: 'Cómo se aprueba una ley europea', layout: 'linea', color: '#1d4ed8',
+    text: `Cómo se aprueba una ley europea
+  > Casi todas las leyes de la UE siguen el «procedimiento legislativo ordinario» (artículo 294 del Tratado de Funcionamiento de la UE), antes llamado codecisión: la Comisión propone y el Parlamento Europeo y el Consejo de la UE deciden en pie de igualdad.
+  Los pasos #pasos
+    La Comisión Europea prepara y presenta la propuesta
+      * Solo la Comisión puede proponer leyes: es el «monopolio de iniciativa»
+      * Antes consulta a expertos y ciudadanos y estudia el impacto de la ley
+      * El Parlamento, el Consejo o una iniciativa ciudadana pueden pedirle que proponga una ley
+    Los parlamentos nacionales y los comités consultivos opinan
+      * Los parlamentos nacionales tienen 8 semanas para avisar si la UE se mete en lo que no le toca (subsidiariedad)
+      * Si protesta al menos un tercio, es «tarjeta amarilla» y la Comisión debe revisar la propuesta
+      * Dan también su opinión el Comité Económico y Social y el Comité de las Regiones
+    Primera lectura del Parlamento Europeo
+      * Una comisión parlamentaria la estudia y nombra a un ponente
+      * El pleno aprueba su posición, con o sin enmiendas, por mayoría simple
+      * En primera lectura no hay plazo
+    Primera lectura del Consejo de la UE
+      * Si acepta la posición del Parlamento, la ley queda aprobada
+      * Si no, aprueba su propia posición y la devuelve al Parlamento
+      * Más del 85 % de las leyes se cierran en esta lectura o al empezar la segunda
+    Segunda lectura del Parlamento
+      * Tiene 3 meses, ampliables a 4
+      * Si aprueba la posición del Consejo o no dice nada, la ley queda adoptada
+      * Para rechazarla o enmendarla necesita la mayoría absoluta de sus miembros
+    Segunda lectura del Consejo
+      * También tiene 3 meses, ampliables a 4
+      * Si acepta todas las enmiendas del Parlamento, la ley queda adoptada
+      * Las enmiendas que la Comisión rechaza solo se aprueban por unanimidad
+    Comité de Conciliación
+      * Lo forman a partes iguales representantes del Consejo y eurodiputados
+      * Tiene 6 semanas, ampliables a 8, para pactar un texto común
+      * Si no hay acuerdo, la ley no se aprueba
+    Tercera lectura
+      * Parlamento y Consejo tienen 6 semanas, ampliables a 8, para aprobar el texto común
+      * Ya no se puede enmendar: solo aprobar o rechazar
+      * Hoy es muy rara: casi todo se pacta antes
+    Firma y publicación
+      * La firman los presidentes del Parlamento y del Consejo
+      * Se publica en el Diario Oficial de la Unión Europea
+      * Entra en vigor en la fecha que diga o, si no dice nada, a los 20 días de publicarse
+  Quién es quién #grupo
+    Comisión Europea
+      * Un comisario por país: 27 en total
+      * Propone las leyes y vigila que se cumplan
+    Parlamento Europeo
+      * 720 eurodiputados elegidos por los ciudadanos cada cinco años
+      * Representa a los ciudadanos y decide las leyes junto al Consejo
+    Consejo de la Unión Europea
+      * Reúne a los ministros de los 27 gobiernos, según el tema
+      * Su presidencia pasa de un país a otro cada seis meses
+    Consejo Europeo
+      * Reúne a los jefes de Estado o de Gobierno
+      * Marca la dirección política, pero no aprueba leyes
+  Tipos de normas #grupo
+    Reglamento
+      * Se aplica directamente y por igual en todos los países
+      * No hace falta ninguna ley nacional para que valga
+    Directiva
+      * Fija un objetivo que cada país debe alcanzar a su manera
+      * Cada país la incorpora con su propia ley: es la «transposición»
+      * Cada directiva fija su plazo de transposición, a menudo de unos dos años
+    Decisión
+      * Es obligatoria; si tiene destinatarios (un país, una empresa…), solo para ellos
+    Recomendación y dictamen
+      * No son obligatorios: orientan, pero no obligan
+  Claves #grupo
+    Mayoría cualificada en el Consejo
+      * Hace falta el 55 % de los países: 15 de 27
+      * Que además sumen al menos el 65 % de la población de la UE
+      * Para bloquear hacen falta al menos 4 países con más del 35 % de la población
+    Trílogos
+      * Reuniones informales entre Parlamento, Consejo y Comisión
+      * Sirven para pactar el texto antes de las votaciones formales
+      * Se les critica por su falta de transparencia
+    Iniciativa ciudadana europea
+      * Un millón de firmas de al menos siete países
+      * Obliga a la Comisión a responder, pero no a proponer la ley` },
+  { id: 'ej-brexit', v: 7, name: 'El Brexit: causas, proceso y consecuencias', layout: 'linea', color: '#0f766e',
+    text: `El Brexit: causas, proceso y consecuencias
+  > Salida del Reino Unido de la Unión Europea, decidida en referéndum en 2016 y hecha efectiva en 2020. Las cifras económicas son estimaciones: es difícil separar el efecto del Brexit del de la covid o la crisis energética.
+  Causas #grupo
+    Un euroescepticismo antiguo
+      * El Reino Unido entró en la Comunidad Europea en 1973
+      * En 1975 ya votó en referéndum si seguía: el 67 % dijo sí
+      * Se quedó fuera del euro y del espacio Schengen
+      * Thatcher logró en 1984 un descuento en su aportación: el «cheque británico»
+    Inmigración y libre circulación
+      * En 2004 fue uno de los tres países que abrieron su mercado laboral a los nuevos socios del Este sin esperar
+      * La migración neta superaba las 300.000 personas al año hacia 2015
+      * Fue el motivo principal para un tercio de quienes votaron salir (encuesta de Lord Ashcroft, 12.369 personas)
+    Soberanía: «recuperar el control»
+      * «Take back control» fue el lema de la campaña oficial por la salida
+      * Casi la mitad de quienes votaron salir dio como motivo principal que las decisiones sobre el Reino Unido se tomaran en el Reino Unido
+      * Rechazo a que el Tribunal de Justicia de la UE tuviera la última palabra
+    Presión política interna
+      * El UKIP, partidario de salir, ganó en el Reino Unido las elecciones europeas de 2014
+      * El Partido Conservador llevaba décadas dividido sobre Europa
+      * Cameron prometió el referéndum también para cerrar esa división
+    Brecha territorial y generacional
+      * La salida ganó sobre todo en antiguas zonas industriales y en pueblos de Inglaterra y Gales
+      * Londres y muchas ciudades universitarias votaron quedarse
+      * El 73 % de los jóvenes de 18 a 24 años votó quedarse; el 60 % de los mayores de 65, salir
+    La campaña
+      * El autobús que prometía «350 millones de libras a la semana» para la sanidad pública
+      * La Autoridad Estadística británica calificó esa cifra de engañosa
+      * A la campaña por quedarse se la acusó de alarmismo económico: el «Project Fear»
+  Proceso
+    2013 · Cameron promete un referéndum
+      * Lo anunció en enero, en el llamado discurso de Bloomberg
+      * Prometió renegociar la relación con la UE y después votar
+    2015 · Los conservadores ganan con mayoría absoluta
+      * El referéndum iba en su programa electoral
+      * En diciembre se aprobó la ley que lo convocaba
+    2016 · Cameron renegocia con la UE
+      * En febrero cerró un acuerdo con los demás líderes europeos
+      * Incluía un freno temporal a ayudas sociales para trabajadores recién llegados de la UE
+      * Y una excepción a la «unión cada vez más estrecha»
+    2016 · Referéndum: gana la salida
+      * El 23 de junio: 51,9 % por salir y 48,1 % por quedarse
+      * Votó el 72 % del censo
+      * Inglaterra y Gales votaron salir; Escocia e Irlanda del Norte, quedarse
+      * Cameron dimitió y Theresa May fue primera ministra en julio
+    2017 · Se activa el artículo 50
+      * May envió la carta a Bruselas el 29 de marzo
+      * Se abría un plazo de dos años para negociar la salida
+    2017 · Elecciones anticipadas: May pierde la mayoría
+      * Las convocó para reforzarse y perdió la mayoría absoluta
+      * Pasó a depender de los unionistas norirlandeses del DUP
+    2018 · Acuerdo de retirada con la «salvaguarda» irlandesa
+      * Pactado con la UE en noviembre
+      * La salvaguarda evitaba una frontera física en Irlanda: el Reino Unido seguiría en una unión aduanera mientras no hubiera otra solución
+      * Ese año dimitieron varios ministros contrarios al plan de May, entre ellos Boris Johnson
+    2019 · El Parlamento tumba tres veces el acuerdo
+      * En enero lo rechazó por 432 votos a 202, la mayor derrota de un gobierno británico en la era moderna
+      * La UE aplazó varias veces la fecha de salida
+      * Theresa May dimitió y Boris Johnson la sustituyó en julio
+    2019 · Johnson renegocia y gana las elecciones
+      * El Tribunal Supremo declaró ilegal su suspensión del Parlamento
+      * Nuevo acuerdo: el Protocolo de Irlanda del Norte sustituye a la salvaguarda
+      * En diciembre ganó con una mayoría de 80 escaños y el lema «Get Brexit done»
+    2020 · El Reino Unido sale de la UE
+      * El 31 de enero a las 23:00, hora británica
+      * Empezó un periodo de transición: casi todo siguió igual hasta final de año
+    2020 · Acuerdo de Comercio y Cooperación
+      * Se cerró el 24 de diciembre, a una semana del límite
+      * Comercio sin aranceles ni cuotas, pero con aduanas y controles
+    2021 · Fin del periodo de transición
+      * El 1 de enero salió del mercado único y de la unión aduanera
+      * Terminó la libre circulación de personas
+    2023 · Marco de Windsor
+      * Sunak y von der Leyen lo pactaron en febrero para Irlanda del Norte
+      * Un «carril verde» con menos controles para lo que se queda en Irlanda del Norte
+      * Da a la Asamblea norirlandesa un «freno de Stormont» ante nuevas normas de la UE
+    2026 · Tratado sobre Gibraltar
+      * El acuerdo político se anunció en junio de 2025
+      * Firmado en julio de 2026: la Verja deja de ser un control fronterizo
+      * España hace los controles Schengen en el puerto y el aeropuerto de Gibraltar
+      * La soberanía no cambia: España mantiene su reclamación
+  Consecuencias #grupo
+    Comercio y economía
+      * Sin aranceles, pero con papeleo y controles en la frontera
+      * La OBR, el organismo fiscal independiente británico, calcula que a largo plazo comerciará un 15 % menos que dentro de la UE
+      * La misma OBR estima una productividad un 4 % menor a largo plazo
+    Más autonomía
+      * Firma sus propios tratados comerciales: entró en el CPTPP en 2024 y pactó con la India en 2025
+      * Ya no paga al presupuesto de la UE, del que era contribuyente neto
+      * El Tribunal de Justicia de la UE ya no tiene la última palabra sobre sus leyes
+    Irlanda del Norte
+      * Sigue aplicando normas de la UE sobre mercancías para no levantar frontera con Irlanda
+      * El control se trasladó al mar de Irlanda, entre Gran Bretaña e Irlanda del Norte
+      * Los unionistas del DUP bloquearon el Gobierno norirlandés de 2022 a 2024 en protesta
+    Inmigración
+      * Desde 2021 rige un sistema de visados por puntos también para los europeos
+      * Bajó la llegada de europeos, pero subió mucho la de fuera de Europa
+      * La migración neta tocó un récord de unas 900.000 personas en el año hasta junio de 2023
+    Escocia
+      * Escocia había votado quedarse, con un 62 %
+      * Su Gobierno pidió un nuevo referéndum de independencia
+      * En 2022 el Tribunal Supremo decidió que no puede convocarlo sin permiso de Londres
+    Ciudadanos
+      * El acuerdo de retirada protegió a los europeos que ya vivían en el Reino Unido, y a los británicos en la UE
+      * Millones de europeos pidieron el estatus de residente (EU Settlement Scheme)
+    Política británica
+      * Siete primeros ministros en diez años: Cameron, May, Johnson, Truss, Sunak, Starmer y Burnham
+      * En junio de 2026, según YouGov, el 57 % cree que salir fue un error y el 30 %, un acierto
+    Relación con la UE hoy
+      * Primera cumbre UE-Reino Unido en mayo de 2025: pacto de pesca hasta 2038 y de seguridad y defensa
+      * Volverá al programa Erasmus+ en 2027
+      * En noviembre de 2026 se pactó un borrador de acuerdo agroalimentario para reducir controles` }
 ];
 function mpExample(ex){
   const sc = mpNew(ex.name, ex.layout, ex.text); sc.id = ex.id; sc.color = ex.color;
@@ -10761,7 +11416,7 @@ function mpSeedExamples(force){
 }
 /* cambios de ejemplos: fuera los retirados y dentro los actuales (una sola vez por aparato) */
 const MP_EJ_GONE = ['ej-tatuaje', 'ej-fermentos', 'ej-skate', 'ej-hongos'];
-const MP_EJ_VER = 6;
+const MP_EJ_VER = 7;
 function mpMigrate3(){
   let ver = 0; try{ ver = parseInt(localStorage.getItem('esq2_ver') || '0', 10) || (localStorage.getItem('esq2_v4') === '1' ? 4 : 0); }catch(e){}
   if(ver >= MP_EJ_VER) return 0;
