@@ -2182,13 +2182,20 @@
    "run": {
     "dd": {},
     "f": {},
-    "phase": 1,
+    "phase": 2,
     "res": {
      "p:ngp4h0w745": 3,
      "p:nwdm9dr745": 3
     },
     "slot": {
+     "n6y2ogy745": "n6y2ogy745",
+     "n7dxgr6745": "n7dxgr6745",
+     "ndlkv8r745": "ndlkv8r745",
+     "ng6zsut745": "ng6zsut745",
      "ngp4h0w745": "ngp4h0w745",
+     "nqlhqtm745": "nqlhqtm745",
+     "ns2ikgh745": "ns2ikgh745",
+     "nt5hlsn745": "nt5hlsn745",
      "nwdm9dr745": "nwdm9dr745"
     },
     "start": 1794513497954,
