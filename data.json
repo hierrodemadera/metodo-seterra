@@ -2715,52 +2715,71 @@
      "t": "Relación con la UE hoy"
     }
    ],
-   "run": {
-    "dd": {
-     "n0d8i2gcl1:0": true,
-     "n4f7nf1cl1:2": true,
-     "na9s6pycl1:1": true,
-     "na9s6pycl1:2": true,
-     "nl7b848cl1:0": true,
-     "nl7b848cl1:1": true
+   "stats": {
+    "d:n0d8i2gcl1:0": {
+     "r": 3,
+     "t": 1794493712124
     },
-    "f": {},
-    "phase": 2,
-    "res": {
-     "d:n0d8i2gcl1:0": 3,
-     "d:n4f7nf1cl1:2": 3,
-     "d:na9s6pycl1:1": 3,
-     "d:na9s6pycl1:2": 3,
-     "d:nl7b848cl1:0": 3,
-     "d:nl7b848cl1:1": 3,
-     "p:n0lqup1cl1": 0,
-     "p:n1fbzh8cl1": 3,
-     "p:n35sc1jcl1": 3,
-     "p:ndlmxbqcl1": 3,
-     "p:ng6zjbecl1": 3,
-     "p:njbfeo7cl1": 3,
-     "p:nmro8hpcl1": 3,
-     "p:ns57s3gcl1": 3,
-     "p:nxvipt7cl1": 3
+    "d:n4f7nf1cl1:2": {
+     "r": 3,
+     "t": 1794493712124
     },
-    "slot": {
-     "n0lqup1cl1": "nxvipt7cl1",
-     "n1fbzh8cl1": "n1fbzh8cl1",
-     "n2x6ktwcl1": "n2x6ktwcl1",
-     "n35sc1jcl1": "n35sc1jcl1",
-     "nctmylhcl1": "nctmylhcl1",
-     "ndlmxbqcl1": "ndlmxbqcl1",
-     "nemahj0cl1": "nemahj0cl1",
-     "ng6zjbecl1": "ng6zjbecl1",
-     "njbfeo7cl1": "njbfeo7cl1",
-     "nmro8hpcl1": "nmro8hpcl1",
-     "noz5jrdcl1": "noz5jrdcl1",
-     "nqhdkcccl1": "nqhdkcccl1",
-     "ns57s3gcl1": "ns57s3gcl1",
-     "nxvipt7cl1": "n0lqup1cl1"
+    "d:n7l4irncl1:1": {
+     "r": 3,
+     "t": 1794493712124
     },
-    "start": 1794493640365,
-    "v": "ln1"
+    "d:na9s6pycl1:1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "d:na9s6pycl1:2": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "d:nl7b848cl1:0": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "d:nl7b848cl1:1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:n0lqup1cl1": {
+     "r": 0,
+     "t": 1794493712124
+    },
+    "p:n1fbzh8cl1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:n35sc1jcl1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:ndlmxbqcl1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:ng6zjbecl1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:njbfeo7cl1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:nmro8hpcl1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:ns57s3gcl1": {
+     "r": 3,
+     "t": 1794493712124
+    },
+    "p:nxvipt7cl1": {
+     "r": 3,
+     "t": 1794493712124
+    }
    },
    "type": "scheme",
    "updated": 1794493492597,
