@@ -2715,6 +2715,15 @@
      "t": "Relación con la UE hoy"
     }
    ],
+   "run": {
+    "dd": {},
+    "f": {},
+    "phase": 1,
+    "res": {},
+    "slot": {},
+    "start": 1794493640365,
+    "v": "ln1"
+   },
    "type": "scheme",
    "updated": 1794493492597,
    "v": 2
