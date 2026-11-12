@@ -27,6 +27,9 @@
   },
   {
    "d": "esqimg-ej-transicion"
+  },
+  {
+   "d": "esqimg-ej-ley-ue"
   }
  ],
  "esquemas": [
@@ -2786,6 +2789,13 @@
    "kb": 5,
    "name": "La Transición española · imágenes",
    "tarjetas": 39
+  },
+  {
+   "file": "Como se aprueba una ley europea · imagenes.json",
+   "id": "esqimg-ej-ley-ue",
+   "kb": 2,
+   "name": "Cómo se aprueba una ley europea · imágenes",
+   "tarjetas": 12
   }
  ],
  "notas": [
