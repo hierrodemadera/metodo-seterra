@@ -1857,6 +1857,8 @@ body.mp-open .ctx-backdrop{z-index:88;}
 .rd-n.origin .rd-box{fill:#1c1c1e;}
 .rd-n.origin .rd-t{fill:#fff;stroke:none;}
 .rd-n.origin circle{stroke-width:4;}
+.rd-n.dest .rd-box{fill:#fff;stroke:#1c1c1e;stroke-width:2;}
+.rd-n.dest circle{stroke-width:4;}
 .rd-n.pending .rd-box{fill:#fff7e0;stroke:#e0b100;stroke-width:1.4;}
 .rd-n.yearonly .rd-t,.rd-n.yearslot .rd-t{font-size:14px;font-weight:800;fill:#3a3a3c;}
 .rd-n.yearslot .rd-box{fill:#fff;stroke:#b4b4bd;stroke-dasharray:5 4;stroke-width:1.6;}
@@ -9949,8 +9951,9 @@ function mpRedLinkMenu(id, anchor){
    1 Puntos: sale un nombre y tocas su punto (3 intentos, «Ver»; el punto que tocas por error enseña su nombre en rojo).
    2 Línea del tiempo: los años están puestos; colocas cada hecho en su año y luego los datos de cada hecho.
    3 Datos: en cada punto colocas sus datos con fecha en sus años; al acabar se abre su ficha para leer.
-   4 Líneas (lo último, lo que lo une todo): unes de origen a destino (el sentido cuenta) → eliges el tipo
-     de línea → eliges su frase entre las que quedan (la bolsa se va vaciando).
+   4 Líneas (lo último, lo que lo une todo): las líneas salen solas, una a una y en orden (actor por actor,
+     empezando por el que más tiene), con su flecha ya puesta → eliges el tipo de línea → eliges su frase
+     entre las que quedan (la bolsa se va vaciando).
    La partida se guarda (sc.run) y se puede seguir otro día. Colores: 0 a la primera · 1 · 2 · 3 fallada/vista. */
 const NET_PH = ['Puntos', 'Línea del tiempo', 'Datos', 'Líneas'];
 let NG = null;
@@ -10045,12 +10048,52 @@ function mpNetStart(sc, run){
   netSkipEmpty(); netSave();
   netDraw(); NG.C.fit(null, 1.1);
   if(NG.C.k < .7){ const bb = NG.C.L.bbox; NG.C.k = .7; NG.C.center(bb.x + bb.w / 2, bb.y + bb.h / 2); }
+  if(NG.run.phase === 4 && NG.run.cur) netFocusLine();
   NG.C.legend(sc);
 }
 function netClose(){ clearTimeout(netSave.t); if(NG){ NG.sc.run = NG.run; saveEsq(); } document.getElementById('mp')?.remove(); document.body.classList.remove('mp-open'); NG = null; try{ if(MPV) mpViewDraw(); }catch(e){} }
 
+/* fase 4: orden lógico de las líneas — actor por actor (el que más líneas tiene primero);
+   de cada actor, primero las que salen de él y luego las que le llegan */
+function netLineOrder(){
+  const sc = NG.sc, ls = netLinks(sc), deg = {};
+  ls.forEach(l=>{ deg[l.a] = (deg[l.a] || 0) + 1; deg[l.b] = (deg[l.b] || 0) + 1; });
+  const pos = {}; sc.nodes.forEach((n, i)=> pos[n.id] = i);
+  const actors = Object.keys(deg).sort((x, y)=> deg[y] - deg[x] || pos[x] - pos[y]);
+  const seen = new Set(), order = [];
+  actors.forEach(a=>{
+    ls.filter(l=> !seen.has(l.id) && (l.a === a || l.b === a))
+      .sort((x, y)=> (x.a === a ? 0 : 1) - (y.a === a ? 0 : 1) || deg[x.a === a ? x.b : x.a] - deg[y.a === a ? y.b : y.a])
+      .forEach(l=>{ seen.add(l.id); order.push(l.id); });
+  });
+  return order;
+}
+function netAutoLine(){
+  const sc = NG.sc, R = NG.run;
+  if(R.phase !== 4 || R.cur || netPhaseDone(4)) return;
+  const ls = netLinks(sc);
+  if(!R.lorder || R.lorder.length !== ls.length) R.lorder = netLineOrder();
+  const id = R.lorder.find(x=> !R.linksDone[x] && ls.some(l=> l.id === x)) || (ls.find(l=> !R.linksDone[l.id]) || {}).id;
+  const l = id && ls.find(x=> x.id === id); if(!l) return;
+  /* si entre esos dos hay más líneas en el mismo sentido, el tipo que elijas decide cuál es */
+  const cands = ls.filter(x=> !R.linksDone[x.id] && x.a === l.a && x.b === l.b).map(x=> x.id);
+  R.cur = { a: l.a, b: l.b, cands: [l.id, ...cands.filter(x=> x !== l.id)], stage: 'tipo', r: 0 };
+  NG.focus = true;
+}
+/* encuadra la línea que toca: los dos puntos a la vista */
+function netFocusLine(){
+  const c = NG.run.cur, B = NG.C.L && NG.C.L.B; if(!c || !B) return;
+  const A = B[c.a], Z = B[c.b]; if(!A || !Z) return;
+  const r = NG.C.svg.getBoundingClientRect();
+  const x1 = Math.min(A.x, Z.x), x2 = Math.max(A.x + A.w, Z.x + Z.w), y1 = Math.min(A.y, Z.y), y2 = Math.max(A.y + A.h, Z.y + Z.h);
+  const kf = Math.min((r.width - 60) / Math.max(1, x2 - x1), (r.height - 80) / Math.max(1, y2 - y1));
+  NG.C.k = Math.max(.45, Math.min(1, kf));
+  NG.C.center((x1 + x2) / 2, (y1 + y2) / 2);
+}
+
 /* ---------- dibujar ---------- */
 function netDraw(){
+  netAutoLine();
   const sc = NG.sc, R = NG.run, ph = R.phase, L = mpLayout(sc), out = [];
   const T = (k, c)=> `<marker id="nm-${k}" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`;
   out.push('<defs>' + Object.entries(RED_L).map(([k, v])=> T(k, v.c)).join('') + T('nada', '#8e8e93') + '</defs>');
@@ -10069,7 +10112,7 @@ function netDraw(){
     out.push(`<path d="${d}" fill="none" stroke="${st.c}" stroke-width="${isCur ? st.w + 1.2 : st.w}"${st.d ? ` stroke-dasharray="${st.d}"` : ''} stroke-linecap="round" marker-end="url(#nm-${t})"${e.bi ? ` marker-start="url(#nm-${t})"` : ''} class="${isCur ? 'net-cur' : ''}"/>`);
   });
   /* puntos */
-  const remain = {}; if(ph === 4) netLinks(sc).forEach(l=>{ if(!R.linksDone[l.id]){ remain[l.a] = (remain[l.a] || 0) + 1; remain[l.b] = (remain[l.b] || 0) + 1; } });
+  const remain = {}; if(false) netLinks(sc).forEach(l=>{ if(!R.linksDone[l.id]){ remain[l.a] = (remain[l.a] || 0) + 1; remain[l.b] = (remain[l.b] || 0) + 1; } });
   const placedAt = {}; Object.entries(R.tl).forEach(([slot, ev])=> placedAt[slot] = ev);
   sc.nodes.forEach(n=>{
     const b = L.B[n.id]; if(!b) return;
@@ -10078,7 +10121,7 @@ function netDraw(){
     if(!isH){
       r = R.res['n:' + n.id];
       if(ph === 1 && r == null){ if(NG.flash === n.id){ cls += ' flash'; } else { shown = false; cls += ' hidden'; } }
-      if(ph === 4 && NG.sel === n.id) cls += ' origin';
+      if(ph === 4 && cur && cur.a === n.id) cls += ' origin'; if(ph === 4 && cur && cur.b === n.id) cls += ' dest';
       if(ph === 3 && netDated(n).length && !R.pdone[n.id]) cls += ' pending';
       if(ph === 1 && r != null) cls += ' r' + r;
     } else {
@@ -10108,6 +10151,7 @@ function netDraw(){
     out.push(`<g class="mp-lb rd-lb${ri != null ? ' r' + ri : ''}" transform="translate(${l.x - l.w / 2} ${l.y - l.h / 2})"><rect width="${l.w}" height="${l.h}" rx="${Math.min(9, l.h / 2)}"/>${l.lines.map((t, i)=> `<text x="${l.w / 2}" y="${13 + i * 14}" text-anchor="middle">${mpEsc(t)}</text>`).join('')}</g>`);
   });
   NG.C.draw(out.join(''), L);
+  if(NG.focus){ NG.focus = false; netFocusLine(); }
   netSteps(); netTray();
 }
 function netSteps(){
@@ -10155,7 +10199,7 @@ function netTray(){
     }
     const o = NG.sel && by[NG.sel];
     tr.innerHTML = o ? `<div class="mp-hint big">Desde <b>${mpEsc(o.t)}</b>: toca hacia dónde va la línea</div><div class="mp-trow"><button data-nt="verline">Ver una línea suya</button><button data-nt="unsel">Cambiar de origen</button></div>`
-      : `<div class="mp-hint big">Toca el punto de <b>origen</b> y luego el de <b>destino</b>. El número dice cuántas líneas le faltan a cada punto.</div>`;
+      : `<div class="mp-hint big">Preparando la siguiente línea…</div>`;
     return;
   }
   if(ph === 2){
@@ -10216,7 +10260,9 @@ function netTap(t){
     return;
   }
   if(ph === 4){
-    if(n.k === 'hecho') return;
+    /* las líneas salen solas: tocar un punto solo abre su ficha para leer */
+    if(n.k !== 'hecho'){ netFicha(n); return; }
+    return;
     if(R.cur) return toast(R.cur.stage === 'tipo' ? 'Primero elige el tipo de línea' : 'Primero elige su información');
     if(!NG.sel){
       if(!netLinks(sc).some(l=> !R.linksDone[l.id] && (l.a === id || l.b === id))) return toast('Este punto ya tiene todas sus líneas');
