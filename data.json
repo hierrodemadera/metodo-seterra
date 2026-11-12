@@ -1359,10 +1359,21 @@
      "n87wgolzlj",
      "nfx8py1zlj"
     ],
-    "pd": {},
-    "pdone": {},
+    "pd": {
+     "nt9g1s3zlj:0": {
+      "s": 0
+     },
+     "nt9g1s3zlj:1": {
+      "s": 1
+     }
+    },
+    "pdone": {
+     "nt9g1s3zlj": true
+    },
     "phase": 3,
     "res": {
+     "d:nt9g1s3zlj:0": 0,
+     "d:nt9g1s3zlj:1": 1,
      "h:n1fyk3xzll": 3,
      "h:n29hie6zlk": 0,
      "h:n72mupczll": 0,
