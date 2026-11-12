@@ -1854,6 +1854,9 @@ body.mp-open .ctx-backdrop{z-index:88;}
 .net-steps span{flex-shrink:0;font-size:11.5px;font-weight:700;padding:5px 9px;border-radius:999px;background:#f0f0f3;color:#8e8e93;white-space:nowrap;}
 .net-steps span.on{background:#1c1c1e;color:#fff;}
 .net-steps span.ok{background:#e3f4ea;color:#0a8a3f;}
+.net-steps span[data-nt=jump]{cursor:pointer;}
+.net-skip{flex-shrink:0;border:0;background:#f0f0f3;color:#3a3a3c;font:inherit;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:999px;margin-left:6px;cursor:pointer;}
+.net-skip[hidden]{display:none;}
 .rd-n.origin .rd-box{fill:#1c1c1e;}
 .rd-n.origin .rd-t{fill:#fff;stroke:none;}
 .rd-n.origin circle{stroke-width:4;}
@@ -1905,6 +1908,15 @@ body.mp-open .ctx-backdrop{z-index:88;}
 @keyframes netBlink{50%{fill:#fff;}}
 .net-find{padding:2px 14px 0;text-align:center;}
 .net-name{font-size:21px;font-weight:800;line-height:1.2;margin:2px 0 8px;}
+
+/* datos puestos en un hecho: lista debajo */
+.net-hd rect{fill:#fff;stroke:#c7c7cc;stroke-width:1.2;}
+.net-hd text{font-size:11.5px;font-weight:500;fill:#3a3a3c;}
+.net-hd.r0 rect{fill:#e3f4ea;stroke:#0a8a3f;}
+.net-hd.r1 rect{fill:#fdf3c7;stroke:#e0b100;}
+.net-hd.r2 rect{fill:#fde3cc;stroke:#f28a2e;}
+.net-hd.r3 rect{fill:#fbdcdc;stroke:#e5484d;}
+.net-hdl{stroke:#b4b4bd;stroke-width:1.4;fill:none;}
 
 </style>
 </head>
@@ -9948,7 +9960,8 @@ function mpRedLinkMenu(id, anchor){
 { const _d = mpEditDraw; mpEditDraw = function(){ const r = _d.apply(this, arguments); if(MPE){ MPE.C.legend(MPE.sc); } return r; }; }
 
 /* ================= JUEGO DE LAS REDES (un solo modo, por fases y en orden) =================
-   1 Puntos: sale un nombre y tocas su punto (3 intentos, «Ver»; el punto que tocas por error enseña su nombre en rojo).
+   (La antigua fase «Puntos» ya no se juega: los nombres salen puestos desde el principio.
+    Por dentro las fases siguen numeradas 2-4; en pantalla se ven como 1-3.)
    2 Línea del tiempo: los años están puestos; colocas cada hecho en su año y luego los datos de cada hecho.
    3 Datos: en cada punto colocas sus datos con fecha en sus años; al acabar se abre su ficha para leer.
    4 Líneas (lo último, lo que lo une todo): las líneas salen solas, una a una y en orden (actor por actor,
@@ -9957,6 +9970,7 @@ function mpRedLinkMenu(id, anchor){
    La partida se guarda (sc.run) y se puede seguir otro día. Colores: 0 a la primera · 1 · 2 · 3 fallada/vista. */
 const NET_PH = ['Puntos', 'Línea del tiempo', 'Datos', 'Líneas'];
 let NG = null;
+const NET_DFONT = '500 11.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
 
 /* ---------- corrección laxa ---------- */
 const NET_STOP = new Set(['de', 'del', 'la', 'el', 'los', 'las', 'y', 'e', 'en', 'a', 'al', 'un', 'una', 'the', 'of']);
@@ -9992,7 +10006,7 @@ const netHText = n=> n.t.replace(/^\s*\d{3,4}\s*[·:\-–]?\s*/, '') || n.t;
 const netDated = n=> (n.d || []).filter(d=> d.y);
 const netIsH = (sc, id)=>{ const n = sc.nodes.find(x=> x.id === id); return !!n && n.k === 'hecho'; };
 const netLinks = sc=> (sc.links || []).filter(l=> !netIsH(sc, l.a) && !netIsH(sc, l.b));
-function netNewRun(sc){ return { v: 2, phase: 1, res: {}, f: {}, linksDone: {}, tl: {}, hd: {}, pd: {}, pdone: {}, cur: null, start: Date.now() }; }
+function netNewRun(sc){ return { v: 3, phase: 2, res: {}, f: {}, linksDone: {}, tl: {}, hd: {}, pd: {}, pdone: {}, cur: null, start: Date.now() }; }
 /* fase 1: el nombre que toca buscar (orden barajado y guardado) */
 function netTarget(){
   const sc = NG.sc, R = NG.run;
@@ -10008,6 +10022,26 @@ function netPhaseDone(ph){
   if(ph === 3) return netActors(sc).every(n=> !netDated(n).length || R.pdone[n.id]);
   return true;
 }
+/* saltar: lo que falta de las fases que te saltas se pone solo (y no cuenta en los resultados) */
+function netResolve(ph){
+  const sc = NG.sc, R = NG.run;
+  if(ph === 2){
+    netHechos(sc).forEach(h=>{ if(Object.values(R.tl).includes(h.id)) return; const y = netYear(h); const slot = netHechos(sc).find(x=> !R.tl[x.id] && netYear(x) === y) || netHechos(sc).find(x=> !R.tl[x.id]); if(slot) R.tl[slot.id] = h.id; });
+    netHechos(sc).forEach(h=> (h.d || []).forEach((x, i)=>{ R.hd[h.id + ':' + i] = true; }));
+  }
+  if(ph === 3) netActors(sc).forEach(n=>{ if(netDated(n).length) R.pdone[n.id] = true; });
+  if(ph === 4){ netLinks(sc).forEach(l=>{ R.linksDone[l.id] = true; }); R.cur = null; }
+}
+function netJump(to){
+  const R = NG.run; if(to <= R.phase) return;
+  const last = to > 4, name = last ? 'terminar la red' : 'pasar a «' + NET_PH[to - 1] + '»';
+  if(!confirm(`¿${name[0].toUpperCase() + name.slice(1)}? Lo que falta ${to - R.phase > 1 ? 'de las fases anteriores' : 'de esta fase'} se pone solo.`)) return;
+  document.getElementById('net-panel')?.remove(); NG.open = null;
+  for(let p = R.phase; p < to && p <= 4; p++) netResolve(p);
+  R.cur = null; NG.sel = null; NG.piece = null; R.phase = Math.min(to, 5); netSkipEmpty();
+  if(R.phase > 4){ netFinish(); return; }
+  netSave(); netDraw(); if(NG.run.cur) netFocusLine();
+}
 function netSkipEmpty(){ /* fases sin nada que hacer se saltan solas */ while(NG.run.phase <= 4 && netPhaseDone(NG.run.phase) && netPhaseEmpty(NG.run.phase)) NG.run.phase++; }
 function netPhaseEmpty(ph){ const sc = NG.sc; if(ph === 1) return !netActors(sc).length; if(ph === 4) return !netLinks(sc).length; if(ph === 2) return !netHechos(sc).length; if(ph === 3) return !netActors(sc).some(n=> netDated(n).length); return true; }
 
@@ -10015,15 +10049,16 @@ function netPhaseEmpty(ph){ const sc = NG.sc; if(ph === 1) return !netActors(sc)
 /* partidas guardadas con el orden antiguo (Puntos, Líneas, Tiempo, Datos): se pasan al nuevo sin perder lo hecho */
 function netMigrate(run){
   if(run && run.v === 1){ run.phase = ({ 1: 1, 2: 2, 3: 2, 4: 3 })[run.phase] || run.phase; run.cur = null; run.v = 2; }
+  if(run && run.v === 2){ if(run.phase < 2) run.phase = 2; run.v = 3; }
   return run;
 }
 function mpNetOpen(sc){
   netMigrate(sc.run);
-  if(sc.run && !sc.run.done && sc.run.v === 2){
+  if(sc.run && !sc.run.done && sc.run.v === 3){
     document.getElementById('mp-choose')?.remove();
     const el = document.createElement('div'); el.id = 'mp-choose';
     el.innerHTML = `<div class="mp-dim"></div><div class="mp-cbox"><div class="mp-ct">${mpEsc(sc.name)}</div>
-      <div class="mp-cs">Tienes una partida a medias: fase ${sc.run.phase} de 4 (${NET_PH[sc.run.phase - 1] || ''}).</div>
+      <div class="mp-cs">Tienes una partida a medias: fase ${sc.run.phase - 1} de 3 (${NET_PH[sc.run.phase - 1] || ''}).</div>
       <button class="mp-opt on" data-nc="go"><b>Seguir donde lo dejé</b></button>
       <button class="mp-opt" data-nc="new"><b>Empezar de nuevo</b><span>se borra la partida a medias</span></button>
       <button class="mp-cancel" data-nc="">Cancelar</button></div>`;
@@ -10040,7 +10075,7 @@ function mpNetOpen(sc){
 function mpNetStart(sc, run){
   NG = { sc, run: run || netNewRun(sc), sel: null, piece: null, open: null, flash: null };
   const el = document.createElement('div'); el.id = 'mp'; el.className = 'net';
-  el.innerHTML = `<div class="mp-top"><button class="mp-x" data-nt="quit" aria-label="Salir">✕</button><div class="net-steps"></div><span class="mp-cnt"></span></div>
+  el.innerHTML = `<div class="mp-top"><button class="mp-x" data-nt="quit" aria-label="Salir">✕</button><div class="net-steps"></div><span class="mp-cnt"></span><button class="net-skip" data-nt="skip">Saltar ›</button></div>
     <div class="mp-cv"></div><div class="mp-tray net-tray"></div>`;
   document.body.appendChild(el); document.body.classList.add('mp-open');
   NG.C = mpCanvas(el.querySelector('.mp-cv'), { onTap: t=> netTap(t) });
@@ -10131,6 +10166,19 @@ function netDraw(){
       else { const E = sc.nodes.find(x=> x.id === ev); label = E ? E.t : n.t; r = R.res['h:' + ev]; if(ph === 2 && r != null) cls += ' r' + r; }
     }
     const lines = mpWrap(label, RED_FONT, isH ? 116 : 150).lines;
+    /* hechos: los datos que ya le has puesto van entrando en una lista debajo */
+    let list = '';
+    if(isH && placedAt[n.id]){
+      const E = sc.nodes.find(x=> x.id === placedAt[n.id]), lw = Math.max(b.w + 14, 124), lx = b.w / 2 - lw / 2;
+      const got = ((E && E.d) || []).map((d, i)=> ({ d, i })).filter(o=> R.hd[E.id + ':' + o.i]);
+      let y = b.h + 10;
+      got.forEach(o=>{
+        const ls = mpWrap(o.d.t, NET_DFONT, lw - 18).lines, h = ls.length * 14 + 8, rr = R.res['hd:' + E.id + ':' + o.i];
+        list += `<g class="net-hd${rr != null ? ' r' + rr : ''}"><rect x="${lx}" y="${y}" width="${lw}" height="${h}" rx="6"/>${ls.map((t, k)=> `<text x="${lx + 8}" y="${y + 15 + k * 14}">${mpEsc(t)}</text>`).join('')}</g>`;
+        y += h + 5;
+      });
+      if(got.length) list = `<path d="M${b.w / 2} ${b.h}V${b.h + 10}" class="net-hdl"/>` + list;
+    }
     const dotX = isH ? b.w / 2 : 12, dotY = isH ? 8 : b.h / 2, rr = redR(n);
     const tx = isH ? b.w / 2 : 30, anchor = isH ? 'middle' : 'start', ty0 = isH ? 32 : (b.h - lines.length * 16) / 2 + 12;
     out.push(`<g class="${cls}" data-n="${n.id}" transform="translate(${b.x} ${b.y})">
@@ -10138,6 +10186,7 @@ function netDraw(){
       <rect class="rd-box" x="${isH ? 0 : 22}" y="${isH ? 18 : 0}" width="${isH ? b.w : b.w - 22}" height="${isH ? b.h - 18 : b.h}" rx="7"/>
       <circle cx="${dotX}" cy="${dotY}" r="${rr}" style="fill:${isH ? '#fff' : Tn.c};stroke:${Tn.c}"/>
       ${shown ? `<text class="rd-t">${lines.map((t, i)=> `<tspan x="${tx}" y="${ty0 + i * 16}" text-anchor="${anchor}">${mpEsc(t)}</tspan>`).join('')}</text>` : ''}
+      ${list}
       ${ph === 4 && remain[n.id] ? `<g class="net-badge"><circle cx="${dotX - 10}" cy="${dotY - 11}" r="8"/><text x="${dotX - 10}" y="${dotY - 7.5}" text-anchor="middle">${remain[n.id]}</text></g>` : ''}
       ${ph === 3 && netDated(n).length && !R.pdone[n.id] ? `<g class="net-badge cal"><circle cx="${dotX - 10}" cy="${dotY - 11}" r="8"/><text x="${dotX - 10}" y="${dotY - 7.5}" text-anchor="middle">${netDated(n).length}</text></g>` : ''}
     </g>`);
@@ -10157,7 +10206,9 @@ function netDraw(){
 function netSteps(){
   const el = document.querySelector('#mp .net-steps'); if(!el) return;
   const R = NG.run;
-  el.innerHTML = NET_PH.map((p, i)=> `<span class="${R.phase === i + 1 ? 'on' : R.phase > i + 1 ? 'ok' : ''}" title="${p}">${R.phase > i + 1 ? '✓' : i + 1}${R.phase === i + 1 ? ' ' + p : ''}</span>`).join('');
+  el.innerHTML = NET_PH.map((p, i)=> i === 0 ? '' : `<span class="${R.phase === i + 1 ? 'on' : R.phase > i + 1 ? 'ok' : ''}" title="${p}">${R.phase > i + 1 ? '✓' : i}${R.phase === i + 1 ? ' ' + p : ''}</span>`).join('');
+  el.querySelectorAll('span').forEach((x, i)=>{ if(i + 2 > R.phase){ x.dataset.nt = 'jump'; x.dataset.ph = i + 2; } });
+  const sk = document.querySelector('#mp .net-skip'); if(sk) sk.hidden = R.phase > 4 || netPhaseDone(R.phase);
   const sc = NG.sc, cnt = document.querySelector('#mp .mp-cnt');
   let a = 0, b = 0;
   if(R.phase === 1){ const xs = netActors(sc); b = xs.length; a = xs.filter(n=> R.res['n:' + n.id] != null).length; }
@@ -10234,7 +10285,7 @@ function netPhaseSummary(ph){
   if(ph === 4) vals = netLinks(NG.sc).map(l=> Math.max(R.res['l:' + l.id] || 0, R.res['lt:' + l.id] || 0, R.res['li:' + l.id] || 0));
   const c = [0, 1, 2, 3].map(r=> vals.filter(v=> v === r).length);
   const last = ph === 4 || [2, 3, 4].slice(ph - 1).every(p=> netPhaseEmpty(p));
-  return `<div class="net-sum"><div class="net-st">Fase ${ph} completa: ${NET_PH[ph - 1]}</div>
+  return `<div class="net-sum"><div class="net-st">Fase ${ph - 1} completa: ${NET_PH[ph - 1]}</div>
     <div class="mp-leg">${[0, 1, 2, 3].map(r=> `<span><i style="background:${MP_RES[r]}"></i>${c[r]} ${['a la primera', 'al 2º', 'al 3º', 'falladas o vistas'][r]}</span>`).join('')}</div>
     <button class="pri" data-nt="next">${last ? 'Terminar' : 'Siguiente fase: ' + NET_PH[ph]} →</button></div>`;
 }
@@ -10404,6 +10455,8 @@ function netClick(e){
   if(x = t.closest('[data-nt]')){
     const a = x.dataset.nt, R = NG.run;
     if(a === 'quit'){ netClose(); return; }
+    if(a === 'skip'){ netJump(R.phase + 1); return; }
+    if(a === 'jump'){ netJump(+x.dataset.ph); return; }
     if(a === 'ver' && R.phase === 1){ const id = netTarget(); if(id) netFindReveal(id); return; }
     if(a === 'unsel'){ NG.sel = null; netDraw(); return; }
     if(a === 'verline' && NG.sel){ netRevealFrom(NG.sel); return; }
@@ -10434,7 +10487,7 @@ function netFinish(){
   netDraw();
   const el = document.createElement('div'); el.className = 'mp-end';
   el.innerHTML = `<div class="mp-ebox"><div class="mp-et">¡Red montada!</div>
-    <div class="mp-es">${first} de ${vals.length} a la primera</div>
+    <div class="mp-es">${vals.length ? `${first} de ${vals.length} a la primera` : 'Te has saltado las fases: aquí tienes la red completa'}</div>
     <div class="mp-leg">${[0, 1, 2, 3].map(r=> `<span><i style="background:${MP_RES[r]}"></i>${vals.filter(v=> v === r).length} ${['a la primera', 'al 2º', 'al 3º', 'falladas o vistas'][r]}</span>`).join('')}</div>
     <div class="mp-cs">Tiempo total de juego entre sesiones: ${secs > 3600 ? Math.round(secs / 3600) + ' h' : Math.round(secs / 60) + ' min'}</div>
     <button class="pri" data-nt="again">Otra vez</button><button data-nt="look">Ver la red</button><button data-nt="quit">Salir</button></div>`;
