@@ -2717,19 +2717,21 @@
    ],
    "run": {
     "dd": {},
-    "f": {
-     "p:nmro8hpcl1": 1
-    },
+    "f": {},
     "phase": 1,
     "res": {
      "p:n35sc1jcl1": 3,
      "p:ng6zjbecl1": 3,
+     "p:nmro8hpcl1": 3,
+     "p:ns57s3gcl1": 3,
      "p:nxvipt7cl1": 3
     },
     "slot": {
      "n0lqup1cl1": "nxvipt7cl1",
      "n35sc1jcl1": "n35sc1jcl1",
-     "ng6zjbecl1": "ng6zjbecl1"
+     "ng6zjbecl1": "ng6zjbecl1",
+     "nmro8hpcl1": "nmro8hpcl1",
+     "ns57s3gcl1": "ns57s3gcl1"
     },
     "start": 1794493640365,
     "v": "ln1"
