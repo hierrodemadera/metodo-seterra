@@ -1314,43 +1314,48 @@
      "t": "2026 · Guerra contra Irán"
     }
    ],
-   "stats": {
-    "l:nkscavgzln": {
-     "r": 0,
-     "t": 1794486911107
+   "run": {
+    "cur": null,
+    "f": {
+     "n:ngsywzdzlj": 1
     },
-    "l:nwrym09zln": {
-     "r": 0,
-     "t": 1794486911107
+    "hd": {},
+    "linksDone": {},
+    "order": [
+     "n76dfgezlj",
+     "nqlzq31zlj",
+     "ngsywzdzlj",
+     "nbchiubzlj",
+     "nzz8s4nzlj",
+     "n72kzh5zlj",
+     "n87wgolzlj",
+     "n4zy97ezlj",
+     "n5j4k3nzlj",
+     "nfx8py1zlj",
+     "nxgy81dzlj",
+     "nu7hnofzlj",
+     "nwp4bhszlj",
+     "nt1bu6lzlj",
+     "nt9g1s3zlj",
+     "nx62twszlj",
+     "nuxqmtvzlj",
+     "n2h3kptzlj",
+     "nq80km5zlj",
+     "n558i19zlj",
+     "npkrswwzlj",
+     "nkd9eiazlj",
+     "n8hjfv4zlj"
+    ],
+    "pd": {},
+    "pdone": {},
+    "phase": 1,
+    "res": {
+     "n:n76dfgezlj": 3,
+     "n:nqlzq31zlj": 0
     },
-    "l:nxn1u10zln": {
-     "r": 0,
-     "t": 1794486911107
-    },
-    "li:nkscavgzln": {
-     "r": 3,
-     "t": 1794486911107
-    },
-    "li:nwrym09zln": {
-     "r": 0,
-     "t": 1794486911107
-    },
-    "li:nxn1u10zln": {
-     "r": 3,
-     "t": 1794486911107
-    },
-    "lt:nkscavgzln": {
-     "r": 0,
-     "t": 1794486911107
-    },
-    "lt:nwrym09zln": {
-     "r": 0,
-     "t": 1794486911107
-    },
-    "lt:nxn1u10zln": {
-     "r": 3,
-     "t": 1794486911107
-    }
+    "start": 1794329253276,
+    "tl": {},
+    "v": 2
    },
    "type": "scheme",
    "updated": 1794329246647,
@@ -1358,21 +1363,21 @@
   },
   {
    "color": "#c2410c",
-   "created": 1794493492595,
+   "created": 1794512521152,
    "id": "ej-transicion",
    "layout": "linea",
    "links": [],
    "name": "La Transición española",
    "nodes": [
     {
-     "id": "nn81kqmcl0",
+     "id": "nulji49742",
      "n": "Paso de la dictadura de Franco a una democracia parlamentaria. Suele situarse entre la muerte de Franco (1975) y la llegada del PSOE al Gobierno (1982); algunos historiadores la cierran antes, en 1978 o en 1981.",
      "p": null,
      "t": "La Transición española"
     },
     {
-     "id": "n718f6pcl0",
-     "p": "nn81kqmcl0",
+     "id": "nfqq7zh742",
+     "p": "nulji49742",
      "t": "Cronología"
     },
     {
@@ -1387,9 +1392,9 @@
        "t": "Le sustituyó Carlos Arias Navarro"
       }
      ],
-     "id": "nnqsdq1cl0",
+     "id": "ne8ydjg742",
      "n": "Luis Carrero Blanco era la mano derecha de Franco y el encargado de asegurar que el régimen siguiera después de él.",
-     "p": "n718f6pcl0",
+     "p": "nfqq7zh742",
      "t": "1973 · ETA asesina a Carrero Blanco"
     },
     {
@@ -1407,8 +1412,8 @@
        "t": "Arias Navarro siguió de presidente: el primer Gobierno apenas cambió nada"
       }
      ],
-     "id": "ni16ixpcl0",
-     "p": "n718f6pcl0",
+     "id": "nm9s6ai742",
+     "p": "nfqq7zh742",
      "t": "1975 · Muere Franco y Juan Carlos I es proclamado rey"
     },
     {
@@ -1423,8 +1428,8 @@
        "t": "A finales de julio su Gobierno aprobó una amnistía parcial para presos políticos"
       }
      ],
-     "id": "njz9vwhcl0",
-     "p": "n718f6pcl0",
+     "id": "n3pv5se742",
+     "p": "nfqq7zh742",
      "t": "1976 · El rey nombra presidente a Adolfo Suárez"
     },
     {
@@ -1442,9 +1447,9 @@
        "t": "Creaba unas Cortes de dos cámaras elegidas por sufragio universal"
       }
      ],
-     "id": "n4usanucl0",
+     "id": "njv44jp742",
      "n": "Fue la llave de la Transición: se pasó a la democracia desde la propia legalidad franquista, sin romperla («de la ley a la ley»).",
-     "p": "n718f6pcl0",
+     "p": "nfqq7zh742",
      "t": "1976 · Ley para la Reforma Política"
     },
     {
@@ -1459,8 +1464,8 @@
        "t": "El entierro reunió a miles de personas en silencio y sin incidentes"
       }
      ],
-     "id": "n5vbnelcl0",
-     "p": "n718f6pcl0",
+     "id": "nxvvm8x742",
+     "p": "nfqq7zh742",
      "t": "1977 · Matanza de Atocha"
     },
     {
@@ -1475,8 +1480,8 @@
        "t": "Días después el PCE aceptó la monarquía y la bandera rojigualda"
       }
      ],
-     "id": "neox9yrcl0",
-     "p": "n718f6pcl0",
+     "id": "nmv99xd742",
+     "p": "nfqq7zh742",
      "t": "1977 · Se legaliza el Partido Comunista"
     },
     {
@@ -1494,8 +1499,8 @@
        "t": "Las Cortes elegidas se encargaron de redactar la Constitución"
       }
      ],
-     "id": "nr9ech2cl0",
-     "p": "n718f6pcl0",
+     "id": "n1gd7la742",
+     "p": "nfqq7zh742",
      "t": "1977 · Primeras elecciones democráticas desde 1936"
     },
     {
@@ -1507,8 +1512,8 @@
        "t": "Al llegar a Barcelona en octubre dijo: «Ciutadans de Catalunya, ja sóc aquí»"
       }
      ],
-     "id": "nqmsk2ccl0",
-     "p": "n718f6pcl0",
+     "id": "nz39dz9742",
+     "p": "nfqq7zh742",
      "t": "1977 · Vuelve Tarradellas y se restablece la Generalitat"
     },
     {
@@ -1523,9 +1528,9 @@
        "t": "También impidió juzgar los crímenes cometidos por autoridades de la dictadura"
       }
      ],
-     "id": "nui8ck3cl0",
+     "id": "nnuuw1r742",
      "n": "Sigue en vigor y es objeto de debate: para muchos fue la base de la reconciliación; organismos de la ONU han pedido derogarla porque impide investigar los crímenes del franquismo.",
-     "p": "n718f6pcl0",
+     "p": "nfqq7zh742",
      "t": "1977 · Ley de Amnistía"
     },
     {
@@ -1543,8 +1548,8 @@
        "t": "Incluían un acuerdo político sobre libertades y control de los medios públicos"
       }
      ],
-     "id": "ntqiuhxcl0",
-     "p": "n718f6pcl0",
+     "id": "nne0fyu743",
+     "p": "nfqq7zh742",
      "t": "1977 · Pactos de la Moncloa"
     },
     {
@@ -1565,9 +1570,9 @@
        "t": "Define España como monarquía parlamentaria y abre el Estado de las autonomías"
       }
      ],
-     "id": "n4cc7bocl0",
+     "id": "n2yitft743",
      "n": "En el País Vasco la abstención superó la mitad del censo, en parte porque el PNV pidió abstenerse.",
-     "p": "n718f6pcl0",
+     "p": "nfqq7zh742",
      "t": "1978 · Se aprueba la Constitución"
     },
     {
@@ -1582,8 +1587,8 @@
        "t": "La izquierda pasó a gobernar muchas grandes ciudades, como Madrid con Tierno Galván"
       }
      ],
-     "id": "n50cwkucl0",
-     "p": "n718f6pcl0",
+     "id": "nuutg5l743",
+     "p": "nfqq7zh742",
      "t": "1979 · Primeras elecciones con la Constitución"
     },
     {
@@ -1598,8 +1603,8 @@
        "t": "Fueron los primeros estatutos del Estado de las autonomías"
       }
      ],
-     "id": "n0m8efkcl0",
-     "p": "n718f6pcl0",
+     "id": "n94sztl743",
+     "p": "nfqq7zh742",
      "t": "1979 · Estatutos de autonomía vasco y catalán"
     },
     {
@@ -1614,8 +1619,8 @@
        "t": "Le debía sustituir Leopoldo Calvo-Sotelo"
       }
      ],
-     "id": "n412pk3cl0",
-     "p": "n718f6pcl0",
+     "id": "nlp6bmi743",
+     "p": "nfqq7zh742",
      "t": "1981 · Dimite Adolfo Suárez"
     },
     {
@@ -1636,8 +1641,8 @@
        "t": "El Gobierno desclasificó los documentos oficiales del golpe en febrero de 2026"
       }
      ],
-     "id": "nw1gp8vcl0",
-     "p": "n718f6pcl0",
+     "id": "nulsrai743",
+     "p": "nfqq7zh742",
      "t": "1981 · Intento de golpe de Estado del 23-F"
     },
     {
@@ -1649,8 +1654,8 @@
        "t": "El PSOE se oponía entonces y prometió un referéndum, que se celebró en 1986"
       }
      ],
-     "id": "n9ez0nbcl0",
-     "p": "n718f6pcl0",
+     "id": "no0jc1d743",
+     "p": "nfqq7zh742",
      "t": "1982 · España entra en la OTAN"
     },
     {
@@ -1668,14 +1673,14 @@
        "t": "Muchos historiadores sitúan aquí el final de la Transición"
       }
      ],
-     "id": "nystljgcl0",
-     "p": "n718f6pcl0",
+     "id": "n11d7m2743",
+     "p": "nfqq7zh742",
      "t": "1982 · Gana el PSOE: primera alternancia"
     },
     {
-     "id": "nynwjgscl0",
+     "id": "n0orlez743",
      "k": "grupo",
-     "p": "nn81kqmcl0",
+     "p": "nulji49742",
      "t": "Protagonistas"
     },
     {
@@ -1690,8 +1695,8 @@
        "t": "Abdicó en 2014 en su hijo, Felipe VI"
       }
      ],
-     "id": "nqeq411cl0",
-     "p": "nynwjgscl0",
+     "id": "nnlvcvt743",
+     "p": "n0orlez743",
      "t": "Juan Carlos I"
     },
     {
@@ -1706,8 +1711,8 @@
        "t": "Primer presidente salido de las urnas tras la dictadura"
       }
      ],
-     "id": "nfb8oeocl0",
-     "p": "nynwjgscl0",
+     "id": "nyfzxgy743",
+     "p": "n0orlez743",
      "t": "Adolfo Suárez"
     },
     {
@@ -1722,8 +1727,8 @@
        "t": "Se le atribuye el diseño jurídico de la Ley para la Reforma Política"
       }
      ],
-     "id": "nb9ocl7cl0",
-     "p": "nynwjgscl0",
+     "id": "nxlanyb743",
+     "p": "n0orlez743",
      "t": "Torcuato Fernández-Miranda"
     },
     {
@@ -1738,8 +1743,8 @@
        "t": "Defendía el eurocomunismo, un comunismo alejado de Moscú"
       }
      ],
-     "id": "nt1khafcl0",
-     "p": "nynwjgscl0",
+     "id": "ngtfm43743",
+     "p": "n0orlez743",
      "t": "Santiago Carrillo"
     },
     {
@@ -1754,8 +1759,8 @@
        "t": "Presidente del Gobierno de 1982 a 1996"
       }
      ],
-     "id": "nhri84gcl0",
-     "p": "nynwjgscl0",
+     "id": "nbpsxy5744",
+     "p": "n0orlez743",
      "t": "Felipe González"
     },
     {
@@ -1770,8 +1775,8 @@
        "t": "Fue uno de los siete ponentes de la Constitución"
       }
      ],
-     "id": "nx6z64tcl0",
-     "p": "nynwjgscl0",
+     "id": "nfui9go744",
+     "p": "n0orlez743",
      "t": "Manuel Fraga"
     },
     {
@@ -1786,8 +1791,8 @@
        "t": "El 23-F se enfrentó a los guardias civiles que asaltaban el Congreso"
       }
      ],
-     "id": "nvbj7ugcl0",
-     "p": "nynwjgscl0",
+     "id": "ng1lqvd744",
+     "p": "n0orlez743",
      "t": "Manuel Gutiérrez Mellado"
     },
     {
@@ -1799,145 +1804,33 @@
        "t": "Negoció con Suárez la vuelta de la Generalitat"
       }
      ],
-     "id": "nxi4eoicl0",
-     "p": "nynwjgscl0",
+     "id": "nojtrkn744",
+     "p": "n0orlez743",
      "t": "Josep Tarradellas"
     }
    ],
-   "run": {
-    "dd": {
-     "n0m8efkcl0:0": true,
-     "n0m8efkcl0:1": true,
-     "n0m8efkcl0:2": true,
-     "n412pk3cl0:0": true,
-     "n412pk3cl0:1": true,
-     "n412pk3cl0:2": true,
-     "n4cc7bocl0:0": true,
-     "n4cc7bocl0:1": true,
-     "n4cc7bocl0:2": true,
-     "n4cc7bocl0:3": true,
-     "n4cc7bocl0:4": true,
-     "n4usanucl0:0": true,
-     "n4usanucl0:1": true,
-     "n4usanucl0:2": true,
-     "n4usanucl0:3": true,
-     "n50cwkucl0:0": true,
-     "n50cwkucl0:1": true,
-     "n50cwkucl0:2": true,
-     "n5vbnelcl0:0": true,
-     "n5vbnelcl0:1": true,
-     "n5vbnelcl0:2": true,
-     "n9ez0nbcl0:0": true,
-     "n9ez0nbcl0:1": true,
-     "nb9ocl7cl0:0": true,
-     "nb9ocl7cl0:1": true,
-     "nb9ocl7cl0:2": true,
-     "neox9yrcl0:0": true,
-     "neox9yrcl0:1": true,
-     "neox9yrcl0:2": true,
-     "nfb8oeocl0:0": true,
-     "nfb8oeocl0:1": true,
-     "nfb8oeocl0:2": true,
-     "nhri84gcl0:0": true,
-     "nhri84gcl0:1": true,
-     "nhri84gcl0:2": true,
-     "ni16ixpcl0:0": true,
-     "ni16ixpcl0:1": true,
-     "ni16ixpcl0:2": true,
-     "ni16ixpcl0:3": true,
-     "njz9vwhcl0:0": true,
-     "njz9vwhcl0:1": true,
-     "njz9vwhcl0:2": true,
-     "nnqsdq1cl0:0": true,
-     "nnqsdq1cl0:1": true,
-     "nnqsdq1cl0:2": true,
-     "nqeq411cl0:0": true,
-     "nqeq411cl0:1": true,
-     "nqeq411cl0:2": true,
-     "nqmsk2ccl0:0": true,
-     "nqmsk2ccl0:1": true,
-     "nr9ech2cl0:0": true,
-     "nr9ech2cl0:1": true,
-     "nr9ech2cl0:2": true,
-     "nr9ech2cl0:3": true,
-     "nt1khafcl0:0": true,
-     "nt1khafcl0:1": true,
-     "nt1khafcl0:2": true,
-     "ntqiuhxcl0:0": true,
-     "ntqiuhxcl0:1": true,
-     "ntqiuhxcl0:2": true,
-     "ntqiuhxcl0:3": true,
-     "nui8ck3cl0:0": true,
-     "nui8ck3cl0:1": true,
-     "nui8ck3cl0:2": true,
-     "nvbj7ugcl0:0": true,
-     "nvbj7ugcl0:1": true,
-     "nvbj7ugcl0:2": true,
-     "nw1gp8vcl0:0": true,
-     "nw1gp8vcl0:1": true,
-     "nw1gp8vcl0:2": true,
-     "nw1gp8vcl0:3": true,
-     "nw1gp8vcl0:4": true,
-     "nx6z64tcl0:0": true,
-     "nx6z64tcl0:1": true,
-     "nx6z64tcl0:2": true,
-     "nxi4eoicl0:0": true,
-     "nxi4eoicl0:1": true,
-     "nystljgcl0:0": true,
-     "nystljgcl0:1": true,
-     "nystljgcl0:2": true,
-     "nystljgcl0:3": true
-    },
-    "done": true,
-    "f": {},
-    "phase": 3,
-    "res": {
-     "d:nystljgcl0:3": 3
-    },
-    "slot": {
-     "n0m8efkcl0": "n0m8efkcl0",
-     "n412pk3cl0": "n412pk3cl0",
-     "n4cc7bocl0": "n4cc7bocl0",
-     "n4usanucl0": "n4usanucl0",
-     "n50cwkucl0": "n50cwkucl0",
-     "n5vbnelcl0": "n5vbnelcl0",
-     "n9ez0nbcl0": "n9ez0nbcl0",
-     "neox9yrcl0": "neox9yrcl0",
-     "ni16ixpcl0": "ni16ixpcl0",
-     "njz9vwhcl0": "njz9vwhcl0",
-     "nnqsdq1cl0": "nnqsdq1cl0",
-     "nqmsk2ccl0": "nqmsk2ccl0",
-     "nr9ech2cl0": "nr9ech2cl0",
-     "ntqiuhxcl0": "ntqiuhxcl0",
-     "nui8ck3cl0": "nui8ck3cl0",
-     "nw1gp8vcl0": "nw1gp8vcl0",
-     "nystljgcl0": "nystljgcl0"
-    },
-    "start": 1794493550165,
-    "v": "ln1"
-   },
    "type": "scheme",
-   "updated": 1794493492595,
+   "updated": 1794512521152,
    "v": 2
   },
   {
    "color": "#1d4ed8",
-   "created": 1794493492596,
+   "created": 1794512521156,
    "id": "ej-ley-ue",
    "layout": "linea",
    "links": [],
    "name": "Cómo se aprueba una ley europea",
    "nodes": [
     {
-     "id": "nh9r42tcl0",
+     "id": "n0rwm51744",
      "n": "Casi todas las leyes de la UE siguen el «procedimiento legislativo ordinario» (artículo 294 del Tratado de Funcionamiento de la UE), antes llamado codecisión: la Comisión propone y el Parlamento Europeo y el Consejo de la UE deciden en pie de igualdad.",
      "p": null,
      "t": "Cómo se aprueba una ley europea"
     },
     {
-     "id": "nco582lcl0",
+     "id": "nprax9r745",
      "k": "pasos",
-     "p": "nh9r42tcl0",
+     "p": "n0rwm51744",
      "t": "Los pasos"
     },
     {
@@ -1952,8 +1845,8 @@
        "t": "El Parlamento, el Consejo o una iniciativa ciudadana pueden pedirle que proponga una ley"
       }
      ],
-     "id": "ncjmv4acl0",
-     "p": "nco582lcl0",
+     "id": "ng6zsut745",
+     "p": "nprax9r745",
      "t": "La Comisión Europea prepara y presenta la propuesta"
     },
     {
@@ -1968,8 +1861,8 @@
        "t": "Dan también su opinión el Comité Económico y Social y el Comité de las Regiones"
       }
      ],
-     "id": "njqfmiocl0",
-     "p": "nco582lcl0",
+     "id": "ns2ikgh745",
+     "p": "nprax9r745",
      "t": "Los parlamentos nacionales y los comités consultivos opinan"
     },
     {
@@ -1984,8 +1877,8 @@
        "t": "En primera lectura no hay plazo"
       }
      ],
-     "id": "ngw6cp3cl0",
-     "p": "nco582lcl0",
+     "id": "n7dxgr6745",
+     "p": "nprax9r745",
      "t": "Primera lectura del Parlamento Europeo"
     },
     {
@@ -2000,8 +1893,8 @@
        "t": "Más del 85 % de las leyes se cierran en esta lectura o al empezar la segunda"
       }
      ],
-     "id": "noqyisqcl0",
-     "p": "nco582lcl0",
+     "id": "nwdm9dr745",
+     "p": "nprax9r745",
      "t": "Primera lectura del Consejo de la UE"
     },
     {
@@ -2016,8 +1909,8 @@
        "t": "Para rechazarla o enmendarla necesita la mayoría absoluta de sus miembros"
       }
      ],
-     "id": "no4ulyscl0",
-     "p": "nco582lcl0",
+     "id": "ndlkv8r745",
+     "p": "nprax9r745",
      "t": "Segunda lectura del Parlamento"
     },
     {
@@ -2032,8 +1925,8 @@
        "t": "Las enmiendas que la Comisión rechaza solo se aprueban por unanimidad"
       }
      ],
-     "id": "n7x6n6pcl0",
-     "p": "nco582lcl0",
+     "id": "nqlhqtm745",
+     "p": "nprax9r745",
      "t": "Segunda lectura del Consejo"
     },
     {
@@ -2048,8 +1941,8 @@
        "t": "Si no hay acuerdo, la ley no se aprueba"
       }
      ],
-     "id": "nw387aacl0",
-     "p": "nco582lcl0",
+     "id": "nt5hlsn745",
+     "p": "nprax9r745",
      "t": "Comité de Conciliación"
     },
     {
@@ -2064,8 +1957,8 @@
        "t": "Hoy es muy rara: casi todo se pacta antes"
       }
      ],
-     "id": "namvwkkcl0",
-     "p": "nco582lcl0",
+     "id": "ngp4h0w745",
+     "p": "nprax9r745",
      "t": "Tercera lectura"
     },
     {
@@ -2080,14 +1973,14 @@
        "t": "Entra en vigor en la fecha que diga o, si no dice nada, a los 20 días de publicarse"
       }
      ],
-     "id": "njw6avjcl0",
-     "p": "nco582lcl0",
+     "id": "n6y2ogy745",
+     "p": "nprax9r745",
      "t": "Firma y publicación"
     },
     {
-     "id": "nrs1i3lcl0",
+     "id": "nf4mfph745",
      "k": "grupo",
-     "p": "nh9r42tcl0",
+     "p": "n0rwm51744",
      "t": "Quién es quién"
     },
     {
@@ -2099,8 +1992,8 @@
        "t": "Propone las leyes y vigila que se cumplan"
       }
      ],
-     "id": "nl1u7z2cl0",
-     "p": "nrs1i3lcl0",
+     "id": "ny782m5745",
+     "p": "nf4mfph745",
      "t": "Comisión Europea"
     },
     {
@@ -2112,8 +2005,8 @@
        "t": "Representa a los ciudadanos y decide las leyes junto al Consejo"
       }
      ],
-     "id": "nzk2rjycl0",
-     "p": "nrs1i3lcl0",
+     "id": "nc4a5fo745",
+     "p": "nf4mfph745",
      "t": "Parlamento Europeo"
     },
     {
@@ -2125,8 +2018,8 @@
        "t": "Su presidencia pasa de un país a otro cada seis meses"
       }
      ],
-     "id": "nazju35cl0",
-     "p": "nrs1i3lcl0",
+     "id": "ntvr00m745",
+     "p": "nf4mfph745",
      "t": "Consejo de la Unión Europea"
     },
     {
@@ -2138,14 +2031,14 @@
        "t": "Marca la dirección política, pero no aprueba leyes"
       }
      ],
-     "id": "no5dd0zcl0",
-     "p": "nrs1i3lcl0",
+     "id": "nxfhix5745",
+     "p": "nf4mfph745",
      "t": "Consejo Europeo"
     },
     {
-     "id": "nv640cwcl0",
+     "id": "nmxe242745",
      "k": "grupo",
-     "p": "nh9r42tcl0",
+     "p": "n0rwm51744",
      "t": "Tipos de normas"
     },
     {
@@ -2157,8 +2050,8 @@
        "t": "No hace falta ninguna ley nacional para que valga"
       }
      ],
-     "id": "nh9ypuqcl0",
-     "p": "nv640cwcl0",
+     "id": "nyfl2j3745",
+     "p": "nmxe242745",
      "t": "Reglamento"
     },
     {
@@ -2173,8 +2066,8 @@
        "t": "Cada directiva fija su plazo de transposición, a menudo de unos dos años"
       }
      ],
-     "id": "n0801wvcl1",
-     "p": "nv640cwcl0",
+     "id": "ne7im9n745",
+     "p": "nmxe242745",
      "t": "Directiva"
     },
     {
@@ -2183,8 +2076,8 @@
        "t": "Es obligatoria; si tiene destinatarios (un país, una empresa…), solo para ellos"
       }
      ],
-     "id": "nzff7mkcl1",
-     "p": "nv640cwcl0",
+     "id": "nh1983k745",
+     "p": "nmxe242745",
      "t": "Decisión"
     },
     {
@@ -2193,14 +2086,14 @@
        "t": "No son obligatorios: orientan, pero no obligan"
       }
      ],
-     "id": "nxlev9ocl1",
-     "p": "nv640cwcl0",
+     "id": "nxcujji745",
+     "p": "nmxe242745",
      "t": "Recomendación y dictamen"
     },
     {
-     "id": "nfe7fv0cl1",
+     "id": "n7ioiy4745",
      "k": "grupo",
-     "p": "nh9r42tcl0",
+     "p": "n0rwm51744",
      "t": "Claves"
     },
     {
@@ -2215,8 +2108,8 @@
        "t": "Para bloquear hacen falta al menos 4 países con más del 35 % de la población"
       }
      ],
-     "id": "n2s340gcl1",
-     "p": "nfe7fv0cl1",
+     "id": "ndvmv1h745",
+     "p": "n7ioiy4745",
      "t": "Mayoría cualificada en el Consejo"
     },
     {
@@ -2231,8 +2124,8 @@
        "t": "Se les critica por su falta de transparencia"
       }
      ],
-     "id": "nl1j06dcl1",
-     "p": "nfe7fv0cl1",
+     "id": "ni6wdka745",
+     "p": "n7ioiy4745",
      "t": "Trílogos"
     },
     {
@@ -2244,33 +2137,33 @@
        "t": "Obliga a la Comisión a responder, pero no a proponer la ley"
       }
      ],
-     "id": "n2j4sk5cl1",
-     "p": "nfe7fv0cl1",
+     "id": "nkueqtn745",
+     "p": "n7ioiy4745",
      "t": "Iniciativa ciudadana europea"
     }
    ],
    "type": "scheme",
-   "updated": 1794493492596,
+   "updated": 1794512521156,
    "v": 2
   },
   {
    "color": "#0f766e",
-   "created": 1794493492597,
+   "created": 1794512521158,
    "id": "ej-brexit",
    "layout": "linea",
    "links": [],
    "name": "El Brexit: causas, proceso y consecuencias",
    "nodes": [
     {
-     "id": "nxhn41wcl1",
+     "id": "nyi650f746",
      "n": "Salida del Reino Unido de la Unión Europea, decidida en referéndum en 2016 y hecha efectiva en 2020. Las cifras económicas son estimaciones: es difícil separar el efecto del Brexit del de la covid o la crisis energética.",
      "p": null,
      "t": "El Brexit: causas, proceso y consecuencias"
     },
     {
-     "id": "n29m5g0cl1",
+     "id": "nyhom3x746",
      "k": "grupo",
-     "p": "nxhn41wcl1",
+     "p": "nyi650f746",
      "t": "Causas"
     },
     {
@@ -2288,8 +2181,8 @@
        "t": "Thatcher logró en 1984 un descuento en su aportación: el «cheque británico»"
       }
      ],
-     "id": "n7l4irncl1",
-     "p": "n29m5g0cl1",
+     "id": "n75nn9x746",
+     "p": "nyhom3x746",
      "t": "Un euroescepticismo antiguo"
     },
     {
@@ -2304,8 +2197,8 @@
        "t": "Fue el motivo principal para un tercio de quienes votaron salir (encuesta de Lord Ashcroft, 12.369 personas)"
       }
      ],
-     "id": "n0d8i2gcl1",
-     "p": "n29m5g0cl1",
+     "id": "ntw76zh746",
+     "p": "nyhom3x746",
      "t": "Inmigración y libre circulación"
     },
     {
@@ -2320,8 +2213,8 @@
        "t": "Rechazo a que el Tribunal de Justicia de la UE tuviera la última palabra"
       }
      ],
-     "id": "n4f7nf1cl1",
-     "p": "n29m5g0cl1",
+     "id": "nywjgeo746",
+     "p": "nyhom3x746",
      "t": "Soberanía: «recuperar el control»"
     },
     {
@@ -2336,8 +2229,8 @@
        "t": "Cameron prometió el referéndum también para cerrar esa división"
       }
      ],
-     "id": "n93xk58cl1",
-     "p": "n29m5g0cl1",
+     "id": "nixult2746",
+     "p": "nyhom3x746",
      "t": "Presión política interna"
     },
     {
@@ -2352,8 +2245,8 @@
        "t": "El 73 % de los jóvenes de 18 a 24 años votó quedarse; el 60 % de los mayores de 65, salir"
       }
      ],
-     "id": "nl7b848cl1",
-     "p": "n29m5g0cl1",
+     "id": "n457kgt746",
+     "p": "nyhom3x746",
      "t": "Brecha territorial y generacional"
     },
     {
@@ -2368,13 +2261,13 @@
        "t": "A la campaña por quedarse se la acusó de alarmismo económico: el «Project Fear»"
       }
      ],
-     "id": "na9s6pycl1",
-     "p": "n29m5g0cl1",
+     "id": "nppqo9i746",
+     "p": "nyhom3x746",
      "t": "La campaña"
     },
     {
-     "id": "n09f80pcl1",
-     "p": "nxhn41wcl1",
+     "id": "nex5uwt746",
+     "p": "nyi650f746",
      "t": "Proceso"
     },
     {
@@ -2386,8 +2279,8 @@
        "t": "Prometió renegociar la relación con la UE y después votar"
       }
      ],
-     "id": "nqhdkcccl1",
-     "p": "n09f80pcl1",
+     "id": "n1ffutt746",
+     "p": "nex5uwt746",
      "t": "2013 · Cameron promete un referéndum"
     },
     {
@@ -2399,8 +2292,8 @@
        "t": "En diciembre se aprobó la ley que lo convocaba"
       }
      ],
-     "id": "ng6zjbecl1",
-     "p": "n09f80pcl1",
+     "id": "n026co9746",
+     "p": "nex5uwt746",
      "t": "2015 · Los conservadores ganan con mayoría absoluta"
     },
     {
@@ -2415,8 +2308,8 @@
        "t": "Y una excepción a la «unión cada vez más estrecha»"
       }
      ],
-     "id": "njbfeo7cl1",
-     "p": "n09f80pcl1",
+     "id": "n585fhw746",
+     "p": "nex5uwt746",
      "t": "2016 · Cameron renegocia con la UE"
     },
     {
@@ -2434,8 +2327,8 @@
        "t": "Cameron dimitió y Theresa May fue primera ministra en julio"
       }
      ],
-     "id": "nctmylhcl1",
-     "p": "n09f80pcl1",
+     "id": "na4onv7746",
+     "p": "nex5uwt746",
      "t": "2016 · Referéndum: gana la salida"
     },
     {
@@ -2447,8 +2340,8 @@
        "t": "Se abría un plazo de dos años para negociar la salida"
       }
      ],
-     "id": "n35sc1jcl1",
-     "p": "n09f80pcl1",
+     "id": "nvv8nn9746",
+     "p": "nex5uwt746",
      "t": "2017 · Se activa el artículo 50"
     },
     {
@@ -2460,8 +2353,8 @@
        "t": "Pasó a depender de los unionistas norirlandeses del DUP"
       }
      ],
-     "id": "ns57s3gcl1",
-     "p": "n09f80pcl1",
+     "id": "njztkpm746",
+     "p": "nex5uwt746",
      "t": "2017 · Elecciones anticipadas: May pierde la mayoría"
     },
     {
@@ -2476,8 +2369,8 @@
        "t": "Ese año dimitieron varios ministros contrarios al plan de May, entre ellos Boris Johnson"
       }
      ],
-     "id": "n1fbzh8cl1",
-     "p": "n09f80pcl1",
+     "id": "n9jd55u746",
+     "p": "nex5uwt746",
      "t": "2018 · Acuerdo de retirada con la «salvaguarda» irlandesa"
     },
     {
@@ -2492,8 +2385,8 @@
        "t": "Theresa May dimitió y Boris Johnson la sustituyó en julio"
       }
      ],
-     "id": "n0lqup1cl1",
-     "p": "n09f80pcl1",
+     "id": "nn0m8qb746",
+     "p": "nex5uwt746",
      "t": "2019 · El Parlamento tumba tres veces el acuerdo"
     },
     {
@@ -2508,8 +2401,8 @@
        "t": "En diciembre ganó con una mayoría de 80 escaños y el lema «Get Brexit done»"
       }
      ],
-     "id": "nxvipt7cl1",
-     "p": "n09f80pcl1",
+     "id": "n4ynqz9746",
+     "p": "nex5uwt746",
      "t": "2019 · Johnson renegocia y gana las elecciones"
     },
     {
@@ -2521,8 +2414,8 @@
        "t": "Empezó un periodo de transición: casi todo siguió igual hasta final de año"
       }
      ],
-     "id": "ndlmxbqcl1",
-     "p": "n09f80pcl1",
+     "id": "n97wpmn746",
+     "p": "nex5uwt746",
      "t": "2020 · El Reino Unido sale de la UE"
     },
     {
@@ -2534,8 +2427,8 @@
        "t": "Comercio sin aranceles ni cuotas, pero con aduanas y controles"
       }
      ],
-     "id": "nemahj0cl1",
-     "p": "n09f80pcl1",
+     "id": "n952a4o746",
+     "p": "nex5uwt746",
      "t": "2020 · Acuerdo de Comercio y Cooperación"
     },
     {
@@ -2547,8 +2440,8 @@
        "t": "Terminó la libre circulación de personas"
       }
      ],
-     "id": "n2x6ktwcl1",
-     "p": "n09f80pcl1",
+     "id": "nlsxqlr746",
+     "p": "nex5uwt746",
      "t": "2021 · Fin del periodo de transición"
     },
     {
@@ -2563,8 +2456,8 @@
        "t": "Da a la Asamblea norirlandesa un «freno de Stormont» ante nuevas normas de la UE"
       }
      ],
-     "id": "noz5jrdcl1",
-     "p": "n09f80pcl1",
+     "id": "n9rvofq746",
+     "p": "nex5uwt746",
      "t": "2023 · Marco de Windsor"
     },
     {
@@ -2582,14 +2475,14 @@
        "t": "La soberanía no cambia: España mantiene su reclamación"
       }
      ],
-     "id": "nmro8hpcl1",
-     "p": "n09f80pcl1",
+     "id": "ngeygq2746",
+     "p": "nex5uwt746",
      "t": "2026 · Tratado sobre Gibraltar"
     },
     {
-     "id": "n4miw77cl1",
+     "id": "nm3ps2x746",
      "k": "grupo",
-     "p": "nxhn41wcl1",
+     "p": "nyi650f746",
      "t": "Consecuencias"
     },
     {
@@ -2604,8 +2497,8 @@
        "t": "La misma OBR estima una productividad un 4 % menor a largo plazo"
       }
      ],
-     "id": "ni7nt93cl1",
-     "p": "n4miw77cl1",
+     "id": "nmrvriu747",
+     "p": "nm3ps2x746",
      "t": "Comercio y economía"
     },
     {
@@ -2620,8 +2513,8 @@
        "t": "El Tribunal de Justicia de la UE ya no tiene la última palabra sobre sus leyes"
       }
      ],
-     "id": "nayrekgcl1",
-     "p": "n4miw77cl1",
+     "id": "ny5xiyv747",
+     "p": "nm3ps2x746",
      "t": "Más autonomía"
     },
     {
@@ -2636,8 +2529,8 @@
        "t": "Los unionistas del DUP bloquearon el Gobierno norirlandés de 2022 a 2024 en protesta"
       }
      ],
-     "id": "n0bfztzcl1",
-     "p": "n4miw77cl1",
+     "id": "n0zqh05747",
+     "p": "nm3ps2x746",
      "t": "Irlanda del Norte"
     },
     {
@@ -2652,8 +2545,8 @@
        "t": "La migración neta tocó un récord de unas 900.000 personas en el año hasta junio de 2023"
       }
      ],
-     "id": "n02t935cl1",
-     "p": "n4miw77cl1",
+     "id": "njvw7pz747",
+     "p": "nm3ps2x746",
      "t": "Inmigración"
     },
     {
@@ -2668,8 +2561,8 @@
        "t": "En 2022 el Tribunal Supremo decidió que no puede convocarlo sin permiso de Londres"
       }
      ],
-     "id": "nh8sy85cl1",
-     "p": "n4miw77cl1",
+     "id": "ncd0nf2747",
+     "p": "nm3ps2x746",
      "t": "Escocia"
     },
     {
@@ -2681,8 +2574,8 @@
        "t": "Millones de europeos pidieron el estatus de residente (EU Settlement Scheme)"
       }
      ],
-     "id": "nlm84izcl1",
-     "p": "n4miw77cl1",
+     "id": "n8ybmtw747",
+     "p": "nm3ps2x746",
      "t": "Ciudadanos"
     },
     {
@@ -2694,8 +2587,8 @@
        "t": "En junio de 2026, según YouGov, el 57 % cree que salir fue un error y el 30 %, un acierto"
       }
      ],
-     "id": "nzhup0scl1",
-     "p": "n4miw77cl1",
+     "id": "nimrgtt747",
+     "p": "nm3ps2x746",
      "t": "Política británica"
     },
     {
@@ -2710,79 +2603,13 @@
        "t": "En noviembre de 2026 se pactó un borrador de acuerdo agroalimentario para reducir controles"
       }
      ],
-     "id": "nkiwrj0cl1",
-     "p": "n4miw77cl1",
+     "id": "nu5fxl5747",
+     "p": "nm3ps2x746",
      "t": "Relación con la UE hoy"
     }
    ],
-   "stats": {
-    "d:n0d8i2gcl1:0": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "d:n4f7nf1cl1:2": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "d:n7l4irncl1:1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "d:na9s6pycl1:1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "d:na9s6pycl1:2": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "d:nl7b848cl1:0": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "d:nl7b848cl1:1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:n0lqup1cl1": {
-     "r": 0,
-     "t": 1794493712124
-    },
-    "p:n1fbzh8cl1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:n35sc1jcl1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:ndlmxbqcl1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:ng6zjbecl1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:njbfeo7cl1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:nmro8hpcl1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:ns57s3gcl1": {
-     "r": 3,
-     "t": 1794493712124
-    },
-    "p:nxvipt7cl1": {
-     "r": 3,
-     "t": 1794493712124
-    }
-   },
    "type": "scheme",
-   "updated": 1794493492597,
+   "updated": 1794512521158,
    "v": 2
   }
  ],
