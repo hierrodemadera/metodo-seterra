@@ -11500,6 +11500,51 @@ function mpPurgeOld(){ const n = mpPurgeOldRaw(); if(n) saveEsq(true); return n;
 /* también cuando llegan de GitHub */
 { const _s = saveEsq; saveEsq = function(){ mpPurgeOldRaw(); return _s.apply(this, arguments); }; }
 
+/* ---------- organización por temas (carpetas) ----------
+   Crea una sola vez la estructura «España» (áreas → temas) y «Mundo», y coloca dentro los esquemas de ejemplo
+   que sigan sueltos. Ids fijos: si ya existe (por ejemplo, llegó de otro aparato) no se toca nada. */
+const ESQ_ORG = [
+  ['f-espana', 'España', '#c2410c', [
+    ['f-es-territorio', 'Territorio', '#15803d', []],
+    ['f-es-historia', 'Historia', '#b45309', [
+      ['f-es-hi-raices', 'Raíces (de Atapuerca al siglo XVIII)', null, []],
+      ['f-es-hi-xix', 'Siglo XIX', null, []],
+      ['f-es-hi-xx', 'Siglo XX y XXI', null, ['ej-transicion']],
+      ['f-es-hi-conjunto', 'Visiones de conjunto', null, []]]],
+    ['f-es-politica', 'Política e instituciones', '#1d4ed8', [
+      ['f-es-po-constitucion', 'La Constitución', null, []],
+      ['f-es-po-poderes', 'Los poderes del Estado', null, []],
+      ['f-es-po-funciona', 'Cómo funciona', null, []],
+      ['f-es-po-elecciones', 'Elecciones y partidos', null, ['ej-dhondt']],
+      ['f-es-po-autonomico', 'El Estado autonómico', null, []],
+      ['f-es-po-mundo', 'España en el mundo', null, ['ej-ley-ue']],
+      ['f-es-po-debates', 'Debates abiertos', null, []]]],
+    ['f-es-economia', 'Economía', '#0f766e', []],
+    ['f-es-sociedad', 'Sociedad', '#7c3aed', []],
+    ['f-es-cultura', 'Cultura', '#be185d', []]]],
+  ['f-mundo', 'Mundo', '#334155', ['ej-brexit', 'ej-gaza']]
+];
+/* se organiza cuando falta la estructura y los esquemas de ejemplo siguen sueltos en la raíz
+   (si borras las carpetas, sus esquemas se borran con ellas y esto ya no vuelve a pasar) */
+function mpOrganizeRaw(){
+  if(esqFind('f-espana') || esqFind('f-mundo')) return 0;
+  const ids = ESQ_ORG_IDS(); if(!esquemas.some(x=> x && ids.includes(x.id))) return 0;
+  const take = id=>{ const i = esquemas.findIndex(x=> x && x.id === id); return i >= 0 ? esquemas.splice(i, 1)[0] : null; };   // solo si sigue suelto
+  const build = ([id, name, color, kids])=>{
+    const f = { id, type: 'folder', name, expanded: false, children: [] }; if(color) f.color = color;
+    kids.forEach(k=>{ if(Array.isArray(k)) f.children.push(build(k)); else { const sc = take(k); if(sc) f.children.push(sc); } });
+    return f;
+  };
+  const made = ESQ_ORG.map(build);
+  esquemas.unshift(...made);
+  return made.length;
+}
+function ESQ_ORG_IDS(){ const out = []; (function w(a){ a.forEach(k=>{ if(Array.isArray(k)) w(k[3]); else out.push(k); }); })(ESQ_ORG); return out; }
+function mpOrganize(){ const n = mpOrganizeRaw(); if(n) saveEsq(true); return n; }
+/* también después de sincronizar (por si llega de GitHub una lista sin organizar) */
+{ const _s = saveEsq; saveEsq = function(){ mpOrganizeRaw(); return _s.apply(this, arguments); }; }
+{ const _m = mpMigrate3; mpMigrate3 = function(){ const n = _m.apply(this, arguments); return n + mpOrganize(); }; }
+
 boot();
 
 /* sin conexión: guarda una copia de la app para poder abrirla sin internet (solo en la web publicada) */
