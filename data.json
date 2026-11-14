@@ -593,22 +593,22 @@
        "children": [
         {
          "color": "#1d4ed8",
-         "created": 1794647132888,
+         "created": 1794650406970,
          "id": "ej-po-constitucion",
          "layout": "linea",
          "links": [],
          "name": "La Constitución de 1978",
          "nodes": [
           {
-           "id": "nzhmpvxe6x",
+           "id": "nkjsvv6khn",
            "n": "La norma suprema de España: todas las leyes y poderes públicos están sometidos a ella. La aprobaron las Cortes el 31 de octubre de 1978, la votó el pueblo en referéndum el 6 de diciembre y entró en vigor el 29 de diciembre. Tiene 169 artículos.",
            "p": null,
            "t": "La Constitución de 1978"
           },
           {
-           "id": "ngz5yuxe6x",
+           "id": "nv27mfnkhn",
            "k": "pasos",
-           "p": "nzhmpvxe6x",
+           "p": "nkjsvv6khn",
            "t": "Sus partes, en orden"
           },
           {
@@ -620,8 +620,8 @@
              "t": "Proclama proteger a todos los españoles y pueblos de España en el ejercicio de los derechos humanos, sus culturas, tradiciones, lenguas e instituciones"
             }
            ],
-           "id": "n65n2hhe6x",
-           "p": "ngz5yuxe6x",
+           "id": "nlsc2j4khn",
+           "p": "nv27mfnkhn",
            "t": "Preámbulo"
           },
           {
@@ -633,8 +633,8 @@
              "t": "Define España, la soberanía, la forma política, las lenguas, la bandera y la capital"
             }
            ],
-           "id": "n76oaume6x",
-           "p": "ngz5yuxe6x",
+           "id": "n761yyqkhn",
+           "p": "nv27mfnkhn",
            "t": "Título preliminar"
           },
           {
@@ -646,8 +646,8 @@
              "t": "Incluye derechos fundamentales, deberes, principios rectores, sus garantías y cuándo pueden suspenderse"
             }
            ],
-           "id": "nld92g2e6x",
-           "p": "ngz5yuxe6x",
+           "id": "ndowbd2khn",
+           "p": "nv27mfnkhn",
            "t": "Título I · Derechos y deberes fundamentales"
           },
           {
@@ -659,8 +659,8 @@
              "t": "El rey, sus funciones, la sucesión, la regencia y el refrendo"
             }
            ],
-           "id": "n0gnoh6e6x",
-           "p": "ngz5yuxe6x",
+           "id": "ngc2lijkhn",
+           "p": "nv27mfnkhn",
            "t": "Título II · La Corona"
           },
           {
@@ -672,8 +672,8 @@
              "t": "Congreso y Senado, cómo se hacen las leyes y los tratados internacionales"
             }
            ],
-           "id": "ncafx8ie6x",
-           "p": "ngz5yuxe6x",
+           "id": "n83r1j8khn",
+           "p": "nv27mfnkhn",
            "t": "Título III · Las Cortes Generales"
           },
           {
@@ -685,8 +685,8 @@
              "t": "Composición y funciones del Gobierno, la Administración pública y el Consejo de Estado"
             }
            ],
-           "id": "nzmywe1e6x",
-           "p": "ngz5yuxe6x",
+           "id": "npfqohkkhn",
+           "p": "nv27mfnkhn",
            "t": "Título IV · El Gobierno y la Administración"
           },
           {
@@ -698,8 +698,8 @@
              "t": "Control al Gobierno, cuestión de confianza, moción de censura, disolución y estados de alarma, excepción y sitio"
             }
            ],
-           "id": "n3z2xf7e6x",
-           "p": "ngz5yuxe6x",
+           "id": "ns8e7nmkho",
+           "p": "nv27mfnkhn",
            "t": "Título V · Relaciones entre el Gobierno y las Cortes"
           },
           {
@@ -711,8 +711,8 @@
              "t": "Independencia judicial, Consejo General del Poder Judicial, Tribunal Supremo, Ministerio Fiscal y jurado"
             }
            ],
-           "id": "n6kus8pe6x",
-           "p": "ngz5yuxe6x",
+           "id": "n6x3jwskho",
+           "p": "nv27mfnkhn",
            "t": "Título VI · El Poder Judicial"
           },
           {
@@ -727,8 +727,8 @@
              "t": "Su artículo 135, reformado en 2011, da prioridad al pago de la deuda"
             }
            ],
-           "id": "n6yxmpge6x",
-           "p": "ngz5yuxe6x",
+           "id": "nldeqamkho",
+           "p": "nv27mfnkhn",
            "t": "Título VII · Economía y Hacienda"
           },
           {
@@ -743,8 +743,8 @@
              "t": "Aquí está el artículo 155"
             }
            ],
-           "id": "nwkdhvae6x",
-           "p": "ngz5yuxe6x",
+           "id": "ng7wjx8kho",
+           "p": "nv27mfnkhn",
            "t": "Título VIII · La organización territorial del Estado"
           },
           {
@@ -756,8 +756,8 @@
              "t": "Composición, competencias y efectos de sus sentencias"
             }
            ],
-           "id": "n69y7tge6x",
-           "p": "ngz5yuxe6x",
+           "id": "nowo14dkho",
+           "p": "nv27mfnkhn",
            "t": "Título IX · El Tribunal Constitucional"
           },
           {
@@ -769,8 +769,8 @@
              "t": "Los dos procedimientos para cambiar la Constitución, el ordinario y el agravado"
             }
            ],
-           "id": "n5pyir6e6x",
-           "p": "ngz5yuxe6x",
+           "id": "nb9060zkho",
+           "p": "nv27mfnkhn",
            "t": "Título X · La reforma constitucional"
           },
           {
@@ -785,14 +785,14 @@
              "t": "Una derogatoria, que anula las Leyes Fundamentales del franquismo, y una final, que fija su entrada en vigor"
             }
            ],
-           "id": "nu9v7n7e6x",
-           "p": "ngz5yuxe6x",
+           "id": "nlcon80kho",
+           "p": "nv27mfnkhn",
            "t": "Disposiciones finales del texto"
           },
           {
-           "id": "n72tmble6x",
+           "id": "ncexgkbkho",
            "k": "grupo",
-           "p": "nzhmpvxe6x",
+           "p": "nkjsvv6khn",
            "t": "Los principios del título preliminar"
           },
           {
@@ -804,8 +804,8 @@
              "t": "Sus valores superiores: libertad, justicia, igualdad y pluralismo político"
             }
            ],
-           "id": "noi5n95e6x",
-           "p": "n72tmble6x",
+           "id": "nfdq23xkho",
+           "p": "ncexgkbkho",
            "t": "Estado social y democrático de Derecho"
           },
           {
@@ -814,8 +814,8 @@
              "t": "Artículo 1.2: reside en el pueblo español, del que emanan los poderes del Estado"
             }
            ],
-           "id": "n9wj5hfe6x",
-           "p": "n72tmble6x",
+           "id": "ngav4xdkho",
+           "p": "ncexgkbkho",
            "t": "Soberanía nacional"
           },
           {
@@ -827,8 +827,8 @@
              "t": "El rey reina pero no gobierna: el poder político está en las Cortes y el Gobierno"
             }
            ],
-           "id": "nmbhdoge6x",
-           "p": "n72tmble6x",
+           "id": "n3n3n9ukho",
+           "p": "ncexgkbkho",
            "t": "Monarquía parlamentaria"
           },
           {
@@ -840,8 +840,8 @@
              "t": "Reconoce y garantiza el derecho a la autonomía de las nacionalidades y regiones, y la solidaridad entre ellas"
             }
            ],
-           "id": "n6ggspxe6x",
-           "p": "n72tmble6x",
+           "id": "ntsrhm8kho",
+           "p": "ncexgkbkho",
            "t": "Unidad y autonomía"
           },
           {
@@ -853,8 +853,8 @@
              "t": "Las demás lenguas españolas son también oficiales en sus comunidades, según sus estatutos"
             }
            ],
-           "id": "nni7zzse6x",
-           "p": "n72tmble6x",
+           "id": "nzsmr9wkho",
+           "p": "ncexgkbkho",
            "t": "Lenguas"
           },
           {
@@ -866,8 +866,8 @@
              "t": "Artículo 5: la capital del Estado es la villa de Madrid"
             }
            ],
-           "id": "n2oirf6e6x",
-           "p": "n72tmble6x",
+           "id": "nj3jiwqkho",
+           "p": "ncexgkbkho",
            "t": "Bandera y capital"
           },
           {
@@ -882,8 +882,8 @@
              "t": "Las Fuerzas Armadas garantizan la soberanía, la independencia y el orden constitucional"
             }
            ],
-           "id": "nnxdweje6x",
-           "p": "n72tmble6x",
+           "id": "n934tytkho",
+           "p": "ncexgkbkho",
            "t": "Partidos, sindicatos y Fuerzas Armadas"
           },
           {
@@ -895,33 +895,33 @@
              "t": "Garantiza la jerarquía normativa, la publicidad de las normas y la irretroactividad de las sanciones desfavorables"
             }
            ],
-           "id": "nzpt232e6x",
-           "p": "n72tmble6x",
+           "id": "nleu6d6khp",
+           "p": "ncexgkbkho",
            "t": "Seguridad jurídica"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132888,
+         "updated": 1794650406970,
          "v": 2
         },
         {
          "color": "#1d4ed8",
-         "created": 1794647132889,
+         "created": 1794650406973,
          "id": "ej-po-derechos",
          "layout": "linea",
          "links": [],
          "name": "Derechos y deberes fundamentales",
          "nodes": [
           {
-           "id": "n6fuwlme6x",
+           "id": "nmjc465khr",
            "n": "El Título I de la Constitución (artículos 10 a 55). No todos los derechos tienen la misma protección: los de la Sección 1.ª del Capítulo II son los más protegidos; los principios rectores solo orientan las leyes.",
            "p": null,
            "t": "Derechos y deberes fundamentales"
           },
           {
-           "id": "n7ving1e6x",
+           "id": "njd69fckhr",
            "k": "pasos",
-           "p": "n6fuwlme6x",
+           "p": "nmjc465khr",
            "t": "Cómo se ordenan"
           },
           {
@@ -933,8 +933,8 @@
              "t": "Los derechos se interpretan según la Declaración Universal de Derechos Humanos y los tratados ratificados por España"
             }
            ],
-           "id": "n3m9espe6x",
-           "p": "n7ving1e6x",
+           "id": "nw6nromkhr",
+           "p": "njd69fckhr",
            "t": "Fundamento: la dignidad de la persona"
           },
           {
@@ -949,8 +949,8 @@
              "t": "Ningún español de origen puede ser privado de su nacionalidad"
             }
            ],
-           "id": "nyx5dnwe6x",
-           "p": "n7ving1e6x",
+           "id": "n8r9e8tkhr",
+           "p": "njd69fckhr",
            "t": "Españoles y extranjeros"
           },
           {
@@ -959,8 +959,8 @@
              "t": "Artículo 14: sin discriminación por nacimiento, raza, sexo, religión, opinión o cualquier otra circunstancia"
             }
            ],
-           "id": "nxstztde6x",
-           "p": "n7ving1e6x",
+           "id": "nwxr0ajkhr",
+           "p": "njd69fckhr",
            "t": "Igualdad ante la ley"
           },
           {
@@ -972,8 +972,8 @@
              "t": "Solo pueden desarrollarse por ley orgánica y se defienden con el recurso de amparo"
             }
            ],
-           "id": "n7rkxofe6x",
-           "p": "n7ving1e6x",
+           "id": "nrlzhaokhr",
+           "p": "njd69fckhr",
            "t": "Derechos fundamentales y libertades públicas"
           },
           {
@@ -985,8 +985,8 @@
              "t": "Protegidos por la ley, pero sin recurso de amparo"
             }
            ],
-           "id": "nz5cyspe6x",
-           "p": "n7ving1e6x",
+           "id": "n3tbsxdkhr",
+           "p": "njd69fckhr",
            "t": "Derechos y deberes de los ciudadanos"
           },
           {
@@ -998,8 +998,8 @@
              "t": "No se pueden reclamar directamente ante un juez: guían al legislador"
             }
            ],
-           "id": "nslj5j1e6x",
-           "p": "n7ving1e6x",
+           "id": "n5wtp2hkhr",
+           "p": "njd69fckhr",
            "t": "Principios rectores de la política social y económica"
           },
           {
@@ -1011,8 +1011,8 @@
              "t": "Vinculan a todos los poderes públicos y tienen al Defensor del Pueblo como protector"
             }
            ],
-           "id": "nzoztjwe6x",
-           "p": "n7ving1e6x",
+           "id": "nsrz2q9khr",
+           "p": "njd69fckhr",
            "t": "Garantías"
           },
           {
@@ -1024,14 +1024,14 @@
              "t": "Algunos derechos pueden suspenderse en los estados de excepción y de sitio, nunca en el de alarma"
             }
            ],
-           "id": "n3nkd4ye6x",
-           "p": "n7ving1e6x",
+           "id": "nikoegekhr",
+           "p": "njd69fckhr",
            "t": "Suspensión de derechos"
           },
           {
-           "id": "nslr50we6x",
+           "id": "n92eo8fkhr",
            "k": "grupo",
-           "p": "n6fuwlme6x",
+           "p": "nmjc465khr",
            "t": "Los derechos más protegidos"
           },
           {
@@ -1043,8 +1043,8 @@
              "t": "Queda abolida la pena de muerte"
             }
            ],
-           "id": "ntvk9vge6x",
-           "p": "nslr50we6x",
+           "id": "n9rv1wukhr",
+           "p": "n92eo8fkhr",
            "t": "Vida e integridad"
           },
           {
@@ -1056,8 +1056,8 @@
              "t": "Ninguna confesión tendrá carácter estatal, aunque los poderes públicos cooperarán con la Iglesia católica y las demás"
             }
            ],
-           "id": "n2iftvze6x",
-           "p": "nslr50we6x",
+           "id": "nj8vipmkhr",
+           "p": "n92eo8fkhr",
            "t": "Libertad ideológica y religiosa"
           },
           {
@@ -1072,8 +1072,8 @@
              "t": "El «habeas corpus» permite pedir que un juez revise de inmediato una detención ilegal"
             }
            ],
-           "id": "nn23bmbe6x",
-           "p": "nslr50we6x",
+           "id": "nsdsp5dkhr",
+           "p": "n92eo8fkhr",
            "t": "Libertad y detención"
           },
           {
@@ -1085,8 +1085,8 @@
              "t": "Garantiza el secreto de las comunicaciones y limita el uso de la informática para proteger la intimidad"
             }
            ],
-           "id": "n3kml6ue6x",
-           "p": "nslr50we6x",
+           "id": "nmx9so2khr",
+           "p": "n92eo8fkhr",
            "t": "Honor, intimidad y domicilio"
           },
           {
@@ -1098,8 +1098,8 @@
              "t": "Prohíbe la censura previa; solo un juez puede secuestrar una publicación"
             }
            ],
-           "id": "npfm8zre6x",
-           "p": "nslr50we6x",
+           "id": "nt1qjurkhr",
+           "p": "n92eo8fkhr",
            "t": "Expresión e información"
           },
           {
@@ -1111,8 +1111,8 @@
              "t": "Artículo 22: se prohíben las asociaciones secretas y las de carácter paramilitar"
             }
            ],
-           "id": "n7n2ayee6x",
-           "p": "nslr50we6x",
+           "id": "n0ro50jkhr",
+           "p": "n92eo8fkhr",
            "t": "Reunión y asociación"
           },
           {
@@ -1124,8 +1124,8 @@
              "t": "Acceder en condiciones de igualdad a los cargos públicos"
             }
            ],
-           "id": "nef4mn0e6x",
-           "p": "nslr50we6x",
+           "id": "nfy5gbzkhr",
+           "p": "n92eo8fkhr",
            "t": "Participación política"
           },
           {
@@ -1137,8 +1137,8 @@
              "t": "Artículo 25: nadie puede ser condenado por algo que no era delito cuando lo hizo"
             }
            ],
-           "id": "nml9yuye6x",
-           "p": "nslr50we6x",
+           "id": "n75kuyfkhr",
+           "p": "n92eo8fkhr",
            "t": "Tutela judicial efectiva"
           },
           {
@@ -1150,8 +1150,8 @@
              "t": "Libertad de enseñanza y derecho de los padres a una formación religiosa y moral acorde con sus convicciones"
             }
            ],
-           "id": "ndy3pb8e6x",
-           "p": "nslr50we6x",
+           "id": "n3d0717khr",
+           "p": "n92eo8fkhr",
            "t": "Educación"
           },
           {
@@ -1160,14 +1160,14 @@
              "t": "Artículo 28: libertad sindical y derecho a la huelga, garantizando los servicios esenciales"
             }
            ],
-           "id": "n466le6e6x",
-           "p": "nslr50we6x",
+           "id": "n1mkdickhr",
+           "p": "n92eo8fkhr",
            "t": "Sindicación y huelga"
           },
           {
-           "id": "nlwfchze6x",
+           "id": "nzf9papkhr",
            "k": "grupo",
-           "p": "n6fuwlme6x",
+           "p": "nmjc465khr",
            "t": "Derechos y deberes de los ciudadanos"
           },
           {
@@ -1179,8 +1179,8 @@
              "t": "Artículo 31: todos contribuyen al gasto público según su capacidad, con un sistema tributario justo y progresivo"
             }
            ],
-           "id": "nxwm15ie6x",
-           "p": "nlwfchze6x",
+           "id": "n3318rzkhr",
+           "p": "nzf9papkhr",
            "t": "Deberes con el Estado"
           },
           {
@@ -1192,8 +1192,8 @@
              "t": "Artículo 33: propiedad privada y herencia, limitadas por su función social"
             }
            ],
-           "id": "n18ge8te6x",
-           "p": "nlwfchze6x",
+           "id": "n3mjwrbkhr",
+           "p": "nzf9papkhr",
            "t": "Familia y propiedad"
           },
           {
@@ -1208,14 +1208,14 @@
              "t": "Artículo 38: libertad de empresa en el marco de la economía de mercado"
             }
            ],
-           "id": "nc4bfzne6x",
-           "p": "nlwfchze6x",
+           "id": "nxg9aupkhr",
+           "p": "nzf9papkhr",
            "t": "Trabajo y empresa"
           },
           {
-           "id": "nmikfpie6x",
+           "id": "n6hozr2khs",
            "k": "grupo",
-           "p": "n6fuwlme6x",
+           "p": "nmjc465khr",
            "t": "Principios rectores"
           },
           {
@@ -1227,8 +1227,8 @@
              "t": "Los hijos son iguales ante la ley con independencia de su filiación"
             }
            ],
-           "id": "n7yqhcoe6x",
-           "p": "nmikfpie6x",
+           "id": "n8mmfsskhs",
+           "p": "n6hozr2khs",
            "t": "Familia e infancia"
           },
           {
@@ -1240,8 +1240,8 @@
              "t": "Artículo 45: derecho a un medio ambiente adecuado y deber de conservarlo"
             }
            ],
-           "id": "n96zuf3e6x",
-           "p": "nmikfpie6x",
+           "id": "nbxxff5khs",
+           "p": "n6hozr2khs",
            "t": "Salud, cultura y medio ambiente"
           },
           {
@@ -1253,8 +1253,8 @@
              "t": "Los poderes públicos deben impedir la especulación del suelo"
             }
            ],
-           "id": "ne5fqnde6x",
-           "p": "nmikfpie6x",
+           "id": "nbsdrjrkhs",
+           "p": "n6hozr2khs",
            "t": "Vivienda"
           },
           {
@@ -1266,8 +1266,8 @@
              "t": "Protección especial de mujeres y menores con discapacidad"
             }
            ],
-           "id": "n3edc8ee6x",
-           "p": "nmikfpie6x",
+           "id": "n3beeiukhs",
+           "p": "n6hozr2khs",
            "t": "Personas con discapacidad"
           },
           {
@@ -1279,14 +1279,14 @@
              "t": "Artículo 51: defensa de consumidores y usuarios"
             }
            ],
-           "id": "nrsyxwze6x",
-           "p": "nmikfpie6x",
+           "id": "nqzrx0kkhs",
+           "p": "n6hozr2khs",
            "t": "Mayores y consumidores"
           },
           {
-           "id": "nq95g38e6x",
+           "id": "n0ow813khs",
            "k": "grupo",
-           "p": "n6fuwlme6x",
+           "p": "nmjc465khr",
            "t": "Garantías y suspensión"
           },
           {
@@ -1298,8 +1298,8 @@
              "t": "Antes hay que agotar la vía judicial ordinaria"
             }
            ],
-           "id": "n1muje9e6x",
-           "p": "nq95g38e6x",
+           "id": "nejb0exkhs",
+           "p": "n0ow813khs",
            "t": "Recurso de amparo"
           },
           {
@@ -1308,8 +1308,8 @@
              "t": "Artículo 54: alto comisionado de las Cortes para defender los derechos del Título I"
             }
            ],
-           "id": "nhe37rpe6x",
-           "p": "nq95g38e6x",
+           "id": "nor4ks6khs",
+           "p": "n0ow813khs",
            "t": "Defensor del Pueblo"
           },
           {
@@ -1327,8 +1327,8 @@
              "t": "En 2021 el Constitucional declaró inconstitucional el confinamiento de 2020: debió hacerse con estado de excepción"
             }
            ],
-           "id": "nk35j8me6x",
-           "p": "nq95g38e6x",
+           "id": "n5quhdrkhs",
+           "p": "n0ow813khs",
            "t": "Estado de alarma"
           },
           {
@@ -1340,8 +1340,8 @@
              "t": "Para graves alteraciones del orden público o del funcionamiento de las instituciones"
             }
            ],
-           "id": "n35ayeke6x",
-           "p": "nq95g38e6x",
+           "id": "nisgztokhs",
+           "p": "n0ow813khs",
            "t": "Estado de excepción"
           },
           {
@@ -1356,46 +1356,33 @@
              "t": "Nunca se ha usado en democracia"
             }
            ],
-           "id": "npkxh75e6x",
-           "p": "nq95g38e6x",
+           "id": "nh0is8ekhs",
+           "p": "n0ow813khs",
            "t": "Estado de sitio"
           }
          ],
-         "run": {
-          "dd": {},
-          "f": {},
-          "phase": 1,
-          "res": {
-           "p:nxstztde6x": 3
-          },
-          "slot": {
-           "nxstztde6x": "nxstztde6x"
-          },
-          "start": 1794648164284,
-          "v": "ln1"
-         },
          "type": "scheme",
-         "updated": 1794647132889,
+         "updated": 1794650406973,
          "v": 2
         },
         {
          "color": "#1d4ed8",
-         "created": 1794647132889,
+         "created": 1794650406976,
          "id": "ej-po-reforma",
          "layout": "linea",
          "links": [],
          "name": "Cómo se reforma la Constitución",
          "nodes": [
           {
-           "id": "nnedkzze6x",
+           "id": "n7cdh72khs",
            "n": "La Constitución no tiene cláusulas intocables: todo se puede reformar, pero cuanto más esencial es la parte, más difícil es. La iniciativa la tienen el Gobierno, el Congreso, el Senado y los parlamentos autonómicos; no cabe por iniciativa popular.",
            "p": null,
            "t": "Cómo se reforma la Constitución"
           },
           {
-           "id": "nxv3ieke6x",
+           "id": "nnxcrgskhs",
            "k": "pasos",
-           "p": "nnedkzze6x",
+           "p": "n7cdh72khs",
            "t": "Reforma ordinaria · artículo 167"
           },
           {
@@ -1407,8 +1394,8 @@
              "t": "Se usa para cualquier parte que no esté protegida por el procedimiento agravado"
             }
            ],
-           "id": "nngxpi0e6x",
-           "p": "nxv3ieke6x",
+           "id": "n7z3i44khs",
+           "p": "nnxcrgskhs",
            "t": "Iniciativa"
           },
           {
@@ -1417,8 +1404,8 @@
              "t": "Hacen falta 210 diputados y tres quintos de los senadores"
             }
            ],
-           "id": "nteyj8se6x",
-           "p": "nxv3ieke6x",
+           "id": "nhjtdyakhs",
+           "p": "nnxcrgskhs",
            "t": "Aprobación por tres quintos en cada cámara"
           },
           {
@@ -1427,8 +1414,8 @@
              "t": "Diputados y senadores a partes iguales intentan pactar un texto común"
             }
            ],
-           "id": "nm5hql1e6x",
-           "p": "nxv3ieke6x",
+           "id": "nx71tn8khs",
+           "p": "nnxcrgskhs",
            "t": "Comisión paritaria si las cámaras no coinciden"
           },
           {
@@ -1437,8 +1424,8 @@
              "t": "Si no hay acuerdo, basta con dos tercios del Congreso si el Senado la aprobó por mayoría absoluta"
             }
            ],
-           "id": "n87cbfwe6x",
-           "p": "nxv3ieke6x",
+           "id": "nfpd5dakhs",
+           "p": "nnxcrgskhs",
            "t": "Alternativa: dos tercios del Congreso"
           },
           {
@@ -1450,14 +1437,14 @@
              "t": "Ninguna de las reformas hechas hasta hoy ha tenido referéndum"
             }
            ],
-           "id": "nghmjl5e6x",
-           "p": "nxv3ieke6x",
+           "id": "nj5e9nbkhs",
+           "p": "nnxcrgskhs",
            "t": "Referéndum solo si se pide"
           },
           {
-           "id": "nwd6vule6x",
+           "id": "nt5i0npkhs",
            "k": "pasos",
-           "p": "nnedkzze6x",
+           "p": "n7cdh72khs",
            "t": "Reforma agravada · artículo 168"
           },
           {
@@ -1466,8 +1453,8 @@
              "t": "Para una revisión total o para tocar el Título preliminar, los derechos fundamentales de la Sección 1.ª o la Corona"
             }
            ],
-           "id": "nwx2tbne6x",
-           "p": "nwd6vule6x",
+           "id": "netosrykhs",
+           "p": "nt5i0npkhs",
            "t": "Cuándo se aplica"
           },
           {
@@ -1476,8 +1463,8 @@
              "t": "Las dos cámaras aprueban por dos tercios la idea de reformar"
             }
            ],
-           "id": "nahkkf8e6x",
-           "p": "nwd6vule6x",
+           "id": "nj862u9khs",
+           "p": "nt5i0npkhs",
            "t": "Aprobación del principio por dos tercios"
           },
           {
@@ -1486,8 +1473,8 @@
              "t": "Se convocan elecciones generales"
             }
            ],
-           "id": "nnzix2re6x",
-           "p": "nwd6vule6x",
+           "id": "n7qhxrlkhs",
+           "p": "nt5i0npkhs",
            "t": "Disolución inmediata de las Cortes"
           },
           {
@@ -1496,8 +1483,8 @@
              "t": "Estudian el nuevo texto y deben aprobarlo otra vez por dos tercios en cada cámara"
             }
            ],
-           "id": "n2q6lfoe6x",
-           "p": "nwd6vule6x",
+           "id": "n4mwlx8khs",
+           "p": "nt5i0npkhs",
            "t": "Las nuevas cámaras ratifican"
           },
           {
@@ -1506,13 +1493,13 @@
              "t": "La reforma solo se aprueba si la ratifica el pueblo"
             }
            ],
-           "id": "n3gkuvre6x",
-           "p": "nwd6vule6x",
+           "id": "narqrzlkhs",
+           "p": "nt5i0npkhs",
            "t": "Referéndum obligatorio"
           },
           {
-           "id": "n8jeyune6x",
-           "p": "nnedkzze6x",
+           "id": "nufh0mekhs",
+           "p": "n7cdh72khs",
            "t": "Las reformas hechas"
           },
           {
@@ -1524,8 +1511,8 @@
              "t": "Permite a los ciudadanos de la UE ser candidatos en las elecciones municipales"
             }
            ],
-           "id": "n8nhy1ze6x",
-           "p": "n8jeyune6x",
+           "id": "nbfpo6nkhs",
+           "p": "nufh0mekhs",
            "t": "1992 · Voto de los europeos en las municipales"
           },
           {
@@ -1540,8 +1527,8 @@
              "t": "Da prioridad absoluta al pago de la deuda pública y limita el déficit"
             }
            ],
-           "id": "nj8wl4ue6x",
-           "p": "n8jeyune6x",
+           "id": "nsoavhpkhs",
+           "p": "nufh0mekhs",
            "t": "2011 · Estabilidad presupuestaria"
           },
           {
@@ -1553,8 +1540,8 @@
              "t": "Se aprobó con un apoyo casi unánime"
             }
            ],
-           "id": "ng3jlp4e6x",
-           "p": "n8jeyune6x",
+           "id": "n9eq8mbkhs",
+           "p": "nufh0mekhs",
            "t": "2024 · Personas con discapacidad"
           },
           {
@@ -1566,14 +1553,14 @@
              "t": "Sancionada por el rey el 19 de mayo de 2026; se aplica desde las siguientes elecciones al Senado"
             }
            ],
-           "id": "nek8hsse6x",
-           "p": "n8jeyune6x",
+           "id": "n78phkvkhs",
+           "p": "nufh0mekhs",
            "t": "2026 · Un senador para Formentera"
           },
           {
-           "id": "n4yanlqe6x",
+           "id": "ne25cmdkhs",
            "k": "grupo",
-           "p": "nnedkzze6x",
+           "p": "n7cdh72khs",
            "t": "Límites y propuestas"
           },
           {
@@ -1585,8 +1572,8 @@
              "t": "No hay ninguna parte que no se pueda reformar"
             }
            ],
-           "id": "na1qcsde6y",
-           "p": "n4yanlqe6x",
+           "id": "nlfniqikhs",
+           "p": "ne25cmdkhs",
            "t": "Límites"
           },
           {
@@ -1604,13 +1591,13 @@
              "t": "Avanzar hacia un modelo federal, o recentralizar competencias, según quién lo proponga"
             }
            ],
-           "id": "nslnu5we6y",
-           "p": "n4yanlqe6x",
+           "id": "n46sdvakhs",
+           "p": "ne25cmdkhs",
            "t": "Reformas que se han propuesto y no se han hecho"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132889,
+         "updated": 1794650406976,
          "v": 2
         }
        ],
@@ -1622,22 +1609,22 @@
        "children": [
         {
          "color": "#7c2d12",
-         "created": 1794647132890,
+         "created": 1794650406976,
          "id": "ej-po-corona",
          "layout": "linea",
          "links": [],
          "name": "La Corona",
          "nodes": [
           {
-           "id": "nhvao8qe6y",
+           "id": "nd9mi5mkhs",
            "n": "España es una monarquía parlamentaria: el rey es el jefe del Estado, pero no gobierna. Casi todos sus actos necesitan la firma de un responsable político (el refrendo).",
            "p": null,
            "t": "La Corona"
           },
           {
-           "id": "nxyxhhee6y",
+           "id": "n9wekyskhs",
            "k": "grupo",
-           "p": "nhvao8qe6y",
+           "p": "nd9mi5mkhs",
            "t": "Qué es y qué hace"
           },
           {
@@ -1655,8 +1642,8 @@
              "t": "Su persona es inviolable y no está sujeta a responsabilidad"
             }
            ],
-           "id": "nun74zde6y",
-           "p": "nxyxhhee6y",
+           "id": "nworjwxkhs",
+           "p": "n9wekyskhs",
            "t": "El rey, jefe del Estado"
           },
           {
@@ -1671,8 +1658,8 @@
              "t": "Abre solemnemente cada legislatura"
             }
            ],
-           "id": "nbqex01e6y",
-           "p": "nxyxhhee6y",
+           "id": "nmdcdn8khs",
+           "p": "n9wekyskhs",
            "t": "Funciones con las Cortes"
           },
           {
@@ -1687,8 +1674,8 @@
              "t": "Expide los decretos aprobados en el Consejo de Ministros"
             }
            ],
-           "id": "nij9zwne6y",
-           "p": "nxyxhhee6y",
+           "id": "nw55tp2khs",
+           "p": "n9wekyskhs",
            "t": "Funciones con el Gobierno"
           },
           {
@@ -1706,8 +1693,8 @@
              "t": "Ejerce el alto patronazgo de las Reales Academias"
             }
            ],
-           "id": "nfh3731e6y",
-           "p": "nxyxhhee6y",
+           "id": "npfgo8lkhs",
+           "p": "n9wekyskhs",
            "t": "Otras funciones"
           },
           {
@@ -1722,14 +1709,14 @@
              "t": "Solo nombra libremente a los miembros de su Casa y reparte el presupuesto que recibe"
             }
            ],
-           "id": "nlyuliae6y",
-           "p": "nxyxhhee6y",
+           "id": "n6ngm7vkhs",
+           "p": "n9wekyskhs",
            "t": "El refrendo"
           },
           {
-           "id": "njn3pt2e6y",
+           "id": "n4lnm5rkhs",
            "k": "grupo",
-           "p": "nhvao8qe6y",
+           "p": "nd9mi5mkhs",
            "t": "La sucesión"
           },
           {
@@ -1747,8 +1734,8 @@
              "t": "La preferencia del varón es la reforma pendiente más citada"
             }
            ],
-           "id": "nfx3p3le6y",
-           "p": "njn3pt2e6y",
+           "id": "nzd5eppkhs",
+           "p": "n4lnm5rkhs",
            "t": "Cómo se hereda"
           },
           {
@@ -1763,8 +1750,8 @@
              "t": "Completó su formación militar en las tres academias; en 2026 se anunció que estudiará Ciencias Políticas"
             }
            ],
-           "id": "nor9ojie6y",
-           "p": "njn3pt2e6y",
+           "id": "nxe90gskhs",
+           "p": "n4lnm5rkhs",
            "t": "La heredera"
           },
           {
@@ -1776,13 +1763,13 @@
              "t": "Si el rey es menor de edad o está inhabilitado, gobierna un regente"
             }
            ],
-           "id": "nccvy9ae6y",
-           "p": "njn3pt2e6y",
+           "id": "nlha2v0khs",
+           "p": "n4lnm5rkhs",
            "t": "Abdicación y regencia"
           },
           {
-           "id": "neomq3qe6y",
-           "p": "nhvao8qe6y",
+           "id": "n0qc9kwkhs",
+           "p": "nd9mi5mkhs",
            "t": "Los reyes en democracia"
           },
           {
@@ -1794,8 +1781,8 @@
              "t": "Franco lo había designado sucesor en 1969"
             }
            ],
-           "id": "nsv17dte6y",
-           "p": "neomq3qe6y",
+           "id": "nzberkxkhs",
+           "p": "n0qc9kwkhs",
            "t": "1975 · Juan Carlos I, proclamado rey"
           },
           {
@@ -1807,8 +1794,8 @@
              "t": "Fue una de las bases de su popularidad durante décadas"
             }
            ],
-           "id": "nl7tgbbe6y",
-           "p": "neomq3qe6y",
+           "id": "nt8pd2xkhs",
+           "p": "n0qc9kwkhs",
            "t": "1981 · El rey frente al 23-F"
           },
           {
@@ -1820,8 +1807,8 @@
              "t": "Pidió disculpas en público: «Lo siento mucho. Me he equivocado y no volverá a ocurrir»"
             }
            ],
-           "id": "nsio2wxe6y",
-           "p": "neomq3qe6y",
+           "id": "nsvef1nkhs",
+           "p": "n0qc9kwkhs",
            "t": "2012 · La cacería de Botsuana"
           },
           {
@@ -1833,8 +1820,8 @@
              "t": "Felipe VI fue proclamado el 19 de junio"
             }
            ],
-           "id": "n5owv5ke6y",
-           "p": "neomq3qe6y",
+           "id": "nksi444khs",
+           "p": "n0qc9kwkhs",
            "t": "2014 · Abdicación: Felipe VI, rey"
           },
           {
@@ -1846,8 +1833,8 @@
              "t": "Fue aplaudido por unos y criticado por otros por no llamar al diálogo"
             }
            ],
-           "id": "ncumxf5e6y",
-           "p": "neomq3qe6y",
+           "id": "nn8zknykht",
+           "p": "n0qc9kwkhs",
            "t": "2017 · El discurso del 3 de octubre"
           },
           {
@@ -1859,8 +1846,8 @@
              "t": "Felipe VI le retiró la asignación y renunció a la herencia que pudiera corresponderle"
             }
            ],
-           "id": "ntpdtppe6y",
-           "p": "neomq3qe6y",
+           "id": "n3peh06kht",
+           "p": "n0qc9kwkhs",
            "t": "2020 · El rey emérito se va a Abu Dabi"
           },
           {
@@ -1869,8 +1856,8 @@
              "t": "La Fiscalía archivó las causas: unos hechos habían prescrito, otros los cubría la inviolabilidad y otros se regularizaron con Hacienda"
             }
            ],
-           "id": "nffro77e6y",
-           "p": "neomq3qe6y",
+           "id": "njzzt7mkht",
+           "p": "n0qc9kwkhs",
            "t": "2022 · Archivo de las investigaciones"
           },
           {
@@ -1879,8 +1866,8 @@
              "t": "Al cumplir la mayoría de edad, ante las Cortes Generales"
             }
            ],
-           "id": "nevy72me6y",
-           "p": "neomq3qe6y",
+           "id": "njzlk7qkht",
+           "p": "n0qc9kwkhs",
            "t": "2023 · Leonor jura la Constitución"
           },
           {
@@ -1889,42 +1876,33 @@
              "t": "Publicó «Reconciliación», escritas con la historiadora Laurence Debray"
             }
            ],
-           "id": "nk7hoqje6y",
-           "p": "neomq3qe6y",
+           "id": "n4lvah6kht",
+           "p": "n0qc9kwkhs",
            "t": "2025 · Las memorias de Juan Carlos I"
           }
          ],
-         "run": {
-          "dd": {},
-          "f": {},
-          "phase": 1,
-          "res": {},
-          "slot": {},
-          "start": 1794648185930,
-          "v": "ln1"
-         },
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406976,
          "v": 2
         },
         {
          "color": "#7c2d12",
-         "created": 1794647132890,
+         "created": 1794650406977,
          "id": "ej-po-cortes",
          "layout": "linea",
          "links": [],
          "name": "Las Cortes Generales",
          "nodes": [
           {
-           "id": "n993dvle6y",
+           "id": "n80wwqmkht",
            "n": "Representan al pueblo español y tienen dos cámaras: el Congreso de los Diputados y el Senado. El Congreso pesa mucho más: es un bicameralismo desigual. Se eligen cada cuatro años como máximo.",
            "p": null,
            "t": "Las Cortes Generales"
           },
           {
-           "id": "n0r2h5he6y",
+           "id": "nz5s8vhkht",
            "k": "grupo",
-           "p": "n993dvle6y",
+           "p": "n80wwqmkht",
            "t": "Las dos cámaras"
           },
           {
@@ -1951,8 +1929,8 @@
              "t": "Su sede es el Palacio de las Cortes, en la Carrera de San Jerónimo de Madrid"
             }
            ],
-           "id": "nv0djk5e6y",
-           "p": "n0r2h5he6y",
+           "id": "nu95yc8kht",
+           "p": "nz5s8vhkht",
            "t": "Congreso de los Diputados"
           },
           {
@@ -1979,14 +1957,14 @@
              "t": "Su sede es el Palacio del Senado, en la plaza de la Marina Española"
             }
            ],
-           "id": "nrcevgge6y",
-           "p": "n0r2h5he6y",
+           "id": "nnia1hskht",
+           "p": "nz5s8vhkht",
            "t": "Senado"
           },
           {
-           "id": "ntjd1qce6y",
+           "id": "nxpakp0kht",
            "k": "grupo",
-           "p": "n993dvle6y",
+           "p": "n80wwqmkht",
            "t": "Qué hacen"
           },
           {
@@ -1998,8 +1976,8 @@
              "t": "Pueden delegar en el Gobierno la redacción de textos legales"
             }
            ],
-           "id": "nveyb88e6y",
-           "p": "ntjd1qce6y",
+           "id": "nppzmoakht",
+           "p": "nxpakp0kht",
            "t": "Hacer las leyes"
           },
           {
@@ -2011,8 +1989,8 @@
              "t": "Si no se aprueban a tiempo, se prorrogan los del año anterior"
             }
            ],
-           "id": "n4p3od2e6y",
-           "p": "ntjd1qce6y",
+           "id": "nplgltqkht",
+           "p": "nxpakp0kht",
            "t": "Aprobar los presupuestos"
           },
           {
@@ -2027,8 +2005,8 @@
              "t": "El Congreso puede exigir responsabilidad política con la moción de censura"
             }
            ],
-           "id": "n3jrncwe6y",
-           "p": "ntjd1qce6y",
+           "id": "n3la30ykht",
+           "p": "nxpakp0kht",
            "t": "Controlar al Gobierno"
           },
           {
@@ -2043,14 +2021,14 @@
              "t": "Autorizan los estados de excepción y declaran el de sitio"
             }
            ],
-           "id": "nddlp86e6y",
-           "p": "ntjd1qce6y",
+           "id": "na9urtzkht",
+           "p": "nxpakp0kht",
            "t": "Otras funciones"
           },
           {
-           "id": "na8cqrze6y",
+           "id": "nf4d5mdkht",
            "k": "grupo",
-           "p": "n993dvle6y",
+           "p": "n80wwqmkht",
            "t": "Cómo se organizan"
           },
           {
@@ -2065,8 +2043,8 @@
              "t": "La Mesa organiza el trabajo y decide qué iniciativas se tramitan"
             }
            ],
-           "id": "n2ni3gze6y",
-           "p": "na8cqrze6y",
+           "id": "nch8l9tkht",
+           "p": "nf4d5mdkht",
            "t": "Presidencia y Mesa"
           },
           {
@@ -2078,8 +2056,8 @@
              "t": "Fija el orden del día de los plenos"
             }
            ],
-           "id": "nl3xg3ye6y",
-           "p": "na8cqrze6y",
+           "id": "nef0fg1kht",
+           "p": "nf4d5mdkht",
            "t": "Junta de Portavoces"
           },
           {
@@ -2091,8 +2069,8 @@
              "t": "Las comisiones estudian las leyes por temas y pueden aprobar algunas sin pasar por el Pleno"
             }
            ],
-           "id": "nvudvx7e6y",
-           "p": "na8cqrze6y",
+           "id": "nh7zykhkht",
+           "p": "nf4d5mdkht",
            "t": "Pleno y comisiones"
           },
           {
@@ -2104,8 +2082,8 @@
              "t": "Los que no llegan van al Grupo Mixto"
             }
            ],
-           "id": "nspohfje6y",
-           "p": "na8cqrze6y",
+           "id": "n73iqqukht",
+           "p": "nf4d5mdkht",
            "t": "Grupos parlamentarios"
           },
           {
@@ -2117,8 +2095,8 @@
              "t": "Así ocurre desde la disolución del 6 de octubre de 2026 hasta que se constituyan las nuevas Cortes"
             }
            ],
-           "id": "ntohm6we6y",
-           "p": "na8cqrze6y",
+           "id": "n7x2auxkht",
+           "p": "nf4d5mdkht",
            "t": "Diputación Permanente"
           },
           {
@@ -2127,14 +2105,14 @@
              "t": "Dos al año: de septiembre a diciembre y de febrero a junio"
             }
            ],
-           "id": "n4yfn74e6y",
-           "p": "na8cqrze6y",
+           "id": "nqta5dlkht",
+           "p": "nf4d5mdkht",
            "t": "Periodos de sesiones"
           },
           {
-           "id": "n2c2akke6y",
+           "id": "ndjdvkdkht",
            "k": "grupo",
-           "p": "n993dvle6y",
+           "p": "n80wwqmkht",
            "t": "Estatuto de los parlamentarios"
           },
           {
@@ -2143,8 +2121,8 @@
              "t": "No pueden ser perseguidos por las opiniones expresadas en el ejercicio de su cargo"
             }
            ],
-           "id": "nt2h8uke6y",
-           "p": "n2c2akke6y",
+           "id": "n3av4nxkht",
+           "p": "ndjdvkdkht",
            "t": "Inviolabilidad"
           },
           {
@@ -2156,8 +2134,8 @@
              "t": "Para procesarlos hace falta autorización de su cámara: el suplicatorio"
             }
            ],
-           "id": "n76q2rce6y",
-           "p": "n2c2akke6y",
+           "id": "nybwd3mkht",
+           "p": "ndjdvkdkht",
            "t": "Inmunidad"
           },
           {
@@ -2166,8 +2144,8 @@
              "t": "Los juzga la Sala de lo Penal del Tribunal Supremo"
             }
            ],
-           "id": "nzehnbte6y",
-           "p": "n2c2akke6y",
+           "id": "nj3ah61kht",
+           "p": "ndjdvkdkht",
            "t": "Aforamiento"
           },
           {
@@ -2176,33 +2154,33 @@
              "t": "El escaño es del diputado, no del partido: no se le puede obligar a votar algo"
             }
            ],
-           "id": "nwrwt4ae6y",
-           "p": "n2c2akke6y",
+           "id": "nsdqt70kht",
+           "p": "ndjdvkdkht",
            "t": "Sin mandato imperativo"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406977,
          "v": 2
         },
         {
          "color": "#7c2d12",
-         "created": 1794647132890,
+         "created": 1794650406977,
          "id": "ej-po-gobierno",
          "layout": "linea",
          "links": [],
          "name": "El Gobierno",
          "nodes": [
           {
-           "id": "nfhzj9ee6y",
+           "id": "nr1l2nckht",
            "n": "Dirige la política del país y la Administración. Lo encabeza un presidente elegido por el Congreso, no directamente por los ciudadanos: España es un sistema parlamentario.",
            "p": null,
            "t": "El Gobierno"
           },
           {
-           "id": "n4d7xrbe6y",
+           "id": "n3q5851khu",
            "k": "grupo",
-           "p": "nfhzj9ee6y",
+           "p": "nr1l2nckht",
            "t": "Cómo es"
           },
           {
@@ -2217,8 +2195,8 @@
              "t": "Los secretarios de Estado ayudan a los ministros, pero no forman parte del Gobierno"
             }
            ],
-           "id": "nijixlae6y",
-           "p": "n4d7xrbe6y",
+           "id": "n06551akhu",
+           "p": "n3q5851khu",
            "t": "Composición"
           },
           {
@@ -2236,8 +2214,8 @@
              "t": "Puede plantear la cuestión de confianza y proponer un referéndum consultivo, que debe autorizar el Congreso"
             }
            ],
-           "id": "no5ljote6y",
-           "p": "n4d7xrbe6y",
+           "id": "nvjh5ubkhu",
+           "p": "n3q5851khu",
            "t": "El presidente"
           },
           {
@@ -2255,8 +2233,8 @@
              "t": "En casos de extraordinaria y urgente necesidad dicta decretos-ley"
             }
            ],
-           "id": "ner7lx8e6y",
-           "p": "n4d7xrbe6y",
+           "id": "neqdlm9khu",
+           "p": "n3q5851khu",
            "t": "Funciones"
           },
           {
@@ -2268,8 +2246,8 @@
              "t": "Sus miembros son juzgados penalmente por el Tribunal Supremo"
             }
            ],
-           "id": "nm5yznye6y",
-           "p": "n4d7xrbe6y",
+           "id": "n4ssh4ckhu",
+           "p": "n3q5851khu",
            "t": "Responsabilidad"
           },
           {
@@ -2281,8 +2259,8 @@
              "t": "Sigue «en funciones» hasta que toma posesión el nuevo, limitado a los asuntos ordinarios"
             }
            ],
-           "id": "nivjno5e6y",
-           "p": "n4d7xrbe6y",
+           "id": "nqgxcuqkhu",
+           "p": "n3q5851khu",
            "t": "Cuándo cesa"
           },
           {
@@ -2294,13 +2272,13 @@
              "t": "Un delegado del Gobierno en cada comunidad autónoma y subdelegados en las provincias"
             }
            ],
-           "id": "nn6mzdve6y",
-           "p": "n4d7xrbe6y",
+           "id": "nv3asd5khu",
+           "p": "n3q5851khu",
            "t": "La Administración General del Estado"
           },
           {
-           "id": "nawo8qre6y",
-           "p": "nfhzj9ee6y",
+           "id": "njeqoztkhu",
+           "p": "nr1l2nckht",
            "t": "Los presidentes desde 1976"
           },
           {
@@ -2312,8 +2290,8 @@
              "t": "Dirigió la Transición y dimitió en enero de 1981"
             }
            ],
-           "id": "niua370e6y",
-           "p": "nawo8qre6y",
+           "id": "nvsztt9khu",
+           "p": "njeqoztkhu",
            "t": "1976 · Adolfo Suárez"
           },
           {
@@ -2325,8 +2303,8 @@
              "t": "Metió a España en la OTAN y convocó elecciones anticipadas en 1982"
             }
            ],
-           "id": "niw4ujwe6y",
-           "p": "nawo8qre6y",
+           "id": "nq2f4q7khu",
+           "p": "njeqoztkhu",
            "t": "1981 · Leopoldo Calvo-Sotelo"
           },
           {
@@ -2341,8 +2319,8 @@
              "t": "Su etapa final estuvo marcada por la corrupción y los GAL"
             }
            ],
-           "id": "n5n89nae6y",
-           "p": "nawo8qre6y",
+           "id": "n1ob1z2khu",
+           "p": "njeqoztkhu",
            "t": "1982 · Felipe González"
           },
           {
@@ -2354,8 +2332,8 @@
              "t": "Entrada en el euro, privatizaciones y apoyo a la guerra de Irak"
             }
            ],
-           "id": "njfnt5ie6y",
-           "p": "nawo8qre6y",
+           "id": "n9ce8gzkhu",
+           "p": "njeqoztkhu",
            "t": "1996 · José María Aznar"
           },
           {
@@ -2367,8 +2345,8 @@
              "t": "Retirada de Irak, matrimonio igualitario y fin de ETA; la crisis de 2008 marcó su segundo mandato"
             }
            ],
-           "id": "na3qz8de6y",
-           "p": "nawo8qre6y",
+           "id": "ncspksakhu",
+           "p": "njeqoztkhu",
            "t": "2004 · José Luis Rodríguez Zapatero"
           },
           {
@@ -2383,8 +2361,8 @@
              "t": "Primer presidente desalojado por una moción de censura, en 2018"
             }
            ],
-           "id": "nf93rr6e6y",
-           "p": "nawo8qre6y",
+           "id": "n5ibua6khu",
+           "p": "njeqoztkhu",
            "t": "2011 · Mariano Rajoy"
           },
           {
@@ -2399,33 +2377,33 @@
              "t": "Convocó elecciones anticipadas para el 29 de noviembre de 2026"
             }
            ],
-           "id": "nhiqy9ye6y",
-           "p": "nawo8qre6y",
+           "id": "nq0offzkhu",
+           "p": "njeqoztkhu",
            "t": "2018 · Pedro Sánchez"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406977,
          "v": 2
         },
         {
          "color": "#7c2d12",
-         "created": 1794647132890,
+         "created": 1794650406978,
          "id": "ej-po-judicial",
          "layout": "linea",
          "links": [],
          "name": "El poder judicial",
          "nodes": [
           {
-           "id": "njf2ypie6y",
+           "id": "nakrswhkhu",
            "n": "La justicia emana del pueblo y se administra en nombre del rey por jueces y magistrados independientes, inamovibles, responsables y sometidos únicamente a la ley.",
            "p": null,
            "t": "El poder judicial"
           },
           {
-           "id": "nrlp23ge6y",
+           "id": "nyp2z86khu",
            "k": "grupo",
-           "p": "njf2ypie6y",
+           "p": "nakrswhkhu",
            "t": "Principios"
           },
           {
@@ -2440,8 +2418,8 @@
              "t": "Juzgar y hacer ejecutar lo juzgado corresponde solo a los jueces"
             }
            ],
-           "id": "njqi1gle6y",
-           "p": "nrlp23ge6y",
+           "id": "n0t30drkhu",
+           "p": "nyp2z86khu",
            "t": "Independencia y unidad"
           },
           {
@@ -2456,8 +2434,8 @@
              "t": "Los ciudadanos participan con el jurado popular y la acción popular"
             }
            ],
-           "id": "npb8bcce6y",
-           "p": "nrlp23ge6y",
+           "id": "n3hr4f8khu",
+           "p": "nyp2z86khu",
            "t": "Una justicia abierta"
           },
           {
@@ -2475,14 +2453,14 @@
              "t": "Social: conflictos laborales y de Seguridad Social"
             }
            ],
-           "id": "nocucace6y",
-           "p": "nrlp23ge6y",
+           "id": "nqoil4jkhu",
+           "p": "nyp2z86khu",
            "t": "Los órdenes jurisdiccionales"
           },
           {
-           "id": "nu39m9be6y",
+           "id": "n6910xdkhu",
            "k": "grupo",
-           "p": "njf2ypie6y",
+           "p": "nakrswhkhu",
            "t": "Los órganos"
           },
           {
@@ -2503,8 +2481,8 @@
              "t": "Isabel Perelló lo preside desde septiembre de 2024: la primera mujer"
             }
            ],
-           "id": "n4lxxm0e6y",
-           "p": "nu39m9be6y",
+           "id": "nmd9phskhu",
+           "p": "n6910xdkhu",
            "t": "Consejo General del Poder Judicial"
           },
           {
@@ -2522,8 +2500,8 @@
              "t": "Tiene su sede en el Palacio de las Salesas, en Madrid"
             }
            ],
-           "id": "nyoy9zle6y",
-           "p": "nu39m9be6y",
+           "id": "nsqnjywkhu",
+           "p": "n6910xdkhu",
            "t": "Tribunal Supremo"
           },
           {
@@ -2538,8 +2516,8 @@
              "t": "Se creó en 1977"
             }
            ],
-           "id": "nlmni5ne6y",
-           "p": "nu39m9be6y",
+           "id": "n9l1y8lkhu",
+           "p": "n6910xdkhu",
            "t": "Audiencia Nacional"
           },
           {
@@ -2551,8 +2529,8 @@
              "t": "Juzgan a los aforados autonómicos"
             }
            ],
-           "id": "nfr8tile6y",
-           "p": "nu39m9be6y",
+           "id": "nrggn3gkhu",
+           "p": "n6910xdkhu",
            "t": "Tribunales Superiores de Justicia"
           },
           {
@@ -2567,14 +2545,14 @@
              "t": "En los municipios sin juzgado actúan los jueces de paz, que son legos"
             }
            ],
-           "id": "ntdu7gpe6y",
-           "p": "nu39m9be6y",
+           "id": "npmtdfvkhu",
+           "p": "n6910xdkhu",
            "t": "Audiencias Provinciales y tribunales de instancia"
           },
           {
-           "id": "n75247ye6y",
+           "id": "n9hvnrnkhu",
            "k": "grupo",
-           "p": "njf2ypie6y",
+           "p": "nakrswhkhu",
            "t": "La Fiscalía"
           },
           {
@@ -2586,8 +2564,8 @@
              "t": "Actúa con unidad y dependencia jerárquica"
             }
            ],
-           "id": "na7buy6e6y",
-           "p": "n75247ye6y",
+           "id": "n8361d5khu",
+           "p": "n9hvnrnkhu",
            "t": "El Ministerio Fiscal"
           },
           {
@@ -2602,14 +2580,14 @@
              "t": "La sentencia tuvo dos votos discrepantes; él dimitió y le sustituyó Teresa Peramato en diciembre de 2025"
             }
            ],
-           "id": "nzemikae6y",
-           "p": "n75247ye6y",
+           "id": "ntdv8ttkhu",
+           "p": "n9hvnrnkhu",
            "t": "El fiscal general del Estado"
           },
           {
-           "id": "nk3qsu9e6y",
+           "id": "nryqy7akhu",
            "k": "grupo",
-           "p": "njf2ypie6y",
+           "p": "nakrswhkhu",
            "t": "Debates sobre la justicia"
           },
           {
@@ -2621,8 +2599,8 @@
              "t": "Otros, como la Comisión Europea, piden que los jueces elijan a una parte de los vocales para reforzar su independencia"
             }
            ],
-           "id": "ndk003ne6y",
-           "p": "nk3qsu9e6y",
+           "id": "ndqhhe4khu",
+           "p": "nryqy7akhu",
            "t": "Cómo se elige al CGPJ"
           },
           {
@@ -2634,8 +2612,8 @@
              "t": "Las asociaciones judiciales mayoritarias y la oposición rechazan esas acusaciones como ataques a la independencia judicial"
             }
            ],
-           "id": "ngb6yj8e6y",
-           "p": "nk3qsu9e6y",
+           "id": "nnez8lpkhu",
+           "p": "nryqy7akhu",
            "t": "Justicia y política"
           },
           {
@@ -2647,33 +2625,33 @@
              "t": "En 2021 se indultó a los nueve presos del procés, con críticas del Supremo y de la oposición"
             }
            ],
-           "id": "n84wchre6y",
-           "p": "nk3qsu9e6y",
+           "id": "ngo579kkhu",
+           "p": "nryqy7akhu",
            "t": "El indulto"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406978,
          "v": 2
         },
         {
          "color": "#7c2d12",
-         "created": 1794647132890,
+         "created": 1794650406978,
          "id": "ej-po-tc",
          "layout": "linea",
          "links": [],
          "name": "El Tribunal Constitucional y los órganos de control",
          "nodes": [
           {
-           "id": "n6oq8yfe6y",
+           "id": "nbldgmdkhu",
            "n": "Además de los tres poderes clásicos, la Constitución crea órganos que vigilan que se respete la propia Constitución, los derechos y las cuentas públicas.",
            "p": null,
            "t": "El Tribunal Constitucional y los órganos de control"
           },
           {
-           "id": "nmq2540e6y",
+           "id": "nyyhhe7khu",
            "k": "grupo",
-           "p": "n6oq8yfe6y",
+           "p": "nbldgmdkhu",
            "t": "Tribunal Constitucional"
           },
           {
@@ -2688,8 +2666,8 @@
              "t": "Tiene su sede en Madrid, en la calle Domenico Scarlatti"
             }
            ],
-           "id": "nt563zqe6y",
-           "p": "nmq2540e6y",
+           "id": "nvjp38ukhu",
+           "p": "nyyhhe7khu",
            "t": "Qué es"
           },
           {
@@ -2707,8 +2685,8 @@
              "t": "Cándido Conde-Pumpido lo preside desde enero de 2023; su mandato venció en diciembre de 2025 y sigue en funciones mientras el Senado no renueva su tercio"
             }
            ],
-           "id": "nwau6hle6y",
-           "p": "nmq2540e6y",
+           "id": "n088dw3khv",
+           "p": "nyyhhe7khu",
            "t": "Quién lo forma"
           },
           {
@@ -2726,8 +2704,8 @@
              "t": "Conflictos de competencias entre el Estado y las comunidades autónomas"
             }
            ],
-           "id": "n4yyddxe6y",
-           "p": "nmq2540e6y",
+           "id": "navzeb0khv",
+           "p": "nyyhhe7khu",
            "t": "Qué resuelve"
           },
           {
@@ -2749,14 +2727,14 @@
              "y": "2025"
             }
            ],
-           "id": "nwxshk3e6y",
-           "p": "nmq2540e6y",
+           "id": "nqw3bqtkhv",
+           "p": "nyyhhe7khu",
            "t": "Sentencias que marcaron época"
           },
           {
-           "id": "nr8rylee6y",
+           "id": "n3ycvbtkhv",
            "k": "grupo",
-           "p": "n6oq8yfe6y",
+           "p": "nbldgmdkhu",
            "t": "Órganos de control"
           },
           {
@@ -2777,8 +2755,8 @@
              "t": "Varias comunidades tienen el suyo: Síndic de Greuges, Ararteko, Valedora do Pobo…"
             }
            ],
-           "id": "n2mua3we6y",
-           "p": "nr8rylee6y",
+           "id": "nkwsvsmkhv",
+           "p": "n3ycvbtkhv",
            "t": "Defensor del Pueblo"
           },
           {
@@ -2793,8 +2771,8 @@
              "t": "Puede exigir a los gestores públicos que devuelvan el dinero mal gastado"
             }
            ],
-           "id": "niqm7nbe6y",
-           "p": "nr8rylee6y",
+           "id": "nc7m98wkhv",
+           "p": "n3ycvbtkhv",
            "t": "Tribunal de Cuentas"
           },
           {
@@ -2809,8 +2787,8 @@
              "t": "Carmen Calvo lo preside desde 2024"
             }
            ],
-           "id": "nbn86c8e6y",
-           "p": "nr8rylee6y",
+           "id": "nt1l96okhw",
+           "p": "n3ycvbtkhv",
            "t": "Consejo de Estado"
           },
           {
@@ -2828,13 +2806,13 @@
              "t": "CNMC: defiende la competencia y regula mercados como la energía o las telecomunicaciones"
             }
            ],
-           "id": "nfvist8e6y",
-           "p": "nr8rylee6y",
+           "id": "n8azyx5khw",
+           "p": "n3ycvbtkhv",
            "t": "Organismos independientes"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406978,
          "v": 2
         }
        ],
@@ -2846,22 +2824,22 @@
        "children": [
         {
          "color": "#0f766e",
-         "created": 1794647132890,
+         "created": 1794650406980,
          "id": "ej-po-investidura",
          "layout": "linea",
          "links": [],
          "name": "Cómo se elige al presidente del Gobierno",
          "nodes": [
           {
-           "id": "nty2oe7e6y",
+           "id": "nx8bdpukhw",
            "n": "En España no se vota directamente al presidente: se vota a los diputados, y estos eligen al presidente en una votación de investidura en el Congreso.",
            "p": null,
            "t": "Cómo se elige al presidente del Gobierno"
           },
           {
-           "id": "nhgydace6y",
+           "id": "nexd8y3khw",
            "k": "pasos",
-           "p": "nty2oe7e6y",
+           "p": "nx8bdpukhw",
            "t": "La investidura, paso a paso"
           },
           {
@@ -2870,8 +2848,8 @@
              "t": "Se eligen los 350 diputados y los senadores"
             }
            ],
-           "id": "nx108sxe6y",
-           "p": "nhgydace6y",
+           "id": "n2htw1tkhw",
+           "p": "nexd8y3khw",
            "t": "Elecciones generales"
           },
           {
@@ -2883,8 +2861,8 @@
              "t": "Cada cámara elige su presidencia y su Mesa"
             }
            ],
-           "id": "ntcy16ze6y",
-           "p": "nhgydace6y",
+           "id": "nwyn4bekhw",
+           "p": "nexd8y3khw",
            "t": "Se constituyen las nuevas Cortes"
           },
           {
@@ -2893,8 +2871,8 @@
              "t": "El rey recibe a los representantes de los grupos con escaños"
             }
            ],
-           "id": "nvy6g2pe6y",
-           "p": "nhgydace6y",
+           "id": "nk2q9x2khw",
+           "p": "nexd8y3khw",
            "t": "Ronda de consultas del rey"
           },
           {
@@ -2906,8 +2884,8 @@
              "t": "Suele ser quien tiene más apoyos, no necesariamente el más votado"
             }
            ],
-           "id": "nn6ublse6y",
-           "p": "nhgydace6y",
+           "id": "n7yglw6khw",
+           "p": "nexd8y3khw",
            "t": "El rey propone un candidato"
           },
           {
@@ -2916,8 +2894,8 @@
              "t": "El candidato expone su programa y pide la confianza de la cámara"
             }
            ],
-           "id": "nvrvbjae6y",
-           "p": "nhgydace6y",
+           "id": "n1b6cubkhw",
+           "p": "nexd8y3khw",
            "t": "Debate de investidura"
           },
           {
@@ -2926,8 +2904,8 @@
              "t": "Necesita 176 votos a favor"
             }
            ],
-           "id": "npibzoge6y",
-           "p": "nhgydace6y",
+           "id": "nvwr4fpkhw",
+           "p": "nexd8y3khw",
            "t": "Primera votación: mayoría absoluta"
           },
           {
@@ -2936,8 +2914,8 @@
              "t": "48 horas después basta con más síes que noes"
             }
            ],
-           "id": "n8legmve6y",
-           "p": "nhgydace6y",
+           "id": "n7ihp81khw",
+           "p": "nexd8y3khw",
            "t": "Segunda votación: mayoría simple"
           },
           {
@@ -2949,8 +2927,8 @@
              "t": "Si a los dos meses de la primera votación nadie lo consigue, las Cortes se disuelven solas y hay nuevas elecciones"
             }
            ],
-           "id": "nwkvouwe6y",
-           "p": "nhgydace6y",
+           "id": "nxqasywkhw",
+           "p": "nexd8y3khw",
            "t": "Si fracasa, nuevos intentos"
           },
           {
@@ -2962,13 +2940,13 @@
              "t": "Después nombra a sus ministros"
             }
            ],
-           "id": "n1vpmg6e6y",
-           "p": "nhgydace6y",
+           "id": "ninnxpfkhw",
+           "p": "nexd8y3khw",
            "t": "Nombramiento y toma de posesión"
           },
           {
-           "id": "n15nizze6y",
-           "p": "nty2oe7e6y",
+           "id": "njyn0sdkhw",
+           "p": "nx8bdpukhw",
            "t": "Investiduras para recordar"
           },
           {
@@ -2977,8 +2955,8 @@
              "t": "El golpe de Tejero interrumpió la votación de Calvo-Sotelo, que fue investido dos días después"
             }
            ],
-           "id": "nlllr28e6y",
-           "p": "n15nizze6y",
+           "id": "nbsah98khw",
+           "p": "njyn0sdkhw",
            "t": "1981 · La investidura del 23-F"
           },
           {
@@ -2990,8 +2968,8 @@
              "t": "Rajoy fue investido en octubre gracias a la abstención del PSOE, que provocó una crisis interna socialista"
             }
            ],
-           "id": "na0hb57e6y",
-           "p": "n15nizze6y",
+           "id": "nuhewiekhw",
+           "p": "njyn0sdkhw",
            "t": "2016 · Primera repetición electoral"
           },
           {
@@ -3000,8 +2978,8 @@
              "t": "Sánchez no logró la investidura tras las elecciones de abril y se repitieron en noviembre"
             }
            ],
-           "id": "niwlne7e6y",
-           "p": "n15nizze6y",
+           "id": "n3tmfkkkhw",
+           "p": "njyn0sdkhw",
            "t": "2019 · Segunda repetición electoral"
           },
           {
@@ -3013,8 +2991,8 @@
              "t": "PSOE y Unidas Podemos formaron el primer Gobierno de coalición de la democracia"
             }
            ],
-           "id": "n3oc9pbe6y",
-           "p": "n15nizze6y",
+           "id": "n7flstfkhw",
+           "p": "njyn0sdkhw",
            "t": "2020 · El primer Gobierno de coalición"
           },
           {
@@ -3026,33 +3004,33 @@
              "t": "Sánchez fue investido en noviembre con 179 votos, con el apoyo de Sumar, ERC, Junts, Bildu, PNV, BNG y Coalición Canaria"
             }
            ],
-           "id": "nbbtk66e6y",
-           "p": "n15nizze6y",
+           "id": "n3v0xu7khw",
+           "p": "njyn0sdkhw",
            "t": "2023 · Feijóo fallida, Sánchez investido"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406980,
          "v": 2
         },
         {
          "color": "#0f766e",
-         "created": 1794647132890,
+         "created": 1794650406980,
          "id": "ej-po-mocion",
          "layout": "linea",
          "links": [],
          "name": "Moción de censura y cuestión de confianza",
          "nodes": [
           {
-           "id": "nir3ixre6y",
+           "id": "n5dqsl4khw",
            "n": "Las dos vías por las que el Congreso puede quitar o confirmar su apoyo a un Gobierno durante la legislatura. La moción la presenta la oposición; la cuestión de confianza, el propio presidente.",
            "p": null,
            "t": "Moción de censura y cuestión de confianza"
           },
           {
-           "id": "nsp5ec6e6y",
+           "id": "nkhsaaukhw",
            "k": "pasos",
-           "p": "nir3ixre6y",
+           "p": "n5dqsl4khw",
            "t": "La moción de censura · artículo 113"
           },
           {
@@ -3061,8 +3039,8 @@
              "t": "Al menos 35 diputados"
             }
            ],
-           "id": "nzulbw8e6y",
-           "p": "nsp5ec6e6y",
+           "id": "nd8hxt7khw",
+           "p": "nkhsaaukhw",
            "t": "La firma un décimo de los diputados"
           },
           {
@@ -3071,8 +3049,8 @@
              "t": "Es una moción «constructiva»: no basta con echar al presidente, hay que proponer otro"
             }
            ],
-           "id": "nf2dxcpe6y",
-           "p": "nsp5ec6e6y",
+           "id": "noppiajkhw",
+           "p": "nkhsaaukhw",
            "t": "Debe incluir un candidato alternativo"
           },
           {
@@ -3084,8 +3062,8 @@
              "t": "En los dos primeros días se pueden presentar mociones alternativas"
             }
            ],
-           "id": "nf4ypgge6y",
-           "p": "nsp5ec6e6y",
+           "id": "ncy242jkhw",
+           "p": "nkhsaaukhw",
            "t": "Plazo de espera"
           },
           {
@@ -3094,8 +3072,8 @@
              "t": "Necesita 176 votos a favor"
             }
            ],
-           "id": "nnm505te6y",
-           "p": "nsp5ec6e6y",
+           "id": "nyjohplkhw",
+           "p": "nkhsaaukhw",
            "t": "Votación: mayoría absoluta"
           },
           {
@@ -3104,8 +3082,8 @@
              "t": "El Gobierno cae y el candidato queda investido presidente automáticamente"
             }
            ],
-           "id": "n7oe1ide6y",
-           "p": "nsp5ec6e6y",
+           "id": "nqa3qbckhw",
+           "p": "nkhsaaukhw",
            "t": "Si prospera"
           },
           {
@@ -3114,14 +3092,14 @@
              "t": "Sus firmantes no pueden presentar otra en el mismo periodo de sesiones"
             }
            ],
-           "id": "n0bihgue6y",
-           "p": "nsp5ec6e6y",
+           "id": "nbvypwmkhw",
+           "p": "nkhsaaukhw",
            "t": "Si fracasa"
           },
           {
-           "id": "na27l0re6y",
+           "id": "nmwsjfnkhw",
            "k": "pasos",
-           "p": "nir3ixre6y",
+           "p": "n5dqsl4khw",
            "t": "La cuestión de confianza · artículo 112"
           },
           {
@@ -3133,8 +3111,8 @@
              "t": "Sobre su programa o sobre una declaración de política general"
             }
            ],
-           "id": "ngzhx4se6y",
-           "p": "na27l0re6y",
+           "id": "nh3qy05khw",
+           "p": "nmwsjfnkhw",
            "t": "La plantea el presidente"
           },
           {
@@ -3143,8 +3121,8 @@
              "t": "Basta con más síes que noes"
             }
            ],
-           "id": "nalqt6je6y",
-           "p": "na27l0re6y",
+           "id": "ncxd2h2khw",
+           "p": "nmwsjfnkhw",
            "t": "Votación: mayoría simple"
           },
           {
@@ -3153,13 +3131,13 @@
              "t": "El Gobierno dimite y se abre una nueva investidura"
             }
            ],
-           "id": "n8ky4toe6y",
-           "p": "na27l0re6y",
+           "id": "nup8l6ukhw",
+           "p": "nmwsjfnkhw",
            "t": "Si la pierde"
           },
           {
-           "id": "n2gtkbre6y",
-           "p": "nir3ixre6y",
+           "id": "nia7twzkhw",
+           "p": "n5dqsl4khw",
            "t": "Las que ha habido"
           },
           {
@@ -3168,8 +3146,8 @@
              "t": "Fracasó, pero proyectó a González como alternativa de Gobierno"
             }
            ],
-           "id": "ngyialce6y",
-           "p": "n2gtkbre6y",
+           "id": "nyco5etkhw",
+           "p": "nia7twzkhw",
            "t": "1980 · Felipe González contra Suárez"
           },
           {
@@ -3178,8 +3156,8 @@
              "t": "La planteó en septiembre, en plena crisis de la UCD"
             }
            ],
-           "id": "nvuftepe6y",
-           "p": "n2gtkbre6y",
+           "id": "nlh05axkhw",
+           "p": "nia7twzkhw",
            "t": "1980 · Suárez gana una cuestión de confianza"
           },
           {
@@ -3188,8 +3166,8 @@
              "t": "El líder de Alianza Popular solo logró 67 apoyos"
             }
            ],
-           "id": "ndxwu98e6y",
-           "p": "n2gtkbre6y",
+           "id": "n5jq8dhkhw",
+           "p": "nia7twzkhw",
            "t": "1987 · Hernández Mancha contra González"
           },
           {
@@ -3198,8 +3176,8 @@
              "t": "La planteó tras las elecciones de 1989 para reforzar su mandato"
             }
            ],
-           "id": "n435wawe6y",
-           "p": "n2gtkbre6y",
+           "id": "n1r462nkhw",
+           "p": "nia7twzkhw",
            "t": "1990 · González gana una cuestión de confianza"
           },
           {
@@ -3208,8 +3186,8 @@
              "t": "Podemos la presentó por la corrupción en el PP; fracasó con 82 votos"
             }
            ],
-           "id": "nqxs9l0e6y",
-           "p": "n2gtkbre6y",
+           "id": "nrk6tqpkhx",
+           "p": "nia7twzkhw",
            "t": "2017 · Pablo Iglesias contra Rajoy"
           },
           {
@@ -3218,8 +3196,8 @@
              "t": "Tras la sentencia del caso Gürtel, logró 180 votos con el apoyo de Podemos, nacionalistas e independentistas"
             }
            ],
-           "id": "no81h31e6y",
-           "p": "n2gtkbre6y",
+           "id": "nrm1827khx",
+           "p": "nia7twzkhw",
            "t": "2018 · Sánchez contra Rajoy: la única que ha prosperado"
           },
           {
@@ -3228,8 +3206,8 @@
              "t": "Vox se quedó solo: 52 votos"
             }
            ],
-           "id": "nl3l7bpe6y",
-           "p": "n2gtkbre6y",
+           "id": "npzrrygkhx",
+           "p": "nia7twzkhw",
            "t": "2020 · Abascal contra Sánchez"
           },
           {
@@ -3238,8 +3216,8 @@
              "t": "Vox propuso como candidato a un economista independiente de 89 años; logró 53 votos"
             }
            ],
-           "id": "nv6lsg1e6y",
-           "p": "n2gtkbre6y",
+           "id": "nenjrzekhx",
+           "p": "nia7twzkhw",
            "t": "2023 · Ramón Tamames contra Sánchez"
           },
           {
@@ -3251,33 +3229,33 @@
              "t": "No era vinculante, y el PP no llegó a presentar una moción de censura"
             }
            ],
-           "id": "ngq8qbwe6y",
-           "p": "n2gtkbre6y",
+           "id": "nhyjwj1khx",
+           "p": "nia7twzkhw",
            "t": "2026 · El Congreso pide una cuestión de confianza"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406980,
          "v": 2
         },
         {
          "color": "#0f766e",
-         "created": 1794647132890,
+         "created": 1794650406981,
          "id": "ej-po-leyes",
          "layout": "linea",
          "links": [],
          "name": "Cómo se aprueba una ley en España",
          "nodes": [
           {
-           "id": "nkaj9hge6y",
+           "id": "ndnk7ackhx",
            "n": "El procedimiento legislativo de las Cortes Generales. La mayoría de las leyes nacen como proyectos del Gobierno; el Congreso decide y el Senado puede retrasar o enmendar, pero no bloquear.",
            "p": null,
            "t": "Cómo se aprueba una ley en España"
           },
           {
-           "id": "nmodxjqe6y",
+           "id": "nbmbaz7khx",
            "k": "pasos",
-           "p": "nkaj9hge6y",
+           "p": "ndnk7ackhx",
            "t": "Los pasos"
           },
           {
@@ -3292,8 +3270,8 @@
              "t": "Iniciativa legislativa popular: 500.000 firmas, salvo en leyes orgánicas, tributarias, internacionales o de indulto"
             }
            ],
-           "id": "nv6x8pfe6y",
-           "p": "nmodxjqe6y",
+           "id": "niyq4v8khx",
+           "p": "nbmbaz7khx",
            "t": "Iniciativa"
           },
           {
@@ -3305,8 +3283,8 @@
              "t": "Las proposiciones de ley se votan primero para decidir si se tramitan"
             }
            ],
-           "id": "njot2jqe6y",
-           "p": "nmodxjqe6y",
+           "id": "ngcpbbikhx",
+           "p": "nbmbaz7khx",
            "t": "Debate de totalidad o toma en consideración"
           },
           {
@@ -3318,8 +3296,8 @@
              "t": "Una ponencia de diputados elabora un informe"
             }
            ],
-           "id": "n6ep8moe6y",
-           "p": "nmodxjqe6y",
+           "id": "ngpcc91khx",
+           "p": "nbmbaz7khx",
            "t": "Enmiendas y ponencia"
           },
           {
@@ -3331,8 +3309,8 @@
              "t": "A veces la comisión aprueba la ley directamente, con competencia legislativa plena"
             }
            ],
-           "id": "nt00k2je6y",
-           "p": "nmodxjqe6y",
+           "id": "nsql0abkhx",
+           "p": "nbmbaz7khx",
            "t": "Comisión"
           },
           {
@@ -3341,8 +3319,8 @@
              "t": "Vota el texto; las leyes orgánicas necesitan mayoría absoluta en una votación final"
             }
            ],
-           "id": "nozjsrie6y",
-           "p": "nmodxjqe6y",
+           "id": "nku5s3skhx",
+           "p": "nbmbaz7khx",
            "t": "Pleno del Congreso"
           },
           {
@@ -3354,8 +3332,8 @@
              "t": "Puede aprobarla, introducir enmiendas o vetarla por mayoría absoluta"
             }
            ],
-           "id": "nul9s4je6y",
-           "p": "nmodxjqe6y",
+           "id": "nmce4gwkhx",
+           "p": "nbmbaz7khx",
            "t": "Senado"
           },
           {
@@ -3367,8 +3345,8 @@
              "t": "Levanta el veto por mayoría absoluta, o por mayoría simple pasados dos meses"
             }
            ],
-           "id": "ndnr3bee6y",
-           "p": "nmodxjqe6y",
+           "id": "n69cvazkhx",
+           "p": "nbmbaz7khx",
            "t": "Vuelta al Congreso"
           },
           {
@@ -3380,14 +3358,14 @@
              "t": "Entra en vigor a los 20 días de publicarse, salvo que diga otra cosa"
             }
            ],
-           "id": "n67bkh5e6y",
-           "p": "nmodxjqe6y",
+           "id": "ne175ktkhx",
+           "p": "nbmbaz7khx",
            "t": "Sanción, promulgación y publicación"
           },
           {
-           "id": "n9nhsure6y",
+           "id": "na7zhykkhx",
            "k": "grupo",
-           "p": "nkaj9hge6y",
+           "p": "ndnk7ackhx",
            "t": "Tipos de normas"
           },
           {
@@ -3396,8 +3374,8 @@
              "t": "Está por encima de todas las demás normas"
             }
            ],
-           "id": "ns07f5de6y",
-           "p": "n9nhsure6y",
+           "id": "nbjxszokhx",
+           "p": "na7zhykkhx",
            "t": "Constitución"
           },
           {
@@ -3409,8 +3387,8 @@
              "t": "Necesita mayoría absoluta del Congreso en una votación final sobre el conjunto"
             }
            ],
-           "id": "nkmtqfoe6y",
-           "p": "n9nhsure6y",
+           "id": "nyqtt0ikhx",
+           "p": "na7zhykkhx",
            "t": "Ley orgánica"
           },
           {
@@ -3419,8 +3397,8 @@
              "t": "Para el resto de materias; basta la mayoría simple"
             }
            ],
-           "id": "nx2z13xe6y",
-           "p": "n9nhsure6y",
+           "id": "nfnfp7ekhx",
+           "p": "na7zhykkhx",
            "t": "Ley ordinaria"
           },
           {
@@ -3435,8 +3413,8 @@
              "t": "No puede regular derechos fundamentales, instituciones básicas ni el régimen electoral"
             }
            ],
-           "id": "nz54lode6y",
-           "p": "n9nhsure6y",
+           "id": "nskqm5ikhx",
+           "p": "na7zhykkhx",
            "t": "Real decreto-ley"
           },
           {
@@ -3448,8 +3426,8 @@
              "t": "Sirve para refundir leyes dispersas o desarrollar unas bases"
             }
            ],
-           "id": "nptl44ke6y",
-           "p": "n9nhsure6y",
+           "id": "na0skg2khx",
+           "p": "na7zhykkhx",
            "t": "Real decreto legislativo"
           },
           {
@@ -3461,8 +3439,8 @@
              "t": "Están por debajo de la ley y no pueden contradecirla"
             }
            ],
-           "id": "nq27znne6y",
-           "p": "n9nhsure6y",
+           "id": "nkkimx9ki2",
+           "p": "na7zhykkhx",
            "t": "Reglamentos"
           },
           {
@@ -3474,14 +3452,14 @@
              "t": "Los parlamentos autonómicos hacen leyes en sus competencias"
             }
            ],
-           "id": "nfqq2ppe6y",
-           "p": "n9nhsure6y",
+           "id": "nnmfy4ski2",
+           "p": "na7zhykkhx",
            "t": "Normas europeas y autonómicas"
           },
           {
-           "id": "noe3vcae6y",
+           "id": "nn20nc2ki2",
            "k": "grupo",
-           "p": "nkaj9hge6y",
+           "p": "ndnk7ackhx",
            "t": "Claves"
           },
           {
@@ -3490,8 +3468,8 @@
              "t": "Una norma inferior no puede contradecir a una superior"
             }
            ],
-           "id": "ntyzz6re6y",
-           "p": "noe3vcae6y",
+           "id": "n2g3lcqki2",
+           "p": "nn20nc2ki2",
            "t": "Jerarquía normativa"
           },
           {
@@ -3503,8 +3481,8 @@
              "t": "Desde 2009 solo se publica en edición electrónica"
             }
            ],
-           "id": "n3ijbyze6y",
-           "p": "noe3vcae6y",
+           "id": "nswodhpki2",
+           "p": "nn20nc2ki2",
            "t": "El Boletín Oficial del Estado"
           },
           {
@@ -3516,13 +3494,13 @@
              "t": "Si no se aprueba, se prorrogan automáticamente los presupuestos anteriores"
             }
            ],
-           "id": "nc6omkoe6y",
-           "p": "noe3vcae6y",
+           "id": "npj602wki2",
+           "p": "nn20nc2ki2",
            "t": "La ley de presupuestos"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406981,
          "v": 2
         }
        ],
@@ -3533,263 +3511,6 @@
       {
        "children": [
         {
-         "_by": {
-          "n0ojuiqzla": {
-           "id": "n0ojuiqzla",
-           "p": "nktwykbzla",
-           "t": "Facilita mayorías y gobiernos más estables"
-          },
-          "n0rlpwzzla": {
-           "id": "n0rlpwzzla",
-           "n": "Los otros 248 se reparten según la población. Ceuta y Melilla eligen 1 cada una.",
-           "p": "n5rl2p0zla",
-           "t": "2 diputados fijos por provincia"
-          },
-          "n24f4r2zla": {
-           "id": "n24f4r2zla",
-           "p": "n5rl2p0zla",
-           "t": "Umbral del 3 % en cada provincia"
-          },
-          "n2tahg8zla": {
-           "id": "n2tahg8zla",
-           "n": "Sus votos están repartidos por todo el país y en muchas provincias no llegan a ningún escaño: esos votos no sirven para nada.",
-           "p": "nktwykbzla",
-           "t": "Castiga a los pequeños de ámbito nacional"
-          },
-          "n3v2eb0zl8": {
-           "id": "n3v2eb0zl8",
-           "n": "Fórmula matemática para repartir los escaños entre los partidos según los votos que ha sacado cada uno. No es una ley en sí: es el método que manda usar la ley electoral.",
-           "p": null,
-           "t": "Ley D’Hondt"
-          },
-          "n5hzij3zla": {
-           "id": "n5hzij3zla",
-           "p": "n5rl2p0zla",
-           "t": "350 diputados"
-          },
-          "n5l7fgqzl9": {
-           "id": "n5l7fgqzl9",
-           "p": "nu8ur2ozl8",
-           "t": "Resultado"
-          },
-          "n5rl2p0zla": {
-           "id": "n5rl2p0zla",
-           "p": "nr4w8wozla",
-           "t": "Congreso de los Diputados"
-          },
-          "n7liw38zl8": {
-           "c": "#8b5cf6",
-           "id": "n7liw38zl8",
-           "p": "n3v2eb0zl8",
-           "t": "Qué es"
-          },
-          "n7yxat5zl9": {
-           "id": "n7yxat5zl9",
-           "p": "n5l7fgqzl9",
-           "t": "A: 3 escaños con el 43 % de los votos"
-          },
-          "n88sta1zl8": {
-           "id": "n88sta1zl8",
-           "p": "nzshyf8zl8",
-           "t": "2º 80.000 (B)"
-          },
-          "nbxs8pkzl8": {
-           "id": "nbxs8pkzl8",
-           "p": "nzshyf8zl8",
-           "t": "5º 33.333 (A)"
-          },
-          "nd89a0lzl8": {
-           "id": "nd89a0lzl8",
-           "p": "n7liw38zl8",
-           "t": "Lo manda la ley electoral (LOREG, 1985)"
-          },
-          "ndwx073zla": {
-           "id": "ndwx073zla",
-           "p": "nr4w8wozla",
-           "t": "También en"
-          },
-          "nf02gtszla": {
-           "id": "nf02gtszla",
-           "n": "Sistema mayoritario de voto limitado: en cada provincia se eligen 4 senadores y cada votante marca hasta 3 nombres. Salen los más votados.",
-           "p": "nr4w8wozla",
-           "t": "El Senado no usa D’Hondt"
-          },
-          "ngjkgvjzla": {
-           "id": "ngjkgvjzla",
-           "n": "Se calcula cuántos votos «cuesta» un escaño (votos ÷ escaños); cada partido se lleva los escaños enteros que le tocan y los que sobran van a los restos más grandes.",
-           "p": "nk8ke71zla",
-           "t": "Resto mayor (Hare)"
-          },
-          "ngtmbyizla": {
-           "id": "ngtmbyizla",
-           "n": "En cada distrito gana un solo candidato, el más votado, y el resto de votos no cuenta. Reino Unido y Estados Unidos.",
-           "p": "nk8ke71zla",
-           "t": "Mayoritario"
-          },
-          "nhf9y3fzla": {
-           "id": "nhf9y3fzla",
-           "p": "ndwx073zla",
-           "t": "Elecciones autonómicas (umbral según la comunidad)"
-          },
-          "njl3k3wzl9": {
-           "id": "njl3k3wzl9",
-           "p": "n5l7fgqzl9",
-           "t": "B: 2 escaños con el 35 %"
-          },
-          "nk8ke71zla": {
-           "c": "#f28a2e",
-           "id": "nk8ke71zla",
-           "p": "n3v2eb0zl8",
-           "t": "Otros métodos"
-          },
-          "nktwykbzla": {
-           "c": "#e5484d",
-           "id": "nktwykbzla",
-           "p": "n3v2eb0zl8",
-           "t": "Efectos"
-          },
-          "nkzsayhzl9": {
-           "id": "nkzsayhzl9",
-           "n": "Con 30.000 votos se queda fuera: le faltaron unos 3.300 para superar el 33.333 de A.",
-           "p": "n5l7fgqzl9",
-           "t": "C: ninguno con el 13 %"
-          },
-          "nlrvvzezl8": {
-           "id": "nlrvvzezl8",
-           "p": "nzshyf8zl8",
-           "t": "3º 50.000 (A)"
-          },
-          "nm0maayzla": {
-           "id": "nm0maayzla",
-           "p": "nktwykbzla",
-           "t": "Premia a los partidos grandes"
-          },
-          "nnay3aczla": {
-           "id": "nnay3aczla",
-           "p": "ndwx073zla",
-           "t": "Elecciones municipales (umbral del 5 %)"
-          },
-          "nonndwdzla": {
-           "id": "nonndwdzla",
-           "n": "Por los 2 diputados fijos, un escaño en Soria o Teruel cuesta muchos menos votos que uno en Madrid o Barcelona.",
-           "p": "nktwykbzla",
-           "t": "Un voto rural pesa más que uno urbano"
-          },
-          "notxo4czl8": {
-           "c": "#1c9bd6",
-           "id": "notxo4czl8",
-           "p": "n3v2eb0zl8",
-           "t": "Paso a paso"
-          },
-          "npoh2sxzl8": {
-           "id": "npoh2sxzl8",
-           "n": "Si también empatan en votos, se sortea.",
-           "p": "notxo4czl8",
-           "t": "Empate: gana el partido con más votos"
-          },
-          "npvkesnzl8": {
-           "id": "npvkesnzl8",
-           "p": "notxo4czl8",
-           "t": "Paso 3: ordenar todos los resultados de mayor a menor"
-          },
-          "nq8zz5nzl8": {
-           "id": "nq8zz5nzl8",
-           "p": "nzshyf8zl8",
-           "t": "4º 40.000 (B)"
-          },
-          "nr4w8wozla": {
-           "c": "#e0b100",
-           "id": "nr4w8wozla",
-           "p": "n3v2eb0zl8",
-           "t": "Cómo se usa en España"
-          },
-          "nt139jqzla": {
-           "id": "nt139jqzla",
-           "n": "Votas una lista de un partido entera, sin poder cambiar el orden ni tachar nombres.",
-           "p": "n5rl2p0zla",
-           "t": "Listas cerradas y bloqueadas"
-          },
-          "ntcfbr6zla": {
-           "id": "ntcfbr6zla",
-           "n": "Donde se reparten 3 escaños, para sacar uno hace falta en torno al 20 % de los votos. Ojo: en España la desproporción viene sobre todo de lo pequeñas que son muchas provincias, más que de la fórmula en sí.",
-           "p": "nktwykbzla",
-           "t": "Provincias pequeñas: hace falta mucho porcentaje"
-          },
-          "nu8ur2ozl8": {
-           "c": "#14b8a6",
-           "id": "nu8ur2ozl8",
-           "n": "Votos: A 100.000 · B 80.000 · C 30.000. Divisiones de A: 100.000 / 50.000 / 33.333… · de B: 80.000 / 40.000 / 26.667… · de C: 30.000 / 15.000…",
-           "p": "n3v2eb0zl8",
-           "t": "Ejemplo con 5 escaños"
-          },
-          "nucspb8zla": {
-           "id": "nucspb8zla",
-           "p": "n5rl2p0zla",
-           "t": "52 circunscripciones (50 provincias, Ceuta y Melilla)"
-          },
-          "nw61f1uzla": {
-           "id": "nw61f1uzla",
-           "n": "Divide entre 1, 3, 5, 7… Es más proporcional y trata mejor a los partidos medianos. Se usa, por ejemplo, en Suecia y en Noruega (con un ajuste) y en Alemania.",
-           "p": "nk8ke71zla",
-           "t": "Sainte-Laguë"
-          },
-          "nwzgqmkzl8": {
-           "id": "nwzgqmkzl8",
-           "n": "Si hay 5 escaños, se dan a los 5 resultados más altos, sean del partido que sean.",
-           "p": "notxo4czl8",
-           "t": "Paso 4: un escaño para cada uno de los más altos"
-          },
-          "nxech15zl8": {
-           "id": "nxech15zl8",
-           "p": "n7liw38zl8",
-           "t": "Ideado por Victor D’Hondt (Bélgica, 1878)"
-          },
-          "nxejil5zla": {
-           "id": "nxejil5zla",
-           "n": "Al sacar muchos votos en pocas provincias, consiguen escaños con menos votos totales.",
-           "p": "nktwykbzla",
-           "t": "Favorece a los regionales con voto concentrado"
-          },
-          "ny5esskzl8": {
-           "id": "ny5esskzl8",
-           "n": "Para el Congreso, el 3 % de los votos válidos de la provincia (los votos en blanco cuentan como válidos; los nulos, no).",
-           "p": "notxo4czl8",
-           "t": "Paso 1: quitar a los que no llegan al umbral"
-          },
-          "nygg25azl8": {
-           "id": "nygg25azl8",
-           "n": "En España, en cada provincia. Por eso el resultado depende tanto de cuántos escaños reparte cada una.",
-           "p": "n7liw38zl8",
-           "t": "Se aplica en cada circunscripción por separado"
-          },
-          "nymw1ftzla": {
-           "id": "nymw1ftzla",
-           "p": "ndwx073zla",
-           "t": "Elecciones europeas (toda España, una sola circunscripción)"
-          },
-          "nywl9a4zl8": {
-           "id": "nywl9a4zl8",
-           "n": "Cuantos más votos, más escaños, aunque no en la proporción exacta: redondea a favor de los grandes.",
-           "p": "n7liw38zl8",
-           "t": "Un método de reparto proporcional"
-          },
-          "nzn3mzdzl8": {
-           "id": "nzn3mzdzl8",
-           "n": "Se divide hasta llegar al número de escaños que se reparten en esa provincia.",
-           "p": "notxo4czl8",
-           "t": "Paso 2: dividir los votos de cada partido entre 1, 2, 3…"
-          },
-          "nzshyf8zl8": {
-           "id": "nzshyf8zl8",
-           "p": "nu8ur2ozl8",
-           "t": "Los 5 más altos"
-          },
-          "nzvqcsbzl8": {
-           "id": "nzvqcsbzl8",
-           "p": "nzshyf8zl8",
-           "t": "1º 100.000 (A)"
-          }
-         },
          "color": "#1c1c1e",
          "created": 1794329246634,
          "id": "ej-dhondt",
@@ -4053,32 +3774,28 @@
            "t": "Mayoritario"
           }
          ],
-         "playOpts": {
-          "links": false,
-          "mode": "piezas"
-         },
          "type": "scheme",
          "updated": 1794329246634,
          "v": 2
         },
         {
          "color": "#b45309",
-         "created": 1794647132890,
+         "created": 1794650406986,
          "id": "ej-po-sistema",
          "layout": "linea",
          "links": [],
          "name": "El sistema electoral español",
          "nodes": [
           {
-           "id": "nso7ngle6y",
+           "id": "n7lvsjhki2",
            "n": "Regulado por la Constitución y por la Ley Orgánica del Régimen Electoral General (LOREG) de 1985. Voto universal, libre, igual, directo y secreto.",
            "p": null,
            "t": "El sistema electoral español"
           },
           {
-           "id": "nmfmgfte6y",
+           "id": "nvfggs9ki2",
            "k": "grupo",
-           "p": "nso7ngle6y",
+           "p": "n7lvsjhki2",
            "t": "Tipos de elecciones"
           },
           {
@@ -4090,8 +3807,8 @@
              "t": "Como máximo cada cuatro años; el presidente puede adelantarlas"
             }
            ],
-           "id": "n3nbvhbe6y",
-           "p": "nmfmgfte6y",
+           "id": "n15e8ouki2",
+           "p": "nvfggs9ki2",
            "t": "Generales"
           },
           {
@@ -4103,8 +3820,8 @@
              "t": "Muchas coinciden con las municipales; Andalucía, Cataluña, Galicia y País Vasco tienen calendario propio"
             }
            ],
-           "id": "nwletb2e6y",
-           "p": "nmfmgfte6y",
+           "id": "nkvbuduki2",
+           "p": "nvfggs9ki2",
            "t": "Autonómicas"
           },
           {
@@ -4116,8 +3833,8 @@
              "t": "Se votan listas de concejales, que después eligen al alcalde"
             }
            ],
-           "id": "ndf55w1e6y",
-           "p": "nmfmgfte6y",
+           "id": "nur7o0hki2",
+           "p": "nvfggs9ki2",
            "t": "Municipales"
           },
           {
@@ -4129,14 +3846,14 @@
              "t": "España elige 61 eurodiputados desde 2024"
             }
            ],
-           "id": "nyrmdx9e6y",
-           "p": "nmfmgfte6y",
+           "id": "nzadw94ki2",
+           "p": "nvfggs9ki2",
            "t": "Europeas"
           },
           {
-           "id": "nvogl84e6y",
+           "id": "n7nvbp6ki2",
            "k": "grupo",
-           "p": "nso7ngle6y",
+           "p": "n7lvsjhki2",
            "t": "Quién vota"
           },
           {
@@ -4148,8 +3865,8 @@
              "t": "Los españoles que viven fuera votan desde el extranjero; en 2022 se suprimió el «voto rogado», que exigía pedirlo antes"
             }
            ],
-           "id": "n05j82he6y",
-           "p": "nvogl84e6y",
+           "id": "nkd5h9xki2",
+           "p": "n7nvbp6ki2",
            "t": "El censo electoral"
           },
           {
@@ -4161,8 +3878,8 @@
              "t": "Los de países con acuerdo de reciprocidad, solo en municipales"
             }
            ],
-           "id": "n5uba70e6y",
-           "p": "nvogl84e6y",
+           "id": "n8vlmhuki2",
+           "p": "n7nvbp6ki2",
            "t": "Extranjeros"
           },
           {
@@ -4174,14 +3891,14 @@
              "t": "Las mesas las forman ciudadanos elegidos por sorteo: es obligatorio"
             }
            ],
-           "id": "n4nbvg2e6y",
-           "p": "nvogl84e6y",
+           "id": "nn72im7ki2",
+           "p": "n7nvbp6ki2",
            "t": "Formas de votar"
           },
           {
-           "id": "nu4ci8se6y",
+           "id": "n0mql47ki2",
            "k": "pasos",
-           "p": "nso7ngle6y",
+           "p": "n7lvsjhki2",
            "t": "El proceso"
           },
           {
@@ -4190,8 +3907,8 @@
              "t": "Real decreto publicado en el BOE: las elecciones se celebran 54 días después"
             }
            ],
-           "id": "nfimeeue6y",
-           "p": "nu4ci8se6y",
+           "id": "ng1kz1vki2",
+           "p": "n0mql47ki2",
            "t": "Convocatoria"
           },
           {
@@ -4203,8 +3920,8 @@
              "t": "Desde 2024 deben alternar hombres y mujeres: listas «cremallera»"
             }
            ],
-           "id": "ngc6uqce6y",
-           "p": "nu4ci8se6y",
+           "id": "ngki3a6ki2",
+           "p": "n0mql47ki2",
            "t": "Presentación de candidaturas"
           },
           {
@@ -4216,8 +3933,8 @@
              "t": "Los cinco días antes de votar no se pueden publicar encuestas"
             }
            ],
-           "id": "nr7vnlae6y",
-           "p": "nu4ci8se6y",
+           "id": "nug8693ki2",
+           "p": "n0mql47ki2",
            "t": "Campaña electoral"
           },
           {
@@ -4226,8 +3943,8 @@
              "t": "El sábado: no se puede pedir el voto"
             }
            ],
-           "id": "n1s63nse6y",
-           "p": "nu4ci8se6y",
+           "id": "nohzjv8ki2",
+           "p": "n0mql47ki2",
            "t": "Jornada de reflexión"
           },
           {
@@ -4236,8 +3953,8 @@
              "t": "El domingo, de 9:00 a 20:00"
             }
            ],
-           "id": "nwkhehce6y",
-           "p": "nu4ci8se6y",
+           "id": "n56oar8ki2",
+           "p": "n0mql47ki2",
            "t": "Votación"
           },
           {
@@ -4246,8 +3963,8 @@
              "t": "Se cuentan los votos en cada mesa nada más cerrar y después las juntas electorales hacen el recuento oficial"
             }
            ],
-           "id": "no45i0se6y",
-           "p": "nu4ci8se6y",
+           "id": "nj7ta3nki2",
+           "p": "n0mql47ki2",
            "t": "Escrutinio"
           },
           {
@@ -4256,14 +3973,14 @@
              "t": "Las juntas electorales proclaman a los elegidos y se constituyen las cámaras"
             }
            ],
-           "id": "nux7nmge6y",
-           "p": "nu4ci8se6y",
+           "id": "nwdyefeki2",
+           "p": "n0mql47ki2",
            "t": "Proclamación de electos"
           },
           {
-           "id": "nuc9xyge6y",
+           "id": "n62x0anki2",
            "k": "grupo",
-           "p": "nso7ngle6y",
+           "p": "n7lvsjhki2",
            "t": "Cómo se reparten los escaños"
           },
           {
@@ -4281,8 +3998,8 @@
              "t": "Barrera del 3 % de los votos válidos en cada provincia"
             }
            ],
-           "id": "n0dt39je6y",
-           "p": "nuc9xyge6y",
+           "id": "nnifq28ki2",
+           "p": "n62x0anki2",
            "t": "Congreso"
           },
           {
@@ -4297,8 +4014,8 @@
              "t": "Desde 2026 se eligen 209: Formentera tiene senador propio"
             }
            ],
-           "id": "nfb38khe6y",
-           "p": "nuc9xyge6y",
+           "id": "nxgvgdiki2",
+           "p": "n62x0anki2",
            "t": "Senado"
           },
           {
@@ -4313,33 +4030,33 @@
              "t": "Sus defensores destacan que da gobiernos estables; sus críticos, que no es proporcional"
             }
            ],
-           "id": "n0h8wrje6y",
-           "p": "nuc9xyge6y",
+           "id": "nrrr2w2ki2",
+           "p": "n62x0anki2",
            "t": "Efectos del sistema"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406986,
          "v": 2
         },
         {
          "color": "#b45309",
-         "created": 1794647132890,
+         "created": 1794650406986,
          "id": "ej-po-partidos",
          "layout": "linea",
          "links": [],
          "name": "Los partidos políticos",
          "nodes": [
           {
-           "id": "nfnjz53e6y",
+           "id": "n9nkcskki2",
            "n": "Datos de noviembre de 2026, antes de las elecciones generales del 29 de noviembre: cuando haya resultados conviene actualizarlo. Las etiquetas ideológicas son las habituales en la ciencia política y en los medios.",
            "p": null,
            "t": "Los partidos políticos"
           },
           {
-           "id": "n4njojne6y",
+           "id": "ntcwxw7ki2",
            "k": "grupo",
-           "p": "nfnjz53e6y",
+           "p": "n9nkcskki2",
            "t": "Partidos de ámbito estatal"
           },
           {
@@ -4357,8 +4074,8 @@
              "t": "137 diputados en la legislatura 2023-2026: el grupo más grande"
             }
            ],
-           "id": "n1ntiske6y",
-           "p": "n4njojne6y",
+           "id": "nss77xtki2",
+           "p": "ntcwxw7ki2",
            "t": "Partido Popular (PP)"
           },
           {
@@ -4376,8 +4093,8 @@
              "t": "121 diputados en 2023-2026, con los socialistas catalanes del PSC"
             }
            ],
-           "id": "n3soj01e6y",
-           "p": "n4njojne6y",
+           "id": "nvd1ls2ki2",
+           "p": "ntcwxw7ki2",
            "t": "Partido Socialista Obrero Español (PSOE)"
           },
           {
@@ -4392,8 +4109,8 @@
              "t": "Logró 33 diputados en 2023 y las encuestas de 2026 lo situaban cerca del 20 %"
             }
            ],
-           "id": "nc7ky9qe6y",
-           "p": "n4njojne6y",
+           "id": "nipvg3ski2",
+           "p": "ntcwxw7ki2",
            "t": "Vox"
           },
           {
@@ -4408,8 +4125,8 @@
              "t": "Para 2026 se reorganizó como Frente Amplio, con Ada Colau de candidata"
             }
            ],
-           "id": "nj92ud3e6y",
-           "p": "n4njojne6y",
+           "id": "njnp3w1ki2",
+           "p": "ntcwxw7ki2",
            "t": "Sumar y el Frente Amplio"
           },
           {
@@ -4424,8 +4141,8 @@
              "t": "Irene Montero, su candidata en 2026"
             }
            ],
-           "id": "nl13im6e6y",
-           "p": "n4njojne6y",
+           "id": "nkevw6pki2",
+           "p": "ntcwxw7ki2",
            "t": "Podemos"
           },
           {
@@ -4437,14 +4154,14 @@
              "t": "Irrumpió en las europeas de 2024 con 3 eurodiputados"
             }
            ],
-           "id": "nwnho78e6y",
-           "p": "n4njojne6y",
+           "id": "n8t6o9wki2",
+           "p": "ntcwxw7ki2",
            "t": "Se Acabó La Fiesta (SALF)"
           },
           {
-           "id": "nwmb2ude6y",
+           "id": "na67u1cki2",
            "k": "grupo",
-           "p": "nfnjz53e6y",
+           "p": "n9nkcskki2",
            "t": "Partidos nacionalistas y regionalistas"
           },
           {
@@ -4459,8 +4176,8 @@
              "t": "Apoyó la investidura de Sánchez y pactó con él la financiación catalana"
             }
            ],
-           "id": "nsefpche6y",
-           "p": "nwmb2ude6y",
+           "id": "nss07jiki2",
+           "p": "na67u1cki2",
            "t": "Esquerra Republicana de Catalunya (ERC)"
           },
           {
@@ -4475,8 +4192,8 @@
              "t": "Rompió con el Gobierno en octubre de 2025; su portavoz es Míriam Nogueras"
             }
            ],
-           "id": "nrp4zsye6y",
-           "p": "nwmb2ude6y",
+           "id": "n4yf8scki2",
+           "p": "na67u1cki2",
            "t": "Junts per Catalunya"
           },
           {
@@ -4488,8 +4205,8 @@
              "t": "Coordinador general: Arnaldo Otegi"
             }
            ],
-           "id": "ne9lezhe6y",
-           "p": "nwmb2ude6y",
+           "id": "nrbv8tzki2",
+           "p": "na67u1cki2",
            "t": "EH Bildu"
           },
           {
@@ -4501,8 +4218,8 @@
              "t": "Gobierna el País Vasco casi sin interrupción desde 1980"
             }
            ],
-           "id": "n3e1v65e6y",
-           "p": "nwmb2ude6y",
+           "id": "nq393ivki2",
+           "p": "na67u1cki2",
            "t": "Partido Nacionalista Vasco (PNV)"
           },
           {
@@ -4511,8 +4228,8 @@
              "t": "Nacionalista gallego de izquierdas; su líder es Ana Pontón"
             }
            ],
-           "id": "nh23qbxe6z",
-           "p": "nwmb2ude6y",
+           "id": "ncwp9y6ki2",
+           "p": "na67u1cki2",
            "t": "Bloque Nacionalista Galego (BNG)"
           },
           {
@@ -4527,14 +4244,14 @@
              "t": "Compromís: valencianista de izquierdas"
             }
            ],
-           "id": "nootiqoe6z",
-           "p": "nwmb2ude6y",
+           "id": "nlhe5pski2",
+           "p": "na67u1cki2",
            "t": "Otros con escaño"
           },
           {
-           "id": "nkk3w62e6z",
+           "id": "nwikysfki2",
            "k": "grupo",
-           "p": "nfnjz53e6y",
+           "p": "n9nkcskki2",
            "t": "El Congreso que se disolvió en 2026"
           },
           {
@@ -4549,8 +4266,8 @@
              "t": "Grupo Mixto 9: Podemos 4, BNG, Coalición Canaria, UPN, Compromís y un exdiputado de Vox"
             }
            ],
-           "id": "nixbripe6z",
-           "p": "nkk3w62e6z",
+           "id": "n51uhxhki2",
+           "p": "nwikysfki2",
            "t": "Los grupos al final de la legislatura"
           },
           {
@@ -4565,8 +4282,8 @@
              "t": "En octubre de 2026 el Congreso tumbó dos decretos de vivienda y Sánchez disolvió las Cortes"
             }
            ],
-           "id": "nlx52aze6z",
-           "p": "nkk3w62e6z",
+           "id": "nzey9yfki2",
+           "p": "nwikysfki2",
            "t": "Una mayoría muy frágil"
           },
           {
@@ -4581,32 +4298,32 @@
              "t": "Las encuestas de octubre daban ventaja al PP, con Vox cerca del 20 % y en posición de ser decisivo"
             }
            ],
-           "id": "nyue1gye6z",
-           "p": "nkk3w62e6z",
+           "id": "n2lse0ski2",
+           "p": "nwikysfki2",
            "t": "Las elecciones del 29 de noviembre de 2026"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132890,
+         "updated": 1794650406986,
          "v": 2
         },
         {
          "color": "#b45309",
-         "created": 1794647132891,
+         "created": 1794650406986,
          "id": "ej-po-elecciones",
          "layout": "linea",
          "links": [],
          "name": "Las elecciones generales desde 1977",
          "nodes": [
           {
-           "id": "ntx1enre6z",
+           "id": "nyyzeerki2",
            "n": "Quién ganó cada elección y quién llegó a gobernar. La mayoría absoluta en el Congreso son 176 escaños de 350.",
            "p": null,
            "t": "Las elecciones generales desde 1977"
           },
           {
-           "id": "niohwbpe6z",
-           "p": "ntx1enre6z",
+           "id": "nxk61g6ki2",
+           "p": "nyyzeerki2",
            "t": "Las elecciones"
           },
           {
@@ -4618,8 +4335,8 @@
              "t": "El PSOE, con 118, se convierte en la alternativa"
             }
            ],
-           "id": "naro423e6z",
-           "p": "niohwbpe6z",
+           "id": "no2ocg8ki2",
+           "p": "nxk61g6ki2",
            "t": "1977 · Gana la UCD de Suárez"
           },
           {
@@ -4628,8 +4345,8 @@
              "t": "168 escaños, ya con la Constitución en vigor"
             }
            ],
-           "id": "nb784gqe6z",
-           "p": "niohwbpe6z",
+           "id": "ntjdgp1ki2",
+           "p": "nxk61g6ki2",
            "t": "1979 · La UCD repite victoria"
           },
           {
@@ -4641,8 +4358,8 @@
              "t": "La UCD se hunde hasta 11 escaños y Alianza Popular pasa a ser la oposición"
             }
            ],
-           "id": "nxy8kske6z",
-           "p": "niohwbpe6z",
+           "id": "naboto5ki3",
+           "p": "nxk61g6ki2",
            "t": "1982 · Arrollador triunfo del PSOE"
           },
           {
@@ -4651,8 +4368,8 @@
              "t": "184 escaños, meses después de entrar en la Comunidad Europea"
             }
            ],
-           "id": "n76s5g6e6z",
-           "p": "niohwbpe6z",
+           "id": "naunttqki3",
+           "p": "nxk61g6ki2",
            "t": "1986 · Segunda mayoría absoluta del PSOE"
           },
           {
@@ -4661,8 +4378,8 @@
              "t": "175 escaños, uno menos que la mayoría absoluta"
             }
            ],
-           "id": "nl2ignme6z",
-           "p": "niohwbpe6z",
+           "id": "npgica2ki3",
+           "p": "nxk61g6ki2",
            "t": "1989 · Tercera victoria de González"
           },
           {
@@ -4671,8 +4388,8 @@
              "t": "159 escaños; gobierna con el apoyo de CiU y PNV"
             }
            ],
-           "id": "naoap47e6z",
-           "p": "niohwbpe6z",
+           "id": "n58ghnlki3",
+           "p": "nxk61g6ki2",
            "t": "1993 · El PSOE gana sin mayoría"
           },
           {
@@ -4681,8 +4398,8 @@
              "t": "156 escaños; Aznar gobierna con el apoyo de CiU, PNV y Coalición Canaria"
             }
            ],
-           "id": "n5lss18e6z",
-           "p": "niohwbpe6z",
+           "id": "n9iyowwki3",
+           "p": "nxk61g6ki2",
            "t": "1996 · Primera victoria del PP"
           },
           {
@@ -4691,8 +4408,8 @@
              "t": "183 escaños: la primera mayoría absoluta del centro-derecha"
             }
            ],
-           "id": "ns1bkxoe6z",
-           "p": "niohwbpe6z",
+           "id": "nrbkgkgki3",
+           "p": "nxk61g6ki2",
            "t": "2000 · Mayoría absoluta del PP"
           },
           {
@@ -4701,8 +4418,8 @@
              "t": "164 escaños, tres días después de los atentados de Madrid"
             }
            ],
-           "id": "ntvjv5je6z",
-           "p": "niohwbpe6z",
+           "id": "npf0i3wki3",
+           "p": "nxk61g6ki2",
            "t": "2004 · Zapatero gana tras el 11-M"
           },
           {
@@ -4711,8 +4428,8 @@
              "t": "169 escaños, al inicio de la gran crisis económica"
             }
            ],
-           "id": "n0uqv3re6z",
-           "p": "niohwbpe6z",
+           "id": "nn1ns43ki3",
+           "p": "nxk61g6ki2",
            "t": "2008 · Zapatero repite"
           },
           {
@@ -4721,8 +4438,8 @@
              "t": "186 escaños, en plena crisis de la deuda"
             }
            ],
-           "id": "n9jat46e6z",
-           "p": "niohwbpe6z",
+           "id": "nyt0u27ki3",
+           "p": "nxk61g6ki2",
            "t": "2011 · Mayoría absoluta de Rajoy"
           },
           {
@@ -4734,8 +4451,8 @@
              "t": "Nadie logra la investidura y las elecciones se repiten"
             }
            ],
-           "id": "nxh7i5be6z",
-           "p": "niohwbpe6z",
+           "id": "nmk0aidki3",
+           "p": "nxk61g6ki2",
            "t": "2015 · Fin del bipartidismo"
           },
           {
@@ -4744,8 +4461,8 @@
              "t": "El PP sube a 137 y Rajoy es investido con la abstención del PSOE"
             }
            ],
-           "id": "n9c1n42e6z",
-           "p": "niohwbpe6z",
+           "id": "nzxawi6ki3",
+           "p": "nxk61g6ki2",
            "t": "2016 · Rajoy, de nuevo"
           },
           {
@@ -4757,8 +4474,8 @@
              "t": "No hay investidura y se repiten las elecciones"
             }
            ],
-           "id": "nixy799e6z",
-           "p": "niohwbpe6z",
+           "id": "ni6ho3tki3",
+           "p": "nxk61g6ki2",
            "t": "2019 · Abril: gana el PSOE"
           },
           {
@@ -4770,8 +4487,8 @@
              "t": "Nace el primer Gobierno de coalición: PSOE y Unidas Podemos"
             }
            ],
-           "id": "nsvm2spe6z",
-           "p": "niohwbpe6z",
+           "id": "n9l14gkki3",
+           "p": "nxk61g6ki2",
            "t": "2019 · Noviembre: primera coalición"
           },
           {
@@ -4783,8 +4500,8 @@
              "t": "Feijóo no logra la investidura y Sánchez sí, con el apoyo de Sumar y de los nacionalistas e independentistas"
             }
            ],
-           "id": "nogi8m4e6z",
-           "p": "niohwbpe6z",
+           "id": "no3hub3ki3",
+           "p": "nxk61g6ki2",
            "t": "2023 · Gana el PP, gobierna el PSOE"
           },
           {
@@ -4793,13 +4510,13 @@
              "t": "Convocadas para el 29 de noviembre de 2026"
             }
            ],
-           "id": "nu0mkb1e6z",
-           "p": "niohwbpe6z",
+           "id": "n06m8rkki3",
+           "p": "nxk61g6ki2",
            "t": "2026 · Elecciones anticipadas"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406986,
          "v": 2
         }
        ],
@@ -4811,22 +4528,22 @@
        "children": [
         {
          "color": "#15803d",
-         "created": 1794647132891,
+         "created": 1794650406987,
          "id": "ej-po-autonomico",
          "layout": "linea",
          "links": [],
          "name": "Cómo se formó el Estado autonómico",
          "nodes": [
           {
-           "id": "nqbouu2e6z",
+           "id": "nguk5m7ki3",
            "n": "La Constitución no dibujó un mapa cerrado: abrió la puerta a que cada territorio pidiera su autonomía. Entre 1979 y 1983 se aprobaron los 17 estatutos, y desde entonces el sistema no ha dejado de evolucionar.",
            "p": null,
            "t": "Cómo se formó el Estado autonómico"
           },
           {
-           "id": "n4ytrqxe6z",
+           "id": "noax8bbki3",
            "k": "grupo",
-           "p": "nqbouu2e6z",
+           "p": "nguk5m7ki3",
            "t": "Las claves"
           },
           {
@@ -4838,8 +4555,8 @@
              "t": "Vía lenta, artículo 143: menos competencias al principio y ampliables a los cinco años; la siguieron las demás"
             }
            ],
-           "id": "n0ie20ye6z",
-           "p": "n4ytrqxe6z",
+           "id": "nxic49fki3",
+           "p": "noax8bbki3",
            "t": "Dos vías de acceso"
           },
           {
@@ -4851,8 +4568,8 @@
              "t": "Por eso pudieron acceder directamente por la vía rápida"
             }
            ],
-           "id": "nmw4b4de6z",
-           "p": "n4ytrqxe6z",
+           "id": "ncll9c0ki3",
+           "p": "noax8bbki3",
            "t": "Las nacionalidades históricas"
           },
           {
@@ -4864,13 +4581,13 @@
              "t": "Se aprueba como ley orgánica de las Cortes"
             }
            ],
-           "id": "n4ysudae6z",
-           "p": "n4ytrqxe6z",
+           "id": "nsjpzlhki3",
+           "p": "noax8bbki3",
            "t": "Qué es un estatuto de autonomía"
           },
           {
-           "id": "nuf9ax0e6z",
-           "p": "nqbouu2e6z",
+           "id": "nuwt7tgki3",
+           "p": "nguk5m7ki3",
            "t": "Cronología"
           },
           {
@@ -4879,8 +4596,8 @@
              "t": "Regímenes provisionales antes de la Constitución; el primero, la Generalitat de Tarradellas"
             }
            ],
-           "id": "nrktgple6z",
-           "p": "nuf9ax0e6z",
+           "id": "ndyipa3ki3",
+           "p": "nuwt7tgki3",
            "t": "1977 · Las preautonomías"
           },
           {
@@ -4889,8 +4606,8 @@
              "t": "El Título VIII regula las comunidades autónomas y sus vías de acceso"
             }
            ],
-           "id": "n7otwpse6z",
-           "p": "nuf9ax0e6z",
+           "id": "nap7dr4ki3",
+           "p": "nuwt7tgki3",
            "t": "1978 · La Constitución abre el camino"
           },
           {
@@ -4899,8 +4616,8 @@
              "t": "Los primeros: Gernika y Sau, aprobados en referéndum en octubre"
             }
            ],
-           "id": "nj31mhle6z",
-           "p": "nuf9ax0e6z",
+           "id": "nzf2gyoki3",
+           "p": "nuwt7tgki3",
            "t": "1979 · Estatutos vasco y catalán"
           },
           {
@@ -4912,8 +4629,8 @@
              "t": "Hoy el 28 de febrero es el Día de Andalucía"
             }
            ],
-           "id": "nojug9te6z",
-           "p": "nuf9ax0e6z",
+           "id": "n5f6puski3",
+           "p": "nuwt7tgki3",
            "t": "1980 · El 28-F andaluz"
           },
           {
@@ -4925,8 +4642,8 @@
              "t": "Galicia, Asturias, Cantabria y Andalucía aprueban sus estatutos"
             }
            ],
-           "id": "ny79ti0e6z",
-           "p": "nuf9ax0e6z",
+           "id": "nnj8zsfki3",
+           "p": "nuwt7tgki3",
            "t": "1981 · Los primeros pactos autonómicos"
           },
           {
@@ -4938,8 +4655,8 @@
              "t": "Se aprueba la LOAPA para armonizar el proceso"
             }
            ],
-           "id": "nlmyovge6z",
-           "p": "nuf9ax0e6z",
+           "id": "n7k27hski3",
+           "p": "nuwt7tgki3",
            "t": "1982 · La mayoría de estatutos"
           },
           {
@@ -4954,8 +4671,8 @@
              "t": "En agosto el Constitucional anula buena parte de la LOAPA"
             }
            ],
-           "id": "n3l0uste6z",
-           "p": "nuf9ax0e6z",
+           "id": "n4lg6dkki3",
+           "p": "nuwt7tgki3",
            "t": "1983 · Se completa el mapa"
           },
           {
@@ -4964,8 +4681,8 @@
              "t": "PSOE y PP acuerdan ampliar las competencias de las comunidades de la vía lenta"
             }
            ],
-           "id": "nkjk11ne6z",
-           "p": "nuf9ax0e6z",
+           "id": "n3bg3u3ki3",
+           "p": "nuwt7tgki3",
            "t": "1992 · Segundos pactos autonómicos"
           },
           {
@@ -4974,8 +4691,8 @@
              "t": "Aprueban sus estatutos, pero sin parlamento con poder legislativo"
             }
            ],
-           "id": "nh9tn2ne6z",
-           "p": "nuf9ax0e6z",
+           "id": "noiktb4ki3",
+           "p": "nuwt7tgki3",
            "t": "1995 · Ceuta y Melilla, ciudades autónomas"
           },
           {
@@ -4984,8 +4701,8 @@
              "t": "Las últimas diez comunidades reciben la sanidad: el gran salto del gasto autonómico"
             }
            ],
-           "id": "nqa2pq7e6z",
-           "p": "nuf9ax0e6z",
+           "id": "nn8du3mki3",
+           "p": "nuwt7tgki3",
            "t": "2002 · Toda la sanidad, transferida"
           },
           {
@@ -4994,8 +4711,8 @@
              "t": "Nuevos estatutos en Cataluña y la Comunitat Valenciana; después Andalucía, Aragón, Baleares, Castilla y León…"
             }
            ],
-           "id": "nxrtan9e6z",
-           "p": "nuf9ax0e6z",
+           "id": "n49h56nki3",
+           "p": "nuwt7tgki3",
            "t": "2006 · Reformas de los estatutos"
           },
           {
@@ -5007,8 +4724,8 @@
              "t": "Multitudinaria manifestación de protesta en Barcelona"
             }
            ],
-           "id": "n375rnde6z",
-           "p": "nuf9ax0e6z",
+           "id": "n41ofldki3",
+           "p": "nuwt7tgki3",
            "t": "2010 · Sentencia del Estatut"
           },
           {
@@ -5020,33 +4737,33 @@
              "t": "Se cesa al Govern y se convocan elecciones; dura hasta junio de 2018"
             }
            ],
-           "id": "nxq6avle6z",
-           "p": "nuf9ax0e6z",
+           "id": "n1uvws7ki3",
+           "p": "nuwt7tgki3",
            "t": "2017 · Primera aplicación del 155"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406987,
          "v": 2
         },
         {
          "color": "#15803d",
-         "created": 1794647132891,
+         "created": 1794650406987,
          "id": "ej-po-ccaa",
          "layout": "linea",
          "links": [],
          "name": "Las comunidades autónomas",
          "nodes": [
           {
-           "id": "nzsww34e6z",
+           "id": "nyfd8zbki3",
            "n": "17 comunidades autónomas y 2 ciudades autónomas. Cada una tiene parlamento, gobierno y presidente propios, salvo Ceuta y Melilla, que no tienen poder legislativo.",
            "p": null,
            "t": "Las comunidades autónomas"
           },
           {
-           "id": "nwu2awue6z",
+           "id": "now8ikwki3",
            "k": "grupo",
-           "p": "nzsww34e6z",
+           "p": "nyfd8zbki3",
            "t": "Las comunidades"
           },
           {
@@ -5064,8 +4781,8 @@
              "t": "La comunidad más poblada"
             }
            ],
-           "id": "nkibra1e6z",
-           "p": "nwu2awue6z",
+           "id": "npc6q4hki3",
+           "p": "now8ikwki3",
            "t": "Andalucía"
           },
           {
@@ -5077,8 +4794,8 @@
              "t": "Gobierno de Aragón; 3 provincias; estatuto de 1982"
             }
            ],
-           "id": "nwxjwgee6z",
-           "p": "nwu2awue6z",
+           "id": "nmwadg9ki3",
+           "p": "now8ikwki3",
            "t": "Aragón"
           },
           {
@@ -5090,8 +4807,8 @@
              "t": "Estatuto de 1981"
             }
            ],
-           "id": "n8uf9nbe6z",
-           "p": "nwu2awue6z",
+           "id": "n8a4os7ki3",
+           "p": "now8ikwki3",
            "t": "Principado de Asturias"
           },
           {
@@ -5106,8 +4823,8 @@
              "t": "Estatuto de 1983; lengua cooficial: el catalán"
             }
            ],
-           "id": "nu0175be6z",
-           "p": "nwu2awue6z",
+           "id": "nuofzo5ki3",
+           "p": "now8ikwki3",
            "t": "Illes Balears"
           },
           {
@@ -5122,8 +4839,8 @@
              "t": "Tiene un régimen económico y fiscal propio, con el IGIC en lugar del IVA"
             }
            ],
-           "id": "nkq56twe6z",
-           "p": "nwu2awue6z",
+           "id": "nip22mzki3",
+           "p": "now8ikwki3",
            "t": "Canarias"
           },
           {
@@ -5135,8 +4852,8 @@
              "t": "Estatuto de 1981"
             }
            ],
-           "id": "nkx1l5ae6z",
-           "p": "nwu2awue6z",
+           "id": "nash8fbki3",
+           "p": "now8ikwki3",
            "t": "Cantabria"
           },
           {
@@ -5148,8 +4865,8 @@
              "t": "Junta de Comunidades; 5 provincias; estatuto de 1982"
             }
            ],
-           "id": "nz8mp88e6z",
-           "p": "nwu2awue6z",
+           "id": "nltrvhlki3",
+           "p": "now8ikwki3",
            "t": "Castilla-La Mancha"
           },
           {
@@ -5164,8 +4881,8 @@
              "t": "Estatuto de 1983"
             }
            ],
-           "id": "ne6l8vre6z",
-           "p": "nwu2awue6z",
+           "id": "ncfvmxuki3",
+           "p": "now8ikwki3",
            "t": "Castilla y León"
           },
           {
@@ -5180,8 +4897,8 @@
              "t": "Estatuto de 1979, sustituido en 2006 y recortado por el Constitucional en 2010; lengua cooficial: el catalán"
             }
            ],
-           "id": "ng5spfje6z",
-           "p": "nwu2awue6z",
+           "id": "n8xejgski3",
+           "p": "now8ikwki3",
            "t": "Cataluña"
           },
           {
@@ -5196,8 +4913,8 @@
              "t": "Estatuto de 1982, reformado en 2006; lengua cooficial: el valenciano"
             }
            ],
-           "id": "ni138fie6z",
-           "p": "nwu2awue6z",
+           "id": "n82wnc1ki3",
+           "p": "now8ikwki3",
            "t": "Comunitat Valenciana"
           },
           {
@@ -5209,8 +4926,8 @@
              "t": "Junta de Extremadura; 2 provincias; estatuto de 1983"
             }
            ],
-           "id": "n14vq59e6z",
-           "p": "nwu2awue6z",
+           "id": "np495khki3",
+           "p": "now8ikwki3",
            "t": "Extremadura"
           },
           {
@@ -5222,8 +4939,8 @@
              "t": "Xunta de Galicia; 4 provincias; estatuto de 1981; lengua cooficial: el gallego"
             }
            ],
-           "id": "n73i1hxe6z",
-           "p": "nwu2awue6z",
+           "id": "n9n7w13ki3",
+           "p": "now8ikwki3",
            "t": "Galicia"
           },
           {
@@ -5235,8 +4952,8 @@
              "t": "Comunidad uniprovincial; estatuto de 1983"
             }
            ],
-           "id": "n9ajo7ke6z",
-           "p": "nwu2awue6z",
+           "id": "njn6yzyki3",
+           "p": "now8ikwki3",
            "t": "Comunidad de Madrid"
           },
           {
@@ -5248,8 +4965,8 @@
              "t": "Comunidad uniprovincial; estatuto de 1982"
             }
            ],
-           "id": "nxl29lue6z",
-           "p": "nwu2awue6z",
+           "id": "n3v101lki3",
+           "p": "now8ikwki3",
            "t": "Región de Murcia"
           },
           {
@@ -5264,8 +4981,8 @@
              "t": "Régimen fiscal propio, el Convenio Económico, y policía propia, la Policía Foral"
             }
            ],
-           "id": "nn40fu5e6z",
-           "p": "nwu2awue6z",
+           "id": "n73rvfxki3",
+           "p": "now8ikwki3",
            "t": "Comunidad Foral de Navarra"
           },
           {
@@ -5280,8 +4997,8 @@
              "t": "Estatuto de Gernika, de 1979; concierto económico propio; policía propia: la Ertzaintza; lengua cooficial: el euskera"
             }
            ],
-           "id": "nbnx4y6e6z",
-           "p": "nwu2awue6z",
+           "id": "ngze9ryki3",
+           "p": "now8ikwki3",
            "t": "País Vasco"
           },
           {
@@ -5293,14 +5010,14 @@
              "t": "Estatuto de 1982"
             }
            ],
-           "id": "nspd2lze6z",
-           "p": "nwu2awue6z",
+           "id": "nc87tqmki3",
+           "p": "now8ikwki3",
            "t": "La Rioja"
           },
           {
-           "id": "na8zpjje6z",
+           "id": "n5cmmqaki3",
            "k": "grupo",
-           "p": "nzsww34e6z",
+           "p": "nyfd8zbki3",
            "t": "Las ciudades autónomas"
           },
           {
@@ -5315,8 +5032,8 @@
              "t": "Marruecos reclama su soberanía"
             }
            ],
-           "id": "nfawxj0e6z",
-           "p": "na8zpjje6z",
+           "id": "n4e28hqki4",
+           "p": "n5cmmqaki3",
            "t": "Ceuta"
           },
           {
@@ -5331,33 +5048,33 @@
              "t": "Marruecos también reclama su soberanía"
             }
            ],
-           "id": "n0t1h2xe6z",
-           "p": "na8zpjje6z",
+           "id": "n1tt5s5ki4",
+           "p": "n5cmmqaki3",
            "t": "Melilla"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406987,
          "v": 2
         },
         {
          "color": "#15803d",
-         "created": 1794647132891,
+         "created": 1794650406988,
          "id": "ej-po-competencias",
          "layout": "linea",
          "links": [],
          "name": "Competencias y financiación autonómica",
          "nodes": [
           {
-           "id": "nf89xnde6z",
+           "id": "n6g30gzki4",
            "n": "Quién hace qué entre el Estado y las comunidades, cómo se pagan los servicios autonómicos y por qué es uno de los debates más vivos de la política española.",
            "p": null,
            "t": "Competencias y financiación autonómica"
           },
           {
-           "id": "n3nyh61e6z",
+           "id": "nfv9eqvki4",
            "k": "grupo",
-           "p": "nf89xnde6z",
+           "p": "n6g30gzki4",
            "t": "Quién hace qué"
           },
           {
@@ -5372,8 +5089,8 @@
              "t": "Las bases de la sanidad, la Seguridad Social y la educación"
             }
            ],
-           "id": "nrnr7cke6z",
-           "p": "n3nyh61e6z",
+           "id": "n4fpo6hki4",
+           "p": "nfv9eqvki4",
            "t": "Competencias exclusivas del Estado"
           },
           {
@@ -5388,8 +5105,8 @@
              "t": "Por eso las comunidades gastan más que la Administración central sin contar las pensiones"
             }
            ],
-           "id": "n2qb0i3e6z",
-           "p": "n3nyh61e6z",
+           "id": "nilul26ki4",
+           "p": "nfv9eqvki4",
            "t": "Competencias de las comunidades"
           },
           {
@@ -5401,8 +5118,8 @@
              "t": "Ejemplos: educación, medio ambiente o sanidad"
             }
            ],
-           "id": "nfz6qcpe6z",
-           "p": "n3nyh61e6z",
+           "id": "nz75bgmki4",
+           "p": "nfv9eqvki4",
            "t": "Competencias compartidas"
           },
           {
@@ -5414,14 +5131,14 @@
              "t": "En caso de conflicto prevalece el derecho estatal y los choques los resuelve el Constitucional"
             }
            ],
-           "id": "ncbjyr7e6z",
-           "p": "n3nyh61e6z",
+           "id": "nvkpydvki4",
+           "p": "nfv9eqvki4",
            "t": "Las reglas del reparto"
           },
           {
-           "id": "n2pnmpbe6z",
+           "id": "n2t5ichki4",
            "k": "grupo",
-           "p": "nf89xnde6z",
+           "p": "n6g30gzki4",
            "t": "Coordinación y control"
           },
           {
@@ -5433,8 +5150,8 @@
              "t": "Solo se ha usado una vez: Cataluña, de octubre de 2017 a junio de 2018"
             }
            ],
-           "id": "nquqo8we6z",
-           "p": "n2pnmpbe6z",
+           "id": "n7mx59kki4",
+           "p": "n2t5ichki4",
            "t": "Artículo 155"
           },
           {
@@ -5449,14 +5166,14 @@
              "t": "Conferencias sectoriales por materias, como la de Salud"
             }
            ],
-           "id": "nev8ofne6z",
-           "p": "n2pnmpbe6z",
+           "id": "nuutzd1ki4",
+           "p": "n2t5ichki4",
            "t": "Órganos de cooperación"
           },
           {
-           "id": "n3ql082e6z",
+           "id": "nrrvoi1ki4",
            "k": "grupo",
-           "p": "nf89xnde6z",
+           "p": "n6g30gzki4",
            "t": "Cómo se financian"
           },
           {
@@ -5474,8 +5191,8 @@
              "t": "El modelo vigente es de 2009 y debía haberse renovado en 2014"
             }
            ],
-           "id": "nd6ac33e6z",
-           "p": "n3ql082e6z",
+           "id": "n0kkc6kki4",
+           "p": "nrrvoi1ki4",
            "t": "Régimen común"
           },
           {
@@ -5490,8 +5207,8 @@
              "t": "Tienen más recursos por habitante que las comunidades de régimen común"
             }
            ],
-           "id": "nrm5p1ce6z",
-           "p": "n3ql082e6z",
+           "id": "nw267maki4",
+           "p": "nrrvoi1ki4",
            "t": "Régimen foral"
           },
           {
@@ -5503,8 +5220,8 @@
              "t": "Ha hecho del Estado el gran acreedor de las comunidades"
             }
            ],
-           "id": "nsjffzge6z",
-           "p": "n3ql082e6z",
+           "id": "nf296fvki4",
+           "p": "nrrvoi1ki4",
            "t": "Fondo de Liquidez Autonómica"
           },
           {
@@ -5522,8 +5239,8 @@
              "t": "Necesitaba cambiar leyes en las Cortes y quedó pendiente con su disolución"
             }
            ],
-           "id": "n9cltfue6z",
-           "p": "n3ql082e6z",
+           "id": "nv6bvj0ki4",
+           "p": "nrrvoi1ki4",
            "t": "El nuevo modelo de 2026"
           },
           {
@@ -5535,14 +5252,14 @@
              "t": "Decayó sin votación final al disolverse las Cortes"
             }
            ],
-           "id": "n9xzbdhe6z",
-           "p": "n3ql082e6z",
+           "id": "nim9m78ki4",
+           "p": "nrrvoi1ki4",
            "t": "La condonación de deuda"
           },
           {
-           "id": "n2amlrde6z",
+           "id": "nn0msytki4",
            "k": "grupo",
-           "p": "nf89xnde6z",
+           "p": "n6g30gzki4",
            "t": "Las posturas"
           },
           {
@@ -5554,8 +5271,8 @@
              "t": "Piden un fondo transitorio y un modelo basado en la población ajustada"
             }
            ],
-           "id": "n8kq1oue6z",
-           "p": "n2amlrde6z",
+           "id": "ndzf7bvki4",
+           "p": "nn0msytki4",
            "t": "Las comunidades que se sienten infrafinanciadas"
           },
           {
@@ -5567,8 +5284,8 @@
              "t": "Sus partidarios invocan el principio de ordinalidad: que quien más aporta no quede por detrás tras el reparto"
             }
            ],
-           "id": "n98ubpie6z",
-           "p": "n2amlrde6z",
+           "id": "nmvokxrki4",
+           "p": "nn0msytki4",
            "t": "La «financiación singular» catalana"
           },
           {
@@ -5583,33 +5300,33 @@
              "t": "Los partidarios de recentralizar proponen que el Estado recupere competencias"
             }
            ],
-           "id": "n3q27fxe6z",
-           "p": "n2amlrde6z",
+           "id": "npz3m5lki4",
+           "p": "nn0msytki4",
            "t": "Las críticas"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406988,
          "v": 2
         },
         {
          "color": "#15803d",
-         "created": 1794647132891,
+         "created": 1794650406988,
          "id": "ej-po-local",
          "layout": "linea",
          "links": [],
          "name": "La administración local",
          "nodes": [
           {
-           "id": "ntdd1sae6z",
+           "id": "nd4wl5jki4",
            "n": "Ayuntamientos, diputaciones, cabildos y consejos insulares: la administración más cercana al ciudadano. La Constitución garantiza su autonomía para gestionar sus intereses.",
            "p": null,
            "t": "La administración local"
           },
           {
-           "id": "ngt7t6oe6z",
+           "id": "nyc915yki4",
            "k": "grupo",
-           "p": "ntdd1sae6z",
+           "p": "nd4wl5jki4",
            "t": "Los niveles"
           },
           {
@@ -5624,8 +5341,8 @@
              "t": "Burgos es la provincia con más municipios, 371"
             }
            ],
-           "id": "nob1ruue6z",
-           "p": "ngt7t6oe6z",
+           "id": "nxty8e3ki4",
+           "p": "nyc915yki4",
            "t": "Municipios"
           },
           {
@@ -5643,8 +5360,8 @@
              "t": "En pueblos muy pequeños puede funcionar el concejo abierto: la asamblea de todos los vecinos"
             }
            ],
-           "id": "nrhkdo7e6z",
-           "p": "ngt7t6oe6z",
+           "id": "n35hx8vki4",
+           "p": "nyc915yki4",
            "t": "El ayuntamiento"
           },
           {
@@ -5659,8 +5376,8 @@
              "t": "Se financian con impuestos propios como el IBI, el de vehículos o las plusvalías, y con transferencias del Estado"
             }
            ],
-           "id": "nq07k8xe6z",
-           "p": "ngt7t6oe6z",
+           "id": "njn51fxki4",
+           "p": "nyc915yki4",
            "t": "Qué hacen los ayuntamientos"
           },
           {
@@ -5675,8 +5392,8 @@
              "t": "Son la circunscripción electoral para el Congreso y el Senado"
             }
            ],
-           "id": "n1geuqre6z",
-           "p": "ngt7t6oe6z",
+           "id": "n9khkbbki4",
+           "p": "nyc915yki4",
            "t": "Provincias"
           },
           {
@@ -5691,8 +5408,8 @@
              "t": "No existen en las comunidades uniprovinciales; en el País Vasco son diputaciones forales con mucho más poder"
             }
            ],
-           "id": "nee9ij4e6z",
-           "p": "ngt7t6oe6z",
+           "id": "n9l1g7aki4",
+           "p": "nyc915yki4",
            "t": "Diputaciones provinciales"
           },
           {
@@ -5704,8 +5421,8 @@
              "t": "En Baleares, los consejos insulares de Mallorca, Menorca, Ibiza y Formentera"
             }
            ],
-           "id": "n4zu9pje6z",
-           "p": "ngt7t6oe6z",
+           "id": "noj4do0ki4",
+           "p": "nyc915yki4",
            "t": "Islas"
           },
           {
@@ -5717,14 +5434,14 @@
              "t": "Mancomunidades de municipios para compartir servicios y áreas metropolitanas como la de Barcelona"
             }
            ],
-           "id": "n551s9ze6z",
-           "p": "ngt7t6oe6z",
+           "id": "n5dgifkki4",
+           "p": "nyc915yki4",
            "t": "Comarcas y otras entidades"
           },
           {
-           "id": "n39hey0e6z",
+           "id": "n234yiuki4",
            "k": "grupo",
-           "p": "ntdd1sae6z",
+           "p": "nd4wl5jki4",
            "t": "Debates"
           },
           {
@@ -5736,8 +5453,8 @@
              "t": "Otros defienden que mantienen vivo el mundo rural y la atención a los pueblos"
             }
            ],
-           "id": "ndthnfpe6z",
-           "p": "n39hey0e6z",
+           "id": "nnr00n8ki4",
+           "p": "n234yiuki4",
            "t": "¿Sobran municipios o diputaciones?"
           },
           {
@@ -5749,13 +5466,13 @@
              "t": "Ha dado lugar a candidaturas propias como Teruel Existe"
             }
            ],
-           "id": "n94dhx2e6z",
-           "p": "n39hey0e6z",
+           "id": "n22mkshki4",
+           "p": "n234yiuki4",
            "t": "La España vaciada"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406988,
          "v": 2
         }
        ],
@@ -6179,21 +5896,21 @@
         },
         {
          "color": "#1e40af",
-         "created": 1794647132891,
+         "created": 1794650406988,
          "id": "ej-po-ue",
          "layout": "linea",
          "links": [],
          "name": "España en la Unión Europea",
          "nodes": [
           {
-           "id": "nrudst1e6z",
+           "id": "nbfhwzgki5",
            "n": "La entrada en la Comunidad Europea en 1986 fue la gran aspiración de la Transición: Europa como sinónimo de democracia y modernización.",
            "p": null,
            "t": "España en la Unión Europea"
           },
           {
-           "id": "nc6l76re6z",
-           "p": "nrudst1e6z",
+           "id": "ncpabq3ki5",
+           "p": "nbfhwzgki5",
            "t": "Cronología"
           },
           {
@@ -6202,8 +5919,8 @@
              "t": "El ministro Castiella pidió abrir negociaciones; Europa la rechazó por no ser una democracia"
             }
            ],
-           "id": "nj4aylme6z",
-           "p": "nc6l76re6z",
+           "id": "nlk3xjski5",
+           "p": "ncpabq3ki5",
            "t": "1962 · El franquismo pide la asociación"
           },
           {
@@ -6212,8 +5929,8 @@
              "t": "Un acuerdo solo económico con la Comunidad Económica Europea"
             }
            ],
-           "id": "nlt076ce6z",
-           "p": "nc6l76re6z",
+           "id": "ngdluehki5",
+           "p": "ncpabq3ki5",
            "t": "1970 · Acuerdo Comercial Preferencial"
           },
           {
@@ -6222,8 +5939,8 @@
              "t": "El Gobierno de Suárez la presentó en julio, un mes después de las primeras elecciones"
             }
            ],
-           "id": "nmz988re6z",
-           "p": "nc6l76re6z",
+           "id": "nwar4krki5",
+           "p": "ncpabq3ki5",
            "t": "1977 · Solicitud de adhesión"
           },
           {
@@ -6232,8 +5949,8 @@
              "t": "Firmado el 12 de junio en el Palacio Real de Madrid, el mismo día que Portugal en Lisboa"
             }
            ],
-           "id": "nq48urde6z",
-           "p": "nc6l76re6z",
+           "id": "n7n9lxeki5",
+           "p": "ncpabq3ki5",
            "t": "1985 · Firma del tratado de adhesión"
           },
           {
@@ -6245,8 +5962,8 @@
              "t": "Llegan los fondos estructurales que financian autovías, trenes y modernización"
             }
            ],
-           "id": "n687cjre6z",
-           "p": "nc6l76re6z",
+           "id": "nm22iw3ki5",
+           "p": "ncpabq3ki5",
            "t": "1986 · España entra en la Comunidad Europea"
           },
           {
@@ -6255,8 +5972,8 @@
              "t": "España preside por primera vez el Consejo de la Comunidad"
             }
            ],
-           "id": "nbqyvbqe6z",
-           "p": "nc6l76re6z",
+           "id": "ny5i3nbki5",
+           "p": "ncpabq3ki5",
            "t": "1989 · Primera presidencia española"
           },
           {
@@ -6268,8 +5985,8 @@
              "t": "España logra los Fondos de Cohesión para los países menos ricos"
             }
            ],
-           "id": "ntroveae6z",
-           "p": "nc6l76re6z",
+           "id": "np4cy32ki5",
+           "p": "ncpabq3ki5",
            "t": "1992 · El Tratado de Maastricht"
           },
           {
@@ -6281,8 +5998,8 @@
              "t": "En diciembre, en el Consejo Europeo de Madrid, se elige el nombre del «euro»"
             }
            ],
-           "id": "nuv4iffe6z",
-           "p": "nc6l76re6z",
+           "id": "nep1pluki5",
+           "p": "ncpabq3ki5",
            "t": "1995 · Schengen y el nombre del euro"
           },
           {
@@ -6291,8 +6008,8 @@
              "t": "El euro sustituye a la peseta en los mercados: un euro, 166,386 pesetas"
             }
            ],
-           "id": "neh599ye6z",
-           "p": "nc6l76re6z",
+           "id": "nhu85s7ki5",
+           "p": "ncpabq3ki5",
            "t": "1999 · Nace el euro"
           },
           {
@@ -6301,8 +6018,8 @@
              "t": "El 1 de enero llegan los billetes y monedas; la peseta desaparece en dos meses"
             }
            ],
-           "id": "na48bz8e6z",
-           "p": "nc6l76re6z",
+           "id": "no9zm17ki5",
+           "p": "ncpabq3ki5",
            "t": "2002 · Billetes y monedas de euro"
           },
           {
@@ -6314,8 +6031,8 @@
              "t": "El tratado no entró en vigor porque lo rechazaron Francia y Países Bajos"
             }
            ],
-           "id": "nfa6quae6z",
-           "p": "nc6l76re6z",
+           "id": "njfyoj0ki5",
+           "p": "ncpabq3ki5",
            "t": "2005 · Referéndum sobre la Constitución Europea"
           },
           {
@@ -6324,8 +6041,8 @@
              "t": "Europa prestó a España hasta 100.000 millones para sanear las cajas de ahorros; se usaron unos 41.000"
             }
            ],
-           "id": "n3shetee6z",
-           "p": "nc6l76re6z",
+           "id": "nddofuqki5",
+           "p": "ncpabq3ki5",
            "t": "2012 · El rescate bancario"
           },
           {
@@ -6334,8 +6051,8 @@
              "t": "Plan europeo de recuperación tras la covid: España, de los mayores beneficiarios"
             }
            ],
-           "id": "niouqnie6z",
-           "p": "nc6l76re6z",
+           "id": "ny3jqm8ki5",
+           "p": "ncpabq3ki5",
            "t": "2020 · Los fondos Next Generation"
           },
           {
@@ -6344,14 +6061,14 @@
              "t": "Segundo semestre de 2023, tras las de 1989, 1995, 2002 y 2010"
             }
            ],
-           "id": "nuua0oae6z",
-           "p": "nc6l76re6z",
+           "id": "nsd32y2ki5",
+           "p": "ncpabq3ki5",
            "t": "2023 · Quinta presidencia española"
           },
           {
-           "id": "nytx06ne6z",
+           "id": "ndyrffqki5",
            "k": "grupo",
-           "p": "nrudst1e6z",
+           "p": "nbfhwzgki5",
            "t": "Españoles en Europa"
           },
           {
@@ -6363,8 +6080,8 @@
              "t": "Antes, secretario general de la OTAN"
             }
            ],
-           "id": "nczlx71e6z",
-           "p": "nytx06ne6z",
+           "id": "nl7y57oki5",
+           "p": "ndyrffqki5",
            "t": "Javier Solana"
           },
           {
@@ -6373,8 +6090,8 @@
              "t": "Presidente del Parlamento Europeo (2004-2007) y Alto Representante (2019-2024)"
             }
            ],
-           "id": "nxqrupze6z",
-           "p": "nytx06ne6z",
+           "id": "nqyeiruki5",
+           "p": "ndyrffqki5",
            "t": "Josep Borrell"
           },
           {
@@ -6383,8 +6100,8 @@
              "t": "Vicepresidenta ejecutiva de la Comisión Europea desde 2024"
             }
            ],
-           "id": "nxq2bk0e6z",
-           "p": "nytx06ne6z",
+           "id": "nav03zuki5",
+           "p": "ndyrffqki5",
            "t": "Teresa Ribera"
           },
           {
@@ -6393,32 +6110,32 @@
              "t": "Presidenta del Banco Europeo de Inversiones desde 2024"
             }
            ],
-           "id": "nq9v3dae6z",
-           "p": "nytx06ne6z",
+           "id": "nlheul2ki5",
+           "p": "ndyrffqki5",
            "t": "Nadia Calviño"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406988,
          "v": 2
         },
         {
          "color": "#1e40af",
-         "created": 1794647132891,
+         "created": 1794650406989,
          "id": "ej-po-defensa",
          "layout": "linea",
          "links": [],
          "name": "Defensa y seguridad: la OTAN y las Fuerzas Armadas",
          "nodes": [
           {
-           "id": "n6ziffse6z",
+           "id": "n9tn13oki5",
            "n": "España pasó del aislamiento militar del franquismo, atado a Estados Unidos por las bases, a ser un aliado más de la OTAN y de la defensa europea. El gasto en defensa es hoy uno de los grandes debates.",
            "p": null,
            "t": "Defensa y seguridad: la OTAN y las Fuerzas Armadas"
           },
           {
-           "id": "n2e6s3ge6z",
-           "p": "n6ziffse6z",
+           "id": "nxg2blmki5",
+           "p": "n9tn13oki5",
            "t": "Cronología"
           },
           {
@@ -6430,8 +6147,8 @@
              "t": "Rompe el aislamiento internacional del régimen"
             }
            ],
-           "id": "nw0nkcoe6z",
-           "p": "n2e6s3ge6z",
+           "id": "nj5trd5ki5",
+           "p": "nxg2blmki5",
            "t": "1953 · Pactos de Madrid con Estados Unidos"
           },
           {
@@ -6440,8 +6157,8 @@
              "t": "El 30 de mayo, con el Gobierno de Calvo-Sotelo y el rechazo del PSOE"
             }
            ],
-           "id": "ni8rj4ee6z",
-           "p": "n2e6s3ge6z",
+           "id": "nr1ue5xki5",
+           "p": "nxg2blmki5",
            "t": "1982 · España entra en la OTAN"
           },
           {
@@ -6453,8 +6170,8 @@
              "t": "Ganó la permanencia con el 52,5 %, con condiciones: sin entrar en la estructura militar, sin armas nucleares y con menos tropas de EE. UU."
             }
            ],
-           "id": "n83tf2ve6z",
-           "p": "n2e6s3ge6z",
+           "id": "nllh55ski5",
+           "p": "nxg2blmki5",
            "t": "1986 · Referéndum sobre la OTAN"
           },
           {
@@ -6463,8 +6180,8 @@
              "t": "Las tropas estadounidenses dejan Torrejón y Zaragoza; se mantienen Rota y Morón"
             }
            ],
-           "id": "n9cqaote6z",
-           "p": "n2e6s3ge6z",
+           "id": "nog57z1ki5",
+           "p": "nxg2blmki5",
            "t": "1988 · Nuevo convenio con Estados Unidos"
           },
           {
@@ -6473,8 +6190,8 @@
              "t": "El primer español al frente de la Alianza, hasta 1999"
             }
            ],
-           "id": "ngb9rkie6z",
-           "p": "n2e6s3ge6z",
+           "id": "nxbloyzki5",
+           "p": "nxg2blmki5",
            "t": "1995 · Javier Solana, secretario general de la OTAN"
           },
           {
@@ -6483,8 +6200,8 @@
              "t": "España entra plenamente en el mando militar integrado de la OTAN"
             }
            ],
-           "id": "n194m9ne6z",
-           "p": "n2e6s3ge6z",
+           "id": "nbsptvxki5",
+           "p": "nxg2blmki5",
            "t": "1999 · Integración en la estructura militar"
           },
           {
@@ -6493,8 +6210,8 @@
              "t": "Se suspende el servicio militar obligatorio: Ejército profesional"
             }
            ],
-           "id": "n2cvl80e6z",
-           "p": "n2e6s3ge6z",
+           "id": "nsjfggoki5",
+           "p": "nxg2blmki5",
            "t": "2001 · Fin de la mili"
           },
           {
@@ -6506,8 +6223,8 @@
              "t": "Zapatero retira las tropas en 2004"
             }
            ],
-           "id": "nitld39e6z",
-           "p": "n2e6s3ge6z",
+           "id": "nskoeseki5",
+           "p": "nxg2blmki5",
            "t": "2003 · La guerra de Irak"
           },
           {
@@ -6516,8 +6233,8 @@
              "t": "Aprueba el nuevo concepto estratégico tras la invasión rusa de Ucrania"
             }
            ],
-           "id": "nnnzbode6z",
-           "p": "n2e6s3ge6z",
+           "id": "n34uvjuki5",
+           "p": "nxg2blmki5",
            "t": "2022 · Cumbre de la OTAN en Madrid"
           },
           {
@@ -6529,8 +6246,8 @@
              "t": "España firma con una carta de «flexibilidad» y defiende que le basta con el 2,1 %"
             }
            ],
-           "id": "n1bm4z7e6z",
-           "p": "n2e6s3ge6z",
+           "id": "nvpwegmki5",
+           "p": "nxg2blmki5",
            "t": "2025 · Cumbre de La Haya"
           },
           {
@@ -6539,14 +6256,14 @@
              "t": "El Gobierno no autoriza el uso de Rota y Morón para la guerra de Irán, lo que enfrenta a Sánchez con Trump"
             }
            ],
-           "id": "nyboaple6z",
-           "p": "n2e6s3ge6z",
+           "id": "n5xfni0ki5",
+           "p": "nxg2blmki5",
            "t": "2026 · La guerra de Irán y las bases"
           },
           {
-           "id": "nt7ue2ve6z",
+           "id": "n8cbrqcki5",
            "k": "grupo",
-           "p": "n6ziffse6z",
+           "p": "n9tn13oki5",
            "t": "Las Fuerzas Armadas"
           },
           {
@@ -6558,8 +6275,8 @@
              "t": "El rey ejerce el mando supremo; el Gobierno dirige la política de defensa"
             }
            ],
-           "id": "nd5hztee6z",
-           "p": "nt7ue2ve6z",
+           "id": "ny7azoiki5",
+           "p": "n8cbrqcki5",
            "t": "Los ejércitos"
           },
           {
@@ -6568,8 +6285,8 @@
              "t": "Creada en 2005 para catástrofes: incendios, inundaciones, nevadas"
             }
            ],
-           "id": "ngw3bwoe6z",
-           "p": "nt7ue2ve6z",
+           "id": "n07itx8ki5",
+           "p": "n8cbrqcki5",
            "t": "Unidad Militar de Emergencias"
           },
           {
@@ -6578,14 +6295,14 @@
              "t": "Líbano con los cascos azules de la ONU desde 2006, Letonia con la OTAN y la operación Atalanta contra la piratería, entre otras"
             }
            ],
-           "id": "njqhp4oe6z",
-           "p": "nt7ue2ve6z",
+           "id": "ns82j1hki5",
+           "p": "n8cbrqcki5",
            "t": "Misiones en el exterior"
           },
           {
-           "id": "nwu6y9te6z",
+           "id": "nlnq94yki5",
            "k": "grupo",
-           "p": "n6ziffse6z",
+           "p": "n9tn13oki5",
            "t": "Las fuerzas de seguridad"
           },
           {
@@ -6594,8 +6311,8 @@
              "t": "Cuerpo civil; actúa sobre todo en ciudades"
             }
            ],
-           "id": "nrmw3kse6z",
-           "p": "nwu6y9te6z",
+           "id": "nbxvlhoki5",
+           "p": "nlnq94yki5",
            "t": "Policía Nacional"
           },
           {
@@ -6607,8 +6324,8 @@
              "t": "Actúa sobre todo en zonas rurales, carreteras, costas y fronteras"
             }
            ],
-           "id": "nq2vdlfe6z",
-           "p": "nwu6y9te6z",
+           "id": "nzo4hr1ki5",
+           "p": "nlnq94yki5",
            "t": "Guardia Civil"
           },
           {
@@ -6620,14 +6337,14 @@
              "t": "Las policías locales dependen de cada ayuntamiento"
             }
            ],
-           "id": "ncwxkc5e6z",
-           "p": "nwu6y9te6z",
+           "id": "nzom9tmki5",
+           "p": "nlnq94yki5",
            "t": "Policías autonómicas y locales"
           },
           {
-           "id": "nqoz0fce6z",
+           "id": "nfbq7akki5",
            "k": "grupo",
-           "p": "n6ziffse6z",
+           "p": "n9tn13oki5",
            "t": "El gasto en defensa"
           },
           {
@@ -6642,8 +6359,8 @@
              "t": "La subida se aprobó en Consejo de Ministros, sin votación en el Congreso"
             }
            ],
-           "id": "n69x7kle6z",
-           "p": "nqoz0fce6z",
+           "id": "n7unnqtki5",
+           "p": "nfbq7akki5",
            "t": "Cuánto gasta España"
           },
           {
@@ -6655,33 +6372,33 @@
              "t": "El Gobierno sostiene que el 2,1 % basta para cumplir las capacidades que pide la OTAN; la OTAN calcula que hará falta más"
             }
            ],
-           "id": "noczzm1e6z",
-           "p": "nqoz0fce6z",
+           "id": "n6z7tkvki5",
+           "p": "nfbq7akki5",
            "t": "Las posturas"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406989,
          "v": 2
         },
         {
          "color": "#1e40af",
-         "created": 1794647132891,
+         "created": 1794650406989,
          "id": "ej-po-exteriores",
          "layout": "linea",
          "links": [],
          "name": "Las relaciones exteriores de España",
          "nodes": [
           {
-           "id": "ndffoaye6z",
+           "id": "ny601xvki5",
            "n": "Europa, el Mediterráneo y América Latina son los tres grandes ejes de la política exterior española, con Marruecos y Estados Unidos como relaciones especialmente sensibles.",
            "p": null,
            "t": "Las relaciones exteriores de España"
           },
           {
-           "id": "ntbmqjge6z",
+           "id": "neoodq3ki5",
            "k": "grupo",
-           "p": "ndffoaye6z",
+           "p": "ny601xvki5",
            "t": "Los vecinos del sur"
           },
           {
@@ -6696,8 +6413,8 @@
              "t": "Reclama la soberanía de Ceuta y Melilla"
             }
            ],
-           "id": "noeo2ste6z",
-           "p": "ntbmqjge6z",
+           "id": "nehd8yhki5",
+           "p": "neoodq3ki5",
            "t": "Marruecos"
           },
           {
@@ -6715,8 +6432,8 @@
              "t": "En octubre de 2025 el Consejo de Seguridad de la ONU vio la autonomía como la solución más viable, sin reconocer la soberanía marroquí"
             }
            ],
-           "id": "n9lrjome6z",
-           "p": "ntbmqjge6z",
+           "id": "nebc0nyki5",
+           "p": "neoodq3ki5",
            "t": "El Sáhara Occidental"
           },
           {
@@ -6728,14 +6445,14 @@
              "t": "Rompió el tratado de amistad con España en 2022 por el cambio de postura sobre el Sáhara"
             }
            ],
-           "id": "npz5doqe6z",
-           "p": "ntbmqjge6z",
+           "id": "n79cqjgki5",
+           "p": "neoodq3ki5",
            "t": "Argelia"
           },
           {
-           "id": "njoiuuie6z",
+           "id": "nx1i277ki5",
            "k": "grupo",
-           "p": "ndffoaye6z",
+           "p": "ny601xvki5",
            "t": "Europa y el Atlántico"
           },
           {
@@ -6747,8 +6464,8 @@
              "t": "El tratado firmado en 2026 entre la UE y el Reino Unido elimina la Verja como frontera, sin tocar la soberanía"
             }
            ],
-           "id": "n2hie6ge6z",
-           "p": "njoiuuie6z",
+           "id": "n0wwnkzki5",
+           "p": "nx1i277ki5",
            "t": "Gibraltar"
           },
           {
@@ -6760,8 +6477,8 @@
              "t": "Portugal: cumbres anuales y cooperación a lo largo de «la Raya»"
             }
            ],
-           "id": "no9j7jse6z",
-           "p": "njoiuuie6z",
+           "id": "nhvu2bjki5",
+           "p": "nx1i277ki5",
            "t": "Francia y Portugal"
           },
           {
@@ -6773,14 +6490,14 @@
              "t": "Relación tensa con Trump por el gasto en defensa y la guerra de Irán"
             }
            ],
-           "id": "nxi6w1xe6z",
-           "p": "njoiuuie6z",
+           "id": "nxgbanski5",
+           "p": "nx1i277ki5",
            "t": "Estados Unidos"
           },
           {
-           "id": "nnt4io2e6z",
+           "id": "nhgsrz2ki5",
            "k": "grupo",
-           "p": "ndffoaye6z",
+           "p": "ny601xvki5",
            "t": "Más allá"
           },
           {
@@ -6795,8 +6512,8 @@
              "t": "La «ley de nietos» de 2022 ha dado ya la nacionalidad española a más de 400.000 descendientes de exiliados y emigrantes"
             }
            ],
-           "id": "nek2u5he6z",
-           "p": "nnt4io2e6z",
+           "id": "nw1sbrvki5",
+           "p": "nhgsrz2ki5",
            "t": "Iberoamérica"
           },
           {
@@ -6811,8 +6528,8 @@
              "t": "Madrid acogió la Conferencia de Paz de 1991"
             }
            ],
-           "id": "ntpvncje6z",
-           "p": "nnt4io2e6z",
+           "id": "nlovz4aki5",
+           "p": "nhgsrz2ki5",
            "t": "Oriente Próximo"
           },
           {
@@ -6824,13 +6541,13 @@
              "t": "Ha participado en numerosas misiones de paz, de los Balcanes al Líbano"
             }
            ],
-           "id": "nxy31y7e6z",
-           "p": "nnt4io2e6z",
+           "id": "n2pzyswki5",
+           "p": "nhgsrz2ki5",
            "t": "Naciones Unidas"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406989,
          "v": 2
         }
        ],
@@ -6842,22 +6559,22 @@
        "children": [
         {
          "color": "#475569",
-         "created": 1794647132891,
+         "created": 1794650406989,
          "id": "ej-po-debate-territorial",
          "layout": "linea",
          "links": [],
          "name": "El modelo territorial y el independentismo",
          "nodes": [
           {
-           "id": "n329duge6z",
+           "id": "ng4na8nki5",
            "n": "El debate más duradero de la democracia: cómo encajar en un mismo Estado a territorios con identidades nacionales propias, sobre todo Cataluña y el País Vasco. Aquí se recogen los hechos y las posturas principales, sin tomar partido.",
            "p": null,
            "t": "El modelo territorial y el independentismo"
           },
           {
-           "id": "n043ozue6z",
+           "id": "nttcfyuki5",
            "k": "grupo",
-           "p": "n329duge6z",
+           "p": "ng4na8nki5",
            "t": "Qué está en juego"
           },
           {
@@ -6875,8 +6592,8 @@
              "t": "Independencia de algunos territorios"
             }
            ],
-           "id": "njeti5te6z",
-           "p": "n043ozue6z",
+           "id": "ntce3t2ki5",
+           "p": "nttcfyuki5",
            "t": "Los modelos posibles"
           },
           {
@@ -6891,13 +6608,13 @@
              "t": "Un referéndum de independencia vinculante exigiría reformar la Constitución"
             }
            ],
-           "id": "njar0m7e6z",
-           "p": "n043ozue6z",
+           "id": "nhmu6wqki5",
+           "p": "nttcfyuki5",
            "t": "El choque de principios"
           },
           {
-           "id": "nmouplye6z",
-           "p": "n329duge6z",
+           "id": "nx1u6n9ki5",
+           "p": "ng4na8nki5",
            "t": "Cronología del caso catalán"
           },
           {
@@ -6906,8 +6623,8 @@
              "t": "Aprobado por las Cortes y en referéndum en Cataluña; el PP lo recurrió"
             }
            ],
-           "id": "nojh8tce6z",
-           "p": "nmouplye6z",
+           "id": "nabz2rgki5",
+           "p": "nx1u6n9ki5",
            "t": "2006 · Nuevo Estatuto de Cataluña"
           },
           {
@@ -6916,8 +6633,8 @@
              "t": "El Constitucional recorta el estatuto; gran manifestación en Barcelona con el lema «Som una nació»"
             }
            ],
-           "id": "n2temo0e6z",
-           "p": "nmouplye6z",
+           "id": "nqm95laki5",
+           "p": "nx1u6n9ki5",
            "t": "2010 · Sentencia del Estatut"
           },
           {
@@ -6926,8 +6643,8 @@
              "t": "Una Diada masiva y el giro de CiU hacia la independencia"
             }
            ],
-           "id": "nfyfouie6z",
-           "p": "nmouplye6z",
+           "id": "nr905jtki5",
+           "p": "nx1u6n9ki5",
            "t": "2012 · El giro independentista"
           },
           {
@@ -6936,8 +6653,8 @@
              "t": "Votación simbólica prohibida por el Constitucional; Artur Mas fue condenado a inhabilitación por desobediencia"
             }
            ],
-           "id": "njx0ephe6z",
-           "p": "nmouplye6z",
+           "id": "nfiysjgki5",
+           "p": "nx1u6n9ki5",
            "t": "2014 · La consulta del 9-N"
           },
           {
@@ -6952,8 +6669,8 @@
              "t": "El 27 de octubre el Parlament declara la independencia y el Senado aprueba el 155; Puigdemont se marcha a Bélgica"
             }
            ],
-           "id": "n92wi8we6z",
-           "p": "nmouplye6z",
+           "id": "nlw3p3vki5",
+           "p": "nx1u6n9ki5",
            "t": "2017 · El 1-O y la declaración de independencia"
           },
           {
@@ -6962,8 +6679,8 @@
              "t": "El Supremo condena a nueve líderes por sedición, a varios también por malversación, con penas de hasta 13 años para Junqueras"
             }
            ],
-           "id": "n1yvdkqe6z",
-           "p": "nmouplye6z",
+           "id": "njic88jki5",
+           "p": "nx1u6n9ki5",
            "t": "2019 · La sentencia del procés"
           },
           {
@@ -6972,8 +6689,8 @@
              "t": "El Gobierno indulta a los nueve presos"
             }
            ],
-           "id": "ntiwasve6z",
-           "p": "nmouplye6z",
+           "id": "ngfv4oiki5",
+           "p": "nx1u6n9ki5",
            "t": "2021 · Los indultos"
           },
           {
@@ -6982,8 +6699,8 @@
              "t": "Se suprime el delito de sedición y se reforma la malversación"
             }
            ],
-           "id": "nqmdjxwe6z",
-           "p": "nmouplye6z",
+           "id": "nysmbp3ki5",
+           "p": "nx1u6n9ki5",
            "t": "2022 · Reforma del Código Penal"
           },
           {
@@ -6995,8 +6712,8 @@
              "t": "En agosto Salvador Illa, del PSC, preside la Generalitat: el primer no independentista desde 2010"
             }
            ],
-           "id": "nlnrodxe6z",
-           "p": "nmouplye6z",
+           "id": "n5kt732ki5",
+           "p": "nx1u6n9ki5",
            "t": "2024 · Ley de amnistía e Illa presidente"
           },
           {
@@ -7005,8 +6722,8 @@
              "t": "En junio, por 6 votos a 4"
             }
            ],
-           "id": "n5cptjie6z",
-           "p": "nmouplye6z",
+           "id": "nloz4tcki5",
+           "p": "nx1u6n9ki5",
            "t": "2025 · El Constitucional avala la amnistía"
           },
           {
@@ -7018,14 +6735,14 @@
              "t": "En octubre el Constitucional ampara la amnistía de la malversación y el Supremo levanta la orden de detención contra Puigdemont"
             }
            ],
-           "id": "nfxavfle6z",
-           "p": "nmouplye6z",
+           "id": "n8p3w4kki6",
+           "p": "nx1u6n9ki5",
            "t": "2026 · Aval europeo y fin de la orden contra Puigdemont"
           },
           {
-           "id": "nyncuo7e6z",
+           "id": "na3xbbvki6",
            "k": "grupo",
-           "p": "n329duge6z",
+           "p": "ng4na8nki5",
            "t": "Las posturas"
           },
           {
@@ -7037,8 +6754,8 @@
              "t": "Vox va más allá y propone suprimir o vaciar las autonomías"
             }
            ],
-           "id": "nhw0qwle6z",
-           "p": "nyncuo7e6z",
+           "id": "n8mc7wrki6",
+           "p": "na3xbbvki6",
            "t": "Unidad constitucional"
           },
           {
@@ -7050,8 +6767,8 @@
              "t": "Proponen reconocer más la diversidad sin romper el Estado"
             }
            ],
-           "id": "nnwwpmxe6z",
-           "p": "nyncuo7e6z",
+           "id": "nm9vsslki6",
+           "p": "na3xbbvki6",
            "t": "Reforma federal"
           },
           {
@@ -7063,8 +6780,8 @@
              "t": "Las encuestas catalanas muestran desde 2017 un descenso del apoyo a la independencia"
             }
            ],
-           "id": "nqjtlufe6z",
-           "p": "nyncuo7e6z",
+           "id": "nqknctiki6",
+           "p": "na3xbbvki6",
            "t": "Derecho a decidir"
           },
           {
@@ -7079,33 +6796,33 @@
              "t": "El propio Constitucional se dividió: cuatro de sus magistrados votaron en contra"
             }
            ],
-           "id": "n033tqje6z",
-           "p": "nyncuo7e6z",
+           "id": "neviqndki6",
+           "p": "na3xbbvki6",
            "t": "Sobre la amnistía"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406989,
          "v": 2
         },
         {
          "color": "#475569",
-         "created": 1794647132891,
+         "created": 1794650406990,
          "id": "ej-po-debate-monarquia",
          "layout": "linea",
          "links": [],
          "name": "Monarquía o república",
          "nodes": [
           {
-           "id": "ns9cc1ae6z",
+           "id": "na9eocyki6",
            "n": "La Constitución de 1978 establece la monarquía parlamentaria. Cambiarla exigiría la reforma más difícil: dos tercios de las Cortes, elecciones, nueva aprobación y referéndum.",
            "p": null,
            "t": "Monarquía o república"
           },
           {
-           "id": "nenq9spe6z",
+           "id": "nx1p5ghki6",
            "k": "grupo",
-           "p": "ns9cc1ae6z",
+           "p": "na9eocyki6",
            "t": "Los datos"
           },
           {
@@ -7117,8 +6834,8 @@
              "t": "La Constitución se votó en bloque: nunca hubo un referéndum específico sobre la monarquía"
             }
            ],
-           "id": "nwpaoate6z",
-           "p": "nenq9spe6z",
+           "id": "ni2vb2nki6",
+           "p": "nx1p5ghki6",
            "t": "Qué dice la Constitución"
           },
           {
@@ -7133,8 +6850,8 @@
              "t": "La princesa Leonor recibe en general mejores valoraciones que la institución"
             }
            ],
-           "id": "nhzozxje6z",
-           "p": "nenq9spe6z",
+           "id": "n63ng2vki6",
+           "p": "nx1p5ghki6",
            "t": "La opinión pública"
           },
           {
@@ -7146,13 +6863,13 @@
              "t": "Sumar, Podemos, ERC, Junts, EH Bildu y el BNG son republicanos"
             }
            ],
-           "id": "nj69vpfe6z",
-           "p": "nenq9spe6z",
+           "id": "n92oaf1ki6",
+           "p": "nx1p5ghki6",
            "t": "Los partidos"
           },
           {
-           "id": "n4txahbe6z",
-           "p": "ns9cc1ae6z",
+           "id": "nnj6xqaki6",
+           "p": "na9eocyki6",
            "t": "Cronología"
           },
           {
@@ -7161,8 +6878,8 @@
              "t": "Alfonso XIII se exilia tras las elecciones municipales de abril"
             }
            ],
-           "id": "n68nua1e6z",
-           "p": "n4txahbe6z",
+           "id": "nvjkynski6",
+           "p": "nnj6xqaki6",
            "t": "1931 · Segunda República"
           },
           {
@@ -7171,8 +6888,8 @@
              "t": "La Ley de Sucesión de Franco define España como reino y le deja elegir sucesor"
             }
            ],
-           "id": "n9wnqc3e6z",
-           "p": "n4txahbe6z",
+           "id": "n4k9i13ki6",
+           "p": "nnj6xqaki6",
            "t": "1947 · España, «reino» sin rey"
           },
           {
@@ -7181,8 +6898,8 @@
              "t": "Lo designa sucesor «a título de Rey», saltándose a su padre, Juan de Borbón"
             }
            ],
-           "id": "nlt34zqe6z",
-           "p": "n4txahbe6z",
+           "id": "n2thee3ki6",
+           "p": "nnj6xqaki6",
            "t": "1969 · Franco elige a Juan Carlos"
           },
           {
@@ -7191,8 +6908,8 @@
              "t": "Cede sus derechos dinásticos a su hijo, lo que refuerza la legitimidad histórica del rey"
             }
            ],
-           "id": "ndgpgxee6z",
-           "p": "n4txahbe6z",
+           "id": "nq7shn9ki6",
+           "p": "nnj6xqaki6",
            "t": "1977 · Renuncia de Juan de Borbón"
           },
           {
@@ -7201,8 +6918,8 @@
              "t": "Establece la monarquía parlamentaria"
             }
            ],
-           "id": "npszr88e6z",
-           "p": "n4txahbe6z",
+           "id": "nh7kew4ki6",
+           "p": "nnj6xqaki6",
            "t": "1978 · La Constitución"
           },
           {
@@ -7211,8 +6928,8 @@
              "t": "Tras años de escándalos, abdica en Felipe VI"
             }
            ],
-           "id": "norkh8de6z",
-           "p": "n4txahbe6z",
+           "id": "ngrq9cyki6",
+           "p": "nnj6xqaki6",
            "t": "2014 · Abdicación de Juan Carlos I"
           },
           {
@@ -7221,8 +6938,8 @@
              "t": "Tras conocerse investigaciones sobre su fortuna en el extranjero"
             }
            ],
-           "id": "ni4pv80e6z",
-           "p": "n4txahbe6z",
+           "id": "nmx8f1ski6",
+           "p": "nnj6xqaki6",
            "t": "2020 · Juan Carlos I se va a Abu Dabi"
           },
           {
@@ -7231,14 +6948,14 @@
              "t": "La heredera alcanza la mayoría de edad"
             }
            ],
-           "id": "nt1j56te6z",
-           "p": "n4txahbe6z",
+           "id": "nnqwt1bki6",
+           "p": "nnj6xqaki6",
            "t": "2023 · Leonor jura la Constitución"
           },
           {
-           "id": "n6fdheee6z",
+           "id": "nzco2bzki6",
            "k": "grupo",
-           "p": "ns9cc1ae6z",
+           "p": "na9eocyki6",
            "t": "Los argumentos"
           },
           {
@@ -7256,8 +6973,8 @@
              "t": "Funciona en democracias consolidadas como Reino Unido, Suecia o Países Bajos"
             }
            ],
-           "id": "nygky17e6z",
-           "p": "n6fdheee6z",
+           "id": "najvb6iki6",
+           "p": "nzco2bzki6",
            "t": "A favor de la monarquía parlamentaria"
           },
           {
@@ -7275,33 +6992,33 @@
              "t": "El origen de la monarquía actual está en la designación de Franco"
             }
            ],
-           "id": "nqiwhpse6z",
-           "p": "n6fdheee6z",
+           "id": "ngwqxvqki6",
+           "p": "nzco2bzki6",
            "t": "A favor de la república"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406990,
          "v": 2
         },
         {
          "color": "#475569",
-         "created": 1794647132891,
+         "created": 1794650406990,
          "id": "ej-po-debate-memoria",
          "layout": "linea",
          "links": [],
          "name": "Memoria democrática",
          "nodes": [
           {
-           "id": "nvclm13e6z",
+           "id": "nh2w93jki6",
            "n": "Cómo debe tratar la democracia el pasado de la Guerra Civil y la dictadura: las víctimas, las fosas comunes, los símbolos y los lugares franquistas. La Transición optó por no mirar atrás; desde 2000 el debate no ha dejado de crecer.",
            "p": null,
            "t": "Memoria democrática"
           },
           {
-           "id": "n3cm0pve6z",
+           "id": "nrpw1knki6",
            "k": "grupo",
-           "p": "nvclm13e6z",
+           "p": "nh2w93jki6",
            "t": "Los datos"
           },
           {
@@ -7313,8 +7030,8 @@
              "t": "Las estimaciones más citadas hablan de más de 100.000 desaparecidos"
             }
            ],
-           "id": "nu1f3yse6z",
-           "p": "n3cm0pve6z",
+           "id": "nqmz998ki6",
+           "p": "nrpw1knki6",
            "t": "Las víctimas"
           },
           {
@@ -7332,8 +7049,8 @@
              "t": "Da la nacionalidad a descendientes de exiliados: la llamada «ley de nietos»"
             }
            ],
-           "id": "nbxtlf6e6z",
-           "p": "n3cm0pve6z",
+           "id": "n6mymeeki6",
+           "p": "nrpw1knki6",
            "t": "La Ley de Memoria Democrática"
           },
           {
@@ -7348,13 +7065,13 @@
              "t": "En 2026 empezaron los primeros trabajos, entre recursos judiciales y protestas"
             }
            ],
-           "id": "n4hvb10e6z",
-           "p": "n3cm0pve6z",
+           "id": "n15drnuki6",
+           "p": "nrpw1knki6",
            "t": "El Valle de Cuelgamuros"
           },
           {
-           "id": "ncauhw9e6z",
-           "p": "nvclm13e6z",
+           "id": "nvg9648ki6",
+           "p": "nh2w93jki6",
            "t": "Cronología"
           },
           {
@@ -7363,8 +7080,8 @@
              "t": "Libera a los presos políticos y a la vez impide juzgar los crímenes del franquismo"
             }
            ],
-           "id": "n6rfbppe6z",
-           "p": "ncauhw9e6z",
+           "id": "n8136zbki6",
+           "p": "nvg9648ki6",
            "t": "1977 · Ley de Amnistía"
           },
           {
@@ -7373,8 +7090,8 @@
              "t": "La fosa de los «trece de Priaranza», en León, inicia las exhumaciones con métodos científicos"
             }
            ],
-           "id": "nhdbvgue6z",
-           "p": "ncauhw9e6z",
+           "id": "ni8b2ceki6",
+           "p": "nvg9648ki6",
            "t": "2000 · Las primeras exhumaciones"
           },
           {
@@ -7383,8 +7100,8 @@
              "t": "Aprobada con Zapatero: reconoce a las víctimas y ordena retirar símbolos franquistas"
             }
            ],
-           "id": "nptf6u6e6z",
-           "p": "ncauhw9e6z",
+           "id": "nuvkilxki6",
+           "p": "nvg9648ki6",
            "t": "2007 · Ley de Memoria Histórica"
           },
           {
@@ -7393,8 +7110,8 @@
              "t": "Sus restos salen de Cuelgamuros y se trasladan al cementerio de Mingorrubio"
             }
            ],
-           "id": "n9d4biie6z",
-           "p": "ncauhw9e6z",
+           "id": "nbmr5ziki6",
+           "p": "nvg9648ki6",
            "t": "2019 · Exhumación de Franco"
           },
           {
@@ -7403,8 +7120,8 @@
              "t": "Sustituye a la de 2007 y llega más lejos"
             }
            ],
-           "id": "no9sw2me6z",
-           "p": "ncauhw9e6z",
+           "id": "nj55qiiki6",
+           "p": "nvg9648ki6",
            "t": "2022 · Ley de Memoria Democrática"
           },
           {
@@ -7413,8 +7130,8 @@
              "t": "El fundador de Falange también sale de Cuelgamuros"
             }
            ],
-           "id": "n46ia0je6z",
-           "p": "ncauhw9e6z",
+           "id": "nm1260fki6",
+           "p": "nvg9648ki6",
            "t": "2023 · Exhumación de José Antonio Primo de Rivera"
           },
           {
@@ -7423,14 +7140,14 @@
              "t": "El Gobierno organiza un programa de actos para celebrar la llegada de la democracia"
             }
            ],
-           "id": "nn0ymp2e6z",
-           "p": "ncauhw9e6z",
+           "id": "ntwmr2kki6",
+           "p": "nvg9648ki6",
            "t": "2025 · Cincuenta años de la muerte de Franco"
           },
           {
-           "id": "nozna6ee6z",
+           "id": "nuv6fb3ki6",
            "k": "grupo",
-           "p": "nvclm13e6z",
+           "p": "nh2w93jki6",
            "t": "Las posturas"
           },
           {
@@ -7445,8 +7162,8 @@
              "t": "Una democracia no debe mantener homenajes a una dictadura"
             }
            ],
-           "id": "nwb98noe6z",
-           "p": "nozna6ee6z",
+           "id": "ng77jvkki6",
+           "p": "nuv6fb3ki6",
            "t": "A favor de las políticas de memoria"
           },
           {
@@ -7464,13 +7181,13 @@
              "t": "El PP ha anunciado que derogará la ley si gobierna"
             }
            ],
-           "id": "ndu0cpie6z",
-           "p": "nozna6ee6z",
+           "id": "n5klo3oki6",
+           "p": "nuv6fb3ki6",
            "t": "Las críticas"
           }
          ],
          "type": "scheme",
-         "updated": 1794647132891,
+         "updated": 1794650406990,
          "v": 2
         }
        ],
