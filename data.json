@@ -42,6 +42,9 @@
   },
   {
    "d": "esqimg-ej-po-corona"
+  },
+  {
+   "d": "esqimg-ej-po-judicial"
   }
  ],
  "esquemas": [
@@ -9101,6 +9104,13 @@
    "kb": 1,
    "name": "La Corona · imágenes",
    "tarjetas": 8
+  },
+  {
+   "file": "El poder judicial · imagenes.json",
+   "id": "esqimg-ej-po-judicial",
+   "kb": 1,
+   "name": "El poder judicial · imágenes",
+   "tarjetas": 5
   }
  ],
  "notas": [
