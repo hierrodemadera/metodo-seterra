@@ -36,6 +36,9 @@
   },
   {
    "d": "esqimg-ej-gaza"
+  },
+  {
+   "d": "esqimg-ej-po-constitucion"
   }
  ],
  "esquemas": [
@@ -9081,6 +9084,13 @@
    "kb": 0,
    "name": "El conflicto de Gaza · imágenes",
    "tarjetas": 0
+  },
+  {
+   "file": "La Constitucion de 1978 · imagenes.json",
+   "id": "esqimg-ej-po-constitucion",
+   "kb": 1,
+   "name": "La Constitución de 1978 · imágenes",
+   "tarjetas": 4
   }
  ],
  "notas": [
