@@ -42,6 +42,13 @@
   {
    "children": [
     {
+     "children": [],
+     "color": "#15803d",
+     "id": "f-es-territorio",
+     "name": "Territorio",
+     "type": "folder"
+    },
+    {
      "children": [
       {
        "children": [],
