@@ -4786,6 +4786,15 @@
            "t": "2017 · Primera aplicación del 155"
           }
          ],
+         "run": {
+          "dd": {},
+          "f": {},
+          "phase": 1,
+          "res": {},
+          "slot": {},
+          "start": 1794667308134,
+          "v": "ln1"
+         },
          "type": "scheme",
          "updated": 1794650406987,
          "v": 2
