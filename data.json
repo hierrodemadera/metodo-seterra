@@ -48,6 +48,9 @@
   },
   {
    "d": "esqimg-ej-po-tc"
+  },
+  {
+   "d": "esqimg-ej-po-elecciones"
   }
  ],
  "esquemas": [
@@ -9121,6 +9124,13 @@
    "kb": 1,
    "name": "El Tribunal Constitucional y los órganos de control · imágenes",
    "tarjetas": 4
+  },
+  {
+   "file": "Las elecciones generales desde 1977 · imagenes.json",
+   "id": "esqimg-ej-po-elecciones",
+   "kb": 0,
+   "name": "Las elecciones generales desde 1977 · imágenes",
+   "tarjetas": 0
   }
  ],
  "notas": [
