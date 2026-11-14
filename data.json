@@ -45,6 +45,9 @@
   },
   {
    "d": "esqimg-ej-po-judicial"
+  },
+  {
+   "d": "esqimg-ej-po-tc"
   }
  ],
  "esquemas": [
@@ -9111,6 +9114,13 @@
    "kb": 1,
    "name": "El poder judicial · imágenes",
    "tarjetas": 5
+  },
+  {
+   "file": "El Tribunal Constitucional y los organos de control · imagenes.json",
+   "id": "esqimg-ej-po-tc",
+   "kb": 1,
+   "name": "El Tribunal Constitucional y los órganos de control · imágenes",
+   "tarjetas": 4
   }
  ],
  "notas": [
