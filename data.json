@@ -4035,6 +4035,15 @@
            "t": "Efectos del sistema"
           }
          ],
+         "run": {
+          "dd": {},
+          "f": {},
+          "phase": 1,
+          "res": {},
+          "slot": {},
+          "start": 1794650455885,
+          "v": "ln1"
+         },
          "type": "scheme",
          "updated": 1794650406986,
          "v": 2
