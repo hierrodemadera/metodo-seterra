@@ -1365,8 +1365,12 @@
           "dd": {},
           "f": {},
           "phase": 1,
-          "res": {},
-          "slot": {},
+          "res": {
+           "p:nxstztde6x": 3
+          },
+          "slot": {
+           "nxstztde6x": "nxstztde6x"
+          },
           "start": 1794648164284,
           "v": "ln1"
          },
