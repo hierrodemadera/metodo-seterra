@@ -51,6 +51,9 @@
   },
   {
    "d": "esqimg-ej-po-elecciones"
+  },
+  {
+   "d": "esqimg-ej-po-leyes"
   }
  ],
  "esquemas": [
@@ -9131,6 +9134,13 @@
    "kb": 0,
    "name": "Las elecciones generales desde 1977 · imágenes",
    "tarjetas": 0
+  },
+  {
+   "file": "Como se aprueba una ley en Espana · imagenes.json",
+   "id": "esqimg-ej-po-leyes",
+   "kb": 0,
+   "name": "Cómo se aprueba una ley en España · imágenes",
+   "tarjetas": 1
   }
  ],
  "notas": [
