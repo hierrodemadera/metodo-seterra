@@ -1361,6 +1361,15 @@
            "t": "Estado de sitio"
           }
          ],
+         "run": {
+          "dd": {},
+          "f": {},
+          "phase": 1,
+          "res": {},
+          "slot": {},
+          "start": 1794648164284,
+          "v": "ln1"
+         },
          "type": "scheme",
          "updated": 1794647132889,
          "v": 2
