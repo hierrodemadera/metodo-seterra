@@ -4042,7 +4042,8 @@
            "nkvbuduki2:1": true,
            "nur7o0hki2:0": true,
            "nur7o0hki2:1": true,
-           "nzadw94ki2:0": true
+           "nzadw94ki2:0": true,
+           "nzadw94ki2:1": true
           },
           "f": {},
           "phase": 2,
@@ -4053,6 +4054,7 @@
            "d:nur7o0hki2:0": 2,
            "d:nur7o0hki2:1": 1,
            "d:nzadw94ki2:0": 0,
+           "d:nzadw94ki2:1": 3,
            "p:n56oar8ki2": 2,
            "p:ng1kz1vki2": 1,
            "p:ngki3a6ki2": 0,
