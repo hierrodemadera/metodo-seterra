@@ -54,6 +54,9 @@
   },
   {
    "d": "esqimg-ej-po-leyes"
+  },
+  {
+   "d": "esqimg-ej-po-partidos"
   }
  ],
  "esquemas": [
@@ -9141,6 +9144,13 @@
    "kb": 0,
    "name": "Cómo se aprueba una ley en España · imágenes",
    "tarjetas": 1
+  },
+  {
+   "file": "Los partidos politicos · imagenes.json",
+   "id": "esqimg-ej-po-partidos",
+   "kb": 3,
+   "name": "Los partidos políticos · imágenes",
+   "tarjetas": 25
   }
  ],
  "notas": [
