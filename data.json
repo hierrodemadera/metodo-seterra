@@ -4036,10 +4036,13 @@
           }
          ],
          "run": {
-          "dd": {},
+          "dd": {
+           "nkvbuduki2:1": true
+          },
           "f": {},
           "phase": 2,
           "res": {
+           "d:nkvbuduki2:1": 1,
            "p:n56oar8ki2": 2,
            "p:ng1kz1vki2": 1,
            "p:ngki3a6ki2": 0,
