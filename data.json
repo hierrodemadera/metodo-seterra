@@ -4037,6 +4037,7 @@
          ],
          "run": {
           "dd": {
+           "nkvbuduki2:0": true,
            "nkvbuduki2:1": true,
            "nur7o0hki2:0": true,
            "nur7o0hki2:1": true
@@ -4044,6 +4045,7 @@
           "f": {},
           "phase": 2,
           "res": {
+           "d:nkvbuduki2:0": 1,
            "d:nkvbuduki2:1": 1,
            "d:nur7o0hki2:0": 2,
            "d:nur7o0hki2:1": 1,
