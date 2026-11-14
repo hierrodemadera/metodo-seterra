@@ -57,6 +57,9 @@
   },
   {
    "d": "esqimg-ej-po-partidos"
+  },
+  {
+   "d": "esqimg-ej-po-local"
   }
  ],
  "esquemas": [
@@ -9151,6 +9154,13 @@
    "kb": 3,
    "name": "Los partidos políticos · imágenes",
    "tarjetas": 25
+  },
+  {
+   "file": "La administracion local · imagenes.json",
+   "id": "esqimg-ej-po-local",
+   "kb": 0,
+   "name": "La administración local · imágenes",
+   "tarjetas": 2
   }
  ],
  "notas": [
