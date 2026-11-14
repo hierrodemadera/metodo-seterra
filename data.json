@@ -39,6 +39,9 @@
   },
   {
    "d": "esqimg-ej-po-constitucion"
+  },
+  {
+   "d": "esqimg-ej-po-corona"
   }
  ],
  "esquemas": [
@@ -9091,6 +9094,13 @@
    "kb": 1,
    "name": "La Constitución de 1978 · imágenes",
    "tarjetas": 4
+  },
+  {
+   "file": "La Corona · imagenes.json",
+   "id": "esqimg-ej-po-corona",
+   "kb": 1,
+   "name": "La Corona · imágenes",
+   "tarjetas": 8
   }
  ],
  "notas": [
